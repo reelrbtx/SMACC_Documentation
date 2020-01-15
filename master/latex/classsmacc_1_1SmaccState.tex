@@ -27,7 +27,7 @@ Collaboration diagram for smacc\+:\+:Smacc\+State$<$ Most\+Derived, Context, Inn
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structsmacc_1_1SmaccState_1_1AddLogicUnitEventType}{Add\+Logic\+Unit\+Event\+Type}
+struct \hyperlink{structsmacc_1_1SmaccState_1_1AddStateBehaviorEventType}{Add\+State\+Behavior\+Event\+Type}
 \item 
 struct \hyperlink{structsmacc_1_1SmaccState_1_1my__context}{my\+\_\+context}
 \end{DoxyCompactItemize}
@@ -88,9 +88,9 @@ void \hyperlink{classsmacc_1_1SmaccState_a80082718f226bebedb589f0c4696001d}{chec
 \item 
 {\footnotesize template$<$typename T\+Orthogonal , typename T\+Behavior , typename... Args$>$ }\\static void \hyperlink{classsmacc_1_1SmaccState_a3e335f3290e4968db0c8e22bf88356b7}{static\+\_\+configure} (Args \&\&...args)
 \item 
-{\footnotesize template$<$typename T\+Event\+List $>$ }\\static void \hyperlink{classsmacc_1_1SmaccState_a234cb467d9054c636f9ee77f1174b253}{iterate\+Logic\+Unit\+Event\+Types} (\hyperlink{structsmacc_1_1introspection_1_1SmaccLogicUnitInfo}{Smacc\+Logic\+Unit\+Info} \&luinfo)
+{\footnotesize template$<$typename T\+Event\+List $>$ }\\static void \hyperlink{classsmacc_1_1SmaccState_a9deac4c991e25df847af4c1882dbe71a}{iterate\+State\+Behavior\+Event\+Types} (\hyperlink{structsmacc_1_1introspection_1_1SmaccStateBehaviorInfo}{Smacc\+State\+Behavior\+Info} \&sbinfo)
 \item 
-{\footnotesize template$<$typename T\+L\+Unit , typename T\+Trigger\+Event , typename T\+Event\+List , typename... T\+U\+Args$>$ }\\static void \hyperlink{classsmacc_1_1SmaccState_a6fc90cf59c60c749e82f49aafb079b23}{static\+\_\+create\+Logic\+Unit} (T\+U\+Args...\+args)
+{\footnotesize template$<$typename T\+State\+Behavior , typename T\+Trigger\+Event , typename T\+Event\+List , typename... T\+U\+Args$>$ }\\static void \hyperlink{classsmacc_1_1SmaccState_a827c90e9c0b1791f6ee26f1f074231e4}{static\+\_\+create\+State\+Behavior} (T\+U\+Args...\+args)
 \item 
 static void \hyperlink{classsmacc_1_1SmaccState_af4b4635d16a32bdd3956e5d40ddbd01d}{initial\+\_\+deep\+\_\+construct} (\hyperlink{classsmacc_1_1SmaccState_aaf76bbe2aa9dd73e3284605f84ab4b16}{outermost\+\_\+context\+\_\+base\+\_\+type} \&outermost\+Context\+Base)
 \item 
@@ -252,7 +252,8 @@ Definition at line 46 of file smacc\+\_\+state\+\_\+base.\+h.
 87 
 88       \textcolor{keyword}{const} std::type\_info *tindex = &(\textcolor{keyword}{typeid}(MostDerived));
 89       \textcolor{keyword}{auto} &staticDefinedBehaviors = SmaccStateInfo::staticBehaviorInfo[tindex];
-90       \textcolor{keyword}{auto} &staticDefinedLogicUnits = \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7a22f3c1ea22042a19f897db4ecfeb67}{SmaccStateInfo::logicUnitsInfo}[tindex];
+90       \textcolor{keyword}{auto} &staticDefinedStateBehaviors = \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7f62357b9ed1db5b8f9fcc3394f7f58b}{SmaccStateInfo::stateBehaviorsInfo}
+      [tindex];
 91 
 92       \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &bhinfo : staticDefinedBehaviors)
 93       \{
@@ -261,11 +262,11 @@ Definition at line 46 of file smacc\+\_\+state\+\_\+base.\+h.
 95         bhinfo.factoryFunction(\textcolor{keyword}{this});
 96       \}
 97 
-98       \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &lu : staticDefinedLogicUnits)
+98       \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &sb : staticDefinedStateBehaviors)
 99       \{
-100         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"- Creating static logic unit: "} << \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(lu.logicUnitType->
-      name()));
-101         lu.factoryFunction(\textcolor{keyword}{this});
+100         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"- Creating static state behavior: "} << \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(sb.
+      stateBehaviorType->name()));
+101         sb.factoryFunction(\textcolor{keyword}{this});
 102       \}
 103 
 104       ROS\_INFO(\textcolor{stringliteral}{"---- END STATIC DESCRIPTION"});
@@ -503,13 +504,13 @@ Definition at line 373 of file smacc\+\_\+state\+\_\+base.\+h.
 376     \hyperlink{classsmacc_1_1SmaccState_aac23d8a6909f75c5e5fca2a7c09b5368}{deep\_construct}(&outermostContextBase, outermostContextBase);
 377   \}
 \end{DoxyCode}
-\index{smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}!iterate\+Logic\+Unit\+Event\+Types@{iterate\+Logic\+Unit\+Event\+Types}}
-\index{iterate\+Logic\+Unit\+Event\+Types@{iterate\+Logic\+Unit\+Event\+Types}!smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}}
-\subsubsection[{\texorpdfstring{iterate\+Logic\+Unit\+Event\+Types(\+Smacc\+Logic\+Unit\+Info \&luinfo)}{iterateLogicUnitEventTypes(SmaccLogicUnitInfo &luinfo)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Most\+Derived, class Context, class Inner\+Initial = mpl\+::list$<$$>$, sc\+::history\+\_\+mode history\+Mode = sc\+::has\+\_\+deep\+\_\+history$>$ template$<$typename T\+Event\+List $>$ static void {\bf smacc\+::\+Smacc\+State}$<$ Most\+Derived, Context, Inner\+Initial, history\+Mode $>$\+::iterate\+Logic\+Unit\+Event\+Types (
+\index{smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}!iterate\+State\+Behavior\+Event\+Types@{iterate\+State\+Behavior\+Event\+Types}}
+\index{iterate\+State\+Behavior\+Event\+Types@{iterate\+State\+Behavior\+Event\+Types}!smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}}
+\subsubsection[{\texorpdfstring{iterate\+State\+Behavior\+Event\+Types(\+Smacc\+State\+Behavior\+Info \&sbinfo)}{iterateStateBehaviorEventTypes(SmaccStateBehaviorInfo &sbinfo)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Most\+Derived, class Context, class Inner\+Initial = mpl\+::list$<$$>$, sc\+::history\+\_\+mode history\+Mode = sc\+::has\+\_\+deep\+\_\+history$>$ template$<$typename T\+Event\+List $>$ static void {\bf smacc\+::\+Smacc\+State}$<$ Most\+Derived, Context, Inner\+Initial, history\+Mode $>$\+::iterate\+State\+Behavior\+Event\+Types (
 \begin{DoxyParamCaption}
-\item[{{\bf Smacc\+Logic\+Unit\+Info} \&}]{luinfo}
+\item[{{\bf Smacc\+State\+Behavior\+Info} \&}]{sbinfo}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classsmacc_1_1SmaccState_a234cb467d9054c636f9ee77f1174b253}{}\label{classsmacc_1_1SmaccState_a234cb467d9054c636f9ee77f1174b253}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classsmacc_1_1SmaccState_a9deac4c991e25df847af4c1882dbe71a}{}\label{classsmacc_1_1SmaccState_a9deac4c991e25df847af4c1882dbe71a}
 
 
 Definition at line 270 of file smacc\+\_\+state\+\_\+base.\+h.
@@ -519,7 +520,7 @@ Definition at line 270 of file smacc\+\_\+state\+\_\+base.\+h.
 271   \{
 272     \textcolor{keyword}{using} boost::mpl::\_1;
 273     \textcolor{keyword}{using} wrappedList = \textcolor{keyword}{typename} boost::mpl::transform<TEventList, \_1>::type;
-274     AddLogicUnitEventType<wrappedList> op(luinfo);
+274     AddStateBehaviorEventType<wrappedList> op(sbinfo);
 275     boost::mpl::for\_each<wrappedList>(op);
 276   \}
 \end{DoxyCode}
@@ -668,13 +669,13 @@ Definition at line 195 of file smacc\+\_\+state\+\_\+base.\+h.
 215     \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a2cc62c6c9dec1a4f5294f8430efb71f2}{SmaccStateInfo::staticBehaviorInfo}[tindex].push\_back(bhinfo);
 216   \}
 \end{DoxyCode}
-\index{smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}!static\+\_\+create\+Logic\+Unit@{static\+\_\+create\+Logic\+Unit}}
-\index{static\+\_\+create\+Logic\+Unit@{static\+\_\+create\+Logic\+Unit}!smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}}
-\subsubsection[{\texorpdfstring{static\+\_\+create\+Logic\+Unit(\+T\+U\+Args...\+args)}{static_createLogicUnit(TUArgs...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Most\+Derived, class Context, class Inner\+Initial = mpl\+::list$<$$>$, sc\+::history\+\_\+mode history\+Mode = sc\+::has\+\_\+deep\+\_\+history$>$ template$<$typename T\+L\+Unit , typename T\+Trigger\+Event , typename T\+Event\+List , typename... T\+U\+Args$>$ static void {\bf smacc\+::\+Smacc\+State}$<$ Most\+Derived, Context, Inner\+Initial, history\+Mode $>$\+::static\+\_\+create\+Logic\+Unit (
+\index{smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}!static\+\_\+create\+State\+Behavior@{static\+\_\+create\+State\+Behavior}}
+\index{static\+\_\+create\+State\+Behavior@{static\+\_\+create\+State\+Behavior}!smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}}
+\subsubsection[{\texorpdfstring{static\+\_\+create\+State\+Behavior(\+T\+U\+Args...\+args)}{static_createStateBehavior(TUArgs...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Most\+Derived, class Context, class Inner\+Initial = mpl\+::list$<$$>$, sc\+::history\+\_\+mode history\+Mode = sc\+::has\+\_\+deep\+\_\+history$>$ template$<$typename T\+State\+Behavior , typename T\+Trigger\+Event , typename T\+Event\+List , typename... T\+U\+Args$>$ static void {\bf smacc\+::\+Smacc\+State}$<$ Most\+Derived, Context, Inner\+Initial, history\+Mode $>$\+::static\+\_\+create\+State\+Behavior (
 \begin{DoxyParamCaption}
 \item[{T\+U\+Args...}]{args}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classsmacc_1_1SmaccState_a6fc90cf59c60c749e82f49aafb079b23}{}\label{classsmacc_1_1SmaccState_a6fc90cf59c60c749e82f49aafb079b23}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classsmacc_1_1SmaccState_a827c90e9c0b1791f6ee26f1f074231e4}{}\label{classsmacc_1_1SmaccState_a827c90e9c0b1791f6ee26f1f074231e4}
 
 
 Definition at line 279 of file smacc\+\_\+state\+\_\+base.\+h.
@@ -682,35 +683,36 @@ Definition at line 279 of file smacc\+\_\+state\+\_\+base.\+h.
 
 \begin{DoxyCode}
 280   \{
-281     \hyperlink{structsmacc_1_1introspection_1_1SmaccLogicUnitInfo}{SmaccLogicUnitInfo} luinfo;
+281     \hyperlink{structsmacc_1_1introspection_1_1SmaccStateBehaviorInfo}{SmaccStateBehaviorInfo} sbinfo;
 282 
-283     luinfo.\hyperlink{structsmacc_1_1introspection_1_1SmaccLogicUnitInfo_af399d58635280862b10116c76cb6e0f8}{logicUnitType} = &\textcolor{keyword}{typeid}(TLUnit);
+283     sbinfo.\hyperlink{structsmacc_1_1introspection_1_1SmaccStateBehaviorInfo_a85dc84a01fbd0b830ed6598996c4a7c9}{stateBehaviorType} = &\textcolor{keyword}{typeid}(TStateBehavior);
 284 
 285     std::string eventtypename = \textcolor{keyword}{typeid}(TTriggerEvent).name();
 286     \textcolor{keyword}{auto} eventType = \hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a47d65b6c61499d7ae8ab9f6325c84837}{TypeInfo::getTypeInfoFromString}(eventtypename);
 287 
 288     \textcolor{keywordflow}{if} (eventType->templateParameters.size() > 1)
 289     \{
-290       luinfo.\hyperlink{structsmacc_1_1introspection_1_1SmaccLogicUnitInfo_a4a1fc60624c6ad423c28a0bece4805ea}{objectTagType} = eventType->templateParameters[1];
+290       sbinfo.\hyperlink{structsmacc_1_1introspection_1_1SmaccStateBehaviorInfo_ae853ad3a28609fd83aa3d395d2e4c163}{objectTagType} = eventType->templateParameters[1];
 291     \}
 292     \textcolor{keywordflow}{else}
 293     \{
-294       luinfo.\hyperlink{structsmacc_1_1introspection_1_1SmaccLogicUnitInfo_a4a1fc60624c6ad423c28a0bece4805ea}{objectTagType} = \textcolor{keyword}{nullptr};
+294       sbinfo.\hyperlink{structsmacc_1_1introspection_1_1SmaccStateBehaviorInfo_ae853ad3a28609fd83aa3d395d2e4c163}{objectTagType} = \textcolor{keyword}{nullptr};
 295     \}
 296 
-297     iterateLogicUnitEventTypes<TEventList>(luinfo);
+297     iterateStateBehaviorEventTypes<TEventList>(sbinfo);
 298 
-299     luinfo.\hyperlink{structsmacc_1_1introspection_1_1SmaccLogicUnitInfo_ad98da99b4913a3dcad4309005cf30072}{factoryFunction} = [&, \hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...](ISmaccState *state) \{
-300       \textcolor{keyword}{auto} lu = state->createLogicUnit<TLUnit, TTriggerEvent, TEventList>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
-301       \textcolor{keywordflow}{return} lu;
+299     sbinfo.\hyperlink{structsmacc_1_1introspection_1_1SmaccStateBehaviorInfo_a966cf5a5fe5cbe839be792b04e6c7368}{factoryFunction} = [&, \hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...](ISmaccState *state) \{
+300       \textcolor{keyword}{auto} sb = state->createStateBehavior<TStateBehavior, TTriggerEvent, TEventList>(
+      \hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
+301       \textcolor{keywordflow}{return} sb;
 302     \};
 303 
 304     \textcolor{keyword}{const} std::type\_info *tindex = &(\textcolor{keyword}{typeid}(MostDerived));
-305     \textcolor{keywordflow}{if} (!\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7a22f3c1ea22042a19f897db4ecfeb67}{SmaccStateInfo::logicUnitsInfo}.count(tindex))
-306       \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7a22f3c1ea22042a19f897db4ecfeb67}{SmaccStateInfo::logicUnitsInfo}[tindex] = 
-      std::vector<SmaccLogicUnitInfo>();
+305     \textcolor{keywordflow}{if} (!\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7f62357b9ed1db5b8f9fcc3394f7f58b}{SmaccStateInfo::stateBehaviorsInfo}.count(tindex))
+306       \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7f62357b9ed1db5b8f9fcc3394f7f58b}{SmaccStateInfo::stateBehaviorsInfo}[tindex] = 
+      std::vector<SmaccStateBehaviorInfo>();
 307 
-308     \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7a22f3c1ea22042a19f897db4ecfeb67}{SmaccStateInfo::logicUnitsInfo}[tindex].push\_back(luinfo);
+308     \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7f62357b9ed1db5b8f9fcc3394f7f58b}{SmaccStateInfo::stateBehaviorsInfo}[tindex].push\_back(sbinfo);
 309   \}
 \end{DoxyCode}
 \index{smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}!throw\+Finish\+Event@{throw\+Finish\+Event}}

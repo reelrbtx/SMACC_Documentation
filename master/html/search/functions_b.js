@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['notifyevent',['notifyEvent',['../classsmacc_1_1LogicUnit.html#a1c2bee307f2586bc34c0b75fbc4f6fcf',1,'smacc::LogicUnit']]],
+  ['notifyevent',['notifyEvent',['../classsmacc_1_1StateBehavior.html#a9307fb59a1d8bf490d280b8660a13c09',1,'smacc::StateBehavior']]],
   ['notifyonstateentryend',['notifyOnStateEntryEnd',['../classsmacc_1_1ISmaccStateMachine.html#a856cf2d25d84659b974cccfbf44aeec9',1,'smacc::ISmaccStateMachine']]],
   ['notifyonstateentrystart',['notifyOnStateEntryStart',['../classsmacc_1_1ISmaccStateMachine.html#aeec54e997d715b105ebfeb5caadc4fbf',1,'smacc::ISmaccStateMachine']]],
   ['notifyonstateexit',['notifyOnStateExit',['../classsmacc_1_1ISmaccStateMachine.html#a9d2bd4aca0c80a1ec22c5f95e7c38db8',1,'smacc::ISmaccStateMachine']]],

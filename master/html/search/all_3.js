@@ -2,8 +2,8 @@ var searchData=
 [
   ['damages',['DAMAGES',['../LICENSE_8txt.html#ae4e5ba7d6e99370d4c12feff5651d808',1,'LICENSE.txt']]],
   ['debug',['DEBUG',['../namespacesmacc.html#a3e4f79486ea6ea6342dd3c712d16a4f6adc30ec20708ef7b0f641ef78b7880a15',1,'smacc']]],
-  ['declareinputevent',['declareInputEvent',['../classsmacc_1_1LogicUnit.html#ac2a0394d534063591de8ff8f9ef0bc2c',1,'smacc::LogicUnit']]],
-  ['declarepostevent',['declarePostEvent',['../classsmacc_1_1LogicUnit.html#a4daf7250a0af4cff8703258668efb3e3',1,'smacc::LogicUnit']]],
+  ['declareinputevent',['declareInputEvent',['../classsmacc_1_1StateBehavior.html#a70f1d1efdafa981fe60b06308a528218',1,'smacc::StateBehavior']]],
+  ['declarepostevent',['declarePostEvent',['../classsmacc_1_1StateBehavior.html#ad7f9270d45491624f3bd19ff04dbad69',1,'smacc::StateBehavior']]],
   ['declaretransition',['declareTransition',['../classsmacc_1_1introspection_1_1SmaccStateInfo.html#ac0b32e5504ccbed161ad50f0b77c2004',1,'smacc::introspection::SmaccStateInfo']]],
   ['deep_5fconstruct',['deep_construct',['../classsmacc_1_1SmaccState.html#aac23d8a6909f75c5e5fca2a7c09b5368',1,'smacc::SmaccState']]],
   ['deep_5fhistory',['deep_history',['../structsm__dance__bot_1_1SmDanceBot.html#abd58ec4a2b50a45da304a5f0b9c44706',1,'sm_dance_bot::SmDanceBot']]],

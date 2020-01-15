@@ -137,7 +137,7 @@ std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename Event\+Type $>$ }\\void \hyperlink{classsmacc_1_1ISmaccStateMachine_a268198b98e9540f4edb703801527a192}{propagate\+Event\+To\+Logic\+Units} (\hyperlink{classsmacc_1_1ISmaccState}{I\+Smacc\+State} $\ast$st, Event\+Type $\ast$ev)
+{\footnotesize template$<$typename Event\+Type $>$ }\\void \hyperlink{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5}{propagate\+Event\+To\+State\+Behaviors} (\hyperlink{classsmacc_1_1ISmaccState}{I\+Smacc\+State} $\ast$st, Event\+Type $\ast$ev)
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -331,8 +331,8 @@ Referenced by smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ senso
 270 \{
 271     static\_assert(std::is\_base\_of<ISmaccState, TSmaccObjectType>::value || std::is\_base\_of<ISmaccClient,
        TSmaccObjectType>::value || std::is\_base\_of<SmaccClientBehavior, TSmaccObjectType>::value || 
-      std::is\_base\_of<LogicUnit, TSmaccObjectType>::value || std::is\_base\_of<ISmaccComponent, TSmaccObjectType>::value, \textcolor{stringliteral}{"Only are
-       accepted smacc types as subscribers for smacc signals"});
+      std::is\_base\_of<StateBehavior, TSmaccObjectType>::value || std::is\_base\_of<ISmaccComponent, TSmaccObjectType>::value, \textcolor{stringliteral}{"Only
+       are accepted smacc types as subscribers for smacc signals"});
 272 
 273     \textcolor{keyword}{typedef} decltype(callback) ft;
 274     \hyperlink{structsmacc_1_1utils_1_1Bind}{Bind}<\hyperlink{namespaceboost}{boost}::function\_types::function\_arity<ft>::value> binder;
@@ -1098,7 +1098,7 @@ Definition at line 128 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 
-Referenced by smacc\+::\+Logic\+Unit\+::declare\+Post\+Event(), smacc\+::\+I\+Smacc\+Client\+::post\+Event(), smacc\+::\+I\+Smacc\+Component\+::post\+Event(), and smacc\+::\+Smacc\+Client\+Behavior\+::post\+Event().
+Referenced by smacc\+::\+State\+Behavior\+::declare\+Post\+Event(), smacc\+::\+I\+Smacc\+Client\+::post\+Event(), smacc\+::\+I\+Smacc\+Component\+::post\+Event(), and smacc\+::\+Smacc\+Client\+Behavior\+::post\+Event().
 
 
 \begin{DoxyCode}
@@ -1106,14 +1106,14 @@ Referenced by smacc\+::\+Logic\+Unit\+::declare\+Post\+Event(), smacc\+::\+I\+Sm
 130     std::lock\_guard<std::recursive\_mutex> lock(\hyperlink{classsmacc_1_1ISmaccStateMachine_aac785541646e5c517273bf31072505a1}{m\_mutex\_});
 131 
 132     \textcolor{comment}{// when a postting event is requested by any component, client, or client behavior}
-133     \textcolor{comment}{// we reach this place. Now, we propagate the events to all the state logic units to generate}
+133     \textcolor{comment}{// we reach this place. Now, we propagate the events to all the state state behaviors to generate}
 134     \textcolor{comment}{// some more events}
 135 
 136     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PostEvent entry point] "} << demangleSymbol<EventType>());
 137     \textcolor{keyword}{auto} currentstate = \hyperlink{classsmacc_1_1ISmaccStateMachine_a9c6e7745205bcce80a301f2fbe8f7e99}{currentState\_};
 138     \textcolor{keywordflow}{if} (currentstate != \textcolor{keyword}{nullptr})
 139     \{
-140         \hyperlink{classsmacc_1_1ISmaccStateMachine_a268198b98e9540f4edb703801527a192}{propagateEventToLogicUnits}(currentstate, ev);
+140         \hyperlink{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5}{propagateEventToStateBehaviors}(currentstate, ev);
 141     \}
 142 
 143     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a3982eb671f5f001cb047d3a467789986}{signalDetector\_}->\hyperlink{classsmacc_1_1SignalDetector_a6ab99d99cef8d101e39797a72daeb2b7}{postEvent}(ev);
@@ -1149,36 +1149,36 @@ Definition at line 147 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 150     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a1549189caf29520514e677ca46f57348}{postEvent}(ev);
 151 \}
 \end{DoxyCode}
-\index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!propagate\+Event\+To\+Logic\+Units@{propagate\+Event\+To\+Logic\+Units}}
-\index{propagate\+Event\+To\+Logic\+Units@{propagate\+Event\+To\+Logic\+Units}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
-\subsubsection[{\texorpdfstring{propagate\+Event\+To\+Logic\+Units(\+I\+Smacc\+State $\ast$st, Event\+Type $\ast$ev)}{propagateEventToLogicUnits(ISmaccState *st, EventType *ev)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Event\+Type $>$ void smacc\+::\+I\+Smacc\+State\+Machine\+::propagate\+Event\+To\+Logic\+Units (
+\index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!propagate\+Event\+To\+State\+Behaviors@{propagate\+Event\+To\+State\+Behaviors}}
+\index{propagate\+Event\+To\+State\+Behaviors@{propagate\+Event\+To\+State\+Behaviors}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
+\subsubsection[{\texorpdfstring{propagate\+Event\+To\+State\+Behaviors(\+I\+Smacc\+State $\ast$st, Event\+Type $\ast$ev)}{propagateEventToStateBehaviors(ISmaccState *st, EventType *ev)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Event\+Type $>$ void smacc\+::\+I\+Smacc\+State\+Machine\+::propagate\+Event\+To\+State\+Behaviors (
 \begin{DoxyParamCaption}
 \item[{{\bf I\+Smacc\+State} $\ast$}]{st, }
 \item[{Event\+Type $\ast$}]{ev}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classsmacc_1_1ISmaccStateMachine_a268198b98e9540f4edb703801527a192}{}\label{classsmacc_1_1ISmaccStateMachine_a268198b98e9540f4edb703801527a192}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5}{}\label{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5}
 
 
 Definition at line 364 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 
-References smacc\+::\+I\+Smacc\+State\+::get\+Class\+Name(), smacc\+::\+I\+Smacc\+State\+::get\+Logic\+Units(), and smacc\+::\+I\+Smacc\+State\+::get\+Parent\+State().
+References smacc\+::\+I\+Smacc\+State\+::get\+Class\+Name(), smacc\+::\+I\+Smacc\+State\+::get\+Parent\+State(), and smacc\+::\+I\+Smacc\+State\+::get\+State\+Behaviors().
 
 
 \begin{DoxyCode}
 365 \{
 366     ROS\_DEBUG(\textcolor{stringliteral}{"PROPAGATING EVENT [%s] TO LUs [%s]: "}, demangleSymbol<EventType>().c\_str(), st->getClassName
       ().c\_str());
-367     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &lu : st->getLogicUnits())
+367     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &sb : st->getStateBehaviors())
 368     \{
-369         lu->notifyEvent(ev);
+369         sb->notifyEvent(ev);
 370     \}
 371 
 372     \textcolor{keyword}{auto} *pst = st->getParentState();
 373     \textcolor{keywordflow}{if} (pst != \textcolor{keyword}{nullptr})
 374     \{
-375         \hyperlink{classsmacc_1_1ISmaccStateMachine_a268198b98e9540f4edb703801527a192}{propagateEventToLogicUnits}(pst, ev);
+375         \hyperlink{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5}{propagateEventToStateBehaviors}(pst, ev);
 376     \}
 377 \}
 \end{DoxyCode}
@@ -1189,7 +1189,7 @@ Here is the call graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classsmacc_1_1ISmaccStateMachine_a268198b98e9540f4edb703801527a192_cgraph}
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5_cgraph}
 \end{center}
 \end{figure}
 

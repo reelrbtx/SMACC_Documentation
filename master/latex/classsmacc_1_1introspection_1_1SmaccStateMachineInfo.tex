@@ -108,7 +108,7 @@ Definition at line 6 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+cpp.
 
 
 
-References smacc\+::introspection\+::demangle\+Symbol(), smacc\+::\+I\+Smacc\+State\+Machine\+::get\+Orthogonals(), smacc\+::introspection\+::\+Smacc\+State\+Info\+::logic\+Units\+Info, state\+Msgs, states, smacc\+::introspection\+::\+Smacc\+State\+Info\+::static\+Behavior\+Info, and smacc\+::introspection\+::transition\+Info\+To\+Msg().
+References smacc\+::introspection\+::demangle\+Symbol(), smacc\+::\+I\+Smacc\+State\+Machine\+::get\+Orthogonals(), smacc\+::introspection\+::\+Smacc\+State\+Info\+::state\+Behaviors\+Info, state\+Msgs, states, smacc\+::introspection\+::\+Smacc\+State\+Info\+::static\+Behavior\+Info, and smacc\+::introspection\+::transition\+Info\+To\+Msg().
 
 
 
@@ -237,24 +237,26 @@ Referenced by compute\+All\+State\+Message().
 121             stateMsg.orthogonals.push\_back(orthogonalMsg);
 122         \}
 123 
-124         ss << \textcolor{stringliteral}{" Logic units:"} << std::endl;
-125         \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7a22f3c1ea22042a19f897db4ecfeb67}{SmaccStateInfo::logicUnitsInfo}.count(statetid) > 0)
+124         ss << \textcolor{stringliteral}{" State behaviors:"} << std::endl;
+125         \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7f62357b9ed1db5b8f9fcc3394f7f58b}{SmaccStateInfo::stateBehaviorsInfo}.count(statetid) > 0)
 126         \{
 127             \textcolor{keywordtype}{int} k = 0;
-128             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &luinfo : \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7a22f3c1ea22042a19f897db4ecfeb67}{SmaccStateInfo::logicUnitsInfo}[statetid])
+128             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &sbinfo : \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7f62357b9ed1db5b8f9fcc3394f7f58b}{SmaccStateInfo::stateBehaviorsInfo}[
+      statetid])
 129             \{
-130                 smacc\_msgs::SmaccLogicUnit logicUnitMsg;
-131                 logicUnitMsg.index = k++;
-132                 logicUnitMsg.type\_name = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(luinfo.logicUnitType->name());
+130                 smacc\_msgs::SmaccStateBehavior stateBehaviorMsg;
+131                 stateBehaviorMsg.index = k++;
+132                 stateBehaviorMsg.type\_name = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(sbinfo.stateBehaviorType->name())
+      ;
 133 
-134                 ss << \textcolor{stringliteral}{" - logic unit: "} << logicUnitMsg.type\_name << std::endl;
-135                 \textcolor{keywordflow}{if} (luinfo.objectTagType != \textcolor{keyword}{nullptr})
+134                 ss << \textcolor{stringliteral}{" - state behavior: "} << stateBehaviorMsg.type\_name << std::endl;
+135                 \textcolor{keywordflow}{if} (sbinfo.objectTagType != \textcolor{keyword}{nullptr})
 136                 \{
-137                     logicUnitMsg.object\_tag = luinfo.objectTagType->getFullName();
-138                     ss << \textcolor{stringliteral}{"        - object tag: "} << logicUnitMsg.object\_tag << std::endl;
+137                     stateBehaviorMsg.object\_tag = sbinfo.objectTagType->getFullName();
+138                     ss << \textcolor{stringliteral}{"        - object tag: "} << stateBehaviorMsg.object\_tag << std::endl;
 139                 \}
 140 
-141                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &tev : luinfo.sourceEventTypes)
+141                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &tev : sbinfo.sourceEventTypes)
 142                 \{
 143                     \textcolor{comment}{// WE SHOULD CREATE A SMACC\_EVENT\_INFO TYPE, also using in typewalker transition}
 144                     \textcolor{keyword}{auto} eventTypeName = tev->getEventTypeName();
@@ -272,15 +274,15 @@ Referenced by compute\+All\+State\+Message().
 156                     \textcolor{keyword}{event}.label = tev->label;
 157                     ss << \textcolor{stringliteral}{"                 - event label: "} << \textcolor{keyword}{event}.label << std::endl;
 158 
-159                     logicUnitMsg.event\_sources.push\_back(event);
+159                     stateBehaviorMsg.event\_sources.push\_back(event);
 160                 \}
 161 
-162                 stateMsg.logic\_units.push\_back(logicUnitMsg);
+162                 stateMsg.state\_behaviors.push\_back(stateBehaviorMsg);
 163             \}
 164         \}
 165         \textcolor{keywordflow}{else}
 166         \{
-167             ss << \textcolor{stringliteral}{"- NO LOGIC UNITS - "} << std::endl;
+167             ss << \textcolor{stringliteral}{"- NO STATE BEHAVIORS - "} << std::endl;
 168         \}
 169 
 170         ROS\_INFO\_STREAM(ss.str());
