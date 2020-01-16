@@ -1,0 +1,129 @@
+\hypertarget{classsmacc_1_1introspection_1_1StateBehaviorHandler}{}\section{smacc\+:\+:introspection\+:\+:State\+Behavior\+Handler Class Reference}
+\label{classsmacc_1_1introspection_1_1StateBehaviorHandler}\index{smacc\+::introspection\+::\+State\+Behavior\+Handler@{smacc\+::introspection\+::\+State\+Behavior\+Handler}}
+
+
+{\ttfamily \#include $<$smacc\+\_\+state\+\_\+info.\+h$>$}
+
+
+
+Collaboration diagram for smacc\+:\+:introspection\+:\+:State\+Behavior\+Handler\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{classsmacc_1_1introspection_1_1StateBehaviorHandler__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classsmacc_1_1introspection_1_1StateBehaviorHandler_aefcd40058547a808232ebb0258a08d61}{configure\+State\+Behavior} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1StateBehavior}{smacc\+::\+State\+Behavior} $>$ sb)
+\item 
+{\footnotesize template$<$typename T\+Ev $>$ }\\void \hyperlink{classsmacc_1_1introspection_1_1StateBehaviorHandler_aa4f2ae7831cd27dfe47bd89882aceeb7}{add\+Input\+Event} ()
+\item 
+{\footnotesize template$<$typename T\+Ev $>$ }\\void \hyperlink{classsmacc_1_1introspection_1_1StateBehaviorHandler_a2579188153b8e819f981c9e39850704e}{set\+Output\+Event} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{structsmacc_1_1introspection_1_1CallbackFunctor}{Callback\+Functor} $>$ \hyperlink{classsmacc_1_1introspection_1_1StateBehaviorHandler_acb0abaf0d56fa700925a39f1d062ed55}{callbacks\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 62 of file smacc\+\_\+state\+\_\+info.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{smacc\+::introspection\+::\+State\+Behavior\+Handler@{smacc\+::introspection\+::\+State\+Behavior\+Handler}!add\+Input\+Event@{add\+Input\+Event}}
+\index{add\+Input\+Event@{add\+Input\+Event}!smacc\+::introspection\+::\+State\+Behavior\+Handler@{smacc\+::introspection\+::\+State\+Behavior\+Handler}}
+\subsubsection[{\texorpdfstring{add\+Input\+Event()}{addInputEvent()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+Ev $>$ void smacc\+::introspection\+::\+State\+Behavior\+Handler\+::add\+Input\+Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classsmacc_1_1introspection_1_1StateBehaviorHandler_aa4f2ae7831cd27dfe47bd89882aceeb7}{}\label{classsmacc_1_1introspection_1_1StateBehaviorHandler_aa4f2ae7831cd27dfe47bd89882aceeb7}
+
+
+Definition at line 47 of file smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h.
+
+
+
+References smacc\+::introspection\+::\+Callback\+Functor\+::fn.
+
+
+\begin{DoxyCode}
+48 \{
+49     CallbackFunctor functor;
+50     functor.fn = [](std::shared\_ptr<smacc::StateBehavior> sb) \{
+51         sb->addInputEvent<TEv>();
+52     \};
+53 
+54     this->\hyperlink{classsmacc_1_1introspection_1_1StateBehaviorHandler_acb0abaf0d56fa700925a39f1d062ed55}{callbacks\_}.push\_back(functor);
+55 \}
+\end{DoxyCode}
+\index{smacc\+::introspection\+::\+State\+Behavior\+Handler@{smacc\+::introspection\+::\+State\+Behavior\+Handler}!configure\+State\+Behavior@{configure\+State\+Behavior}}
+\index{configure\+State\+Behavior@{configure\+State\+Behavior}!smacc\+::introspection\+::\+State\+Behavior\+Handler@{smacc\+::introspection\+::\+State\+Behavior\+Handler}}
+\subsubsection[{\texorpdfstring{configure\+State\+Behavior(std\+::shared\+\_\+ptr$<$ smacc\+::\+State\+Behavior $>$ sb)}{configureStateBehavior(std::shared_ptr< smacc::StateBehavior > sb)}}]{\setlength{\rightskip}{0pt plus 5cm}void smacc\+::introspection\+::\+State\+Behavior\+Handler\+::configure\+State\+Behavior (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf smacc\+::\+State\+Behavior} $>$}]{sb}
+\end{DoxyParamCaption}
+)}\hypertarget{classsmacc_1_1introspection_1_1StateBehaviorHandler_aefcd40058547a808232ebb0258a08d61}{}\label{classsmacc_1_1introspection_1_1StateBehaviorHandler_aefcd40058547a808232ebb0258a08d61}
+
+
+Definition at line 37 of file state\+\_\+behavior.\+cpp.
+
+
+\begin{DoxyCode}
+38 \{
+39     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} callback : this->\hyperlink{classsmacc_1_1introspection_1_1StateBehaviorHandler_acb0abaf0d56fa700925a39f1d062ed55}{callbacks\_})
+40     \{
+41         callback.fn(sb);
+42     \}
+43 \}
+\end{DoxyCode}
+\index{smacc\+::introspection\+::\+State\+Behavior\+Handler@{smacc\+::introspection\+::\+State\+Behavior\+Handler}!set\+Output\+Event@{set\+Output\+Event}}
+\index{set\+Output\+Event@{set\+Output\+Event}!smacc\+::introspection\+::\+State\+Behavior\+Handler@{smacc\+::introspection\+::\+State\+Behavior\+Handler}}
+\subsubsection[{\texorpdfstring{set\+Output\+Event()}{setOutputEvent()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+Ev $>$ void smacc\+::introspection\+::\+State\+Behavior\+Handler\+::set\+Output\+Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classsmacc_1_1introspection_1_1StateBehaviorHandler_a2579188153b8e819f981c9e39850704e}{}\label{classsmacc_1_1introspection_1_1StateBehaviorHandler_a2579188153b8e819f981c9e39850704e}
+
+
+Definition at line 58 of file smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h.
+
+
+
+References smacc\+::introspection\+::\+Callback\+Functor\+::fn.
+
+
+\begin{DoxyCode}
+59 \{
+60     CallbackFunctor functor;
+61     functor.fn = [](std::shared\_ptr<smacc::StateBehavior> sb) \{
+62         sb->setOutputEvent<TEv>();
+63     \};
+64 
+65     this->\hyperlink{classsmacc_1_1introspection_1_1StateBehaviorHandler_acb0abaf0d56fa700925a39f1d062ed55}{callbacks\_}.push\_back(functor);
+66 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{smacc\+::introspection\+::\+State\+Behavior\+Handler@{smacc\+::introspection\+::\+State\+Behavior\+Handler}!callbacks\+\_\+@{callbacks\+\_\+}}
+\index{callbacks\+\_\+@{callbacks\+\_\+}!smacc\+::introspection\+::\+State\+Behavior\+Handler@{smacc\+::introspection\+::\+State\+Behavior\+Handler}}
+\subsubsection[{\texorpdfstring{callbacks\+\_\+}{callbacks_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Callback\+Functor}$>$ smacc\+::introspection\+::\+State\+Behavior\+Handler\+::callbacks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classsmacc_1_1introspection_1_1StateBehaviorHandler_acb0abaf0d56fa700925a39f1d062ed55}{}\label{classsmacc_1_1introspection_1_1StateBehaviorHandler_acb0abaf0d56fa700925a39f1d062ed55}
+
+
+Definition at line 65 of file smacc\+\_\+state\+\_\+info.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc/include/smacc/introspection/\hyperlink{smacc__state__info_8h}{smacc\+\_\+state\+\_\+info.\+h}\item 
+smacc/include/smacc/impl/\hyperlink{smacc__state__behavior__impl_8h}{smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h}\item 
+smacc/src/smacc/\hyperlink{state__behavior_8cpp}{state\+\_\+behavior.\+cpp}\end{DoxyCompactItemize}
