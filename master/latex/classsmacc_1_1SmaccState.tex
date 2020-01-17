@@ -86,7 +86,7 @@ void \hyperlink{classsmacc_1_1SmaccState_a80082718f226bebedb589f0c4696001d}{chec
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename T\+Orthogonal , typename T\+Behavior , typename... Args$>$ }\\static void \hyperlink{classsmacc_1_1SmaccState_a3e335f3290e4968db0c8e22bf88356b7}{static\+\_\+configure} (Args \&\&...args)
+{\footnotesize template$<$typename T\+Orthogonal , typename T\+Behavior , typename... Args$>$ }\\static void \hyperlink{classsmacc_1_1SmaccState_acc54b973834c91d6ea1fad58ccecc97b}{configure\+\_\+orthogonal} (Args \&\&...args)
 \item 
 {\footnotesize template$<$typename T\+Event\+List $>$ }\\static void \hyperlink{classsmacc_1_1SmaccState_a9deac4c991e25df847af4c1882dbe71a}{iterate\+State\+Behavior\+Event\+Types} (\hyperlink{structsmacc_1_1introspection_1_1SmaccStateBehaviorInfo}{Smacc\+State\+Behavior\+Info} \&sbinfo)
 \item 
@@ -346,6 +346,42 @@ Definition at line 343 of file smacc\+\_\+state\+\_\+base.\+h.
 358     \}
 359     ROS\_INFO(\textcolor{stringliteral}{"POST THROW CONDITION"});
 360   \}
+\end{DoxyCode}
+\index{smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}!configure\+\_\+orthogonal@{configure\+\_\+orthogonal}}
+\index{configure\+\_\+orthogonal@{configure\+\_\+orthogonal}!smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}}
+\subsubsection[{\texorpdfstring{configure\+\_\+orthogonal(\+Args \&\&...\+args)}{configure_orthogonal(Args &&...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Most\+Derived, class Context, class Inner\+Initial = mpl\+::list$<$$>$, sc\+::history\+\_\+mode history\+Mode = sc\+::has\+\_\+deep\+\_\+history$>$ template$<$typename T\+Orthogonal , typename T\+Behavior , typename... Args$>$ static void {\bf smacc\+::\+Smacc\+State}$<$ Most\+Derived, Context, Inner\+Initial, history\+Mode $>$\+::configure\+\_\+orthogonal (
+\begin{DoxyParamCaption}
+\item[{Args \&\&...}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classsmacc_1_1SmaccState_acc54b973834c91d6ea1fad58ccecc97b}{}\label{classsmacc_1_1SmaccState_acc54b973834c91d6ea1fad58ccecc97b}
+
+
+Definition at line 195 of file smacc\+\_\+state\+\_\+base.\+h.
+
+
+\begin{DoxyCode}
+196   \{
+197     \textcolor{keyword}{auto} strorthogonal = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(TOrthogonal).name());
+198     \textcolor{keyword}{auto} strbehavior = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(TBehavior).name());
+199 
+200     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Orthogonal "} << strorthogonal << \textcolor{stringliteral}{" -> "} << strbehavior);
+201 
+202     \hyperlink{structsmacc_1_1introspection_1_1StateBehaviorInfoEntry}{StateBehaviorInfoEntry} bhinfo;
+203     bhinfo.\hyperlink{structsmacc_1_1introspection_1_1StateBehaviorInfoEntry_ac7db4e9a687700edb0207ee100aa3576}{factoryFunction} = [=](ISmaccState *state) \{
+204       \textcolor{comment}{//auto bh = std::make\_shared<TBehavior>(args...);}
+205       state->configure<TOrthogonal, TBehavior>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
+206     \};
+207 
+208     bhinfo.behaviorType = &(\textcolor{keyword}{typeid}(TBehavior));
+209     bhinfo.orthogonalType = &(\textcolor{keyword}{typeid}(TOrthogonal));
+210 
+211     \textcolor{keyword}{const} std::type\_info *tindex = &(\textcolor{keyword}{typeid}(MostDerived));
+212     \textcolor{keywordflow}{if} (!\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a2cc62c6c9dec1a4f5294f8430efb71f2}{SmaccStateInfo::staticBehaviorInfo}.count(tindex))
+213       \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a2cc62c6c9dec1a4f5294f8430efb71f2}{SmaccStateInfo::staticBehaviorInfo}[tindex] = 
+      std::vector<StateBehaviorInfoEntry>();
+214 
+215     \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a2cc62c6c9dec1a4f5294f8430efb71f2}{SmaccStateInfo::staticBehaviorInfo}[tindex].push\_back(bhinfo);
+216   \}
 \end{DoxyCode}
 \index{smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}!deep\+\_\+construct@{deep\+\_\+construct}}
 \index{deep\+\_\+construct@{deep\+\_\+construct}!smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}}
@@ -632,42 +668,6 @@ Definition at line 390 of file smacc\+\_\+state\+\_\+base.\+h.
 400     outermostContextBase.add(pInnerContext);
 401     \textcolor{keywordflow}{return} pInnerContext;
 402   \}
-\end{DoxyCode}
-\index{smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}!static\+\_\+configure@{static\+\_\+configure}}
-\index{static\+\_\+configure@{static\+\_\+configure}!smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}}
-\subsubsection[{\texorpdfstring{static\+\_\+configure(\+Args \&\&...\+args)}{static_configure(Args &&...args)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Most\+Derived, class Context, class Inner\+Initial = mpl\+::list$<$$>$, sc\+::history\+\_\+mode history\+Mode = sc\+::has\+\_\+deep\+\_\+history$>$ template$<$typename T\+Orthogonal , typename T\+Behavior , typename... Args$>$ static void {\bf smacc\+::\+Smacc\+State}$<$ Most\+Derived, Context, Inner\+Initial, history\+Mode $>$\+::static\+\_\+configure (
-\begin{DoxyParamCaption}
-\item[{Args \&\&...}]{args}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classsmacc_1_1SmaccState_a3e335f3290e4968db0c8e22bf88356b7}{}\label{classsmacc_1_1SmaccState_a3e335f3290e4968db0c8e22bf88356b7}
-
-
-Definition at line 195 of file smacc\+\_\+state\+\_\+base.\+h.
-
-
-\begin{DoxyCode}
-196   \{
-197     \textcolor{keyword}{auto} strorthogonal = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(TOrthogonal).name());
-198     \textcolor{keyword}{auto} strbehavior = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(TBehavior).name());
-199 
-200     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Orthogonal "} << strorthogonal << \textcolor{stringliteral}{" -> "} << strbehavior);
-201 
-202     \hyperlink{structsmacc_1_1introspection_1_1StateBehaviorInfoEntry}{StateBehaviorInfoEntry} bhinfo;
-203     bhinfo.\hyperlink{structsmacc_1_1introspection_1_1StateBehaviorInfoEntry_ac7db4e9a687700edb0207ee100aa3576}{factoryFunction} = [=](ISmaccState *state) \{
-204       \textcolor{comment}{//auto bh = std::make\_shared<TBehavior>(args...);}
-205       state->configure<TOrthogonal, TBehavior>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
-206     \};
-207 
-208     bhinfo.behaviorType = &(\textcolor{keyword}{typeid}(TBehavior));
-209     bhinfo.orthogonalType = &(\textcolor{keyword}{typeid}(TOrthogonal));
-210 
-211     \textcolor{keyword}{const} std::type\_info *tindex = &(\textcolor{keyword}{typeid}(MostDerived));
-212     \textcolor{keywordflow}{if} (!\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a2cc62c6c9dec1a4f5294f8430efb71f2}{SmaccStateInfo::staticBehaviorInfo}.count(tindex))
-213       \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a2cc62c6c9dec1a4f5294f8430efb71f2}{SmaccStateInfo::staticBehaviorInfo}[tindex] = 
-      std::vector<StateBehaviorInfoEntry>();
-214 
-215     \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a2cc62c6c9dec1a4f5294f8430efb71f2}{SmaccStateInfo::staticBehaviorInfo}[tindex].push\_back(bhinfo);
-216   \}
 \end{DoxyCode}
 \index{smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}!static\+\_\+create\+State\+Behavior@{static\+\_\+create\+State\+Behavior}}
 \index{static\+\_\+create\+State\+Behavior@{static\+\_\+create\+State\+Behavior}!smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}}

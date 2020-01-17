@@ -36,8 +36,7 @@ var searchData=
   ['smacctransitioninfo',['SmaccTransitionInfo',['../structsmacc_1_1introspection_1_1SmaccTransitionInfo.html#ad9f52aaeeecec400ac9419cc69054204',1,'smacc::introspection::SmaccTransitionInfo']]],
   ['state_5fmachine_5fvisualization',['state_machine_visualization',['../classsmacc_1_1ISmaccStateMachine.html#ac03029f770422d0ea77ea9856b8cb1a8',1,'smacc::ISmaccStateMachine']]],
   ['statebehavior',['StateBehavior',['../classsmacc_1_1StateBehavior.html#af12ce0aee0639e34b872fea3ac23c1d4',1,'smacc::StateBehavior']]],
-  ['static_5fconfigure',['static_configure',['../classsmacc_1_1SmaccState.html#a3e335f3290e4968db0c8e22bf88356b7',1,'smacc::SmaccState']]],
   ['static_5fcreatestatebehavior',['static_createStateBehavior',['../classsmacc_1_1SmaccState.html#a827c90e9c0b1791f6ee26f1f074231e4',1,'smacc::SmaccState']]],
-  ['stop',['Stop',['../classsmacc_1_1ISmaccStateMachine.html#a8f353fcf0686b1dacb57458da882c89b',1,'smacc::ISmaccStateMachine::Stop()'],['../structsmacc_1_1SmaccStateMachineBase.html#a9c7c7b8d814a8cb1b741c7675dc2a9f7',1,'smacc::SmaccStateMachineBase::Stop()'],['../classsmacc_1_1SignalDetector.html#a536ea005ea4ef4632c0c9c1c62c557a3',1,'smacc::SignalDetector::stop()']]],
+  ['stop',['stop',['../classsmacc_1_1SignalDetector.html#a536ea005ea4ef4632c0c9c1c62c557a3',1,'smacc::SignalDetector::stop()'],['../classsmacc_1_1ISmaccStateMachine.html#a8f353fcf0686b1dacb57458da882c89b',1,'smacc::ISmaccStateMachine::Stop()'],['../structsmacc_1_1SmaccStateMachineBase.html#a9c7c7b8d814a8cb1b741c7675dc2a9f7',1,'smacc::SmaccStateMachineBase::Stop()']]],
   ['subscribe',['subscribe',['../classsmacc__rviz__plugin_1_1SmaccRvizDisplay.html#ad774027ba3eda277c991619332495cbb',1,'smacc_rviz_plugin::SmaccRvizDisplay']]]
 ];
