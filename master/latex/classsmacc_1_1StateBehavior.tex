@@ -24,19 +24,12 @@ Collaboration diagram for smacc\+:\+:State\+Behavior\+:
 \includegraphics[width=350pt]{classsmacc_1_1StateBehavior__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \hyperlink{structsmacc_1_1StateBehavior_1_1AddTEventType}{Add\+T\+Event\+Type}
-\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classsmacc_1_1StateBehavior_af12ce0aee0639e34b872fea3ac23c1d4}{State\+Behavior} ()
 \item 
 virtual void \hyperlink{classsmacc_1_1StateBehavior_af8b18ef9895f4753d0363c9efe21b6cf}{on\+Initialized} ()
-\item 
-{\footnotesize template$<$typename T\+Event\+List $>$ }\\void \hyperlink{classsmacc_1_1StateBehavior_aae97c74f5f11a96afccd78aa2c1566e7}{initialize} (\hyperlink{classsmacc_1_1ISmaccState}{I\+Smacc\+State} $\ast$\hyperlink{classsmacc_1_1StateBehavior_abdc8c883baf520fd01f98e046d045dca}{owner\+State}, T\+Event\+List $\ast$)
 \item 
 virtual void \hyperlink{classsmacc_1_1StateBehavior_ad04ebf39e7955d684642234d3e8252ea}{on\+Event\+Notified} (const std\+::type\+\_\+info $\ast$event\+Type)
 \item 
@@ -48,9 +41,11 @@ void \hyperlink{classsmacc_1_1StateBehavior_a5aa08609fe8095513e762ae40ca4884b}{u
 \item 
 virtual \hyperlink{classbool}{bool} \hyperlink{classsmacc_1_1StateBehavior_a29fc4e24391c977f8686424326b3b70f}{triggers} ()=0
 \item 
-{\footnotesize template$<$typename T\+Ev $>$ }\\void \hyperlink{classsmacc_1_1StateBehavior_a70f1d1efdafa981fe60b06308a528218}{declare\+Input\+Event} ()
+{\footnotesize template$<$typename T\+Ev $>$ }\\void \hyperlink{classsmacc_1_1StateBehavior_aef14060bd756c3e33c6634527f0d9a29}{add\+Input\+Event} ()
 \item 
-{\footnotesize template$<$typename T\+Ev $>$ }\\void \hyperlink{classsmacc_1_1StateBehavior_ad7f9270d45491624f3bd19ff04dbad69}{declare\+Post\+Event} (\hyperlink{structsmacc_1_1introspection_1_1typelist}{smacc\+::introspection\+::typelist}$<$ T\+Ev $>$)
+{\footnotesize template$<$typename T\+Ev $>$ }\\void \hyperlink{classsmacc_1_1StateBehavior_a66b481fdcc9e8c7bdb0cac5072d3bf8c}{set\+Output\+Event} ()
+\item 
+void \hyperlink{classsmacc_1_1StateBehavior_aa5022db9d47a02b79472daf337341201}{initialize} (\hyperlink{classsmacc_1_1ISmaccState}{I\+Smacc\+State} $\ast$\hyperlink{classsmacc_1_1StateBehavior_abdc8c883baf520fd01f98e046d045dca}{owner\+State})
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -78,7 +73,7 @@ friend \hyperlink{classsmacc_1_1StateBehavior_a4bc03d3369b90283c91d7046461a554a}
 \subsection{Detailed Description}
 
 
-Definition at line 23 of file smacc\+\_\+state\+\_\+behavior.\+h.
+Definition at line 29 of file smacc\+\_\+state\+\_\+behavior.\+h.
 
 
 
@@ -102,6 +97,27 @@ Definition at line 7 of file state\+\_\+behavior.\+cpp.
 
 
 \subsection{Member Function Documentation}
+\index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!add\+Input\+Event@{add\+Input\+Event}}
+\index{add\+Input\+Event@{add\+Input\+Event}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
+\subsubsection[{\texorpdfstring{add\+Input\+Event()}{addInputEvent()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+Ev $>$ void smacc\+::\+State\+Behavior\+::add\+Input\+Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classsmacc_1_1StateBehavior_aef14060bd756c3e33c6634527f0d9a29}{}\label{classsmacc_1_1StateBehavior_aef14060bd756c3e33c6634527f0d9a29}
+
+
+Definition at line 24 of file smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h.
+
+
+
+References event\+Types.
+
+
+\begin{DoxyCode}
+25 \{
+26     this->\hyperlink{classsmacc_1_1StateBehavior_a2df8158ebc3bb0f82c55824f088288bb}{eventTypes}.push\_back(&\textcolor{keyword}{typeid}(TEv));
+27 \}
+\end{DoxyCode}
 \index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!create\+Event\+Callback@{create\+Event\+Callback}}
 \index{create\+Event\+Callback@{create\+Event\+Callback}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
 \subsubsection[{\texorpdfstring{create\+Event\+Callback(void(\+T\+Class\+::$\ast$callback)(\+T $\ast$), T\+Class $\ast$object)}{createEventCallback(void(TClass::*callback)(T *), TClass *object)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename T\+Class $>$ void smacc\+::\+State\+Behavior\+::create\+Event\+Callback (
@@ -112,7 +128,7 @@ Definition at line 7 of file state\+\_\+behavior.\+cpp.
 )}\hypertarget{classsmacc_1_1StateBehavior_a74dcb4a32f0d6aecf8bf35872e8be6bb}{}\label{classsmacc_1_1StateBehavior_a74dcb4a32f0d6aecf8bf35872e8be6bb}
 
 
-Definition at line 35 of file smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h.
+Definition at line 30 of file smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h.
 
 
 
@@ -120,13 +136,13 @@ References event\+Callbacks\+\_\+.
 
 
 \begin{DoxyCode}
-36 \{
-37     \textcolor{keyword}{const} \textcolor{keyword}{auto} *eventtype = &\textcolor{keyword}{typeid}(T);
-38     this->\hyperlink{classsmacc_1_1StateBehavior_acbe54c0be9466094565c5b47ab53d84b}{eventCallbacks\_}[eventtype] = [=](\textcolor{keywordtype}{void} *msg) \{
-39         T *evptr = (T *)msg;
-40         (\textcolor{keywordtype}{object}->*callback)(evptr);
-41     \};
-42 \}
+31 \{
+32     \textcolor{keyword}{const} \textcolor{keyword}{auto} *eventtype = &\textcolor{keyword}{typeid}(T);
+33     this->\hyperlink{classsmacc_1_1StateBehavior_acbe54c0be9466094565c5b47ab53d84b}{eventCallbacks\_}[eventtype] = [=](\textcolor{keywordtype}{void} *msg) \{
+34         T *evptr = (T *)msg;
+35         (\textcolor{keywordtype}{object}->*callback)(evptr);
+36     \};
+37 \}
 \end{DoxyCode}
 \index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!create\+Event\+Callback@{create\+Event\+Callback}}
 \index{create\+Event\+Callback@{create\+Event\+Callback}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
@@ -137,7 +153,7 @@ References event\+Callbacks\+\_\+.
 )}\hypertarget{classsmacc_1_1StateBehavior_aeb745a538bfe3745d5de8225cd6760ff}{}\label{classsmacc_1_1StateBehavior_aeb745a538bfe3745d5de8225cd6760ff}
 
 
-Definition at line 45 of file smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h.
+Definition at line 40 of file smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h.
 
 
 
@@ -145,99 +161,24 @@ References event\+Callbacks\+\_\+.
 
 
 \begin{DoxyCode}
-46 \{
-47     \textcolor{keyword}{const} \textcolor{keyword}{auto} *eventtype = &\textcolor{keyword}{typeid}(T);
-48     this->\hyperlink{classsmacc_1_1StateBehavior_acbe54c0be9466094565c5b47ab53d84b}{eventCallbacks\_}[eventtype] = [=](\textcolor{keywordtype}{void} *msg) \{
-49         T *evptr = (T *)msg;
-50         callback(evptr);
-51     \};
-52 \}
+41 \{
+42     \textcolor{keyword}{const} \textcolor{keyword}{auto} *eventtype = &\textcolor{keyword}{typeid}(T);
+43     this->\hyperlink{classsmacc_1_1StateBehavior_acbe54c0be9466094565c5b47ab53d84b}{eventCallbacks\_}[eventtype] = [=](\textcolor{keywordtype}{void} *msg) \{
+44         T *evptr = (T *)msg;
+45         callback(evptr);
+46     \};
+47 \}
 \end{DoxyCode}
-\index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!declare\+Input\+Event@{declare\+Input\+Event}}
-\index{declare\+Input\+Event@{declare\+Input\+Event}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
-\subsubsection[{\texorpdfstring{declare\+Input\+Event()}{declareInputEvent()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+Ev $>$ void smacc\+::\+State\+Behavior\+::declare\+Input\+Event (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{classsmacc_1_1StateBehavior_a70f1d1efdafa981fe60b06308a528218}{}\label{classsmacc_1_1StateBehavior_a70f1d1efdafa981fe60b06308a528218}
-
-
-Definition at line 16 of file smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h.
-
-
-
-References event\+Types.
-
-
-
-Referenced by smacc\+::\+State\+Behavior\+::\+Add\+T\+Event\+Type$<$ T\+Event\+List $>$\+::operator()().
-
-
-\begin{DoxyCode}
-17 \{
-18     this->\hyperlink{classsmacc_1_1StateBehavior_a2df8158ebc3bb0f82c55824f088288bb}{eventTypes}.push\_back(&\textcolor{keyword}{typeid}(TEv));
-19 \}
-\end{DoxyCode}
-
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classsmacc_1_1StateBehavior_a70f1d1efdafa981fe60b06308a528218_icgraph}
-\end{center}
-\end{figure}
-
-
-\index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!declare\+Post\+Event@{declare\+Post\+Event}}
-\index{declare\+Post\+Event@{declare\+Post\+Event}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
-\subsubsection[{\texorpdfstring{declare\+Post\+Event(smacc\+::introspection\+::typelist$<$ T\+Ev $>$)}{declarePostEvent(smacc::introspection::typelist< TEv >)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+Ev $>$ void smacc\+::\+State\+Behavior\+::declare\+Post\+Event (
-\begin{DoxyParamCaption}
-\item[{{\bf smacc\+::introspection\+::typelist}$<$ T\+Ev $>$}]{}
-\end{DoxyParamCaption}
-)}\hypertarget{classsmacc_1_1StateBehavior_ad7f9270d45491624f3bd19ff04dbad69}{}\label{classsmacc_1_1StateBehavior_ad7f9270d45491624f3bd19ff04dbad69}
-
-
-Definition at line 6 of file smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h.
-
-
-
-References smacc\+::\+I\+Smacc\+State\+::get\+State\+Machine(), owner\+State, smacc\+::\+I\+Smacc\+State\+Machine\+::post\+Event(), and post\+Event\+Fn.
-
-
-\begin{DoxyCode}
-7 \{
-8     this->\hyperlink{classsmacc_1_1StateBehavior_aa8485f8a68716ca9429ac8e72e057b7c}{postEventFn} = [\textcolor{keyword}{this}]() \{
-9         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[State Behavior Base] postingfn posting event: "} << demangleSymbol<TEv>());
-10         \textcolor{keyword}{auto} *ev = \textcolor{keyword}{new} TEv();
-11         this->\hyperlink{classsmacc_1_1StateBehavior_abdc8c883baf520fd01f98e046d045dca}{ownerState}->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_ad80cdd7bbc9a9f3b221c625754fed1ed}{postEvent}(ev);
-12     \};
-13 \}
-\end{DoxyCode}
-
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classsmacc_1_1StateBehavior_ad7f9270d45491624f3bd19ff04dbad69_cgraph}
-\end{center}
-\end{figure}
-
-
 \index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!initialize@{initialize}}
 \index{initialize@{initialize}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
-\subsubsection[{\texorpdfstring{initialize(\+I\+Smacc\+State $\ast$owner\+State, T\+Event\+List $\ast$)}{initialize(ISmaccState *ownerState, TEventList *)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+Event\+List $>$ void smacc\+::\+State\+Behavior\+::initialize (
+\subsubsection[{\texorpdfstring{initialize(\+I\+Smacc\+State $\ast$owner\+State)}{initialize(ISmaccState *ownerState)}}]{\setlength{\rightskip}{0pt plus 5cm}void smacc\+::\+State\+Behavior\+::initialize (
 \begin{DoxyParamCaption}
-\item[{{\bf I\+Smacc\+State} $\ast$}]{owner\+State, }
-\item[{T\+Event\+List $\ast$}]{}
+\item[{{\bf smacc\+::\+I\+Smacc\+State} $\ast$}]{owner\+State}
 \end{DoxyParamCaption}
-)}\hypertarget{classsmacc_1_1StateBehavior_aae97c74f5f11a96afccd78aa2c1566e7}{}\label{classsmacc_1_1StateBehavior_aae97c74f5f11a96afccd78aa2c1566e7}
+)}\hypertarget{classsmacc_1_1StateBehavior_aa5022db9d47a02b79472daf337341201}{}\label{classsmacc_1_1StateBehavior_aa5022db9d47a02b79472daf337341201}
 
 
-Definition at line 22 of file smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h.
+Definition at line 11 of file state\+\_\+behavior.\+cpp.
 
 
 
@@ -245,16 +186,11 @@ References on\+Initialized(), and owner\+State.
 
 
 \begin{DoxyCode}
-23 \{
-24     this->\hyperlink{classsmacc_1_1StateBehavior_abdc8c883baf520fd01f98e046d045dca}{ownerState} = \hyperlink{classsmacc_1_1StateBehavior_abdc8c883baf520fd01f98e046d045dca}{ownerState};
-25 
-26     \textcolor{keyword}{using} boost::mpl::\_1;
-27     \textcolor{keyword}{using} wrappedList = \textcolor{keyword}{typename} boost::mpl::transform<TEventList, \_1>::type;
-28     AddTEventType<TEventList> op(\textcolor{keyword}{this});
-29     boost::mpl::for\_each<wrappedList>(op);
-30 
-31     this->\hyperlink{classsmacc_1_1StateBehavior_af8b18ef9895f4753d0363c9efe21b6cf}{onInitialized}();
-32 \}
+12 \{
+13     this->ownerState = \hyperlink{classsmacc_1_1StateBehavior_abdc8c883baf520fd01f98e046d045dca}{ownerState};
+14 
+15     this->\hyperlink{classsmacc_1_1StateBehavior_af8b18ef9895f4753d0363c9efe21b6cf}{onInitialized}();
+16 \}
 \end{DoxyCode}
 
 
@@ -263,7 +199,7 @@ Here is the call graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classsmacc_1_1StateBehavior_aae97c74f5f11a96afccd78aa2c1566e7_cgraph}
+\includegraphics[width=350pt]{classsmacc_1_1StateBehavior_aa5022db9d47a02b79472daf337341201_cgraph}
 \end{center}
 \end{figure}
 
@@ -277,25 +213,25 @@ Here is the call graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\hypertarget{classsmacc_1_1StateBehavior_a9307fb59a1d8bf490d280b8660a13c09}{}\label{classsmacc_1_1StateBehavior_a9307fb59a1d8bf490d280b8660a13c09}
 
 
-Definition at line 78 of file smacc\+\_\+state\+\_\+behavior.\+h.
+Definition at line 85 of file smacc\+\_\+state\+\_\+behavior.\+h.
 
 
 \begin{DoxyCode}
-79     \{
-80         \textcolor{comment}{//the state machine uses this method to notify this state behavior some event happened.}
-81         \textcolor{keyword}{auto} tid = &(\textcolor{keyword}{typeid}(TEvent));
-82         \textcolor{keywordflow}{if} (std::find(\hyperlink{classsmacc_1_1StateBehavior_a2df8158ebc3bb0f82c55824f088288bb}{eventTypes}.begin(), \hyperlink{classsmacc_1_1StateBehavior_a2df8158ebc3bb0f82c55824f088288bb}{eventTypes}.end(), tid) != 
+86     \{
+87         \textcolor{comment}{//the state machine uses this method to notify this state behavior some event happened.}
+88         \textcolor{keyword}{auto} tid = &(\textcolor{keyword}{typeid}(TEvent));
+89         \textcolor{keywordflow}{if} (std::find(\hyperlink{classsmacc_1_1StateBehavior_a2df8158ebc3bb0f82c55824f088288bb}{eventTypes}.begin(), \hyperlink{classsmacc_1_1StateBehavior_a2df8158ebc3bb0f82c55824f088288bb}{eventTypes}.end(), tid) != 
       \hyperlink{classsmacc_1_1StateBehavior_a2df8158ebc3bb0f82c55824f088288bb}{eventTypes}.end())
-83         \{
-84             this->\hyperlink{classsmacc_1_1StateBehavior_ad04ebf39e7955d684642234d3e8252ea}{onEventNotified}(tid);
-85             this->\hyperlink{classsmacc_1_1StateBehavior_a5aa08609fe8095513e762ae40ca4884b}{update}();
-86 
-87             \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1StateBehavior_acbe54c0be9466094565c5b47ab53d84b}{eventCallbacks\_}.count(tid))
-88             \{
-89                 \hyperlink{classsmacc_1_1StateBehavior_acbe54c0be9466094565c5b47ab53d84b}{eventCallbacks\_}[tid]((\textcolor{keywordtype}{void} *)ev);
-90             \}
-91         \}
-92     \}
+90         \{
+91             this->\hyperlink{classsmacc_1_1StateBehavior_ad04ebf39e7955d684642234d3e8252ea}{onEventNotified}(tid);
+92             this->\hyperlink{classsmacc_1_1StateBehavior_a5aa08609fe8095513e762ae40ca4884b}{update}();
+93 
+94             \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1StateBehavior_acbe54c0be9466094565c5b47ab53d84b}{eventCallbacks\_}.count(tid))
+95             \{
+96                 \hyperlink{classsmacc_1_1StateBehavior_acbe54c0be9466094565c5b47ab53d84b}{eventCallbacks\_}[tid]((\textcolor{keywordtype}{void} *)ev);
+97             \}
+98         \}
+99     \}
 \end{DoxyCode}
 \index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!on\+Event\+Notified@{on\+Event\+Notified}}
 \index{on\+Event\+Notified@{on\+Event\+Notified}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
@@ -310,12 +246,12 @@ Reimplemented in \hyperlink{classsmacc_1_1state__behaviors_1_1SbEventCountdown_a
 
 
 
-Definition at line 15 of file state\+\_\+behavior.\+cpp.
+Definition at line 22 of file state\+\_\+behavior.\+cpp.
 
 
 \begin{DoxyCode}
-16 \{
-17 \}
+23 \{
+24 \}
 \end{DoxyCode}
 \index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!on\+Initialized@{on\+Initialized}}
 \index{on\+Initialized@{on\+Initialized}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
@@ -330,7 +266,7 @@ Reimplemented in \hyperlink{classsmacc_1_1state__behaviors_1_1SbEventCountdown_a
 
 
 
-Definition at line 11 of file state\+\_\+behavior.\+cpp.
+Definition at line 18 of file state\+\_\+behavior.\+cpp.
 
 
 
@@ -338,8 +274,8 @@ Referenced by initialize().
 
 
 \begin{DoxyCode}
-12 \{
-13 \}
+19 \{
+20 \}
 \end{DoxyCode}
 
 
@@ -349,6 +285,43 @@ Here is the caller graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classsmacc_1_1StateBehavior_af8b18ef9895f4753d0363c9efe21b6cf_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!set\+Output\+Event@{set\+Output\+Event}}
+\index{set\+Output\+Event@{set\+Output\+Event}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
+\subsubsection[{\texorpdfstring{set\+Output\+Event()}{setOutputEvent()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+Ev $>$ void smacc\+::\+State\+Behavior\+::set\+Output\+Event (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classsmacc_1_1StateBehavior_a66b481fdcc9e8c7bdb0cac5072d3bf8c}{}\label{classsmacc_1_1StateBehavior_a66b481fdcc9e8c7bdb0cac5072d3bf8c}
+
+
+Definition at line 14 of file smacc\+\_\+state\+\_\+behavior\+\_\+impl.\+h.
+
+
+
+References smacc\+::\+I\+Smacc\+State\+::get\+State\+Machine(), owner\+State, smacc\+::\+I\+Smacc\+State\+Machine\+::post\+Event(), and post\+Event\+Fn.
+
+
+\begin{DoxyCode}
+15 \{
+16     this->\hyperlink{classsmacc_1_1StateBehavior_aa8485f8a68716ca9429ac8e72e057b7c}{postEventFn} = [\textcolor{keyword}{this}]() \{
+17         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[State Behavior Base] postingfn posting event: "} << demangleSymbol<TEv>());
+18         \textcolor{keyword}{auto} *ev = \textcolor{keyword}{new} TEv();
+19         this->\hyperlink{classsmacc_1_1StateBehavior_abdc8c883baf520fd01f98e046d045dca}{ownerState}->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_ad80cdd7bbc9a9f3b221c625754fed1ed}{postEvent}(ev);
+20     \};
+21 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1StateBehavior_a66b481fdcc9e8c7bdb0cac5072d3bf8c_cgraph}
 \end{center}
 \end{figure}
 
@@ -389,7 +362,7 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classsmacc_1_1StateBehavior_a5aa08609fe8095513e762ae40ca4884b}{}\label{classsmacc_1_1StateBehavior_a5aa08609fe8095513e762ae40ca4884b}
 
 
-Definition at line 19 of file state\+\_\+behavior.\+cpp.
+Definition at line 26 of file state\+\_\+behavior.\+cpp.
 
 
 
@@ -397,13 +370,13 @@ References post\+Event\+Fn, and triggers().
 
 
 \begin{DoxyCode}
-20 \{
-21     \textcolor{keywordflow}{if} (this->\hyperlink{classsmacc_1_1StateBehavior_a29fc4e24391c977f8686424326b3b70f}{triggers}())
-22     \{
-23         ROS\_INFO(\textcolor{stringliteral}{"State behavior base REALLY TRIGGERS!!"});
-24         this->\hyperlink{classsmacc_1_1StateBehavior_aa8485f8a68716ca9429ac8e72e057b7c}{postEventFn}();
-25     \}
-26 \}
+27 \{
+28     \textcolor{keywordflow}{if} (this->\hyperlink{classsmacc_1_1StateBehavior_a29fc4e24391c977f8686424326b3b70f}{triggers}())
+29     \{
+30         ROS\_INFO(\textcolor{stringliteral}{"State behavior base REALLY TRIGGERS!!"});
+31         this->\hyperlink{classsmacc_1_1StateBehavior_aa8485f8a68716ca9429ac8e72e057b7c}{postEventFn}();
+32     \}
+33 \}
 \end{DoxyCode}
 
 
@@ -425,7 +398,7 @@ Here is the call graph for this function\+:
 \subsubsection[{\texorpdfstring{event\+Callbacks\+\_\+}{eventCallbacks_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$const std\+::type\+\_\+info $\ast$, std\+::function$<$void(void $\ast$)$>$ $>$ smacc\+::\+State\+Behavior\+::event\+Callbacks\+\_\+}\hypertarget{classsmacc_1_1StateBehavior_acbe54c0be9466094565c5b47ab53d84b}{}\label{classsmacc_1_1StateBehavior_acbe54c0be9466094565c5b47ab53d84b}
 
 
-Definition at line 29 of file smacc\+\_\+state\+\_\+behavior.\+h.
+Definition at line 35 of file smacc\+\_\+state\+\_\+behavior.\+h.
 
 
 
@@ -436,40 +409,40 @@ Referenced by create\+Event\+Callback().
 \subsubsection[{\texorpdfstring{event\+Types}{eventTypes}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$const std\+::type\+\_\+info $\ast$$>$ smacc\+::\+State\+Behavior\+::event\+Types}\hypertarget{classsmacc_1_1StateBehavior_a2df8158ebc3bb0f82c55824f088288bb}{}\label{classsmacc_1_1StateBehavior_a2df8158ebc3bb0f82c55824f088288bb}
 
 
-Definition at line 28 of file smacc\+\_\+state\+\_\+behavior.\+h.
+Definition at line 34 of file smacc\+\_\+state\+\_\+behavior.\+h.
 
 
 
-Referenced by declare\+Input\+Event(), and smacc\+::state\+\_\+behaviors\+::\+Sb\+Event\+Countdown\+::on\+Initialized().
+Referenced by add\+Input\+Event(), and smacc\+::state\+\_\+behaviors\+::\+Sb\+Event\+Countdown\+::on\+Initialized().
 
 \index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!I\+Smacc\+State\+Machine@{I\+Smacc\+State\+Machine}}
 \index{I\+Smacc\+State\+Machine@{I\+Smacc\+State\+Machine}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
 \subsubsection[{\texorpdfstring{I\+Smacc\+State\+Machine}{ISmaccStateMachine}}]{\setlength{\rightskip}{0pt plus 5cm}friend smacc\+::\+State\+Behavior\+::\+I\+Smacc\+State\+Machine\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classsmacc_1_1StateBehavior_a4bc03d3369b90283c91d7046461a554a}{}\label{classsmacc_1_1StateBehavior_a4bc03d3369b90283c91d7046461a554a}
 
 
-Definition at line 75 of file smacc\+\_\+state\+\_\+behavior.\+h.
+Definition at line 82 of file smacc\+\_\+state\+\_\+behavior.\+h.
 
 \index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!owner\+State@{owner\+State}}
 \index{owner\+State@{owner\+State}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
 \subsubsection[{\texorpdfstring{owner\+State}{ownerState}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\+Smacc\+State}$\ast$ smacc\+::\+State\+Behavior\+::owner\+State}\hypertarget{classsmacc_1_1StateBehavior_abdc8c883baf520fd01f98e046d045dca}{}\label{classsmacc_1_1StateBehavior_abdc8c883baf520fd01f98e046d045dca}
 
 
-Definition at line 26 of file smacc\+\_\+state\+\_\+behavior.\+h.
+Definition at line 32 of file smacc\+\_\+state\+\_\+behavior.\+h.
 
 
 
-Referenced by declare\+Post\+Event(), and initialize().
+Referenced by initialize(), and set\+Output\+Event().
 
 \index{smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}!post\+Event\+Fn@{post\+Event\+Fn}}
 \index{post\+Event\+Fn@{post\+Event\+Fn}!smacc\+::\+State\+Behavior@{smacc\+::\+State\+Behavior}}
 \subsubsection[{\texorpdfstring{post\+Event\+Fn}{postEventFn}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::function$<$void()$>$ smacc\+::\+State\+Behavior\+::post\+Event\+Fn}\hypertarget{classsmacc_1_1StateBehavior_aa8485f8a68716ca9429ac8e72e057b7c}{}\label{classsmacc_1_1StateBehavior_aa8485f8a68716ca9429ac8e72e057b7c}
 
 
-Definition at line 27 of file smacc\+\_\+state\+\_\+behavior.\+h.
+Definition at line 33 of file smacc\+\_\+state\+\_\+behavior.\+h.
 
 
 
-Referenced by declare\+Post\+Event(), and update().
+Referenced by set\+Output\+Event(), and update().
 
 
 

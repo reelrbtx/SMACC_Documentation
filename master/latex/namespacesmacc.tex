@@ -98,7 +98,7 @@ Definition at line 43 of file common.\+h.
 )}\hypertarget{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}{}\label{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}
 
 
-Definition at line 79 of file smacc\+\_\+signal\+\_\+detector.\+h.
+Definition at line 78 of file smacc\+\_\+signal\+\_\+detector.\+h.
 
 
 
@@ -106,28 +106,28 @@ References smacc\+::\+Signal\+Detector\+::polling\+Loop(), and smacc\+::\+Signal
 
 
 \begin{DoxyCode}
-80 \{
-81     \textcolor{comment}{// create the asynchronous state machine scheduler}
-82     \hyperlink{smacc__fifo__scheduler_8h_a0063e275231c80d5f97df21d17257bf7}{SmaccFifoScheduler} scheduler1(\textcolor{keyword}{true});
-83 
-84     \textcolor{comment}{// create the signalDetector component}
-85     SignalDetector signalDetector(&scheduler1);
-86 
-87     \textcolor{comment}{// create the asynchronous state machine processor}
-88     SmaccFifoScheduler::processor\_handle sm =
-89         scheduler1.create\_processor<StateMachineType>(&signalDetector);
-90 
-91     \textcolor{comment}{// initialize the asynchronous state machine processor}
-92     signalDetector.setProcessorHandle(sm);
-93 
-94     scheduler1.initiate\_processor(sm);
-95 
-96     \textcolor{comment}{//create a thread for the asynchronous state machine processor execution}
-97     boost::thread otherThread(boost::bind(&sc::fifo\_scheduler<>::operator(), &scheduler1, 0));
-98 
-99     \textcolor{comment}{// use the  main thread for the signal detector component (waiting actionclient requests)}
-100     signalDetector.pollingLoop();
-101 \}
+79 \{
+80     \textcolor{comment}{// create the asynchronous state machine scheduler}
+81     \hyperlink{smacc__fifo__scheduler_8h_a0063e275231c80d5f97df21d17257bf7}{SmaccFifoScheduler} scheduler1(\textcolor{keyword}{true});
+82 
+83     \textcolor{comment}{// create the signalDetector component}
+84     SignalDetector signalDetector(&scheduler1);
+85 
+86     \textcolor{comment}{// create the asynchronous state machine processor}
+87     SmaccFifoScheduler::processor\_handle sm =
+88         scheduler1.create\_processor<StateMachineType>(&signalDetector);
+89 
+90     \textcolor{comment}{// initialize the asynchronous state machine processor}
+91     signalDetector.setProcessorHandle(sm);
+92 
+93     scheduler1.initiate\_processor(sm);
+94 
+95     \textcolor{comment}{//create a thread for the asynchronous state machine processor execution}
+96     boost::thread otherThread(boost::bind(&sc::fifo\_scheduler<>::operator(), &scheduler1, 0));
+97 
+98     \textcolor{comment}{// use the  main thread for the signal detector component (waiting actionclient requests)}
+99     signalDetector.pollingLoop();
+100 \}
 \end{DoxyCode}
 
 

@@ -76,10 +76,6 @@ Definition at line 31 of file st\+\_\+acquire\+\_\+sensors.\+h.
 Definition at line 33 of file st\+\_\+acquire\+\_\+sensors.\+h.
 
 
-
-References smacc\+::\+Smacc\+State$<$ St\+Acquire\+Sensors, Ms\+Dance\+Bot\+Run\+Mode $>$\+::static\+\_\+create\+State\+Behavior().
-
-
 \begin{DoxyCode}
 34    \{
 35       configure\_orthogonal<OrObstaclePerception, CbLidarSensor>();
@@ -88,29 +84,24 @@ References smacc\+::\+Smacc\+State$<$ St\+Acquire\+Sensors, Ms\+Dance\+Bot\+Run\
 38       configure\_orthogonal<OrService3, CbService3>(Service3Command::SERVICE3\_ON);
 39       configure\_orthogonal<OrUpdatablePublisher, ros\_publisher\_client::CbDefaultPublishLoop>();
 40 
-41       \hyperlink{classsmacc_1_1SmaccState_a827c90e9c0b1791f6ee26f1f074231e4}{static\_createStateBehavior}<SbAllEventsGo,
-42                              EvAllGo<SbAllEventsGo, SBehav1>,
-43                              mpl::list<EvTopicMessage<CbLidarSensor, OrObstaclePerception>, 
-      EvTopicMessage<CbConditionTemperatureSensor, OrTemperatureSensor>>>();
+41       \textcolor{comment}{// static\_createStateBehavior<SbAllEventsGo,}
+42       \textcolor{comment}{//                            EvAllGo<SbAllEventsGo, SBehav1>,}
+43       \textcolor{comment}{//                            mpl::list<EvTopicMessage<CbLidarSensor, OrObstaclePerception>,
+       EvTopicMessage<CbConditionTemperatureSensor, OrTemperatureSensor>>>();}
 44 
-45       \textcolor{comment}{// auto sball = static\_createStateBehavior<SbAllEventsGo>();}
-46       \textcolor{comment}{// sball->enablesOn<EvTopicMessage<CbLidarSensor, OrObstaclePerception>,
+45       \textcolor{keyword}{auto} sbAllSensorsReady = static\_createStateBehavior<SbAllEventsGo>();
+46       sbAllSensorsReady->addInputEvent<EvTopicMessage<CbLidarSensor, OrObstaclePerception>>();
+47       sbAllSensorsReady->addInputEvent<EvTopicMessage<CbConditionTemperatureSensor, OrTemperatureSensor>>()
+      ;
+48 
+49       sbAllSensorsReady->setOutputEvent<EvAllGo<SbAllEventsGo, SBehav1>>();
+50 
+51       \textcolor{comment}{// auto sball = static\_createStateBehavior<SbAllEventsGo>();}
+52       \textcolor{comment}{// sball->enablesOn<EvTopicMessage<CbLidarSensor, OrObstaclePerception>,
        EvTopicMessage<CbConditionTemperatureSensor, OrTemperatureSensor>>();}
-47       \textcolor{comment}{// sball->throwsEvent<EvAllGo<SbAllEventsGo, SBehav1>>();}
-48    \}
+53       \textcolor{comment}{// sball->throwsEvent<EvAllGo<SbAllEventsGo, SBehav1>>();}
+54    \}
 \end{DoxyCode}
-
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{structsm__dance__bot_1_1StAcquireSensors_ae30f4b633faa922070fc8412b6dd78fc_cgraph}
-\end{center}
-\end{figure}
-
-
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

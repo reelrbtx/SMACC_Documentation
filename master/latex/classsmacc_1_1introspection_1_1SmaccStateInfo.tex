@@ -74,16 +74,16 @@ const std\+::type\+\_\+info $\ast$ \hyperlink{classsmacc_1_1introspection_1_1Sma
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static std\+::map$<$ const std\+::type\+\_\+info $\ast$, std\+::vector$<$ \hyperlink{structsmacc_1_1introspection_1_1StateBehaviorInfoEntry}{State\+Behavior\+Info\+Entry} $>$ $>$ \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a2cc62c6c9dec1a4f5294f8430efb71f2}{static\+Behavior\+Info}
+static std\+::map$<$ const std\+::type\+\_\+info $\ast$, std\+::vector$<$ \hyperlink{structsmacc_1_1introspection_1_1ClientBehaviorInfoEntry}{Client\+Behavior\+Info\+Entry} $>$ $>$ \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_ad3d8b3450060cb0b91f38fb2fe0a7678}{static\+Behavior\+Info}
 \item 
-static std\+::map$<$ const std\+::type\+\_\+info $\ast$, std\+::vector$<$ \hyperlink{structsmacc_1_1introspection_1_1SmaccStateBehaviorInfo}{Smacc\+State\+Behavior\+Info} $>$ $>$ \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7f62357b9ed1db5b8f9fcc3394f7f58b}{state\+Behaviors\+Info}
+static std\+::map$<$ const std\+::type\+\_\+info $\ast$, std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{structsmacc_1_1introspection_1_1SmaccStateBehaviorInfo}{Smacc\+State\+Behavior\+Info} $>$ $>$ $>$ \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a9366c579e8cbe2b842b2dcc9fc7154de}{state\+Behaviors\+Info}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 71 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 105 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
@@ -93,7 +93,7 @@ Definition at line 71 of file smacc\+\_\+state\+\_\+info.\+h.
 \subsubsection[{\texorpdfstring{Ptr}{Ptr}}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\+::shared\+\_\+ptr$<${\bf Smacc\+State\+Info}$>$ {\bf smacc\+::introspection\+::\+Smacc\+State\+Info\+::\+Ptr}}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_a374ef2022bca958ab14469931fc4dcc1}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_a374ef2022bca958ab14469931fc4dcc1}
 
 
-Definition at line 75 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 109 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
@@ -138,29 +138,29 @@ References depth\+\_\+, parent\+State\+\_\+, state\+Machine\+\_\+, and tid\+\_\+
 )}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_a287664f0ac1c0380bad11ef6973cde8d}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_a287664f0ac1c0380bad11ef6973cde8d}
 
 
-Definition at line 439 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
+Definition at line 445 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
 
 
 \begin{DoxyCode}
-440 \{
-441     \textcolor{keyword}{auto} realparentState = this->\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a74685e4540842ee292a80a1db44818bb}{stateMachine\_}->getState<\textcolor{keyword}{typename} StateType::TContext>();
-442 
-443     \textcolor{keyword}{auto} childState = this->\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a74685e4540842ee292a80a1db44818bb}{stateMachine\_}->createState<StateType>(realparentState);
-444 
-445     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"Real parent state> "} << demangleSymbol<typename StateType::TContext>());
-446 
-447     \textcolor{comment}{/*auto contextInfo = TypeInfo::getTypeInfoFromType<InitialStateType>();}
-448 \textcolor{comment}{    auto parentState2= getState<InitialStateType::TContext>();}
-449 \textcolor{comment}{    parentState2->createChildState<InitialStateType>();*/}
+446 \{
+447     \textcolor{keyword}{auto} realparentState = this->\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a74685e4540842ee292a80a1db44818bb}{stateMachine\_}->getState<\textcolor{keyword}{typename} StateType::TContext>();
+448 
+449     \textcolor{keyword}{auto} childState = this->\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a74685e4540842ee292a80a1db44818bb}{stateMachine\_}->createState<StateType>(realparentState);
 450 
-451     \textcolor{comment}{//this->stateMachine\_->addState(childState);}
-452     \textcolor{comment}{//stateMachineInfo.addState(stateMachineInfo)}
-453     \textcolor{comment}{//stateNames.push\_back(currentname);}
-454     \textcolor{comment}{//ROS\_INFO("------------");}
-455     \textcolor{comment}{//ROS\_INFO\_STREAM("** STATE state: "<< this->demangledStateName);}
+451     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"Real parent state> "} << demangleSymbol<typename StateType::TContext>());
+452 
+453     \textcolor{comment}{/*auto contextInfo = TypeInfo::getTypeInfoFromType<InitialStateType>();}
+454 \textcolor{comment}{    auto parentState2= getState<InitialStateType::TContext>();}
+455 \textcolor{comment}{    parentState2->createChildState<InitialStateType>();*/}
 456 
-457     \textcolor{keywordflow}{return} childState;
-458 \}
+457     \textcolor{comment}{//this->stateMachine\_->addState(childState);}
+458     \textcolor{comment}{//stateMachineInfo.addState(stateMachineInfo)}
+459     \textcolor{comment}{//stateNames.push\_back(currentname);}
+460     \textcolor{comment}{//ROS\_INFO("------------");}
+461     \textcolor{comment}{//ROS\_INFO\_STREAM("** STATE state: "<< this->demangledStateName);}
+462 
+463     \textcolor{keywordflow}{return} childState;
+464 \}
 \end{DoxyCode}
 \index{smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}!declare\+Transition@{declare\+Transition}}
 \index{declare\+Transition@{declare\+Transition}!smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}}
@@ -175,7 +175,7 @@ Definition at line 439 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
 )}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_ac0b32e5504ccbed161ad50f0b77c2004}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_ac0b32e5504ccbed161ad50f0b77c2004}
 
 
-Definition at line 195 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
+Definition at line 201 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
 
 
 
@@ -183,31 +183,31 @@ References smacc\+::introspection\+::\+Smacc\+Transition\+Info\+::index.
 
 
 \begin{DoxyCode}
-196 \{
-197     \textcolor{keyword}{auto} evtype = demangledTypeName<EvType>();
-198 
-199     SmaccTransitionInfo transitionInfo;
-200     transitionInfo.index = \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_ae8b5d8e409e377ef9a88d92fb31a8446}{transitions\_}.size();
-201     transitionInfo.sourceState = shared\_from\_this();
-202     transitionInfo.destinyState = dstState;
-203     transitionInfo.transitionTypeInfo = transitionTypeInfo;
+202 \{
+203     \textcolor{keyword}{auto} evtype = demangledTypeName<EvType>();
 204 
-205     \textcolor{keywordflow}{if} (transitionTag != \textcolor{stringliteral}{""})
-206         transitionInfo.transitionTag = transitionTag;
-207     \textcolor{keywordflow}{else}
-208         transitionInfo.transitionTag = \textcolor{stringliteral}{"Transition\_"} + std::to\_string(transitionInfo.index);
-209 
-210     transitionInfo.transitionType = transitionType;
-211     transitionInfo.historyNode = history;
-212 
-213     transitionInfo.eventInfo = std::make\_shared<SmaccEventInfo>(transitionTypeInfo->templateParameters.
+205     SmaccTransitionInfo transitionInfo;
+206     transitionInfo.index = \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_ae8b5d8e409e377ef9a88d92fb31a8446}{transitions\_}.size();
+207     transitionInfo.sourceState = shared\_from\_this();
+208     transitionInfo.destinyState = dstState;
+209     transitionInfo.transitionTypeInfo = transitionTypeInfo;
+210 
+211     \textcolor{keywordflow}{if} (transitionTag != \textcolor{stringliteral}{""})
+212         transitionInfo.transitionTag = transitionTag;
+213     \textcolor{keywordflow}{else}
+214         transitionInfo.transitionTag = \textcolor{stringliteral}{"Transition\_"} + std::to\_string(transitionInfo.index);
+215 
+216     transitionInfo.transitionType = transitionType;
+217     transitionInfo.historyNode = history;
+218 
+219     transitionInfo.eventInfo = std::make\_shared<SmaccEventInfo>(transitionTypeInfo->templateParameters.
       front());
-214 
-215     EventLabel<EvType>(transitionInfo.eventInfo->label);
-216     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"LABEL: "} << transitionInfo.eventInfo->label);
-217 
-218     \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_ae8b5d8e409e377ef9a88d92fb31a8446}{transitions\_}.push\_back(transitionInfo);
-219 \}
+220 
+221     EventLabel<EvType>(transitionInfo.eventInfo->label);
+222     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"LABEL: "} << transitionInfo.eventInfo->label);
+223 
+224     \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_ae8b5d8e409e377ef9a88d92fb31a8446}{transitions\_}.push\_back(transitionInfo);
+225 \}
 \end{DoxyCode}
 \index{smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}!depth@{depth}}
 \index{depth@{depth}!smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}}
@@ -218,11 +218,11 @@ References smacc\+::introspection\+::\+Smacc\+Transition\+Info\+::index.
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_afbf3165f49cfd6cdb842120a6317a2cb}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_afbf3165f49cfd6cdb842120a6317a2cb}
 
 
-Definition at line 96 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 130 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 \begin{DoxyCode}
-96 \{ \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7e97a482ca49057f27e638268d1a3189}{depth\_}; \}
+130 \{ \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a7e97a482ca49057f27e638268d1a3189}{depth\_}; \}
 \end{DoxyCode}
 \index{smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}!get\+Ancestors@{get\+Ancestors}}
 \index{get\+Ancestors@{get\+Ancestors}!smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}}
@@ -399,7 +399,7 @@ Here is the caller graph for this function\+:
 \subsubsection[{\texorpdfstring{children\+\_\+}{children_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::shared\+\_\+ptr$<${\bf Smacc\+State\+Info}$>$ $>$ smacc\+::introspection\+::\+Smacc\+State\+Info\+::children\+\_\+}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_a73eac049e8149b6eaeec735101c32ef9}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_a73eac049e8149b6eaeec735101c32ef9}
 
 
-Definition at line 88 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 122 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
@@ -410,7 +410,7 @@ Referenced by get\+State\+Level().
 \subsubsection[{\texorpdfstring{demangled\+State\+Name}{demangledStateName}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string smacc\+::introspection\+::\+Smacc\+State\+Info\+::demangled\+State\+Name}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_acf0014a819c23caad085ba6df13a17bf}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_acf0014a819c23caad085ba6df13a17bf}
 
 
-Definition at line 82 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 116 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
@@ -421,7 +421,7 @@ Referenced by to\+Short\+Name().
 \subsubsection[{\texorpdfstring{depth\+\_\+}{depth_}}]{\setlength{\rightskip}{0pt plus 5cm}int smacc\+::introspection\+::\+Smacc\+State\+Info\+::depth\+\_\+}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_a7e97a482ca49057f27e638268d1a3189}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_a7e97a482ca49057f27e638268d1a3189}
 
 
-Definition at line 89 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 123 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
@@ -432,7 +432,7 @@ Referenced by Smacc\+State\+Info().
 \subsubsection[{\texorpdfstring{full\+State\+Name}{fullStateName}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string smacc\+::introspection\+::\+Smacc\+State\+Info\+::full\+State\+Name}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_aef6053863f757bf9af16fe4da75c51de}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_aef6053863f757bf9af16fe4da75c51de}
 
 
-Definition at line 81 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 115 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
@@ -443,7 +443,7 @@ Referenced by get\+Demangled\+Full\+Name().
 \subsubsection[{\texorpdfstring{parent\+State\+\_\+}{parentState_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf Smacc\+State\+Info}$>$ smacc\+::introspection\+::\+Smacc\+State\+Info\+::parent\+State\+\_\+}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_afa49a141d2ccdb3d6f9676ed380ce006}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_afa49a141d2ccdb3d6f9676ed380ce006}
 
 
-Definition at line 85 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 119 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
@@ -451,10 +451,10 @@ Referenced by get\+Ancestors(), get\+Full\+Path(), get\+State\+Level(), and Smac
 
 \index{smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}!state\+Behaviors\+Info@{state\+Behaviors\+Info}}
 \index{state\+Behaviors\+Info@{state\+Behaviors\+Info}!smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}}
-\subsubsection[{\texorpdfstring{state\+Behaviors\+Info}{stateBehaviorsInfo}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$ const std\+::type\+\_\+info $\ast$, std\+::vector$<$ {\bf Smacc\+State\+Behavior\+Info} $>$ $>$ smacc\+::\+Smacc\+State\+Info\+::state\+Behaviors\+Info\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_a7f62357b9ed1db5b8f9fcc3394f7f58b}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_a7f62357b9ed1db5b8f9fcc3394f7f58b}
+\subsubsection[{\texorpdfstring{state\+Behaviors\+Info}{stateBehaviorsInfo}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$ const std\+::type\+\_\+info $\ast$, std\+::vector$<$ std\+::shared\+\_\+ptr$<$ {\bf smacc\+::introspection\+::\+Smacc\+State\+Behavior\+Info} $>$ $>$ $>$ smacc\+::\+Smacc\+State\+Info\+::state\+Behaviors\+Info\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_a9366c579e8cbe2b842b2dcc9fc7154de}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_a9366c579e8cbe2b842b2dcc9fc7154de}
 
 
-Definition at line 78 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 112 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
@@ -465,14 +465,14 @@ Referenced by smacc\+::introspection\+::\+Smacc\+State\+Machine\+Info\+::assembl
 \subsubsection[{\texorpdfstring{state\+Index\+\_\+}{stateIndex_}}]{\setlength{\rightskip}{0pt plus 5cm}int smacc\+::introspection\+::\+Smacc\+State\+Info\+::state\+Index\+\_\+}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_a2354fa7abf158f0c29ab71c3125c9801}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_a2354fa7abf158f0c29ab71c3125c9801}
 
 
-Definition at line 80 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 114 of file smacc\+\_\+state\+\_\+info.\+h.
 
 \index{smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}!state\+Machine\+\_\+@{state\+Machine\+\_\+}}
 \index{state\+Machine\+\_\+@{state\+Machine\+\_\+}!smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}}
 \subsubsection[{\texorpdfstring{state\+Machine\+\_\+}{stateMachine_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf Smacc\+State\+Machine\+Info}$>$ smacc\+::introspection\+::\+Smacc\+State\+Info\+::state\+Machine\+\_\+}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_a74685e4540842ee292a80a1db44818bb}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_a74685e4540842ee292a80a1db44818bb}
 
 
-Definition at line 84 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 118 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
@@ -480,10 +480,10 @@ Referenced by Smacc\+State\+Info().
 
 \index{smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}!static\+Behavior\+Info@{static\+Behavior\+Info}}
 \index{static\+Behavior\+Info@{static\+Behavior\+Info}!smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}}
-\subsubsection[{\texorpdfstring{static\+Behavior\+Info}{staticBehaviorInfo}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$ const std\+::type\+\_\+info $\ast$, std\+::vector$<$ {\bf State\+Behavior\+Info\+Entry} $>$ $>$ smacc\+::\+Smacc\+State\+Info\+::static\+Behavior\+Info\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_a2cc62c6c9dec1a4f5294f8430efb71f2}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_a2cc62c6c9dec1a4f5294f8430efb71f2}
+\subsubsection[{\texorpdfstring{static\+Behavior\+Info}{staticBehaviorInfo}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$ const std\+::type\+\_\+info $\ast$, std\+::vector$<$ {\bf Client\+Behavior\+Info\+Entry} $>$ $>$ smacc\+::\+Smacc\+State\+Info\+::static\+Behavior\+Info\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_ad3d8b3450060cb0b91f38fb2fe0a7678}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_ad3d8b3450060cb0b91f38fb2fe0a7678}
 
 
-Definition at line 77 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 111 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
@@ -494,7 +494,7 @@ Referenced by smacc\+::introspection\+::\+Smacc\+State\+Machine\+Info\+::assembl
 \subsubsection[{\texorpdfstring{tid\+\_\+}{tid_}}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::type\+\_\+info$\ast$ smacc\+::introspection\+::\+Smacc\+State\+Info\+::tid\+\_\+}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_a37d0d0bce171b57b8d3a39f44ab45248}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_a37d0d0bce171b57b8d3a39f44ab45248}
 
 
-Definition at line 90 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 124 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
@@ -505,7 +505,7 @@ Referenced by Smacc\+State\+Info().
 \subsubsection[{\texorpdfstring{transitions\+\_\+}{transitions_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Smacc\+Transition\+Info}$>$ smacc\+::introspection\+::\+Smacc\+State\+Info\+::transitions\+\_\+}\hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_ae8b5d8e409e377ef9a88d92fb31a8446}{}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_ae8b5d8e409e377ef9a88d92fb31a8446}
 
 
-Definition at line 86 of file smacc\+\_\+state\+\_\+info.\+h.
+Definition at line 120 of file smacc\+\_\+state\+\_\+info.\+h.
 
 
 
