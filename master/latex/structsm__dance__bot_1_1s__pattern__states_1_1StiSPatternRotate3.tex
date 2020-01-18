@@ -94,15 +94,16 @@ Definition at line 17 of file sti\+\_\+spattern\+\_\+rotate\+\_\+3.\+h.
 20         ROS\_INFO(\textcolor{stringliteral}{"[StiSPatternRotate] SpatternRotate rotate: SS current iteration: %d/%d"}, superstate.
       iteration\_count, SS::total\_iterations());
 21 
-22         \textcolor{keywordtype}{float} angle = 0;
-23         \textcolor{keywordflow}{if} (superstate.direction() == TDirection::LEFT)
-24             angle = -90;
-25         \textcolor{keywordflow}{else}
-26             angle = 90;
-27 
-28         this->configure<OrNavigation, CbRotate>(angle);
-29         this->configure<OrLED, CbLEDOff>();
-30     \}
+22         \textcolor{keywordtype}{float} offset = 7;
+23         \textcolor{keywordtype}{float} angle = 0;
+24         \textcolor{keywordflow}{if} (superstate.direction() == TDirection::LEFT)
+25             angle = -90 - offset;
+26         \textcolor{keywordflow}{else}
+27             angle = +90 + offset;
+28 
+29         this->configure<OrNavigation, CbRotate>(angle);
+30         this->configure<OrLED, CbLEDOff>();
+31     \}
 \end{DoxyCode}
 
 
