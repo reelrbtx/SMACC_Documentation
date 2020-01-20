@@ -253,53 +253,61 @@ Referenced by sm\+\_\+dance\+\_\+bot\+\_\+2\+::\+Or\+Navigation\+::load\+Waypoin
 100     \textcolor{keywordflow}{throw} std::string(\textcolor{stringliteral}{"Waypoints file not found"});
 101   \}
 102 
-103 \textcolor{preprocessor}{#ifdef HAVE\_NEW\_YAMLCPP}
-104   YAML::Node node = YAML::Load(ifs);
-105 \textcolor{preprocessor}{#else}
-106   YAML::Parser \hyperlink{namespacegenerate__debs_a4a9ae4bb85fc62d7973ea3d09ced6c26}{parser}(ifs);
-107   \hyperlink{namespacegenerate__debs_a4a9ae4bb85fc62d7973ea3d09ced6c26}{parser}.GetNextDocument(node);
-108 \textcolor{preprocessor}{#endif}
-109 
-110 \textcolor{preprocessor}{#ifdef HAVE\_NEW\_YAMLCPP}
-111   \textcolor{keyword}{const} YAML::Node &wp\_node\_tmp = node[\textcolor{stringliteral}{"waypoints"}];
-112   \textcolor{keyword}{const} YAML::Node *wp\_node = wp\_node\_tmp ? &wp\_node\_tmp : NULL;
-113 \textcolor{preprocessor}{#else}
-114   \textcolor{keyword}{const} YAML::Node *wp\_node = node.FindValue(\textcolor{stringliteral}{"waypoints"});
-115 \textcolor{preprocessor}{#endif}
-116 
-117   \textcolor{keywordflow}{if} (wp\_node != NULL)
-118   \{
-119     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i = 0; i < wp\_node->size(); ++i)
-120     \{
-121       \textcolor{comment}{// Parse waypoint entries on YAML}
-122       geometry\_msgs::Pose wp;
-123 
-124       \textcolor{keywordflow}{try}
-125       \{
-126         \textcolor{comment}{// (*wp\_node)[i]["name"] >> wp.name;}
-127         \textcolor{comment}{// (*wp\_node)[i]["frame\_id"] >> wp.header.frame\_id;}
-128         wp.position.x = (*wp\_node)[i][\textcolor{stringliteral}{"position"}][\textcolor{stringliteral}{"x"}].as<\textcolor{keywordtype}{double}>();
-129         wp.position.y = (*wp\_node)[i][\textcolor{stringliteral}{"position"}][\textcolor{stringliteral}{"y"}].as<\textcolor{keywordtype}{double}>();
-130         wp.position.z = (*wp\_node)[i][\textcolor{stringliteral}{"position"}][\textcolor{stringliteral}{"z"}].as<\textcolor{keywordtype}{double}>();
-131         wp.orientation.x = (*wp\_node)[i][\textcolor{stringliteral}{"orientation"}][\textcolor{stringliteral}{"x"}].as<\textcolor{keywordtype}{double}>();
-132         wp.orientation.y = (*wp\_node)[i][\textcolor{stringliteral}{"orientation"}][\textcolor{stringliteral}{"y"}].as<\textcolor{keywordtype}{double}>();
-133         wp.orientation.z = (*wp\_node)[i][\textcolor{stringliteral}{"orientation"}][\textcolor{stringliteral}{"z"}].as<\textcolor{keywordtype}{double}>();
-134         wp.orientation.w = (*wp\_node)[i][\textcolor{stringliteral}{"orientation"}][\textcolor{stringliteral}{"w"}].as<\textcolor{keywordtype}{double}>();
-135 
-136         this->\hyperlink{classmove__base__z__client_1_1WaypointNavigator_a83e4e39987eaf1c8856d32d581eb4cd0}{waypoints\_}.push\_back(wp);
-137       \}
-138       \textcolor{keywordflow}{catch} (...)
-139       \{
-140         ROS\_ERROR(\textcolor{stringliteral}{"parsing waypoint file, syntax error in point %d"}, i);
-141       \}
-142     \}
-143     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Parsed "} << this->\hyperlink{classmove__base__z__client_1_1WaypointNavigator_a83e4e39987eaf1c8856d32d581eb4cd0}{waypoints\_}.size() << \textcolor{stringliteral}{" waypoints."});
-144   \}
-145   \textcolor{keywordflow}{else}
-146   \{
-147     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"Couldn't find any waypoints in the provided yaml file."});
-148   \}
-149 \}
+103   \textcolor{keywordflow}{try}
+104   \{
+105 
+106 \textcolor{preprocessor}{#ifdef HAVE\_NEW\_YAMLCPP}
+107     YAML::Node node = YAML::Load(ifs);
+108 \textcolor{preprocessor}{#else}
+109     YAML::Parser \hyperlink{namespacegenerate__debs_a4a9ae4bb85fc62d7973ea3d09ced6c26}{parser}(ifs);
+110     \hyperlink{namespacegenerate__debs_a4a9ae4bb85fc62d7973ea3d09ced6c26}{parser}.GetNextDocument(node);
+111 \textcolor{preprocessor}{#endif}
+112 
+113 \textcolor{preprocessor}{#ifdef HAVE\_NEW\_YAMLCPP}
+114     \textcolor{keyword}{const} YAML::Node &wp\_node\_tmp = node[\textcolor{stringliteral}{"waypoints"}];
+115     \textcolor{keyword}{const} YAML::Node *wp\_node = wp\_node\_tmp ? &wp\_node\_tmp : NULL;
+116 \textcolor{preprocessor}{#else}
+117     \textcolor{keyword}{const} YAML::Node *wp\_node = node.FindValue(\textcolor{stringliteral}{"waypoints"});
+118 \textcolor{preprocessor}{#endif}
+119 
+120     \textcolor{keywordflow}{if} (wp\_node != NULL)
+121     \{
+122       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i = 0; i < wp\_node->size(); ++i)
+123       \{
+124         \textcolor{comment}{// Parse waypoint entries on YAML}
+125         geometry\_msgs::Pose wp;
+126 
+127         \textcolor{keywordflow}{try}
+128         \{
+129           \textcolor{comment}{// (*wp\_node)[i]["name"] >> wp.name;}
+130           \textcolor{comment}{// (*wp\_node)[i]["frame\_id"] >> wp.header.frame\_id;}
+131           wp.position.x = (*wp\_node)[i][\textcolor{stringliteral}{"position"}][\textcolor{stringliteral}{"x"}].as<\textcolor{keywordtype}{double}>();
+132           wp.position.y = (*wp\_node)[i][\textcolor{stringliteral}{"position"}][\textcolor{stringliteral}{"y"}].as<\textcolor{keywordtype}{double}>();
+133           wp.position.z = (*wp\_node)[i][\textcolor{stringliteral}{"position"}][\textcolor{stringliteral}{"z"}].as<\textcolor{keywordtype}{double}>();
+134           wp.orientation.x = (*wp\_node)[i][\textcolor{stringliteral}{"orientation"}][\textcolor{stringliteral}{"x"}].as<\textcolor{keywordtype}{double}>();
+135           wp.orientation.y = (*wp\_node)[i][\textcolor{stringliteral}{"orientation"}][\textcolor{stringliteral}{"y"}].as<\textcolor{keywordtype}{double}>();
+136           wp.orientation.z = (*wp\_node)[i][\textcolor{stringliteral}{"orientation"}][\textcolor{stringliteral}{"z"}].as<\textcolor{keywordtype}{double}>();
+137           wp.orientation.w = (*wp\_node)[i][\textcolor{stringliteral}{"orientation"}][\textcolor{stringliteral}{"w"}].as<\textcolor{keywordtype}{double}>();
+138 
+139           this->\hyperlink{classmove__base__z__client_1_1WaypointNavigator_a83e4e39987eaf1c8856d32d581eb4cd0}{waypoints\_}.push\_back(wp);
+140         \}
+141         \textcolor{keywordflow}{catch} (...)
+142         \{
+143           ROS\_ERROR(\textcolor{stringliteral}{"parsing waypoint file, syntax error in point %d"}, i);
+144         \}
+145       \}
+146       ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Parsed "} << this->\hyperlink{classmove__base__z__client_1_1WaypointNavigator_a83e4e39987eaf1c8856d32d581eb4cd0}{waypoints\_}.size() << \textcolor{stringliteral}{" waypoints."});
+147     \}
+148     \textcolor{keywordflow}{else}
+149     \{
+150       ROS\_WARN\_STREAM(\textcolor{stringliteral}{"Couldn't find any waypoints in the provided yaml file."});
+151     \}
+152   \}
+153   \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} YAML::ParserException &ex)
+154   \{
+155     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Error loading the Waypoints YAML file. Incorrect syntax: "} << ex.what());
+156   \}
+157 \}
 \end{DoxyCode}
 
 
