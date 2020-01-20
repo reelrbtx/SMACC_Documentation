@@ -46,6 +46,7 @@ var searchData=
   ['robotbasepathpub_5f',['robotBasePathPub_',['../classmove__base__z__client_1_1odom__tracker_1_1OdomTracker.html#a3eb6ca9be9504dc3c1da949d1e1daeda',1,'move_base_z_client::odom_tracker::OdomTracker']]],
   ['ros_5fpublisher_5fclient',['ros_publisher_client',['../namespaceros__publisher__client.html',1,'']]],
   ['ros_5ftimer_5fclient',['ros_timer_client',['../namespaceros__timer__client.html',1,'']]],
+  ['ros_5fversion',['ros_version',['../namespacegenerate__debs.html#ab436d8146ee3697ac269d8398023fb37',1,'generate_debs']]],
   ['rospack',['rospack',['../namespacegenerate__debs.html#a609fa33c1ebbff173ec90524eeb7b49d',1,'generate_debs']]],
   ['rotatedegree',['rotateDegree',['../classmove__base__z__client_1_1CbRotate.html#a30d0f24b857149d78a023635562516b6',1,'move_base_z_client::CbRotate']]],
   ['rt_5fready_5fflag',['rt_ready_flag',['../structsm__dance__bot_1_1SmDanceBot.html#a0f0587a13670ad8925555cd8f6cb6b2d',1,'sm_dance_bot::SmDanceBot']]],

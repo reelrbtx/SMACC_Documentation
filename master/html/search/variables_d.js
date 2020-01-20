@@ -17,6 +17,8 @@ var searchData=
   ['orthogonal',['Orthogonal',['../Global_01Transition_01Rules_8txt.html#a2e1cdec29dad5013e514270d0a78fe22',1,'Global Transition Rules.txt']]],
   ['orthogonals_5f',['orthogonals_',['../classsmacc_1_1ISmaccStateMachine.html#a6d7c344ce2570b35737a1173633d0d71',1,'smacc::ISmaccStateMachine']]],
   ['orthogonaltype',['orthogonalType',['../structsmacc_1_1introspection_1_1ClientBehaviorInfoEntry.html#aabffb57e6ee723ce1b2bdb6ad30c6993',1,'smacc::introspection::ClientBehaviorInfoEntry']]],
+  ['os',['os',['../namespacegenerate__debs.html#a7c51b2a8375b1f63faa1a85253faf1de',1,'generate_debs']]],
+  ['os_5fversion',['os_version',['../namespacegenerate__debs.html#afb8badf2c49de1c3be06aefc87f38932',1,'generate_debs']]],
   ['outfile',['outfile',['../namespacegenerate__debs.html#aa1faa039b35b72ee44dc6f106ad12911',1,'generate_debs']]],
   ['owner_5f',['owner_',['../classsmacc_1_1ISmaccComponent.html#a909590e672450ce0eb0d8facb45c737a',1,'smacc::ISmaccComponent']]],
   ['ownerstate',['ownerState',['../structsmacc_1_1introspection_1_1SmaccStateReactorInfo.html#a7f79a42095ce284939ca47fb25a14101',1,'smacc::introspection::SmaccStateReactorInfo::ownerState()'],['../classsmacc_1_1StateReactor.html#aabd30af9412a8fea9ec5906f173d9d4a',1,'smacc::StateReactor::ownerState()']]]

@@ -38,7 +38,7 @@ class smacc\+::\+Orthogonal$<$ T\+Orthogonal $>$}
 
 
 
-Definition at line 101 of file smacc\+\_\+orthogonal\+\_\+impl.\+h.
+Definition at line 126 of file smacc\+\_\+orthogonal\+\_\+impl.\+h.
 
 
 
@@ -52,36 +52,35 @@ Definition at line 101 of file smacc\+\_\+orthogonal\+\_\+impl.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classsmacc_1_1Orthogonal_af9e1b8d75e705c0f409d29acda08db5a}{}\label{classsmacc_1_1Orthogonal_af9e1b8d75e705c0f409d29acda08db5a}
 
 
-Definition at line 105 of file smacc\+\_\+orthogonal\+\_\+impl.\+h.
+Definition at line 130 of file smacc\+\_\+orthogonal\+\_\+impl.\+h.
 
 
 \begin{DoxyCode}
-106     \{
-107         \textcolor{comment}{//static\_assert(std::is\_base\_of<IOrthogonal, TObjectTag>::value, "The object Tag must be the
+131     \{
+132         \textcolor{comment}{//static\_assert(std::is\_base\_of<IOrthogonal, TObjectTag>::value, "The object Tag must be the
        orthogonal type where the client was created");}
-108         \textcolor{comment}{// if (typeid(*this) != typeid(TObjectTag))}
-109         \textcolor{comment}{// \{}
-110         \textcolor{comment}{//     ROS\_ERROR\_STREAM("Error creating client. The object Tag must be the type of the orthogonal
+133         \textcolor{comment}{// if (typeid(*this) != typeid(TObjectTag))}
+134         \textcolor{comment}{// \{}
+135         \textcolor{comment}{//     ROS\_ERROR\_STREAM("Error creating client. The object Tag must be the type of the orthogonal
        where the client was created:" << demangleType(typeid(*this)) << ". The object creation was skipped and a
        nullptr was returned");}
-111         \textcolor{comment}{//     return nullptr;}
-112         \textcolor{comment}{// \}}
-113 
-114         ROS\_INFO(\textcolor{stringliteral}{"[%s] creates a client of type '%s' and object tag '%s'"},
-115                  \hyperlink{namespacesmacc_1_1introspection_a670e39ccea29952859df4e2d0e45077b}{demangleType}(\textcolor{keyword}{typeid}(*\textcolor{keyword}{this})).c\_str(),
-116                  demangledTypeName<TClient>().c\_str(),                                                     
-                               
-117                  demangledTypeName<TOrthogonal>().c\_str());
-118 
-119         \textcolor{keyword}{auto} client = std::make\_shared<ClientHandler<TOrthogonal, TClient>>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
-120         client->setStateMachine(\hyperlink{classsmacc_1_1IOrthogonal_a6c62a3a971d827d0b2c0b273a49a2129}{stateMachine\_});
-121 
-122         client->template configureEventSourceTypes<TOrthogonal, TClient>();
-123 
-124         \textcolor{comment}{// it is stored the client (not the client handler)}
-125         \hyperlink{classsmacc_1_1IOrthogonal_ad3e5fb55db8c40ff178b22c92c9c9cd3}{clients\_}.push\_back(client);
-126         \textcolor{keywordflow}{return} client;
-127     \}
+136         \textcolor{comment}{//     return nullptr;}
+137         \textcolor{comment}{// \}}
+138 
+139         ROS\_INFO(\textcolor{stringliteral}{"[%s] creates a client of type '%s' and object tag '%s'"},
+140                  \hyperlink{namespacesmacc_1_1introspection_a670e39ccea29952859df4e2d0e45077b}{demangleType}(\textcolor{keyword}{typeid}(*\textcolor{keyword}{this})).c\_str(),
+141                  demangledTypeName<TClient>().c\_str(),
+142                  demangledTypeName<TOrthogonal>().c\_str());
+143 
+144         \textcolor{keyword}{auto} client = std::make\_shared<ClientHandler<TOrthogonal, TClient>>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
+145         client->setStateMachine(\hyperlink{classsmacc_1_1IOrthogonal_a6b48950f01f10e3367bbb74a215bde1e}{getStateMachine}());
+146 
+147         client->template configureEventSourceTypes<TOrthogonal, TClient>();
+148 
+149         \textcolor{comment}{// it is stored the client (not the client handler)}
+150         \hyperlink{classsmacc_1_1IOrthogonal_ad3e5fb55db8c40ff178b22c92c9c9cd3}{clients\_}.push\_back(client);
+151         \textcolor{keywordflow}{return} client;
+152     \}
 \end{DoxyCode}
 
 
