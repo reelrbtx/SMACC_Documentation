@@ -149,12 +149,12 @@ Here is the call graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_aebda19712c75b75a31e90272f472a7e3}{}\label{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_aebda19712c75b75a31e90272f472a7e3}
 
 
-Definition at line 119 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
+Definition at line 122 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
 
 
 \begin{DoxyCode}
-120 \{
-121 \}
+123 \{
+124 \}
 \end{DoxyCode}
 
 
@@ -168,13 +168,18 @@ Definition at line 119 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a8a041fe0d0e88fa0219204c85831d10e}{}\label{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a8a041fe0d0e88fa0219204c85831d10e}
 
 
-Definition at line 114 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
+Definition at line 116 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
+
+
+
+References current\+\_\+state\+\_\+.
 
 
 \begin{DoxyCode}
-115 \{
-116   \textcolor{comment}{//MFDClass::onInitialize();}
-117 \}
+117 \{
+118   \textcolor{comment}{//MFDClass::onInitialize();}
+119   \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a342ff238c1dfaa427f09ee205a9e92d5}{current\_state\_}->setValue(QString(\textcolor{stringliteral}{""}));
+120 \}
 \end{DoxyCode}
 \index{smacc\+\_\+rviz\+\_\+plugin\+::\+Smacc\+Rviz\+Display@{smacc\+\_\+rviz\+\_\+plugin\+::\+Smacc\+Rviz\+Display}!process\+Message@{process\+Message}}
 \index{process\+Message@{process\+Message}!smacc\+\_\+rviz\+\_\+plugin\+::\+Smacc\+Rviz\+Display@{smacc\+\_\+rviz\+\_\+plugin\+::\+Smacc\+Rviz\+Display}}
@@ -185,7 +190,7 @@ Definition at line 114 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
 )\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_acc7281b99c92fa89f7494f6ca53e4905}{}\label{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_acc7281b99c92fa89f7494f6ca53e4905}
 
 
-Definition at line 135 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
+Definition at line 139 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
 
 
 
@@ -197,57 +202,57 @@ Referenced by subscribe().
 
 
 \begin{DoxyCode}
-136 \{
-137   std::string concatenated;
-138 
-139   \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}& state: msg->current\_states)
-140   \{
-141     concatenated = concatenated + std::string(\textcolor{stringliteral}{"/"})+ state;
-142   \}
-143 
-144   ROS\_INFO(\textcolor{stringliteral}{"current state: %s"}, concatenated.c\_str());
-145   \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a342ff238c1dfaa427f09ee205a9e92d5}{current\_state\_}->setValue(QString(concatenated.c\_str()));
-146   \textcolor{comment}{// Here we call the rviz::FrameManager to get the transform from the}
-147   \textcolor{comment}{// fixed frame to the frame in the header of this Imu message.  If}
-148   \textcolor{comment}{// it fails, we can't do anything else so we return.}
-149   \textcolor{comment}{/*}
-150 \textcolor{comment}{  Ogre::Quaternion orientation;}
-151 \textcolor{comment}{  Ogre::Vector3 position;}
-152 \textcolor{comment}{  if( !context\_->getFrameManager()->getTransform( msg->header.frame\_id,}
-153 \textcolor{comment}{                                                  msg->header.stamp,}
-154 \textcolor{comment}{                                                  position, orientation ))}
-155 \textcolor{comment}{  \{}
-156 \textcolor{comment}{    ROS\_DEBUG( "Error transforming from frame '%s' to frame '%s'",}
-157 \textcolor{comment}{               msg->header.frame\_id.c\_str(), qPrintable( fixed\_frame\_ ));}
-158 \textcolor{comment}{    return;}
-159 \textcolor{comment}{  \}}
-160 \textcolor{comment}{}
-161 \textcolor{comment}{  // We are keeping a circular buffer of visual pointers.  This gets}
-162 \textcolor{comment}{  // the next one, or creates and stores it if the buffer is not full}
-163 \textcolor{comment}{  boost::shared\_ptr<ImuVisual> visual;}
-164 \textcolor{comment}{  if( visuals\_.full() )}
-165 \textcolor{comment}{  \{}
-166 \textcolor{comment}{    visual = visuals\_.front();}
-167 \textcolor{comment}{  \}}
-168 \textcolor{comment}{  else}
+140 \{
+141   std::string concatenated;
+142 
+143   \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}& state: msg->current\_states)
+144   \{
+145     concatenated = concatenated + std::string(\textcolor{stringliteral}{"/"})+ state;
+146   \}
+147 
+148   ROS\_INFO(\textcolor{stringliteral}{"current state: %s"}, concatenated.c\_str());
+149   \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a342ff238c1dfaa427f09ee205a9e92d5}{current\_state\_}->setValue(QString(concatenated.c\_str()));
+150   \textcolor{comment}{// Here we call the rviz::FrameManager to get the transform from the}
+151   \textcolor{comment}{// fixed frame to the frame in the header of this Imu message.  If}
+152   \textcolor{comment}{// it fails, we can't do anything else so we return.}
+153   \textcolor{comment}{/*}
+154 \textcolor{comment}{  Ogre::Quaternion orientation;}
+155 \textcolor{comment}{  Ogre::Vector3 position;}
+156 \textcolor{comment}{  if( !context\_->getFrameManager()->getTransform( msg->header.frame\_id,}
+157 \textcolor{comment}{                                                  msg->header.stamp,}
+158 \textcolor{comment}{                                                  position, orientation ))}
+159 \textcolor{comment}{  \{}
+160 \textcolor{comment}{    ROS\_DEBUG( "Error transforming from frame '%s' to frame '%s'",}
+161 \textcolor{comment}{               msg->header.frame\_id.c\_str(), qPrintable( fixed\_frame\_ ));}
+162 \textcolor{comment}{    return;}
+163 \textcolor{comment}{  \}}
+164 \textcolor{comment}{}
+165 \textcolor{comment}{  // We are keeping a circular buffer of visual pointers.  This gets}
+166 \textcolor{comment}{  // the next one, or creates and stores it if the buffer is not full}
+167 \textcolor{comment}{  boost::shared\_ptr<ImuVisual> visual;}
+168 \textcolor{comment}{  if( visuals\_.full() )}
 169 \textcolor{comment}{  \{}
-170 \textcolor{comment}{    visual.reset(new ImuVisual( context\_->getSceneManager(), scene\_node\_ ));}
-171 \textcolor{comment}{  \}*/}
-172 
-173   \textcolor{comment}{// Now set or update the contents of the chosen visual.}
-174   \textcolor{comment}{//visual->setMessage( msg );}
-175   \textcolor{comment}{//visual->setFramePosition( position );}
-176   \textcolor{comment}{//visual->setFrameOrientation( orientation );}
-177 
-178   \textcolor{comment}{/*}
-179 \textcolor{comment}{  float alpha = alpha\_property\_->getFloat();}
-180 \textcolor{comment}{  Ogre::ColourValue color = color\_property\_->getOgreColor();}
-181 \textcolor{comment}{  visual->setColor( color.r, color.g, color.b, alpha );}
-182 \textcolor{comment}{}
-183 \textcolor{comment}{  // And send it to the end of the circular buffer}
-184 \textcolor{comment}{  visuals\_.push\_back(visual);}
-185 \textcolor{comment}{  */}
-186 \}
+170 \textcolor{comment}{    visual = visuals\_.front();}
+171 \textcolor{comment}{  \}}
+172 \textcolor{comment}{  else}
+173 \textcolor{comment}{  \{}
+174 \textcolor{comment}{    visual.reset(new ImuVisual( context\_->getSceneManager(), scene\_node\_ ));}
+175 \textcolor{comment}{  \}*/}
+176 
+177   \textcolor{comment}{// Now set or update the contents of the chosen visual.}
+178   \textcolor{comment}{//visual->setMessage( msg );}
+179   \textcolor{comment}{//visual->setFramePosition( position );}
+180   \textcolor{comment}{//visual->setFrameOrientation( orientation );}
+181 
+182   \textcolor{comment}{/*}
+183 \textcolor{comment}{  float alpha = alpha\_property\_->getFloat();}
+184 \textcolor{comment}{  Ogre::ColourValue color = color\_property\_->getOgreColor();}
+185 \textcolor{comment}{  visual->setColor( color.r, color.g, color.b, alpha );}
+186 \textcolor{comment}{}
+187 \textcolor{comment}{  // And send it to the end of the circular buffer}
+188 \textcolor{comment}{  visuals\_.push\_back(visual);}
+189 \textcolor{comment}{  */}
+190 \}
 \end{DoxyCode}
 
 
@@ -282,7 +287,11 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_af9cf4f5ef4f5fdb2fcb1bf1a81cdac4d}{}\label{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_af9cf4f5ef4f5fdb2fcb1bf1a81cdac4d}
 
 
-Definition at line 124 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
+Definition at line 127 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
+
+
+
+References current\+\_\+state\+\_\+.
 
 
 
@@ -290,10 +299,11 @@ Referenced by update\+Topic().
 
 
 \begin{DoxyCode}
-125 \{
-126   \textcolor{comment}{//MFDClass::reset();}
-127   \textcolor{comment}{//visuals\_.clear();}
-128 \}
+128 \{
+129   \textcolor{comment}{//MFDClass::reset();}
+130   \textcolor{comment}{//visuals\_.clear();}
+131   \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a342ff238c1dfaa427f09ee205a9e92d5}{current\_state\_}->setValue(QString(\textcolor{stringliteral}{""}));
+132 \}
 \end{DoxyCode}
 
 
@@ -320,7 +330,7 @@ Definition at line 94 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
 
 
 
-References nh\+\_\+, process\+Message(), sub\+\_\+, and topic\+\_\+property\+\_\+.
+References current\+\_\+state\+\_\+, nh\+\_\+, process\+Message(), sub\+\_\+, and topic\+\_\+property\+\_\+.
 
 
 
@@ -329,9 +339,10 @@ Referenced by update\+Topic().
 
 \begin{DoxyCode}
 95   \{
-96       \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_abae6e8df8428a072d1de2c59dd4f9cd4}{sub\_} = \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a077ef80f5698d21376b2d211f95ab73d}{nh\_}.subscribe<smacc\_msgs::SmaccStatus>(\hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_ad81e5239e1343b2ba01ee16d1f010932}{topic\_property\_}->getTopic().
+96       \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a342ff238c1dfaa427f09ee205a9e92d5}{current\_state\_}->setValue(QString(\textcolor{stringliteral}{""}));
+97       \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_abae6e8df8428a072d1de2c59dd4f9cd4}{sub\_} = \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a077ef80f5698d21376b2d211f95ab73d}{nh\_}.subscribe<smacc\_msgs::SmaccStatus>(\hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_ad81e5239e1343b2ba01ee16d1f010932}{topic\_property\_}->getTopic().
       toStdString(), 1, &\hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_acc7281b99c92fa89f7494f6ca53e4905}{SmaccRvizDisplay::processMessage} , \textcolor{keyword}{this});
-97   \}
+98   \}
 \end{DoxyCode}
 
 
@@ -366,11 +377,11 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a49a35acd10a664a8335ef5852f8c115c}{}\label{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a49a35acd10a664a8335ef5852f8c115c}
 
 
-Definition at line 99 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
+Definition at line 100 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
 
 
 
-References sub\+\_\+.
+References current\+\_\+state\+\_\+, and sub\+\_\+.
 
 
 
@@ -378,10 +389,11 @@ Referenced by update\+Topic().
 
 
 \begin{DoxyCode}
-100   \{
-101     \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_abae6e8df8428a072d1de2c59dd4f9cd4}{sub\_}.shutdown();
-102 
-103   \}
+101   \{
+102     \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a342ff238c1dfaa427f09ee205a9e92d5}{current\_state\_}->setValue(QString(\textcolor{stringliteral}{""}));
+103     \hyperlink{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_abae6e8df8428a072d1de2c59dd4f9cd4}{sub\_}.shutdown();
+104 
+105   \}
 \end{DoxyCode}
 
 
@@ -404,7 +416,7 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}\hypertarget{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a6031090e46077a5e95754b5f70ea639a}{}\label{classsmacc__rviz__plugin_1_1SmaccRvizDisplay_a6031090e46077a5e95754b5f70ea639a}
 
 
-Definition at line 130 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
+Definition at line 134 of file smacc\+\_\+rviz\+\_\+display.\+cpp.
 
 
 
@@ -412,8 +424,8 @@ Referenced by Smacc\+Rviz\+Display().
 
 
 \begin{DoxyCode}
-131 \{  
-132 \}
+135 \{  
+136 \}
 \end{DoxyCode}
 
 
@@ -491,7 +503,7 @@ Definition at line 116 of file smacc\+\_\+rviz\+\_\+display.\+h.
 
 
 
-Referenced by process\+Message(), and Smacc\+Rviz\+Display().
+Referenced by on\+Initialize(), process\+Message(), reset(), Smacc\+Rviz\+Display(), subscribe(), and unsubscribe().
 
 \index{smacc\+\_\+rviz\+\_\+plugin\+::\+Smacc\+Rviz\+Display@{smacc\+\_\+rviz\+\_\+plugin\+::\+Smacc\+Rviz\+Display}!nh\+\_\+@{nh\+\_\+}}
 \index{nh\+\_\+@{nh\+\_\+}!smacc\+\_\+rviz\+\_\+plugin\+::\+Smacc\+Rviz\+Display@{smacc\+\_\+rviz\+\_\+plugin\+::\+Smacc\+Rviz\+Display}}

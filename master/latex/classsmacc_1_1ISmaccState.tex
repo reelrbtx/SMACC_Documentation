@@ -73,6 +73,8 @@ std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1StateBehavio
 ros\+::\+Node\+Handle \hyperlink{classsmacc_1_1ISmaccState_a13fe6e6abfdb87996402189d44b78494}{nh}
 \item 
 \hyperlink{classsmacc_1_1ISmaccState}{I\+Smacc\+State} $\ast$ \hyperlink{classsmacc_1_1ISmaccState_ad61db41d8d06a836e7d1dac7767f5695}{parent\+State\+\_\+}
+\item 
+std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo}{smacc\+::introspection\+::\+Smacc\+State\+Info} $>$ \hyperlink{classsmacc_1_1ISmaccState_a88f44aca6998fa98c55ce6bd53c08fe4}{state\+Info\+\_\+}
 \end{DoxyCompactItemize}
 
 
@@ -540,7 +542,7 @@ Definition at line 11 of file smacc\+\_\+state.\+cpp.
 
 
 
-References smacc\+::\+I\+Smacc\+State\+Machine\+::get\+Current\+State\+Info(), get\+State\+Machine(), and smacc\+::\+I\+Smacc\+State\+Machine\+::publish\+Transition().
+References get\+State\+Machine(), smacc\+::\+I\+Smacc\+State\+Machine\+::publish\+Transition(), and state\+Info\+\_\+.
 
 
 
@@ -551,38 +553,62 @@ Referenced by get\+Parent\+State().
 12 \{
 13     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"NOTIFY TRANSITION: "} << transitionType->getFullName());
 14 
-15     \textcolor{keyword}{auto} currstateinfo = this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().
-      \hyperlink{classsmacc_1_1ISmaccStateMachine_a4738679e8e5f7adab35e610dce0bfff7}{getCurrentStateInfo}();
-16     \textcolor{keywordflow}{if} (currstateinfo != \textcolor{keyword}{nullptr})
-17     \{
-18         \textcolor{comment}{//ROS\_ERROR\_STREAM("CURRENT STATE INFO: " << currstateinfo->fullStateName);}
-19         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &transition : currstateinfo->transitions\_)
-20         \{
-21             std::string transitionCandidateName = transition.transitionTypeInfo->getFullName();
-22             \textcolor{comment}{//ROS\_ERROR\_STREAM("candidate transition: " << transitionCandidateName);}
-23 
-24             \textcolor{keywordflow}{if} (transitionType->getFullName() == transitionCandidateName)
-25             \{
-26                 this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_ab61bff5b3c49c4bfc17972e2de8d4fd5}{publishTransition}(transition);
-27                 \textcolor{keywordflow}{return};
-28             \}
-29         \}
-30 
-31         \textcolor{comment}{// debug information if not found}
-32         ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Transition happened, but there is not any transitioninfo match available to
-       publish transition: "} << transitionType->getFullName());
-33 
-34         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &transition : currstateinfo->transitions\_)
-35         \{
-36             std::string transitionCandidateName = transition.transitionTypeInfo->getFullName();
-37             ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"candidate transition: "} << transitionCandidateName);
-38         \}
-39     \}
-40     \textcolor{keywordflow}{else}
-41     \{
-42         ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Transition happened, but current state was not set. Transition candidates:"});
-43     \}
-44 \}
+15     \textcolor{comment}{//auto currstateinfo = this->getStateMachine().getCurrentStateInfo();}
+16     \textcolor{keyword}{auto} currstateinfo = this->\hyperlink{classsmacc_1_1ISmaccState_a88f44aca6998fa98c55ce6bd53c08fe4}{stateInfo\_};
+17     
+18     \textcolor{keywordflow}{if} (currstateinfo != \textcolor{keyword}{nullptr})
+19     \{
+20         \textcolor{comment}{//ROS\_ERROR\_STREAM("CURRENT STATE INFO: " << currstateinfo->fullStateName);}
+21         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &transition : currstateinfo->transitions\_)
+22         \{
+23             std::string transitionCandidateName = transition.transitionTypeInfo->getFullName();
+24             \textcolor{comment}{//ROS\_ERROR\_STREAM("candidate transition: " << transitionCandidateName);}
+25 
+26             \textcolor{keywordflow}{if} (transitionType->getFullName() == transitionCandidateName)
+27             \{
+28                 this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_ab61bff5b3c49c4bfc17972e2de8d4fd5}{publishTransition}(transition);
+29                 \textcolor{keywordflow}{return};
+30             \}
+31         \}
+32 
+33         \textcolor{comment}{// debug information if not found}
+34         ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Transition happened, from current state "} << currstateinfo->getDemangledFullName(
+      ) << \textcolor{stringliteral}{" but there is not any transitioninfo match available to publish transition: "} << transitionType->
+      getFullName());
+35         std::stringstream ss;
+36 
+37         \textcolor{keyword}{auto} stateinfo = currstateinfo;
+38 
+39         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &transition : currstateinfo->transitions\_)
+40         \{
+41             std::string transitionCandidateName = transition.transitionTypeInfo->getFullName();
+42             ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"- candidate transition: "} << transitionCandidateName);
+43         \}
+44 
+45         ROS\_ERROR(\textcolor{stringliteral}{"Ancestors candidates: "});
+46 
+47         std::list<std::shared\_ptr<SmaccStateInfo>> ancestors;
+48         stateinfo->getAncestors(ancestors);
+49 
+50         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &ancestor : ancestors)
+51         \{
+52             ROS\_ERROR\_STREAM(\textcolor{stringliteral}{" * Ancestor "} << ancestor->getDemangledFullName() << \textcolor{stringliteral}{":"});
+53             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &transition : ancestor->transitions\_)
+54             \{
+55                 std::string transitionCandidateName = transition.transitionTypeInfo->getFullName();
+56                 ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"- candidate transition: "} << transitionCandidateName);
+57                 \textcolor{keywordflow}{if} (transitionType->getFullName() == transitionCandidateName)
+58                 \{
+59                     ROS\_ERROR(\textcolor{stringliteral}{"GOTCHA"});
+60                 \}
+61             \}
+62         \}
+63     \}
+64     \textcolor{keywordflow}{else}
+65     \{
+66         ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Transition happened, but current state was not set. Transition candidates:"});
+67     \}
+68 \}
 \end{DoxyCode}
 
 
@@ -855,6 +881,17 @@ Definition at line 75 of file smacc\+\_\+state.\+h.
 
 
 Referenced by get\+State\+Behaviors().
+
+\index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!state\+Info\+\_\+@{state\+Info\+\_\+}}
+\index{state\+Info\+\_\+@{state\+Info\+\_\+}!smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}}
+\subsubsection[{\texorpdfstring{state\+Info\+\_\+}{stateInfo_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf smacc\+::introspection\+::\+Smacc\+State\+Info}$>$ smacc\+::\+I\+Smacc\+State\+::state\+Info\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classsmacc_1_1ISmaccState_a88f44aca6998fa98c55ce6bd53c08fe4}{}\label{classsmacc_1_1ISmaccState_a88f44aca6998fa98c55ce6bd53c08fe4}
+
+
+Definition at line 81 of file smacc\+\_\+state.\+h.
+
+
+
+Referenced by notify\+Transition\+From\+Transition\+Type\+Info().
 
 
 
