@@ -319,5 +319,6 @@ var searchData=
   ['evwaypoint98',['EvWaypoint98',['../structmove__base__z__client_1_1EvWaypoint98.html',1,'move_base_z_client']]],
   ['evwaypoint99',['EvWaypoint99',['../structmove__base__z__client_1_1EvWaypoint99.html',1,'move_base_z_client']]],
   ['execute',['execute',['../classOdomTrackerActionServer.html#afa69287377bb2a12c5346cbe8d68cb04',1,'OdomTrackerActionServer']]],
-  ['exemplary',['EXEMPLARY',['../LICENSE_8txt.html#a43c88664011ec4ec9fd41f9050dd8ffe',1,'LICENSE.txt']]]
+  ['exemplary',['EXEMPLARY',['../LICENSE_8txt.html#a43c88664011ec4ec9fd41f9050dd8ffe',1,'LICENSE.txt']]],
+  ['exit',['exit',['../classsmacc_1_1SmaccState.html#a34b22a3b1af1796f2bdc1383eeef3a74',1,'smacc::SmaccState']]]
 ];
