@@ -137,7 +137,7 @@ std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename Event\+Type $>$ }\\void \hyperlink{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5}{propagate\+Event\+To\+State\+Behaviors} (\hyperlink{classsmacc_1_1ISmaccState}{I\+Smacc\+State} $\ast$st, Event\+Type $\ast$ev)
+{\footnotesize template$<$typename Event\+Type $>$ }\\void \hyperlink{classsmacc_1_1ISmaccStateMachine_a3d369c7cff22632ca85a8656000ba19c}{propagate\+Event\+To\+State\+Reactors} (\hyperlink{classsmacc_1_1ISmaccState}{I\+Smacc\+State} $\ast$st, Event\+Type $\ast$ev)
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -331,7 +331,7 @@ Referenced by smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ senso
 286 \{
 287     static\_assert(std::is\_base\_of<ISmaccState, TSmaccObjectType>::value || std::is\_base\_of<ISmaccClient,
        TSmaccObjectType>::value || std::is\_base\_of<SmaccClientBehavior, TSmaccObjectType>::value || 
-      std::is\_base\_of<StateBehavior, TSmaccObjectType>::value || std::is\_base\_of<ISmaccComponent, TSmaccObjectType>::value, \textcolor{stringliteral}{"Only
+      std::is\_base\_of<StateReactor, TSmaccObjectType>::value || std::is\_base\_of<ISmaccComponent, TSmaccObjectType>::value, \textcolor{stringliteral}{"Only
        are accepted smacc types as subscribers for smacc signals"});
 288 
 289     \textcolor{keyword}{typedef} decltype(callback) ft;
@@ -790,8 +790,8 @@ References smacc\+::introspection\+::demangle\+Symbol().
 216 \{
 217     std::string stateFieldName = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(StateField).name());
 218     std::string behaviorType = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(BehaviorType).name());
-219     ROS\_INFO(\textcolor{stringliteral}{"Mapping state field '%s' to stateBehavior '%s'"}, stateFieldName.c\_str(), behaviorType.c\_str()
-      );
+219     ROS\_INFO(\textcolor{stringliteral}{"Mapping state field '%s' to stateReactor '%s'"}, stateFieldName.c\_str(), behaviorType.c\_str())
+      ;
 220     SmaccClientBehavior *globalreference;
 221     \textcolor{keywordflow}{if} (!this->\hyperlink{classsmacc_1_1ISmaccStateMachine_aeda2d6813c6c428bf318a5792e014b61}{getGlobalSMData}(stateFieldName, globalreference))
 222     \{
@@ -1083,7 +1083,7 @@ Definition at line 134 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 
-Referenced by smacc\+::\+I\+Smacc\+Client\+::post\+Event(), smacc\+::\+I\+Smacc\+Component\+::post\+Event(), smacc\+::\+Smacc\+Client\+Behavior\+::post\+Event(), and smacc\+::\+State\+Behavior\+::set\+Output\+Event().
+Referenced by smacc\+::\+I\+Smacc\+Client\+::post\+Event(), smacc\+::\+I\+Smacc\+Component\+::post\+Event(), smacc\+::\+Smacc\+Client\+Behavior\+::post\+Event(), and smacc\+::\+State\+Reactor\+::set\+Output\+Event().
 
 
 \begin{DoxyCode}
@@ -1091,14 +1091,14 @@ Referenced by smacc\+::\+I\+Smacc\+Client\+::post\+Event(), smacc\+::\+I\+Smacc\
 136     std::lock\_guard<std::recursive\_mutex> lock(\hyperlink{classsmacc_1_1ISmaccStateMachine_aac785541646e5c517273bf31072505a1}{m\_mutex\_});
 137 
 138     \textcolor{comment}{// when a postting event is requested by any component, client, or client behavior}
-139     \textcolor{comment}{// we reach this place. Now, we propagate the events to all the state state behaviors to generate}
+139     \textcolor{comment}{// we reach this place. Now, we propagate the events to all the state state reactors to generate}
 140     \textcolor{comment}{// some more events}
 141 
 142     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PostEvent entry point] "} << demangleSymbol<EventType>());
 143     \textcolor{keyword}{auto} currentstate = \hyperlink{classsmacc_1_1ISmaccStateMachine_a9c6e7745205bcce80a301f2fbe8f7e99}{currentState\_};
 144     \textcolor{keywordflow}{if} (currentstate != \textcolor{keyword}{nullptr})
 145     \{
-146         \hyperlink{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5}{propagateEventToStateBehaviors}(currentstate, ev);
+146         \hyperlink{classsmacc_1_1ISmaccStateMachine_a3d369c7cff22632ca85a8656000ba19c}{propagateEventToStateReactors}(currentstate, ev);
 147     \}
 148 
 149     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a3982eb671f5f001cb047d3a467789986}{signalDetector\_}->\hyperlink{classsmacc_1_1SignalDetector_a6ab99d99cef8d101e39797a72daeb2b7}{postEvent}(ev);
@@ -1134,28 +1134,28 @@ Definition at line 153 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 156     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a1549189caf29520514e677ca46f57348}{postEvent}(ev);
 157 \}
 \end{DoxyCode}
-\index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!propagate\+Event\+To\+State\+Behaviors@{propagate\+Event\+To\+State\+Behaviors}}
-\index{propagate\+Event\+To\+State\+Behaviors@{propagate\+Event\+To\+State\+Behaviors}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
-\subsubsection[{\texorpdfstring{propagate\+Event\+To\+State\+Behaviors(\+I\+Smacc\+State $\ast$st, Event\+Type $\ast$ev)}{propagateEventToStateBehaviors(ISmaccState *st, EventType *ev)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Event\+Type $>$ void smacc\+::\+I\+Smacc\+State\+Machine\+::propagate\+Event\+To\+State\+Behaviors (
+\index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!propagate\+Event\+To\+State\+Reactors@{propagate\+Event\+To\+State\+Reactors}}
+\index{propagate\+Event\+To\+State\+Reactors@{propagate\+Event\+To\+State\+Reactors}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
+\subsubsection[{\texorpdfstring{propagate\+Event\+To\+State\+Reactors(\+I\+Smacc\+State $\ast$st, Event\+Type $\ast$ev)}{propagateEventToStateReactors(ISmaccState *st, EventType *ev)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Event\+Type $>$ void smacc\+::\+I\+Smacc\+State\+Machine\+::propagate\+Event\+To\+State\+Reactors (
 \begin{DoxyParamCaption}
 \item[{{\bf I\+Smacc\+State} $\ast$}]{st, }
 \item[{Event\+Type $\ast$}]{ev}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5}{}\label{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classsmacc_1_1ISmaccStateMachine_a3d369c7cff22632ca85a8656000ba19c}{}\label{classsmacc_1_1ISmaccStateMachine_a3d369c7cff22632ca85a8656000ba19c}
 
 
 Definition at line 380 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 
-References smacc\+::\+I\+Smacc\+State\+::get\+Class\+Name(), smacc\+::\+I\+Smacc\+State\+::get\+Parent\+State(), and smacc\+::\+I\+Smacc\+State\+::get\+State\+Behaviors().
+References smacc\+::\+I\+Smacc\+State\+::get\+Class\+Name(), smacc\+::\+I\+Smacc\+State\+::get\+Parent\+State(), and smacc\+::\+I\+Smacc\+State\+::get\+State\+Reactors().
 
 
 \begin{DoxyCode}
 381 \{
 382     ROS\_DEBUG(\textcolor{stringliteral}{"PROPAGATING EVENT [%s] TO LUs [%s]: "}, demangleSymbol<EventType>().c\_str(), st->getClassName
       ().c\_str());
-383     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &sb : st->getStateBehaviors())
+383     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &sb : st->getStateReactors())
 384     \{
 385         sb->notifyEvent(ev);
 386     \}
@@ -1163,7 +1163,7 @@ References smacc\+::\+I\+Smacc\+State\+::get\+Class\+Name(), smacc\+::\+I\+Smacc
 388     \textcolor{keyword}{auto} *pst = st->getParentState();
 389     \textcolor{keywordflow}{if} (pst != \textcolor{keyword}{nullptr})
 390     \{
-391         \hyperlink{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5}{propagateEventToStateBehaviors}(pst, ev);
+391         \hyperlink{classsmacc_1_1ISmaccStateMachine_a3d369c7cff22632ca85a8656000ba19c}{propagateEventToStateReactors}(pst, ev);
 392     \}
 393 \}
 \end{DoxyCode}
@@ -1174,7 +1174,7 @@ Here is the call graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classsmacc_1_1ISmaccStateMachine_acf38a22ca5aa3c7ed51a55cffdb661d5_cgraph}
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccStateMachine_a3d369c7cff22632ca85a8656000ba19c_cgraph}
 \end{center}
 \end{figure}
 

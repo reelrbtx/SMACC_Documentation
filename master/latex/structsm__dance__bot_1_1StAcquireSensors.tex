@@ -84,19 +84,19 @@ Definition at line 33 of file st\+\_\+acquire\+\_\+sensors.\+h.
 38       configure\_orthogonal<OrService3, CbService3>(Service3Command::SERVICE3\_ON);
 39       configure\_orthogonal<OrUpdatablePublisher, ros\_publisher\_client::CbDefaultPublishLoop>();
 40 
-41       \textcolor{comment}{// static\_createStateBehavior<SbAllEventsGo,}
+41       \textcolor{comment}{// static\_createStateReactor<SbAllEventsGo,}
 42       \textcolor{comment}{//                            EvAllGo<SbAllEventsGo, SBehav1>,}
 43       \textcolor{comment}{//                            mpl::list<EvTopicMessage<CbLidarSensor, OrObstaclePerception>,
        EvTopicMessage<CbConditionTemperatureSensor, OrTemperatureSensor>>>();}
 44 
-45       \textcolor{keyword}{auto} sbAllSensorsReady = static\_createStateBehavior<SbAllEventsGo>();
+45       \textcolor{keyword}{auto} sbAllSensorsReady = static\_createStateReactor<SbAllEventsGo>();
 46       sbAllSensorsReady->addInputEvent<EvTopicMessage<CbLidarSensor, OrObstaclePerception>>();
 47       sbAllSensorsReady->addInputEvent<EvTopicMessage<CbConditionTemperatureSensor, OrTemperatureSensor>>()
       ;
 48 
 49       sbAllSensorsReady->setOutputEvent<EvAllGo<SbAllEventsGo, SBehav1>>();
 50 
-51       \textcolor{comment}{// auto sball = static\_createStateBehavior<SbAllEventsGo>();}
+51       \textcolor{comment}{// auto sball = static\_createStateReactor<SbAllEventsGo>();}
 52       \textcolor{comment}{// sball->enablesOn<EvTopicMessage<CbLidarSensor, OrObstaclePerception>,
        EvTopicMessage<CbConditionTemperatureSensor, OrTemperatureSensor>>();}
 53       \textcolor{comment}{// sball->throwsEvent<EvAllGo<SbAllEventsGo, SBehav1>>();}
