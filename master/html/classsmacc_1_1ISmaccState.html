@@ -238,6 +238,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a562bb3f9a3ac16b8be71e4794c9e7523"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3484b4a32ef47a8650f08df67de4fae5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsmacc_1_1ISmaccState.html">ISmaccState</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5">getParentState</a> ()</td></tr>
 <tr class="separator:a3484b4a32ef47a8650f08df67de4fae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d3f13b9d7ae7fdcf9da21c4ed935706"><td class="memItemLeft" align="right" valign="top">ros::NodeHandle &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706">getROSNode</a> ()</td></tr>
+<tr class="separator:a5d3f13b9d7ae7fdcf9da21c4ed935706"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bf0b49d5ea6b9e8f45c26fa155b2664"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmacc_1_1ISmaccState.html#a5bf0b49d5ea6b9e8f45c26fa155b2664">getClassName</a> ()</td></tr>
 <tr class="separator:a5bf0b49d5ea6b9e8f45c26fa155b2664"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb349c8ad38ce8e0bf3f72a316413313"><td class="memTemplParams" colspan="2">template&lt;typename TOrthogonal , typename TBehavior , typename... Args&gt; </td></tr>
@@ -283,8 +285,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afc5c5683cbe39964a52fc3a2553196d2"><td class="memTemplParams" colspan="2">template&lt;typename TOrthogonal &gt; </td></tr>
 <tr class="memitem:afc5c5683cbe39964a52fc3a2553196d2"><td class="memTemplItemLeft" align="right" valign="top">TOrthogonal *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classsmacc_1_1ISmaccState.html#afc5c5683cbe39964a52fc3a2553196d2">getOrthogonal</a> ()</td></tr>
 <tr class="separator:afc5c5683cbe39964a52fc3a2553196d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d3f13b9d7ae7fdcf9da21c4ed935706"><td class="memItemLeft" align="right" valign="top">ros::NodeHandle &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706">getROSNode</a> ()</td></tr>
-<tr class="separator:a5d3f13b9d7ae7fdcf9da21c4ed935706"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -326,18 +326,17 @@ template&lt;typename TOrthogonal , typename TBehavior , typename... Args&gt; </d
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00045">45</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>References <a class="el" href="generate__debs_8py_source.html#l00189">generate_debs::args</a>.</p>
+<p>References <a class="el" href="generate__debs_8py_source.html#l00195">generate_debs::args</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00016">getParentState()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    std::string orthogonalkey = demangledTypeName&lt;TOrthogonal&gt;();</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    ROS_INFO(<span class="stringliteral">&quot;Configuring orthogonal: %s&quot;</span>, orthogonalkey.c_str());</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    TOrthogonal *orthogonal = this-&gt;getOrthogonal&lt;TOrthogonal&gt;();</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span> (orthogonal != <span class="keyword">nullptr</span>)</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">auto</span> clientBehavior = std::shared_ptr&lt;TBehavior&gt;(<span class="keyword">new</span> TBehavior(<a class="code" href="namespacegenerate__debs.html#a75f9143e38df82d83b2e8a6f99cae02c">args</a>...));</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        clientBehavior-&gt;template configureEventSourceTypes&lt;TOrthogonal, TBehavior&gt;();</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        orthogonal-&gt;addClientBehavior(clientBehavior);</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">else</span></div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    {</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        ROS_ERROR(<span class="stringliteral">&quot;Skipping client behavior creation. Orthogonal did not exist.&quot;</span>);</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div><div class="ttc" id="namespacegenerate__debs_html_a75f9143e38df82d83b2e8a6f99cae02c"><div class="ttname"><a href="namespacegenerate__debs.html#a75f9143e38df82d83b2e8a6f99cae02c">generate_debs.args</a></div><div class="ttdeci">args</div><div class="ttdef"><b>Definition:</b> <a href="generate__debs_8py_source.html#l00189">generate_debs.py:189</a></div></div>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00018">getROSNode()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    std::string orthogonalkey = demangledTypeName&lt;TOrthogonal&gt;();</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    ROS_INFO(<span class="stringliteral">&quot;Configuring orthogonal: %s&quot;</span>, orthogonalkey.c_str());</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    TOrthogonal *orthogonal = this-&gt;getOrthogonal&lt;TOrthogonal&gt;();</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span> (orthogonal != <span class="keyword">nullptr</span>)</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">auto</span> clientBehavior = std::shared_ptr&lt;TBehavior&gt;(<span class="keyword">new</span> TBehavior(<a class="code" href="namespacegenerate__debs.html#a75f9143e38df82d83b2e8a6f99cae02c">args</a>...));</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        clientBehavior-&gt;template configureEventSourceTypes&lt;TOrthogonal, TBehavior&gt;();</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        orthogonal-&gt;addClientBehavior(clientBehavior);</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">else</span></div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    {</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        ROS_ERROR(<span class="stringliteral">&quot;Skipping client behavior creation. Orthogonal did not exist.&quot;</span>);</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div><div class="ttc" id="namespacegenerate__debs_html_a75f9143e38df82d83b2e8a6f99cae02c"><div class="ttname"><a href="namespacegenerate__debs.html#a75f9143e38df82d83b2e8a6f99cae02c">generate_debs.args</a></div><div class="ttdeci">args</div><div class="ttdef"><b>Definition:</b> <a href="generate__debs_8py_source.html#l00195">generate_debs.py:195</a></div></div>
 </div><!-- fragment -->
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsmacc_1_1ISmaccState_acb349c8ad38ce8e0bf3f72a316413313_icgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_acb349c8ad38ce8e0bf3f72a316413313_icgraph" alt=""/></div>
 <map name="classsmacc_1_1ISmaccState_acb349c8ad38ce8e0bf3f72a316413313_icgraph" id="classsmacc_1_1ISmaccState_acb349c8ad38ce8e0bf3f72a316413313_icgraph">
-<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5" title="smacc::ISmaccState\l::getParentState" alt="" coords="208,5,363,47"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="411,5,645,47"/>
+<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706" title="smacc::ISmaccState\l::getROSNode" alt="" coords="208,5,363,47"/>
 </map>
 </div>
 </p>
@@ -362,19 +361,18 @@ template&lt;typename TStateReactor , typename TTriggerEvent , typename TEventLis
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00113">113</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>References <a class="el" href="generate__debs_8py_source.html#l00189">generate_debs::args</a>.</p>
+<p>References <a class="el" href="generate__debs_8py_source.html#l00195">generate_debs::args</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00016">getParentState()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00018">getROSNode()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;{</div><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">auto</span> sb = std::make_shared&lt;TStateReactor&gt;(<a class="code" href="namespacegenerate__debs.html#a75f9143e38df82d83b2e8a6f99cae02c">args</a>...);</div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    TEventList *mock;</div><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    sb-&gt;initialize(<span class="keyword">this</span>, mock);</div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    sb-&gt;template setOutputEvent&lt;TTriggerEvent&gt;();</div><div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <a class="code" href="classsmacc_1_1ISmaccState.html#a7410a353b515f7b7357e94ef619a6c45">stateReactors_</a>.push_back(sb);</div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">return</span> sb;</div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a7410a353b515f7b7357e94ef619a6c45"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a7410a353b515f7b7357e94ef619a6c45">smacc::ISmaccState::stateReactors_</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; StateReactor &gt; &gt; stateReactors_</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8h_source.html#l00075">smacc_state.h:75</a></div></div>
-<div class="ttc" id="namespacegenerate__debs_html_a75f9143e38df82d83b2e8a6f99cae02c"><div class="ttname"><a href="namespacegenerate__debs.html#a75f9143e38df82d83b2e8a6f99cae02c">generate_debs.args</a></div><div class="ttdeci">args</div><div class="ttdef"><b>Definition:</b> <a href="generate__debs_8py_source.html#l00189">generate_debs.py:189</a></div></div>
+<div class="ttc" id="namespacegenerate__debs_html_a75f9143e38df82d83b2e8a6f99cae02c"><div class="ttname"><a href="namespacegenerate__debs.html#a75f9143e38df82d83b2e8a6f99cae02c">generate_debs.args</a></div><div class="ttdeci">args</div><div class="ttdef"><b>Definition:</b> <a href="generate__debs_8py_source.html#l00195">generate_debs.py:195</a></div></div>
 </div><!-- fragment -->
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsmacc_1_1ISmaccState_adfa47151c571de814f91003e3c7d1ff2_icgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_adfa47151c571de814f91003e3c7d1ff2_icgraph" alt=""/></div>
 <map name="classsmacc_1_1ISmaccState_adfa47151c571de814f91003e3c7d1ff2_icgraph" id="classsmacc_1_1ISmaccState_adfa47151c571de814f91003e3c7d1ff2_icgraph">
-<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5" title="smacc::ISmaccState\l::getParentState" alt="" coords="208,5,363,47"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="411,5,645,47"/>
+<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706" title="smacc::ISmaccState\l::getROSNode" alt="" coords="208,5,363,47"/>
 </map>
 </div>
 </p>
@@ -399,9 +397,9 @@ template&lt;typename TStateReactor , typename... TEvArgs&gt; </div>
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00103">103</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>References <a class="el" href="generate__debs_8py_source.html#l00189">generate_debs::args</a>.</p>
+<p>References <a class="el" href="generate__debs_8py_source.html#l00195">generate_debs::args</a>.</p>
 <div class="fragment"><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;{</div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">auto</span> sb = std::make_shared&lt;TStateReactor&gt;(<a class="code" href="namespacegenerate__debs.html#a75f9143e38df82d83b2e8a6f99cae02c">args</a>...);</div><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="comment">//sb-&gt;initialize(this, mock);</span></div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment">//sb-&gt;setOutputEvent(typelist&lt;TTriggerEvent&gt;());</span></div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="classsmacc_1_1ISmaccState.html#a7410a353b515f7b7357e94ef619a6c45">stateReactors_</a>.push_back(sb);</div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> sb;</div><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a7410a353b515f7b7357e94ef619a6c45"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a7410a353b515f7b7357e94ef619a6c45">smacc::ISmaccState::stateReactors_</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; StateReactor &gt; &gt; stateReactors_</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8h_source.html#l00075">smacc_state.h:75</a></div></div>
-<div class="ttc" id="namespacegenerate__debs_html_a75f9143e38df82d83b2e8a6f99cae02c"><div class="ttname"><a href="namespacegenerate__debs.html#a75f9143e38df82d83b2e8a6f99cae02c">generate_debs.args</a></div><div class="ttdeci">args</div><div class="ttdef"><b>Definition:</b> <a href="generate__debs_8py_source.html#l00189">generate_debs.py:189</a></div></div>
+<div class="ttc" id="namespacegenerate__debs_html_a75f9143e38df82d83b2e8a6f99cae02c"><div class="ttname"><a href="namespacegenerate__debs.html#a75f9143e38df82d83b2e8a6f99cae02c">generate_debs.args</a></div><div class="ttdeci">args</div><div class="ttdef"><b>Definition:</b> <a href="generate__debs_8py_source.html#l00195">generate_debs.py:195</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -430,7 +428,7 @@ template&lt;typename TStateReactor , typename... TEvArgs&gt; </div>
 
 <p>References <a class="el" href="introspection_8h_source.html#l00051">smacc::introspection::demangleSymbol()</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00016">getParentState()</a>, and <a class="el" href="smacc__state__machine__impl_8h_source.html#l00380">smacc::ISmaccStateMachine::propagateEventToStateReactors()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00018">getROSNode()</a>, and <a class="el" href="smacc__state__machine__impl_8h_source.html#l00393">smacc::ISmaccStateMachine::propagateEventToStateReactors()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacesmacc_1_1introspection.html#a2f495108db3e57604d8d3ff5ef030302">demangleSymbol</a>(<span class="keyword">typeid</span>(*this).name());</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;}</div><div class="ttc" id="namespacesmacc_1_1introspection_html_a2f495108db3e57604d8d3ff5ef030302"><div class="ttname"><a href="namespacesmacc_1_1introspection.html#a2f495108db3e57604d8d3ff5ef030302">smacc::introspection::demangleSymbol</a></div><div class="ttdeci">std::string demangleSymbol(const std::string &amp;name)</div><div class="ttdef"><b>Definition:</b> <a href="introspection_8h_source.html#l00051">introspection.h:51</a></div></div>
 </div><!-- fragment -->
 <p><div class="dynheader">
@@ -448,8 +446,8 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsmacc_1_1ISmaccState_a5bf0b49d5ea6b9e8f45c26fa155b2664_icgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_a5bf0b49d5ea6b9e8f45c26fa155b2664_icgraph" alt=""/></div>
 <map name="classsmacc_1_1ISmaccState_a5bf0b49d5ea6b9e8f45c26fa155b2664_icgraph" id="classsmacc_1_1ISmaccState_a5bf0b49d5ea6b9e8f45c26fa155b2664_icgraph">
-<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5" title="smacc::ISmaccState\l::getParentState" alt="" coords="208,5,363,47"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="411,35,645,76"/>
+<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706" title="smacc::ISmaccState\l::getROSNode" alt="" coords="248,5,403,47"/>
+<area shape="rect" id="node3" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="208,71,443,112"/>
 </map>
 </div>
 </p>
@@ -484,7 +482,7 @@ template&lt;typename T &gt; </div>
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00088">88</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00016">getParentState()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00018">getROSNode()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">getStateMachine</a>().<a class="code" href="classsmacc_1_1ISmaccStateMachine.html#aeda2d6813c6c428bf318a5792e014b61">getGlobalSMData</a>(name, ret);</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccStateMachine_html_aeda2d6813c6c428bf318a5792e014b61"><div class="ttname"><a href="classsmacc_1_1ISmaccStateMachine.html#aeda2d6813c6c428bf318a5792e014b61">smacc::ISmaccStateMachine::getGlobalSMData</a></div><div class="ttdeci">bool getGlobalSMData(std::string name, T &amp;ret)</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__machine__impl_8h_source.html#l00160">smacc_state_machine_impl.h:160</a></div></div>
 <div class="ttc" id="classsmacc_1_1ISmaccState_html_a562bb3f9a3ac16b8be71e4794c9e7523"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">smacc::ISmaccState::getStateMachine</a></div><div class="ttdeci">virtual ISmaccStateMachine &amp; getStateMachine()=0</div></div>
 </div><!-- fragment -->
@@ -493,8 +491,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsmacc_1_1ISmaccState_ad6811b03329d9e694e78bc4b1220c2c0_icgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_ad6811b03329d9e694e78bc4b1220c2c0_icgraph" alt=""/></div>
 <map name="classsmacc_1_1ISmaccState_ad6811b03329d9e694e78bc4b1220c2c0_icgraph" id="classsmacc_1_1ISmaccState_ad6811b03329d9e694e78bc4b1220c2c0_icgraph">
-<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5" title="smacc::ISmaccState\l::getParentState" alt="" coords="208,5,363,47"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="411,5,645,47"/>
+<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706" title="smacc::ISmaccState\l::getROSNode" alt="" coords="208,5,363,47"/>
 </map>
 </div>
 </p>
@@ -518,7 +515,7 @@ template&lt;typename TOrthogonal &gt; </div>
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00124">124</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00052">getStateReactors()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00057">getStateReactors()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;{</div><div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">getStateMachine</a>().<a class="code" href="classsmacc_1_1ISmaccStateMachine.html#a38b8b6e3d65b7de33020c9c397cf29bb">getOrthogonal</a>&lt;TOrthogonal&gt;();</div><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a562bb3f9a3ac16b8be71e4794c9e7523"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">smacc::ISmaccState::getStateMachine</a></div><div class="ttdeci">virtual ISmaccStateMachine &amp; getStateMachine()=0</div></div>
 <div class="ttc" id="classsmacc_1_1ISmaccStateMachine_html_a38b8b6e3d65b7de33020c9c397cf29bb"><div class="ttname"><a href="classsmacc_1_1ISmaccStateMachine.html#a38b8b6e3d65b7de33020c9c397cf29bb">smacc::ISmaccStateMachine::getOrthogonal</a></div><div class="ttdeci">TOrthogonal * getOrthogonal()</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__machine__impl_8h_source.html#l00030">smacc_state_machine_impl.h:30</a></div></div>
 </div><!-- fragment -->
@@ -563,7 +560,7 @@ template&lt;typename T &gt; </div>
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00022">22</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00052">getStateReactors()</a>, and <a class="el" href="cb__navigate__global__position_8cpp_source.html#l00055">move_base_z_client::CbNavigateGlobalPosition::readStartPoseFromParameterServer()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00057">getStateReactors()</a>, and <a class="el" href="cb__navigate__global__position_8cpp_source.html#l00055">move_base_z_client::CbNavigateGlobalPosition::readStartPoseFromParameterServer()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a13fe6e6abfdb87996402189d44b78494">nh</a>.getParam(param_name, param_storage);</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a13fe6e6abfdb87996402189d44b78494"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a13fe6e6abfdb87996402189d44b78494">smacc::ISmaccState::nh</a></div><div class="ttdeci">ros::NodeHandle nh</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8h_source.html#l00077">smacc_state.h:77</a></div></div>
 </div><!-- fragment -->
 <p><div class="dynheader">
@@ -605,34 +602,11 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="smacc__state_8h_source.html#l00016">16</a> of file <a class="el" href="smacc__state_8h_source.html">smacc_state.h</a>.</p>
 
-<p>References <a class="el" href="generate__debs_8py_source.html#l00189">generate_debs::args</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00045">configure()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00113">createStateReactor()</a>, <a class="el" href="smacc__state_8cpp_source.html#l00006">getClassName()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00088">getGlobalSMData()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00149">notifyTransition()</a>, <a class="el" href="smacc__state_8cpp_source.html#l00011">notifyTransitionFromTransitionTypeInfo()</a>, <a class="el" href="smacc__state_8h_source.html#l00079">parentState_</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00142">postEvent()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00072">requiresClient()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00065">requiresComponent()</a>, and <a class="el" href="smacc__state__impl_8h_source.html#l00096">setGlobalSMData()</a>.</p>
+<p>References <a class="el" href="smacc__state_8h_source.html#l00079">parentState_</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state__machine__impl_8h_source.html#l00380">smacc::ISmaccStateMachine::propagateEventToStateReactors()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state__machine__impl_8h_source.html#l00393">smacc::ISmaccStateMachine::propagateEventToStateReactors()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="classsmacc_1_1ISmaccState.html#ad61db41d8d06a836e7d1dac7767f5695">parentState_</a>; };</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_ad61db41d8d06a836e7d1dac7767f5695"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#ad61db41d8d06a836e7d1dac7767f5695">smacc::ISmaccState::parentState_</a></div><div class="ttdeci">ISmaccState * parentState_</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8h_source.html#l00079">smacc_state.h:79</a></div></div>
 </div><!-- fragment -->
-<p><div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="classsmacc_1_1ISmaccState_a3484b4a32ef47a8650f08df67de4fae5_cgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_a3484b4a32ef47a8650f08df67de4fae5_cgraph" alt=""/></div>
-<map name="classsmacc_1_1ISmaccState_a3484b4a32ef47a8650f08df67de4fae5_cgraph" id="classsmacc_1_1ISmaccState_a3484b4a32ef47a8650f08df67de4fae5_cgraph">
-<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#acb349c8ad38ce8e0bf3f72a316413313" title="smacc::ISmaccState\l::configure" alt="" coords="239,5,394,47"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccState.html#adfa47151c571de814f91003e3c7d1ff2" title="smacc::ISmaccState\l::createStateReactor" alt="" coords="239,71,394,112"/>
-<area shape="rect" id="node4" href="classsmacc_1_1ISmaccState.html#a5bf0b49d5ea6b9e8f45c26fa155b2664" title="smacc::ISmaccState\l::getClassName" alt="" coords="239,136,394,177"/>
-<area shape="rect" id="node6" href="classsmacc_1_1ISmaccState.html#ad6811b03329d9e694e78bc4b1220c2c0" title="smacc::ISmaccState\l::getGlobalSMData" alt="" coords="239,201,394,243"/>
-<area shape="rect" id="node7" href="classsmacc_1_1ISmaccState.html#a98df316afd79180d3c27a15a7d5dd1cf" title="smacc::ISmaccState\l::notifyTransition" alt="" coords="239,267,394,308"/>
-<area shape="rect" id="node8" href="classsmacc_1_1ISmaccState.html#acb3dd7d402c634004ae3b67a01169438" title="smacc::ISmaccState\l::notifyTransitionFromTransition\lTypeInfo" alt="" coords="208,331,425,387"/>
-<area shape="rect" id="node12" href="classsmacc_1_1ISmaccState.html#acef404ab3766ddf2892e8dad14a4a7cf" title="smacc::ISmaccState\l::postEvent" alt="" coords="239,411,394,452"/>
-<area shape="rect" id="node13" href="classsmacc_1_1ISmaccState.html#a7f95c9f0a6ea2d6f18d1aec0519de4ac" title="smacc::ISmaccState\l::requiresClient" alt="" coords="239,476,394,517"/>
-<area shape="rect" id="node14" href="classsmacc_1_1ISmaccState.html#afd5264c36403d22e124eea89a0122e59" title="smacc::ISmaccState\l::requiresComponent" alt="" coords="238,541,395,583"/>
-<area shape="rect" id="node15" href="classsmacc_1_1ISmaccState.html#a120fcda41b44a437ff2e3906ac9fa5ca" title="smacc::ISmaccState\l::setGlobalSMData" alt="" coords="239,607,394,648"/>
-<area shape="rect" id="node5" href="namespacesmacc_1_1introspection.html#a2f495108db3e57604d8d3ff5ef030302" title="smacc::introspection\l::demangleSymbol" alt="" coords="499,136,654,177"/>
-<area shape="rect" id="node9" href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523" title="smacc::ISmaccState\l::getStateMachine" alt="" coords="499,307,654,348"/>
-<area shape="rect" id="node10" href="classsmacc_1_1ISmaccStateMachine.html#a06cc53c282c93692829b6efd28e315f4" title="smacc::ISmaccStateMachine\l::publishTransition" alt="" coords="473,372,680,413"/>
-<area shape="rect" id="node11" href="namespacesmacc_1_1introspection.html#a6c1b51c4d44fd5e41fe218f1ee150681" title="smacc::introspection\l::transitionInfoToMsg" alt="" coords="728,372,883,413"/>
-</map>
-</div>
-</p>
-
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -666,11 +640,34 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="smacc__state_8h_source.html#l00069">69</a> of file <a class="el" href="smacc__state_8h_source.html">smacc_state.h</a>.</p>
+<p>Definition at line <a class="el" href="smacc__state_8h_source.html#l00018">18</a> of file <a class="el" href="smacc__state_8h_source.html">smacc_state.h</a>.</p>
 
-<p>References <a class="el" href="smacc__state_8h_source.html#l00077">nh</a>.</p>
-<div class="fragment"><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  {</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a13fe6e6abfdb87996402189d44b78494">nh</a>;</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  }</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a13fe6e6abfdb87996402189d44b78494"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a13fe6e6abfdb87996402189d44b78494">smacc::ISmaccState::nh</a></div><div class="ttdeci">ros::NodeHandle nh</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8h_source.html#l00077">smacc_state.h:77</a></div></div>
+<p>References <a class="el" href="generate__debs_8py_source.html#l00195">generate_debs::args</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00045">configure()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00113">createStateReactor()</a>, <a class="el" href="smacc__state_8cpp_source.html#l00006">getClassName()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00088">getGlobalSMData()</a>, <a class="el" href="smacc__state_8h_source.html#l00077">nh</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00149">notifyTransition()</a>, <a class="el" href="smacc__state_8cpp_source.html#l00011">notifyTransitionFromTransitionTypeInfo()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00142">postEvent()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00072">requiresClient()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00065">requiresComponent()</a>, and <a class="el" href="smacc__state__impl_8h_source.html#l00096">setGlobalSMData()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  {</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a13fe6e6abfdb87996402189d44b78494">nh</a>;</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  }</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a13fe6e6abfdb87996402189d44b78494"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a13fe6e6abfdb87996402189d44b78494">smacc::ISmaccState::nh</a></div><div class="ttdeci">ros::NodeHandle nh</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8h_source.html#l00077">smacc_state.h:77</a></div></div>
 </div><!-- fragment -->
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classsmacc_1_1ISmaccState_a5d3f13b9d7ae7fdcf9da21c4ed935706_cgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_a5d3f13b9d7ae7fdcf9da21c4ed935706_cgraph" alt=""/></div>
+<map name="classsmacc_1_1ISmaccState_a5d3f13b9d7ae7fdcf9da21c4ed935706_cgraph" id="classsmacc_1_1ISmaccState_a5d3f13b9d7ae7fdcf9da21c4ed935706_cgraph">
+<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#acb349c8ad38ce8e0bf3f72a316413313" title="smacc::ISmaccState\l::configure" alt="" coords="239,5,394,47"/>
+<area shape="rect" id="node3" href="classsmacc_1_1ISmaccState.html#adfa47151c571de814f91003e3c7d1ff2" title="smacc::ISmaccState\l::createStateReactor" alt="" coords="239,71,394,112"/>
+<area shape="rect" id="node4" href="classsmacc_1_1ISmaccState.html#a5bf0b49d5ea6b9e8f45c26fa155b2664" title="smacc::ISmaccState\l::getClassName" alt="" coords="239,136,394,177"/>
+<area shape="rect" id="node6" href="classsmacc_1_1ISmaccState.html#ad6811b03329d9e694e78bc4b1220c2c0" title="smacc::ISmaccState\l::getGlobalSMData" alt="" coords="239,201,394,243"/>
+<area shape="rect" id="node7" href="classsmacc_1_1ISmaccState.html#a98df316afd79180d3c27a15a7d5dd1cf" title="smacc::ISmaccState\l::notifyTransition" alt="" coords="239,267,394,308"/>
+<area shape="rect" id="node8" href="classsmacc_1_1ISmaccState.html#acb3dd7d402c634004ae3b67a01169438" title="smacc::ISmaccState\l::notifyTransitionFromTransition\lTypeInfo" alt="" coords="208,331,425,387"/>
+<area shape="rect" id="node12" href="classsmacc_1_1ISmaccState.html#acef404ab3766ddf2892e8dad14a4a7cf" title="smacc::ISmaccState\l::postEvent" alt="" coords="239,411,394,452"/>
+<area shape="rect" id="node13" href="classsmacc_1_1ISmaccState.html#a7f95c9f0a6ea2d6f18d1aec0519de4ac" title="smacc::ISmaccState\l::requiresClient" alt="" coords="239,476,394,517"/>
+<area shape="rect" id="node14" href="classsmacc_1_1ISmaccState.html#afd5264c36403d22e124eea89a0122e59" title="smacc::ISmaccState\l::requiresComponent" alt="" coords="238,541,395,583"/>
+<area shape="rect" id="node15" href="classsmacc_1_1ISmaccState.html#a120fcda41b44a437ff2e3906ac9fa5ca" title="smacc::ISmaccState\l::setGlobalSMData" alt="" coords="239,607,394,648"/>
+<area shape="rect" id="node5" href="namespacesmacc_1_1introspection.html#a2f495108db3e57604d8d3ff5ef030302" title="smacc::introspection\l::demangleSymbol" alt="" coords="499,136,654,177"/>
+<area shape="rect" id="node9" href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523" title="smacc::ISmaccState\l::getStateMachine" alt="" coords="499,307,654,348"/>
+<area shape="rect" id="node10" href="classsmacc_1_1ISmaccStateMachine.html#a06cc53c282c93692829b6efd28e315f4" title="smacc::ISmaccStateMachine\l::publishTransition" alt="" coords="473,372,680,413"/>
+<area shape="rect" id="node11" href="namespacesmacc_1_1introspection.html#a6c1b51c4d44fd5e41fe218f1ee150681" title="smacc::introspection\l::transitionInfoToMsg" alt="" coords="728,372,883,413"/>
+</map>
+</div>
+</p>
+
 </div>
 </div>
 <a class="anchor" id="a562bb3f9a3ac16b8be71e4794c9e7523"></a>
@@ -704,11 +701,10 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523_icgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523_icgraph" alt=""/></div>
 <map name="classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523_icgraph" id="classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523_icgraph">
 <area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#acb3dd7d402c634004ae3b67a01169438" title="smacc::ISmaccState\l::notifyTransitionFromTransition\lTypeInfo" alt="" coords="208,5,425,61"/>
-<area shape="rect" id="node5" href="classsmacc_1_1ISmaccState.html#ae733140761345e027713bd622d93bf0f" title="smacc::ISmaccState\l::requestLockStateMachine" alt="" coords="219,85,415,126"/>
-<area shape="rect" id="node6" href="classsmacc_1_1ISmaccState.html#a3bf006f25d5b9c0534c8e89ae2e93d40" title="smacc::ISmaccState\l::requestUnlockStateMachine" alt="" coords="211,150,422,191"/>
-<area shape="rect" id="node7" href="classsmacc_1_1StateReactor.html#ae9d0dd0c8cdcc57f8881f0962040c8ed" title="smacc::StateReactor\l::setOutputEvent" alt="" coords="239,215,394,257"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5" title="smacc::ISmaccState\l::getParentState" alt="" coords="473,13,628,54"/>
-<area shape="rect" id="node4" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="676,13,911,54"/>
+<area shape="rect" id="node4" href="classsmacc_1_1ISmaccState.html#ae733140761345e027713bd622d93bf0f" title="smacc::ISmaccState\l::requestLockStateMachine" alt="" coords="219,85,415,126"/>
+<area shape="rect" id="node5" href="classsmacc_1_1ISmaccState.html#a3bf006f25d5b9c0534c8e89ae2e93d40" title="smacc::ISmaccState\l::requestUnlockStateMachine" alt="" coords="211,150,422,191"/>
+<area shape="rect" id="node6" href="classsmacc_1_1StateReactor.html#ae9d0dd0c8cdcc57f8881f0962040c8ed" title="smacc::StateReactor\l::setOutputEvent" alt="" coords="239,215,394,257"/>
+<area shape="rect" id="node3" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706" title="smacc::ISmaccState\l::getROSNode" alt="" coords="473,13,628,54"/>
 </map>
 </div>
 </p>
@@ -736,12 +732,12 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="smacc__state_8h_source.html#l00052">52</a> of file <a class="el" href="smacc__state_8h_source.html">smacc_state.h</a>.</p>
+<p>Definition at line <a class="el" href="smacc__state_8h_source.html#l00057">57</a> of file <a class="el" href="smacc__state_8h_source.html">smacc_state.h</a>.</p>
 
 <p>References <a class="el" href="smacc__state__impl_8h_source.html#l00124">getOrthogonal()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00022">getParam()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00038">param()</a>, <a class="el" href="smacc__state__impl_8h_source.html#l00030">setParam()</a>, and <a class="el" href="smacc__state_8h_source.html#l00075">stateReactors_</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state__machine__impl_8h_source.html#l00380">smacc::ISmaccStateMachine::propagateEventToStateReactors()</a>.</p>
-<div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a7410a353b515f7b7357e94ef619a6c45">stateReactors_</a>; }</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a7410a353b515f7b7357e94ef619a6c45"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a7410a353b515f7b7357e94ef619a6c45">smacc::ISmaccState::stateReactors_</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; StateReactor &gt; &gt; stateReactors_</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8h_source.html#l00075">smacc_state.h:75</a></div></div>
+<p>Referenced by <a class="el" href="smacc__state__machine__impl_8h_source.html#l00393">smacc::ISmaccStateMachine::propagateEventToStateReactors()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a7410a353b515f7b7357e94ef619a6c45">stateReactors_</a>; }</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a7410a353b515f7b7357e94ef619a6c45"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a7410a353b515f7b7357e94ef619a6c45">smacc::ISmaccState::stateReactors_</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; StateReactor &gt; &gt; stateReactors_</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8h_source.html#l00075">smacc_state.h:75</a></div></div>
 </div><!-- fragment -->
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -785,7 +781,7 @@ template&lt;typename TransitionType &gt; </div>
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00149">149</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00016">getParentState()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00018">getROSNode()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;{</div><div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keyword">auto</span> transitionType = TypeInfo::getTypeInfoFromType&lt;TransitionType&gt;();</div><div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    this-&gt;<a class="code" href="classsmacc_1_1ISmaccState.html#acb3dd7d402c634004ae3b67a01169438">notifyTransitionFromTransitionTypeInfo</a>(transitionType);</div><div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_acb3dd7d402c634004ae3b67a01169438"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#acb3dd7d402c634004ae3b67a01169438">smacc::ISmaccState::notifyTransitionFromTransitionTypeInfo</a></div><div class="ttdeci">void notifyTransitionFromTransitionTypeInfo(std::shared_ptr&lt; smacc::introspection::TypeInfo &gt; &amp;transitionTypeInfo)</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8cpp_source.html#l00011">smacc_state.cpp:11</a></div></div>
 </div><!-- fragment -->
 <p><div class="dynheader">
@@ -793,8 +789,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsmacc_1_1ISmaccState_a98df316afd79180d3c27a15a7d5dd1cf_icgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_a98df316afd79180d3c27a15a7d5dd1cf_icgraph" alt=""/></div>
 <map name="classsmacc_1_1ISmaccState_a98df316afd79180d3c27a15a7d5dd1cf_icgraph" id="classsmacc_1_1ISmaccState_a98df316afd79180d3c27a15a7d5dd1cf_icgraph">
-<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5" title="smacc::ISmaccState\l::getParentState" alt="" coords="208,5,363,47"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="411,5,645,47"/>
+<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706" title="smacc::ISmaccState\l::getROSNode" alt="" coords="208,5,363,47"/>
 </map>
 </div>
 </p>
@@ -819,7 +814,7 @@ Here is the caller graph for this function:</div>
 
 <p>References <a class="el" href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">getStateMachine()</a>, <a class="el" href="smacc__state__machine_8cpp_source.html#l00101">smacc::ISmaccStateMachine::publishTransition()</a>, and <a class="el" href="smacc__state_8h_source.html#l00081">stateInfo_</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00016">getParentState()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00018">getROSNode()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    ROS_INFO_STREAM(<span class="stringliteral">&quot;NOTIFY TRANSITION: &quot;</span> &lt;&lt; transitionType-&gt;getFullName());</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">//auto currstateinfo = this-&gt;getStateMachine().getCurrentStateInfo();</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">auto</span> currstateinfo = this-&gt;<a class="code" href="classsmacc_1_1ISmaccState.html#af20df2cfd3aa826fe02a3d703dc63c1b">stateInfo_</a>;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">if</span> (currstateinfo != <span class="keyword">nullptr</span>)</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    {</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="comment">//ROS_ERROR_STREAM(&quot;CURRENT STATE INFO: &quot; &lt;&lt; currstateinfo-&gt;fullStateName);</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;transition : currstateinfo-&gt;transitions_)</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        {</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            std::string transitionCandidateName = transition.transitionTypeInfo-&gt;getFullName();</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="comment">//ROS_ERROR_STREAM(&quot;candidate transition: &quot; &lt;&lt; transitionCandidateName);</span></div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordflow">if</span> (transitionType-&gt;getFullName() == transitionCandidateName)</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            {</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                this-&gt;<a class="code" href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">getStateMachine</a>().<a class="code" href="classsmacc_1_1ISmaccStateMachine.html#a06cc53c282c93692829b6efd28e315f4">publishTransition</a>(transition);</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="keywordflow">return</span>;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            }</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        }</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="comment">// debug information if not found</span></div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        ROS_ERROR_STREAM(<span class="stringliteral">&quot;Transition happened, from current state &quot;</span> &lt;&lt; currstateinfo-&gt;getDemangledFullName() &lt;&lt; <span class="stringliteral">&quot; but there is not any transitioninfo match available to publish transition: &quot;</span> &lt;&lt; transitionType-&gt;getFullName());</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        std::stringstream ss;</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">auto</span> stateinfo = currstateinfo;</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;transition : currstateinfo-&gt;transitions_)</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        {</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            std::string transitionCandidateName = transition.transitionTypeInfo-&gt;getFullName();</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            ROS_ERROR_STREAM(<span class="stringliteral">&quot;- candidate transition: &quot;</span> &lt;&lt; transitionCandidateName);</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        }</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        ROS_ERROR(<span class="stringliteral">&quot;Ancestors candidates: &quot;</span>);</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        std::list&lt;const SmaccStateInfo *&gt; ancestors;</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        stateinfo-&gt;getAncestors(ancestors);</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;ancestor : ancestors)</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        {</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            ROS_ERROR_STREAM(<span class="stringliteral">&quot; * Ancestor &quot;</span> &lt;&lt; ancestor-&gt;getDemangledFullName() &lt;&lt; <span class="stringliteral">&quot;:&quot;</span>);</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;transition : ancestor-&gt;transitions_)</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            {</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                std::string transitionCandidateName = transition.transitionTypeInfo-&gt;getFullName();</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                ROS_ERROR_STREAM(<span class="stringliteral">&quot;- candidate transition: &quot;</span> &lt;&lt; transitionCandidateName);</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="keywordflow">if</span> (transitionType-&gt;getFullName() == transitionCandidateName)</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                {</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    ROS_ERROR(<span class="stringliteral">&quot;GOTCHA&quot;</span>);</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                }</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            }</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">else</span></div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    {</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        ROS_ERROR_STREAM(<span class="stringliteral">&quot;Transition happened, but current state was not set. Transition candidates:&quot;</span>);</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccStateMachine_html_a06cc53c282c93692829b6efd28e315f4"><div class="ttname"><a href="classsmacc_1_1ISmaccStateMachine.html#a06cc53c282c93692829b6efd28e315f4">smacc::ISmaccStateMachine::publishTransition</a></div><div class="ttdeci">void publishTransition(const SmaccTransitionInfo &amp;transitionInfo)</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__machine_8cpp_source.html#l00101">smacc_state_machine.cpp:101</a></div></div>
 <div class="ttc" id="classsmacc_1_1ISmaccState_html_af20df2cfd3aa826fe02a3d703dc63c1b"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#af20df2cfd3aa826fe02a3d703dc63c1b">smacc::ISmaccState::stateInfo_</a></div><div class="ttdeci">const smacc::introspection::SmaccStateInfo * stateInfo_</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8h_source.html#l00081">smacc_state.h:81</a></div></div>
 <div class="ttc" id="classsmacc_1_1ISmaccState_html_a562bb3f9a3ac16b8be71e4794c9e7523"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">smacc::ISmaccState::getStateMachine</a></div><div class="ttdeci">virtual ISmaccStateMachine &amp; getStateMachine()=0</div></div>
@@ -841,8 +836,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsmacc_1_1ISmaccState_acb3dd7d402c634004ae3b67a01169438_icgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_acb3dd7d402c634004ae3b67a01169438_icgraph" alt=""/></div>
 <map name="classsmacc_1_1ISmaccState_acb3dd7d402c634004ae3b67a01169438_icgraph" id="classsmacc_1_1ISmaccState_acb3dd7d402c634004ae3b67a01169438_icgraph">
-<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5" title="smacc::ISmaccState\l::getParentState" alt="" coords="271,13,425,54"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="473,13,708,54"/>
+<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706" title="smacc::ISmaccState\l::getROSNode" alt="" coords="271,13,425,54"/>
 </map>
 </div>
 </p>
@@ -883,7 +877,7 @@ template&lt;typename T &gt; </div>
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00038">38</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00052">getStateReactors()</a>, <a class="el" href="cb__rotate_8cpp_source.html#l00014">move_base_z_client::CbRotate::onEntry()</a>, <a class="el" href="cb__absolute__rotate_8cpp_source.html#l00015">move_base_z_client::CbAbsoluteRotate::onEntry()</a>, <a class="el" href="cb__navigate__backward_8cpp_source.html#l00024">move_base_z_client::CbNavigateBackwards::onEntry()</a>, and <a class="el" href="cb__navigate__forward_8cpp_source.html#l00016">move_base_z_client::CbNavigateForward::onEntry()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00057">getStateReactors()</a>, <a class="el" href="cb__rotate_8cpp_source.html#l00014">move_base_z_client::CbRotate::onEntry()</a>, <a class="el" href="cb__absolute__rotate_8cpp_source.html#l00015">move_base_z_client::CbAbsoluteRotate::onEntry()</a>, <a class="el" href="cb__navigate__backward_8cpp_source.html#l00024">move_base_z_client::CbNavigateBackwards::onEntry()</a>, and <a class="el" href="cb__navigate__forward_8cpp_source.html#l00016">move_base_z_client::CbNavigateForward::onEntry()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a13fe6e6abfdb87996402189d44b78494">nh</a>.param(param_name, param_val, default_val);</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a13fe6e6abfdb87996402189d44b78494"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a13fe6e6abfdb87996402189d44b78494">smacc::ISmaccState::nh</a></div><div class="ttdeci">ros::NodeHandle nh</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8h_source.html#l00077">smacc_state.h:77</a></div></div>
 </div><!-- fragment -->
 <p><div class="dynheader">
@@ -921,7 +915,7 @@ template&lt;typename EventType &gt; </div>
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00142">142</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>Referenced by <a class="el" href="sm__viewer__sim_8h_source.html#l00043">sm_viewer_sim::delayedPostEvent()</a>, and <a class="el" href="smacc__state_8h_source.html#l00016">getParentState()</a>.</p>
+<p>Referenced by <a class="el" href="sm__viewer__sim_8h_source.html#l00043">sm_viewer_sim::delayedPostEvent()</a>, and <a class="el" href="smacc__state_8h_source.html#l00018">getROSNode()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;{</div><div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <a class="code" href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">getStateMachine</a>().<a class="code" href="classsmacc_1_1ISmaccStateMachine.html#ad80cdd7bbc9a9f3b221c625754fed1ed">postEvent</a>(ev);</div><div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a562bb3f9a3ac16b8be71e4794c9e7523"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">smacc::ISmaccState::getStateMachine</a></div><div class="ttdeci">virtual ISmaccStateMachine &amp; getStateMachine()=0</div></div>
 <div class="ttc" id="classsmacc_1_1ISmaccStateMachine_html_ad80cdd7bbc9a9f3b221c625754fed1ed"><div class="ttname"><a href="classsmacc_1_1ISmaccStateMachine.html#ad80cdd7bbc9a9f3b221c625754fed1ed">smacc::ISmaccStateMachine::postEvent</a></div><div class="ttdeci">void postEvent(EventType *ev)</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__machine__impl_8h_source.html#l00134">smacc_state_machine_impl.h:134</a></div></div>
 </div><!-- fragment -->
@@ -931,8 +925,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="classsmacc_1_1ISmaccState_acef404ab3766ddf2892e8dad14a4a7cf_icgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_acef404ab3766ddf2892e8dad14a4a7cf_icgraph" alt=""/></div>
 <map name="classsmacc_1_1ISmaccState_acef404ab3766ddf2892e8dad14a4a7cf_icgraph" id="classsmacc_1_1ISmaccState_acef404ab3766ddf2892e8dad14a4a7cf_icgraph">
 <area shape="rect" id="node2" href="namespacesm__viewer__sim.html#a19b5db17983d5b9bbf21e96ecf9ab5c8" title="sm_viewer_sim::delayedPost\lEvent" alt="" coords="208,5,413,47"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5" title="smacc::ISmaccState\l::getParentState" alt="" coords="233,71,388,112"/>
-<area shape="rect" id="node4" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="461,71,696,112"/>
+<area shape="rect" id="node3" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706" title="smacc::ISmaccState\l::getROSNode" alt="" coords="233,71,388,112"/>
 </map>
 </div>
 </p>
@@ -1039,7 +1032,7 @@ template&lt;typename SmaccClientType &gt; </div>
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00072">72</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00016">getParentState()</a>, <a class="el" href="2_2include_2sm__dance__bot__2_2states_2radial__motion__states_2sti__radial__end__point_8h_source.html#l00020">sm_dance_bot_2::radial_motion_states::StiRadialEndPoint::runtimeConfiguration()</a>, <a class="el" href="st__navigate__forward__1_8h_source.html#l00025">sm_dance_bot::StNavigateForward1::runtimeConfiguration()</a>, and <a class="el" href="include_2sm__dance__bot_2states_2st__navigate__to__waypoints__x_8h_source.html#l00047">sm_dance_bot::StNavigateToWaypointsX::runtimeConfiguration()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00018">getROSNode()</a>, <a class="el" href="2_2include_2sm__dance__bot__2_2states_2radial__motion__states_2sti__radial__end__point_8h_source.html#l00020">sm_dance_bot_2::radial_motion_states::StiRadialEndPoint::runtimeConfiguration()</a>, <a class="el" href="st__navigate__forward__1_8h_source.html#l00025">sm_dance_bot::StNavigateForward1::runtimeConfiguration()</a>, and <a class="el" href="include_2sm__dance__bot_2states_2st__navigate__to__waypoints__x_8h_source.html#l00047">sm_dance_bot::StNavigateToWaypointsX::runtimeConfiguration()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    storage = <span class="keyword">nullptr</span>;</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">auto</span> &amp;orthogonals = this-&gt;<a class="code" href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">getStateMachine</a>().<a class="code" href="classsmacc_1_1ISmaccStateMachine.html#ad6e8b109676edd2df8edf99889508bf4">getOrthogonals</a>();</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp;ortho : orthogonals)</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        ortho.second-&gt;requiresClient(storage);</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">if</span> (storage != <span class="keyword">nullptr</span>)</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">return</span>;</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    ROS_ERROR(<span class="stringliteral">&quot;Client of type &#39;%s&#39; not found in any orthogonal of the current state machine. This may produce a segmentation fault if the returned reference is used.&quot;</span>, demangleSymbol&lt;SmaccClientType&gt;().c_str());</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccStateMachine_html_ad6e8b109676edd2df8edf99889508bf4"><div class="ttname"><a href="classsmacc_1_1ISmaccStateMachine.html#ad6e8b109676edd2df8edf99889508bf4">smacc::ISmaccStateMachine::getOrthogonals</a></div><div class="ttdeci">const std::map&lt; std::string, std::shared_ptr&lt; smacc::IOrthogonal &gt; &gt; &amp; getOrthogonals() const </div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__machine_8cpp_source.html#l00061">smacc_state_machine.cpp:61</a></div></div>
 <div class="ttc" id="classsmacc_1_1ISmaccState_html_a562bb3f9a3ac16b8be71e4794c9e7523"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">smacc::ISmaccState::getStateMachine</a></div><div class="ttdeci">virtual ISmaccStateMachine &amp; getStateMachine()=0</div></div>
 </div><!-- fragment -->
@@ -1048,11 +1041,10 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac_icgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac_icgraph" alt=""/></div>
 <map name="classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac_icgraph" id="classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac_icgraph">
-<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5" title="smacc::ISmaccState\l::getParentState" alt="" coords="256,5,411,47"/>
-<area shape="rect" id="node4" href="structsm__dance__bot__2_1_1radial__motion__states_1_1StiRadialEndPoint.html#a19948496cf3deaa4f8afd0cb4b901d37" title="sm_dance_bot_2::radial\l_motion_states::StiRadialEnd\lPoint::runtimeConfiguration" alt="" coords="229,70,437,126"/>
-<area shape="rect" id="node5" href="structsm__dance__bot_1_1StNavigateForward1.html#a171dea7ed3ef92dddc0ec36eb6a9e319" title="sm_dance_bot::StNavigate\lForward1::runtimeConfiguration" alt="" coords="222,149,445,191"/>
-<area shape="rect" id="node6" href="structsm__dance__bot_1_1StNavigateToWaypointsX.html#a107587614652f5c7ea09825e4cbc436c" title="sm_dance_bot::StNavigate\lToWaypointsX::runtimeConfiguration" alt="" coords="208,215,459,256"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="507,5,741,47"/>
+<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706" title="smacc::ISmaccState\l::getROSNode" alt="" coords="256,5,411,47"/>
+<area shape="rect" id="node3" href="structsm__dance__bot__2_1_1radial__motion__states_1_1StiRadialEndPoint.html#a19948496cf3deaa4f8afd0cb4b901d37" title="sm_dance_bot_2::radial\l_motion_states::StiRadialEnd\lPoint::runtimeConfiguration" alt="" coords="229,70,437,126"/>
+<area shape="rect" id="node4" href="structsm__dance__bot_1_1StNavigateForward1.html#a171dea7ed3ef92dddc0ec36eb6a9e319" title="sm_dance_bot::StNavigate\lForward1::runtimeConfiguration" alt="" coords="222,149,445,191"/>
+<area shape="rect" id="node5" href="structsm__dance__bot_1_1StNavigateToWaypointsX.html#a107587614652f5c7ea09825e4cbc436c" title="sm_dance_bot::StNavigate\lToWaypointsX::runtimeConfiguration" alt="" coords="208,215,459,256"/>
 </map>
 </div>
 </p>
@@ -1077,7 +1069,7 @@ template&lt;typename SmaccComponentType &gt; </div>
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00065">65</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00016">getParentState()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00018">getROSNode()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    this-&gt;<a class="code" href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">getStateMachine</a>().<a class="code" href="classsmacc_1_1ISmaccStateMachine.html#aa6b25e28f3bce24c4b356dc865a9eb7b">requiresComponent</a>(storage);</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccStateMachine_html_aa6b25e28f3bce24c4b356dc865a9eb7b"><div class="ttname"><a href="classsmacc_1_1ISmaccStateMachine.html#aa6b25e28f3bce24c4b356dc865a9eb7b">smacc::ISmaccStateMachine::requiresComponent</a></div><div class="ttdeci">void requiresComponent(SmaccComponentType *&amp;storage)</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__machine__impl_8h_source.html#l00093">smacc_state_machine_impl.h:93</a></div></div>
 <div class="ttc" id="classsmacc_1_1ISmaccState_html_a562bb3f9a3ac16b8be71e4794c9e7523"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">smacc::ISmaccState::getStateMachine</a></div><div class="ttdeci">virtual ISmaccStateMachine &amp; getStateMachine()=0</div></div>
 </div><!-- fragment -->
@@ -1086,8 +1078,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsmacc_1_1ISmaccState_afd5264c36403d22e124eea89a0122e59_icgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_afd5264c36403d22e124eea89a0122e59_icgraph" alt=""/></div>
 <map name="classsmacc_1_1ISmaccState_afd5264c36403d22e124eea89a0122e59_icgraph" id="classsmacc_1_1ISmaccState_afd5264c36403d22e124eea89a0122e59_icgraph">
-<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5" title="smacc::ISmaccState\l::getParentState" alt="" coords="211,5,365,47"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="413,5,648,47"/>
+<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706" title="smacc::ISmaccState\l::getROSNode" alt="" coords="211,5,365,47"/>
 </map>
 </div>
 </p>
@@ -1122,7 +1113,7 @@ template&lt;typename T &gt; </div>
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00096">96</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00016">getParentState()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00018">getROSNode()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;{</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    this-&gt;<a class="code" href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">getStateMachine</a>().<a class="code" href="classsmacc_1_1ISmaccStateMachine.html#a8588f9e580fbb95b53e2bd2ca3ff1f98">setGlobalSMData</a>(name, value);</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a562bb3f9a3ac16b8be71e4794c9e7523"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a562bb3f9a3ac16b8be71e4794c9e7523">smacc::ISmaccState::getStateMachine</a></div><div class="ttdeci">virtual ISmaccStateMachine &amp; getStateMachine()=0</div></div>
 <div class="ttc" id="classsmacc_1_1ISmaccStateMachine_html_a8588f9e580fbb95b53e2bd2ca3ff1f98"><div class="ttname"><a href="classsmacc_1_1ISmaccStateMachine.html#a8588f9e580fbb95b53e2bd2ca3ff1f98">smacc::ISmaccStateMachine::setGlobalSMData</a></div><div class="ttdeci">void setGlobalSMData(std::string name, T value)</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__machine__impl_8h_source.html#l00195">smacc_state_machine_impl.h:195</a></div></div>
 </div><!-- fragment -->
@@ -1131,8 +1122,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsmacc_1_1ISmaccState_a120fcda41b44a437ff2e3906ac9fa5ca_icgraph.png" border="0" usemap="#classsmacc_1_1ISmaccState_a120fcda41b44a437ff2e3906ac9fa5ca_icgraph" alt=""/></div>
 <map name="classsmacc_1_1ISmaccState_a120fcda41b44a437ff2e3906ac9fa5ca_icgraph" id="classsmacc_1_1ISmaccState_a120fcda41b44a437ff2e3906ac9fa5ca_icgraph">
-<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5" title="smacc::ISmaccState\l::getParentState" alt="" coords="208,5,363,47"/>
-<area shape="rect" id="node3" href="classsmacc_1_1ISmaccStateMachine.html#a3d369c7cff22632ca85a8656000ba19c" title="smacc::ISmaccStateMachine\l::propagateEventToStateReactors" alt="" coords="411,5,645,47"/>
+<area shape="rect" id="node2" href="classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706" title="smacc::ISmaccState\l::getROSNode" alt="" coords="208,5,363,47"/>
 </map>
 </div>
 </p>
@@ -1167,7 +1157,7 @@ template&lt;typename T &gt; </div>
 
 <p>Definition at line <a class="el" href="smacc__state__impl_8h_source.html#l00030">30</a> of file <a class="el" href="smacc__state__impl_8h_source.html">smacc_state_impl.h</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00052">getStateReactors()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00057">getStateReactors()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a13fe6e6abfdb87996402189d44b78494">nh</a>.setParam(param_name, param_val);</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div><div class="ttc" id="classsmacc_1_1ISmaccState_html_a13fe6e6abfdb87996402189d44b78494"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a13fe6e6abfdb87996402189d44b78494">smacc::ISmaccState::nh</a></div><div class="ttdeci">ros::NodeHandle nh</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state_8h_source.html#l00077">smacc_state.h:77</a></div></div>
 </div><!-- fragment -->
 <p><div class="dynheader">
@@ -1204,7 +1194,7 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="smacc__state_8h_source.html#l00077">77</a> of file <a class="el" href="smacc__state_8h_source.html">smacc_state.h</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00069">getROSNode()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00018">getROSNode()</a>.</p>
 
 </div>
 </div>
@@ -1276,7 +1266,7 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="smacc__state_8h_source.html#l00075">75</a> of file <a class="el" href="smacc__state_8h_source.html">smacc_state.h</a>.</p>
 
-<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00052">getStateReactors()</a>.</p>
+<p>Referenced by <a class="el" href="smacc__state_8h_source.html#l00057">getStateReactors()</a>.</p>
 
 </div>
 </div>

@@ -6,5 +6,6 @@ var searchData=
   ['eventinfo',['eventInfo',['../structsmacc_1_1introspection_1_1SmaccTransitionInfo.html#a573be95bb6fdeeae46fc5ed56b260138',1,'smacc::introspection::SmaccTransitionInfo']]],
   ['eventtype',['eventType',['../structsmacc_1_1introspection_1_1SmaccEventInfo.html#af3bdf1abf797864e681662d92a5515f9',1,'smacc::introspection::SmaccEventInfo']]],
   ['eventtypes',['eventTypes',['../classsmacc_1_1StateReactor.html#a65c8ddfce40e7859e5c73fff1cf6c04b',1,'smacc::StateReactor']]],
-  ['exemplary',['EXEMPLARY',['../LICENSE_8txt.html#a43c88664011ec4ec9fd41f9050dd8ffe',1,'LICENSE.txt']]]
+  ['exemplary',['EXEMPLARY',['../LICENSE_8txt.html#a43c88664011ec4ec9fd41f9050dd8ffe',1,'LICENSE.txt']]],
+  ['extra_5fsmacc_5fviewer',['extra_smacc_viewer',['../namespacegenerate__debs.html#aae153eaf5f6cddad5899c36fef7e1b10',1,'generate_debs']]]
 ];
