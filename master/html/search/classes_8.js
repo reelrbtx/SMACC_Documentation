@@ -1,6 +1,8 @@
 var searchData=
 [
   ['msdancebotrecoverymode',['MsDanceBotRecoveryMode',['../classsm__dance__bot_1_1MsDanceBotRecoveryMode.html',1,'sm_dance_bot']]],
+  ['msdancebotrecoverymode',['MsDanceBotRecoveryMode',['../classsm__dance__bot__3_1_1MsDanceBotRecoveryMode.html',1,'sm_dance_bot_3']]],
+  ['msdancebotrunmode',['MsDanceBotRunMode',['../classsm__dance__bot__3_1_1MsDanceBotRunMode.html',1,'sm_dance_bot_3']]],
   ['msdancebotrunmode',['MsDanceBotRunMode',['../classsm__dance__bot_1_1MsDanceBotRunMode.html',1,'sm_dance_bot']]],
   ['msrecover',['MsRecover',['../classsm__three__some_1_1MsRecover.html',1,'sm_three_some']]],
   ['msrecoverymode',['MsRecoveryMode',['../structsm__viewer__sim_1_1MsRecoveryMode.html',1,'sm_viewer_sim']]],
