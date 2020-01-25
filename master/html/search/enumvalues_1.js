@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['debug',['DEBUG',['../namespacesmacc.html#a3e4f79486ea6ea6342dd3c712d16a4f6adc30ec20708ef7b0f641ef78b7880a15',1,'smacc']]]
+  ['clear_5fpath_5fbackward',['CLEAR_PATH_BACKWARD',['../namespacemove__base__z__client_1_1odom__tracker.html#adf3e5fc3644563922cc64a20a0197224a0cf8f27617189e35619df3c18bda6274',1,'move_base_z_client::odom_tracker']]]
 ];
