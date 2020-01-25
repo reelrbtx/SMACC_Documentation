@@ -80,19 +80,16 @@ References smacc\+::\+I\+Smacc\+State\+::requires\+Client().
 18   \{
 19     \textcolor{keywordtype}{double} extrasecurityMargin = 0.2;
 20     
-21     this->configure<OrNavigation, CbNavigateForward>();
+21     \textcolor{keyword}{auto} forwardBehavior = this->configure<OrNavigation, CbNavigateForward>();
 22     this->configure<OrLED, CbLEDOn>();
 23 
-24      \textcolor{keyword}{auto} forwardBehavior = this->configure<OrNavigation, CbNavigateForward>();
-25     this->configure<OrLED, CbLEDOn>();
-26 
-27     cl\_lidar::ClLidarSensor *lidarClient;
-28     this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(lidarClient);
-29     \textcolor{keyword}{auto} lidarData = lidarClient->getComponent<CpLidarSensorData>();
-30 
-31     forwardBehavior->forwardDistance = lidarData->forwardObstacleDistance - extrasecurityMargin \textcolor{comment}{/*extra
+24     cl\_lidar::ClLidarSensor *lidarClient;
+25     this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(lidarClient);
+26     \textcolor{keyword}{auto} lidarData = lidarClient->getComponent<CpLidarSensorData>();
+27 
+28     forwardBehavior->forwardDistance = lidarData->forwardObstacleDistance - extrasecurityMargin \textcolor{comment}{/*extra
        security margin for easy dynamic implementation of dynamic-smotion*/};
-32   \}
+29   \}
 \end{DoxyCode}
 
 
