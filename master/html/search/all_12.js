@@ -503,7 +503,7 @@ var searchData=
   ['stnavigatetowaypointsx',['StNavigateToWaypointsX',['../structsm__dance__bot_1_1StNavigateToWaypointsX.html',1,'sm_dance_bot']]],
   ['stnavigatetowaypointsx',['StNavigateToWaypointsX',['../structsm__dance__bot__2_1_1StNavigateToWaypointsX.html',1,'sm_dance_bot_2']]],
   ['stnavigatetowaypointsx',['StNavigateToWaypointsX',['../structsm__dance__bot__3_1_1StNavigateToWaypointsX.html',1,'sm_dance_bot_3']]],
-  ['stop',['stop',['../classsmacc_1_1SignalDetector.html#a536ea005ea4ef4632c0c9c1c62c557a3',1,'smacc::SignalDetector::stop()'],['../classsmacc_1_1ISmaccStateMachine.html#a8f353fcf0686b1dacb57458da882c89b',1,'smacc::ISmaccStateMachine::Stop()'],['../structsmacc_1_1SmaccStateMachineBase.html#a9c7c7b8d814a8cb1b741c7675dc2a9f7',1,'smacc::SmaccStateMachineBase::Stop()']]],
+  ['stop',['Stop',['../classsmacc_1_1ISmaccStateMachine.html#a8f353fcf0686b1dacb57458da882c89b',1,'smacc::ISmaccStateMachine::Stop()'],['../structsmacc_1_1SmaccStateMachineBase.html#a9c7c7b8d814a8cb1b741c7675dc2a9f7',1,'smacc::SmaccStateMachineBase::Stop()'],['../classsmacc_1_1SignalDetector.html#a536ea005ea4ef4632c0c9c1c62c557a3',1,'smacc::SignalDetector::stop()']]],
   ['strict',['STRICT',['../namespacesmacc_1_1components.html#a18117d6a71feb2471fb4e07f47674e4ca659b52150977b11ffc0fa1d7f1f30a01',1,'smacc::components']]],
   ['strictness',['Strictness',['../namespacesmacc_1_1components.html#a18117d6a71feb2471fb4e07f47674e4c',1,'smacc::components']]],
   ['string_5ftype_5fwalker_2ecpp',['string_type_walker.cpp',['../string__type__walker_8cpp.html',1,'']]],
