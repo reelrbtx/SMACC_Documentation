@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['generate_5fdebs',['generate_debs',['../namespacegenerate__debs.html',1,'']]]
+  ['batery_5fmonitor_5fclient',['batery_monitor_client',['../namespacebatery__monitor__client.html',1,'']]]
 ];
