@@ -15,7 +15,7 @@ var searchData=
   ['base_5ftype',['base_type',['../classsmacc_1_1SmaccState.html#a68f547c6fe147554bbe607b6fcd8e40a',1,'smacc::SmaccState']]],
   ['baseclass',['baseClass',['../structsmacc_1_1components_1_1ControllerTypeInfo.html#a4506855fc728c39046bdb4f98a6a61f3',1,'smacc::components::ControllerTypeInfo']]],
   ['basetrajectory_5f',['baseTrajectory_',['../classmove__base__z__client_1_1odom__tracker_1_1OdomTracker.html#a83fa5a9bfe0b2683eee33444d3f030ea',1,'move_base_z_client::odom_tracker::OdomTracker']]],
-  ['batery_5fmonitor_5fclient',['batery_monitor_client',['../namespacebatery__monitor__client.html',1,'']]],
+  ['battery_5fmonitor_5fclient',['battery_monitor_client',['../namespacebattery__monitor__client.html',1,'']]],
   ['behaviortype',['behaviorType',['../structsmacc_1_1introspection_1_1ClientBehaviorInfoEntry.html#a11156213a771b7801ae69698de326e44',1,'smacc::introspection::ClientBehaviorInfoEntry']]],
   ['best_5feffort',['BEST_EFFORT',['../namespacesmacc_1_1components.html#a18117d6a71feb2471fb4e07f47674e4cac068971243fbd65b8e03256ec6cc3ca7',1,'smacc::components']]],
   ['betta_5foffset_5f',['betta_offset_',['../classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner.html#ae35f99afc3c859a4b14d0417ef7839df',1,'move_base_z_client::backward_local_planner::BackwardLocalPlanner::betta_offset_()'],['../classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner.html#a491ebf7d21303325b6751d8e9bf0aff9',1,'move_base_z_client::forward_local_planner::ForwardLocalPlanner::betta_offset_()'],['../classmove__base__z__client_1_1__local__planner_1_1ForwardLocalPlanner.html#af55219de92a84cc35ce9367108d8a067',1,'move_base_z_client::_local_planner::ForwardLocalPlanner::betta_offset_()']]],

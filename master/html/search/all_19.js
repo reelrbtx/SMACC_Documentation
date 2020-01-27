@@ -2,7 +2,7 @@ var searchData=
 [
   ['_7ebackwardglobalplanner',['~BackwardGlobalPlanner',['../classmove__base__z__client_1_1backward__global__planner_1_1BackwardGlobalPlanner.html#a1ea7cf297b7668364b26c2bbef07bafe',1,'move_base_z_client::backward_global_planner::BackwardGlobalPlanner']]],
   ['_7ebackwardlocalplanner',['~BackwardLocalPlanner',['../classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner.html#a8d57b252d272da3c42920ee3687ddcc6',1,'move_base_z_client::backward_local_planner::BackwardLocalPlanner']]],
-  ['_7eclbatterymonitor',['~ClBatteryMonitor',['../classbatery__monitor__client_1_1ClBatteryMonitor.html#a8d62ed866de6f6a82ec951c685e272e6',1,'batery_monitor_client::ClBatteryMonitor']]],
+  ['_7eclbatterymonitor',['~ClBatteryMonitor',['../classbattery__monitor__client_1_1ClBatteryMonitor.html#a04bf9d943a21d6cb2433190d73d1422a',1,'battery_monitor_client::ClBatteryMonitor']]],
   ['_7eclkeyboard',['~ClKeyboard',['../classkeyboard__client_1_1ClKeyboard.html#a0e9bfb4a0e564e26f57248a78a78d087',1,'keyboard_client::ClKeyboard']]],
   ['_7eclled',['~ClLED',['../classsm__dance__bot_1_1cl__led_1_1ClLED.html#add9ff40d28e1d31d77e1a2ff92e79fd2',1,'sm_dance_bot::cl_led::ClLED::~ClLED()'],['../classsm__dance__bot__3_1_1cl__led_1_1ClLED.html#a554d05dd7c158e5221a2122c5f183cc6',1,'sm_dance_bot_3::cl_led::ClLED::~ClLED()']]],
   ['_7eclmovebasez',['~ClMoveBaseZ',['../classmove__base__z__client_1_1ClMoveBaseZ.html#ab5de84b969e58d80723f5c0d3ce79afa',1,'move_base_z_client::ClMoveBaseZ']]],
