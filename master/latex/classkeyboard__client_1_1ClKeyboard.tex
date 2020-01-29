@@ -27,6 +27,8 @@ Collaboration diagram for keyboard\+\_\+client\+:\+:Cl\+Keyboard\+:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+{\footnotesize template$<$typename T $>$ }\\void \hyperlink{classkeyboard__client_1_1ClKeyboard_a09581faae1ada2cdd53010ebb9a2197a}{On\+Key\+Press} (void(T\+::$\ast$callback)(char keypress), T $\ast$object)
+\item 
 \hyperlink{classkeyboard__client_1_1ClKeyboard_a4da263c77c076b959c4c21160af1bcb5}{Cl\+Keyboard} ()
 \item 
 virtual \hyperlink{classkeyboard__client_1_1ClKeyboard_a0e9bfb4a0e564e26f57248a78a78d087}{$\sim$\+Cl\+Keyboard} ()
@@ -42,9 +44,7 @@ void \hyperlink{classkeyboard__client_1_1ClKeyboard_adbfb9c2b98f784b12cf7740b4e8
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-boost\+::signals2\+::signal$<$ void(char keypress)$>$ \hyperlink{classkeyboard__client_1_1ClKeyboard_a771589b55252145020691bfb6ec47adf}{On\+Key\+Press}
-\item 
-boost\+::signals2\+::scoped\+\_\+connection \hyperlink{classkeyboard__client_1_1ClKeyboard_a32d0c1c037454900708b58b709767e56}{c\+\_\+}
+\hyperlink{classsmacc_1_1SmaccSignal}{smacc\+::\+Smacc\+Signal}$<$ void(char keypress)$>$ \hyperlink{classkeyboard__client_1_1ClKeyboard_a0fcb5b4432b26b8c8ca6924e8e82fbeb}{On\+Key\+Press\+\_\+}
 \item 
 std\+::function$<$ void(std\+\_\+msgs\+::\+U\+Int16)$>$ \hyperlink{classkeyboard__client_1_1ClKeyboard_aadd675eea47a012b348a4e6c00e7e9d0}{post\+Event\+Key\+Press}
 \end{DoxyCompactItemize}
@@ -99,7 +99,9 @@ Definition at line 9 of file cl\+\_\+keyboard.\+cpp.
 
 
 \begin{DoxyCode}
-9 \{\}
+10 \{
+11   
+12 \}
 \end{DoxyCode}
 
 
@@ -113,70 +115,76 @@ Definition at line 9 of file cl\+\_\+keyboard.\+cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classkeyboard__client_1_1ClKeyboard_a9643ea9235ee12d054c87f79fbf31211}{}\label{classkeyboard__client_1_1ClKeyboard_a9643ea9235ee12d054c87f79fbf31211}
 
 
-Definition at line 163 of file cl\+\_\+keyboard.\+h.
+Definition at line 169 of file cl\+\_\+keyboard.\+h.
 
 
 \begin{DoxyCode}
-164         \{
-165                 \hyperlink{classkeyboard__client_1_1ClKeyboard_aadd675eea47a012b348a4e6c00e7e9d0}{postEventKeyPress} = [=](\textcolor{keyword}{auto} unicode\_keychar) \{
-166                         \textcolor{keywordtype}{char} character = (char)unicode\_keychar.data;
-167                         ROS\_WARN(\textcolor{stringliteral}{"detected keyboard: %c"}, character);
-168 
-169                         \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'a'})
-170                                 this->postKeyEvent<EvKeyPressA<ClKeyboard, TObjectTag>>();
-171                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'b'})
-172                                 this->postKeyEvent<EvKeyPressB<ClKeyboard, TObjectTag>>();
-173                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'c'})
-174                                 this->postKeyEvent<EvKeyPressC<ClKeyboard, TObjectTag>>();
-175                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'d'})
-176                                 this->postKeyEvent<EvKeyPressD<ClKeyboard, TObjectTag>>();
-177                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'e'})
-178                                 this->postKeyEvent<EvKeyPressE<ClKeyboard, TObjectTag>>();
-179                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'f'})
-180                                 this->postKeyEvent<EvKeyPressF<ClKeyboard, TObjectTag>>();
-181                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'g'})
-182                                 this->postKeyEvent<EvKeyPressG<ClKeyboard, TObjectTag>>();
-183                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'h'})
-184                                 this->postKeyEvent<EvKeyPressH<ClKeyboard, TObjectTag>>();
-185                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'y'})
-186                                 this->postKeyEvent<EvKeyPressI<ClKeyboard, TObjectTag>>();
-187                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'j'})
-188                                 this->postKeyEvent<EvKeyPressJ<ClKeyboard, TObjectTag>>();
-189                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'k'})
-190                                 this->postKeyEvent<EvKeyPressK<ClKeyboard, TObjectTag>>();
-191                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'l'})
-192                                 this->postKeyEvent<EvKeyPressL<ClKeyboard, TObjectTag>>();
-193                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'m'})
-194                                 this->postKeyEvent<EvKeyPressM<ClKeyboard, TObjectTag>>();
-195                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'n'})
-196                                 this->postKeyEvent<EvKeyPressN<ClKeyboard, TObjectTag>>();
-197                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'o'})
-198                                 this->postKeyEvent<EvKeyPressO<ClKeyboard, TObjectTag>>();
-199                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'p'})
-200                                 this->postKeyEvent<EvKeyPressP<ClKeyboard, TObjectTag>>();
-201                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'q'})
-202                                 this->postKeyEvent<EvKeyPressQ<ClKeyboard, TObjectTag>>();
-203                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'r'})
-204                                 this->postKeyEvent<EvKeyPressR<ClKeyboard, TObjectTag>>();
-205                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'s'})
-206                                 this->postKeyEvent<EvKeyPressS<ClKeyboard, TObjectTag>>();
-207                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'t'})
-208                                 this->postKeyEvent<EvKeyPressT<ClKeyboard, TObjectTag>>();
-209                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'u'})
-210                                 this->postKeyEvent<EvKeyPressU<ClKeyboard, TObjectTag>>();
-211                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'v'})
-212                                 this->postKeyEvent<EvKeyPressV<ClKeyboard, TObjectTag>>();
-213                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'w'})
-214                                 this->postKeyEvent<EvKeyPressW<ClKeyboard, TObjectTag>>();
-215                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'x'})
-216                                 this->postKeyEvent<EvKeyPressX<ClKeyboard, TObjectTag>>();
-217                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'y'})
-218                                 this->postKeyEvent<EvKeyPressY<ClKeyboard, TObjectTag>>();
-219                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'z'})
-220                                 this->postKeyEvent<EvKeyPressZ<ClKeyboard, TObjectTag>>();
-221                         \hyperlink{classkeyboard__client_1_1ClKeyboard_a771589b55252145020691bfb6ec47adf}{OnKeyPress}(character); \textcolor{comment}{/*  */}
-222                 \};
-223         \}
+170         \{
+171                 \textcolor{comment}{// call tothe base configuration to properly handling the message and initial message smacc
+       events}
+172                 
+      \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient}{smacc::client\_bases::SmaccSubscriberClient<std\_msgs::UInt16>::configureEventSourceTypes}
+      <TObjectTag, TDerived>();
+173 
+174                 \hyperlink{classkeyboard__client_1_1ClKeyboard_aadd675eea47a012b348a4e6c00e7e9d0}{postEventKeyPress} = [=](\textcolor{keyword}{auto} unicode\_keychar) \{
+175                         \textcolor{keywordtype}{char} character = (char)unicode\_keychar.data;
+176                         ROS\_WARN(\textcolor{stringliteral}{"detected keyboard: %c"}, character);
+177 
+178                         \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'a'})
+179                                 this->postKeyEvent<EvKeyPressA<ClKeyboard, TObjectTag>>();
+180                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'b'})
+181                                 this->postKeyEvent<EvKeyPressB<ClKeyboard, TObjectTag>>();
+182                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'c'})
+183                                 this->postKeyEvent<EvKeyPressC<ClKeyboard, TObjectTag>>();
+184                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'d'})
+185                                 this->postKeyEvent<EvKeyPressD<ClKeyboard, TObjectTag>>();
+186                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'e'})
+187                                 this->postKeyEvent<EvKeyPressE<ClKeyboard, TObjectTag>>();
+188                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'f'})
+189                                 this->postKeyEvent<EvKeyPressF<ClKeyboard, TObjectTag>>();
+190                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'g'})
+191                                 this->postKeyEvent<EvKeyPressG<ClKeyboard, TObjectTag>>();
+192                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'h'})
+193                                 this->postKeyEvent<EvKeyPressH<ClKeyboard, TObjectTag>>();
+194                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'y'})
+195                                 this->postKeyEvent<EvKeyPressI<ClKeyboard, TObjectTag>>();
+196                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'j'})
+197                                 this->postKeyEvent<EvKeyPressJ<ClKeyboard, TObjectTag>>();
+198                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'k'})
+199                                 this->postKeyEvent<EvKeyPressK<ClKeyboard, TObjectTag>>();
+200                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'l'})
+201                                 this->postKeyEvent<EvKeyPressL<ClKeyboard, TObjectTag>>();
+202                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'m'})
+203                                 this->postKeyEvent<EvKeyPressM<ClKeyboard, TObjectTag>>();
+204                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'n'})
+205                                 this->postKeyEvent<EvKeyPressN<ClKeyboard, TObjectTag>>();
+206                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'o'})
+207                                 this->postKeyEvent<EvKeyPressO<ClKeyboard, TObjectTag>>();
+208                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'p'})
+209                                 this->postKeyEvent<EvKeyPressP<ClKeyboard, TObjectTag>>();
+210                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'q'})
+211                                 this->postKeyEvent<EvKeyPressQ<ClKeyboard, TObjectTag>>();
+212                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'r'})
+213                                 this->postKeyEvent<EvKeyPressR<ClKeyboard, TObjectTag>>();
+214                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'s'})
+215                                 this->postKeyEvent<EvKeyPressS<ClKeyboard, TObjectTag>>();
+216                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'t'})
+217                                 this->postKeyEvent<EvKeyPressT<ClKeyboard, TObjectTag>>();
+218                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'u'})
+219                                 this->postKeyEvent<EvKeyPressU<ClKeyboard, TObjectTag>>();
+220                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'v'})
+221                                 this->postKeyEvent<EvKeyPressV<ClKeyboard, TObjectTag>>();
+222                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'w'})
+223                                 this->postKeyEvent<EvKeyPressW<ClKeyboard, TObjectTag>>();
+224                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'x'})
+225                                 this->postKeyEvent<EvKeyPressX<ClKeyboard, TObjectTag>>();
+226                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'y'})
+227                                 this->postKeyEvent<EvKeyPressY<ClKeyboard, TObjectTag>>();
+228                         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (character == \textcolor{charliteral}{'z'})
+229                                 this->postKeyEvent<EvKeyPressZ<ClKeyboard, TObjectTag>>();
+230                         \hyperlink{classkeyboard__client_1_1ClKeyboard_a0fcb5b4432b26b8c8ca6924e8e82fbeb}{OnKeyPress\_}(character); \textcolor{comment}{/*  */}
+231                 \};
+232         \}
 \end{DoxyCode}
 \index{keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}!initialize@{initialize}}
 \index{initialize@{initialize}!keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}}
@@ -191,7 +199,7 @@ Reimplemented from \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClie
 
 
 
-Definition at line 11 of file cl\+\_\+keyboard.\+cpp.
+Definition at line 14 of file cl\+\_\+keyboard.\+cpp.
 
 
 
@@ -199,16 +207,16 @@ References smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ std\+\_\
 
 
 \begin{DoxyCode}
-11                             \{
-12 
-13   \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{SmaccSubscriberClient<std\_msgs::UInt16>::initialize}();
-14 
-15   \textcolor{keywordflow}{if} (!this->\hyperlink{classkeyboard__client_1_1ClKeyboard_aff74d4f212f4846a1f7cc6c0e4d5f728}{initialized\_}) \{
-16     this->\hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_a4f02251e3a161fb6d802b154b1081f18}{onMessageReceived}(&\hyperlink{classkeyboard__client_1_1ClKeyboard_adbfb9c2b98f784b12cf7740b4e861d8e}{ClKeyboard::onKeyboardMessage}, \textcolor{keyword}{
+14                             \{
+15 
+16   \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{SmaccSubscriberClient<std\_msgs::UInt16>::initialize}();
+17 
+18   \textcolor{keywordflow}{if} (!this->\hyperlink{classkeyboard__client_1_1ClKeyboard_aff74d4f212f4846a1f7cc6c0e4d5f728}{initialized\_}) \{
+19     this->\hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_a4f02251e3a161fb6d802b154b1081f18}{onMessageReceived}(&\hyperlink{classkeyboard__client_1_1ClKeyboard_adbfb9c2b98f784b12cf7740b4e861d8e}{ClKeyboard::onKeyboardMessage}, \textcolor{keyword}{
       this});
-17     this->\hyperlink{classkeyboard__client_1_1ClKeyboard_aff74d4f212f4846a1f7cc6c0e4d5f728}{initialized\_} = \textcolor{keyword}{true};
-18   \}
-19 \}
+20     this->\hyperlink{classkeyboard__client_1_1ClKeyboard_aff74d4f212f4846a1f7cc6c0e4d5f728}{initialized\_} = \textcolor{keyword}{true};
+21   \}
+22 \}
 \end{DoxyCode}
 
 
@@ -231,7 +239,7 @@ Here is the call graph for this function\+:
 )}\hypertarget{classkeyboard__client_1_1ClKeyboard_adbfb9c2b98f784b12cf7740b4e861d8e}{}\label{classkeyboard__client_1_1ClKeyboard_adbfb9c2b98f784b12cf7740b4e861d8e}
 
 
-Definition at line 21 of file cl\+\_\+keyboard.\+cpp.
+Definition at line 24 of file cl\+\_\+keyboard.\+cpp.
 
 
 
@@ -243,10 +251,10 @@ Referenced by initialize().
 
 
 \begin{DoxyCode}
-21                                                                         \{
-22   
-23   \hyperlink{classkeyboard__client_1_1ClKeyboard_aadd675eea47a012b348a4e6c00e7e9d0}{postEventKeyPress}(unicode\_keychar);
-24 \}
+24                                                                         \{
+25   
+26   \hyperlink{classkeyboard__client_1_1ClKeyboard_aadd675eea47a012b348a4e6c00e7e9d0}{postEventKeyPress}(unicode\_keychar);
+27 \}
 \end{DoxyCode}
 
 
@@ -260,6 +268,42 @@ Here is the caller graph for this function\+:
 \end{figure}
 
 
+\index{keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}!On\+Key\+Press@{On\+Key\+Press}}
+\index{On\+Key\+Press@{On\+Key\+Press}!keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}}
+\subsubsection[{\texorpdfstring{On\+Key\+Press(void(\+T\+::$\ast$callback)(char keypress), T $\ast$object)}{OnKeyPress(void(T::*callback)(char keypress), T *object)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ void keyboard\+\_\+client\+::\+Cl\+Keyboard\+::\+On\+Key\+Press (
+\begin{DoxyParamCaption}
+\item[{void(T\+::$\ast$)(char keypress)}]{callback, }
+\item[{T $\ast$}]{object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classkeyboard__client_1_1ClKeyboard_a09581faae1ada2cdd53010ebb9a2197a}{}\label{classkeyboard__client_1_1ClKeyboard_a09581faae1ada2cdd53010ebb9a2197a}
+
+
+Definition at line 154 of file cl\+\_\+keyboard.\+h.
+
+
+
+Referenced by keyboard\+\_\+client\+::\+Cb\+Default\+Keyboard\+Behavior\+::on\+Entry().
+
+
+\begin{DoxyCode}
+155         \{
+156                 \textcolor{comment}{//this->connectSignal(OnKeyPress\_, callback, object);}
+157                 this->\hyperlink{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}{getStateMachine}()->\hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{createSignalConnection}(
+      \hyperlink{classkeyboard__client_1_1ClKeyboard_a0fcb5b4432b26b8c8ca6924e8e82fbeb}{OnKeyPress\_}, callback, \textcolor{keywordtype}{object});
+158         \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classkeyboard__client_1_1ClKeyboard_a09581faae1ada2cdd53010ebb9a2197a_icgraph}
+\end{center}
+\end{figure}
+
+
 \index{keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}!post\+Key\+Event@{post\+Key\+Event}}
 \index{post\+Key\+Event@{post\+Key\+Event}!keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}}
 \subsubsection[{\texorpdfstring{post\+Key\+Event()}{postKeyEvent()}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+Ev $>$ void keyboard\+\_\+client\+::\+Cl\+Keyboard\+::post\+Key\+Event (
@@ -269,7 +313,7 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classkeyboard__client_1_1ClKeyboard_ad62d3548adfeca7f31469a283454dbeb}{}\label{classkeyboard__client_1_1ClKeyboard_ad62d3548adfeca7f31469a283454dbeb}
 
 
-Definition at line 228 of file cl\+\_\+keyboard.\+h.
+Definition at line 237 of file cl\+\_\+keyboard.\+h.
 
 
 
@@ -277,12 +321,12 @@ References smacc\+::introspection\+::demangle\+Symbol().
 
 
 \begin{DoxyCode}
-229         \{
-230                 ROS\_WARN(\textcolor{stringliteral}{"ClKeyboard ev: %s"}, \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{smacc::demangleSymbol}(\textcolor{keyword}{typeid}(TEv).name()
+238         \{
+239                 ROS\_WARN(\textcolor{stringliteral}{"ClKeyboard ev: %s"}, \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{smacc::demangleSymbol}(\textcolor{keyword}{typeid}(TEv).name()
       ).c\_str());
-231                 \textcolor{keyword}{auto} \textcolor{keyword}{event} = \textcolor{keyword}{new} TEv();
-232                 this->\hyperlink{classsmacc_1_1ISmaccClient_a21a79203cb44fc717d4d977c190327c6}{postEvent}(event);
-233         \}
+240                 \textcolor{keyword}{auto} \textcolor{keyword}{event} = \textcolor{keyword}{new} TEv();
+241                 this->\hyperlink{classsmacc_1_1ISmaccClient_a21a79203cb44fc717d4d977c190327c6}{postEvent}(event);
+242         \}
 \end{DoxyCode}
 
 
@@ -299,41 +343,30 @@ Here is the call graph for this function\+:
 
 
 \subsection{Member Data Documentation}
-\index{keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}!c\+\_\+@{c\+\_\+}}
-\index{c\+\_\+@{c\+\_\+}!keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}}
-\subsubsection[{\texorpdfstring{c\+\_\+}{c_}}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::signals2\+::scoped\+\_\+connection keyboard\+\_\+client\+::\+Cl\+Keyboard\+::c\+\_\+}\hypertarget{classkeyboard__client_1_1ClKeyboard_a32d0c1c037454900708b58b709767e56}{}\label{classkeyboard__client_1_1ClKeyboard_a32d0c1c037454900708b58b709767e56}
-
-
-Definition at line 152 of file cl\+\_\+keyboard.\+h.
-
 \index{keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}!initialized\+\_\+@{initialized\+\_\+}}
 \index{initialized\+\_\+@{initialized\+\_\+}!keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}}
 \subsubsection[{\texorpdfstring{initialized\+\_\+}{initialized_}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bool} keyboard\+\_\+client\+::\+Cl\+Keyboard\+::initialized\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classkeyboard__client_1_1ClKeyboard_aff74d4f212f4846a1f7cc6c0e4d5f728}{}\label{classkeyboard__client_1_1ClKeyboard_aff74d4f212f4846a1f7cc6c0e4d5f728}
 
 
-Definition at line 236 of file cl\+\_\+keyboard.\+h.
+Definition at line 245 of file cl\+\_\+keyboard.\+h.
 
 
 
 Referenced by Cl\+Keyboard(), and initialize().
 
-\index{keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}!On\+Key\+Press@{On\+Key\+Press}}
-\index{On\+Key\+Press@{On\+Key\+Press}!keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}}
-\subsubsection[{\texorpdfstring{On\+Key\+Press}{OnKeyPress}}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::signals2\+::signal$<$void(char keypress)$>$ keyboard\+\_\+client\+::\+Cl\+Keyboard\+::\+On\+Key\+Press}\hypertarget{classkeyboard__client_1_1ClKeyboard_a771589b55252145020691bfb6ec47adf}{}\label{classkeyboard__client_1_1ClKeyboard_a771589b55252145020691bfb6ec47adf}
+\index{keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}!On\+Key\+Press\+\_\+@{On\+Key\+Press\+\_\+}}
+\index{On\+Key\+Press\+\_\+@{On\+Key\+Press\+\_\+}!keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}}
+\subsubsection[{\texorpdfstring{On\+Key\+Press\+\_\+}{OnKeyPress_}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf smacc\+::\+Smacc\+Signal}$<$void(char keypress)$>$ keyboard\+\_\+client\+::\+Cl\+Keyboard\+::\+On\+Key\+Press\+\_\+}\hypertarget{classkeyboard__client_1_1ClKeyboard_a0fcb5b4432b26b8c8ca6924e8e82fbeb}{}\label{classkeyboard__client_1_1ClKeyboard_a0fcb5b4432b26b8c8ca6924e8e82fbeb}
 
 
 Definition at line 151 of file cl\+\_\+keyboard.\+h.
-
-
-
-Referenced by keyboard\+\_\+client\+::\+Cb\+Default\+Keyboard\+Behavior\+::on\+Entry().
 
 \index{keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}!post\+Event\+Key\+Press@{post\+Event\+Key\+Press}}
 \index{post\+Event\+Key\+Press@{post\+Event\+Key\+Press}!keyboard\+\_\+client\+::\+Cl\+Keyboard@{keyboard\+\_\+client\+::\+Cl\+Keyboard}}
 \subsubsection[{\texorpdfstring{post\+Event\+Key\+Press}{postEventKeyPress}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::function$<$void(std\+\_\+msgs\+::\+U\+Int16)$>$ keyboard\+\_\+client\+::\+Cl\+Keyboard\+::post\+Event\+Key\+Press}\hypertarget{classkeyboard__client_1_1ClKeyboard_aadd675eea47a012b348a4e6c00e7e9d0}{}\label{classkeyboard__client_1_1ClKeyboard_aadd675eea47a012b348a4e6c00e7e9d0}
 
 
-Definition at line 160 of file cl\+\_\+keyboard.\+h.
+Definition at line 166 of file cl\+\_\+keyboard.\+h.
 
 
 

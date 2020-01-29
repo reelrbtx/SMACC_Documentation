@@ -71,8 +71,6 @@ virtual void \hyperlink{classsmacc_1_1ISmaccStateMachine_ac2982c6c8283663e5e1e8a
 \item 
 {\footnotesize template$<$typename T\+Smacc\+Signal , typename T\+Member\+Function\+Prototype , typename T\+Smacc\+Object\+Type $>$ }\\boost\+::signals2\+::connection \hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{create\+Signal\+Connection} (T\+Smacc\+Signal \&signal, T\+Member\+Function\+Prototype callback, T\+Smacc\+Object\+Type $\ast$object)
 \item 
-{\footnotesize template$<$typename T\+Smacc\+Signal , typename T\+Member\+Function\+Prototype $>$ }\\boost\+::signals2\+::connection \hyperlink{classsmacc_1_1ISmaccStateMachine_a9248dd505790b9d46d6dbebeb31bf5f8}{create\+Signal\+Connection} (T\+Smacc\+Signal \&signal, T\+Member\+Function\+Prototype callback)
-\item 
 {\footnotesize template$<$typename State\+Type $>$ }\\void \hyperlink{classsmacc_1_1ISmaccStateMachine_aeec54e997d715b105ebfeb5caadc4fbf}{notify\+On\+State\+Entry\+Start} (State\+Type $\ast$state)
 \item 
 {\footnotesize template$<$typename State\+Type $>$ }\\void \hyperlink{classsmacc_1_1ISmaccStateMachine_a856cf2d25d84659b974cccfbf44aeec9}{notify\+On\+State\+Entry\+End} (State\+Type $\ast$state)
@@ -263,16 +261,16 @@ Definition at line 44 of file smacc\+\_\+state\+\_\+machine.\+cpp.
 )}\hypertarget{classsmacc_1_1ISmaccStateMachine_a8e9c16ed0dc3dfc878548a8c6f3c47d7}{}\label{classsmacc_1_1ISmaccStateMachine_a8e9c16ed0dc3dfc878548a8c6f3c47d7}
 
 
-Definition at line 409 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 420 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 \begin{DoxyCode}
-410 \{
-411     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a0914aa27c3f51374c338d89a32b135d1}{stateMachineInfo\_} = std::make\_shared<SmaccStateMachineInfo>();
-412     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a0914aa27c3f51374c338d89a32b135d1}{stateMachineInfo\_}->buildStateMachineInfo<InitialStateType>();
-413     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a0914aa27c3f51374c338d89a32b135d1}{stateMachineInfo\_}->assembleSMStructureMessage(\textcolor{keyword}{this});
-414     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_af34fa8346ae3f52882704422d59b9055}{checkStateMachineConsistence}();
-415 \}
+421 \{
+422     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a0914aa27c3f51374c338d89a32b135d1}{stateMachineInfo\_} = std::make\_shared<SmaccStateMachineInfo>();
+423     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a0914aa27c3f51374c338d89a32b135d1}{stateMachineInfo\_}->buildStateMachineInfo<InitialStateType>();
+424     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a0914aa27c3f51374c338d89a32b135d1}{stateMachineInfo\_}->assembleSMStructureMessage(\textcolor{keyword}{this});
+425     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_af34fa8346ae3f52882704422d59b9055}{checkStateMachineConsistence}();
+426 \}
 \end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!check\+State\+Machine\+Consistence@{check\+State\+Machine\+Consistence}}
 \index{check\+State\+Machine\+Consistence@{check\+State\+Machine\+Consistence}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
@@ -415,7 +413,7 @@ References smacc\+::utils\+::\+Bind$<$ arity $>$\+::bindaux().
 
 
 
-Referenced by ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer\+Countdown\+Once\+::on\+Timer\+Tick(), and ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer\+Countdown\+Loop\+::on\+Timer\+Tick().
+Referenced by smacc\+::\+I\+Smacc\+Client\+::connect\+Signal(), ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer\+Countdown\+Once\+::on\+Timer\+Tick(), and ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer\+Countdown\+Loop\+::on\+Timer\+Tick().
 
 
 \begin{DoxyCode}
@@ -429,17 +427,29 @@ Referenced by ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer\+Countdown\+Once\+::on\+
 290     \hyperlink{structsmacc_1_1utils_1_1Bind}{Bind}<\hyperlink{namespaceboost}{boost}::function\_types::function\_arity<ft>::value> binder;
 291     \hyperlink{namespaceboost}{boost}::signals2::connection connection = binder.bindaux(signal, callback, \textcolor{keywordtype}{object});
 292 
-293     if (std::is\_base\_of<ISmaccComponent, TSmaccObjectType>::value)
-294     \{
-295     \}
-296     \textcolor{keywordflow}{else} \textcolor{comment}{// state life-time objects}
-297     \{
-298         ROS\_INFO(\textcolor{stringliteral}{"[StateMachine] life-time constrained smacc signal subscription created. Subscriber is %s"}
-      , demangledTypeName<TSmaccObjectType>().c\_str());
-299         \hyperlink{classsmacc_1_1ISmaccStateMachine_aaf98bb0edaa5d8c84767e4acfad3548d}{stateCallbackConnections}.push\_back(connection);
-300     \}
-301     \textcolor{keywordflow}{return} connection;
-302 \}
+293     \textcolor{comment}{// long life-time objects}
+294     if (std::is\_base\_of<ISmaccComponent, TSmaccObjectType>::value
+295         ||std::is\_base\_of<ISmaccClient, TSmaccObjectType>::value
+296         || std::is\_base\_of<IOrthogonal, TSmaccObjectType>::value
+297         || std::is\_base\_of<\hyperlink{classsmacc_1_1ISmaccStateMachine_a497c2185584adbec3298d4000277b75e}{ISmaccStateMachine}, TSmaccObjectType>::value)
+298     \{
+299     \}
+300     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (   std::is\_base\_of<ISmaccState, TSmaccObjectType>::value ||
+301                 std::is\_base\_of<StateReactor, TSmaccObjectType>::value ||
+302                 std::is\_base\_of<SmaccClientBehavior, TSmaccObjectType>::value)
+303                 \{
+304                     ROS\_INFO(\textcolor{stringliteral}{"[StateMachine] life-time constrained smacc signal subscription created.
+       Subscriber is %s"}, demangledTypeName<TSmaccObjectType>().c\_str());
+305         \hyperlink{classsmacc_1_1ISmaccStateMachine_aaf98bb0edaa5d8c84767e4acfad3548d}{stateCallbackConnections}.push\_back(connection);
+306                 \}
+307     \textcolor{keywordflow}{else} \textcolor{comment}{// state life-time objects}
+308     \{
+309         ROS\_WARN(\textcolor{stringliteral}{"[StateMachine] connecting signal to an unknown object with life-time unknown behavior. It
+       might provoke an exception if the object is destroyed during the execution."});
+310     \}
+311 
+312     \textcolor{keywordflow}{return} connection;
+313 \}
 \end{DoxyCode}
 
 
@@ -465,25 +475,6 @@ Here is the caller graph for this function\+:
 \end{figure}
 
 
-\index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!create\+Signal\+Connection@{create\+Signal\+Connection}}
-\index{create\+Signal\+Connection@{create\+Signal\+Connection}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
-\subsubsection[{\texorpdfstring{create\+Signal\+Connection(\+T\+Smacc\+Signal \&signal, T\+Member\+Function\+Prototype callback)}{createSignalConnection(TSmaccSignal &signal, TMemberFunctionPrototype callback)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+Smacc\+Signal , typename T\+Member\+Function\+Prototype $>$ boost\+::signals2\+::connection smacc\+::\+I\+Smacc\+State\+Machine\+::create\+Signal\+Connection (
-\begin{DoxyParamCaption}
-\item[{T\+Smacc\+Signal \&}]{signal, }
-\item[{T\+Member\+Function\+Prototype}]{callback}
-\end{DoxyParamCaption}
-)}\hypertarget{classsmacc_1_1ISmaccStateMachine_a9248dd505790b9d46d6dbebeb31bf5f8}{}\label{classsmacc_1_1ISmaccStateMachine_a9248dd505790b9d46d6dbebeb31bf5f8}
-
-
-Definition at line 305 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
-
-
-\begin{DoxyCode}
-306 \{
-307     \textcolor{keywordflow}{return} signal.connect(callback);
-308     \textcolor{comment}{// return signal;}
-309 \}
-\end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!E\+Stop@{E\+Stop}}
 \index{E\+Stop@{E\+Stop}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
 \subsubsection[{\texorpdfstring{E\+Stop()}{EStop()}}]{\setlength{\rightskip}{0pt plus 5cm}void smacc\+::\+I\+Smacc\+State\+Machine\+::\+E\+Stop (
@@ -529,7 +520,7 @@ Here is the caller graph for this function\+:
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classsmacc_1_1ISmaccStateMachine_ad150bf5c87f3c8f3cadd716e571d858e}{}\label{classsmacc_1_1ISmaccStateMachine_ad150bf5c87f3c8f3cadd716e571d858e}
 
 
-Definition at line 422 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 433 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 
@@ -537,9 +528,9 @@ Referenced by smacc\+::\+Signal\+Detector\+::poll\+Once().
 
 
 \begin{DoxyCode}
-423 \{
-424     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a9c6e7745205bcce80a301f2fbe8f7e99}{currentState\_};
-425 \}
+434 \{
+435     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a9c6e7745205bcce80a301f2fbe8f7e99}{currentState\_};
+436 \}
 \end{DoxyCode}
 
 
@@ -562,7 +553,7 @@ Here is the caller graph for this function\+:
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classsmacc_1_1ISmaccStateMachine_a03966e531cefc1e096bffa46111871d2}{}\label{classsmacc_1_1ISmaccStateMachine_a03966e531cefc1e096bffa46111871d2}
 
 
-Definition at line 417 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 428 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 
@@ -570,9 +561,9 @@ Referenced by smacc\+::\+Signal\+Detector\+::poll\+Once().
 
 
 \begin{DoxyCode}
-418 \{
-419     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccStateMachine_ab41ee07d20715142e2f7c92d551b2bd6}{stateSeqCounter\_};
-420 \}
+429 \{
+430     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccStateMachine_ab41ee07d20715142e2f7c92d551b2bd6}{stateSeqCounter\_};
+431 \}
 \end{DoxyCode}
 
 
@@ -754,13 +745,13 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classsmacc_1_1ISmaccStateMachine_ac9fda4abe36f62db5ae231289afa4665}{}\label{classsmacc_1_1ISmaccStateMachine_ac9fda4abe36f62db5ae231289afa4665}
 
 
-Definition at line 312 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 323 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 \begin{DoxyCode}
-313 \{
-314     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccStateMachine_ad8877bcca9dbb345fe72cca839c93dd3}{nh\_}.getParam(param\_name, param\_storage);
-315 \}
+324 \{
+325     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccStateMachine_ad8877bcca9dbb345fe72cca839c93dd3}{nh\_}.getParam(param\_name, param\_storage);
+326 \}
 \end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!get\+State\+Machine\+Info@{get\+State\+Machine\+Info}}
 \index{get\+State\+Machine\+Info@{get\+State\+Machine\+Info}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
@@ -771,13 +762,13 @@ Definition at line 312 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classsmacc_1_1ISmaccStateMachine_a3b1facb0477325fe43b447fc21d9eb7d}{}\label{classsmacc_1_1ISmaccStateMachine_a3b1facb0477325fe43b447fc21d9eb7d}
 
 
-Definition at line 427 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 438 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 \begin{DoxyCode}
-428 \{
-429     \textcolor{keywordflow}{return} *this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a0914aa27c3f51374c338d89a32b135d1}{stateMachineInfo\_};
-430 \}
+439 \{
+440     \textcolor{keywordflow}{return} *this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a0914aa27c3f51374c338d89a32b135d1}{stateMachineInfo\_};
+441 \}
 \end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!get\+State\+Machine\+Name@{get\+State\+Machine\+Name}}
 \index{get\+State\+Machine\+Name@{get\+State\+Machine\+Name}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
@@ -954,20 +945,20 @@ Here is the call graph for this function\+:
 )}\hypertarget{classsmacc_1_1ISmaccStateMachine_a7377ca0f79289fdc27f9ed3ff6e67263}{}\label{classsmacc_1_1ISmaccStateMachine_a7377ca0f79289fdc27f9ed3ff6e67263}
 
 
-Definition at line 358 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 369 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 \begin{DoxyCode}
-359 \{
-360     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} pair : this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a6d7c344ce2570b35737a1173633d0d71}{orthogonals\_})
-361     \{
-362         ROS\_INFO(\textcolor{stringliteral}{"ortho onruntime configure: %s"}, pair.second->getName().c\_str());
-363         \textcolor{keyword}{auto} &orthogonal = pair.second;
-364         orthogonal->runtimeConfigure();
-365     \}
-366 
-367     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_ad246a49015fadaeb0b1639d7ab99f7d0}{updateStatusMessage}();
-368 \}
+370 \{
+371     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} pair : this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a6d7c344ce2570b35737a1173633d0d71}{orthogonals\_})
+372     \{
+373         ROS\_INFO(\textcolor{stringliteral}{"ortho onruntime configure: %s"}, pair.second->getName().c\_str());
+374         \textcolor{keyword}{auto} &orthogonal = pair.second;
+375         orthogonal->runtimeConfigure();
+376     \}
+377 
+378     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_ad246a49015fadaeb0b1639d7ab99f7d0}{updateStatusMessage}();
+379 \}
 \end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!notify\+On\+State\+Entry\+End@{notify\+On\+State\+Entry\+End}}
 \index{notify\+On\+State\+Entry\+End@{notify\+On\+State\+Entry\+End}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
@@ -978,20 +969,20 @@ Definition at line 358 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 )}\hypertarget{classsmacc_1_1ISmaccStateMachine_a856cf2d25d84659b974cccfbf44aeec9}{}\label{classsmacc_1_1ISmaccStateMachine_a856cf2d25d84659b974cccfbf44aeec9}
 
 
-Definition at line 345 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 356 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 \begin{DoxyCode}
-346 \{
-347     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} pair : this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a6d7c344ce2570b35737a1173633d0d71}{orthogonals\_})
-348     \{
-349         ROS\_INFO(\textcolor{stringliteral}{"ortho onentry: %s"}, pair.second->getName().c\_str());
-350         \textcolor{keyword}{auto} &orthogonal = pair.second;
-351         orthogonal->onEntry();
-352     \}
-353 
-354     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_ad246a49015fadaeb0b1639d7ab99f7d0}{updateStatusMessage}();
-355 \}
+357 \{
+358     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} pair : this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a6d7c344ce2570b35737a1173633d0d71}{orthogonals\_})
+359     \{
+360         ROS\_INFO(\textcolor{stringliteral}{"ortho onentry: %s"}, pair.second->getName().c\_str());
+361         \textcolor{keyword}{auto} &orthogonal = pair.second;
+362         orthogonal->onEntry();
+363     \}
+364 
+365     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_ad246a49015fadaeb0b1639d7ab99f7d0}{updateStatusMessage}();
+366 \}
 \end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!notify\+On\+State\+Entry\+Start@{notify\+On\+State\+Entry\+Start}}
 \index{notify\+On\+State\+Entry\+Start@{notify\+On\+State\+Entry\+Start}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
@@ -1002,21 +993,21 @@ Definition at line 345 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 )}\hypertarget{classsmacc_1_1ISmaccStateMachine_aeec54e997d715b105ebfeb5caadc4fbf}{}\label{classsmacc_1_1ISmaccStateMachine_aeec54e997d715b105ebfeb5caadc4fbf}
 
 
-Definition at line 332 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 343 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 \begin{DoxyCode}
-333 \{
-334 std:
-335     lock\_guard<std::recursive\_mutex> lock(\hyperlink{classsmacc_1_1ISmaccStateMachine_aac785541646e5c517273bf31072505a1}{m\_mutex\_});
-336 
-337     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Notification State Entry, orthogonals:"} << this->
+344 \{
+345 std:
+346     lock\_guard<std::recursive\_mutex> lock(\hyperlink{classsmacc_1_1ISmaccStateMachine_aac785541646e5c517273bf31072505a1}{m\_mutex\_});
+347 
+348     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Notification State Entry, orthogonals:"} << this->
       \hyperlink{classsmacc_1_1ISmaccStateMachine_a6d7c344ce2570b35737a1173633d0d71}{orthogonals\_}.size() << \textcolor{stringliteral}{", new state "} << state);
-338 
-339     \hyperlink{classsmacc_1_1ISmaccStateMachine_ab41ee07d20715142e2f7c92d551b2bd6}{stateSeqCounter\_}++;
-340     \hyperlink{classsmacc_1_1ISmaccStateMachine_a9c6e7745205bcce80a301f2fbe8f7e99}{currentState\_} = state;
-341     \hyperlink{classsmacc_1_1ISmaccStateMachine_a95e42f735cecdc231ad5372bf9fe7eaf}{currentStateInfo\_} = \hyperlink{classsmacc_1_1ISmaccStateMachine_a0914aa27c3f51374c338d89a32b135d1}{stateMachineInfo\_}->getState<StateType>();
-342 \}
+349 
+350     \hyperlink{classsmacc_1_1ISmaccStateMachine_ab41ee07d20715142e2f7c92d551b2bd6}{stateSeqCounter\_}++;
+351     \hyperlink{classsmacc_1_1ISmaccStateMachine_a9c6e7745205bcce80a301f2fbe8f7e99}{currentState\_} = state;
+352     \hyperlink{classsmacc_1_1ISmaccStateMachine_a95e42f735cecdc231ad5372bf9fe7eaf}{currentStateInfo\_} = \hyperlink{classsmacc_1_1ISmaccStateMachine_a0914aa27c3f51374c338d89a32b135d1}{stateMachineInfo\_}->getState<StateType>();
+353 \}
 \end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!notify\+On\+State\+Exit@{notify\+On\+State\+Exit}}
 \index{notify\+On\+State\+Exit@{notify\+On\+State\+Exit}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
@@ -1027,28 +1018,28 @@ Definition at line 332 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 )}\hypertarget{classsmacc_1_1ISmaccStateMachine_a9d2bd4aca0c80a1ec22c5f95e7c38db8}{}\label{classsmacc_1_1ISmaccStateMachine_a9d2bd4aca0c80a1ec22c5f95e7c38db8}
 
 
-Definition at line 371 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 382 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 \begin{DoxyCode}
-372 \{
-373     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Notification State Exit: leaving state"} << state);
-374     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} pair : this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a6d7c344ce2570b35737a1173633d0d71}{orthogonals\_})
-375     \{
-376         \textcolor{keyword}{auto} &orthogonal = pair.second;
-377         orthogonal->onExit();
-378     \}
-379 
-380     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &conn : this->\hyperlink{classsmacc_1_1ISmaccStateMachine_aaf98bb0edaa5d8c84767e4acfad3548d}{stateCallbackConnections})
-381     \{
-382         ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[StateMachine] Disconnecting scoped-lifetime SmaccSignal subscription"});
-383         conn.disconnect();
-384     \}
-385 
-386     this->stateCallbackConnections.clear();
-387 
-388     \hyperlink{classsmacc_1_1ISmaccStateMachine_a9c6e7745205bcce80a301f2fbe8f7e99}{currentState\_} = \textcolor{keyword}{nullptr};
-389 \}
+383 \{
+384     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Notification State Exit: leaving state"} << state);
+385     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} pair : this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a6d7c344ce2570b35737a1173633d0d71}{orthogonals\_})
+386     \{
+387         \textcolor{keyword}{auto} &orthogonal = pair.second;
+388         orthogonal->onExit();
+389     \}
+390 
+391     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &conn : this->\hyperlink{classsmacc_1_1ISmaccStateMachine_aaf98bb0edaa5d8c84767e4acfad3548d}{stateCallbackConnections})
+392     \{
+393         ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[StateMachine] Disconnecting scoped-lifetime SmaccSignal subscription"});
+394         conn.disconnect();
+395     \}
+396 
+397     this->stateCallbackConnections.clear();
+398 
+399     \hyperlink{classsmacc_1_1ISmaccStateMachine_a9c6e7745205bcce80a301f2fbe8f7e99}{currentState\_} = \textcolor{keyword}{nullptr};
+400 \}
 \end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!on\+Initialize@{on\+Initialize}}
 \index{on\+Initialize@{on\+Initialize}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
@@ -1214,13 +1205,13 @@ Here is the caller graph for this function\+:
 ) const\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classsmacc_1_1ISmaccStateMachine_a5c8c2c09423e321a46567a671d18d8e4}{}\label{classsmacc_1_1ISmaccStateMachine_a5c8c2c09423e321a46567a671d18d8e4}
 
 
-Definition at line 326 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 337 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 \begin{DoxyCode}
-327 \{
-328     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccStateMachine_ad8877bcca9dbb345fe72cca839c93dd3}{nh\_}.param(param\_name, param\_val, default\_val);
-329 \}
+338 \{
+339     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccStateMachine_ad8877bcca9dbb345fe72cca839c93dd3}{nh\_}.param(param\_name, param\_val, default\_val);
+340 \}
 \end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!post\+Event@{post\+Event}}
 \index{post\+Event@{post\+Event}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}
@@ -1296,7 +1287,7 @@ Definition at line 153 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 )\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classsmacc_1_1ISmaccStateMachine_a3d369c7cff22632ca85a8656000ba19c}{}\label{classsmacc_1_1ISmaccStateMachine_a3d369c7cff22632ca85a8656000ba19c}
 
 
-Definition at line 393 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 404 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 
@@ -1304,20 +1295,20 @@ References smacc\+::\+I\+Smacc\+State\+::get\+Class\+Name(), smacc\+::\+I\+Smacc
 
 
 \begin{DoxyCode}
-394 \{
-395     ROS\_DEBUG(\textcolor{stringliteral}{"PROPAGATING EVENT [%s] TO LUs [%s]: "}, demangleSymbol<EventType>().c\_str(), st->getClassName
+405 \{
+406     ROS\_DEBUG(\textcolor{stringliteral}{"PROPAGATING EVENT [%s] TO LUs [%s]: "}, demangleSymbol<EventType>().c\_str(), st->getClassName
       ().c\_str());
-396     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &sb : st->getStateReactors())
-397     \{
-398         sb->notifyEvent(ev);
-399     \}
-400 
-401     \textcolor{keyword}{auto} *pst = st->getParentState();
-402     \textcolor{keywordflow}{if} (pst != \textcolor{keyword}{nullptr})
-403     \{
-404         \hyperlink{classsmacc_1_1ISmaccStateMachine_a3d369c7cff22632ca85a8656000ba19c}{propagateEventToStateReactors}(pst, ev);
-405     \}
-406 \}
+407     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &sb : st->getStateReactors())
+408     \{
+409         sb->notifyEvent(ev);
+410     \}
+411 
+412     \textcolor{keyword}{auto} *pst = st->getParentState();
+413     \textcolor{keywordflow}{if} (pst != \textcolor{keyword}{nullptr})
+414     \{
+415         \hyperlink{classsmacc_1_1ISmaccStateMachine_a3d369c7cff22632ca85a8656000ba19c}{propagateEventToStateReactors}(pst, ev);
+416     \}
+417 \}
 \end{DoxyCode}
 
 
@@ -1564,13 +1555,13 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classsmacc_1_1ISmaccStateMachine_afc730437f45fa107292c078dfab2aa37}{}\label{classsmacc_1_1ISmaccStateMachine_afc730437f45fa107292c078dfab2aa37}
 
 
-Definition at line 319 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
+Definition at line 330 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 \begin{DoxyCode}
-320 \{
-321     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccStateMachine_ad8877bcca9dbb345fe72cca839c93dd3}{nh\_}.setParam(param\_name, param\_val);
-322 \}
+331 \{
+332     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccStateMachine_ad8877bcca9dbb345fe72cca839c93dd3}{nh\_}.setParam(param\_name, param\_val);
+333 \}
 \end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!state\+\_\+machine\+\_\+visualization@{state\+\_\+machine\+\_\+visualization}}
 \index{state\+\_\+machine\+\_\+visualization@{state\+\_\+machine\+\_\+visualization}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}

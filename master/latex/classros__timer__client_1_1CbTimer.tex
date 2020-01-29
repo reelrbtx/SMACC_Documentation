@@ -32,6 +32,8 @@ virtual void \hyperlink{classros__timer__client_1_1CbTimer_a25c086b5988642602938
 virtual void \hyperlink{classros__timer__client_1_1CbTimer_a27d62ebacf667d4c2518c0416ee7b25b}{on\+Exit} () override
 \item 
 {\footnotesize template$<$typename T\+Object\+Tag , typename T\+Derived $>$ }\\void \hyperlink{classros__timer__client_1_1CbTimer_a11226b0050d363187aa1bfe3e9c672af}{configure\+Event\+Source\+Types} ()
+\item 
+void \hyperlink{classros__timer__client_1_1CbTimer_ad75f8dfb3baa32e3ba7d373e8d902b47}{on\+Client\+Timer\+Tick\+Callback} ()
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -65,7 +67,7 @@ Definition at line 15 of file cb\+\_\+ros\+\_\+timer.\+h.
 
 
 
-References post\+Timer\+Event\+\_\+.
+References on\+Client\+Timer\+Tick\+Callback(), and post\+Timer\+Event\+\_\+.
 
 
 \begin{DoxyCode}
@@ -75,6 +77,55 @@ References post\+Timer\+Event\+\_\+.
 19     \};
 20   \}
 \end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classros__timer__client_1_1CbTimer_a11226b0050d363187aa1bfe3e9c672af_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer@{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer}!on\+Client\+Timer\+Tick\+Callback@{on\+Client\+Timer\+Tick\+Callback}}
+\index{on\+Client\+Timer\+Tick\+Callback@{on\+Client\+Timer\+Tick\+Callback}!ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer@{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer}}
+\subsubsection[{\texorpdfstring{on\+Client\+Timer\+Tick\+Callback()}{onClientTimerTickCallback()}}]{\setlength{\rightskip}{0pt plus 5cm}void ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer\+::on\+Client\+Timer\+Tick\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classros__timer__client_1_1CbTimer_ad75f8dfb3baa32e3ba7d373e8d902b47}{}\label{classros__timer__client_1_1CbTimer_ad75f8dfb3baa32e3ba7d373e8d902b47}
+
+
+Definition at line 12 of file cb\+\_\+timer.\+cpp.
+
+
+
+References post\+Timer\+Event\+\_\+.
+
+
+
+Referenced by configure\+Event\+Source\+Types(), and on\+Entry().
+
+
+\begin{DoxyCode}
+13 \{
+14     this->\hyperlink{classros__timer__client_1_1CbTimer_a7e15bf1451d17c96aba814dc3e5c08e9}{postTimerEvent\_}();
+15 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classros__timer__client_1_1CbTimer_ad75f8dfb3baa32e3ba7d373e8d902b47_icgraph}
+\end{center}
+\end{figure}
+
+
 \index{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer@{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer}!on\+Entry@{on\+Entry}}
 \index{on\+Entry@{on\+Entry}!ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer@{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer}}
 \subsubsection[{\texorpdfstring{on\+Entry() override}{onEntry() override}}]{\setlength{\rightskip}{0pt plus 5cm}void ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer\+::on\+Entry (
@@ -92,18 +143,16 @@ Definition at line 5 of file cb\+\_\+timer.\+cpp.
 
 
 
-References ros\+\_\+timer\+\_\+client\+::\+Cl\+Ros\+Timer\+::on\+Timer\+Tick(), post\+Timer\+Event\+\_\+, smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Client(), and timer\+Client\+\_\+.
+References on\+Client\+Timer\+Tick\+Callback(), ros\+\_\+timer\+\_\+client\+::\+Cl\+Ros\+Timer\+::on\+Timer\+Tick(), smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Client(), and timer\+Client\+\_\+.
 
 
 \begin{DoxyCode}
 6 \{
 7     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classros__timer__client_1_1CbTimer_a370d115a7423db45ca375673db8a4ed1}{timerClient\_});
 8 
-9     \hyperlink{classros__timer__client_1_1CbTimer_a370d115a7423db45ca375673db8a4ed1}{timerClient\_}->\hyperlink{classros__timer__client_1_1ClRosTimer_a06ecf6427b5df59f29879ab3bd1f120c}{onTimerTick}(
-10         [=]() \{
-11             this->\hyperlink{classros__timer__client_1_1CbTimer_a7e15bf1451d17c96aba814dc3e5c08e9}{postTimerEvent\_}();
-12         \});
-13 \}
+9     \hyperlink{classros__timer__client_1_1CbTimer_a370d115a7423db45ca375673db8a4ed1}{timerClient\_}->\hyperlink{classros__timer__client_1_1ClRosTimer_a06ecf6427b5df59f29879ab3bd1f120c}{onTimerTick}(&
+      \hyperlink{classros__timer__client_1_1CbTimer_ad75f8dfb3baa32e3ba7d373e8d902b47}{CbTimer::onClientTimerTickCallback}, \textcolor{keyword}{this});
+10 \}
 \end{DoxyCode}
 
 
@@ -130,12 +179,12 @@ Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ac0cd72d42bd0042
 
 
 
-Definition at line 15 of file cb\+\_\+timer.\+cpp.
+Definition at line 17 of file cb\+\_\+timer.\+cpp.
 
 
 \begin{DoxyCode}
-16 \{
-17 \}
+18 \{
+19 \}
 \end{DoxyCode}
 
 
@@ -145,25 +194,25 @@ Definition at line 15 of file cb\+\_\+timer.\+cpp.
 \subsubsection[{\texorpdfstring{c\+\_\+}{c_}}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::signals2\+::scoped\+\_\+connection ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer\+::c\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classros__timer__client_1_1CbTimer_a755a7f5d8662ae3b7507da0fe82e5b22}{}\label{classros__timer__client_1_1CbTimer_a755a7f5d8662ae3b7507da0fe82e5b22}
 
 
-Definition at line 25 of file cb\+\_\+ros\+\_\+timer.\+h.
+Definition at line 27 of file cb\+\_\+ros\+\_\+timer.\+h.
 
 \index{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer@{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer}!post\+Timer\+Event\+\_\+@{post\+Timer\+Event\+\_\+}}
 \index{post\+Timer\+Event\+\_\+@{post\+Timer\+Event\+\_\+}!ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer@{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer}}
 \subsubsection[{\texorpdfstring{post\+Timer\+Event\+\_\+}{postTimerEvent_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::function$<$void()$>$ ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer\+::post\+Timer\+Event\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classros__timer__client_1_1CbTimer_a7e15bf1451d17c96aba814dc3e5c08e9}{}\label{classros__timer__client_1_1CbTimer_a7e15bf1451d17c96aba814dc3e5c08e9}
 
 
-Definition at line 24 of file cb\+\_\+ros\+\_\+timer.\+h.
+Definition at line 26 of file cb\+\_\+ros\+\_\+timer.\+h.
 
 
 
-Referenced by configure\+Event\+Source\+Types(), and on\+Entry().
+Referenced by configure\+Event\+Source\+Types(), and on\+Client\+Timer\+Tick\+Callback().
 
 \index{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer@{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer}!timer\+Client\+\_\+@{timer\+Client\+\_\+}}
 \index{timer\+Client\+\_\+@{timer\+Client\+\_\+}!ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer@{ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer}}
 \subsubsection[{\texorpdfstring{timer\+Client\+\_\+}{timerClient_}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Cl\+Ros\+Timer}$\ast$ ros\+\_\+timer\+\_\+client\+::\+Cb\+Timer\+::timer\+Client\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classros__timer__client_1_1CbTimer_a370d115a7423db45ca375673db8a4ed1}{}\label{classros__timer__client_1_1CbTimer_a370d115a7423db45ca375673db8a4ed1}
 
 
-Definition at line 23 of file cb\+\_\+ros\+\_\+timer.\+h.
+Definition at line 25 of file cb\+\_\+ros\+\_\+timer.\+h.
 
 
 
