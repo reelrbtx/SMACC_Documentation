@@ -8,7 +8,7 @@ var searchData=
   ['actionclient',['ActionClient',['../classsmacc_1_1client__bases_1_1SmaccActionClientBase.html#ab4cb0717885b95d577f82f4133db7f5f',1,'smacc::client_bases::SmaccActionClientBase']]],
   ['active_5fcb',['active_cb',['../classsmacc_1_1client__bases_1_1SmaccActionClientBase.html#a8aada706b9b8ca50792b48c2f990394a',1,'smacc::client_bases::SmaccActionClientBase']]],
   ['add_5ftype_5fwrapper',['add_type_wrapper',['../structsmacc_1_1introspection_1_1add__type__wrapper.html',1,'smacc::introspection']]],
-  ['addclientbehavior',['addClientBehavior',['../classsmacc_1_1IOrthogonal.html#a19884fe511c71996759c3fe0d2a41251',1,'smacc::IOrthogonal']]],
+  ['addclientbehavior',['addClientBehavior',['../classsmacc_1_1ISmaccOrthogonal.html#a17aaa112dfa2f9cee3782acc79430150',1,'smacc::ISmaccOrthogonal']]],
   ['addinputevent',['addInputEvent',['../classsmacc_1_1introspection_1_1StateReactorHandler.html#aef392b9521dc4484ef84082844cd3538',1,'smacc::introspection::StateReactorHandler::addInputEvent()'],['../classsmacc_1_1StateReactor.html#acd4b35b4c82241fc27bb858761f6e4de',1,'smacc::StateReactor::addInputEvent()']]],
   ['addstate',['addState',['../classsmacc_1_1introspection_1_1SmaccStateMachineInfo.html#ab4eafccfbba21257405fc4274c2ed22a',1,'smacc::introspection::SmaccStateMachineInfo']]],
   ['addsubstate',['AddSubState',['../structsmacc_1_1introspection_1_1AddSubState.html#a9556919fdfce601d7746c8f3efcf298b',1,'smacc::introspection::AddSubState']]],
@@ -19,6 +19,7 @@ var searchData=
   ['args',['args',['../namespacegenerate__debs.html#a75f9143e38df82d83b2e8a6f99cae02c',1,'generate_debs']]],
   ['as_5f',['as_',['../classOdomTrackerActionServer.html#a28bed1d95003d837b2b47053dbc66878',1,'OdomTrackerActionServer']]],
   ['assemblesmstructuremessage',['assembleSMStructureMessage',['../classsmacc_1_1introspection_1_1SmaccStateMachineInfo.html#a6758065a8d1faaa7c3688cf0dffe9334',1,'smacc::introspection::SmaccStateMachineInfo']]],
+  ['assignclienttoorthogonal',['assignClientToOrthogonal',['../classsmacc_1_1ISmaccOrthogonal.html#a586a3b5cabae55f2bf1434cd90c1bdfa',1,'smacc::ISmaccOrthogonal']]],
   ['automatictransitiontag',['automaticTransitionTag',['../namespacesmacc_1_1introspection.html#ae031f62082f4e291e4933ee6f876b571',1,'smacc::introspection::automaticTransitionTag(std::string &amp;transition_name)'],['../namespacesmacc_1_1introspection.html#a0d72ea881eae4f1e0f71fe40b92f1f3e',1,'smacc::introspection::automaticTransitionTag(std::string &amp;transition_name)']]],
   ['automatictransitiontype',['automaticTransitionType',['../namespacesmacc_1_1introspection.html#a2afacf459b5e29bb9fe8880a2a2d2b72',1,'smacc::introspection::automaticTransitionType(std::string &amp;transition_type)'],['../namespacesmacc_1_1introspection.html#ad45bab559ffade7f9d81c6d90ab6d88c',1,'smacc::introspection::automaticTransitionType(std::string &amp;transition_type)']]]
 ];
