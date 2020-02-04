@@ -15,8 +15,8 @@ var searchData=
   ['orobstacleperception',['OrObstaclePerception',['../classsm__dance__bot_1_1OrObstaclePerception.html',1,'sm_dance_bot']]],
   ['orobstacleperception',['OrObstaclePerception',['../classsm__dance__bot__2_1_1OrObstaclePerception.html',1,'sm_dance_bot_2']]],
   ['orobstacleperception',['OrObstaclePerception',['../classsm__dance__bot__3_1_1OrObstaclePerception.html',1,'sm_dance_bot_3']]],
-  ['orservice3',['OrService3',['../classsm__dance__bot_1_1OrService3.html',1,'sm_dance_bot']]],
   ['orservice3',['OrService3',['../classsm__dance__bot__3_1_1OrService3.html',1,'sm_dance_bot_3']]],
+  ['orservice3',['OrService3',['../classsm__dance__bot_1_1OrService3.html',1,'sm_dance_bot']]],
   ['orstringpublisher',['OrStringPublisher',['../classsm__dance__bot_1_1OrStringPublisher.html',1,'sm_dance_bot']]],
   ['orstringpublisher',['OrStringPublisher',['../classsm__dance__bot__3_1_1OrStringPublisher.html',1,'sm_dance_bot_3']]],
   ['orsubscriber',['OrSubscriber',['../classsm__packML_1_1OrSubscriber.html',1,'sm_packML']]],
@@ -39,8 +39,8 @@ var searchData=
   ['ortimer',['OrTimer',['../classsm__atomic_1_1OrTimer.html',1,'sm_atomic']]],
   ['ortimer',['OrTimer',['../classsm__dance__bot__3_1_1OrTimer.html',1,'sm_dance_bot_3']]],
   ['ortimer',['OrTimer',['../classsm__three__some_1_1OrTimer.html',1,'sm_three_some']]],
+  ['orupdatablepublisher',['OrUpdatablePublisher',['../classsm__dance__bot__3_1_1OrUpdatablePublisher.html',1,'sm_dance_bot_3']]],
   ['orupdatablepublisher',['OrUpdatablePublisher',['../classsm__three__some_1_1OrUpdatablePublisher.html',1,'sm_three_some']]],
   ['orupdatablepublisher',['OrUpdatablePublisher',['../classsm__dance__bot_1_1OrUpdatablePublisher.html',1,'sm_dance_bot']]],
-  ['orupdatablepublisher',['OrUpdatablePublisher',['../classsm__dance__bot__3_1_1OrUpdatablePublisher.html',1,'sm_dance_bot_3']]],
   ['orupdatablepublisher',['OrUpdatablePublisher',['../classsm__packML_1_1OrUpdatablePublisher.html',1,'sm_packML']]]
 ];
