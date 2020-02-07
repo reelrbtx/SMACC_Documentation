@@ -24,11 +24,6 @@ Collaboration diagram for sm\+\_\+calendar\+\_\+week\+:\+:St\+Sunday\+:
 \includegraphics[width=350pt]{structsm__calendar__week_1_1StSunday__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \hyperlink{structsm__calendar__week_1_1StSunday_1_1RESET}{R\+E\+S\+ET}
-\end{DoxyCompactItemize}
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -64,7 +59,7 @@ Definition at line 4 of file st\+\_\+sunday.\+h.
 \subsubsection[{\texorpdfstring{reactions}{reactions}}]{\setlength{\rightskip}{0pt plus 5cm}typedef mpl\+::list$<$ Transition$<$Ev\+Key\+PressN$<$Cb\+Default\+Keyboard\+Behavior, {\bf Or\+Keyboard}$>$, {\bf Ms\+Workweek}, {\bf P\+R\+E\+E\+M\+PT}$>$, Transition$<$Ev\+Timer$<$Cb\+Timer\+Countdown\+Once, {\bf Or\+Timer}$>$, {\bf Ms\+Workweek}, {\bf S\+U\+C\+C\+E\+SS}$>$ $>$ {\bf sm\+\_\+calendar\+\_\+week\+::\+St\+Sunday\+::reactions}}\hypertarget{structsm__calendar__week_1_1StSunday_af2828352a507a4c972e43b318bb59a51}{}\label{structsm__calendar__week_1_1StSunday_af2828352a507a4c972e43b318bb59a51}
 
 
-Definition at line 17 of file st\+\_\+sunday.\+h.
+Definition at line 14 of file st\+\_\+sunday.\+h.
 
 
 
@@ -78,7 +73,7 @@ Definition at line 17 of file st\+\_\+sunday.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structsm__calendar__week_1_1StSunday_a5fd7a600527ff7246a90fffede448544}{}\label{structsm__calendar__week_1_1StSunday_a5fd7a600527ff7246a90fffede448544}
 
 
-Definition at line 48 of file st\+\_\+sunday.\+h.
+Definition at line 45 of file st\+\_\+sunday.\+h.
 
 
 
@@ -86,9 +81,9 @@ Referenced by runtime\+Configure().
 
 
 \begin{DoxyCode}
-49     \{
-50         ROS\_INFO(\textcolor{stringliteral}{"single behavior tick!"});
-51     \}
+46     \{
+47         ROS\_INFO(\textcolor{stringliteral}{"single behavior tick!"});
+48     \}
 \end{DoxyCode}
 
 
@@ -111,7 +106,7 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structsm__calendar__week_1_1StSunday_a6bba2c59172fea49fc346a658b592557}{}\label{structsm__calendar__week_1_1StSunday_a6bba2c59172fea49fc346a658b592557}
 
 
-Definition at line 43 of file st\+\_\+sunday.\+h.
+Definition at line 40 of file st\+\_\+sunday.\+h.
 
 
 
@@ -119,9 +114,9 @@ Referenced by runtime\+Configure().
 
 
 \begin{DoxyCode}
-44     \{
-45         ROS\_INFO(\textcolor{stringliteral}{"timer client tick!"});
-46     \}
+41     \{
+42         ROS\_INFO(\textcolor{stringliteral}{"timer client tick!"});
+43     \}
 \end{DoxyCode}
 
 
@@ -144,7 +139,7 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structsm__calendar__week_1_1StSunday_a28c840bf204044472162a7d3f14da28b}{}\label{structsm__calendar__week_1_1StSunday_a28c840bf204044472162a7d3f14da28b}
 
 
-Definition at line 26 of file st\+\_\+sunday.\+h.
+Definition at line 23 of file st\+\_\+sunday.\+h.
 
 
 
@@ -152,22 +147,22 @@ References on\+Single\+Behavior\+Tick\+Callback(), on\+Timer\+Client\+Tick\+Call
 
 
 \begin{DoxyCode}
-27     \{
-28         \textcolor{comment}{// get reference to the client}
-29         ClRosTimer *client;
-30         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(client);
+24     \{
+25         \textcolor{comment}{// get reference to the client}
+26         ClRosTimer *client;
+27         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(client);
+28 
+29         \textcolor{comment}{// subscribe to the timer client callback}
+30         client->onTimerTick(&\hyperlink{structsm__calendar__week_1_1StSunday_a6bba2c59172fea49fc346a658b592557}{StSunday::onTimerClientTickCallback}, \textcolor{keyword}{this});
 31 
-32         \textcolor{comment}{// subscribe to the timer client callback}
-33         client->onTimerTick(&\hyperlink{structsm__calendar__week_1_1StSunday_a6bba2c59172fea49fc346a658b592557}{StSunday::onTimerClientTickCallback}, \textcolor{keyword}{this});
-34 
-35         \textcolor{comment}{// getting reference to the single countdown behavior}
-36         \textcolor{keyword}{auto} *cbsingle = this->getOrthogonal<OrTimer>()
-37                              ->getClientBehavior<CbTimerCountdownOnce>();
-38 
-39         \textcolor{comment}{// subscribe to the single countdown behavior callback}
-40         cbsingle->onTimerTick(&\hyperlink{structsm__calendar__week_1_1StSunday_a5fd7a600527ff7246a90fffede448544}{StSunday::onSingleBehaviorTickCallback}
+32         \textcolor{comment}{// getting reference to the single countdown behavior}
+33         \textcolor{keyword}{auto} *cbsingle = this->getOrthogonal<OrTimer>()
+34                              ->getClientBehavior<CbTimerCountdownOnce>();
+35 
+36         \textcolor{comment}{// subscribe to the single countdown behavior callback}
+37         cbsingle->onTimerTick(&\hyperlink{structsm__calendar__week_1_1StSunday_a5fd7a600527ff7246a90fffede448544}{StSunday::onSingleBehaviorTickCallback}
       , \textcolor{keyword}{this});
-41     \}
+38     \}
 \end{DoxyCode}
 
 
@@ -190,14 +185,14 @@ Here is the call graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{structsm__calendar__week_1_1StSunday_ac9d8f202395f72b238783630e8c1d2f2}{}\label{structsm__calendar__week_1_1StSunday_ac9d8f202395f72b238783630e8c1d2f2}
 
 
-Definition at line 20 of file st\+\_\+sunday.\+h.
+Definition at line 17 of file st\+\_\+sunday.\+h.
 
 
 \begin{DoxyCode}
-21     \{
-22         configure\_orthogonal<OrTimer,  CbTimerCountdownOnce>(5);   
-23         configure\_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
-24     \}
+18     \{
+19         configure\_orthogonal<OrTimer,  CbTimerCountdownOnce>(5);   
+20         configure\_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+21     \}
 \end{DoxyCode}
 
 
