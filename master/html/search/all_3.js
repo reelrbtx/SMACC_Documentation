@@ -4,7 +4,7 @@ var searchData=
   ['debug',['DEBUG',['../namespacesmacc.html#a3e4f79486ea6ea6342dd3c712d16a4f6adc30ec20708ef7b0f641ef78b7880a15',1,'smacc']]],
   ['declaretransition',['declareTransition',['../classsmacc_1_1introspection_1_1SmaccStateInfo.html#ac0b32e5504ccbed161ad50f0b77c2004',1,'smacc::introspection::SmaccStateInfo']]],
   ['deep_5fconstruct',['deep_construct',['../classsmacc_1_1SmaccState.html#aac23d8a6909f75c5e5fca2a7c09b5368',1,'smacc::SmaccState']]],
-  ['deep_5fhistory',['deep_history',['../structsm__dance__bot_1_1SmDanceBot.html#abd58ec4a2b50a45da304a5f0b9c44706',1,'sm_dance_bot::SmDanceBot::deep_history()'],['../structsm__dance__bot__3_1_1SmDanceBot.html#af4725d37e5f9649b7ca07382435e7287',1,'sm_dance_bot_3::SmDanceBot::deep_history()']]],
+  ['deep_5fhistory',['deep_history',['../structsm__dance__bot_1_1SmDanceBot.html#abd58ec4a2b50a45da304a5f0b9c44706',1,'sm_dance_bot::SmDanceBot::deep_history()'],['../structsm__dance__bot__strikes__back_1_1SmDanceBotStrikesBack.html#a3192d4079cbcf0739c7002538767ad22',1,'sm_dance_bot_strikes_back::SmDanceBotStrikesBack::deep_history()']]],
   ['default',['DEFAULT',['../structsmacc_1_1default__transition__tags_1_1DEFAULT.html',1,'smacc::default_transition_tags']]],
   ['default',['default',['../namespacegenerate__debs.html#a3d67a92b7eb3a59c397dc9fdd1c67558',1,'generate_debs']]],
   ['default_5ftransition_5fname',['default_transition_name',['../structsmacc_1_1default__transition__tags_1_1default__transition__name.html',1,'smacc::default_transition_tags']]],
@@ -25,7 +25,7 @@ var searchData=
   ['devicereport',['deviceReport',['../classmicrostrain__mips__client_1_1ClMicrostainMips.html#ae5375a32516d96d79397eaf8f4ad0303',1,'microstrain_mips_client::ClMicrostainMips']]],
   ['devicereportsrv',['deviceReportSrv',['../classmicrostrain__mips__client_1_1ClMicrostainMips.html#a7d7f4bfa828c87c27e1b7cab613e42e1',1,'microstrain_mips_client::ClMicrostainMips']]],
   ['direct',['DIRECT',['../LICENSE_8txt.html#a34cac86a32266331f931bceaa138a96d',1,'LICENSE.txt']]],
-  ['direction',['direction',['../structsm__dance__bot_1_1SS4_1_1SsFPattern1.html#a4d286cea10dd7a14743a89f5a2131dc5',1,'sm_dance_bot::SS4::SsFPattern1::direction()'],['../structsm__dance__bot_1_1SS5_1_1SsSPattern1.html#abe6ab6e7e6630e67566c0fee58ce565f',1,'sm_dance_bot::SS5::SsSPattern1::direction()'],['../structsm__dance__bot__3_1_1SS4_1_1SsFPattern1.html#aa289c91e7307df5bd572731611c81efc',1,'sm_dance_bot_3::SS4::SsFPattern1::direction()'],['../structsm__dance__bot__3_1_1SS5_1_1SsSPattern1.html#adce5119ce940a1455ab8074e86c98c58',1,'sm_dance_bot_3::SS5::SsSPattern1::direction()']]],
+  ['direction',['direction',['../structsm__dance__bot_1_1SS4_1_1SsFPattern1.html#a4d286cea10dd7a14743a89f5a2131dc5',1,'sm_dance_bot::SS4::SsFPattern1::direction()'],['../structsm__dance__bot_1_1SS5_1_1SsSPattern1.html#abe6ab6e7e6630e67566c0fee58ce565f',1,'sm_dance_bot::SS5::SsSPattern1::direction()'],['../structsm__dance__bot__strikes__back_1_1SS4_1_1SsFPattern1.html#a268a3bbf45517f3d39de2f81a925bd99',1,'sm_dance_bot_strikes_back::SS4::SsFPattern1::direction()'],['../structsm__dance__bot__strikes__back_1_1SS5_1_1SsSPattern1.html#ab6ad418e38e92a3f8595f266fdb0e621',1,'sm_dance_bot_strikes_back::SS5::SsSPattern1::direction()']]],
   ['disable',['disable',['../classmove__base__z__client_1_1CostmapSwitch.html#a14a70c2952a2bf34b2f8a383fdd5841f',1,'move_base_z_client::CostmapSwitch::disable(std::string layerName)'],['../classmove__base__z__client_1_1CostmapSwitch.html#acc493a0039e529f11b3f49818f38c5ff',1,'move_base_z_client::CostmapSwitch::disable(StandardLayers layerType)']]],
   ['disablereq',['disableReq',['../classmove__base__z__client_1_1CostmapProxy.html#a3b7933e704ce9bab4061d6902d0e961a',1,'move_base_z_client::CostmapProxy']]],
   ['done_5fcb',['done_cb',['../classsmacc_1_1client__bases_1_1SmaccActionClientBase.html#a39fc5030e98f1e30e9919a9d9737b78a',1,'smacc::client_bases::SmaccActionClientBase']]],
@@ -33,6 +33,6 @@ var searchData=
   ['dynrecofsub_5f',['dynrecofSub_',['../classmove__base__z__client_1_1CostmapProxy.html#a3202a0b1208f7b36c4a707f633d63504',1,'move_base_z_client::CostmapProxy::dynrecofSub_()'],['../classmove__base__z__client_1_1PlannerSwitcher.html#a088bde4ce0fece46776a9f4efe417e15',1,'move_base_z_client::PlannerSwitcher::dynrecofSub_()']]],
   ['dynreconfcallback',['dynreconfCallback',['../classmove__base__z__client_1_1CostmapProxy.html#ad8d20cbef6527b9ef3a21c866b1c08e6',1,'move_base_z_client::CostmapProxy::dynreconfCallback()'],['../classmove__base__z__client_1_1PlannerSwitcher.html#a7eacfedc6b6ea404ee8fab062d62a911',1,'move_base_z_client::PlannerSwitcher::dynreconfCallback()']]],
   ['dance_20bot_20state_20machine',['Dance Bot State Machine',['../md_smacc_sm_reference_library_sm_dance_bot_2_launch_readme.html',1,'']]],
-  ['dance_20bot_20state_20machine',['Dance Bot State Machine',['../md_smacc_sm_reference_library_sm_dance_bot_3_launch_readme.html',1,'']]],
-  ['dance_20bot_20state_20machine',['Dance Bot State Machine',['../md_smacc_sm_reference_library_sm_dance_bot_launch_readme.html',1,'']]]
+  ['dance_20bot_20state_20machine',['Dance Bot State Machine',['../md_smacc_sm_reference_library_sm_dance_bot_launch_readme.html',1,'']]],
+  ['dance_20bot_20state_20machine',['Dance Bot State Machine',['../md_smacc_sm_reference_library_sm_dance_bot_strikes_back_launch_readme.html',1,'']]]
 ];
