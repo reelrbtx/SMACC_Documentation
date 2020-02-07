@@ -54,6 +54,7 @@ var searchData=
   ['getsensorvehicleframetrans',['getSensorVehicleFrameTrans',['../classmicrostrain__mips__client_1_1ClMicrostainMips.html#aacdca79f2e8ed62122552e8196c0c643',1,'microstrain_mips_client::ClMicrostainMips']]],
   ['getshortname',['getShortName',['../classsmacc_1_1SmaccState.html#a4db028a85244653e48957d2b3371413d',1,'smacc::SmaccState']]],
   ['getsoftironmatrix',['getSoftIronMatrix',['../classmicrostrain__mips__client_1_1ClMicrostainMips.html#a1bfdd1f0a1294d6e86f5ad79e74e03c9',1,'microstrain_mips_client::ClMicrostainMips']]],
+  ['getstandardcostmapname',['getStandardCostmapName',['../classmove__base__z__client_1_1CostmapSwitch.html#ae8635d58b81be774e18eb4afa99413e1',1,'move_base_z_client::CostmapSwitch']]],
   ['getstate',['getState',['../classsmacc_1_1client__bases_1_1ISmaccActionClient.html#a7380270966cec25f03ec288c747a2d7e',1,'smacc::client_bases::ISmaccActionClient::getState()'],['../classsmacc_1_1client__bases_1_1SmaccActionClientBase.html#a97192acd7bb7cac5de0191e700ab72ee',1,'smacc::client_bases::SmaccActionClientBase::getState()'],['../classsmacc_1_1introspection_1_1SmaccStateMachineInfo.html#ab2970707b3eec89f70aba88612ab0ca5',1,'smacc::introspection::SmaccStateMachineInfo::getState()']]],
   ['getstateinfo',['getStateInfo',['../classsmacc_1_1SmaccState.html#ab7825f5db39dcbee4e4384913026d3e2',1,'smacc::SmaccState']]],
   ['getstatelevel',['getStateLevel',['../classsmacc_1_1introspection_1_1SmaccStateInfo.html#a360141a4883f0122a9f5e8b7de456084',1,'smacc::introspection::SmaccStateInfo']]],

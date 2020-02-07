@@ -27,11 +27,13 @@ Collaboration diagram for move\+\_\+base\+\_\+z\+\_\+client\+:\+:Planner\+Switch
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a6f07fd7796bc3c9abf2c219ec33d27d3}{Planner\+Switcher} (std\+::string node\+Handle\+Name)
+\hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a41d7aaa9ae9a94fde424b3997e67f0a8}{Planner\+Switcher} ()
 \item 
 void \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a7688616d66fbfe6486c0cbe77e688114}{set\+Backward\+Planner} ()
 \item 
 void \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a4797022f304538949a2019b351ec47a8}{set\+Forward\+Planner} ()
+\item 
+virtual void \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a6eb5949d2402337291fdc4aaeda2ef87}{initialize} (\hyperlink{classsmacc_1_1ISmaccClient}{smacc\+::\+I\+Smacc\+Client} $\ast$owner) override
 \item 
 void \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_aa31306368ab2a5145c024c0c1a580547}{set\+Default\+Planners} ()
 \end{DoxyCompactItemize}
@@ -66,39 +68,20 @@ Definition at line 19 of file planner\+\_\+switcher.\+h.
 \subsection{Constructor \& Destructor Documentation}
 \index{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher@{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher}!Planner\+Switcher@{Planner\+Switcher}}
 \index{Planner\+Switcher@{Planner\+Switcher}!move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher@{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher}}
-\subsubsection[{\texorpdfstring{Planner\+Switcher(std\+::string node\+Handle\+Name)}{PlannerSwitcher(std::string nodeHandleName)}}]{\setlength{\rightskip}{0pt plus 5cm}move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher\+::\+Planner\+Switcher (
+\subsubsection[{\texorpdfstring{Planner\+Switcher()}{PlannerSwitcher()}}]{\setlength{\rightskip}{0pt plus 5cm}move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher\+::\+Planner\+Switcher (
 \begin{DoxyParamCaption}
-\item[{std\+::string}]{node\+Handle\+Name}
+{}
 \end{DoxyParamCaption}
-)}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_a6f07fd7796bc3c9abf2c219ec33d27d3}{}\label{classmove__base__z__client_1_1PlannerSwitcher_a6f07fd7796bc3c9abf2c219ec33d27d3}
+)}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_a41d7aaa9ae9a94fde424b3997e67f0a8}{}\label{classmove__base__z__client_1_1PlannerSwitcher_a41d7aaa9ae9a94fde424b3997e67f0a8}
 
 
-Definition at line 11 of file planner\+\_\+switcher.\+cpp.
-
-
-
-References dynrecof\+Sub\+\_\+, and dynreconf\+Callback().
+Definition at line 12 of file planner\+\_\+switcher.\+cpp.
 
 
 \begin{DoxyCode}
-12 \{
-13   ros::NodeHandle nh(nodeHandleName);
-14   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a088bde4ce0fece46776a9f4efe417e15}{dynrecofSub\_} = nh.subscribe<dynamic\_reconfigure::Config>(\textcolor{stringliteral}{"/move\_base/parameter\_updates"}, 1, 
-      boost::bind(&\hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a7eacfedc6b6ea404ee8fab062d62a911}{PlannerSwitcher::dynreconfCallback}, \textcolor{keyword}{this}, \_1));
-15 \}
+13 \{
+14 \}
 \end{DoxyCode}
-
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classmove__base__z__client_1_1PlannerSwitcher_a6f07fd7796bc3c9abf2c219ec33d27d3_cgraph}
-\end{center}
-\end{figure}
-
-
 
 
 \subsection{Member Function Documentation}
@@ -111,7 +94,7 @@ Here is the call graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_a7eacfedc6b6ea404ee8fab062d62a911}{}\label{classmove__base__z__client_1_1PlannerSwitcher_a7eacfedc6b6ea404ee8fab062d62a911}
 
 
-Definition at line 66 of file planner\+\_\+switcher.\+cpp.
+Definition at line 72 of file planner\+\_\+switcher.\+cpp.
 
 
 
@@ -119,36 +102,36 @@ References desired\+\_\+global\+\_\+planner\+\_\+, desired\+\_\+local\+\_\+plann
 
 
 
-Referenced by Planner\+Switcher().
+Referenced by initialize().
 
 
 \begin{DoxyCode}
-67 \{
-68   \textcolor{keyword}{auto} gp = std::find\_if(configuration\_update->strs.begin(), configuration\_update->strs.begin(),
-69                          [&](\textcolor{keyword}{const} dynamic\_reconfigure::StrParameter &p) \{
-70                            \textcolor{keywordflow}{return} p.name == \textcolor{stringliteral}{"base\_global\_planner"} && p.value == 
+73 \{
+74   \textcolor{keyword}{auto} gp = std::find\_if(configuration\_update->strs.begin(), configuration\_update->strs.begin(),
+75                          [&](\textcolor{keyword}{const} dynamic\_reconfigure::StrParameter &p) \{
+76                            \textcolor{keywordflow}{return} p.name == \textcolor{stringliteral}{"base\_global\_planner"} && p.value == 
       \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}{desired\_global\_planner\_};
-71                          \});
-72 
-73   \textcolor{keyword}{auto} lp = std::find\_if(configuration\_update->strs.begin(), configuration\_update->strs.begin(),
-74                          [&](\textcolor{keyword}{const} dynamic\_reconfigure::StrParameter &p) \{
-75                            \textcolor{keywordflow}{return} p.name == \textcolor{stringliteral}{"base\_local\_planner"} && p.value == 
+77                          \});
+78 
+79   \textcolor{keyword}{auto} lp = std::find\_if(configuration\_update->strs.begin(), configuration\_update->strs.begin(),
+80                          [&](\textcolor{keyword}{const} dynamic\_reconfigure::StrParameter &p) \{
+81                            \textcolor{keywordflow}{return} p.name == \textcolor{stringliteral}{"base\_local\_planner"} && p.value == 
       \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}{desired\_local\_planner\_};
-76                          \});
-77 
-78   \textcolor{keywordflow}{if} (gp == configuration\_update->strs.end() || lp == configuration\_update->strs.end())
-79   \{
-80     ROS\_INFO(\textcolor{stringliteral}{"[PlannerSwitcher] After planner update it is noticed an incorrect move\_base planner
-       configuration. Resending request."});
-81     \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a74c0b5c21064a868700288e759446ac5}{set\_planners\_mode\_flag} = \textcolor{keyword}{false};
-82     \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a189ac8c027169a111c7d8e14d864752f}{updatePlanners}(\textcolor{keyword}{false});
-83   \}
-84   \textcolor{keywordflow}{else}
+82                          \});
+83 
+84   \textcolor{keywordflow}{if} (gp == configuration\_update->strs.end() || lp == configuration\_update->strs.end())
 85   \{
-86     ROS\_INFO(\textcolor{stringliteral}{"[PlannerSwitcher] Planners correctly configured according to parameter update callback"});
-87     \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a74c0b5c21064a868700288e759446ac5}{set\_planners\_mode\_flag} = \textcolor{keyword}{true};
-88   \}
-89 \}
+86     ROS\_INFO(\textcolor{stringliteral}{"[PlannerSwitcher] After planner update it is noticed an incorrect move\_base planner
+       configuration. Resending request."});
+87     \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a74c0b5c21064a868700288e759446ac5}{set\_planners\_mode\_flag} = \textcolor{keyword}{false};
+88     \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a189ac8c027169a111c7d8e14d864752f}{updatePlanners}(\textcolor{keyword}{false});
+89   \}
+90   \textcolor{keywordflow}{else}
+91   \{
+92     ROS\_INFO(\textcolor{stringliteral}{"[PlannerSwitcher] Planners correctly configured according to parameter update callback"});
+93     \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a74c0b5c21064a868700288e759446ac5}{set\_planners\_mode\_flag} = \textcolor{keyword}{true};
+94   \}
+95 \}
 \end{DoxyCode}
 
 
@@ -174,6 +157,46 @@ Here is the caller graph for this function\+:
 \end{figure}
 
 
+\index{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher@{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher}!initialize@{initialize}}
+\index{initialize@{initialize}!move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher@{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher}}
+\subsubsection[{\texorpdfstring{initialize(smacc\+::\+I\+Smacc\+Client $\ast$owner) override}{initialize(smacc::ISmaccClient *owner) override}}]{\setlength{\rightskip}{0pt plus 5cm}void move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher\+::initialize (
+\begin{DoxyParamCaption}
+\item[{{\bf smacc\+::\+I\+Smacc\+Client} $\ast$}]{owner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_a6eb5949d2402337291fdc4aaeda2ef87}{}\label{classmove__base__z__client_1_1PlannerSwitcher_a6eb5949d2402337291fdc4aaeda2ef87}
+
+
+Reimplemented from \hyperlink{classsmacc_1_1ISmaccComponent_a3378552cb1a86aa26a07c0edc057448b}{smacc\+::\+I\+Smacc\+Component}.
+
+
+
+Definition at line 16 of file planner\+\_\+switcher.\+cpp.
+
+
+
+References dynrecof\+Sub\+\_\+, and dynreconf\+Callback().
+
+
+\begin{DoxyCode}
+17 \{
+18   \textcolor{keyword}{auto} client\_ = \textcolor{keyword}{dynamic\_cast<}ClMoveBaseZ *\textcolor{keyword}{>}(owner);
+19   ros::NodeHandle nh(client\_->name\_);
+20   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a088bde4ce0fece46776a9f4efe417e15}{dynrecofSub\_} = nh.subscribe<dynamic\_reconfigure::Config>(\textcolor{stringliteral}{"/move\_base/parameter\_updates"}, 1, 
+      boost::bind(&\hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a7eacfedc6b6ea404ee8fab062d62a911}{PlannerSwitcher::dynreconfCallback}, \textcolor{keyword}{this}, \_1));
+21 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmove__base__z__client_1_1PlannerSwitcher_a6eb5949d2402337291fdc4aaeda2ef87_cgraph}
+\end{center}
+\end{figure}
+
+
 \index{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher@{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher}!set\+Backward\+Planner@{set\+Backward\+Planner}}
 \index{set\+Backward\+Planner@{set\+Backward\+Planner}!move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher@{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher}}
 \subsubsection[{\texorpdfstring{set\+Backward\+Planner()}{setBackwardPlanner()}}]{\setlength{\rightskip}{0pt plus 5cm}void move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher\+::set\+Backward\+Planner (
@@ -183,7 +206,7 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_a7688616d66fbfe6486c0cbe77e688114}{}\label{classmove__base__z__client_1_1PlannerSwitcher_a7688616d66fbfe6486c0cbe77e688114}
 
 
-Definition at line 17 of file planner\+\_\+switcher.\+cpp.
+Definition at line 23 of file planner\+\_\+switcher.\+cpp.
 
 
 
@@ -195,12 +218,12 @@ Referenced by move\+\_\+base\+\_\+z\+\_\+client\+::\+Cb\+Undo\+Path\+Backwards\+
 
 
 \begin{DoxyCode}
-18 \{
-19   ROS\_INFO(\textcolor{stringliteral}{"[PlannerSwitcher] Planner Switcher: Trying to set BackwardPlanner"});
-20   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}{desired\_global\_planner\_} = \textcolor{stringliteral}{"backward\_global\_planner/BackwardGlobalPlanner"};
-21   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}{desired\_local\_planner\_} = \textcolor{stringliteral}{"backward\_local\_planner/BackwardLocalPlanner"};
-22   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a189ac8c027169a111c7d8e14d864752f}{updatePlanners}();
-23 \}
+24 \{
+25   ROS\_INFO(\textcolor{stringliteral}{"[PlannerSwitcher] Planner Switcher: Trying to set BackwardPlanner"});
+26   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}{desired\_global\_planner\_} = \textcolor{stringliteral}{"backward\_global\_planner/BackwardGlobalPlanner"};
+27   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}{desired\_local\_planner\_} = \textcolor{stringliteral}{"backward\_local\_planner/BackwardLocalPlanner"};
+28   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a189ac8c027169a111c7d8e14d864752f}{updatePlanners}();
+29 \}
 \end{DoxyCode}
 
 
@@ -235,7 +258,7 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_aa31306368ab2a5145c024c0c1a580547}{}\label{classmove__base__z__client_1_1PlannerSwitcher_aa31306368ab2a5145c024c0c1a580547}
 
 
-Definition at line 33 of file planner\+\_\+switcher.\+cpp.
+Definition at line 39 of file planner\+\_\+switcher.\+cpp.
 
 
 
@@ -247,11 +270,11 @@ Referenced by move\+\_\+base\+\_\+z\+\_\+client\+::\+Cb\+Navigate\+Global\+Posit
 
 
 \begin{DoxyCode}
-34 \{
-35   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}{desired\_global\_planner\_} = \textcolor{stringliteral}{"navfn/NavfnROS"};
-36   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}{desired\_local\_planner\_} = \textcolor{stringliteral}{"base\_local\_planner/TrajectoryPlannerROS"};
-37   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a189ac8c027169a111c7d8e14d864752f}{updatePlanners}();
-38 \}
+40 \{
+41   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}{desired\_global\_planner\_} = \textcolor{stringliteral}{"navfn/NavfnROS"};
+42   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}{desired\_local\_planner\_} = \textcolor{stringliteral}{"base\_local\_planner/TrajectoryPlannerROS"};
+43   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a189ac8c027169a111c7d8e14d864752f}{updatePlanners}();
+44 \}
 \end{DoxyCode}
 
 
@@ -286,7 +309,7 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_a4797022f304538949a2019b351ec47a8}{}\label{classmove__base__z__client_1_1PlannerSwitcher_a4797022f304538949a2019b351ec47a8}
 
 
-Definition at line 25 of file planner\+\_\+switcher.\+cpp.
+Definition at line 31 of file planner\+\_\+switcher.\+cpp.
 
 
 
@@ -298,12 +321,12 @@ Referenced by move\+\_\+base\+\_\+z\+\_\+client\+::\+Cb\+Navigate\+Forward\+::on
 
 
 \begin{DoxyCode}
-26 \{
-27   ROS\_INFO(\textcolor{stringliteral}{"[PlannerSwitcher] Planner Switcher: Trying to set ForwardPlanner"});
-28   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}{desired\_global\_planner\_} = \textcolor{stringliteral}{"forward\_global\_planner/ForwardGlobalPlanner"};
-29   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}{desired\_local\_planner\_} = \textcolor{stringliteral}{"forward\_local\_planner/ForwardLocalPlanner"};
-30   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a189ac8c027169a111c7d8e14d864752f}{updatePlanners}();
-31 \}
+32 \{
+33   ROS\_INFO(\textcolor{stringliteral}{"[PlannerSwitcher] Planner Switcher: Trying to set ForwardPlanner"});
+34   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}{desired\_global\_planner\_} = \textcolor{stringliteral}{"forward\_global\_planner/ForwardGlobalPlanner"};
+35   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}{desired\_local\_planner\_} = \textcolor{stringliteral}{"forward\_local\_planner/ForwardLocalPlanner"};
+36   \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a189ac8c027169a111c7d8e14d864752f}{updatePlanners}();
+37 \}
 \end{DoxyCode}
 
 
@@ -338,7 +361,7 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_a189ac8c027169a111c7d8e14d864752f}{}\label{classmove__base__z__client_1_1PlannerSwitcher_a189ac8c027169a111c7d8e14d864752f}
 
 
-Definition at line 40 of file planner\+\_\+switcher.\+cpp.
+Definition at line 46 of file planner\+\_\+switcher.\+cpp.
 
 
 
@@ -350,32 +373,32 @@ Referenced by dynreconf\+Callback(), set\+Backward\+Planner(), set\+Default\+Pla
 
 
 \begin{DoxyCode}
-41 \{
-42   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[PlannerSwitcher] Setting global planner: "} << 
+47 \{
+48   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[PlannerSwitcher] Setting global planner: "} << 
       \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}{desired\_global\_planner\_});
-43   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[PlannerSwitcher] Setting local planner: "} << 
+49   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[PlannerSwitcher] Setting local planner: "} << 
       \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}{desired\_local\_planner\_});
-44 
-45   dynamic\_reconfigure::ReconfigureRequest srv\_req;
-46   dynamic\_reconfigure::ReconfigureResponse srv\_resp;
-47   dynamic\_reconfigure::StrParameter local\_planner, global\_planner;
-48   dynamic\_reconfigure::Config conf;
-49 
-50   local\_planner.name = \textcolor{stringliteral}{"base\_local\_planner"};
-51   local\_planner.value = \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}{desired\_local\_planner\_};
-52   conf.strs.push\_back(local\_planner);
-53 
-54   global\_planner.name = \textcolor{stringliteral}{"base\_global\_planner"};
-55   global\_planner.value = \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}{desired\_global\_planner\_};
-56   conf.strs.push\_back(global\_planner);
-57 
-58   srv\_req.config = conf;
-59   ROS\_INFO(\textcolor{stringliteral}{"seting values of the dynamic reconfigure server"});
-60   ros::service::call(\textcolor{stringliteral}{"/move\_base/set\_parameters"}, srv\_req, srv\_resp);
-61   ros::spinOnce();
-62   ros::Duration(0.5).sleep();
-63   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[PlannerSwitcher] Response: "} << srv\_resp);
-64 \}
+50 
+51   dynamic\_reconfigure::ReconfigureRequest srv\_req;
+52   dynamic\_reconfigure::ReconfigureResponse srv\_resp;
+53   dynamic\_reconfigure::StrParameter local\_planner, global\_planner;
+54   dynamic\_reconfigure::Config conf;
+55 
+56   local\_planner.name = \textcolor{stringliteral}{"base\_local\_planner"};
+57   local\_planner.value = \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}{desired\_local\_planner\_};
+58   conf.strs.push\_back(local\_planner);
+59 
+60   global\_planner.name = \textcolor{stringliteral}{"base\_global\_planner"};
+61   global\_planner.value = \hyperlink{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}{desired\_global\_planner\_};
+62   conf.strs.push\_back(global\_planner);
+63 
+64   srv\_req.config = conf;
+65   ROS\_INFO(\textcolor{stringliteral}{"seting values of the dynamic reconfigure server"});
+66   ros::service::call(\textcolor{stringliteral}{"/move\_base/set\_parameters"}, srv\_req, srv\_resp);
+67   ros::spinOnce();
+68   ros::Duration(0.5).sleep();
+69   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[PlannerSwitcher] Response: "} << srv\_resp);
+70 \}
 \end{DoxyCode}
 
 
@@ -397,7 +420,7 @@ Here is the caller graph for this function\+:
 \subsubsection[{\texorpdfstring{desired\+\_\+global\+\_\+planner\+\_\+}{desired_global_planner_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher\+::desired\+\_\+global\+\_\+planner\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}{}\label{classmove__base__z__client_1_1PlannerSwitcher_a004c15858f0a6b9abcd8211d58a7e34c}
 
 
-Definition at line 30 of file planner\+\_\+switcher.\+h.
+Definition at line 32 of file planner\+\_\+switcher.\+h.
 
 
 
@@ -408,7 +431,7 @@ Referenced by dynreconf\+Callback(), set\+Backward\+Planner(), set\+Default\+Pla
 \subsubsection[{\texorpdfstring{desired\+\_\+local\+\_\+planner\+\_\+}{desired_local_planner_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher\+::desired\+\_\+local\+\_\+planner\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}{}\label{classmove__base__z__client_1_1PlannerSwitcher_ae47bd6c9c70b27cddcb394f26bb9372d}
 
 
-Definition at line 31 of file planner\+\_\+switcher.\+h.
+Definition at line 33 of file planner\+\_\+switcher.\+h.
 
 
 
@@ -419,18 +442,18 @@ Referenced by dynreconf\+Callback(), set\+Backward\+Planner(), set\+Default\+Pla
 \subsubsection[{\texorpdfstring{dynrecof\+Sub\+\_\+}{dynrecofSub_}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher\+::dynrecof\+Sub\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_a088bde4ce0fece46776a9f4efe417e15}{}\label{classmove__base__z__client_1_1PlannerSwitcher_a088bde4ce0fece46776a9f4efe417e15}
 
 
-Definition at line 32 of file planner\+\_\+switcher.\+h.
+Definition at line 34 of file planner\+\_\+switcher.\+h.
 
 
 
-Referenced by Planner\+Switcher().
+Referenced by initialize().
 
 \index{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher@{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher}!set\+\_\+planners\+\_\+mode\+\_\+flag@{set\+\_\+planners\+\_\+mode\+\_\+flag}}
 \index{set\+\_\+planners\+\_\+mode\+\_\+flag@{set\+\_\+planners\+\_\+mode\+\_\+flag}!move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher@{move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher}}
 \subsubsection[{\texorpdfstring{set\+\_\+planners\+\_\+mode\+\_\+flag}{set_planners_mode_flag}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bool} move\+\_\+base\+\_\+z\+\_\+client\+::\+Planner\+Switcher\+::set\+\_\+planners\+\_\+mode\+\_\+flag\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmove__base__z__client_1_1PlannerSwitcher_a74c0b5c21064a868700288e759446ac5}{}\label{classmove__base__z__client_1_1PlannerSwitcher_a74c0b5c21064a868700288e759446ac5}
 
 
-Definition at line 33 of file planner\+\_\+switcher.\+h.
+Definition at line 35 of file planner\+\_\+switcher.\+h.
 
 
 

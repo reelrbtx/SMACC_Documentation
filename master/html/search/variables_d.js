@@ -21,6 +21,6 @@ var searchData=
   ['osname',['osname',['../namespacegenerate__debs.html#ad06322332de29cb27a40152d0cccc2ca',1,'generate_debs']]],
   ['osversion',['osversion',['../namespacegenerate__debs.html#a8a733e2d69887dec0999f519d21420e4',1,'generate_debs']]],
   ['outfile',['outfile',['../namespacegenerate__debs.html#aa1faa039b35b72ee44dc6f106ad12911',1,'generate_debs']]],
-  ['owner_5f',['owner_',['../classsmacc_1_1ISmaccComponent.html#a909590e672450ce0eb0d8facb45c737a',1,'smacc::ISmaccComponent']]],
+  ['owner_5f',['owner_',['../classsmacc_1_1ISmaccComponent.html#a909590e672450ce0eb0d8facb45c737a',1,'smacc::ISmaccComponent::owner_()'],['../classmove__base__z__client_1_1CostmapSwitch.html#a00517c28045327007d7b9335c9b433ed',1,'move_base_z_client::CostmapSwitch::owner_()']]],
   ['ownerstate',['ownerState',['../structsmacc_1_1introspection_1_1SmaccStateReactorInfo.html#a7f79a42095ce284939ca47fb25a14101',1,'smacc::introspection::SmaccStateReactorInfo::ownerState()'],['../classsmacc_1_1StateReactor.html#aabd30af9412a8fea9ec5906f173d9d4a',1,'smacc::StateReactor::ownerState()']]]
 ];

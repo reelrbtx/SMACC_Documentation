@@ -10,7 +10,8 @@ var searchData=
   ['destinystate',['destinyState',['../structsmacc_1_1introspection_1_1SmaccTransitionInfo.html#a041f159a4cd56cfbc005765d093d0d4a',1,'smacc::introspection::SmaccTransitionInfo']]],
   ['devicereportsrv',['deviceReportSrv',['../classmicrostrain__mips__client_1_1ClMicrostainMips.html#a7d7f4bfa828c87c27e1b7cab613e42e1',1,'microstrain_mips_client::ClMicrostainMips']]],
   ['direct',['DIRECT',['../LICENSE_8txt.html#a34cac86a32266331f931bceaa138a96d',1,'LICENSE.txt']]],
+  ['disablereq',['disableReq',['../classmove__base__z__client_1_1CostmapProxy.html#a3b7933e704ce9bab4061d6902d0e961a',1,'move_base_z_client::CostmapProxy']]],
   ['done_5fcb',['done_cb',['../classsmacc_1_1client__bases_1_1SmaccActionClientBase.html#a39fc5030e98f1e30e9919a9d9737b78a',1,'smacc::client_bases::SmaccActionClientBase']]],
   ['duration',['duration',['../classros__timer__client_1_1ClRosTimer.html#a79df7a52481e520ba959f3e6afb0a817',1,'ros_timer_client::ClRosTimer']]],
-  ['dynrecofsub_5f',['dynrecofSub_',['../classmove__base__z__client_1_1PlannerSwitcher.html#a088bde4ce0fece46776a9f4efe417e15',1,'move_base_z_client::PlannerSwitcher']]]
+  ['dynrecofsub_5f',['dynrecofSub_',['../classmove__base__z__client_1_1CostmapProxy.html#a3202a0b1208f7b36c4a707f633d63504',1,'move_base_z_client::CostmapProxy::dynrecofSub_()'],['../classmove__base__z__client_1_1PlannerSwitcher.html#a088bde4ce0fece46776a9f4efe417e15',1,'move_base_z_client::PlannerSwitcher::dynrecofSub_()']]]
 ];
