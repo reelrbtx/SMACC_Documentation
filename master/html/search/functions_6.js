@@ -1,6 +1,7 @@
 var searchData=
 [
   ['generatetrajectory',['generateTrajectory',['../classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner.html#a5da53f29e43639a9af5ba3b640e6bf8c',1,'move_base_z_client::backward_local_planner::BackwardLocalPlanner::generateTrajectory()'],['../classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner.html#af0f99683368650fd03c04079afd8c806',1,'move_base_z_client::forward_local_planner::ForwardLocalPlanner::generateTrajectory()'],['../classmove__base__z__client_1_1__local__planner_1_1ForwardLocalPlanner.html#a69f6dec419c8d18a5a236981e64452d0',1,'move_base_z_client::_local_planner::ForwardLocalPlanner::generateTrajectory()']]],
+  ['get',['get',['../classmove__base__z__client_1_1Pose.html#aff06e2c3d38159f35829fb9285a110b6',1,'move_base_z_client::Pose']]],
   ['get_5fidentified_5fpackages',['get_identified_packages',['../namespacegenerate__debs.html#aa91b87c6d9c3ed04015845cc9298431a',1,'generate_debs']]],
   ['getacceladaptivevals',['getAccelAdaptiveVals',['../classmicrostrain__mips__client_1_1ClMicrostainMips.html#a29413fde4bc81d0a61ae9b7dba692182',1,'microstrain_mips_client::ClMicrostainMips']]],
   ['getaccelbias',['getAccelBias',['../classmicrostrain__mips__client_1_1ClMicrostainMips.html#a21083a65193b40c4121814e9d17a7a29',1,'microstrain_mips_client::ClMicrostainMips']]],
@@ -14,6 +15,7 @@ var searchData=
   ['getclients',['getClients',['../classsmacc_1_1ISmaccOrthogonal.html#a83f1d5390ec41d91566e6f034b25b7d9',1,'smacc::ISmaccOrthogonal']]],
   ['getcomplementaryfilter',['getComplementaryFilter',['../classmicrostrain__mips__client_1_1ClMicrostainMips.html#afe0f9a7fe9301e0932a7d8786c905ffb',1,'microstrain_mips_client::ClMicrostainMips']]],
   ['getcomponent',['getComponent',['../classsmacc_1_1ISmaccClient.html#adef78db601749ca63c19e74a27cb88cc',1,'smacc::ISmaccClient']]],
+  ['getcomponents',['getComponents',['../classsmacc_1_1ISmaccClient.html#ac6db21c1ec7072178e9f7c721908e07d',1,'smacc::ISmaccClient']]],
   ['getconingscullingcomp',['getConingScullingComp',['../classmicrostrain__mips__client_1_1ClMicrostainMips.html#ae2c3a98a2f3a2fcc92fe750d885370f4',1,'microstrain_mips_client::ClMicrostainMips']]],
   ['getcurrentstate',['getCurrentState',['../classsmacc_1_1SmaccClientBehavior.html#abf6773e4dd948f932f11a346dd6e7c2c',1,'smacc::SmaccClientBehavior::getCurrentState()'],['../classsmacc_1_1ISmaccStateMachine.html#ad150bf5c87f3c8f3cadd716e571d858e',1,'smacc::ISmaccStateMachine::getCurrentState()']]],
   ['getcurrentstatecounter',['getCurrentStateCounter',['../classsmacc_1_1ISmaccStateMachine.html#a03966e531cefc1e096bffa46111871d2',1,'smacc::ISmaccStateMachine']]],

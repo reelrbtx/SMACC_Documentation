@@ -37,7 +37,7 @@ void \hyperlink{classsm__dance__bot__strikes__back_1_1OrNavigation_abd8811831075
 \subsection{Detailed Description}
 
 
-Definition at line 13 of file or\+\_\+navigation.\+h.
+Definition at line 14 of file or\+\_\+navigation.\+h.
 
 
 
@@ -51,7 +51,7 @@ Definition at line 13 of file or\+\_\+navigation.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classsm__dance__bot__strikes__back_1_1OrNavigation_abd8811831075be61ad28fe4a68fc738d}{}\label{classsm__dance__bot__strikes__back_1_1OrNavigation_abd8811831075be61ad28fe4a68fc738d}
 
 
-Definition at line 35 of file or\+\_\+navigation.\+h.
+Definition at line 38 of file or\+\_\+navigation.\+h.
 
 
 
@@ -59,16 +59,16 @@ References move\+\_\+base\+\_\+z\+\_\+client\+::\+Waypoint\+Navigator\+::load\+W
 
 
 \begin{DoxyCode}
-36     \{
-37         \textcolor{comment}{// if it is the first time and the waypoints navigator is not configured}
-38 
-39         std::string planfilepath;
-40         ros::NodeHandle nh(\textcolor{stringliteral}{"~"});
-41         \textcolor{keywordflow}{if} (nh.getParam(\textcolor{stringliteral}{"/sm\_dance\_bot\_strikes\_back/waypoints\_plan"}, planfilepath))
-42         \{
-43             waypointsNavigator->\hyperlink{classmove__base__z__client_1_1WaypointNavigator_af56d146945280a8660805aad7eb3aed9}{loadWayPointsFromFile}(planfilepath);
-44         \}
-45     \}
+39     \{
+40         \textcolor{comment}{// if it is the first time and the waypoints navigator is not configured}
+41 
+42         std::string planfilepath;
+43         ros::NodeHandle nh(\textcolor{stringliteral}{"~"});
+44         \textcolor{keywordflow}{if} (nh.getParam(\textcolor{stringliteral}{"/sm\_dance\_bot\_strikes\_back/waypoints\_plan"}, planfilepath))
+45         \{
+46             waypointsNavigator->\hyperlink{classmove__base__z__client_1_1WaypointNavigator_af56d146945280a8660805aad7eb3aed9}{loadWayPointsFromFile}(planfilepath);
+47         \}
+48     \}
 \end{DoxyCode}
 
 
@@ -95,28 +95,30 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccOrthogonal_a6bb31c620cb64dd7b8
 
 
 
-Definition at line 16 of file or\+\_\+navigation.\+h.
+Definition at line 17 of file or\+\_\+navigation.\+h.
 
 
 \begin{DoxyCode}
-17     \{
-18         \textcolor{keyword}{auto} movebaseClient = this->createClient<ClMoveBaseZ>();
-19         movebaseClient->initialize();
-20 
-21         \textcolor{comment}{// create planner switcher}
-22         movebaseClient->createComponent<\hyperlink{classmove__base__z__client_1_1PlannerSwitcher}{PlannerSwitcher}>();
+18     \{
+19         \textcolor{keyword}{auto} movebaseClient = this->createClient<ClMoveBaseZ>();
+20         movebaseClient->initialize();
+21 
+22         movebaseClient->createComponent<\hyperlink{classmove__base__z__client_1_1Pose}{Pose}>();
 23 
-24         \textcolor{comment}{// create odom tracker}
-25         movebaseClient->createComponent<OdomTracker>(\textcolor{stringliteral}{"/"});
+24         \textcolor{comment}{// create planner switcher}
+25         movebaseClient->createComponent<\hyperlink{classmove__base__z__client_1_1PlannerSwitcher}{PlannerSwitcher}>();
 26 
-27         \textcolor{comment}{// create waypoints navigator component}
-28         \textcolor{keyword}{auto} waypointsNavigator = movebaseClient->createComponent<
+27         \textcolor{comment}{// create odom tracker}
+28         movebaseClient->createComponent<OdomTracker>(\textcolor{stringliteral}{"/"});
+29 
+30         \textcolor{comment}{// create waypoints navigator component}
+31         \textcolor{keyword}{auto} waypointsNavigator = movebaseClient->createComponent<
       \hyperlink{classmove__base__z__client_1_1WaypointNavigator}{WaypointNavigator}>();
-29         \hyperlink{classsm__dance__bot__strikes__back_1_1OrNavigation_abd8811831075be61ad28fe4a68fc738d}{loadWaypointsFromYaml}(waypointsNavigator);
-30 
-31         \textcolor{comment}{// change this to skip some points of the yaml file, default = 0}
-32         waypointsNavigator->currentWaypoint\_ = 3;
-33     \}
+32         \hyperlink{classsm__dance__bot__strikes__back_1_1OrNavigation_abd8811831075be61ad28fe4a68fc738d}{loadWaypointsFromYaml}(waypointsNavigator);
+33 
+34         \textcolor{comment}{// change this to skip some points of the yaml file, default = 0}
+35         waypointsNavigator->currentWaypoint\_ = 3;
+36     \}
 \end{DoxyCode}
 
 
