@@ -55,7 +55,7 @@ Definition at line 6 of file sti\+\_\+spattern\+\_\+rotate\+\_\+2.\+h.
 \subsubsection[{\texorpdfstring{reactions}{reactions}}]{\setlength{\rightskip}{0pt plus 5cm}typedef mpl\+::list$<$ Transition$<$Ev\+Action\+Succeeded$<${\bf Cl\+Move\+BaseZ}, {\bf Or\+Navigation}$>$, {\bf Sti\+S\+Pattern\+Forward2}$>$, Transition$<$Ev\+Action\+Aborted$<${\bf Cl\+Move\+BaseZ}, {\bf Or\+Navigation}$>$, {\bf Sti\+S\+Pattern\+Forward1}$>$ $>$ {\bf sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Rotate2\+::reactions}}\hypertarget{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternRotate2_a78da9524dc7c70a846265f1fae9a2336}{}\label{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternRotate2_a78da9524dc7c70a846265f1fae9a2336}
 
 
-Definition at line 16 of file sti\+\_\+spattern\+\_\+rotate\+\_\+2.\+h.
+Definition at line 17 of file sti\+\_\+spattern\+\_\+rotate\+\_\+2.\+h.
 
 
 
@@ -69,15 +69,30 @@ Definition at line 16 of file sti\+\_\+spattern\+\_\+rotate\+\_\+2.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternRotate2_a246c58d4d76e3250956ad024ceaed476}{}\label{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternRotate2_a246c58d4d76e3250956ad024ceaed476}
 
 
-Definition at line 32 of file sti\+\_\+spattern\+\_\+rotate\+\_\+2.\+h.
+Definition at line 26 of file sti\+\_\+spattern\+\_\+rotate\+\_\+2.\+h.
 
 
 \begin{DoxyCode}
-33     \{
-34         \textcolor{keyword}{auto} &superstate = this->context<SS>();
-35         ROS\_INFO(\textcolor{stringliteral}{"[StiSPatternRotate] SpatternRotate rotate: SS current iteration: %d/%d"}, superstate.
+27     \{
+28 
+29         \textcolor{keyword}{auto} &superstate = this->context<SS>();
+30         ROS\_INFO(\textcolor{stringliteral}{"[StiSPatternRotate] SpatternRotate rotate: SS current iteration: %d/%d"}, superstate.
       iteration\_count, SS::total\_iterations());
-36     \}
+31 
+32         \textcolor{keywordtype}{float} offset = 0;
+33         \textcolor{keyword}{auto} absoluteRotateBehavior = this->getOrthogonal<OrNavigation>()->\textcolor{keyword}{template} 
+      getClientBehavior<CbAbsoluteRotate>();
+34 
+35 
+36         \textcolor{keywordflow}{if} (superstate.direction() == TDirection::RIGHT)
+37         \{
+38             absoluteRotateBehavior->absoluteGoalAngleDegree = superstate.initialStateAngle - 90 - offset;
+39         \}
+40         \textcolor{keywordflow}{else}
+41         \{
+42             absoluteRotateBehavior->absoluteGoalAngleDegree = superstate.initialStateAngle + 90 + offset;
+43         \}
+44     \}
 \end{DoxyCode}
 \index{sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Rotate2@{sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Rotate2}!static\+Configure@{static\+Configure}}
 \index{static\+Configure@{static\+Configure}!sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Rotate2@{sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Rotate2}}
@@ -88,21 +103,14 @@ Definition at line 32 of file sti\+\_\+spattern\+\_\+rotate\+\_\+2.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternRotate2_ae1c0b394a08a0acb4fbc1963b686ec86}{}\label{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternRotate2_ae1c0b394a08a0acb4fbc1963b686ec86}
 
 
-Definition at line 19 of file sti\+\_\+spattern\+\_\+rotate\+\_\+2.\+h.
+Definition at line 20 of file sti\+\_\+spattern\+\_\+rotate\+\_\+2.\+h.
 
 
 \begin{DoxyCode}
-20     \{
-21         \textcolor{keywordtype}{float} offset = 7;
-22         \textcolor{keywordtype}{float} angle = 0;
-23         \textcolor{keywordflow}{if} (SS::direction() == TDirection::LEFT)
-24             angle = 90 + offset ;
-25         \textcolor{keywordflow}{else}
-26             angle = -90 - offset;
-27 
-28         configure\_orthogonal<OrNavigation, CbRotate>(angle);
-29         configure\_orthogonal<OrLED, CbLEDOff>();
-30     \}
+21     \{
+22         configure\_orthogonal<OrNavigation, CbAbsoluteRotate>();
+23         configure\_orthogonal<OrLED, CbLEDOff>();
+24     \}
 \end{DoxyCode}
 
 

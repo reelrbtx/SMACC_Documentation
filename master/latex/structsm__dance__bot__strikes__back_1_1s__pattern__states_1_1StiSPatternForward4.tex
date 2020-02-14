@@ -55,7 +55,7 @@ Definition at line 6 of file sti\+\_\+spattern\+\_\+forward\+\_\+4.\+h.
 \subsubsection[{\texorpdfstring{reactions}{reactions}}]{\setlength{\rightskip}{0pt plus 5cm}typedef mpl\+::list$<$ Transition$<$Ev\+Action\+Succeeded$<${\bf Cl\+Move\+BaseZ}, {\bf Or\+Navigation}$>$, {\bf Sti\+S\+Pattern\+Loop\+Start}$>$, Transition$<$Ev\+Action\+Aborted$<${\bf Cl\+Move\+BaseZ}, {\bf Or\+Navigation}$>$, {\bf Sti\+S\+Pattern\+Rotate4}$>$ $>$ {\bf sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Forward4\+::reactions}}\hypertarget{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternForward4_a187d9fec6409a071261a66b7fabb54a5}{}\label{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternForward4_a187d9fec6409a071261a66b7fabb54a5}
 
 
-Definition at line 16 of file sti\+\_\+spattern\+\_\+forward\+\_\+4.\+h.
+Definition at line 17 of file sti\+\_\+spattern\+\_\+forward\+\_\+4.\+h.
 
 
 
@@ -69,27 +69,32 @@ Definition at line 16 of file sti\+\_\+spattern\+\_\+forward\+\_\+4.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternForward4_a4701f0f01646b6ab3926751786b987f6}{}\label{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternForward4_a4701f0f01646b6ab3926751786b987f6}
 
 
-Definition at line 23 of file sti\+\_\+spattern\+\_\+forward\+\_\+4.\+h.
+Definition at line 26 of file sti\+\_\+spattern\+\_\+forward\+\_\+4.\+h.
 
 
 
-References smacc\+::\+I\+Smacc\+State\+::requires\+Client().
+References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), and smacc\+::\+I\+Smacc\+State\+::requires\+Client().
 
 
 \begin{DoxyCode}
-24   \{
-25     \textcolor{keywordtype}{double} extrasecurityMargin = 0.2;
-26     
-27     \textcolor{keyword}{auto} forwardBehavior = this->configure<OrNavigation, CbNavigateForward>();
-28     this->configure<OrLED, CbLEDOn>();
-29 
-30     cl\_lidar::ClLidarSensor *lidarClient;
-31     this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(lidarClient);
-32     \textcolor{keyword}{auto} lidarData = lidarClient->getComponent<CpLidarSensorData>();
+27   \{
+28     \textcolor{keyword}{auto} &superstate = this->context<SS>();
+29     \textcolor{keywordtype}{double} extrasecurityMargin = 0.2;
+30 
+31     \textcolor{keyword}{auto} forwardBehavior = this->getOrthogonal<OrNavigation>()
+32                                ->getClientBehavior<CbNavigateForward>();
 33 
-34     forwardBehavior->forwardDistance = lidarData->forwardObstacleDistance - extrasecurityMargin \textcolor{comment}{/*extra
-       security margin for easy dynamic implementation of dynamic-smotion*/};
-35   \}
+34     cl\_lidar::ClLidarSensor *lidarClient;
+35     this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(lidarClient);
+36     \textcolor{keyword}{auto} lidarData = lidarClient->getComponent<CpLidarSensorData>();
+37 
+38     \textcolor{keywordflow}{if} (!std::isnan(lidarData->forwardObstacleDistance))
+39       forwardBehavior->forwardDistance = lidarData->forwardObstacleDistance - extrasecurityMargin; \textcolor{comment}{/*extra
+       security margin for easy dynamic implementation of dynamic-smotion*/}
+40 
+41     \textcolor{keywordflow}{else}
+42       forwardBehavior->forwardDistance = superstate.pitch2\_lenght\_meters();
+43   \}
 \end{DoxyCode}
 
 
@@ -112,12 +117,14 @@ Here is the call graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternForward4_a9f9603945ef905361aa95dcc171d684b}{}\label{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternForward4_a9f9603945ef905361aa95dcc171d684b}
 
 
-Definition at line 19 of file sti\+\_\+spattern\+\_\+forward\+\_\+4.\+h.
+Definition at line 20 of file sti\+\_\+spattern\+\_\+forward\+\_\+4.\+h.
 
 
 \begin{DoxyCode}
-20   \{
-21   \}
+21   \{
+22     configure\_orthogonal<OrNavigation, CbNavigateForward>();
+23     configure\_orthogonal<OrLED, CbLEDOn>();
+24   \}
 \end{DoxyCode}
 
 

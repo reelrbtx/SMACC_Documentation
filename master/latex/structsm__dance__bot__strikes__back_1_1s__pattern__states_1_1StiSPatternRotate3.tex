@@ -55,7 +55,7 @@ Definition at line 6 of file sti\+\_\+spattern\+\_\+rotate\+\_\+3.\+h.
 \subsubsection[{\texorpdfstring{reactions}{reactions}}]{\setlength{\rightskip}{0pt plus 5cm}typedef mpl\+::list$<$ Transition$<$Ev\+Action\+Succeeded$<${\bf Cl\+Move\+BaseZ}, {\bf Or\+Navigation}$>$, {\bf Sti\+S\+Pattern\+Forward3}$>$, Transition$<$Ev\+Action\+Aborted$<${\bf Cl\+Move\+BaseZ}, {\bf Or\+Navigation}$>$, {\bf Sti\+S\+Pattern\+Forward2}$>$ $>$ {\bf sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Rotate3\+::reactions}}\hypertarget{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternRotate3_a01494011589ff9f082011cd9a33574e6}{}\label{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternRotate3_a01494011589ff9f082011cd9a33574e6}
 
 
-Definition at line 16 of file sti\+\_\+spattern\+\_\+rotate\+\_\+3.\+h.
+Definition at line 14 of file sti\+\_\+spattern\+\_\+rotate\+\_\+3.\+h.
 
 
 
@@ -78,16 +78,22 @@ Definition at line 23 of file sti\+\_\+spattern\+\_\+rotate\+\_\+3.\+h.
 26         ROS\_INFO(\textcolor{stringliteral}{"[StiSPatternRotate] SpatternRotate rotate: SS current iteration: %d/%d"}, superstate.
       iteration\_count, SS::total\_iterations());
 27 
-28         \textcolor{keywordtype}{float} offset = 7;
-29         \textcolor{keywordtype}{float} angle = 0;
-30         \textcolor{keywordflow}{if} (superstate.direction() == TDirection::LEFT)
-31             angle = -90 - offset;
-32         \textcolor{keywordflow}{else}
-33             angle = +90 + offset;
-34 
-35         this->configure<OrNavigation, CbRotate>(angle);
-36         this->configure<OrLED, CbLEDOff>();
-37     \}
+28         \textcolor{keywordtype}{float} offset = 13.5;
+29         \textcolor{keyword}{auto} absoluteRotateBehavior = this->getOrthogonal<OrNavigation>()->\textcolor{keyword}{template} 
+      getClientBehavior<CbAbsoluteRotate>();
+30 
+31 
+32         \textcolor{keywordflow}{if} (superstate.direction() == TDirection::RIGHT)
+33         \{
+34             \textcolor{comment}{// - offset because we are looking to the north and we have to turn clockwise}
+35             absoluteRotateBehavior->absoluteGoalAngleDegree = superstate.initialStateAngle + offset;
+36         \}
+37         \textcolor{keywordflow}{else}
+38         \{
+39             \textcolor{comment}{// - offset because we are looking to the south and we have to turn counter-clockwise}
+40             absoluteRotateBehavior->absoluteGoalAngleDegree = superstate.initialStateAngle - offset;
+41         \}
+42     \}
 \end{DoxyCode}
 \index{sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Rotate3@{sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Rotate3}!static\+Configure@{static\+Configure}}
 \index{static\+Configure@{static\+Configure}!sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Rotate3@{sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Rotate3}}
@@ -98,11 +104,13 @@ Definition at line 23 of file sti\+\_\+spattern\+\_\+rotate\+\_\+3.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternRotate3_a8758fe71e4672dd14e6d2fd270828558}{}\label{structsm__dance__bot__strikes__back_1_1s__pattern__states_1_1StiSPatternRotate3_a8758fe71e4672dd14e6d2fd270828558}
 
 
-Definition at line 19 of file sti\+\_\+spattern\+\_\+rotate\+\_\+3.\+h.
+Definition at line 17 of file sti\+\_\+spattern\+\_\+rotate\+\_\+3.\+h.
 
 
 \begin{DoxyCode}
-20     \{
+18     \{
+19         configure\_orthogonal<OrNavigation, CbAbsoluteRotate>();
+20         configure\_orthogonal<OrLED, CbLEDOff>();
 21     \}
 \end{DoxyCode}
 
