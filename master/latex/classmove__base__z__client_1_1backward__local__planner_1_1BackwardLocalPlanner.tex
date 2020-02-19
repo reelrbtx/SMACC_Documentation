@@ -166,7 +166,7 @@ Definition at line 30 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp
 )\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_af91f457b97d26abf9b9e2cfcbeb9d7ed}{}\label{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_af91f457b97d26abf9b9e2cfcbeb9d7ed}
 
 
-Definition at line 560 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 558 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -174,13 +174,13 @@ Referenced by generate\+Trajectory().
 
 
 \begin{DoxyCode}
-561 \{
-562     Eigen::Vector3f new\_pos = Eigen::Vector3f::Zero();
-563     new\_pos[0] = pos[0] + (vel[0] * cos(pos[2]) + vel[1] * cos(M\_PI\_2 + pos[2])) * dt;
-564     new\_pos[1] = pos[1] + (vel[0] * sin(pos[2]) + vel[1] * sin(M\_PI\_2 + pos[2])) * dt;
-565     new\_pos[2] = pos[2] + vel[2] * dt;
-566     \textcolor{keywordflow}{return} new\_pos;
-567 \}
+559 \{
+560     Eigen::Vector3f new\_pos = Eigen::Vector3f::Zero();
+561     new\_pos[0] = pos[0] + (vel[0] * cos(pos[2]) + vel[1] * cos(M\_PI\_2 + pos[2])) * dt;
+562     new\_pos[1] = pos[1] + (vel[0] * sin(pos[2]) + vel[1] * sin(M\_PI\_2 + pos[2])) * dt;
+563     new\_pos[2] = pos[2] + vel[2] * dt;
+564     \textcolor{keywordflow}{return} new\_pos;
+565 \}
 \end{DoxyCode}
 
 
@@ -315,105 +315,104 @@ References alpha\+\_\+offset\+\_\+, backwards\+Plan\+Path\+\_\+, betta\+\_\+offs
 346                                       << \textcolor{stringliteral}{" gamma:"} << gamma);
 347 
 348     \textcolor{comment}{//cmd\_vel.linear.x=0;}
-349     \textcolor{comment}{//cmd\_vel.angular.z = 0;}
-350 
-351     tf::Stamped<tf::Pose> global\_pose;
-352     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a865618f84238fe6ff437d1e38ec5fec0}{costmapRos\_}->getRobotPose(global\_pose);
-353 
-354     \textcolor{keyword}{auto} *costmap2d = \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a865618f84238fe6ff437d1e38ec5fec0}{costmapRos\_}->getCostmap();
-355     \textcolor{keyword}{auto} yaw = tf::getYaw(global\_pose.getRotation());
+349     \textcolor{comment}{//cmd\_vel.angular.z = 0;    }
+350     tf::Stamped<tf::Pose> global\_pose = \hyperlink{namespacemove__base__z__client_1_1backward__local__planner_a80dbd10807e5f70adfcd0ff4dcb7c1db}{optionalRobotPose}(
+      \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a865618f84238fe6ff437d1e38ec5fec0}{costmapRos\_});
+351 
+352     \textcolor{keyword}{auto} *costmap2d = \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a865618f84238fe6ff437d1e38ec5fec0}{costmapRos\_}->getCostmap();
+353     \textcolor{keyword}{auto} yaw = tf::getYaw(global\_pose.getRotation());
+354 
+355     \textcolor{keyword}{auto} &pos = global\_pose.getOrigin();
 356 
-357     \textcolor{keyword}{auto} &pos = global\_pose.getOrigin();
-358 
-359     Eigen::Vector3f currentpose(pos.x(), pos.y(), yaw);
-360     Eigen::Vector3f currentvel(cmd\_vel.linear.x, cmd\_vel.linear.y, cmd\_vel.angular.z);
-361     std::vector<Eigen::Vector3f> trajectory;
-362     this->\hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a5da53f29e43639a9af5ba3b640e6bf8c}{generateTrajectory}(currentpose, currentvel, 0.8 \textcolor{comment}{/*meters*/}, M\_PI / 8 \textcolor{comment}{/*rads*/}, 
+357     Eigen::Vector3f currentpose(pos.x(), pos.y(), yaw);
+358     Eigen::Vector3f currentvel(cmd\_vel.linear.x, cmd\_vel.linear.y, cmd\_vel.angular.z);
+359     std::vector<Eigen::Vector3f> trajectory;
+360     this->\hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a5da53f29e43639a9af5ba3b640e6bf8c}{generateTrajectory}(currentpose, currentvel, 0.8 \textcolor{comment}{/*meters*/}, M\_PI / 8 \textcolor{comment}{/*rads*/}, 
       3.0 \textcolor{comment}{/*seconds*/}, 0.05 \textcolor{comment}{/*seconds*/}, trajectory);
-363 
-364     \textcolor{comment}{// check plan rejection}
-365     \textcolor{keywordtype}{bool} aceptedplan = \textcolor{keyword}{true};
-366 
-367     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
-368     
-369     \textcolor{keywordflow}{if} (\hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a451add2af7d6d83a7415277311b3ed04}{backwardsPlanPath\_}.size() > 0)
-370     \{
-371         \textcolor{keyword}{auto} &finalgoalpose = \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a451add2af7d6d83a7415277311b3ed04}{backwardsPlanPath\_}.back();
-372         
-373         \textcolor{keywordtype}{int} i = 0;
-374         \textcolor{comment}{// ROS\_INFO\_STREAM("lplanner goal: " << finalgoalpose.pose.position);}
-375         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
-376         \{
-377             \textcolor{keywordtype}{float} dx = p[0] - finalgoalpose.pose.position.x;
-378             \textcolor{keywordtype}{float} dy = p[1] - finalgoalpose.pose.position.y;
-379 
-380             \textcolor{keywordtype}{float} dst = sqrt(dx * dx + dy * dy);
-381             \textcolor{keywordflow}{if} (dst < \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a89ab1ee7283a474dc19970789f51c087}{xy\_goal\_tolerance\_} )
-382             \{
-383                 ROS\_INFO(\textcolor{stringliteral}{"trajectory checking skipped, goal reached"});
-384                 \textcolor{keywordflow}{break};
-385             \}
-386 
-387             costmap2d->worldToMap(p[0], p[1], mx, my);
-388             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cost = costmap2d->getCost(mx, my);
-389 
-390             ROS\_INFO(\textcolor{stringliteral}{"checking cost pt %d [%lf, %lf] cell[%d,%d] = %d"}, i, p[0], p[1], mx, my, cost);
-391             ROS\_INFO\_STREAM(\textcolor{stringliteral}{"cost: "} << cost);
-392 
-393             \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
-394             \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
-395             \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
-396             \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
-397 
-398             \textcolor{keywordflow}{if} (costmap2d->getCost(mx, my) >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
-399             \{
-400                 aceptedplan = \textcolor{keyword}{false};
-401                 ROS\_WARN\_STREAM (\textcolor{stringliteral}{"ABORTED LOCAL PLAN BECAUSE OBSTACLE DETEDTED at point "} << i<<\textcolor{stringliteral}{"/"} << 
+361 
+362     \textcolor{comment}{// check plan rejection}
+363     \textcolor{keywordtype}{bool} aceptedplan = \textcolor{keyword}{true};
+364 
+365     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
+366     
+367     \textcolor{keywordflow}{if} (\hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a451add2af7d6d83a7415277311b3ed04}{backwardsPlanPath\_}.size() > 0)
+368     \{
+369         \textcolor{keyword}{auto} &finalgoalpose = \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a451add2af7d6d83a7415277311b3ed04}{backwardsPlanPath\_}.back();
+370         
+371         \textcolor{keywordtype}{int} i = 0;
+372         \textcolor{comment}{// ROS\_INFO\_STREAM("lplanner goal: " << finalgoalpose.pose.position);}
+373         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
+374         \{
+375             \textcolor{keywordtype}{float} dx = p[0] - finalgoalpose.pose.position.x;
+376             \textcolor{keywordtype}{float} dy = p[1] - finalgoalpose.pose.position.y;
+377 
+378             \textcolor{keywordtype}{float} dst = sqrt(dx * dx + dy * dy);
+379             \textcolor{keywordflow}{if} (dst < \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a89ab1ee7283a474dc19970789f51c087}{xy\_goal\_tolerance\_} )
+380             \{
+381                 ROS\_INFO(\textcolor{stringliteral}{"trajectory checking skipped, goal reached"});
+382                 \textcolor{keywordflow}{break};
+383             \}
+384 
+385             costmap2d->worldToMap(p[0], p[1], mx, my);
+386             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cost = costmap2d->getCost(mx, my);
+387 
+388             ROS\_INFO(\textcolor{stringliteral}{"checking cost pt %d [%lf, %lf] cell[%d,%d] = %d"}, i, p[0], p[1], mx, my, cost);
+389             ROS\_INFO\_STREAM(\textcolor{stringliteral}{"cost: "} << cost);
+390 
+391             \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
+392             \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
+393             \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
+394             \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
+395 
+396             \textcolor{keywordflow}{if} (costmap2d->getCost(mx, my) >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
+397             \{
+398                 aceptedplan = \textcolor{keyword}{false};
+399                 ROS\_WARN\_STREAM (\textcolor{stringliteral}{"ABORTED LOCAL PLAN BECAUSE OBSTACLE DETEDTED at point "} << i<<\textcolor{stringliteral}{"/"} << 
       trajectory.size() << std::endl << p[0] << \textcolor{stringliteral}{", "} << p[1]);
-402                 \textcolor{keywordflow}{break};
-403             \}
-404             i++;
-405         \}
-406     \}
-407     \textcolor{keywordflow}{else}
-408     \{
-409         ROS\_WARN(\textcolor{stringliteral}{"[Abort local] Backwards global plan size: %ld"}, 
+400                 \textcolor{keywordflow}{break};
+401             \}
+402             i++;
+403         \}
+404     \}
+405     \textcolor{keywordflow}{else}
+406     \{
+407         ROS\_WARN(\textcolor{stringliteral}{"[Abort local] Backwards global plan size: %ld"}, 
       \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a451add2af7d6d83a7415277311b3ed04}{backwardsPlanPath\_}.size());
-410         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-411     \}
-412 
-413     \textcolor{keywordflow}{if} (aceptedplan)
-414     \{
-415         \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a6969156ab6f82e03418987af4c5bd589}{waiting\_} = \textcolor{keyword}{false};
-416         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-417     \}
-418     \textcolor{keywordflow}{else}
-419     \{
-420         \textcolor{comment}{// stop and wait}
-421         cmd\_vel.linear.x = 0;
-422         cmd\_vel.angular.z = 0;
-423 
-424         \textcolor{keywordflow}{if} (\hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a6969156ab6f82e03418987af4c5bd589}{waiting\_} == \textcolor{keyword}{false})
-425         \{
-426             \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a6969156ab6f82e03418987af4c5bd589}{waiting\_} = \textcolor{keyword}{true};
-427             \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_aea0e5312bd482daafc0b8779efaf56a0}{waitingStamp\_} = ros::Time::now();
-428             ROS\_WARN(\textcolor{stringliteral}{"[Not accepted local plan] starting countdown"});
-429         \}
-430         \textcolor{keywordflow}{else}
-431         \{
-432             \textcolor{keyword}{auto} waitingduration = ros::Time::now() - \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_aea0e5312bd482daafc0b8779efaf56a0}{waitingStamp\_};
-433 
-434             \textcolor{keywordflow}{if} (waitingduration > this->\hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a682a688c42630a6ada49ab462cec38da}{waitingTimeout\_})
-435             \{
-436                 ROS\_WARN(\textcolor{stringliteral}{"[Abort local] timeout! duration %lf/%f"}, waitingduration.toSec(), 
+408         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+409     \}
+410 
+411     \textcolor{keywordflow}{if} (aceptedplan)
+412     \{
+413         \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a6969156ab6f82e03418987af4c5bd589}{waiting\_} = \textcolor{keyword}{false};
+414         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+415     \}
+416     \textcolor{keywordflow}{else}
+417     \{
+418         \textcolor{comment}{// stop and wait}
+419         cmd\_vel.linear.x = 0;
+420         cmd\_vel.angular.z = 0;
+421 
+422         \textcolor{keywordflow}{if} (\hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a6969156ab6f82e03418987af4c5bd589}{waiting\_} == \textcolor{keyword}{false})
+423         \{
+424             \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a6969156ab6f82e03418987af4c5bd589}{waiting\_} = \textcolor{keyword}{true};
+425             \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_aea0e5312bd482daafc0b8779efaf56a0}{waitingStamp\_} = ros::Time::now();
+426             ROS\_WARN(\textcolor{stringliteral}{"[Not accepted local plan] starting countdown"});
+427         \}
+428         \textcolor{keywordflow}{else}
+429         \{
+430             \textcolor{keyword}{auto} waitingduration = ros::Time::now() - \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_aea0e5312bd482daafc0b8779efaf56a0}{waitingStamp\_};
+431 
+432             \textcolor{keywordflow}{if} (waitingduration > this->\hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a682a688c42630a6ada49ab462cec38da}{waitingTimeout\_})
+433             \{
+434                 ROS\_WARN(\textcolor{stringliteral}{"[Abort local] timeout! duration %lf/%f"}, waitingduration.toSec(), 
       \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a682a688c42630a6ada49ab462cec38da}{waitingTimeout\_}.toSec());
-437                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-438             \}
-439         \}
-440 
-441         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-442     \}
-443 \}
+435                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+436             \}
+437         \}
+438 
+439         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+440     \}
+441 \}
 \end{DoxyCode}
 
 
@@ -635,7 +634,7 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a5da53f29e43639a9af5ba3b640e6bf8c}{}\label{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a5da53f29e43639a9af5ba3b640e6bf8c}
 
 
-Definition at line 498 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 496 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -647,67 +646,67 @@ Referenced by compute\+Velocity\+Commands().
 
 
 \begin{DoxyCode}
-499 \{
-500     \textcolor{comment}{//simulate the trajectory and check for collisions, updating costs along the way}
-501     \textcolor{keywordtype}{bool} end = \textcolor{keyword}{false};
-502     \textcolor{keywordtype}{float} time = 0;
-503     Eigen::Vector3f currentpos = pos;
-504     \textcolor{keywordtype}{int} i = 0;
-505     \textcolor{keywordflow}{while} (!end)
-506     \{
-507         \textcolor{comment}{//add the point to the trajectory so we can draw it later if we want}
-508         \textcolor{comment}{//traj.addPoint(pos[0], pos[1], pos[2]);}
-509 
-510         \textcolor{comment}{// if (continued\_acceleration\_) \{}
-511         \textcolor{comment}{//   //calculate velocities}
-512         \textcolor{comment}{//   loop\_vel = computeNewVelocities(sample\_target\_vel, loop\_vel, limits\_->getAccLimits(), dt);}
-513         \textcolor{comment}{//   //ROS\_WARN\_NAMED("Generator", "Flag: %d, Loop\_Vel %f, %f, %f", continued\_acceleration\_,
+497 \{
+498     \textcolor{comment}{//simulate the trajectory and check for collisions, updating costs along the way}
+499     \textcolor{keywordtype}{bool} end = \textcolor{keyword}{false};
+500     \textcolor{keywordtype}{float} time = 0;
+501     Eigen::Vector3f currentpos = pos;
+502     \textcolor{keywordtype}{int} i = 0;
+503     \textcolor{keywordflow}{while} (!end)
+504     \{
+505         \textcolor{comment}{//add the point to the trajectory so we can draw it later if we want}
+506         \textcolor{comment}{//traj.addPoint(pos[0], pos[1], pos[2]);}
+507 
+508         \textcolor{comment}{// if (continued\_acceleration\_) \{}
+509         \textcolor{comment}{//   //calculate velocities}
+510         \textcolor{comment}{//   loop\_vel = computeNewVelocities(sample\_target\_vel, loop\_vel, limits\_->getAccLimits(), dt);}
+511         \textcolor{comment}{//   //ROS\_WARN\_NAMED("Generator", "Flag: %d, Loop\_Vel %f, %f, %f", continued\_acceleration\_,
        loop\_vel[0], loop\_vel[1], loop\_vel[2]);}
-514         \textcolor{comment}{// \}}
-515 
-516         \textcolor{keyword}{auto} loop\_vel = vel;
-517         \textcolor{comment}{//update the position of the robot using the velocities passed in}
-518         \textcolor{keyword}{auto} newpos = \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_af91f457b97d26abf9b9e2cfcbeb9d7ed}{computeNewPositions}(currentpos, loop\_vel, dt);
-519 
-520         \textcolor{keyword}{auto} dx = newpos[0] - currentpos[0];
-521         \textcolor{keyword}{auto} dy = newpos[1] - currentpos[1];
-522         \textcolor{keywordtype}{float} dist, angledist;
-523 
-524         \textcolor{comment}{//ROS\_INFO("traj point %d", i);}
-525         dist = sqrt(dx * dx + dy * dy);
-526         \textcolor{keywordflow}{if} (dist > maxdist)
-527         \{
-528             end = \textcolor{keyword}{true};
-529             \textcolor{comment}{//ROS\_INFO("dist break: %f", dist);}
-530         \}
-531         \textcolor{keywordflow}{else}
-532         \{
-533             \textcolor{comment}{// ouble from, double to}
-534             angledist = angles::shortest\_angular\_distance(currentpos[2], newpos[2]);
-535             \textcolor{keywordflow}{if} (angledist > maxanglediff)
-536             \{
-537                 end = \textcolor{keyword}{true};
-538                 \textcolor{comment}{//ROS\_INFO("angle dist break: %f", angledist);}
-539             \}
-540             \textcolor{keywordflow}{else}
-541             \{
-542                 outtraj.push\_back(newpos);
-543 
-544                 time += dt;
-545                 \textcolor{keywordflow}{if} (time > maxtime)
-546                 \{
-547                     end = \textcolor{keyword}{true};
-548                     \textcolor{comment}{//ROS\_INFO("time break: %f", time);}
-549                 \}
-550 
-551                 \textcolor{comment}{//ROS\_INFO("dist: %f, angledist: %f, time: %f", dist, angledist, time);}
-552             \}
-553         \}
-554 
-555         currentpos = newpos;
-556         i++;
-557     \} \textcolor{comment}{// end for simulation steps}
-558 \}
+512         \textcolor{comment}{// \}}
+513 
+514         \textcolor{keyword}{auto} loop\_vel = vel;
+515         \textcolor{comment}{//update the position of the robot using the velocities passed in}
+516         \textcolor{keyword}{auto} newpos = \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_af91f457b97d26abf9b9e2cfcbeb9d7ed}{computeNewPositions}(currentpos, loop\_vel, dt);
+517 
+518         \textcolor{keyword}{auto} dx = newpos[0] - currentpos[0];
+519         \textcolor{keyword}{auto} dy = newpos[1] - currentpos[1];
+520         \textcolor{keywordtype}{float} dist, angledist;
+521 
+522         \textcolor{comment}{//ROS\_INFO("traj point %d", i);}
+523         dist = sqrt(dx * dx + dy * dy);
+524         \textcolor{keywordflow}{if} (dist > maxdist)
+525         \{
+526             end = \textcolor{keyword}{true};
+527             \textcolor{comment}{//ROS\_INFO("dist break: %f", dist);}
+528         \}
+529         \textcolor{keywordflow}{else}
+530         \{
+531             \textcolor{comment}{// ouble from, double to}
+532             angledist = angles::shortest\_angular\_distance(currentpos[2], newpos[2]);
+533             \textcolor{keywordflow}{if} (angledist > maxanglediff)
+534             \{
+535                 end = \textcolor{keyword}{true};
+536                 \textcolor{comment}{//ROS\_INFO("angle dist break: %f", angledist);}
+537             \}
+538             \textcolor{keywordflow}{else}
+539             \{
+540                 outtraj.push\_back(newpos);
+541 
+542                 time += dt;
+543                 \textcolor{keywordflow}{if} (time > maxtime)
+544                 \{
+545                     end = \textcolor{keyword}{true};
+546                     \textcolor{comment}{//ROS\_INFO("time break: %f", time);}
+547                 \}
+548 
+549                 \textcolor{comment}{//ROS\_INFO("dist: %f, angledist: %f, time: %f", dist, angledist, time);}
+550             \}
+551         \}
+552 
+553         currentpos = newpos;
+554         i++;
+555     \} \textcolor{comment}{// end for simulation steps}
+556 \}
 \end{DoxyCode}
 
 
@@ -907,7 +906,7 @@ True if achieved, false otherwise
 \end{DoxyReturn}
 \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a625198f20113c62e95ffaa82ecc3f472}{is\+Goal\+Reached()} 
 
-Definition at line 470 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 468 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -915,9 +914,9 @@ References goal\+Reached\+\_\+.
 
 
 \begin{DoxyCode}
-471 \{
-472     \textcolor{keywordflow}{return} \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a0a89141d3d3a8ebfb9e1d69d0d33fd49}{goalReached\_};
-473 \}
+469 \{
+470     \textcolor{keywordflow}{return} \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a0a89141d3d3a8ebfb9e1d69d0d33fd49}{goalReached\_};
+471 \}
 \end{DoxyCode}
 \index{move\+\_\+base\+\_\+z\+\_\+client\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{move\+\_\+base\+\_\+z\+\_\+client\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!publish\+Goal\+Marker@{publish\+Goal\+Marker}}
 \index{publish\+Goal\+Marker@{publish\+Goal\+Marker}!move\+\_\+base\+\_\+z\+\_\+client\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{move\+\_\+base\+\_\+z\+\_\+client\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}}
@@ -930,7 +929,7 @@ References goal\+Reached\+\_\+.
 )\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a691e565d33666d2f7004e791cae29b42}{}\label{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a691e565d33666d2f7004e791cae29b42}
 \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a691e565d33666d2f7004e791cae29b42}{publish\+Goal\+Marker()} 
 
-Definition at line 574 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 572 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -942,40 +941,40 @@ Referenced by compute\+Velocity\+Commands().
 
 
 \begin{DoxyCode}
-575 \{
-576     visualization\_msgs::Marker marker;
-577     marker.header.frame\_id = \textcolor{stringliteral}{"/odom"};
-578     marker.header.stamp = ros::Time::now();
-579 
-580     marker.ns = \textcolor{stringliteral}{"my\_namespace2"};
-581     marker.id = 0;
-582     marker.type = visualization\_msgs::Marker::ARROW;
-583     marker.action = visualization\_msgs::Marker::ADD;
-584 
-585     marker.scale.x = 0.05;
-586     marker.scale.y = 0.15;
-587     marker.scale.z = 0.05;
-588     marker.color.a = 1.0;
-589 
-590     marker.color.r = 1;
-591     marker.color.g = 0;
-592     marker.color.b = 0;
-593 
-594     geometry\_msgs::Point start, end;
-595     start.x = x;
-596     start.y = y;
-597 
-598     end.x = x + 0.5 * cos(phi);
-599     end.y = y + 0.5 * sin(phi);
-600 
-601     marker.points.push\_back(start);
-602     marker.points.push\_back(end);
-603 
-604     visualization\_msgs::MarkerArray ma;
-605     ma.markers.push\_back(marker);
-606 
-607     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a7228d3fe90bc48b486e5c46d6ac5e815}{goalMarkerPublisher\_}.publish(ma);
-608 \}
+573 \{
+574     visualization\_msgs::Marker marker;
+575     marker.header.frame\_id = \textcolor{stringliteral}{"/odom"};
+576     marker.header.stamp = ros::Time::now();
+577 
+578     marker.ns = \textcolor{stringliteral}{"my\_namespace2"};
+579     marker.id = 0;
+580     marker.type = visualization\_msgs::Marker::ARROW;
+581     marker.action = visualization\_msgs::Marker::ADD;
+582 
+583     marker.scale.x = 0.05;
+584     marker.scale.y = 0.15;
+585     marker.scale.z = 0.05;
+586     marker.color.a = 1.0;
+587 
+588     marker.color.r = 1;
+589     marker.color.g = 0;
+590     marker.color.b = 0;
+591 
+592     geometry\_msgs::Point start, end;
+593     start.x = x;
+594     start.y = y;
+595 
+596     end.x = x + 0.5 * cos(phi);
+597     end.y = y + 0.5 * sin(phi);
+598 
+599     marker.points.push\_back(start);
+600     marker.points.push\_back(end);
+601 
+602     visualization\_msgs::MarkerArray ma;
+603     ma.markers.push\_back(marker);
+604 
+605     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a7228d3fe90bc48b486e5c46d6ac5e815}{goalMarkerPublisher\_}.publish(ma);
+606 \}
 \end{DoxyCode}
 
 
@@ -1073,7 +1072,7 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a9dfe3fd3fd7a0c8ec414a78e1300d09c}{}\label{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a9dfe3fd3fd7a0c8ec414a78e1300d09c}
 \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a9dfe3fd3fd7a0c8ec414a78e1300d09c}{reconfig\+C\+B()} 
 
-Definition at line 450 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 448 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -1085,19 +1084,19 @@ Referenced by initialize().
 
 
 \begin{DoxyCode}
-451 \{
-452     ROS\_INFO(\textcolor{stringliteral}{"Backward planner reconfigure Request"});
-453     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_ac859500c0329247de08daf864fd2d4b1}{k\_alpha\_} = config.k\_alpha;
-454     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_aa2f7fe022cdc4eb11c17f6f576c732c6}{k\_betta\_} = config.k\_betta;
-455     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a9ae9a8c4c4663a999ba107aea9f6868d}{k\_rho\_} = config.k\_rho;
-456 
-457     \textcolor{comment}{//alpha\_offset\_ = config.alpha\_offset;}
-458     \textcolor{comment}{//betta\_offset\_ = config.betta\_offset;}
-459 
-460     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a6dc3aa0ff63f9f7d0aae852755734b5d}{carrot\_distance\_} = config.carrot\_distance;
-461     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a3d6cba0748b85a67f5dfd7740de9530f}{carrot\_angular\_distance\_} = config.carrot\_angular\_distance;
-462     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a89ab1ee7283a474dc19970789f51c087}{xy\_goal\_tolerance\_} = config.xy\_goal\_tolerance;
-463 \}
+449 \{
+450     ROS\_INFO(\textcolor{stringliteral}{"Backward planner reconfigure Request"});
+451     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_ac859500c0329247de08daf864fd2d4b1}{k\_alpha\_} = config.k\_alpha;
+452     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_aa2f7fe022cdc4eb11c17f6f576c732c6}{k\_betta\_} = config.k\_betta;
+453     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a9ae9a8c4c4663a999ba107aea9f6868d}{k\_rho\_} = config.k\_rho;
+454 
+455     \textcolor{comment}{//alpha\_offset\_ = config.alpha\_offset;}
+456     \textcolor{comment}{//betta\_offset\_ = config.betta\_offset;}
+457 
+458     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a6dc3aa0ff63f9f7d0aae852755734b5d}{carrot\_distance\_} = config.carrot\_distance;
+459     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a3d6cba0748b85a67f5dfd7740de9530f}{carrot\_angular\_distance\_} = config.carrot\_angular\_distance;
+460     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a89ab1ee7283a474dc19970789f51c087}{xy\_goal\_tolerance\_} = config.xy\_goal\_tolerance;
+461 \}
 \end{DoxyCode}
 
 
@@ -1132,7 +1131,7 @@ True if the plan was updated successfully, false otherwise
 \end{DoxyReturn}
 \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a3b552c90996d21cadf7b2f0875706407}{set\+Plan()} 
 
-Definition at line 480 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 478 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -1140,22 +1139,22 @@ References backwards\+Plan\+Path\+\_\+, goal\+Reached\+\_\+, and initial\+Pure\+
 
 
 \begin{DoxyCode}
-481 \{
-482     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a5db5b10d8cdf425321ee6ec932f594ae}{initialPureSpinningStage\_} = \textcolor{keyword}{true};
-483     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a0a89141d3d3a8ebfb9e1d69d0d33fd49}{goalReached\_} = \textcolor{keyword}{false};
-484     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a451add2af7d6d83a7415277311b3ed04}{backwardsPlanPath\_} = plan;
-485 
-486     \textcolor{comment}{/*}
-487 \textcolor{comment}{    std::stringstream ss;}
-488 \textcolor{comment}{}
-489 \textcolor{comment}{    for(auto& p: plan)}
-490 \textcolor{comment}{    \{}
-491 \textcolor{comment}{        ss << p;}
-492 \textcolor{comment}{    \}}
-493 \textcolor{comment}{    ROS\_WARN\_STREAM("Backward Local Planner - plan path - " << ss.str());}
-494 \textcolor{comment}{    */}
-495     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-496 \}
+479 \{
+480     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a5db5b10d8cdf425321ee6ec932f594ae}{initialPureSpinningStage\_} = \textcolor{keyword}{true};
+481     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a0a89141d3d3a8ebfb9e1d69d0d33fd49}{goalReached\_} = \textcolor{keyword}{false};
+482     \hyperlink{classmove__base__z__client_1_1backward__local__planner_1_1BackwardLocalPlanner_a451add2af7d6d83a7415277311b3ed04}{backwardsPlanPath\_} = plan;
+483 
+484     \textcolor{comment}{/*}
+485 \textcolor{comment}{    std::stringstream ss;}
+486 \textcolor{comment}{}
+487 \textcolor{comment}{    for(auto& p: plan)}
+488 \textcolor{comment}{    \{}
+489 \textcolor{comment}{        ss << p;}
+490 \textcolor{comment}{    \}}
+491 \textcolor{comment}{    ROS\_WARN\_STREAM("Backward Local Planner - plan path - " << ss.str());}
+492 \textcolor{comment}{    */}
+493     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+494 \}
 \end{DoxyCode}
 
 
