@@ -336,88 +336,90 @@ References move\+\_\+base\+\_\+z\+\_\+client\+::forward\+\_\+local\+\_\+planner\
 392 
 393     \textcolor{comment}{//integrate trajectory and check collision}
 394 
-395     tf::Stamped<tf::Pose> global\_pose;
-396     \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a00139db9509e49ff456276a86785d234}{costmapRos\_}->getRobotPose(global\_pose);
-397 
-398     \textcolor{keyword}{auto} *costmap2d = \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a00139db9509e49ff456276a86785d234}{costmapRos\_}->getCostmap();
-399     \textcolor{keyword}{auto} yaw = tf::getYaw(global\_pose.getRotation());
-400 
-401     \textcolor{keyword}{auto} &pos = global\_pose.getOrigin();
-402 
-403     Eigen::Vector3f currentpose(pos.x(), pos.y(), yaw);
-404     Eigen::Vector3f currentvel(cmd\_vel.linear.x, cmd\_vel.linear.y, cmd\_vel.angular.z);
-405     std::vector<Eigen::Vector3f> trajectory;
-406     this->\hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_af0f99683368650fd03c04079afd8c806}{generateTrajectory}(currentpose, currentvel, 0.8 \textcolor{comment}{/*meters*/}, M\_PI / 8 \textcolor{comment}{/*rads*/}, 
+395     tf::Stamped<tf::Pose> global\_pose = \hyperlink{namespacemove__base__z__client_1_1forward__local__planner_a683a39a154ed5aa179fdb1afb7bfe2e4}{optionalRobotPose}(
+      \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a00139db9509e49ff456276a86785d234}{costmapRos\_});
+396     
+397     \textcolor{comment}{//->getRobotPose(global\_pose);}
+398 
+399     \textcolor{keyword}{auto} *costmap2d = \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a00139db9509e49ff456276a86785d234}{costmapRos\_}->getCostmap();
+400     \textcolor{keyword}{auto} yaw = tf::getYaw(global\_pose.getRotation());
+401 
+402     \textcolor{keyword}{auto} &pos = global\_pose.getOrigin();
+403 
+404     Eigen::Vector3f currentpose(pos.x(), pos.y(), yaw);
+405     Eigen::Vector3f currentvel(cmd\_vel.linear.x, cmd\_vel.linear.y, cmd\_vel.angular.z);
+406     std::vector<Eigen::Vector3f> trajectory;
+407     this->\hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_af0f99683368650fd03c04079afd8c806}{generateTrajectory}(currentpose, currentvel, 0.8 \textcolor{comment}{/*meters*/}, M\_PI / 8 \textcolor{comment}{/*rads*/}, 
       3.0 \textcolor{comment}{/*seconds*/}, 0.05 \textcolor{comment}{/*seconds*/}, trajectory);
-407 
-408     \textcolor{comment}{// check plan rejection}
-409     \textcolor{keywordtype}{bool} aceptedplan = \textcolor{keyword}{true};
-410 
-411     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
-412 
-413     \textcolor{keywordtype}{int} i = 0;
-414     \textcolor{comment}{// ROS\_INFO\_STREAM("lplanner goal: " << finalgoalpose.pose.position);}
-415     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
-416     \{
-417         \textcolor{keywordtype}{float} dx = p[0] - finalgoalpose.pose.position.x;
-418         \textcolor{keywordtype}{float} dy = p[1] - finalgoalpose.pose.position.y;
-419 
-420         \textcolor{keywordtype}{float} dst = sqrt(dx * dx + dy * dy);
-421         \textcolor{keywordflow}{if} (dst < \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a462f6c9011e538965326add2dfb7529d}{xy\_goal\_tolerance\_})
-422          \{
-423             \textcolor{comment}{//  ROS\_INFO("trajectory checking skipped, goal reached");}
-424              \textcolor{keywordflow}{break};
-425         \}
-426 
-427         costmap2d->worldToMap(p[0], p[1], mx, my);
-428         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cost = costmap2d->getCost(mx, my);
-429 
-430         \textcolor{comment}{// ROS\_INFO("checking cost pt %d [%lf, %lf] cell[%d,%d] = %d", i, p[0], p[1], mx, my, cost);}
-431         \textcolor{comment}{// ROS\_INFO\_STREAM("cost: " << cost);}
-432 
-433         \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
-434         \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
-435         \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
-436         \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
-437 
-438         \textcolor{keywordflow}{if} (costmap2d->getCost(mx, my) >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
-439         \{
-440             aceptedplan = \textcolor{keyword}{false};
-441             \textcolor{comment}{// ROS\_WARN("ABORTED LOCAL PLAN BECAUSE OBSTACLE DETEDTED");}
-442             \textcolor{keywordflow}{break};
-443         \}
-444         i++;
-445     \}
-446 
-447     \textcolor{keywordflow}{if} (aceptedplan)
-448     \{
-449         \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_ab1df0eeecba67bfd070f995700b7bde4}{waiting\_}=\textcolor{keyword}{false};
-450         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-451     \}
-452     \textcolor{keywordflow}{else}
-453     \{
-454         \textcolor{comment}{// stop and wait}
-455         cmd\_vel.linear.x =0;
-456         cmd\_vel.angular.z=0;
-457 
-458         \textcolor{keywordflow}{if}(\hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_ab1df0eeecba67bfd070f995700b7bde4}{waiting\_} == \textcolor{keyword}{false})
-459         \{
-460             \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_ab1df0eeecba67bfd070f995700b7bde4}{waiting\_} = \textcolor{keyword}{true};
-461             \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a20c2ea0e1ea6ebe9a647898f34d8cbc1}{waitingStamp\_} = ros::Time::now();
-462         \}
-463         \textcolor{keywordflow}{else}
-464         \{
-465             \textcolor{keyword}{auto} waitingduration = ros::Time::now() - \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a20c2ea0e1ea6ebe9a647898f34d8cbc1}{waitingStamp\_} ;
-466 
-467             \textcolor{keywordflow}{if} (waitingduration > this->\hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a35eefc7633a516b71f0be1deb572e0bb}{waitingTimeout\_})
-468             \{
-469                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-470             \}
-471         \}
-472         
-473         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-474     \}
-475 \}
+408 
+409     \textcolor{comment}{// check plan rejection}
+410     \textcolor{keywordtype}{bool} aceptedplan = \textcolor{keyword}{true};
+411 
+412     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
+413 
+414     \textcolor{keywordtype}{int} i = 0;
+415     \textcolor{comment}{// ROS\_INFO\_STREAM("lplanner goal: " << finalgoalpose.pose.position);}
+416     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
+417     \{
+418         \textcolor{keywordtype}{float} dx = p[0] - finalgoalpose.pose.position.x;
+419         \textcolor{keywordtype}{float} dy = p[1] - finalgoalpose.pose.position.y;
+420 
+421         \textcolor{keywordtype}{float} dst = sqrt(dx * dx + dy * dy);
+422         \textcolor{keywordflow}{if} (dst < \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a462f6c9011e538965326add2dfb7529d}{xy\_goal\_tolerance\_})
+423          \{
+424             \textcolor{comment}{//  ROS\_INFO("trajectory checking skipped, goal reached");}
+425              \textcolor{keywordflow}{break};
+426         \}
+427 
+428         costmap2d->worldToMap(p[0], p[1], mx, my);
+429         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cost = costmap2d->getCost(mx, my);
+430 
+431         \textcolor{comment}{// ROS\_INFO("checking cost pt %d [%lf, %lf] cell[%d,%d] = %d", i, p[0], p[1], mx, my, cost);}
+432         \textcolor{comment}{// ROS\_INFO\_STREAM("cost: " << cost);}
+433 
+434         \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
+435         \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
+436         \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
+437         \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
+438 
+439         \textcolor{keywordflow}{if} (costmap2d->getCost(mx, my) >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
+440         \{
+441             aceptedplan = \textcolor{keyword}{false};
+442             \textcolor{comment}{// ROS\_WARN("ABORTED LOCAL PLAN BECAUSE OBSTACLE DETEDTED");}
+443             \textcolor{keywordflow}{break};
+444         \}
+445         i++;
+446     \}
+447 
+448     \textcolor{keywordflow}{if} (aceptedplan)
+449     \{
+450         \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_ab1df0eeecba67bfd070f995700b7bde4}{waiting\_}=\textcolor{keyword}{false};
+451         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+452     \}
+453     \textcolor{keywordflow}{else}
+454     \{
+455         \textcolor{comment}{// stop and wait}
+456         cmd\_vel.linear.x =0;
+457         cmd\_vel.angular.z=0;
+458 
+459         \textcolor{keywordflow}{if}(\hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_ab1df0eeecba67bfd070f995700b7bde4}{waiting\_} == \textcolor{keyword}{false})
+460         \{
+461             \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_ab1df0eeecba67bfd070f995700b7bde4}{waiting\_} = \textcolor{keyword}{true};
+462             \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a20c2ea0e1ea6ebe9a647898f34d8cbc1}{waitingStamp\_} = ros::Time::now();
+463         \}
+464         \textcolor{keywordflow}{else}
+465         \{
+466             \textcolor{keyword}{auto} waitingduration = ros::Time::now() - \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a20c2ea0e1ea6ebe9a647898f34d8cbc1}{waitingStamp\_} ;
+467 
+468             \textcolor{keywordflow}{if} (waitingduration > this->\hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a35eefc7633a516b71f0be1deb572e0bb}{waitingTimeout\_})
+469             \{
+470                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+471             \}
+472         \}
+473         
+474         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+475     \}
+476 \}
 \end{DoxyCode}
 
 
@@ -624,13 +626,13 @@ True if achieved, false otherwise
 \end{DoxyReturn}
 \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a9d46d3b7dc05bbb0f1a0c7f996b5b557}{is\+Goal\+Reached()} 
 
-Definition at line 482 of file forward\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 483 of file forward\+\_\+local\+\_\+planner.\+cpp.
 
 
 \begin{DoxyCode}
-483 \{
-484     \textcolor{keywordflow}{return} \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a2c86f8381cc3b8677f95f32ae6939023}{goalReached\_};
-485 \}
+484 \{
+485     \textcolor{keywordflow}{return} \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a2c86f8381cc3b8677f95f32ae6939023}{goalReached\_};
+486 \}
 \end{DoxyCode}
 \index{move\+\_\+base\+\_\+z\+\_\+client\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner@{move\+\_\+base\+\_\+z\+\_\+client\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner}!publish\+Goal\+Marker@{publish\+Goal\+Marker}}
 \index{publish\+Goal\+Marker@{publish\+Goal\+Marker}!move\+\_\+base\+\_\+z\+\_\+client\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner@{move\+\_\+base\+\_\+z\+\_\+client\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner}}
@@ -716,15 +718,15 @@ True if the plan was updated successfully, false otherwise
 \end{DoxyReturn}
 \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a525b842cadd1e69e944907e1945a61c8}{set\+Plan()} 
 
-Definition at line 492 of file forward\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 493 of file forward\+\_\+local\+\_\+planner.\+cpp.
 
 
 \begin{DoxyCode}
-493 \{
-494     \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a1c6191c999481e31fabd41f7a04041fe}{plan\_} = plan;
-495     \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a2c86f8381cc3b8677f95f32ae6939023}{goalReached\_} = \textcolor{keyword}{false};
-496     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-497 \}
+494 \{
+495     \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a1c6191c999481e31fabd41f7a04041fe}{plan\_} = plan;
+496     \hyperlink{classmove__base__z__client_1_1forward__local__planner_1_1ForwardLocalPlanner_a2c86f8381cc3b8677f95f32ae6939023}{goalReached\_} = \textcolor{keyword}{false};
+497     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+498 \}
 \end{DoxyCode}
 
 
