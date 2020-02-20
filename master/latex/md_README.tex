@@ -85,32 +85,13 @@ S\+M\+A\+CC State Machines are boost\+::statechart Asynchronous\+State\+Machines
 
 S\+M\+A\+CC states inherits from boost\+::statechart\+:State so that you can learn the full potential of S\+M\+A\+CC states also diving in the statechart documentation. However, the following examples briefly show how you create define S\+M\+A\+CC states and how you would usually use them.
 
-\subsection*{Code a minimal S\+M\+A\+CC State\+Machine}
+\subsection*{Getting Started}
 
-In this initial example we will implement a simple state machine with a single state state that executes something at state entry and at state exit. That state machine is described in the following image\+:
+The easiest way to get started is by selecting one of the state machines in our reference library, and then hacking it to meet your needs.
 
- 
+Each state machine in the reference library comes with it\textquotesingle{}s own R\+E\+A\+D\+M\+E.\+md file, which contains the appropriate operating instructions, so that all you have to do is simply copy \& paste some commands into your terminal.
 
-S\+M\+A\+CC State\+Machines and Smacc\+States are based on the c++ \href{https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern}{\tt Curiously recurring template pattern} so that the syntax may be strange for some developers but you will notice that it is very easy to follow. The advantage of using this kind of c++ pattern is that the definition of the state machine is correctly written.
-
-The following chunk of code shows the minimal S\+M\+A\+CC State machine you can create\+: 
-\begin{DoxyCode}
-\textcolor{preprocessor}{#include <\hyperlink{smacc__state__machine__base_8h}{smacc/smacc\_state\_machine\_base.h}>}
-
-\textcolor{keyword}{struct }SimpleStateMachine
-    : \textcolor{keyword}{public} SmaccStateMachineBase<SimpleStateMachine,ToolSimpleState>
-\{
-  \textcolor{keyword}{using} SmaccState::SmaccState;
-  \textcolor{keywordtype}{void} onEntry()
-  \{
-  \}
-\};
-\end{DoxyCode}
-
-
-Every S\+M\+A\+CC State Machine must inherit from Smacc\+State\+Machine\+Base. The first template parameter is the derived class type (Simple\+State\+Machine itself) according to the curiosuly recurring template pattern, and the second template parameter (Tool\+Simple\+State) would be the class name of the initial Smacc State
-
-\subsection*{Code a simple S\+M\+A\+CC State}
+\subsection*{Anatomy of a simple S\+M\+A\+CC State}
 
 For the previous state machine, this would be the initial S\+M\+A\+CC State. It also follows the Curiously recurrent template pattern. However, for Smacc states, the second template parameters is the so called \char`\"{}\+Context\char`\"{}, for this simple case, the context is the State\+Machine type itself. However, that could also be other State (in a nexted-\/substate case) or an orthogonal line.
 
@@ -137,57 +118,6 @@ For the previous state machine, this would be the initial S\+M\+A\+CC State. It 
 \}
 \end{DoxyCode}
  According to the U\+ML statchart standard, things happens essencially when the system enters in the state, when the system exits the state and when some event is triggered. The two first ones are shown in this example. The c++ Constructor code is the place you have to write your \char`\"{}entry code\char`\"{}, the destructor is the place you have to write your \char`\"{}exit code\char`\"{}. The constructor parameter (my\+\_\+context) is a reference to the context object (in this case the state machine). This kind of constructor may be verebosy, but is required to implement the rest of S\+M\+A\+CC tasks and always follows the same pattern.
-
-\subsection*{Creating/accessing to Smacc\+Components}
-
-Accessing to S\+M\+A\+CC componets resources is one of the most important capabilities that S\+M\+A\+CC provides. This example shows how to access to these resources form states.
-
-For example, in this case we will asume we are in a state that controls the navigation of the vehicle, and it needs to access to the Ros Navigation Stack Action client and navigate to some position in the environment.
-
- 
-
-The code would be the following\+:
-
-
-\begin{DoxyCode}
-\textcolor{keyword}{struct }Navigate : \hyperlink{classSmaccState}{SmaccState}<Navigate, SimpleStateMachine> 
-\{
-
-\textcolor{keyword}{public}:
-  \textcolor{comment}{// This is the smacc component (it basically is a wrapper of the ROS Action Client for move base), please
-       check the SMACC}
-  \textcolor{comment}{// code to see how to implement your own action client}
-  smacc::SmaccMoveBaseActionClient *moveBaseClient\_;
-
-  \textcolor{keyword}{using} SmaccState::SmaccState;
-  \textcolor{keywordtype}{void} onEntry()
-  \{
-    ROS\_INFO(\textcolor{stringliteral}{"Entering Navigate"});
-
-    \textcolor{comment}{// this substate will need access to the "MoveBase" resource or plugin. In this line}
-    \textcolor{comment}{// you get the reference to this resource.}
-    this->requiresComponent(moveBaseClient\_);
-    goToEndPoint();
-  \}
-
-  \textcolor{comment}{// auxiliar function that defines the motion that is requested to the move\_base action server}
-  \textcolor{keywordtype}{void} goToEndPoint() \{
-    geometry\_msgs::PoseStamped radialStartPose = createInitialPose();
-
-    smacc::SmaccMoveBaseActionClient::Goal goal;
-    goal.target\_pose.header.stamp = ros::Time::now();
-
-    goal.target\_pose = radialStartPose;
-    goal.target\_pose.pose.position.x = 10;
-    goal.target\_pose.pose.position.y = 10;
-    goal.target\_pose.pose.orientation =
-        tf::createQuaternionMsgFromRollPitchYaw(0, 0, M\_PI);
-
-    moveBaseClient\_->sendGoal(goal);
-  \}
-\};
-\end{DoxyCode}
-
 
 \subsection*{Simple State Transition on Action Result Event}
 
@@ -216,60 +146,6 @@ The following would be the code to implement the diagram shown above.
 \};
 
 \textcolor{keyword}{struct }ExecuteToolState : \hyperlink{classSmaccState}{SmaccState}<ExecuteToolState, SimpleStateMachine>
-\{
-    \textcolor{keyword}{using} SmaccState::SmaccState;
-    \textcolor{keywordtype}{void} onEntry()
-    \{
-    \}
-\};
-\end{DoxyCode}
-
-
-\subsection*{Add custom code on Action Result Events}
-
-In the following example, we want to add some code to the transition between the source state \char`\"{}\+Navigate\char`\"{} and the destination state \char`\"{}\+Execute\+Tool\+State\char`\"{}. This code may be any desired custom code (for example some transition guard). This code is located in the react method
-
- 
-
-The following would be the code for this state machine\+:
-
-
-\begin{DoxyCode}
-\textcolor{keyword}{struct }Navigate : \hyperlink{classSmaccState}{SmaccState}<Navigate, SimpleStateMachine> 
-\{
-\textcolor{keyword}{public}:
-
-  \textcolor{comment}{// With this line we specify that we are going to react to any EvActionResult event}
-  \textcolor{comment}{// generated by SMACC when the action server provides a response to our request}
-  \textcolor{keyword}{typedef} mpl::list<sc::custom\_reaction<EvActionResult<SmaccMoveBaseActionClient::Result>>> reactions;
-  \textcolor{keyword}{using} SmaccState::SmaccState;
-  \textcolor{keywordtype}{void} onEntry()
-  \{
-   [...]
-  \}
-
-  \textcolor{comment}{// auxiliary function that defines the motion that is requested to the move\_base action server}
-  \textcolor{keywordtype}{void} goToEndPoint() \{
-   [...]
-
-  sc::result react(\textcolor{keyword}{const} EvActionResult<SmaccMoveBaseActionClient::Result> &ev)
-  \{
-      \textcolor{comment}{// we only will react when the result is succeeded}
-      \textcolor{keywordflow}{if} (ev.getResult() == actionlib::SimpleClientGoalState::SUCCEEDED)
-      \{
-        \textcolor{comment}{// ev.resultMessage provides access to the move\_base action server result structure}
-
-        ROS\_INFO(\textcolor{stringliteral}{"Received event to movebase: %s"},ev.getResult().toString().c\_str());
-        \textcolor{keywordflow}{return} transit<ExecuteToolState>();
-      \}
-      \textcolor{keywordflow}{else}
-      \{
-        \textcolor{keywordflow}{return} forward\_event(); \textcolor{comment}{// do nothing, the default behavior if you do not specify any return value}
-      \} 
-  \}
-\};
-
-\textcolor{keyword}{struct }ExecuteToolState : \hyperlink{classSmaccState}{SmaccState}<ExecuteToolState, SimpleStateMachine> 
 \{
     \textcolor{keyword}{using} SmaccState::SmaccState;
     \textcolor{keywordtype}{void} onEntry()
