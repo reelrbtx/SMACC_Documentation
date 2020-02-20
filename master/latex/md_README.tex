@@ -50,17 +50,6 @@ From it\textquotesingle{}s inception, S\+M\+A\+CC was written to support the pro
 \item $\ast$$\ast$$\ast$\+R\+OS Navigation built-\/in funcionality$\ast$$\ast$$\ast$. S\+M\+A\+CC extends the R\+OS navigation stack in a high level way. It provides specialized navigation planners (for the R\+OS Navigation Stack) that navigate only using pure spinning motions and straight motions. Implements some mechanism to perform motions recording the path and undoing them later. These can be very useful in some industrial applications where the knowledge or certainty on the environment is higher (ros planners are focused on cluttered and dynamic environments).
 \end{DoxyItemize}
 
-\subsection*{Repository Packages}
-
-This repository contains several R\+OS packages\+:
-
-
-\begin{DoxyItemize}
-\item {\bfseries smacc\+\_\+core}\+: The core smacc library. It works as a template-\/based c++ header library.
-\item {\bfseries smacc\+\_\+navigation}\+: a set of ros packages with some \char`\"{}\+Smacc Components\char`\"{} that ease the creation of high level navigation applications. The provided components remotelly control the move\+\_\+base. These components helps in the creation of complex motion strategies (changing planners, recording and undoing paths, etc.)
-\item {\bfseries smacc\+\_\+state\+\_\+machine\+\_\+templates}\+: shows a complete sample application developed with S\+M\+A\+CC that can be reused as a canonical example of a mobile robot moving around and interacting with a custom onboard tool.
-\end{DoxyItemize}
-
 \subsection*{Future Work}
 
 
@@ -69,16 +58,6 @@ This repository contains several R\+OS packages\+:
 \item code generation based on uml diagrams
 \item improving backwards planners for non linear paths
 \end{DoxyItemize}
-
-\subsection*{Shared Resources and Shared variables}
-
-
-\begin{DoxyItemize}
-\item $\ast$$\ast$$\ast$\+Shared Action Client Resources$\ast$$\ast$$\ast$ Action servers in S\+M\+A\+CC play an important role because all low-\/level funcionality must be located on them. In order to interact with these Action Servers S\+M\+A\+CC provide an easy way to create shared Action\+Clients that can be accessed from any State. S\+M\+A\+CC is in charge of eficently handle all the requests and send the resulting events from action servers (result messages, feedback messages, etc) to the \char`\"{}subscribed states\char`\"{} in form of statechart events. (See more about his in section internal architecture)
-\item $\ast$$\ast$$\ast$\+Shared Variables$\ast$$\ast$$\ast$ U\+ML statecharts basically define the high level behavior of a system. However, in practice the real state of the system may be much more complex (mesurement, environment numerical information, etc.). States usually have to share information (or comunicate to each other). In order to do that, S\+M\+A\+CC implements a simple but effective dictionary-\/based mechanism to share information (structs, objects, simple variables or pointers). (See below in tutorials\+: shared variable) 
-\end{DoxyItemize}
-
- 
 
 \subsection*{Development methodology}
 
@@ -342,94 +321,4 @@ Then, the c++ code for the State My\+State\+Machine/\+State1/\+Navigation\+Ortho
 \end{DoxyCode}
 
 
-The param template method reads from the parameters server delegating to the method defined ros\+::\+Node\+Handle handle does but already located at the exact point in the parameter name hierarchy associated to this state. S\+M\+A\+CC is also able have methods get\+Param and set\+Param that are delegated to ros\+::\+Node\+Handle in the same way.
-
-\subsection*{Shared variables between states}
-
-This following example shows how to share a variable between two states. In the Navigate state the \char`\"{}angle\+\_\+value\char`\"{} variable is set using the template method \char`\"{}set\+Data\char`\"{}. Latter in the Execute\+Tool\+State it gets the value using the template method \char`\"{}get\+Global\+S\+M\+Data\char`\"{}.
-
-
-\begin{DoxyCode}
-\textcolor{keyword}{struct }Navigate : \hyperlink{classSmaccState}{SmaccState}<Navigate, SimpleStateMachine>
-\{
-\textcolor{keyword}{public}:
-  \textcolor{keyword}{using} SmaccState::SmaccState;
-  \textcolor{keywordtype}{void} onEntry()
-  \{
-        \textcolor{keywordtype}{double} angle = M\_PI;
-        this->setGlobalSMData(\textcolor{stringliteral}{"angle\_value"}, angle);
-  \}
-\};
-
-\textcolor{keyword}{struct }ExecuteToolState : \hyperlink{classSmaccState}{SmaccState}<ExecuteToolState, SimpleStateMachine>
-\{
-    \textcolor{keyword}{using} SmaccState::SmaccState;
-    \textcolor{keywordtype}{void} onEntry()
-    \{
-         \textcolor{keywordtype}{int} angle;
-         this->getGlobalSMData(\textcolor{stringliteral}{"angle\_value"}, angle);
-    \}
-\};
-\end{DoxyCode}
-
-
-\subsection*{Orthogonal Lines}
-
-S\+M\+A\+CC proposes to work in different orthogonal lines\+: Navigation, Tool1, Tool2, etc. This example shows how you can define orthogonal lines in your S\+M\+A\+CC code. For example, we want to add two orthogonal lines\+: the navigation orthogonal line and the tool orthogonal line.
-
- 
-
-First we will define the Navigation\+Orthogonal line line with a simple Tool\+Sub\+State\+:
-
-
-\begin{DoxyCode}
-\textcolor{keyword}{struct }NavigationOrthogonalLine
-    : \hyperlink{classSmaccState}{SmaccState}<NavigationOrthogonalLine, SimpleStateMachine::orthogonal<0>, NavigateSubstate> \{
-  \textcolor{keyword}{using} SmaccState::SmaccState;
-  \textcolor{keywordtype}{void} onEntry()                 
-  \{
-    ROS\_INFO(\textcolor{stringliteral}{"Entering in the navigation orthogonal line"});
-  \}
-
-  ~NavigationOrthogonalLine() 
-  \{
-    ROS\_INFO(\textcolor{stringliteral}{"Finishing the navigation orthogonal line"});
-  \}
-\};
-
-\textcolor{keyword}{struct }NavigateSubstate : \hyperlink{classSmaccState}{SmaccState}<NavigateSubstate, NavigationOrthogonalLine> 
-\{
-    \textcolor{keyword}{using} SmaccState::SmaccState;
-    \textcolor{keywordtype}{void} onEntry()
-    \{
-    \}
-\};
-\end{DoxyCode}
- First we will define the Tool\+Othogonal line with a simple Tool\+Sub\+State\+:
-
-
-\begin{DoxyCode}
-\textcolor{keyword}{struct }ToolOrthogonalLine
-    : \hyperlink{classSmaccState}{SmaccState}<ToolOrthogonalLine, SimpleStateMachine::orthogonal<1>, ToolSubstate> \{
-\textcolor{keyword}{public}:
-  \textcolor{keyword}{using} SmaccState::SmaccState;
-  \textcolor{keywordtype}{void} onEntry()          
-  \{
-    ROS\_INFO(\textcolor{stringliteral}{"Entering in the tool orthogonal line"});
-  \}
-
-  ~ToolOrthogonalLine() 
-  \{
-    ROS\_INFO(\textcolor{stringliteral}{"Finishing the tool orthogonal line"}); 
-  \}
-\};
-
-\textcolor{keyword}{struct }ToolSubstate : \hyperlink{classSmaccState}{SmaccState}<ToolSubstate, ToolOrthogonalLine> 
-\{
-    \textcolor{keyword}{using} SmaccState::SmaccState;
-    \textcolor{keywordtype}{void} onEntry()
-    \{
-    \}
-\};
-\end{DoxyCode}
- 
+The param template method reads from the parameters server delegating to the method defined ros\+::\+Node\+Handle handle does but already located at the exact point in the parameter name hierarchy associated to this state. S\+M\+A\+CC is also able have methods get\+Param and set\+Param that are delegated to ros\+::\+Node\+Handle in the same way. 
