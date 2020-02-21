@@ -153,48 +153,4 @@ The following would be the code to implement the diagram shown above.
     \}
 \};
 \end{DoxyCode}
-
-
-\subsection*{Adding R\+OS Parameters to Smacc States}
-
-The S\+M\+A\+CC states can be configured from the ros parameter server based on their hierarchy and their class name. It is responsability of the user not to have two different state names at the same level (even if the namespace is distinct since the namespace is trimmed for parameters)
-
-For example, imagine a State\+Machine to move the mobile robot initially to some initial position, and then moving it to some other position relative to the initial position. You could put the navigation parameters in a ros configuration yaml file like this (and avoid hardcoding)\+:
-
-
-\begin{DoxyCode}
-1 MyStateMachine:
-2     State1: #Go to some initial position
-3         NavigationOrthogonalLine:
-4             Navigate:
-5                 start\_position\_x: 3
-6                 start\_position\_y: 0
-7     State2: #Go to some initial position
-8         NavigationOrthogonalLine:
-9             Navigate:
-10                 initial\_orientation\_index: 0 # the initial index of the linear motion (factor of
-       angle\_increment\_degrees)
-11                 angle\_increment\_degree: 90    # the increment of angle between to linear motions
-12                 linear\_trajectories\_count: 2  # the number of linear trajectories of the radial 
-\end{DoxyCode}
-
-
-Then, the c++ code for the State My\+State\+Machine/\+State1/\+Navigation\+Orthogonal\+Line/\+Navigate could contain the following parameter reading funcionality\+:
-
-
-\begin{DoxyCode}
-\textcolor{keyword}{struct }Navigate : \hyperlink{classSmaccState}{SmaccState}<Navigate, NavigationOrthogonalLine> 
-\{
-\textcolor{keyword}{public}:
-  \textcolor{keyword}{using} SmaccState::SmaccState;
-  \textcolor{keywordtype}{void} onEntry()
-  \{
-      geometry\_msgs::Point p;
-      param(\textcolor{stringliteral}{"start\_position\_x"}, p.x, 0);
-      param(\textcolor{stringliteral}{"start\_position\_y"}, p.y, 0);
-  \}
-\}
-\end{DoxyCode}
-
-
-The param template method reads from the parameters server delegating to the method defined ros\+::\+Node\+Handle handle does but already located at the exact point in the parameter name hierarchy associated to this state. S\+M\+A\+CC is also able have methods get\+Param and set\+Param that are delegated to ros\+::\+Node\+Handle in the same way. 
+ 
