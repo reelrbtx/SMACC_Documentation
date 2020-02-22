@@ -23,7 +23,7 @@ Master & &\href{https://reelrbtx.github.io/SMACC_Documentation/master/html/names
 
 S\+M\+A\+CC is an event-\/driven, asynchronous, behavioral state machine library for real-\/time R\+OS (Robotic Operating System) applications written in C++, designed to allow programmers to build robot control applications for multicomponent robots, in an intuitive and systematic manner.
 
-S\+M\+A\+CC is inspired by the \href{http://wiki.ros.org/smach}{\tt S\+M\+A\+CH R\+OS package} and it is built on top of \href{https://www.boost.org/doc/libs/1_53_0/libs/statechart/doc/index.html}{\tt Boost State\+Chart library}.
+S\+M\+A\+CC is inspired by Harel\textquotesingle{}s statecharts and the \href{http://wiki.ros.org/smach}{\tt S\+M\+A\+CH R\+OS package}. S\+M\+A\+CC is built on top of the \href{https://www.boost.org/doc/libs/1_53_0/libs/statechart/doc/index.html}{\tt Boost State\+Chart library}.
 
 Probably the greatest strength of S\+M\+A\+CC is that it offers out-\/of-\/the-\/box reference state machines, (found in the folder \href{https://github.com/reelrbtx/SMACC/tree/master/smacc_sm_reference_library}{\tt sm\+\_\+reference\+\_\+library}) that you can use, test, hack, and customize to quickly get your application up and running, while also knowing that the library supports advanced functionalities that are practically universal among actual working robots.
 
@@ -31,10 +31,16 @@ Probably the greatest strength of S\+M\+A\+CC is that it offers out-\/of-\/the-\
 
 
 \begin{DoxyItemize}
-\item $\ast$$\ast$$\ast$\+Powered by R\+OS\+:$\ast$$\ast$$\ast$ S\+M\+A\+CC has been developed specifically to work with R\+OS. It is a c++ ros package that can be imported from any end-\/user application package.
-\item $\ast$$\ast$$\ast$\+Written in C++\+:$\ast$$\ast$$\ast$ Until now, R\+OS has lacked a library to develop task-\/level state machines in C++. Although libraries have been developed in scripting languages such as python, these are unsuitable for real-\/world industrial evironments where real-\/time requirements are demanded.
-\item $\ast$$\ast$$\ast$\+Static State Machine Checking\+:$\ast$$\ast$$\ast$ S\+M\+A\+CC inherits this from the Boost Statechart library which helps the developer to check the consistency of the state machine at compile time (instead of runtime).
+\item $\ast$$\ast$$\ast$\+Powered by R\+OS\+:$\ast$$\ast$$\ast$ S\+M\+A\+CC has been developed specifically to work with R\+OS. It supports R\+OS topics, services and actions, right out of the box.
+\item $\ast$$\ast$$\ast$\+Written in C++\+:$\ast$$\ast$$\ast$ Until now, R\+OS has lacked a library to develop task-\/level state machines in C++. Although libraries have been developed in scripting languages such as python, these are unsuitable for real-\/world industrial evironments where real-\/time requirements are demanded. Further, as a behavioral state machine library,
+\item $\ast$$\ast$$\ast$\+Orthogonals\+:$\ast$$\ast$$\ast$ Originally conceived by David Harel in 1987, orthogonal states are absolutely crucial to complex robotics. This is because complex robots are always a collection of hardware devices which require communication protocols, start-\/up determinism, etc. With orthogonals, it is a relatively straight forward exercise (at least conceptully;) to code a state machine for a robot comprising a mobile base, a robotic arm, a gripper, two lidar sensors, a gps transceiver and an imu.
+\item $\ast$$\ast$$\ast$\+Static State Machine Checking\+:$\ast$$\ast$$\ast$ One of the features that S\+M\+A\+CC inherits from Boost Statechart is that you get compile time validation checking. This benefits developers in that the amount of runtime testing necessary to ship quality software that is both stable and safe is dramatically reduced. Our philsophy is \char`\"{}\+Wherever possible, let the compiler do it\char`\"{}.
+\item $\ast$$\ast$$\ast$\+State Machine Reference Library\+:$\ast$$\ast$$\ast$ With a constantly growing library of out-\/of-\/the-\/box reference state machines, (found in the folder \href{https://github.com/reelrbtx/SMACC/tree/master/smacc_sm_reference_library}{\tt sm\+\_\+reference\+\_\+library}) guaranteed to compile and run, you can jumpstart your development efforts by choosing a reference machine that is closest to your needs, and then customize and extend to meet the specific requirements of your robotic application. All the while knowing that the library supports advanced functionalities that are practically universal among actual working robots.
+\item $\ast$$\ast$$\ast$\+S\+M\+A\+CC Client Library\+:$\ast$$\ast$$\ast$ One of the features that S\+M\+A\+CC inherits from Boost Statechart is that you get compile time validation checking. This benefits the developer in that it dramatically decreases the amount of runtime testing necessary to ship software that is both stable and safe.
 \item $\ast$$\ast$$\ast$\+Component based architecture\+:$\ast$$\ast$$\ast$ S\+M\+A\+CC has built-\/in funcionality provided inside S\+M\+A\+CC Components that can be dynamically imported at runtime and stored in the local machine. The states only access those components they are concerned with. This enables the S\+M\+A\+CC based application to extend or improve the runtime behavior of the system.
+\begin{DoxyItemize}
+\item $\ast$$\ast$$\ast$\+S\+M\+A\+CC Viewer\+:$\ast$$\ast$$\ast$ One of the features that S\+M\+A\+CC inherits from Boost Statechart is that you get compile time validation checking. This benefits the developer in that it dramatically decreases the amount of runtime testing necessary to ship software that is both stable and safe.
+\end{DoxyItemize}
 \end{DoxyItemize}
 
 \subsection*{S\+M\+A\+CC applications}
@@ -43,38 +49,8 @@ From it\textquotesingle{}s inception, S\+M\+A\+CC was written to support the pro
 
  
 
-\subsection*{R\+OS Integration}
-
-
-\begin{DoxyItemize}
-\item $\ast$$\ast$$\ast$\+Intensive use of R\+OS Action$\ast$$\ast$$\ast$. S\+M\+A\+CC translates Action server events (Result callbacks, Feedback callbacks, etc.) into statechart events. To learn more about this, check the sections Shared Resources and S\+M\+A\+CC Architecture.
-\item $\ast$$\ast$$\ast$\+Powerful access to R\+OS Parameters$\ast$$\ast$$\ast$. Each S\+M\+A\+CC state automatically creates a ros\+::\+Node\+Handle automatically named according to the S\+M\+A\+CC state hierarchy (see more in section Usage Examples -\/ Ros parameters)
-\item $\ast$$\ast$$\ast$\+R\+OS Navigation built-\/in funcionality$\ast$$\ast$$\ast$. S\+M\+A\+CC extends the R\+OS navigation stack in a high level way. It provides specialized navigation planners (for the R\+OS Navigation Stack) that navigate only using pure spinning motions and straight motions. Implements some mechanism to perform motions recording the path and undoing them later. These can be very useful in some industrial applications where the knowledge or certainty on the environment is higher (ros planners are focused on cluttered and dynamic environments).
-\end{DoxyItemize}
-
-\subsection*{Internal Architecture}
-
-S\+M\+A\+CC State Machines are boost\+::statechart Asynchronous\+State\+Machines that can work in a multi-\/threaded application. In S\+M\+A\+CC State Machines are two main components that work concurrently in two different threads\+:
-
-
-\begin{DoxyItemize}
-\item $\ast$$\ast$$\ast$\+Signal Detector$\ast$$\ast$$\ast$. It is able to handle the action client components communication with action servers and translate them to statechart events
-\item $\ast$$\ast$$\ast$\+State Machine$\ast$$\ast$$\ast$. It is the end-\/user code of the state machine itself.
-\end{DoxyItemize}
-
- 
-
 \subsection*{Getting Started}
 
 The easiest way to get started is by selecting one of the state machines in our \href{https://github.com/reelrbtx/SMACC/tree/master/smacc_sm_reference_library}{\tt reference library}, and then hacking it to meet your needs.
 
-Each state machine in the reference library comes with it\textquotesingle{}s own R\+E\+A\+D\+M\+E.\+md file, which contains the appropriate operating instructions, so that all you have to do is simply copy \& paste some commands into your terminal.
-
-\subsection*{Future Work}
-
-
-\begin{DoxyItemize}
-\item undoing paths chunks by state (store the different chunks of the path according to its state in a stack)
-\item code generation based on uml diagrams
-\item improving backwards planners for non linear paths 
-\end{DoxyItemize}
+Each state machine in the reference library comes with it\textquotesingle{}s own R\+E\+A\+D\+M\+E.\+md file, which contains the appropriate operating instructions, so that all you have to do is simply copy \& paste some commands into your terminal. 
