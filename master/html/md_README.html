@@ -119,26 +119,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </ul>
 <h2>SMACC applications</h2>
 <p>From it's inception, SMACC was written to support the programming of multi-component, complex robots. If your project involves small, solar-powered insect robots, that simply navigate towards a light source, then SMACC might not be the right choice for you. But if you are trying to program a robot with a mobile base, a robotic arm, a gripper, two lidar sensors, a gps transceiver and an imu, then you've come to the right place.</p>
-<h2>ROS Integration</h2>
+<div class="image">
+<img src="https://github.com/reelrbtx/SMACC/blob/master/documentation/SMACC-Containers-3.jpg"  width="450" align="center"/>
+</div>
+ <h2>ROS Integration</h2>
 <ul>
 <li>***Intensive use of ROS Action***. SMACC translates Action server events (Result callbacks, Feedback callbacks, etc.) into statechart events. To learn more about this, check the sections Shared Resources and SMACC Architecture.</li>
 <li>***Powerful access to ROS Parameters***. Each SMACC state automatically creates a ros::NodeHandle automatically named according to the SMACC state hierarchy (see more in section Usage Examples - Ros parameters)</li>
 <li>***ROS Navigation built-in funcionality***. SMACC extends the ROS navigation stack in a high level way. It provides specialized navigation planners (for the ROS Navigation Stack) that navigate only using pure spinning motions and straight motions. Implements some mechanism to perform motions recording the path and undoing them later. These can be very useful in some industrial applications where the knowledge or certainty on the environment is higher (ros planners are focused on cluttered and dynamic environments).</li>
 </ul>
-<h2>Future Work</h2>
-<ul>
-<li>undoing paths chunks by state (store the different chunks of the path according to its state in a stack)</li>
-<li>code generation based on uml diagrams</li>
-<li>improving backwards planners for non linear paths</li>
-</ul>
-<h2>Development methodology</h2>
-<p>SMACC also defines a development methodology where State Machine nodes only contain the task-level logic, that is, the high level behavior of the robot system in some specific application.</p>
-<p>SMACC applications have low level coupling with other software components of the robot system. SMACC code is recomended to interact with the rest of components the robot system via ROS Action Servers and <b>Smacc Action Plugins</b>.</p>
-<p>The proposed methdology split the states into 2 or more statechart orthogonal lines that comunicate to each other via events. The orthogonal line 0 is tipically for the mobile robot navigation. The second orthogonal line and ahead are used for tools (manipulators, grippers or other custom tools).</p>
-<div class="image">
-<img src="https://github.com/reelrbtx/SMACC/blob/master/documentation/SMACC-Containers-3.jpg"  width="450" align="center"/>
-</div>
- <h2>Internal Architecture</h2>
+<h2>Internal Architecture</h2>
 <p>SMACC State Machines are boost::statechart AsynchronousStateMachines that can work in a multi-threaded application. In SMACC State Machines are two main components that work concurrently in two different threads:</p>
 <ul>
 <li>***Signal Detector***. It is able to handle the action client components communication with action servers and translate them to statechart events</li>
@@ -147,21 +137,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="image">
 <img src="http://smacc.ninja/wp-content/uploads/2018/09/SMACC-Node-Map-2-2-1.jpg"  width="450" align="center"/>
 </div>
- <h1>Tutorial</h1>
-<p>SMACC states inherits from boost::statechart:State so that you can learn the full potential of SMACC states also diving in the statechart documentation. However, the following examples briefly show how you create define SMACC states and how you would usually use them.</p>
-<h2>Getting Started</h2>
-<p>The easiest way to get started is by selecting one of the state machines in our reference library, and then hacking it to meet your needs.</p>
+ <h2>Getting Started</h2>
+<p>The easiest way to get started is by selecting one of the state machines in our <a href="https://github.com/reelrbtx/SMACC/tree/master/smacc_sm_reference_library">reference library</a>, and then hacking it to meet your needs.</p>
 <p>Each state machine in the reference library comes with it's own README.md file, which contains the appropriate operating instructions, so that all you have to do is simply copy &amp; paste some commands into your terminal.</p>
-<h2>Anatomy of a simple SMACC State</h2>
-<p>For the previous state machine, this would be the initial SMACC State. It also follows the Curiously recurrent template pattern. However, for Smacc states, the second template parameters is the so called "Context", for this simple case, the context is the StateMachine type itself. However, that could also be other State (in a nexted-substate case) or an orthogonal line.</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>ToolSimpleState</div><div class="line">    : <a class="code" href="classSmaccState.html">SmaccState</a>&lt;ToolSimpleState, SimpleStateMachine&gt;</div><div class="line">{</div><div class="line"><span class="keyword">public</span>:</div><div class="line"></div><div class="line">  <span class="keyword">using</span> SmaccState::SmaccState;</div><div class="line">  <span class="keywordtype">void</span> onEntry()</div><div class="line">  {</div><div class="line">    ROS_INFO(<span class="stringliteral">&quot;Entering ToolSimpleState&quot;</span>);</div><div class="line">  }</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keywordtype">int</span> <a class="code" href="odom__tracker__node_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div><div class="line">  <span class="comment">// initialize the ros node</span></div><div class="line">  ros::init(argc, argv, <span class="stringliteral">&quot;example1&quot;</span>);</div><div class="line">  ros::NodeHandle nh;</div><div class="line"></div><div class="line">  smacc::run&lt;SimpleStateMachine&gt;();</div><div class="line">}</div></div><!-- fragment --><p> According to the UML statchart standard, things happens essencially when the system enters in the state, when the system exits the state and when some event is triggered. The two first ones are shown in this example. The c++ Constructor code is the place you have to write your "entry code", the destructor is the place you have to write your "exit code". The constructor parameter (my_context) is a reference to the context object (in this case the state machine). This kind of constructor may be verebosy, but is required to implement the rest of SMACC tasks and always follows the same pattern.</p>
-<h2>Simple State Transition on Action Result Event</h2>
-<p>According to the UML state machines standard, transitions between states happen on events. In SMACC events can be implemented by the user or happen when Action Results callbacks and Action Feedback callbacks happen. In the following example we extend the previous example to transit to another state 'ExecuteToolState' when the move_base action sever returns a Result.</p>
-<div class="image">
-<img src="https://raw.githubusercontent.com/brettpac/SMACC/master/documentation/action_result_transition.png"  width="450"/>
-</div>
- <p>The following would be the code to implement the diagram shown above.</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>Navigate : <a class="code" href="classSmaccState.html">SmaccState</a>&lt;Navigate, SimpleStateMachine&gt;</div><div class="line">{</div><div class="line"><span class="keyword">public</span>:</div><div class="line"></div><div class="line">  <span class="comment">// With this line we specify that we are going to react to any EvActionResult event</span></div><div class="line">  <span class="comment">// generated by SMACC when the action server provides a response to our request</span></div><div class="line">  <span class="keyword">typedef</span> mpl::list&lt;sc::transition&lt;EvActionResult&lt;SmaccMoveBaseActionClient::Result&gt;, ExecuteToolState&gt;&gt; reactions;</div><div class="line"></div><div class="line">  <span class="keyword">using</span> SmaccState::SmaccState;</div><div class="line">  <span class="keywordtype">void</span> onEntry()</div><div class="line">  {</div><div class="line">   [...]</div><div class="line">  }</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">struct </span>ExecuteToolState : <a class="code" href="classSmaccState.html">SmaccState</a>&lt;ExecuteToolState, SimpleStateMachine&gt;</div><div class="line">{</div><div class="line">    <span class="keyword">using</span> SmaccState::SmaccState;</div><div class="line">    <span class="keywordtype">void</span> onEntry()</div><div class="line">    {</div><div class="line">    }</div><div class="line">};</div></div><!-- fragment --> </div></div><!-- contents -->
+<h2>Future Work</h2>
+<ul>
+<li>undoing paths chunks by state (store the different chunks of the path according to its state in a stack)</li>
+<li>code generation based on uml diagrams</li>
+<li>improving backwards planners for non linear paths </li>
+</ul>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
