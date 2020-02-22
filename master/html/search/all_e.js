@@ -100,7 +100,7 @@ var searchData=
   ['orsubscriber',['OrSubscriber',['../classsm__three__some_1_1OrSubscriber.html',1,'sm_three_some']]],
   ['ortemperaturesensor',['OrTemperatureSensor',['../classsm__dance__bot__strikes__back_1_1OrTemperatureSensor.html',1,'sm_dance_bot_strikes_back']]],
   ['ortemperaturesensor',['OrTemperatureSensor',['../classsm__dance__bot_1_1OrTemperatureSensor.html',1,'sm_dance_bot']]],
-  ['orthogonal',['Orthogonal',['../docs_2Global_01Transition_01Rules_8txt.html#a2e1cdec29dad5013e514270d0a78fe22',1,'Orthogonal():&#160;Global Transition Rules.txt'],['../strikes__back_2docs_2Global_01Transition_01Rules_8txt.html#a2e1cdec29dad5013e514270d0a78fe22',1,'Orthogonal():&#160;Global Transition Rules.txt']]],
+  ['orthogonal',['Orthogonal',['../Global_01Transition_01Rules_8txt.html#a2e1cdec29dad5013e514270d0a78fe22',1,'Global Transition Rules.txt']]],
   ['orthogonal',['Orthogonal',['../classsmacc_1_1Orthogonal.html',1,'smacc']]],
   ['orthogonal_2ecpp',['orthogonal.cpp',['../orthogonal_8cpp.html',1,'']]],
   ['orthogonal_3c_20orkeyboard_20_3e',['Orthogonal&lt; OrKeyboard &gt;',['../classsmacc_1_1Orthogonal.html',1,'smacc']]],

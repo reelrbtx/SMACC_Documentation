@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['aborted',['aborted',['../docs_2Global_01Transition_01Rules_8txt.html#a682ac6cc3cf2eeec69ad3f310ae363ea',1,'aborted():&#160;Global Transition Rules.txt'],['../strikes__back_2docs_2Global_01Transition_01Rules_8txt.html#a682ac6cc3cf2eeec69ad3f310ae363ea',1,'aborted():&#160;Global Transition Rules.txt']]],
+  ['aborted',['aborted',['../Global_01Transition_01Rules_8txt.html#a682ac6cc3cf2eeec69ad3f310ae363ea',1,'Global Transition Rules.txt']]],
   ['absolutegoalangledegree',['absoluteGoalAngleDegree',['../classmove__base__z__client_1_1CbAbsoluteRotate.html#a3732ce20b520f9df9408f849ff809a19',1,'move_base_z_client::CbAbsoluteRotate']]],
   ['acceleration_5farrow_5f',['acceleration_arrow_',['../classsmacc__rviz__plugin_1_1ImuVisual.html#abead7d3f3c66b20bba8123a145b121b0',1,'smacc_rviz_plugin::ImuVisual']]],
   ['active_5fcb',['active_cb',['../classsmacc_1_1client__bases_1_1SmaccActionClientBase.html#a8aada706b9b8ca50792b48c2f990394a',1,'smacc::client_bases::SmaccActionClientBase']]],
