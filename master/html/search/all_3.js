@@ -2,6 +2,7 @@ var searchData=
 [
   ['damages',['DAMAGES',['../LICENSE_8txt.html#ae4e5ba7d6e99370d4c12feff5651d808',1,'LICENSE.txt']]],
   ['debug',['DEBUG',['../namespacesmacc.html#a3e4f79486ea6ea6342dd3c712d16a4f6adc30ec20708ef7b0f641ef78b7880a15',1,'smacc']]],
+  ['declareobjecttag',['declareObjectTag',['../classsmacc_1_1state__reactors_1_1SrRandomGenerator.html#a3c8db60268bcffc709a482f2cf302d41',1,'smacc::state_reactors::SrRandomGenerator']]],
   ['declaretransition',['declareTransition',['../classsmacc_1_1introspection_1_1SmaccStateInfo.html#ac0b32e5504ccbed161ad50f0b77c2004',1,'smacc::introspection::SmaccStateInfo']]],
   ['deep_5fconstruct',['deep_construct',['../classsmacc_1_1SmaccState.html#aac23d8a6909f75c5e5fca2a7c09b5368',1,'smacc::SmaccState']]],
   ['deep_5fhistory',['deep_history',['../structsm__dance__bot_1_1SmDanceBot.html#abd58ec4a2b50a45da304a5f0b9c44706',1,'sm_dance_bot::SmDanceBot::deep_history()'],['../structsm__dance__bot__strikes__back_1_1SmDanceBotStrikesBack.html#a3192d4079cbcf0739c7002538767ad22',1,'sm_dance_bot_strikes_back::SmDanceBotStrikesBack::deep_history()']]],

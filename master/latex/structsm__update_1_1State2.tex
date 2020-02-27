@@ -34,6 +34,8 @@ typedef mpl\+::list$<$ Transition$<$ \hyperlink{structros__timer__client_1_1EvTi
 \item 
 void \hyperlink{structsm__update_1_1State2_a4b85c8a77894cc78f017da0de9e2bfa3}{runtime\+Configure} ()
 \item 
+virtual void \hyperlink{structsm__update_1_1State2_a395d9f5e248d78da06c0c375dd8cb1b6}{update} () override
+\item 
 void \hyperlink{structsm__update_1_1State2_a217fac4964c4905921e215805f8b80be}{on\+Timer\+Client\+Tick\+Callback} ()
 \item 
 void \hyperlink{structsm__update_1_1State2_a652c5a4944bcff8dcb237937b340b7dd}{on\+Single\+Behavior\+Tick\+Callback} ()
@@ -59,7 +61,7 @@ Definition at line 6 of file st\+\_\+state\+\_\+2.\+h.
 \subsubsection[{\texorpdfstring{reactions}{reactions}}]{\setlength{\rightskip}{0pt plus 5cm}typedef mpl\+::list$<$ Transition$<${\bf Ev\+Timer}$<${\bf Cb\+Timer\+Countdown\+Once}, {\bf Or\+Timer}$>$, {\bf State1}, {\bf S\+U\+C\+C\+E\+SS}$>$ $>$ {\bf sm\+\_\+update\+::\+State2\+::reactions}}\hypertarget{structsm__update_1_1State2_a6030dbce2602c3a49aae0a372e46e4df}{}\label{structsm__update_1_1State2_a6030dbce2602c3a49aae0a372e46e4df}
 
 
-Definition at line 15 of file st\+\_\+state\+\_\+2.\+h.
+Definition at line 16 of file st\+\_\+state\+\_\+2.\+h.
 
 
 
@@ -73,7 +75,7 @@ Definition at line 15 of file st\+\_\+state\+\_\+2.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structsm__update_1_1State2_a652c5a4944bcff8dcb237937b340b7dd}{}\label{structsm__update_1_1State2_a652c5a4944bcff8dcb237937b340b7dd}
 
 
-Definition at line 48 of file st\+\_\+state\+\_\+2.\+h.
+Definition at line 53 of file st\+\_\+state\+\_\+2.\+h.
 
 
 
@@ -81,9 +83,9 @@ Referenced by runtime\+Configure().
 
 
 \begin{DoxyCode}
-49     \{
-50         ROS\_INFO(\textcolor{stringliteral}{"single behavior tick!"});
-51     \}
+54     \{
+55         ROS\_INFO(\textcolor{stringliteral}{"single behavior tick!"});
+56     \}
 \end{DoxyCode}
 
 
@@ -106,7 +108,7 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structsm__update_1_1State2_a217fac4964c4905921e215805f8b80be}{}\label{structsm__update_1_1State2_a217fac4964c4905921e215805f8b80be}
 
 
-Definition at line 43 of file st\+\_\+state\+\_\+2.\+h.
+Definition at line 48 of file st\+\_\+state\+\_\+2.\+h.
 
 
 
@@ -114,9 +116,9 @@ Referenced by runtime\+Configure().
 
 
 \begin{DoxyCode}
-44     \{
-45         ROS\_INFO(\textcolor{stringliteral}{"timer client tick!"});
-46     \}
+49     \{
+50         ROS\_INFO(\textcolor{stringliteral}{"timer client tick!"});
+51     \}
 \end{DoxyCode}
 
 
@@ -157,7 +159,7 @@ References on\+Single\+Behavior\+Tick\+Callback(), on\+Timer\+Client\+Tick\+Call
 32         \textcolor{comment}{// subscribe to the timer client callback}
 33         client->onTimerTick(&\hyperlink{structsm__update_1_1State2_a217fac4964c4905921e215805f8b80be}{State2::onTimerClientTickCallback}, \textcolor{keyword}{this});
 34 
-35          \textcolor{comment}{// getting reference to the single countdown behavior}
+35         \textcolor{comment}{// getting reference to the single countdown behavior}
 36         \textcolor{keyword}{auto} *cbsingle = this->getOrthogonal<OrTimer>()
 37                              ->getClientBehavior<CbTimerCountdownOnce>();
 38 
@@ -194,6 +196,23 @@ Definition at line 19 of file st\+\_\+state\+\_\+2.\+h.
 20     \{
 21         configure\_orthogonal<OrTimer, CbTimerCountdownOnce>(5); \textcolor{comment}{// EvTimer triggers once at 10 client ticks}
 22     \}
+\end{DoxyCode}
+\index{sm\+\_\+update\+::\+State2@{sm\+\_\+update\+::\+State2}!update@{update}}
+\index{update@{update}!sm\+\_\+update\+::\+State2@{sm\+\_\+update\+::\+State2}}
+\subsubsection[{\texorpdfstring{update() override}{update() override}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void sm\+\_\+update\+::\+State2\+::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{structsm__update_1_1State2_a395d9f5e248d78da06c0c375dd8cb1b6}{}\label{structsm__update_1_1State2_a395d9f5e248d78da06c0c375dd8cb1b6}
+
+
+Definition at line 43 of file st\+\_\+state\+\_\+2.\+h.
+
+
+\begin{DoxyCode}
+44     \{
+45         ROS\_INFO(\textcolor{stringliteral}{"STATE 2 UPDATE"});
+46     \}
 \end{DoxyCode}
 
 
