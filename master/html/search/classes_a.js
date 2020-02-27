@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['odomtracker',['OdomTracker',['../classmove__base__z__client_1_1odom__tracker_1_1OdomTracker.html',1,'move_base_z_client::odom_tracker']]],
+  ['odomtracker',['OdomTracker',['../classcl__move__base__z_1_1odom__tracker_1_1OdomTracker.html',1,'cl_move_base_z::odom_tracker']]],
   ['odomtrackeractionserver',['OdomTrackerActionServer',['../classOdomTrackerActionServer.html',1,'']]],
   ['on_5fsensors_5favailable',['ON_SENSORS_AVAILABLE',['../structsm__dance__bot_1_1StAcquireSensors_1_1ON__SENSORS__AVAILABLE.html',1,'sm_dance_bot::StAcquireSensors']]],
   ['on_5fsensors_5favailable',['ON_SENSORS_AVAILABLE',['../structsm__dance__bot__strikes__back_1_1StAcquireSensors_1_1ON__SENSORS__AVAILABLE.html',1,'sm_dance_bot_strikes_back::StAcquireSensors']]],
