@@ -2,11 +2,11 @@ var searchData=
 [
   ['_7ebackwardglobalplanner',['~BackwardGlobalPlanner',['../classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner.html#a2011b04d7fd3fa18ab940779ee6d6d8c',1,'cl_move_base_z::backward_global_planner::BackwardGlobalPlanner']]],
   ['_7ebackwardlocalplanner',['~BackwardLocalPlanner',['../classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner.html#a6a36aa94617786c6958e861e64abb862',1,'cl_move_base_z::backward_local_planner::BackwardLocalPlanner']]],
-  ['_7eclbatterymonitor',['~ClBatteryMonitor',['../classbattery__monitor__client_1_1ClBatteryMonitor.html#a04bf9d943a21d6cb2433190d73d1422a',1,'battery_monitor_client::ClBatteryMonitor']]],
+  ['_7eclbatterymonitor',['~ClBatteryMonitor',['../classcl__battery__monitor__client_1_1ClBatteryMonitor.html#a583e52bdd7d15f688c265524cf87b68b',1,'cl_battery_monitor_client::ClBatteryMonitor']]],
   ['_7eclkeyboard',['~ClKeyboard',['../classcl__keyboard_1_1ClKeyboard.html#af2f4ffb66639acb158d57d627a56d8e8',1,'cl_keyboard::ClKeyboard']]],
   ['_7eclled',['~ClLED',['../classsm__dance__bot_1_1cl__led_1_1ClLED.html#add9ff40d28e1d31d77e1a2ff92e79fd2',1,'sm_dance_bot::cl_led::ClLED::~ClLED()'],['../classsm__dance__bot__strikes__back_1_1cl__led_1_1ClLED.html#a9365ecafd1b632f48c200b18afab0c7f',1,'sm_dance_bot_strikes_back::cl_led::ClLED::~ClLED()']]],
   ['_7eclmovebasez',['~ClMoveBaseZ',['../classcl__move__base__z_1_1ClMoveBaseZ.html#a33d1432bacc3bb364a93b04954a01f76',1,'cl_move_base_z::ClMoveBaseZ']]],
-  ['_7eclrostimer',['~ClRosTimer',['../classros__timer__client_1_1ClRosTimer.html#a099e3ba0adbd67092703bd5c776d6c3f',1,'ros_timer_client::ClRosTimer']]],
+  ['_7eclrostimer',['~ClRosTimer',['../classcl__ros__timer__client_1_1ClRosTimer.html#a60a7d2b4a38c1ebd7880c211f43c76a2',1,'cl_ros_timer_client::ClRosTimer']]],
   ['_7ecproscontrolinterface',['~CpRosControlInterface',['../classsmacc_1_1components_1_1CpRosControlInterface.html#a85ab7c698b5a1c0b0064775b2779daa8',1,'smacc::components::CpRosControlInterface']]],
   ['_7ecptopicsubscriber',['~CpTopicSubscriber',['../classsmacc_1_1components_1_1CpTopicSubscriber.html#a82118e72ea660b4f651dd02f8caf51a5',1,'smacc::components::CpTopicSubscriber']]],
   ['_7eforwardlocalplanner',['~ForwardLocalPlanner',['../classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner.html#a75fa72309f991772b56a6bc0f6b6b43f',1,'cl_move_base_z::forward_local_planner::ForwardLocalPlanner::~ForwardLocalPlanner()'],['../classcl__move__base__z_1_1__local__planner_1_1ForwardLocalPlanner.html#ad6d3e823b11a8e61c08cd8664580437b',1,'cl_move_base_z::_local_planner::ForwardLocalPlanner::~ForwardLocalPlanner()']]],

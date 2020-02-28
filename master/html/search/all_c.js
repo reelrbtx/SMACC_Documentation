@@ -14,7 +14,6 @@ var searchData=
   ['messagecallbackstoredistancetowall',['MessageCallbackStoreDistanceToWall',['../classsm__dance__bot__strikes__back_1_1cl__lidar_1_1CpLidarSensorData.html#aefe481c1441305a6adf5266c49d941a4',1,'sm_dance_bot_strikes_back::cl_lidar::CpLidarSensorData']]],
   ['met',['met',['../LICENSE_8txt.html#ab7f07fad302c934549e076cb99c8b69b',1,'LICENSE.txt']]],
   ['meter',['meter',['../backward__local__planner_8h.html#ab6024a26b088c11b8a5218a469ae5a57',1,'meter():&#160;backward_local_planner.h'],['../forward__local__planner_2include_2forward__local__planner_2forward__local__planner_8h.html#ab6024a26b088c11b8a5218a469ae5a57',1,'meter():&#160;forward_local_planner.h'],['../pure__spinning__global__planner_8h.html#ab6024a26b088c11b8a5218a469ae5a57',1,'meter():&#160;pure_spinning_global_planner.h'],['../pure__spinning__local__planner_2include_2pure__spinning__local__planner_2forward__local__planner_8h.html#ab6024a26b088c11b8a5218a469ae5a57',1,'meter():&#160;forward_local_planner.h']]],
-  ['microstrain_5fmips_5fclient',['microstrain_mips_client',['../namespacemicrostrain__mips__client.html',1,'']]],
   ['minpointangulardistancebackwardthresh_5f',['minPointAngularDistanceBackwardThresh_',['../classcl__move__base__z_1_1odom__tracker_1_1OdomTracker.html#a2d166d65e97d4aa7851c45fd81985a85',1,'cl_move_base_z::odom_tracker::OdomTracker']]],
   ['minpointangulardistanceforwardthresh_5f',['minPointAngularDistanceForwardThresh_',['../classcl__move__base__z_1_1odom__tracker_1_1OdomTracker.html#a3567ebfbc56db63e0fad52e0c4936c30',1,'cl_move_base_z::odom_tracker::OdomTracker']]],
   ['minpointdistancebackwardthresh_5f',['minPointDistanceBackwardThresh_',['../classcl__move__base__z_1_1odom__tracker_1_1OdomTracker.html#ac1c711aabcc005981c256f8f45c0555b',1,'cl_move_base_z::odom_tracker::OdomTracker']]],
@@ -40,8 +39,8 @@ var searchData=
   ['ms_5funplug_2eh',['ms_unplug.h',['../ms__unplug_8h.html',1,'']]],
   ['ms_5fweekend_2eh',['ms_weekend.h',['../ms__weekend_8h.html',1,'']]],
   ['ms_5fworkweek_2eh',['ms_workweek.h',['../ms__workweek_8h.html',1,'']]],
-  ['msdancebotrecoverymode',['MsDanceBotRecoveryMode',['../classsm__dance__bot_1_1MsDanceBotRecoveryMode.html',1,'sm_dance_bot']]],
   ['msdancebotrecoverymode',['MsDanceBotRecoveryMode',['../classsm__dance__bot__strikes__back_1_1MsDanceBotRecoveryMode.html',1,'sm_dance_bot_strikes_back']]],
+  ['msdancebotrecoverymode',['MsDanceBotRecoveryMode',['../classsm__dance__bot_1_1MsDanceBotRecoveryMode.html',1,'sm_dance_bot']]],
   ['msdancebotrunmode',['MsDanceBotRunMode',['../classsm__dance__bot__strikes__back_1_1MsDanceBotRunMode.html',1,'sm_dance_bot_strikes_back']]],
   ['msdancebotrunmode',['MsDanceBotRunMode',['../classsm__dance__bot_1_1MsDanceBotRunMode.html',1,'sm_dance_bot']]],
   ['msg_5f',['msg_',['../classsm__dance__bot_1_1cl__string__publisher_1_1CbStringPublisher.html#a320ff6940dc15b469af3679d2d2eb655',1,'sm_dance_bot::cl_string_publisher::CbStringPublisher::msg_()'],['../classsm__dance__bot__strikes__back_1_1cl__string__publisher_1_1CbStringPublisher.html#aff05ac35bd920ef24fd9b6464fe83eae',1,'sm_dance_bot_strikes_back::cl_string_publisher::CbStringPublisher::msg_()']]],
@@ -56,7 +55,6 @@ var searchData=
   ['msunplug',['MsUnplug',['../classsm__pr2__plugs_1_1MsUnplug.html',1,'sm_pr2_plugs']]],
   ['msweekend',['MsWeekend',['../classsm__calendar__week_1_1MsWeekend.html',1,'sm_calendar_week']]],
   ['msworkweek',['MsWorkweek',['../classsm__calendar__week_1_1MsWorkweek.html',1,'sm_calendar_week']]],
-  ['multirole_5fsensor_5fclient',['multirole_sensor_client',['../namespacemultirole__sensor__client.html',1,'']]],
-  ['my_5fcontext',['my_context',['../structsmacc_1_1SmaccState_1_1my__context.html',1,'smacc::SmaccState']]],
-  ['my_5fcontext',['my_context',['../structsmacc_1_1SmaccState_1_1my__context.html#af9c11c27b17bbf7de0d4e21c87d49f6f',1,'smacc::SmaccState::my_context::my_context()'],['../common_8h.html#af2dcacead80d69b96952496fe413bbfe',1,'my_context():&#160;common.h']]]
+  ['my_5fcontext',['my_context',['../structsmacc_1_1SmaccState_1_1my__context.html#af9c11c27b17bbf7de0d4e21c87d49f6f',1,'smacc::SmaccState::my_context::my_context()'],['../common_8h.html#af2dcacead80d69b96952496fe413bbfe',1,'my_context():&#160;common.h']]],
+  ['my_5fcontext',['my_context',['../structsmacc_1_1SmaccState_1_1my__context.html',1,'smacc::SmaccState']]]
 ];
