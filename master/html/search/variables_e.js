@@ -8,6 +8,7 @@ var searchData=
   ['parser',['parser',['../namespacegenerate__debs.html#a4a9ae4bb85fc62d7973ea3d09ced6c26',1,'generate_debs']]],
   ['pathstack_5f',['pathStack_',['../classcl__move__base__z_1_1odom__tracker_1_1OdomTracker.html#a1ccad1b568b6c65da43ba6639b6bd1ef',1,'cl_move_base_z::odom_tracker::OdomTracker']]],
   ['pcontext_5f',['pContext_',['../structsmacc_1_1SmaccState_1_1my__context.html#a85f6eff5aba687932efe3f8117be76d3',1,'smacc::SmaccState::my_context']]],
+  ['periodduration_5f',['periodDuration_',['../classsmacc_1_1ISmaccUpdatable.html#ad02d9798ac5609f3ecb9fb8a46febc18',1,'smacc::ISmaccUpdatable']]],
   ['plan_5f',['plan_',['../classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner.html#a929e5d0a9db3027810beb658a2343560',1,'cl_move_base_z::forward_local_planner::ForwardLocalPlanner::plan_()'],['../classcl__move__base__z_1_1__local__planner_1_1ForwardLocalPlanner.html#a40d784e351041e2630cb991aadb3f63c',1,'cl_move_base_z::_local_planner::ForwardLocalPlanner::plan_()']]],
   ['planpub_5f',['planPub_',['../classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner.html#a561eab039140948c52ec928c191f3f43',1,'cl_move_base_z::backward_global_planner::BackwardGlobalPlanner::planPub_()'],['../classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner.html#a927dc6a687fac3751033d9736cf8dfcf',1,'cl_move_base_z::forward_global_planner::ForwardGlobalPlanner::planPub_()']]],
   ['pose_5f',['pose_',['../classcl__move__base__z_1_1Pose.html#a07159b1632042a0292ffcc39995da81e',1,'cl_move_base_z::Pose']]],

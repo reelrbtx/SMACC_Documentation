@@ -103,11 +103,12 @@ References costmap\+\_\+ros\+\_\+, nh\+\_\+, plan\+Pub\+\_\+, pures\+Spinning\+R
 
 \begin{DoxyCode}
 31 \{
-32     \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a927dc6a687fac3751033d9736cf8dfcf}{planPub\_} = \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_aab61c90829040df58fb99dff3b566c72}{nh\_}.advertise<nav\_msgs::Path>(\textcolor{stringliteral}{"global\_plan"}, 1);
-33     \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_abafd101fa62caf2d74f118a0b4bb948c}{skip\_straight\_motion\_distance\_} = 0.2; \textcolor{comment}{//meters}
-34     \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a6aed6f8f6e57a8c5821977814d0b9402}{puresSpinningRadStep\_} = 1000;         \textcolor{comment}{// rads}
-35     this->\hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a711d4a0d92a216eb8cab3b42f18eb795}{costmap\_ros\_} = costmap\_ros;
-36 \}
+32     ROS\_INFO(\textcolor{stringliteral}{"[Forward Global Planner] initializing"});
+33     \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a927dc6a687fac3751033d9736cf8dfcf}{planPub\_} = \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_aab61c90829040df58fb99dff3b566c72}{nh\_}.advertise<nav\_msgs::Path>(\textcolor{stringliteral}{"global\_plan"}, 1);
+34     \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_abafd101fa62caf2d74f118a0b4bb948c}{skip\_straight\_motion\_distance\_} = 0.2; \textcolor{comment}{//meters}
+35     \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a6aed6f8f6e57a8c5821977814d0b9402}{puresSpinningRadStep\_} = 1000;         \textcolor{comment}{// rads}
+36     this->\hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a711d4a0d92a216eb8cab3b42f18eb795}{costmap\_ros\_} = costmap\_ros;
+37 \}
 \end{DoxyCode}
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+global\+\_\+planner\+::\+Forward\+Global\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+global\+\_\+planner\+::\+Forward\+Global\+Planner}!make\+Plan@{make\+Plan}}
 \index{make\+Plan@{make\+Plan}!cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+global\+\_\+planner\+::\+Forward\+Global\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+global\+\_\+planner\+::\+Forward\+Global\+Planner}}
@@ -120,7 +121,7 @@ References costmap\+\_\+ros\+\_\+, nh\+\_\+, plan\+Pub\+\_\+, pures\+Spinning\+R
 )}\hypertarget{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a9d7c48877a390ca3cc580a7ffa50d316}{}\label{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a9d7c48877a390ca3cc580a7ffa50d316}
 
 
-Definition at line 46 of file forward\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 48 of file forward\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -132,80 +133,80 @@ Referenced by make\+Plan().
 
 
 \begin{DoxyCode}
-48 \{
-49     \textcolor{comment}{//ROS\_WARN\_STREAM("Forward global plan goal: " << goal);}
-50 
-51     \textcolor{comment}{//three stages: 1 - heading to goal position, 2 - going forward keep orientation, 3 - heading to goal
-       orientation}
+50 \{
+51     \textcolor{comment}{//ROS\_WARN\_STREAM("Forward global plan goal: " << goal);}
 52 
-53     \textcolor{comment}{// 1 - heading to goal position}
-54     \textcolor{comment}{// orientation direction}
-55 
-56     \textcolor{keywordtype}{double} dx = goal.pose.position.x - start.pose.position.x;
-57     \textcolor{keywordtype}{double} dy = goal.pose.position.y - start.pose.position.y;
-58 
-59     \textcolor{keywordtype}{double} lenght = sqrt(dx * dx + dy * dy);
+53     \textcolor{comment}{//three stages: 1 - heading to goal position, 2 - going forward keep orientation, 3 - heading to goal
+       orientation}
+54 
+55     \textcolor{comment}{// 1 - heading to goal position}
+56     \textcolor{comment}{// orientation direction}
+57 
+58     \textcolor{keywordtype}{double} dx = goal.pose.position.x - start.pose.position.x;
+59     \textcolor{keywordtype}{double} dy = goal.pose.position.y - start.pose.position.y;
 60 
-61     geometry\_msgs::PoseStamped prevState;
-62     \textcolor{keywordflow}{if} (lenght > \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_abafd101fa62caf2d74f118a0b4bb948c}{skip\_straight\_motion\_distance\_})
-63     \{
-64         \textcolor{comment}{// skip initial pure spinning and initial straight motion}
-65         \textcolor{comment}{//ROS\_INFO("1 - heading to goal position pure spinning");}
-66         \textcolor{keywordtype}{double} heading\_direction = atan2(dy, dx);
-67         prevState = \hyperlink{namespacecl__move__base__z_ac774e138510eb7b5e0015be1f7709e19}{cl\_move\_base\_z::makePureSpinningSubPlan}(start, 
+61     \textcolor{keywordtype}{double} lenght = sqrt(dx * dx + dy * dy);
+62 
+63     geometry\_msgs::PoseStamped prevState;
+64     \textcolor{keywordflow}{if} (lenght > \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_abafd101fa62caf2d74f118a0b4bb948c}{skip\_straight\_motion\_distance\_})
+65     \{
+66         \textcolor{comment}{// skip initial pure spinning and initial straight motion}
+67         \textcolor{comment}{//ROS\_INFO("1 - heading to goal position pure spinning");}
+68         \textcolor{keywordtype}{double} heading\_direction = atan2(dy, dx);
+69         prevState = \hyperlink{namespacecl__move__base__z_ac774e138510eb7b5e0015be1f7709e19}{cl\_move\_base\_z::makePureSpinningSubPlan}(start, 
       heading\_direction, plan, \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a6aed6f8f6e57a8c5821977814d0b9402}{puresSpinningRadStep\_});
-68         \textcolor{comment}{//ROS\_INFO("2 - going forward keep orientation pure straight");}
-69         prevState = \hyperlink{namespacecl__move__base__z_a1d6998cc28a1847906272f2bf92bacc8}{cl\_move\_base\_z::makePureStraightSubPlan}(
+70         \textcolor{comment}{//ROS\_INFO("2 - going forward keep orientation pure straight");}
+71         prevState = \hyperlink{namespacecl__move__base__z_a1d6998cc28a1847906272f2bf92bacc8}{cl\_move\_base\_z::makePureStraightSubPlan}(
       prevState, goal.pose.position, lenght, plan);
-70     \}
-71     \textcolor{keywordflow}{else}
-72     \{
-73         prevState = start;
-74     \}
-75 
-76     \textcolor{comment}{//ROS\_INFO("3 - heading to goal orientation");}
-77     \textcolor{keywordtype}{double} goalOrientation = angles::normalize\_angle(tf::getYaw(goal.pose.orientation));
-78     \hyperlink{namespacecl__move__base__z_ac774e138510eb7b5e0015be1f7709e19}{cl\_move\_base\_z::makePureSpinningSubPlan}(prevState, 
+72     \}
+73     \textcolor{keywordflow}{else}
+74     \{
+75         prevState = start;
+76     \}
+77 
+78     \textcolor{comment}{//ROS\_INFO("3 - heading to goal orientation");}
+79     \textcolor{keywordtype}{double} goalOrientation = angles::normalize\_angle(tf::getYaw(goal.pose.orientation));
+80     \hyperlink{namespacecl__move__base__z_ac774e138510eb7b5e0015be1f7709e19}{cl\_move\_base\_z::makePureSpinningSubPlan}(prevState, 
       goalOrientation, plan, \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a6aed6f8f6e57a8c5821977814d0b9402}{puresSpinningRadStep\_});
-79 
-80     nav\_msgs::Path planMsg;
-81     planMsg.poses = plan;
-82     planMsg.header.stamp = ros::Time::now();
-83     planMsg.header.frame\_id = \textcolor{stringliteral}{"/odom"};
-84 
-85     \textcolor{comment}{// check plan rejection}
-86     \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};
-87 
-88     \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
-89     \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
-90     \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
-91     \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
-92 
-93     costmap\_2d::Costmap2D *costmap2d = this->\hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a711d4a0d92a216eb8cab3b42f18eb795}{costmap\_ros\_}->getCostmap();
-94     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : plan)
-95     \{
-96         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
-97         costmap2d->worldToMap(p.pose.position.x, p.pose.position.y, mx, my);
-98         \textcolor{keyword}{auto} cost = costmap2d->getCost(mx, my);
-99 
-100         \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
-101         \{
-102             acceptedGlobalPlan = \textcolor{keyword}{false};
-103             \textcolor{keywordflow}{break};
-104         \}
-105     \}
-106 
-107     \textcolor{keywordflow}{if} (acceptedGlobalPlan)
-108     \{
-109         \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a927dc6a687fac3751033d9736cf8dfcf}{planPub\_}.publish(planMsg);
-110         \textcolor{comment}{//ROS\_INFO\_STREAM("global forward plan: " << planMsg);}
-111         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-112     \}
-113     \textcolor{keywordflow}{else}
-114     \{
-115         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-116     \}
-117 \}
+81 
+82     nav\_msgs::Path planMsg;
+83     planMsg.poses = plan;
+84     planMsg.header.stamp = ros::Time::now();
+85     planMsg.header.frame\_id = \textcolor{stringliteral}{"/odom"};
+86 
+87     \textcolor{comment}{// check plan rejection}
+88     \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};
+89 
+90     \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
+91     \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
+92     \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
+93     \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
+94 
+95     costmap\_2d::Costmap2D *costmap2d = this->\hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a711d4a0d92a216eb8cab3b42f18eb795}{costmap\_ros\_}->getCostmap();
+96     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : plan)
+97     \{
+98         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
+99         costmap2d->worldToMap(p.pose.position.x, p.pose.position.y, mx, my);
+100         \textcolor{keyword}{auto} cost = costmap2d->getCost(mx, my);
+101 
+102         \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
+103         \{
+104             acceptedGlobalPlan = \textcolor{keyword}{false};
+105             \textcolor{keywordflow}{break};
+106         \}
+107     \}
+108 
+109     \textcolor{keywordflow}{if} (acceptedGlobalPlan)
+110     \{
+111         \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a927dc6a687fac3751033d9736cf8dfcf}{planPub\_}.publish(planMsg);
+112         \textcolor{comment}{//ROS\_INFO\_STREAM("global forward plan: " << planMsg);}
+113         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+114     \}
+115     \textcolor{keywordflow}{else}
+116     \{
+117         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+118     \}
+119 \}
 \end{DoxyCode}
 
 
@@ -243,7 +244,7 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_ab01769603169105e92d9b6e479147bce}{}\label{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_ab01769603169105e92d9b6e479147bce}
 
 
-Definition at line 38 of file forward\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 39 of file forward\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -251,10 +252,11 @@ References make\+Plan().
 
 
 \begin{DoxyCode}
-41 \{
-42     cost = 0;
-43     \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a9d7c48877a390ca3cc580a7ffa50d316}{makePlan}(start, goal, plan);
-44 \}
+42 \{
+43     ROS\_INFO(\textcolor{stringliteral}{"[Forward Global Planner] planning"});
+44     cost = 0;
+45     \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a9d7c48877a390ca3cc580a7ffa50d316}{makePlan}(start, goal, plan);
+46 \}
 \end{DoxyCode}
 
 
