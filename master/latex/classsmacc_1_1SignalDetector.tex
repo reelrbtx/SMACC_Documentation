@@ -367,23 +367,31 @@ Referenced by smacc\+::run(), and run\+Thread().
 231 \{
 232     ros::NodeHandle nh(\textcolor{stringliteral}{"~"});
 233 
-234     \textcolor{keywordflow}{if} (!nh.param(\textcolor{stringliteral}{"signal\_detector\_loop\_freq"}, this->loop\_rate\_hz))
-235     \{
-236     \}
-237 
-238     nh.setParam(\textcolor{stringliteral}{"signal\_detector\_loop\_freq"}, this->\hyperlink{classsmacc_1_1SignalDetector_a41a2ae4262ed350f46d8b886bdc1dfa5}{loop\_rate\_hz});
-239 
-240     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[SignalDetector] loop rate hz:"} << \hyperlink{classsmacc_1_1SignalDetector_a41a2ae4262ed350f46d8b886bdc1dfa5}{loop\_rate\_hz});
-241 
-242     ros::Rate r(\hyperlink{classsmacc_1_1SignalDetector_a41a2ae4262ed350f46d8b886bdc1dfa5}{loop\_rate\_hz});
-243     \textcolor{keywordflow}{while} (ros::ok() && !\hyperlink{classsmacc_1_1SignalDetector_aaee266393c01693528a2d74b1f2354a2}{end\_})
-244     \{
-245         ROS\_INFO\_STREAM\_THROTTLE(10, \textcolor{stringliteral}{"[SignalDetector] heartbeat"});
-246         \hyperlink{classsmacc_1_1SignalDetector_a9a116479e23259f3a5d5d4a47278afd5}{pollOnce}();
-247         ros::spinOnce();
-248         r.sleep();
-249     \}
-250 \}
+234 
+235     \textcolor{keywordflow}{if} (!nh.getParam(\textcolor{stringliteral}{"signal\_detector\_loop\_freq"}, this->loop\_rate\_hz))
+236     \{
+237         ROS\_WARN(\textcolor{stringliteral}{"Signal detector frequency (ros param ~signal\_detector\_loop\_freq) was not set, using
+       default frequency: %lf"},  this->\hyperlink{classsmacc_1_1SignalDetector_a41a2ae4262ed350f46d8b886bdc1dfa5}{loop\_rate\_hz});
+238     \}
+239     \textcolor{keywordflow}{else}
+240     \{
+241         ROS\_WARN(\textcolor{stringliteral}{"Signal detector frequency (ros param ~signal\_detector\_loop\_freq): %lf"},  this->
+      \hyperlink{classsmacc_1_1SignalDetector_a41a2ae4262ed350f46d8b886bdc1dfa5}{loop\_rate\_hz});
+242     \}
+243 
+244     nh.setParam(\textcolor{stringliteral}{"signal\_detector\_loop\_freq"}, this->\hyperlink{classsmacc_1_1SignalDetector_a41a2ae4262ed350f46d8b886bdc1dfa5}{loop\_rate\_hz});
+245 
+246     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[SignalDetector] loop rate hz:"} << \hyperlink{classsmacc_1_1SignalDetector_a41a2ae4262ed350f46d8b886bdc1dfa5}{loop\_rate\_hz});
+247 
+248     ros::Rate r(\hyperlink{classsmacc_1_1SignalDetector_a41a2ae4262ed350f46d8b886bdc1dfa5}{loop\_rate\_hz});
+249     \textcolor{keywordflow}{while} (ros::ok() && !\hyperlink{classsmacc_1_1SignalDetector_aaee266393c01693528a2d74b1f2354a2}{end\_})
+250     \{
+251         ROS\_INFO\_STREAM\_THROTTLE(10, \textcolor{stringliteral}{"[SignalDetector] heartbeat"});
+252         \hyperlink{classsmacc_1_1SignalDetector_a9a116479e23259f3a5d5d4a47278afd5}{pollOnce}();
+253         ros::spinOnce();
+254         r.sleep();
+255     \}
+256 \}
 \end{DoxyCode}
 
 
