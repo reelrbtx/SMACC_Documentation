@@ -40,7 +40,7 @@ var searchData=
   ['or_5ftimer_2eh',['or_timer.h',['../smacc__sm__reference__library_2sm__dance__bot_2include_2sm__dance__bot_2orthogonals_2or__timer_8h.html',1,'']]],
   ['or_5ftimer_2eh',['or_timer.h',['../smacc__diagnostics_2sm__test1_2include_2sm__test1_2orthogonals_2or__timer_8h.html',1,'']]],
   ['or_5ftimer_2eh',['or_timer.h',['../smacc__sm__reference__library_2sm__starcraft__ai_2include_2sm__starcraft__ai_2orthogonals_2or__timer_8h.html',1,'']]],
-  ['or_5ftimer_2eh',['or_timer.h',['../smacc__sm__reference__library_2sm__update_2include_2sm__update_2orthogonals_2or__timer_8h.html',1,'']]],
+  ['or_5ftimer_2eh',['or_timer.h',['../smacc__sm__reference__library_2sm__update__loop_2include_2sm__update__loop_2orthogonals_2or__timer_8h.html',1,'']]],
   ['or_5fupdatable_5fpublisher_2eh',['or_updatable_publisher.h',['../sm__starcraft__ai_2include_2sm__starcraft__ai_2orthogonals_2or__updatable__publisher_8h.html',1,'']]],
   ['or_5fupdatable_5fpublisher_2eh',['or_updatable_publisher.h',['../sm__dance__bot__strikes__back_2include_2sm__dance__bot__strikes__back_2orthogonals_2or__updatable__publisher_8h.html',1,'']]],
   ['or_5fupdatable_5fpublisher_2eh',['or_updatable_publisher.h',['../sm__packML_2include_2sm__packML_2orthogonals_2or__updatable__publisher_8h.html',1,'']]],

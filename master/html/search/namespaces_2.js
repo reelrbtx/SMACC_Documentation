@@ -72,7 +72,7 @@ var searchData=
   ['sm_5fthree_5fsome',['sm_three_some',['../namespacesm__three__some_1_1SS2_1_1sm__three__some.html',1,'sm_three_some::SS2']]],
   ['sm_5fthree_5fsome',['sm_three_some',['../namespacesm__three__some_1_1SS1_1_1sm__three__some.html',1,'sm_three_some::SS1']]],
   ['sm_5fthree_5fsome',['sm_three_some',['../namespacesm__three__some.html',1,'']]],
-  ['sm_5fupdate',['sm_update',['../namespacesm__update.html',1,'']]],
+  ['sm_5fupdate_5floop',['sm_update_loop',['../namespacesm__update__loop.html',1,'']]],
   ['sm_5fviewer_5fsim',['sm_viewer_sim',['../namespacesm__viewer__sim.html',1,'']]],
   ['smacc',['smacc',['../namespacesmacc.html',1,'']]],
   ['smacc_5frviz_5fplugin',['smacc_rviz_plugin',['../namespacesmacc__rviz__plugin.html',1,'']]],
