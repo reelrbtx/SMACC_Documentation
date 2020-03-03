@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['microstrain_5fmips_5fclient_2ecpp',['microstrain_mips_client.cpp',['../microstrain__mips__client_8cpp.html',1,'']]],
+  ['microstrain_5fmips_5fclient_2eh',['microstrain_mips_client.h',['../microstrain__mips__client_8h.html',1,'']]],
   ['move_5fbase_5fz_5fclient_5fplugin_2ecpp',['move_base_z_client_plugin.cpp',['../move__base__z__client__plugin_8cpp.html',1,'']]],
   ['move_5fbase_5fz_5fclient_5fplugin_2eh',['move_base_z_client_plugin.h',['../move__base__z__client__plugin_8h.html',1,'']]],
   ['move_5fbase_5fz_5fclient_5ftools_2eh',['move_base_z_client_tools.h',['../move__base__z__client__tools_8h.html',1,'']]],
@@ -13,8 +15,8 @@ var searchData=
   ['ms_5frecover_2eh',['ms_recover.h',['../ms__recover_8h.html',1,'']]],
   ['ms_5frecovery_5fmode_2eh',['ms_recovery_mode.h',['../ms__recovery__mode_8h.html',1,'']]],
   ['ms_5frun_2eh',['ms_run.h',['../sm__starcraft__ai_2include_2sm__starcraft__ai_2mode__states_2ms__run_8h.html',1,'']]],
-  ['ms_5frun_2eh',['ms_run.h',['../sm__packML_2include_2sm__packML_2mode__states_2ms__run_8h.html',1,'']]],
   ['ms_5frun_2eh',['ms_run.h',['../sm__three__some_2include_2sm__three__some_2mode__states_2ms__run_8h.html',1,'']]],
+  ['ms_5frun_2eh',['ms_run.h',['../sm__packML_2include_2sm__packML_2mode__states_2ms__run_8h.html',1,'']]],
   ['ms_5frun_5fmode_2eh',['ms_run_mode.h',['../ms__run__mode_8h.html',1,'']]],
   ['ms_5fstop_2eh',['ms_stop.h',['../ms__stop_8h.html',1,'']]],
   ['ms_5funplug_2eh',['ms_unplug.h',['../ms__unplug_8h.html',1,'']]],
