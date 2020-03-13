@@ -82,13 +82,15 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), move\+Base\+Client\+
 17     odomTracker->setWorkingMode(WorkingMode::CLEAR\_PATH\_BACKWARD);
 18 
 19     ClMoveBaseZ::Goal goal;
-20     \textcolor{keywordflow}{if} (forwardpath.poses.size() > 0)
-21     \{
-22         goal.target\_pose = forwardpath.poses.front();
-23         plannerSwitcher->setBackwardPlanner();
-24         \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
-25     \}
-26 \}
+20     \textcolor{comment}{// this line is used to flush/reset backward planner in the case it were already there}
+21     \textcolor{comment}{//plannerSwitcher->setDefaultPlanners();}
+22     \textcolor{keywordflow}{if} (forwardpath.poses.size() > 0)
+23     \{
+24         goal.target\_pose = forwardpath.poses.front();
+25         plannerSwitcher->setBackwardPlanner();
+26         \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
+27     \}
+28 \}
 \end{DoxyCode}
 
 
@@ -115,7 +117,7 @@ Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ac0cd72d42bd0042
 
 
 
-Definition at line 28 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+cpp.
+Definition at line 30 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+cpp.
 
 
 
@@ -123,11 +125,11 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), move\+Base\+Client\+
 
 
 \begin{DoxyCode}
-29 \{
-30     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_});
-31     \textcolor{keyword}{auto} *odomTracker = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
-32     odomTracker->popPath();
-33 \}
+31 \{
+32     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_});
+33     \textcolor{keyword}{auto} *odomTracker = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
+34     odomTracker->popPath();
+35 \}
 \end{DoxyCode}
 
 
