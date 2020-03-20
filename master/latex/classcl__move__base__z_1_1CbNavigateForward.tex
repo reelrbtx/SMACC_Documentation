@@ -134,57 +134,60 @@ References forward\+Distance, smacc\+::\+I\+Smacc\+Client\+::get\+Component(), s
 29 
 30     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Straight motion distance: "} << dist);
 31 
-32     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a128b88b91b3f600f5a28480d85405c16}{moveBaseClient\_});
-33 
-34     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_} = \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a128b88b91b3f600f5a28480d85405c16}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
-35 
-36     \textcolor{comment}{//this should work better with a coroutine and await}
-37     ros::Rate rate(10.0);
-38     tf::StampedTransform currentPose;
-39 
-40     \textcolor{keywordflow}{while} (ros::ok())
-41     \{
-42         \textcolor{keywordflow}{try}
-43         \{
-44             \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a4fcb3933f612a0801bf373fbdeec71f5}{listener}.lookupTransform(\textcolor{stringliteral}{"/odom"}, \textcolor{stringliteral}{"/base\_link"},
-45                                      ros::Time(0), currentPose);
-46 
-47             \textcolor{keywordflow}{break};
-48         \}
-49         \textcolor{keywordflow}{catch} (tf::TransformException ex)
-50         \{
-51             ROS\_INFO(\textcolor{stringliteral}{"[CbNavigateFordward] Waiting transform: %s"}, ex.what());
-52             ros::Duration(1.0).sleep();
-53         \}
-54     \}
-55 
-56     tf::Transform forwardDeltaTransform;
-57     forwardDeltaTransform.setIdentity();
-58     forwardDeltaTransform.setOrigin(tf::Vector3(dist, 0, 0));
+32     \textcolor{comment}{// TODO: user better:   auto pose = robot->getComponent<cl\_move\_base\_z::Pose>()->get();}
+33     
+34     \textcolor{comment}{//this should work better with a coroutine and await}
+35     ros::Rate rate(10.0);
+36     tf::StampedTransform currentPose;
+37 
+38     \textcolor{keywordflow}{while} (ros::ok())
+39     \{
+40         \textcolor{keywordflow}{try}
+41         \{
+42             \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a4fcb3933f612a0801bf373fbdeec71f5}{listener}.lookupTransform(\textcolor{stringliteral}{"/odom"}, \textcolor{stringliteral}{"/base\_link"},
+43                                      ros::Time(0), currentPose);
+44 
+45             \textcolor{keywordflow}{break};
+46         \}
+47         \textcolor{keywordflow}{catch} (tf::TransformException ex)
+48         \{
+49             ROS\_INFO(\textcolor{stringliteral}{"[CbNavigateFordward] Waiting transform: %s"}, ex.what());
+50             ros::Duration(1.0).sleep();
+51         \}
+52     \}
+53 
+54     tf::Transform forwardDeltaTransform;
+55     forwardDeltaTransform.setIdentity();
+56     forwardDeltaTransform.setOrigin(tf::Vector3(dist, 0, 0));
+57 
+58     tf::Transform targetPose = currentPose * forwardDeltaTransform;
 59 
-60     tf::Transform targetPose = currentPose * forwardDeltaTransform;
-61 
-62     ClMoveBaseZ::Goal goal;
-63     goal.target\_pose.header.frame\_id = \textcolor{stringliteral}{"/odom"};
-64     goal.target\_pose.header.stamp = ros::Time::now();
-65     tf::poseTFToMsg(targetPose, goal.target\_pose.pose);
-66 
-67     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"TARGET POSE FORWARD: "} << goal.target\_pose.pose);
-68     ros::Duration(10).sleep();
-69     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a205ee48ec8b4599658e7408fc4755239}{pushPath}();
-70 
-71     geometry\_msgs::PoseStamped currentPoseMsg;
-72     currentPoseMsg.header.frame\_id = \textcolor{stringliteral}{"/odom"};
-73     currentPoseMsg.header.stamp = ros::Time::now();
-74     tf::poseTFToMsg(currentPose, currentPoseMsg.pose);
-75     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a9f4989c6353022c2ec3b0546c09bf3bc}{setStartPoint}(currentPoseMsg);
-76     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::RECORD\_PATH\_FORWARD);
+60     ClMoveBaseZ::Goal goal;
+61     goal.target\_pose.header.frame\_id = \textcolor{stringliteral}{"/odom"};
+62     goal.target\_pose.header.stamp = ros::Time::now();
+63     tf::poseTFToMsg(targetPose, goal.target\_pose.pose);
+64 
+65     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"TARGET POSE FORWARD: "} << goal.target\_pose.pose);
+66     ros::Duration(0.5).sleep();
+67 
+68     
+69     geometry\_msgs::PoseStamped currentPoseMsg;
+70     currentPoseMsg.header.frame\_id = \textcolor{stringliteral}{"/odom"};
+71     currentPoseMsg.header.stamp = ros::Time::now();
+72     tf::poseTFToMsg(currentPose, currentPoseMsg.pose);
+73 
+74     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a128b88b91b3f600f5a28480d85405c16}{moveBaseClient\_});
+75     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_} = \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a128b88b91b3f600f5a28480d85405c16}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
+76     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a205ee48ec8b4599658e7408fc4755239}{pushPath}();
 77 
-78     \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a128b88b91b3f600f5a28480d85405c16}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
-79     plannerSwitcher->setForwardPlanner();
+78     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a9f4989c6353022c2ec3b0546c09bf3bc}{setStartPoint}(currentPoseMsg);
+79     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::RECORD\_PATH\_FORWARD);
 80 
-81     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a128b88b91b3f600f5a28480d85405c16}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
-82 \}
+81     \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a128b88b91b3f600f5a28480d85405c16}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
+82     plannerSwitcher->setForwardPlanner();
+83 
+84     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a128b88b91b3f600f5a28480d85405c16}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
+85 \}
 \end{DoxyCode}
 
 
@@ -211,7 +214,7 @@ Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ac0cd72d42bd0042
 
 
 
-Definition at line 84 of file cb\+\_\+navigate\+\_\+forward.\+cpp.
+Definition at line 87 of file cb\+\_\+navigate\+\_\+forward.\+cpp.
 
 
 
@@ -219,9 +222,9 @@ References odom\+Tracker\+\_\+, and cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+t
 
 
 \begin{DoxyCode}
-85 \{
-86     this->\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::IDLE);
-87 \}
+88 \{
+89     this->\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::IDLE);
+90 \}
 \end{DoxyCode}
 
 
