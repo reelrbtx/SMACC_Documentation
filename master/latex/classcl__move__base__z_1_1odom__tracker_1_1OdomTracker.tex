@@ -32,7 +32,7 @@ Collaboration diagram for cl\+\_\+move\+\_\+base\+\_\+z\+:\+:odom\+\_\+tracker\+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ae3a5615aa45b7acf11e650e98ab10950}{Odom\+Tracker} (std\+::string odomtopic\+Name=\char`\"{}/odom\char`\"{})
+\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a79fe742fd2d578902e7bbacd4dec04d1}{Odom\+Tracker} (std\+::string odomtopic\+Name=\char`\"{}/odom\char`\"{}, std\+::string odom\+Frame=\char`\"{}/odom\char`\"{})
 \item 
 virtual void \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a12c5a839cfde2e8f2f55a5e0c9647b18}{process\+Odometry\+Message} (const nav\+\_\+msgs\+::\+Odometry \&odom)
 \begin{DoxyCompactList}\small\item\em odom callback\+: Updates the path -\/ this must be called periodically for each odometry message. \end{DoxyCompactList}\item 
@@ -48,32 +48,42 @@ void \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a93a14e15
 \item 
 void \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a9f4989c6353022c2ec3b0546c09bf3bc}{set\+Start\+Point} (const geometry\+\_\+msgs\+::\+Pose\+Stamped \&pose)
 \item 
+void \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4aefe72c155bd0d57c9f42b77a8928a6}{set\+Start\+Point} (const geometry\+\_\+msgs\+::\+Pose \&pose)
+\item 
 nav\+\_\+msgs\+::\+Path \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a762bc88653ebb7d78e693ba465fb160f}{get\+Path} ()
+\item 
+void \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a6d0b450474d9d555205ff4281965164e}{log\+State\+String} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 virtual void \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a8f728f85d1f3f49f4b94e37052a59d6d}{rt\+Publish\+Paths} (ros\+::\+Time timestamp)
 \item 
-virtual \hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa63ebddd9f6e42b0330738af82b60f99}{update\+Forward} (const nav\+\_\+msgs\+::\+Odometry \&odom)
+virtual \hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a77a66083573c6bef726d77447fb53349}{update\+Record\+Path} (const nav\+\_\+msgs\+::\+Odometry \&odom)
 \item 
-virtual \hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a35c8d8d9ae82244ef351ba0a6a4a7cfd}{update\+Backward} (const nav\+\_\+msgs\+::\+Odometry \&odom)
+virtual \hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_abe7ba4dbf014e1f2c64b5806ce42c073}{update\+Clear\+Path} (const nav\+\_\+msgs\+::\+Odometry \&odom)
+\item 
+void \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7922f1e1e688a2ed62d32d9914985a9f}{update\+Aggregated\+Stack\+Path} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 std\+::shared\+\_\+ptr$<$ realtime\+\_\+tools\+::\+Realtime\+Publisher$<$ nav\+\_\+msgs\+::\+Path $>$ $>$ \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a40a7cbb6bb6595e250e7c685c781613b}{robot\+Base\+Path\+Pub\+\_\+}
 \item 
+std\+::shared\+\_\+ptr$<$ realtime\+\_\+tools\+::\+Realtime\+Publisher$<$ nav\+\_\+msgs\+::\+Path $>$ $>$ \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7a2fb23e835ba7d63e69c8db819be876}{robot\+Base\+Path\+Stacked\+Pub\+\_\+}
+\item 
 ros\+::\+Subscriber \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ab55df0e91246e43dff80912dc35a4fee}{odom\+Sub\+\_\+}
 \item 
-double \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2a11c48d1da1f1c9b921ef37c8db6325}{min\+Point\+Distance\+Forward\+Thresh\+\_\+}
+double \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3a1173716d527bd182d04656491e01dd}{record\+Point\+Distance\+Threshold\+\_\+}
 \begin{DoxyCompactList}\small\item\em How much distance there is between two points of the path. \end{DoxyCompactList}\item 
-double \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ac1c711aabcc005981c256f8f45c0555b}{min\+Point\+Distance\+Backward\+Thresh\+\_\+}
+double \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1274fe5334c109cd9c2339beb9411441}{record\+Angular\+Distance\+Threshold\+\_\+}
 \begin{DoxyCompactList}\small\item\em Meters. \end{DoxyCompactList}\item 
-double \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3567ebfbc56db63e0fad52e0c4936c30}{min\+Point\+Angular\+Distance\+Forward\+Thresh\+\_\+}
+double \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7155d25d0e8dd9f237a79ff503b80e26}{clear\+Point\+Distance\+Threshold\+\_\+}
 \begin{DoxyCompactList}\small\item\em rads \end{DoxyCompactList}\item 
-double \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2d166d65e97d4aa7851c45fd81985a85}{min\+Point\+Angular\+Distance\+Backward\+Thresh\+\_\+}
+double \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1b79dd86745adfb31db822e0c8106282}{clear\+Angular\+Distance\+Threshold\+\_\+}
 \begin{DoxyCompactList}\small\item\em rads \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a54f31af5e74006560d94f266297853d4}{odom\+Frame\+\_\+}
+\item 
 \hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4f253d45ab5750dee3c2f18dd5599725}{publish\+Messages}
 \item 
 nav\+\_\+msgs\+::\+Path \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{base\+Trajectory\+\_\+}
@@ -81,6 +91,8 @@ nav\+\_\+msgs\+::\+Path \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1Od
 \hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8}{Working\+Mode} \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a5ae598c85c4469f4c0e984480575c42b}{working\+Mode\+\_\+}
 \item 
 std\+::vector$<$ nav\+\_\+msgs\+::\+Path $>$ \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{path\+Stack\+\_\+}
+\item 
+nav\+\_\+msgs\+::\+Path \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a0fb60113ace2791a1f1bbeed59946404}{aggregated\+Stack\+Path\+Msg\+\_\+}
 \item 
 \hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_afbe614b53a1493eb8268b8ea65b5b93a}{subscribe\+To\+Odometry\+Topic\+\_\+}
 \item 
@@ -98,63 +110,82 @@ Definition at line 37 of file odom\+\_\+tracker.\+h.
 \subsection{Constructor \& Destructor Documentation}
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!Odom\+Tracker@{Odom\+Tracker}}
 \index{Odom\+Tracker@{Odom\+Tracker}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
-\subsubsection[{\texorpdfstring{Odom\+Tracker(std\+::string odomtopic\+Name=""/odom"")}{OdomTracker(std::string odomtopicName="/odom")}}]{\setlength{\rightskip}{0pt plus 5cm}cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::\+Odom\+Tracker (
+\subsubsection[{\texorpdfstring{Odom\+Tracker(std\+::string odomtopic\+Name=""/odom"", std\+::string odom\+Frame=""/odom"")}{OdomTracker(std::string odomtopicName="/odom", std::string odomFrame="/odom")}}]{\setlength{\rightskip}{0pt plus 5cm}cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::\+Odom\+Tracker (
 \begin{DoxyParamCaption}
-\item[{std\+::string}]{odomtopic\+Name = {\ttfamily \char`\"{}/odom\char`\"{}}}
+\item[{std\+::string}]{odomtopic\+Name = {\ttfamily \char`\"{}/odom\char`\"{}}, }
+\item[{std\+::string}]{odom\+Frame = {\ttfamily \char`\"{}/odom\char`\"{}}}
 \end{DoxyParamCaption}
-)}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ae3a5615aa45b7acf11e650e98ab10950}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ae3a5615aa45b7acf11e650e98ab10950}
+)}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a79fe742fd2d578902e7bbacd4dec04d1}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a79fe742fd2d578902e7bbacd4dec04d1}
 
 
-Definition at line 13 of file odom\+\_\+tracker.\+cpp.
+Definition at line 14 of file odom\+\_\+tracker.\+cpp.
 
 
 
-References min\+Point\+Angular\+Distance\+Backward\+Thresh\+\_\+, min\+Point\+Angular\+Distance\+Forward\+Thresh\+\_\+, min\+Point\+Distance\+Backward\+Thresh\+\_\+, min\+Point\+Distance\+Forward\+Thresh\+\_\+, odom\+Sub\+\_\+, process\+Odometry\+Message(), publish\+Messages, cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+R\+E\+C\+O\+R\+D\+\_\+\+P\+A\+T\+H\+\_\+\+F\+O\+R\+W\+A\+RD, robot\+Base\+Path\+Pub\+\_\+, subscribe\+To\+Odometry\+Topic\+\_\+, and working\+Mode\+\_\+.
+References clear\+Angular\+Distance\+Threshold\+\_\+, clear\+Point\+Distance\+Threshold\+\_\+, odom\+Frame\+\_\+, odom\+Sub\+\_\+, process\+Odometry\+Message(), publish\+Messages, cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+R\+E\+C\+O\+R\+D\+\_\+\+P\+A\+TH, record\+Angular\+Distance\+Threshold\+\_\+, record\+Point\+Distance\+Threshold\+\_\+, robot\+Base\+Path\+Pub\+\_\+, robot\+Base\+Path\+Stacked\+Pub\+\_\+, subscribe\+To\+Odometry\+Topic\+\_\+, and working\+Mode\+\_\+.
 
 
 \begin{DoxyCode}
-14 \{
-15     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a5ae598c85c4469f4c0e984480575c42b}{workingMode\_} = \hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a989d06a586bcf9520889228da7faa643}{WorkingMode::RECORD\_PATH\_FORWARD};
-16     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4f253d45ab5750dee3c2f18dd5599725}{publishMessages} = \textcolor{keyword}{true};
-17     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_afbe614b53a1493eb8268b8ea65b5b93a}{subscribeToOdometryTopic\_} = \textcolor{keyword}{true};
-18 
-19     ros::NodeHandle nh;
+15 \{
+16     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a5ae598c85c4469f4c0e984480575c42b}{workingMode\_} = \hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a023bc3adf68871ef7a0c616765ac80a7}{WorkingMode::RECORD\_PATH};
+17     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4f253d45ab5750dee3c2f18dd5599725}{publishMessages} = \textcolor{keyword}{true};
+18     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_afbe614b53a1493eb8268b8ea65b5b93a}{subscribeToOdometryTopic\_} = \textcolor{keyword}{true};
+19     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a54f31af5e74006560d94f266297853d4}{odomFrame\_} = odomFrame;
 20 
-21     ROS\_WARN(\textcolor{stringliteral}{"Initializing Odometry Tracker"});
+21     ros::NodeHandle nh(\textcolor{stringliteral}{"~/odom\_tracker"});
 22 
-23     \textcolor{keywordflow}{if} (!nh.getParam(\textcolor{stringliteral}{"min\_point\_distance\_forward\_thresh"}, 
-      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2a11c48d1da1f1c9b921ef37c8db6325}{minPointDistanceForwardThresh\_}))
-24     \{
-25         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2a11c48d1da1f1c9b921ef37c8db6325}{minPointDistanceForwardThresh\_} = 0.005; \textcolor{comment}{// 5 mm}
-26     \}
-27 
-28     \textcolor{keywordflow}{if} (!nh.getParam(\textcolor{stringliteral}{"min\_point\_distance\_backward\_thresh"}, 
-      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ac1c711aabcc005981c256f8f45c0555b}{minPointDistanceBackwardThresh\_}))
-29     \{
-30         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ac1c711aabcc005981c256f8f45c0555b}{minPointDistanceBackwardThresh\_} = 0.1; \textcolor{comment}{// 5 cm}
-31     \}
-32 
-33     \textcolor{keywordflow}{if} (!nh.getParam(\textcolor{stringliteral}{"min\_point\_angular\_distance\_forward\_thresh"}, 
-      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3567ebfbc56db63e0fad52e0c4936c30}{minPointAngularDistanceForwardThresh\_}))
-34     \{
-35         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3567ebfbc56db63e0fad52e0c4936c30}{minPointAngularDistanceForwardThresh\_} = 0.15; \textcolor{comment}{// degree}
-36     \}
-37 
-38     \textcolor{keywordflow}{if} (!nh.getParam(\textcolor{stringliteral}{"min\_point\_angular\_distance\_backward\_thresh"}, 
-      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2d166d65e97d4aa7851c45fd81985a85}{minPointAngularDistanceBackwardThresh\_}))
-39     \{
-40         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2d166d65e97d4aa7851c45fd81985a85}{minPointAngularDistanceBackwardThresh\_} = 0.15; \textcolor{comment}{// degree}
-41     \}
+23     ROS\_WARN(\textcolor{stringliteral}{"Initializing Odometry Tracker"});
+24 
+25     \textcolor{keywordflow}{if} (!nh.getParam(\textcolor{stringliteral}{"odomFrame"}, this->odomFrame\_))
+26     \{
+27         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[OdomTracker] odomFrame:"} << this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a54f31af5e74006560d94f266297853d4}{odomFrame\_});
+28     \}
+29     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[OdomTracker] odomFrame overwriten by ros parameter:"} << this->
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a54f31af5e74006560d94f266297853d4}{odomFrame\_});
+30 
+31     \textcolor{keywordflow}{if} (!nh.getParam(\textcolor{stringliteral}{"record\_point\_distance\_threshold"}, 
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3a1173716d527bd182d04656491e01dd}{recordPointDistanceThreshold\_}))
+32     \{
+33         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3a1173716d527bd182d04656491e01dd}{recordPointDistanceThreshold\_} = 0.005; \textcolor{comment}{// 5 mm}
+34     \}
+35     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[OdomTracker] record\_point\_distance\_threshold :"} << 
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3a1173716d527bd182d04656491e01dd}{recordPointDistanceThreshold\_});
+36 
+37     \textcolor{keywordflow}{if} (!nh.getParam(\textcolor{stringliteral}{"record\_angular\_distance\_threshold"}, 
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1274fe5334c109cd9c2339beb9411441}{recordAngularDistanceThreshold\_}))
+38     \{
+39         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1274fe5334c109cd9c2339beb9411441}{recordAngularDistanceThreshold\_} = 0.1; \textcolor{comment}{// 5 cm}
+40     \}
+41     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[OdomTracker] record\_angular\_distance\_threshold :"} << 
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1274fe5334c109cd9c2339beb9411441}{recordAngularDistanceThreshold\_});
 42 
-43     \textcolor{keywordflow}{if} (this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_afbe614b53a1493eb8268b8ea65b5b93a}{subscribeToOdometryTopic\_})
+43     \textcolor{keywordflow}{if} (!nh.getParam(\textcolor{stringliteral}{"clear\_point\_distance\_threshold"}, 
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7155d25d0e8dd9f237a79ff503b80e26}{clearPointDistanceThreshold\_}))
 44     \{
-45         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ab55df0e91246e43dff80912dc35a4fee}{odomSub\_} = nh.subscribe(odomTopicName, 1, &
-      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a12c5a839cfde2e8f2f55a5e0c9647b18}{OdomTracker::processOdometryMessage}, \textcolor{keyword}{this});
+45         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7155d25d0e8dd9f237a79ff503b80e26}{clearPointDistanceThreshold\_} = 0.08; \textcolor{comment}{// radians}
 46     \}
-47 
-48     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a40a7cbb6bb6595e250e7c685c781613b}{robotBasePathPub\_} = std::make\_shared<realtime\_tools::RealtimePublisher<nav\_msgs::Path>
+47     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[OdomTracker] clear\_point\_distance\_threshold :"} << 
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7155d25d0e8dd9f237a79ff503b80e26}{clearPointDistanceThreshold\_});
+48 
+49     \textcolor{keywordflow}{if} (!nh.getParam(\textcolor{stringliteral}{"clear\_angular\_distance\_threshold"}, 
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1b79dd86745adfb31db822e0c8106282}{clearAngularDistanceThreshold\_}))
+50     \{
+51         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1b79dd86745adfb31db822e0c8106282}{clearAngularDistanceThreshold\_} = 0.08; \textcolor{comment}{// radians}
+52     \}
+53     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[OdomTracker] clear\_angular\_distance\_threshold :"} << 
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1b79dd86745adfb31db822e0c8106282}{clearAngularDistanceThreshold\_});
+54 
+55     \textcolor{keywordflow}{if} (this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_afbe614b53a1493eb8268b8ea65b5b93a}{subscribeToOdometryTopic\_})
+56     \{
+57         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ab55df0e91246e43dff80912dc35a4fee}{odomSub\_} = nh.subscribe(odomTopicName, 1, &
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a12c5a839cfde2e8f2f55a5e0c9647b18}{OdomTracker::processOdometryMessage}, \textcolor{keyword}{this});
+58     \}
+59 
+60     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a40a7cbb6bb6595e250e7c685c781613b}{robotBasePathPub\_} = std::make\_shared<realtime\_tools::RealtimePublisher<nav\_msgs::Path>
       >(nh, \textcolor{stringliteral}{"odom\_tracker\_path"}, 1);
-49 \}
+61     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7a2fb23e835ba7d63e69c8db819be876}{robotBasePathStackedPub\_} = 
+      std::make\_shared<realtime\_tools::RealtimePublisher<nav\_msgs::Path>>(nh, \textcolor{stringliteral}{"odom\_tracker\_stacked\_path"}, 1);
+62 \}
 \end{DoxyCode}
 
 
@@ -163,7 +194,7 @@ Here is the call graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ae3a5615aa45b7acf11e650e98ab10950_cgraph}
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a79fe742fd2d578902e7bbacd4dec04d1_cgraph}
 \end{center}
 \end{figure}
 
@@ -180,11 +211,11 @@ Here is the call graph for this function\+:
 )}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a93a14e15e3e623f530e056f403bf7644}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a93a14e15e3e623f530e056f403bf7644}
 
 
-Definition at line 113 of file odom\+\_\+tracker.\+cpp.
+Definition at line 152 of file odom\+\_\+tracker.\+cpp.
 
 
 
-References base\+Trajectory\+\_\+, m\+\_\+mutex\+\_\+, and rt\+Publish\+Paths().
+References base\+Trajectory\+\_\+, log\+State\+String(), m\+\_\+mutex\+\_\+, rt\+Publish\+Paths(), and update\+Aggregated\+Stack\+Path().
 
 
 
@@ -192,12 +223,14 @@ Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Backwards\+::on\+
 
 
 \begin{DoxyCode}
-114 \{
-115     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
-116     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.clear();
-117 
-118     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a8f728f85d1f3f49f4b94e37052a59d6d}{rtPublishPaths}(ros::Time::now());
-119 \}
+153 \{
+154     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
+155     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.clear();
+156 
+157     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a8f728f85d1f3f49f4b94e37052a59d6d}{rtPublishPaths}(ros::Time::now());
+158     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a6d0b450474d9d555205ff4281965164e}{logStateString}();
+159     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7922f1e1e688a2ed62d32d9914985a9f}{updateAggregatedStackPath}();
+160 \}
 \end{DoxyCode}
 
 
@@ -232,7 +265,7 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a762bc88653ebb7d78e693ba465fb160f}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a762bc88653ebb7d78e693ba465fb160f}
 
 
-Definition at line 134 of file odom\+\_\+tracker.\+cpp.
+Definition at line 197 of file odom\+\_\+tracker.\+cpp.
 
 
 
@@ -240,11 +273,57 @@ References base\+Trajectory\+\_\+, and m\+\_\+mutex\+\_\+.
 
 
 \begin{DoxyCode}
-135 \{
-136     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
-137     \textcolor{keywordflow}{return} this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_};
-138 \}
+198 \{
+199     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
+200     \textcolor{keywordflow}{return} this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_};
+201 \}
 \end{DoxyCode}
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!log\+State\+String@{log\+State\+String}}
+\index{log\+State\+String@{log\+State\+String}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{log\+State\+String()}{logStateString()}}]{\setlength{\rightskip}{0pt plus 5cm}void cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::log\+State\+String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a6d0b450474d9d555205ff4281965164e}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a6d0b450474d9d555205ff4281965164e}
+
+
+Definition at line 138 of file odom\+\_\+tracker.\+cpp.
+
+
+
+References base\+Trajectory\+\_\+, and path\+Stack\+\_\+.
+
+
+
+Referenced by clear\+Path(), pop\+Path(), and push\+Path().
+
+
+\begin{DoxyCode}
+139 \{
+140     ROS\_INFO(\textcolor{stringliteral}{"--- odom tracker state ---"});
+141     ROS\_INFO(\textcolor{stringliteral}{" - path stack size: %ld"}, \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_}.size());
+142     ROS\_INFO(\textcolor{stringliteral}{" - active path size: %ld"}, \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.size());
+143     \textcolor{keywordtype}{int} i = 0;
+144     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_})
+145     \{
+146         ROS\_INFO\_STREAM(\textcolor{stringliteral}{" - p "} << i << \textcolor{stringliteral}{"["} << p.header.stamp << \textcolor{stringliteral}{"], size: "} << p.poses.size());
+147         i++;
+148     \}
+149     ROS\_INFO(\textcolor{stringliteral}{"---"});
+150 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a6d0b450474d9d555205ff4281965164e_icgraph}
+\end{center}
+\end{figure}
+
+
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!pop\+Path@{pop\+Path}}
 \index{pop\+Path@{pop\+Path}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
 \subsubsection[{\texorpdfstring{pop\+Path(int path\+Count=1, bool keep\+Previous\+Path=false)}{popPath(int pathCount=1, bool keepPreviousPath=false)}}]{\setlength{\rightskip}{0pt plus 5cm}void cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::pop\+Path (
@@ -255,11 +334,11 @@ References base\+Trajectory\+\_\+, and m\+\_\+mutex\+\_\+.
 )}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2749e5cd0443423d50864a0166b078b9}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2749e5cd0443423d50864a0166b078b9}
 
 
-Definition at line 87 of file odom\+\_\+tracker.\+cpp.
+Definition at line 108 of file odom\+\_\+tracker.\+cpp.
 
 
 
-References base\+Trajectory\+\_\+, m\+\_\+mutex\+\_\+, and path\+Stack\+\_\+.
+References base\+Trajectory\+\_\+, log\+State\+String(), m\+\_\+mutex\+\_\+, path\+Stack\+\_\+, and update\+Aggregated\+Stack\+Path().
 
 
 
@@ -267,34 +346,48 @@ Referenced by Odom\+Tracker\+Action\+Server\+::execute().
 
 
 \begin{DoxyCode}
-88 \{
-89     ROS\_INFO(\textcolor{stringliteral}{"odom\_tracker m\_mutex acquire"});
-90     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
-91     ROS\_INFO(\textcolor{stringliteral}{"popping odom tracker path: current elements: %ld"}, \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.size(
-      ));
-92     ROS\_INFO(\textcolor{stringliteral}{"path stack size: %ld"}, \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_}.size());
-93     
-94     \textcolor{keywordflow}{if} (!keepPreviousPath)
-95     \{
-96         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.clear();
-97     \}
-98 
-99     \textcolor{keywordflow}{while}(items > 0 && !\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_}.empty())
-100     \{
-101         \textcolor{keyword}{auto}& stacked = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_}.back().poses;
-102         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.insert(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.begin(), stacked.
-      begin(),stacked.end()) ;
-103         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_}.pop\_back();
-104         items --;
-105     \}
-106 
-107     ROS\_INFO(\textcolor{stringliteral}{"popping odom tracker path after: current elements: %ld"}, 
-      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.size());
-108     ROS\_INFO(\textcolor{stringliteral}{"path stack size: %ld"}, \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_}.size());
-109 
-110     ROS\_INFO(\textcolor{stringliteral}{"odom\_tracker m\_mutex release"});
-111 \}
+109 \{
+110     ROS\_INFO(\textcolor{stringliteral}{"odom\_tracker m\_mutex acquire"});
+111     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
+112 
+113     ROS\_INFO(\textcolor{stringliteral}{"POP PATH ENTRY"});
+114     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a6d0b450474d9d555205ff4281965164e}{logStateString}();
+115 
+116     \textcolor{keywordflow}{if} (!keepPreviousPath)
+117     \{
+118         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.clear();
+119     \}
+120 
+121     \textcolor{keywordflow}{while} (items > 0 && !\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_}.empty())
+122     \{
+123         \textcolor{keyword}{auto} &stacked = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_}.back().poses;
+124         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.insert(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.begin(), stacked.
+      begin(), stacked.end());
+125         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_}.pop\_back();
+126         items--;
+127 
+128         ROS\_INFO(\textcolor{stringliteral}{"POP PATH Iteration "});
+129         this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a6d0b450474d9d555205ff4281965164e}{logStateString}();
+130     \}
+131 
+132     ROS\_INFO(\textcolor{stringliteral}{"POP PATH EXITING"});
+133     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a6d0b450474d9d555205ff4281965164e}{logStateString}();
+134     ROS\_INFO(\textcolor{stringliteral}{"odom\_tracker m\_mutex release"});
+135     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7922f1e1e688a2ed62d32d9914985a9f}{updateAggregatedStackPath}();
+136 \}
 \end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2749e5cd0443423d50864a0166b078b9_cgraph}
+\end{center}
+\end{figure}
+
+
 
 
 Here is the caller graph for this function\+:
@@ -320,11 +413,11 @@ odom callback\+: Updates the path -\/ this must be called periodically for each 
 
 \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a12c5a839cfde2e8f2f55a5e0c9647b18}{process\+Odometry\+Message()} 
 
-Definition at line 258 of file odom\+\_\+tracker.\+cpp.
+Definition at line 356 of file odom\+\_\+tracker.\+cpp.
 
 
 
-References cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+C\+L\+E\+A\+R\+\_\+\+P\+A\+T\+H\+\_\+\+B\+A\+C\+K\+W\+A\+RD, m\+\_\+mutex\+\_\+, publish\+Messages, cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+R\+E\+C\+O\+R\+D\+\_\+\+P\+A\+T\+H\+\_\+\+F\+O\+R\+W\+A\+RD, rt\+Publish\+Paths(), update\+Backward(), update\+Forward(), and working\+Mode\+\_\+.
+References cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+C\+L\+E\+A\+R\+\_\+\+P\+A\+TH, m\+\_\+mutex\+\_\+, publish\+Messages, cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+R\+E\+C\+O\+R\+D\+\_\+\+P\+A\+TH, rt\+Publish\+Paths(), update\+Clear\+Path(), update\+Record\+Path(), and working\+Mode\+\_\+.
 
 
 
@@ -332,27 +425,27 @@ Referenced by Odom\+Tracker().
 
 
 \begin{DoxyCode}
-259 \{
-260     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex acquire");}
-261     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
-262 
-263     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a5ae598c85c4469f4c0e984480575c42b}{workingMode\_} == \hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a989d06a586bcf9520889228da7faa643}{WorkingMode::RECORD\_PATH\_FORWARD})
-264     \{
-265         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa63ebddd9f6e42b0330738af82b60f99}{updateForward}(odom);
-266     \}
-267     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a5ae598c85c4469f4c0e984480575c42b}{workingMode\_} == \hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a0cf8f27617189e35619df3c18bda6274}{WorkingMode::CLEAR\_PATH\_BACKWARD})
-268     \{
-269         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a35c8d8d9ae82244ef351ba0a6a4a7cfd}{updateBackward}(odom);
-270     \}
-271 
-272     \textcolor{comment}{//ROS\_WARN("odomTracker odometry callback");}
-273     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4f253d45ab5750dee3c2f18dd5599725}{publishMessages})
-274     \{
-275         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a8f728f85d1f3f49f4b94e37052a59d6d}{rtPublishPaths}(odom.header.stamp);
-276     \}
-277 
-278     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex release");}
-279 \}
+357 \{
+358     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex acquire");}
+359     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
+360 
+361     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a5ae598c85c4469f4c0e984480575c42b}{workingMode\_} == \hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a023bc3adf68871ef7a0c616765ac80a7}{WorkingMode::RECORD\_PATH})
+362     \{
+363         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a77a66083573c6bef726d77447fb53349}{updateRecordPath}(odom);
+364     \}
+365     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a5ae598c85c4469f4c0e984480575c42b}{workingMode\_} == \hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a68783989ae56d7f2f9496c66c417a192}{WorkingMode::CLEAR\_PATH})
+366     \{
+367         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_abe7ba4dbf014e1f2c64b5806ce42c073}{updateClearPath}(odom);
+368     \}
+369 
+370     \textcolor{comment}{//ROS\_WARN("odomTracker odometry callback");}
+371     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4f253d45ab5750dee3c2f18dd5599725}{publishMessages})
+372     \{
+373         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a8f728f85d1f3f49f4b94e37052a59d6d}{rtPublishPaths}(odom.header.stamp);
+374     \}
+375 
+376     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex release");}
+377 \}
 \end{DoxyCode}
 
 
@@ -387,26 +480,45 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a205ee48ec8b4599658e7408fc4755239}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a205ee48ec8b4599658e7408fc4755239}
 
 
-Definition at line 78 of file odom\+\_\+tracker.\+cpp.
+Definition at line 92 of file odom\+\_\+tracker.\+cpp.
 
 
 
-References base\+Trajectory\+\_\+, m\+\_\+mutex\+\_\+, and path\+Stack\+\_\+.
+References base\+Trajectory\+\_\+, log\+State\+String(), m\+\_\+mutex\+\_\+, path\+Stack\+\_\+, and update\+Aggregated\+Stack\+Path().
 
 
 
-Referenced by Odom\+Tracker\+Action\+Server\+::execute(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Rotate\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate\+::on\+Entry(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Forward\+::on\+Entry().
+Referenced by Odom\+Tracker\+Action\+Server\+::execute(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate\+::on\+Entry(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Forward\+::on\+Entry().
 
 
 \begin{DoxyCode}
-79 \{
-80     ROS\_INFO(\textcolor{stringliteral}{"odom\_tracker m\_mutex acquire"});
-81     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
-82     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_}.push\_back(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_});
-83     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.clear();
-84     ROS\_INFO(\textcolor{stringliteral}{"odom\_tracker m\_mutex release"});
-85 \}
+93 \{
+94     ROS\_INFO(\textcolor{stringliteral}{"odom\_tracker m\_mutex acquire"});
+95     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
+96     ROS\_INFO(\textcolor{stringliteral}{"PUSH\_PATH PATH EXITING"});
+97     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a6d0b450474d9d555205ff4281965164e}{logStateString}();
+98 
+99     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_}.push\_back(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_});
+100     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.clear();
+101 
+102     ROS\_INFO(\textcolor{stringliteral}{"PUSH\_PATH PATH EXITING"});
+103     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a6d0b450474d9d555205ff4281965164e}{logStateString}();
+104     ROS\_INFO(\textcolor{stringliteral}{"odom\_tracker m\_mutex release"});
+105     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7922f1e1e688a2ed62d32d9914985a9f}{updateAggregatedStackPath}();
+106 \}
 \end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a205ee48ec8b4599658e7408fc4755239_cgraph}
+\end{center}
+\end{figure}
+
+
 
 
 Here is the caller graph for this function\+:
@@ -426,13 +538,15 @@ Here is the caller graph for this function\+:
 \item[{ros\+::\+Time}]{timestamp}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a8f728f85d1f3f49f4b94e37052a59d6d}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a8f728f85d1f3f49f4b94e37052a59d6d}
-\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a8f728f85d1f3f49f4b94e37052a59d6d}{rt\+Publish\+Paths()} Copy trajectory 
+\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a8f728f85d1f3f49f4b94e37052a59d6d}{rt\+Publish\+Paths()} Copy trajectory
 
-Definition at line 145 of file odom\+\_\+tracker.\+cpp.
+Copy trajectory 
+
+Definition at line 208 of file odom\+\_\+tracker.\+cpp.
 
 
 
-References base\+Trajectory\+\_\+, and robot\+Base\+Path\+Pub\+\_\+.
+References aggregated\+Stack\+Path\+Msg\+\_\+, base\+Trajectory\+\_\+, robot\+Base\+Path\+Pub\+\_\+, and robot\+Base\+Path\+Stacked\+Pub\+\_\+.
 
 
 
@@ -440,16 +554,25 @@ Referenced by clear\+Path(), and process\+Odometry\+Message().
 
 
 \begin{DoxyCode}
-146 \{
-147     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a40a7cbb6bb6595e250e7c685c781613b}{robotBasePathPub\_}->trylock())
-148     \{
-149         nav\_msgs::Path &msg = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a40a7cbb6bb6595e250e7c685c781613b}{robotBasePathPub\_}->msg\_;
-151 
-152         msg = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_};
-153         msg.header.stamp = timestamp;
-154         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a40a7cbb6bb6595e250e7c685c781613b}{robotBasePathPub\_}->unlockAndPublish();
-155     \}
-156 \}
+209 \{
+210     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a40a7cbb6bb6595e250e7c685c781613b}{robotBasePathPub\_}->trylock())
+211     \{
+212         nav\_msgs::Path &msg = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a40a7cbb6bb6595e250e7c685c781613b}{robotBasePathPub\_}->msg\_;
+214 
+215         msg = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_};
+216         msg.header.stamp = timestamp;
+217         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a40a7cbb6bb6595e250e7c685c781613b}{robotBasePathPub\_}->unlockAndPublish();
+218     \}
+219 
+220     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7a2fb23e835ba7d63e69c8db819be876}{robotBasePathStackedPub\_}->trylock())
+221     \{
+222         nav\_msgs::Path &msg = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7a2fb23e835ba7d63e69c8db819be876}{robotBasePathStackedPub\_}->msg\_;
+224 
+225         msg = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a0fb60113ace2791a1f1bbeed59946404}{aggregatedStackPathMsg\_};
+226         msg.header.stamp = timestamp;
+227         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7a2fb23e835ba7d63e69c8db819be876}{robotBasePathStackedPub\_}->unlockAndPublish();
+228     \}
+229 \}
 \end{DoxyCode}
 
 
@@ -472,11 +595,11 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3b3cf9010e4e4fe4f96cfafd5a529517}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3b3cf9010e4e4fe4f96cfafd5a529517}
 \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3b3cf9010e4e4fe4f96cfafd5a529517}{set\+Publish\+Messages()} 
 
-Definition at line 70 of file odom\+\_\+tracker.\+cpp.
+Definition at line 83 of file odom\+\_\+tracker.\+cpp.
 
 
 
-References m\+\_\+mutex\+\_\+, and publish\+Messages.
+References m\+\_\+mutex\+\_\+, publish\+Messages, and update\+Aggregated\+Stack\+Path().
 
 
 
@@ -484,13 +607,26 @@ Referenced by Odom\+Tracker\+Action\+Server\+::execute().
 
 
 \begin{DoxyCode}
-71 \{
-72     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex acquire");}
-73     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
-74     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4f253d45ab5750dee3c2f18dd5599725}{publishMessages} = value;
-75     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex release");}
-76 \}
+84 \{
+85     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex acquire");}
+86     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
+87     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4f253d45ab5750dee3c2f18dd5599725}{publishMessages} = value;
+88     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex release");}
+89     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7922f1e1e688a2ed62d32d9914985a9f}{updateAggregatedStackPath}();
+90 \}
 \end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3b3cf9010e4e4fe4f96cfafd5a529517_cgraph}
+\end{center}
+\end{figure}
+
+
 
 
 Here is the caller graph for this function\+:
@@ -512,11 +648,11 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a9f4989c6353022c2ec3b0546c09bf3bc}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a9f4989c6353022c2ec3b0546c09bf3bc}
 
 
-Definition at line 121 of file odom\+\_\+tracker.\+cpp.
+Definition at line 162 of file odom\+\_\+tracker.\+cpp.
 
 
 
-References base\+Trajectory\+\_\+, and m\+\_\+mutex\+\_\+.
+References base\+Trajectory\+\_\+, m\+\_\+mutex\+\_\+, and update\+Aggregated\+Stack\+Path().
 
 
 
@@ -524,18 +660,32 @@ Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Backwards\+::on\+
 
 
 \begin{DoxyCode}
-122 \{
-123     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
-124     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.size() > 0)
-125     \{
-126         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses[0] = pose;
-127     \}
-128     \textcolor{keywordflow}{else}
-129     \{
-130         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.push\_back(pose);
-131     \}
-132 \}
+163 \{
+164     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
+165     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[OdomTracker] set current path starting point: "} << pose);
+166     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.size() > 0)
+167     \{
+168         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses[0] = pose;
+169     \}
+170     \textcolor{keywordflow}{else}
+171     \{
+172         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.push\_back(pose);
+173     \}
+174     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7922f1e1e688a2ed62d32d9914985a9f}{updateAggregatedStackPath}();
+175 \}
 \end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a9f4989c6353022c2ec3b0546c09bf3bc_cgraph}
+\end{center}
+\end{figure}
+
+
 
 
 Here is the caller graph for this function\+:
@@ -544,6 +694,54 @@ Here is the caller graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a9f4989c6353022c2ec3b0546c09bf3bc_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!set\+Start\+Point@{set\+Start\+Point}}
+\index{set\+Start\+Point@{set\+Start\+Point}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{set\+Start\+Point(const geometry\+\_\+msgs\+::\+Pose \&pose)}{setStartPoint(const geometry_msgs::Pose &pose)}}]{\setlength{\rightskip}{0pt plus 5cm}void cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::set\+Start\+Point (
+\begin{DoxyParamCaption}
+\item[{const geometry\+\_\+msgs\+::\+Pose \&}]{pose}
+\end{DoxyParamCaption}
+)}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4aefe72c155bd0d57c9f42b77a8928a6}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4aefe72c155bd0d57c9f42b77a8928a6}
+
+
+Definition at line 177 of file odom\+\_\+tracker.\+cpp.
+
+
+
+References base\+Trajectory\+\_\+, m\+\_\+mutex\+\_\+, odom\+Frame\+\_\+, and update\+Aggregated\+Stack\+Path().
+
+
+\begin{DoxyCode}
+178 \{
+179     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
+180     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[OdomTracker] set current path starting point: "} << pose);
+181     geometry\_msgs::PoseStamped posestamped;
+182     posestamped.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a54f31af5e74006560d94f266297853d4}{odomFrame\_};
+183     posestamped.header.stamp = ros::Time::now();
+184     posestamped.pose = pose;
+185 
+186     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.size() > 0)
+187     \{
+188         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses[0] = posestamped;
+189     \}
+190     \textcolor{keywordflow}{else}
+191     \{
+192         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.push\_back(posestamped);
+193     \}
+194     this->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7922f1e1e688a2ed62d32d9914985a9f}{updateAggregatedStackPath}();
+195 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4aefe72c155bd0d57c9f42b77a8928a6_cgraph}
 \end{center}
 \end{figure}
 
@@ -557,7 +755,7 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}
 \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{set\+Working\+Mode()} 
 
-Definition at line 56 of file odom\+\_\+tracker.\+cpp.
+Definition at line 69 of file odom\+\_\+tracker.\+cpp.
 
 
 
@@ -569,13 +767,13 @@ Referenced by Odom\+Tracker\+Action\+Server\+::execute(), cl\+\_\+move\+\_\+base
 
 
 \begin{DoxyCode}
-57 \{
-58     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex acquire");}
-59     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
-60     ROS\_INFO(\textcolor{stringliteral}{"[OdomTracker] setting working mode to: %d"}, (uint8\_t)workingMode);
-61     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a5ae598c85c4469f4c0e984480575c42b}{workingMode\_} = workingMode;
-62     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex release");}
-63 \}
+70 \{
+71     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex acquire");}
+72     std::lock\_guard<std::mutex> lock(\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{m\_mutex\_});
+73     ROS\_INFO(\textcolor{stringliteral}{"[OdomTracker] setting working mode to: %d"}, (uint8\_t)workingMode);
+74     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a5ae598c85c4469f4c0e984480575c42b}{workingMode\_} = workingMode;
+75     \textcolor{comment}{//ROS\_INFO("odom\_tracker m\_mutex release");}
+76 \}
 \end{DoxyCode}
 
 
@@ -589,22 +787,67 @@ Here is the caller graph for this function\+:
 \end{figure}
 
 
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!update\+Backward@{update\+Backward}}
-\index{update\+Backward@{update\+Backward}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
-\subsubsection[{\texorpdfstring{update\+Backward(const nav\+\_\+msgs\+::\+Odometry \&odom)}{updateBackward(const nav_msgs::Odometry &odom)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bool} cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::update\+Backward (
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!update\+Aggregated\+Stack\+Path@{update\+Aggregated\+Stack\+Path}}
+\index{update\+Aggregated\+Stack\+Path@{update\+Aggregated\+Stack\+Path}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{update\+Aggregated\+Stack\+Path()}{updateAggregatedStackPath()}}]{\setlength{\rightskip}{0pt plus 5cm}void cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::update\+Aggregated\+Stack\+Path (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7922f1e1e688a2ed62d32d9914985a9f}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7922f1e1e688a2ed62d32d9914985a9f}
+
+
+Definition at line 231 of file odom\+\_\+tracker.\+cpp.
+
+
+
+References aggregated\+Stack\+Path\+Msg\+\_\+, odom\+Frame\+\_\+, and path\+Stack\+\_\+.
+
+
+
+Referenced by clear\+Path(), pop\+Path(), push\+Path(), set\+Publish\+Messages(), and set\+Start\+Point().
+
+
+\begin{DoxyCode}
+232 \{
+233     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a0fb60113ace2791a1f1bbeed59946404}{aggregatedStackPathMsg\_}.poses.clear();
+234     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{pathStack\_})
+235     \{
+236         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a0fb60113ace2791a1f1bbeed59946404}{aggregatedStackPathMsg\_}.poses.insert(
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a0fb60113ace2791a1f1bbeed59946404}{aggregatedStackPathMsg\_}.poses.end(), p.poses.begin(), p.poses.end());
+237     \}
+238 
+239     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a0fb60113ace2791a1f1bbeed59946404}{aggregatedStackPathMsg\_}.header.frame\_id = this->
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a54f31af5e74006560d94f266297853d4}{odomFrame\_};
+240 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7922f1e1e688a2ed62d32d9914985a9f_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!update\+Clear\+Path@{update\+Clear\+Path}}
+\index{update\+Clear\+Path@{update\+Clear\+Path}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{update\+Clear\+Path(const nav\+\_\+msgs\+::\+Odometry \&odom)}{updateClearPath(const nav_msgs::Odometry &odom)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bool} cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::update\+Clear\+Path (
 \begin{DoxyParamCaption}
 \item[{const nav\+\_\+msgs\+::\+Odometry \&}]{odom}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a35c8d8d9ae82244ef351ba0a6a4a7cfd}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a35c8d8d9ae82244ef351ba0a6a4a7cfd}
-\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a35c8d8d9ae82244ef351ba0a6a4a7cfd}{update\+Backward()} Track robot base pose
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_abe7ba4dbf014e1f2c64b5806ce42c073}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_abe7ba4dbf014e1f2c64b5806ce42c073}
+update\+Backward() Track robot base pose
 
 Not removing point because it is enough far from the last cord point 
 
-Definition at line 163 of file odom\+\_\+tracker.\+cpp.
+Definition at line 247 of file odom\+\_\+tracker.\+cpp.
 
 
 
-References base\+Trajectory\+\_\+, min\+Point\+Distance\+Backward\+Thresh\+\_\+, and cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::p2p\+Distance().
+References base\+Trajectory\+\_\+, clear\+Angular\+Distance\+Threshold\+\_\+, clear\+Point\+Distance\+Threshold\+\_\+, and cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::p2p\+Distance().
 
 
 
@@ -612,48 +855,56 @@ Referenced by process\+Odometry\+Message().
 
 
 \begin{DoxyCode}
-164 \{
-165     \textcolor{comment}{// we initially accept any message if the queue is empty}
-167 \textcolor{comment}{}    geometry\_msgs::PoseStamped base\_pose;
-168 
-169     base\_pose.pose = odom.pose.pose;
-170     base\_pose.header = odom.header;
-171     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.header = odom.header;
-172 
-173     \textcolor{keywordtype}{bool} acceptBackward = \textcolor{keyword}{false};
-174     \textcolor{keywordtype}{bool} pullingerror = \textcolor{keyword}{false};
-175     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.empty())
-176     \{
-177         acceptBackward = \textcolor{keyword}{false};
-178     \}
-179     \textcolor{keywordflow}{else}
-180     \{
-181         \textcolor{keyword}{const} geometry\_msgs::Point &prevPoint = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.back().pose.position;
-182         \textcolor{keyword}{const} geometry\_msgs::Point &currePoint = base\_pose.pose.position;
-183         \textcolor{keywordtype}{double} lastpointdist = \hyperlink{namespacecl__move__base__z_1_1odom__tracker_a501582a760a02ce0069d95bfc67ca973}{p2pDistance}(prevPoint, currePoint);
-184 
-185         acceptBackward = !\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.empty() && lastpointdist < 
-      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ac1c711aabcc005981c256f8f45c0555b}{minPointDistanceBackwardThresh\_};
-186 
-187         pullingerror = lastpointdist > 2 * \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ac1c711aabcc005981c256f8f45c0555b}{minPointDistanceBackwardThresh\_};
-188     \}
-189 
-190     \textcolor{comment}{//ROS\_INFO("Backwards, last distance: %lf < %lf accept: %d", dist, minPointDistanceBackwardThresh\_,
+248 \{
+249     \textcolor{comment}{// we initially accept any message if the queue is empty}
+251 \textcolor{comment}{}    geometry\_msgs::PoseStamped base\_pose;
+252 
+253     base\_pose.pose = odom.pose.pose;
+254     base\_pose.header = odom.header;
+255     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.header = odom.header;
+256 
+257     \textcolor{keywordtype}{bool} acceptBackward = \textcolor{keyword}{false};
+258     \textcolor{keywordtype}{bool} pullingerror = \textcolor{keyword}{false};
+259     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.empty())
+260     \{
+261         acceptBackward = \textcolor{keyword}{false};
+262     \}
+263     \textcolor{keywordflow}{else}
+264     \{
+265         \textcolor{keyword}{auto} &prevPose = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.back().pose;
+266         \textcolor{keyword}{const} geometry\_msgs::Point &prevPoint = prevPose.position;
+267         \textcolor{keywordtype}{double} prevAngle = tf::getYaw(prevPose.orientation);
+268 
+269         \textcolor{keyword}{auto} &currePose = base\_pose.pose;
+270         \textcolor{keyword}{const} geometry\_msgs::Point &currePoint = currePose.position;
+271         \textcolor{keywordtype}{double} currentAngle = tf::getYaw(currePose.orientation);
+272 
+273         \textcolor{keywordtype}{double} lastpointdist = \hyperlink{namespacecl__move__base__z_1_1odom__tracker_a501582a760a02ce0069d95bfc67ca973}{p2pDistance}(prevPoint, currePoint);
+274         \textcolor{keywordtype}{double} goalAngleOffset = angles::shortest\_angular\_distance(prevAngle, currentAngle);
+275 
+276         acceptBackward = !\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.empty() && (lastpointdist > 
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7155d25d0e8dd9f237a79ff503b80e26}{clearPointDistanceThreshold\_} || goalAngleOffset > 
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1b79dd86745adfb31db822e0c8106282}{clearAngularDistanceThreshold\_});
+277 
+278         pullingerror = lastpointdist > 2 * \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7155d25d0e8dd9f237a79ff503b80e26}{clearPointDistanceThreshold\_};
+279     \}
+280 
+281     \textcolor{comment}{//ROS\_INFO("Backwards, last distance: %lf < %lf accept: %d", dist, minPointDistanceBackwardThresh\_,
        acceptBackward);}
-191     \textcolor{keywordflow}{if} (acceptBackward)
-192     \{
-193         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.pop\_back();
-194     \}
-195     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (pullingerror)
-196     \{
-197         ROS\_INFO\_THROTTLE(2, \textcolor{stringliteral}{"Incorrect backwards motion."});
-198     \}
-199     \textcolor{keywordflow}{else}
-200     \{
-202     \}
-203 
-204     \textcolor{keywordflow}{return} acceptBackward;
-205 \}
+282     \textcolor{keywordflow}{if} (acceptBackward)
+283     \{
+284         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.pop\_back();
+285     \}
+286     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (pullingerror)
+287     \{
+288         ROS\_INFO\_THROTTLE(2, \textcolor{stringliteral}{"Incorrect backwards motion."});
+289     \}
+290     \textcolor{keywordflow}{else}
+291     \{
+293     \}
+294 
+295     \textcolor{keywordflow}{return} acceptBackward;
+296 \}
 \end{DoxyCode}
 
 
@@ -662,7 +913,7 @@ Here is the call graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a35c8d8d9ae82244ef351ba0a6a4a7cfd_cgraph}
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_abe7ba4dbf014e1f2c64b5806ce42c073_cgraph}
 \end{center}
 \end{figure}
 
@@ -674,25 +925,25 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a35c8d8d9ae82244ef351ba0a6a4a7cfd_icgraph}
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_abe7ba4dbf014e1f2c64b5806ce42c073_icgraph}
 \end{center}
 \end{figure}
 
 
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!update\+Forward@{update\+Forward}}
-\index{update\+Forward@{update\+Forward}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
-\subsubsection[{\texorpdfstring{update\+Forward(const nav\+\_\+msgs\+::\+Odometry \&odom)}{updateForward(const nav_msgs::Odometry &odom)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bool} cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::update\+Forward (
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!update\+Record\+Path@{update\+Record\+Path}}
+\index{update\+Record\+Path@{update\+Record\+Path}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{update\+Record\+Path(const nav\+\_\+msgs\+::\+Odometry \&odom)}{updateRecordPath(const nav_msgs::Odometry &odom)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bool} cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::update\+Record\+Path (
 \begin{DoxyParamCaption}
 \item[{const nav\+\_\+msgs\+::\+Odometry \&}]{odom}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa63ebddd9f6e42b0330738af82b60f99}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa63ebddd9f6e42b0330738af82b60f99}
-\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa63ebddd9f6e42b0330738af82b60f99}{update\+Forward()} Track robot base pose 
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a77a66083573c6bef726d77447fb53349}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a77a66083573c6bef726d77447fb53349}
+\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a77a66083573c6bef726d77447fb53349}{update\+Record\+Path()} Track robot base pose 
 
-Definition at line 211 of file odom\+\_\+tracker.\+cpp.
+Definition at line 302 of file odom\+\_\+tracker.\+cpp.
 
 
 
-References base\+Trajectory\+\_\+, min\+Point\+Distance\+Forward\+Thresh\+\_\+, and cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::p2p\+Distance().
+References base\+Trajectory\+\_\+, cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::p2p\+Distance(), record\+Angular\+Distance\+Threshold\+\_\+, and record\+Point\+Distance\+Threshold\+\_\+.
 
 
 
@@ -700,45 +951,53 @@ Referenced by process\+Odometry\+Message().
 
 
 \begin{DoxyCode}
-212 \{
-214     geometry\_msgs::PoseStamped base\_pose;
-215 
-216     base\_pose.pose = odom.pose.pose;
-217     base\_pose.header = odom.header;
-218     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.header = odom.header;
-219 
-220     \textcolor{keywordtype}{bool} enqueueOdomMessage = \textcolor{keyword}{false};
-221 
-222     \textcolor{keywordtype}{double} dist = -1;
-223     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.empty())
-224     \{
-225         enqueueOdomMessage = \textcolor{keyword}{true};
-226     \}
-227     \textcolor{keywordflow}{else}
-228     \{
-229         \textcolor{keyword}{const} geometry\_msgs::Point &prevPoint = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.back().pose.position;
-230         \textcolor{keyword}{const} geometry\_msgs::Point &currePoint = base\_pose.pose.position;
-231         dist = \hyperlink{namespacecl__move__base__z_1_1odom__tracker_a501582a760a02ce0069d95bfc67ca973}{p2pDistance}(prevPoint, currePoint);
-232         \textcolor{comment}{//ROS\_WARN("dist %lf vs min %lf", dist, minPointDistanceForwardThresh\_);}
-233 
-234         \textcolor{keywordflow}{if} (dist > \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2a11c48d1da1f1c9b921ef37c8db6325}{minPointDistanceForwardThresh\_})
-235         \{
-236             enqueueOdomMessage = \textcolor{keyword}{true};
-237         \}
-238         \textcolor{keywordflow}{else}
-239         \{
-240             \textcolor{comment}{//ROS\_WARN("skip odom, dist: %lf", dist);}
-241             enqueueOdomMessage = \textcolor{keyword}{false};
-242         \}
-243     \}
-244 
-245     \textcolor{keywordflow}{if} (enqueueOdomMessage)
-246     \{
-247         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.push\_back(base\_pose);
-248     \}
-249 
-250     \textcolor{keywordflow}{return} enqueueOdomMessage;
-251 \}
+303 \{
+305     geometry\_msgs::PoseStamped base\_pose;
+306 
+307     base\_pose.pose = odom.pose.pose;
+308     base\_pose.header = odom.header;
+309     \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.header = odom.header;
+310 
+311     \textcolor{keywordtype}{bool} enqueueOdomMessage = \textcolor{keyword}{false};
+312 
+313     \textcolor{keywordtype}{double} dist = -1;
+314     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.empty())
+315     \{
+316         enqueueOdomMessage = \textcolor{keyword}{true};
+317     \}
+318     \textcolor{keywordflow}{else}
+319     \{
+320         \textcolor{keyword}{const} \textcolor{keyword}{auto} &prevPose = \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.back().pose;
+321         \textcolor{keyword}{const} geometry\_msgs::Point &prevPoint = prevPose.position;
+322         \textcolor{keywordtype}{double} prevAngle = tf::getYaw(prevPose.orientation);
+323 
+324         \textcolor{keyword}{const} geometry\_msgs::Point &currePoint = base\_pose.pose.position;
+325         \textcolor{keywordtype}{double} currentAngle = tf::getYaw(base\_pose.pose.orientation);
+326 
+327         dist = \hyperlink{namespacecl__move__base__z_1_1odom__tracker_a501582a760a02ce0069d95bfc67ca973}{p2pDistance}(prevPoint, currePoint);
+328         \textcolor{keywordtype}{double} goalAngleOffset = angles::shortest\_angular\_distance(prevAngle, currentAngle);
+329 
+330         \textcolor{comment}{//ROS\_WARN("dist %lf vs min %lf", dist, recordPointDistanceThreshold\_);}
+331 
+332         \textcolor{keywordflow}{if} (dist > \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3a1173716d527bd182d04656491e01dd}{recordPointDistanceThreshold\_} || goalAngleOffset > 
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1274fe5334c109cd9c2339beb9411441}{recordAngularDistanceThreshold\_})
+333         \{
+334             enqueueOdomMessage = \textcolor{keyword}{true};
+335         \}
+336         \textcolor{keywordflow}{else}
+337         \{
+338             \textcolor{comment}{//ROS\_WARN("skip odom, dist: %lf", dist);}
+339             enqueueOdomMessage = \textcolor{keyword}{false};
+340         \}
+341     \}
+342 
+343     \textcolor{keywordflow}{if} (enqueueOdomMessage)
+344     \{
+345         \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{baseTrajectory\_}.poses.push\_back(base\_pose);
+346     \}
+347 
+348     \textcolor{keywordflow}{return} enqueueOdomMessage;
+349 \}
 \end{DoxyCode}
 
 
@@ -747,7 +1006,7 @@ Here is the call graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa63ebddd9f6e42b0330738af82b60f99_cgraph}
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a77a66083573c6bef726d77447fb53349_cgraph}
 \end{center}
 \end{figure}
 
@@ -759,7 +1018,7 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa63ebddd9f6e42b0330738af82b60f99_icgraph}
+\includegraphics[width=350pt]{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a77a66083573c6bef726d77447fb53349_icgraph}
 \end{center}
 \end{figure}
 
@@ -767,6 +1026,17 @@ Here is the caller graph for this function\+:
 
 
 \subsection{Member Data Documentation}
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!aggregated\+Stack\+Path\+Msg\+\_\+@{aggregated\+Stack\+Path\+Msg\+\_\+}}
+\index{aggregated\+Stack\+Path\+Msg\+\_\+@{aggregated\+Stack\+Path\+Msg\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{aggregated\+Stack\+Path\+Msg\+\_\+}{aggregatedStackPathMsg_}}]{\setlength{\rightskip}{0pt plus 5cm}nav\+\_\+msgs\+::\+Path cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::aggregated\+Stack\+Path\+Msg\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a0fb60113ace2791a1f1bbeed59946404}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a0fb60113ace2791a1f1bbeed59946404}
+
+
+Definition at line 122 of file odom\+\_\+tracker.\+h.
+
+
+
+Referenced by rt\+Publish\+Paths(), and update\+Aggregated\+Stack\+Path().
+
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!base\+Trajectory\+\_\+@{base\+Trajectory\+\_\+}}
 \index{base\+Trajectory\+\_\+@{base\+Trajectory\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
 \subsubsection[{\texorpdfstring{base\+Trajectory\+\_\+}{baseTrajectory_}}]{\setlength{\rightskip}{0pt plus 5cm}nav\+\_\+msgs\+::\+Path cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::base\+Trajectory\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a466d18a86df049f0f680e043bb5ea91f}
@@ -776,89 +1046,70 @@ Processed path for the mouth of the reel.
 
 
 
-Definition at line 106 of file odom\+\_\+tracker.\+h.
+Definition at line 116 of file odom\+\_\+tracker.\+h.
 
 
 
-Referenced by clear\+Path(), get\+Path(), pop\+Path(), push\+Path(), rt\+Publish\+Paths(), set\+Start\+Point(), update\+Backward(), and update\+Forward().
+Referenced by clear\+Path(), get\+Path(), log\+State\+String(), pop\+Path(), push\+Path(), rt\+Publish\+Paths(), set\+Start\+Point(), update\+Clear\+Path(), and update\+Record\+Path().
+
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!clear\+Angular\+Distance\+Threshold\+\_\+@{clear\+Angular\+Distance\+Threshold\+\_\+}}
+\index{clear\+Angular\+Distance\+Threshold\+\_\+@{clear\+Angular\+Distance\+Threshold\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{clear\+Angular\+Distance\+Threshold\+\_\+}{clearAngularDistanceThreshold_}}]{\setlength{\rightskip}{0pt plus 5cm}double cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::clear\+Angular\+Distance\+Threshold\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1b79dd86745adfb31db822e0c8106282}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1b79dd86745adfb31db822e0c8106282}
+
+
+rads 
+
+
+
+Definition at line 107 of file odom\+\_\+tracker.\+h.
+
+
+
+Referenced by Odom\+Tracker(), and update\+Clear\+Path().
+
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!clear\+Point\+Distance\+Threshold\+\_\+@{clear\+Point\+Distance\+Threshold\+\_\+}}
+\index{clear\+Point\+Distance\+Threshold\+\_\+@{clear\+Point\+Distance\+Threshold\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{clear\+Point\+Distance\+Threshold\+\_\+}{clearPointDistanceThreshold_}}]{\setlength{\rightskip}{0pt plus 5cm}double cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::clear\+Point\+Distance\+Threshold\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7155d25d0e8dd9f237a79ff503b80e26}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7155d25d0e8dd9f237a79ff503b80e26}
+
+
+rads 
+
+
+
+Definition at line 104 of file odom\+\_\+tracker.\+h.
+
+
+
+Referenced by Odom\+Tracker(), and update\+Clear\+Path().
 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!m\+\_\+mutex\+\_\+@{m\+\_\+mutex\+\_\+}}
 \index{m\+\_\+mutex\+\_\+@{m\+\_\+mutex\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
 \subsubsection[{\texorpdfstring{m\+\_\+mutex\+\_\+}{m_mutex_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::mutex cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::m\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aa371639e1eee269273dec8d3ab9dba0f}
 
 
-Definition at line 115 of file odom\+\_\+tracker.\+h.
+Definition at line 127 of file odom\+\_\+tracker.\+h.
 
 
 
 Referenced by clear\+Path(), get\+Path(), pop\+Path(), process\+Odometry\+Message(), push\+Path(), set\+Publish\+Messages(), set\+Start\+Point(), and set\+Working\+Mode().
 
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!min\+Point\+Angular\+Distance\+Backward\+Thresh\+\_\+@{min\+Point\+Angular\+Distance\+Backward\+Thresh\+\_\+}}
-\index{min\+Point\+Angular\+Distance\+Backward\+Thresh\+\_\+@{min\+Point\+Angular\+Distance\+Backward\+Thresh\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
-\subsubsection[{\texorpdfstring{min\+Point\+Angular\+Distance\+Backward\+Thresh\+\_\+}{minPointAngularDistanceBackwardThresh_}}]{\setlength{\rightskip}{0pt plus 5cm}double cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::min\+Point\+Angular\+Distance\+Backward\+Thresh\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2d166d65e97d4aa7851c45fd81985a85}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2d166d65e97d4aa7851c45fd81985a85}
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!odom\+Frame\+\_\+@{odom\+Frame\+\_\+}}
+\index{odom\+Frame\+\_\+@{odom\+Frame\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{odom\+Frame\+\_\+}{odomFrame_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::odom\+Frame\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a54f31af5e74006560d94f266297853d4}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a54f31af5e74006560d94f266297853d4}
 
 
-rads 
-
-
-
-Definition at line 99 of file odom\+\_\+tracker.\+h.
+Definition at line 109 of file odom\+\_\+tracker.\+h.
 
 
 
-Referenced by Odom\+Tracker().
-
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!min\+Point\+Angular\+Distance\+Forward\+Thresh\+\_\+@{min\+Point\+Angular\+Distance\+Forward\+Thresh\+\_\+}}
-\index{min\+Point\+Angular\+Distance\+Forward\+Thresh\+\_\+@{min\+Point\+Angular\+Distance\+Forward\+Thresh\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
-\subsubsection[{\texorpdfstring{min\+Point\+Angular\+Distance\+Forward\+Thresh\+\_\+}{minPointAngularDistanceForwardThresh_}}]{\setlength{\rightskip}{0pt plus 5cm}double cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::min\+Point\+Angular\+Distance\+Forward\+Thresh\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3567ebfbc56db63e0fad52e0c4936c30}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3567ebfbc56db63e0fad52e0c4936c30}
-
-
-rads 
-
-
-
-Definition at line 96 of file odom\+\_\+tracker.\+h.
-
-
-
-Referenced by Odom\+Tracker().
-
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!min\+Point\+Distance\+Backward\+Thresh\+\_\+@{min\+Point\+Distance\+Backward\+Thresh\+\_\+}}
-\index{min\+Point\+Distance\+Backward\+Thresh\+\_\+@{min\+Point\+Distance\+Backward\+Thresh\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
-\subsubsection[{\texorpdfstring{min\+Point\+Distance\+Backward\+Thresh\+\_\+}{minPointDistanceBackwardThresh_}}]{\setlength{\rightskip}{0pt plus 5cm}double cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::min\+Point\+Distance\+Backward\+Thresh\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ac1c711aabcc005981c256f8f45c0555b}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ac1c711aabcc005981c256f8f45c0555b}
-
-
-Meters. 
-
-
-
-Definition at line 93 of file odom\+\_\+tracker.\+h.
-
-
-
-Referenced by Odom\+Tracker(), and update\+Backward().
-
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!min\+Point\+Distance\+Forward\+Thresh\+\_\+@{min\+Point\+Distance\+Forward\+Thresh\+\_\+}}
-\index{min\+Point\+Distance\+Forward\+Thresh\+\_\+@{min\+Point\+Distance\+Forward\+Thresh\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
-\subsubsection[{\texorpdfstring{min\+Point\+Distance\+Forward\+Thresh\+\_\+}{minPointDistanceForwardThresh_}}]{\setlength{\rightskip}{0pt plus 5cm}double cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::min\+Point\+Distance\+Forward\+Thresh\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2a11c48d1da1f1c9b921ef37c8db6325}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a2a11c48d1da1f1c9b921ef37c8db6325}
-
-
-How much distance there is between two points of the path. 
-
-
-
-Definition at line 90 of file odom\+\_\+tracker.\+h.
-
-
-
-Referenced by Odom\+Tracker(), and update\+Forward().
+Referenced by Odom\+Tracker(), set\+Start\+Point(), and update\+Aggregated\+Stack\+Path().
 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!odom\+Sub\+\_\+@{odom\+Sub\+\_\+}}
 \index{odom\+Sub\+\_\+@{odom\+Sub\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
 \subsubsection[{\texorpdfstring{odom\+Sub\+\_\+}{odomSub_}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Subscriber cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::odom\+Sub\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ab55df0e91246e43dff80912dc35a4fee}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ab55df0e91246e43dff80912dc35a4fee}
 
 
-Definition at line 86 of file odom\+\_\+tracker.\+h.
+Definition at line 94 of file odom\+\_\+tracker.\+h.
 
 
 
@@ -869,29 +1120,70 @@ Referenced by Odom\+Tracker().
 \subsubsection[{\texorpdfstring{path\+Stack\+\_\+}{pathStack_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$nav\+\_\+msgs\+::\+Path$>$ cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::path\+Stack\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1ccad1b568b6c65da43ba6639b6bd1ef}
 
 
-Definition at line 110 of file odom\+\_\+tracker.\+h.
+Definition at line 120 of file odom\+\_\+tracker.\+h.
 
 
 
-Referenced by pop\+Path(), and push\+Path().
+Referenced by log\+State\+String(), pop\+Path(), push\+Path(), and update\+Aggregated\+Stack\+Path().
 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!publish\+Messages@{publish\+Messages}}
 \index{publish\+Messages@{publish\+Messages}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
 \subsubsection[{\texorpdfstring{publish\+Messages}{publishMessages}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bool} cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::publish\+Messages\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4f253d45ab5750dee3c2f18dd5599725}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a4f253d45ab5750dee3c2f18dd5599725}
 
 
-Definition at line 103 of file odom\+\_\+tracker.\+h.
+Definition at line 113 of file odom\+\_\+tracker.\+h.
 
 
 
 Referenced by Odom\+Tracker(), process\+Odometry\+Message(), and set\+Publish\+Messages().
+
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!record\+Angular\+Distance\+Threshold\+\_\+@{record\+Angular\+Distance\+Threshold\+\_\+}}
+\index{record\+Angular\+Distance\+Threshold\+\_\+@{record\+Angular\+Distance\+Threshold\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{record\+Angular\+Distance\+Threshold\+\_\+}{recordAngularDistanceThreshold_}}]{\setlength{\rightskip}{0pt plus 5cm}double cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::record\+Angular\+Distance\+Threshold\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1274fe5334c109cd9c2339beb9411441}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a1274fe5334c109cd9c2339beb9411441}
+
+
+Meters. 
+
+
+
+Definition at line 101 of file odom\+\_\+tracker.\+h.
+
+
+
+Referenced by Odom\+Tracker(), and update\+Record\+Path().
+
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!record\+Point\+Distance\+Threshold\+\_\+@{record\+Point\+Distance\+Threshold\+\_\+}}
+\index{record\+Point\+Distance\+Threshold\+\_\+@{record\+Point\+Distance\+Threshold\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{record\+Point\+Distance\+Threshold\+\_\+}{recordPointDistanceThreshold_}}]{\setlength{\rightskip}{0pt plus 5cm}double cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::record\+Point\+Distance\+Threshold\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3a1173716d527bd182d04656491e01dd}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a3a1173716d527bd182d04656491e01dd}
+
+
+How much distance there is between two points of the path. 
+
+
+
+Definition at line 98 of file odom\+\_\+tracker.\+h.
+
+
+
+Referenced by Odom\+Tracker(), and update\+Record\+Path().
 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!robot\+Base\+Path\+Pub\+\_\+@{robot\+Base\+Path\+Pub\+\_\+}}
 \index{robot\+Base\+Path\+Pub\+\_\+@{robot\+Base\+Path\+Pub\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
 \subsubsection[{\texorpdfstring{robot\+Base\+Path\+Pub\+\_\+}{robotBasePathPub_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<$realtime\+\_\+tools\+::\+Realtime\+Publisher$<$nav\+\_\+msgs\+::\+Path$>$ $>$ cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::robot\+Base\+Path\+Pub\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a40a7cbb6bb6595e250e7c685c781613b}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a40a7cbb6bb6595e250e7c685c781613b}
 
 
-Definition at line 81 of file odom\+\_\+tracker.\+h.
+Definition at line 88 of file odom\+\_\+tracker.\+h.
+
+
+
+Referenced by Odom\+Tracker(), and rt\+Publish\+Paths().
+
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}!robot\+Base\+Path\+Stacked\+Pub\+\_\+@{robot\+Base\+Path\+Stacked\+Pub\+\_\+}}
+\index{robot\+Base\+Path\+Stacked\+Pub\+\_\+@{robot\+Base\+Path\+Stacked\+Pub\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker@{cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker}}
+\subsubsection[{\texorpdfstring{robot\+Base\+Path\+Stacked\+Pub\+\_\+}{robotBasePathStackedPub_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<$realtime\+\_\+tools\+::\+Realtime\+Publisher$<$nav\+\_\+msgs\+::\+Path$>$ $>$ cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::robot\+Base\+Path\+Stacked\+Pub\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7a2fb23e835ba7d63e69c8db819be876}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a7a2fb23e835ba7d63e69c8db819be876}
+
+
+Definition at line 89 of file odom\+\_\+tracker.\+h.
 
 
 
@@ -902,7 +1194,7 @@ Referenced by Odom\+Tracker(), and rt\+Publish\+Paths().
 \subsubsection[{\texorpdfstring{subscribe\+To\+Odometry\+Topic\+\_\+}{subscribeToOdometryTopic_}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bool} cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::subscribe\+To\+Odometry\+Topic\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_afbe614b53a1493eb8268b8ea65b5b93a}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_afbe614b53a1493eb8268b8ea65b5b93a}
 
 
-Definition at line 113 of file odom\+\_\+tracker.\+h.
+Definition at line 125 of file odom\+\_\+tracker.\+h.
 
 
 
@@ -913,7 +1205,7 @@ Referenced by Odom\+Tracker().
 \subsubsection[{\texorpdfstring{working\+Mode\+\_\+}{workingMode_}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Working\+Mode} cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::working\+Mode\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a5ae598c85c4469f4c0e984480575c42b}{}\label{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a5ae598c85c4469f4c0e984480575c42b}
 
 
-Definition at line 108 of file odom\+\_\+tracker.\+h.
+Definition at line 118 of file odom\+\_\+tracker.\+h.
 
 
 

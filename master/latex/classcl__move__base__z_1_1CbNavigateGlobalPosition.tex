@@ -116,11 +116,11 @@ References initial\+Point, and initial\+Yaw.
 )}\hypertarget{classcl__move__base__z_1_1CbNavigateGlobalPosition_a489aaab9282dea9253fcf6b02e5f8aa4}{}\label{classcl__move__base__z_1_1CbNavigateGlobalPosition_a489aaab9282dea9253fcf6b02e5f8aa4}
 
 
-Definition at line 50 of file cb\+\_\+navigate\+\_\+global\+\_\+position.\+cpp.
+Definition at line 46 of file cb\+\_\+navigate\+\_\+global\+\_\+position.\+cpp.
 
 
 
-References smacc\+::\+Smacc\+Client\+Behavior\+::get\+State\+Machine(), move\+Base\+Client\+\_\+, read\+Start\+Pose\+From\+Parameter\+Server(), smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ Action\+Type $>$\+::send\+Goal(), and smacc\+::\+I\+Smacc\+State\+Machine\+::set\+Global\+S\+M\+Data().
+References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::get\+Reference\+Frame(), smacc\+::\+Smacc\+Client\+Behavior\+::get\+State\+Machine(), move\+Base\+Client\+\_\+, read\+Start\+Pose\+From\+Parameter\+Server(), smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ Action\+Type $>$\+::send\+Goal(), and smacc\+::\+I\+Smacc\+State\+Machine\+::set\+Global\+S\+M\+Data().
 
 
 
@@ -128,10 +128,15 @@ Referenced by on\+Entry().
 
 
 \begin{DoxyCode}
-51 \{
+47 \{
+48     \textcolor{keyword}{auto} p = \hyperlink{classcl__move__base__z_1_1CbNavigateGlobalPosition_a460d6b43834cb52baa94d22cd3a6fd2b}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
+      \hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose}>();
+49     \textcolor{keyword}{auto} referenceFrame = p->\hyperlink{classcl__move__base__z_1_1Pose_aaef18a35d7698fcbf6712149eead8e8d}{getReferenceFrame}();
+50     \textcolor{keyword}{auto} currentPoseMsg = p->get();
+51 
 52     ROS\_INFO(\textcolor{stringliteral}{"Sending Goal to MoveBase"});
 53     ClMoveBaseZ::Goal goal;
-54     goal.target\_pose.header.frame\_id = \textcolor{stringliteral}{"/odom"};
+54     goal.target\_pose.header.frame\_id = referenceFrame;
 55     goal.target\_pose.header.stamp = ros::Time::now();
 56     \hyperlink{classcl__move__base__z_1_1CbNavigateGlobalPosition_a868b25f238e3781c9a2e44b4e1502fcc}{readStartPoseFromParameterServer}(goal);
 57 
@@ -194,26 +199,22 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), go\+To\+Radial\+Star
 26     \textcolor{comment}{// this substate will need access to the "MoveBase" resource or plugin. In this line}
 27     \textcolor{comment}{// you get the reference to this resource.}
 28     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbNavigateGlobalPosition_a460d6b43834cb52baa94d22cd3a6fd2b}{moveBaseClient\_});
-29     
+29 
 30     ROS\_INFO(\textcolor{stringliteral}{"Component requirements completed"});
 31 
 32     \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbNavigateGlobalPosition_a460d6b43834cb52baa94d22cd3a6fd2b}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
 33     plannerSwitcher->setDefaultPlanners();
-34     
+34 
 35     \textcolor{keyword}{auto} pose = \hyperlink{classcl__move__base__z_1_1CbNavigateGlobalPosition_a460d6b43834cb52baa94d22cd3a6fd2b}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
       \hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose}>()->\textcolor{keyword}{get}();
-36 
-37     geometry\_msgs::PoseStamped posestamped;
-38     posestamped.header.frame\_id = \textcolor{stringliteral}{"/odom"};
-39     posestamped.header.stamp = ros::Time::now();
-40     posestamped.pose = pose;
+36     \textcolor{keyword}{auto} *odomTracker = \hyperlink{classcl__move__base__z_1_1CbNavigateGlobalPosition_a460d6b43834cb52baa94d22cd3a6fd2b}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
+37 
+38     odomTracker->pushPath();
+39     odomTracker->setStartPoint(pose);
+40     odomTracker->setWorkingMode(WorkingMode::RECORD\_PATH);
 41 
-42     \textcolor{keyword}{auto} *odomTracker = \hyperlink{classcl__move__base__z_1_1CbNavigateGlobalPosition_a460d6b43834cb52baa94d22cd3a6fd2b}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
-43     odomTracker->setStartPoint(posestamped);
-44     odomTracker->setWorkingMode(WorkingMode::RECORD\_PATH\_FORWARD);
-45 
-46     \hyperlink{classcl__move__base__z_1_1CbNavigateGlobalPosition_a489aaab9282dea9253fcf6b02e5f8aa4}{goToRadialStart}();
-47 \}
+42     \hyperlink{classcl__move__base__z_1_1CbNavigateGlobalPosition_a489aaab9282dea9253fcf6b02e5f8aa4}{goToRadialStart}();
+43 \}
 \end{DoxyCode}
 
 

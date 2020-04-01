@@ -172,41 +172,42 @@ Referenced by make\+Plan().
 82     nav\_msgs::Path planMsg;
 83     planMsg.poses = plan;
 84     planMsg.header.stamp = ros::Time::now();
-85     planMsg.header.frame\_id = \textcolor{stringliteral}{"/odom"};
-86 
-87     \textcolor{comment}{// check plan rejection}
-88     \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};
-89 
-90     \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
-91     \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
-92     \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
-93     \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
-94 
-95     costmap\_2d::Costmap2D *costmap2d = this->\hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a711d4a0d92a216eb8cab3b42f18eb795}{costmap\_ros\_}->getCostmap();
-96     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : plan)
-97     \{
-98         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
-99         costmap2d->worldToMap(p.pose.position.x, p.pose.position.y, mx, my);
-100         \textcolor{keyword}{auto} cost = costmap2d->getCost(mx, my);
-101 
-102         \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
-103         \{
-104             acceptedGlobalPlan = \textcolor{keyword}{false};
-105             \textcolor{keywordflow}{break};
-106         \}
-107     \}
-108 
-109     \textcolor{keywordflow}{if} (acceptedGlobalPlan)
-110     \{
-111         \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a927dc6a687fac3751033d9736cf8dfcf}{planPub\_}.publish(planMsg);
-112         \textcolor{comment}{//ROS\_INFO\_STREAM("global forward plan: " << planMsg);}
-113         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-114     \}
-115     \textcolor{keywordflow}{else}
-116     \{
-117         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-118     \}
-119 \}
+85     
+86     planMsg.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a711d4a0d92a216eb8cab3b42f18eb795}{costmap\_ros\_}->getGlobalFrameID();
+87 
+88     \textcolor{comment}{// check plan rejection}
+89     \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};
+90 
+91     \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
+92     \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
+93     \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
+94     \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
+95 
+96     costmap\_2d::Costmap2D *costmap2d = this->\hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a711d4a0d92a216eb8cab3b42f18eb795}{costmap\_ros\_}->getCostmap();
+97     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : plan)
+98     \{
+99         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
+100         costmap2d->worldToMap(p.pose.position.x, p.pose.position.y, mx, my);
+101         \textcolor{keyword}{auto} cost = costmap2d->getCost(mx, my);
+102 
+103         \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
+104         \{
+105             acceptedGlobalPlan = \textcolor{keyword}{false};
+106             \textcolor{keywordflow}{break};
+107         \}
+108     \}
+109 
+110     \textcolor{keywordflow}{if} (acceptedGlobalPlan)
+111     \{
+112         \hyperlink{classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner_a927dc6a687fac3751033d9736cf8dfcf}{planPub\_}.publish(planMsg);
+113         \textcolor{comment}{//ROS\_INFO\_STREAM("global forward plan: " << planMsg);}
+114         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+115     \}
+116     \textcolor{keywordflow}{else}
+117     \{
+118         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+119     \}
+120 \}
 \end{DoxyCode}
 
 

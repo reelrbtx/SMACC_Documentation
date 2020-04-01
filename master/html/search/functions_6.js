@@ -50,6 +50,7 @@ var searchData=
   ['getparam',['getParam',['../classsmacc_1_1ISmaccState.html#abbb3a24b912c6e8de28f7b86123b6357',1,'smacc::ISmaccState::getParam()'],['../classsmacc_1_1ISmaccStateMachine.html#ac9fda4abe36f62db5ae231289afa4665',1,'smacc::ISmaccStateMachine::getParam()']]],
   ['getparentstate',['getParentState',['../classsmacc_1_1ISmaccState.html#a3484b4a32ef47a8650f08df67de4fae5',1,'smacc::ISmaccState::getParentState()'],['../classsmacc_1_1SmaccState.html#a69fc0aa1dbe0c00501f2890616225004',1,'smacc::SmaccState::getParentState()']]],
   ['getpath',['getPath',['../classcl__move__base__z_1_1odom__tracker_1_1OdomTracker.html#a762bc88653ebb7d78e693ba465fb160f',1,'cl_move_base_z::odom_tracker::OdomTracker']]],
+  ['getreferenceframe',['getReferenceFrame',['../classcl__move__base__z_1_1Pose.html#aaef18a35d7698fcbf6712149eead8e8d',1,'cl_move_base_z::Pose']]],
   ['getreferenceposition',['getReferencePosition',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#a1bb67145e871d3ce3637a713559a0121',1,'cl_microstrain_mips::ClMicrostainMips']]],
   ['getrosnode',['getROSNode',['../classsmacc_1_1ISmaccState.html#a5d3f13b9d7ae7fdcf9da21c4ed935706',1,'smacc::ISmaccState']]],
   ['getsensorvehicleframeoffset',['getSensorVehicleFrameOffset',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#acbb92f93e42a2c304d450cc30c0e992f',1,'cl_microstrain_mips::ClMicrostainMips']]],
