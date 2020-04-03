@@ -1,0 +1,543 @@
+\hypertarget{sm__moveit__node_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+moveit/src/sm\+\_\+moveit\+\_\+node.cpp File Reference}
+\label{sm__moveit__node_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+moveit/src/sm\+\_\+moveit\+\_\+node.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+moveit/src/sm\+\_\+moveit\+\_\+node.\+cpp}}
+{\ttfamily \#include $<$ros/ros.\+h$>$}\\*
+{\ttfamily \#include $<$moveit/planning\+\_\+scene\+\_\+interface/planning\+\_\+scene\+\_\+interface.\+h$>$}\\*
+{\ttfamily \#include $<$moveit/move\+\_\+group\+\_\+interface/move\+\_\+group\+\_\+interface.\+h$>$}\\*
+{\ttfamily \#include $<$tf2\+\_\+geometry\+\_\+msgs/tf2\+\_\+geometry\+\_\+msgs.\+h$>$}\\*
+{\ttfamily \#include $<$move\+\_\+base\+\_\+z\+\_\+client\+\_\+plugin/components/pose/cp\+\_\+pose.\+h$>$}\\*
+{\ttfamily \#include $<$angles/angles.\+h$>$}\\*
+Include dependency graph for sm\+\_\+moveit\+\_\+node.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sm__moveit__node_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{sm__moveit__node_8cpp_a551dafd613dda701c27ad0b9c8a5a419}{open\+Gripper} (trajectory\+\_\+msgs\+::\+Joint\+Trajectory \&posture)
+\item 
+void \hyperlink{sm__moveit__node_8cpp_a6fdc4996c1df47772fc6b74ce5a2f137}{closed\+Gripper} (trajectory\+\_\+msgs\+::\+Joint\+Trajectory \&posture)
+\item 
+void \hyperlink{sm__moveit__node_8cpp_a95c2ce6b3ffd441a0fb447df3da53789}{pick} (moveit\+::planning\+\_\+interface\+::\+Move\+Group\+Interface \&move\+\_\+group, const geometry\+\_\+msgs\+::\+Pose \&object\+\_\+pose)
+\item 
+void \hyperlink{sm__moveit__node_8cpp_af24e4b42acaf37192189dfac64fefab9}{place} (moveit\+::planning\+\_\+interface\+::\+Move\+Group\+Interface \&arm)
+\item 
+void \hyperlink{sm__moveit__node_8cpp_ab5a9bb8e8749d3c15cb19005c16386f6}{add\+Collision\+Objects} (moveit\+::planning\+\_\+interface\+::\+Planning\+Scene\+Interface \&planning\+\_\+scene\+\_\+interface)
+\item 
+int \hyperlink{sm__moveit__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}!add\+Collision\+Objects@{add\+Collision\+Objects}}
+\index{add\+Collision\+Objects@{add\+Collision\+Objects}!sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{add\+Collision\+Objects(moveit\+::planning\+\_\+interface\+::\+Planning\+Scene\+Interface \&planning\+\_\+scene\+\_\+interface)}{addCollisionObjects(moveit::planning_interface::PlanningSceneInterface &planning_scene_interface)}}]{\setlength{\rightskip}{0pt plus 5cm}void add\+Collision\+Objects (
+\begin{DoxyParamCaption}
+\item[{moveit\+::planning\+\_\+interface\+::\+Planning\+Scene\+Interface \&}]{planning\+\_\+scene\+\_\+interface}
+\end{DoxyParamCaption}
+)}\hypertarget{sm__moveit__node_8cpp_ab5a9bb8e8749d3c15cb19005c16386f6}{}\label{sm__moveit__node_8cpp_ab5a9bb8e8749d3c15cb19005c16386f6}
+
+
+Definition at line 166 of file sm\+\_\+moveit\+\_\+node.\+cpp.
+
+
+\begin{DoxyCode}
+167 \{
+168   \textcolor{comment}{// BEGIN\_SUB\_TUTORIAL table1}
+169   \textcolor{comment}{//}
+170   \textcolor{comment}{// Creating Environment}
+171   \textcolor{comment}{// ^^^^^^^^^^^^^^^^^^^^}
+172   \textcolor{comment}{// Create vector to hold 3 collision objects.}
+173   std::vector<moveit\_msgs::CollisionObject> collision\_objects;
+174   collision\_objects.resize(3);
+175 
+176   \textcolor{comment}{// Add the first table where the cube will originally be kept.}
+177   collision\_objects[0].id = \textcolor{stringliteral}{"table1"};
+178   collision\_objects[0].header.frame\_id = \textcolor{stringliteral}{"panda\_link0"};
+179 
+180   \textcolor{comment}{/* Define the primitive and its dimensions. */}
+181   collision\_objects[0].primitives.resize(1);
+182   collision\_objects[0].primitives[0].type = collision\_objects[0].primitives[0].BOX;
+183   collision\_objects[0].primitives[0].dimensions.resize(3);
+184   collision\_objects[0].primitives[0].dimensions[0] = 0.2;
+185   collision\_objects[0].primitives[0].dimensions[1] = 0.4;
+186   collision\_objects[0].primitives[0].dimensions[2] = 0.4;
+187 
+188   \textcolor{comment}{/* Define the pose of the table. */}
+189   collision\_objects[0].primitive\_poses.resize(1);
+190   collision\_objects[0].primitive\_poses[0].position.x = 0.5;
+191   collision\_objects[0].primitive\_poses[0].position.y = 0;
+192   collision\_objects[0].primitive\_poses[0].position.z = 0.2;
+193   \textcolor{comment}{// END\_SUB\_TUTORIAL}
+194 
+195   collision\_objects[0].operation = collision\_objects[0].ADD;
+196 
+197   \textcolor{comment}{// BEGIN\_SUB\_TUTORIAL table2}
+198   \textcolor{comment}{// Add the second table where we will be placing the cube.}
+199   collision\_objects[1].id = \textcolor{stringliteral}{"table2"};
+200   collision\_objects[1].header.frame\_id = \textcolor{stringliteral}{"panda\_link0"};
+201 
+202   \textcolor{comment}{/* Define the primitive and its dimensions. */}
+203   collision\_objects[1].primitives.resize(1);
+204   collision\_objects[1].primitives[0].type = collision\_objects[1].primitives[0].BOX;
+205   collision\_objects[1].primitives[0].dimensions.resize(3);
+206   collision\_objects[1].primitives[0].dimensions[0] = 0.4;
+207   collision\_objects[1].primitives[0].dimensions[1] = 0.2;
+208   collision\_objects[1].primitives[0].dimensions[2] = 0.4;
+209 
+210   \textcolor{comment}{/* Define the pose of the table. */}
+211   collision\_objects[1].primitive\_poses.resize(1);
+212   collision\_objects[1].primitive\_poses[0].position.x = 0;
+213   collision\_objects[1].primitive\_poses[0].position.y = 0.5;
+214   collision\_objects[1].primitive\_poses[0].position.z = 0.2;
+215   \textcolor{comment}{// END\_SUB\_TUTORIAL}
+216 
+217   collision\_objects[1].operation = collision\_objects[1].ADD;
+218 
+219   \textcolor{comment}{// BEGIN\_SUB\_TUTORIAL object}
+220   \textcolor{comment}{// Define the object that we will be manipulating}
+221   collision\_objects[2].header.frame\_id = \textcolor{stringliteral}{"panda\_link0"};
+222   collision\_objects[2].id = \textcolor{stringliteral}{"object"};
+223 
+224   \textcolor{comment}{/* Define the primitive and its dimensions. */}
+225   collision\_objects[2].primitives.resize(1);
+226   collision\_objects[2].primitives[0].type = collision\_objects[1].primitives[0].BOX;
+227   collision\_objects[2].primitives[0].dimensions.resize(3);
+228   collision\_objects[2].primitives[0].dimensions[0] = 0.02;
+229   collision\_objects[2].primitives[0].dimensions[1] = 0.02;
+230   collision\_objects[2].primitives[0].dimensions[2] = 0.2;
+231 
+232   \textcolor{comment}{/* Define the pose of the object. */}
+233   collision\_objects[2].primitive\_poses.resize(1);
+234   collision\_objects[2].primitive\_poses[0].position.x = 0.5;
+235   collision\_objects[2].primitive\_poses[0].position.y = 0;
+236   collision\_objects[2].primitive\_poses[0].position.z = 0.5;
+237   \textcolor{comment}{// END\_SUB\_TUTORIAL}
+238 
+239   collision\_objects[2].operation = collision\_objects[2].ADD;
+240 
+241   planning\_scene\_interface.applyCollisionObjects(collision\_objects);
+242 \}
+\end{DoxyCode}
+\index{sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}!closed\+Gripper@{closed\+Gripper}}
+\index{closed\+Gripper@{closed\+Gripper}!sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{closed\+Gripper(trajectory\+\_\+msgs\+::\+Joint\+Trajectory \&posture)}{closedGripper(trajectory_msgs::JointTrajectory &posture)}}]{\setlength{\rightskip}{0pt plus 5cm}void closed\+Gripper (
+\begin{DoxyParamCaption}
+\item[{trajectory\+\_\+msgs\+::\+Joint\+Trajectory \&}]{posture}
+\end{DoxyParamCaption}
+)}\hypertarget{sm__moveit__node_8cpp_a6fdc4996c1df47772fc6b74ce5a2f137}{}\label{sm__moveit__node_8cpp_a6fdc4996c1df47772fc6b74ce5a2f137}
+
+
+Definition at line 30 of file sm\+\_\+moveit\+\_\+node.\+cpp.
+
+
+\begin{DoxyCode}
+31 \{
+32   \textcolor{comment}{// BEGIN\_SUB\_TUTORIAL closed\_gripper}
+33   \textcolor{comment}{/* Add both finger joints of panda robot. */}
+34   posture.joint\_names.resize(2);
+35   posture.joint\_names[0] = \textcolor{stringliteral}{"l\_gripper\_finger\_joint"};
+36   posture.joint\_names[1] = \textcolor{stringliteral}{"r\_gripper\_finger\_joint"};
+37 
+38   \textcolor{comment}{/* Set them as closed. */}
+39   posture.points.resize(1);
+40   posture.points[0].positions.resize(2);
+41   posture.points[0].positions[0] = 0.00;
+42   posture.points[0].positions[1] = 0.00;
+43   posture.points[0].time\_from\_start = ros::Duration(0.5);
+44   \textcolor{comment}{// END\_SUB\_TUTORIAL}
+45 \}
+\end{DoxyCode}
+\index{sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}!main@{main}}
+\index{main@{main}!sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{sm__moveit__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{sm__moveit__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+Definition at line 244 of file sm\+\_\+moveit\+\_\+node.\+cpp.
+
+
+
+References cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::get(), pick(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::wait\+Transform\+Update().
+
+
+\begin{DoxyCode}
+245 \{
+246   ros::init(argc, argv, \textcolor{stringliteral}{"sm\_moveit"});
+247   ros::NodeHandle nh;
+248   ros::AsyncSpinner spinner(1);
+249   spinner.start();
+250 
+251   \hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose} cube\_pose(\textcolor{stringliteral}{"/cube\_0"}, \textcolor{stringliteral}{"/map"});
+252   cube\_pose.waitTransformUpdate();
+253 
+254   ros::WallDuration(6.0).sleep();
+255 
+256   moveit::planning\_interface::PlanningSceneInterface planning\_scene\_interface;
+257   moveit::planning\_interface::MoveGroupInterface group(\textcolor{stringliteral}{"arm\_with\_torso"});
+258   group.setPlanningTime(1.0);
+259 
+260   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"CubePose: "} << cube\_pose.get());
+261 
+262   ROS\_INFO(\textcolor{stringliteral}{"------- TESTING PLAN --------"});
+263   geometry\_msgs::PoseStamped target\_pose1;
+264   target\_pose1.header.frame\_id = \textcolor{stringliteral}{"/map"};
+265   target\_pose1.header.stamp = ros::Time::now();
+266   target\_pose1.pose= cube\_pose.get();
+267   target\_pose1.pose.position.x -= 0;
+268   \textcolor{comment}{//target\_pose1.position.y = -target\_pose1.position.y;}
+269   target\_pose1.pose.position.z += 0.3;
+270 
+271   \textcolor{keyword}{auto} cubeYawOnTable = tf::getYaw(target\_pose1.pose.orientation);
+272   \textcolor{keyword}{auto} degrees90 = M\_PI/2;
+273 
+274   \textcolor{keywordflow}{while}(cubeYawOnTable > degrees90)
+275   \{
+276     cubeYawOnTable -= degrees90;
+277   \}
+278 
+279   \textcolor{keywordflow}{while}(cubeYawOnTable < -degrees90)
+280   \{
+281     cubeYawOnTable += degrees90;
+282   \}
+283 
+284   ROS\_INFO(\textcolor{stringliteral}{"picking yaw: %lf"}, cubeYawOnTable);
+285   \textcolor{keyword}{auto} quat = tf::createQuaternionFromRPY(0, M\_PI / 2, cubeYawOnTable);
+286   tf::quaternionTFToMsg(quat, target\_pose1.pose.orientation);
+287 
+288   group.setPoseTarget(target\_pose1);
+289   group.setPoseReferenceFrame(\textcolor{stringliteral}{"/map"});
+290 
+291   moveit::planning\_interface::MoveGroupInterface::Plan my\_plan;
+292   \textcolor{keywordtype}{bool} success = (group.plan(my\_plan) == moveit::planning\_interface::MoveItErrorCode::SUCCESS);
+293   ROS\_INFO\_NAMED(\textcolor{stringliteral}{"tutorial"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} : \textcolor{stringliteral}{"FAILED"});
+294 
+295   \textcolor{keywordflow}{if} (success)
+296   \{
+297     group.execute(my\_plan);
+298 
+299     ros::WallDuration(15.0).sleep();
+300     ROS\_INFO(\textcolor{stringliteral}{"------- CARTESIAN TEST --------"});
+301     std::vector<geometry\_msgs::Pose> waypoints;
+302 
+303     waypoints.push\_back(target\_pose1.pose); \textcolor{comment}{// up and out}
+304     \textcolor{keyword}{auto} target\_pose2 = target\_pose1.pose;
+305 
+306     target\_pose2.position.z -= 0.12;
+307     \textcolor{comment}{//target\_pose2.position.x -= 0.15;}
+308     waypoints.push\_back(target\_pose2); \textcolor{comment}{// left}
+309 
+310     group.setMaxVelocityScalingFactor(0.1);
+311 
+312     moveit\_msgs::RobotTrajectory trajectory;
+313     \textcolor{keywordtype}{double} fraction = group.computeCartesianPath(waypoints,
+314                                                  0.01, \textcolor{comment}{// eef\_step}
+315                                                  0.0,  \textcolor{comment}{// jump\_threshold}
+316                                                  trajectory);
+317 
+318     \textcolor{keyword}{auto} grasp\_pose\_plan = my\_plan;
+319     grasp\_pose\_plan.trajectory\_ = trajectory;
+320     group.execute(grasp\_pose\_plan);
+321 
+322     ROS\_INFO(\textcolor{stringliteral}{"Visualizing plan 4 (cartesian path) (%.2f%% acheived)"},
+323              fraction * 100.0);
+324 
+325     ros::WallDuration(5.0).sleep();         
+326     ROS\_INFO(\textcolor{stringliteral}{"------- RETREAT TEST --------"});
+327     \textcolor{comment}{/*planning\_scene\_interface.removeCollisionObjects(\{"cube\_0"\});}
+328 \textcolor{comment}{    std::vector<double> group\_variable\_values;}
+329 \textcolor{comment}{   
+       group.getCurrentState()->copyJointGroupPositions(group.getCurrentState()->getRobotModel()->getJointModelGroup(group.getName()), group\_variable\_values);}
+330 \textcolor{comment}{    group\_variable\_values[group\_variable\_values.size() -1 ]=0;}
+331 \textcolor{comment}{    group\_variable\_values[group\_variable\_values.size() -2 ]=0;}
+332 \textcolor{comment}{  }
+333 \textcolor{comment}{    }
+334 \textcolor{comment}{    success = (group.plan(my\_plan) == moveit::planning\_interface::MoveItErrorCode::SUCCESS);}
+335 \textcolor{comment}{    ROS\_INFO\_NAMED("tutorial", "Success Visualizing plan 1 (pose goal) %s", success ? "" : "FAILED");}
+336 \textcolor{comment}{    if(!success)}
+337 \textcolor{comment}{      exit(0);*/}
+338 
+339     waypoints.clear();
+340     
+341     target\_pose2 = target\_pose1.pose;
+342     target\_pose2.position.z -= 0.12;
+343     waypoints.push\_back(target\_pose2); \textcolor{comment}{// up and out}
+344     waypoints.push\_back(target\_pose1.pose); \textcolor{comment}{// up and out}
+345     
+346     group.setMaxVelocityScalingFactor(0.1);
+347 
+348     planning\_scene\_interface.removeCollisionObjects(\{\textcolor{stringliteral}{"cube\_0"}\});
+349     moveit\_msgs::RobotTrajectory retreat\_trajectory;
+350     fraction = group.computeCartesianPath(waypoints,
+351                                                  0.01, \textcolor{comment}{// eef\_step}
+352                                                  0.0,  \textcolor{comment}{// jump\_threshold}
+353                                                  retreat\_trajectory);
+354 
+355     \textcolor{keyword}{auto} retreat\_plan = my\_plan;
+356     retreat\_plan.trajectory\_ = retreat\_trajectory;
+357     group.execute(retreat\_plan);
+358 
+359     ROS\_INFO(\textcolor{stringliteral}{"Visualizing plan 4 (cartesian path) (%.2f%% acheived)"},
+360              fraction * 100.0);
+361 
+362     ros::WallDuration(15.0).sleep();
+363     ROS\_INFO(\textcolor{stringliteral}{"------- PICKING PIPELINE --------"});
+364     group.setPlanningTime(4.0);
+365     \hyperlink{sm__moveit__node_8cpp_a95c2ce6b3ffd441a0fb447df3da53789}{pick}(group, target\_pose1.pose);
+366   \}
+367   \textcolor{comment}{/*addCollisionObjects(planning\_scene\_interface);}
+368 \textcolor{comment}{}
+369 \textcolor{comment}{}
+370 \textcolor{comment}{  // Wait a bit for ROS things to initialize}
+371 \textcolor{comment}{  }
+372 \textcolor{comment}{}
+373 \textcolor{comment}{  ros::WallDuration(1.0).sleep();}
+374 \textcolor{comment}{}
+375 \textcolor{comment}{  place(group);}
+376 \textcolor{comment}{}
+377 \textcolor{comment}{  ros::waitForShutdown();*/}
+378   \textcolor{keywordflow}{return} 0;
+379 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{sm__moveit__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}!open\+Gripper@{open\+Gripper}}
+\index{open\+Gripper@{open\+Gripper}!sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{open\+Gripper(trajectory\+\_\+msgs\+::\+Joint\+Trajectory \&posture)}{openGripper(trajectory_msgs::JointTrajectory &posture)}}]{\setlength{\rightskip}{0pt plus 5cm}void open\+Gripper (
+\begin{DoxyParamCaption}
+\item[{trajectory\+\_\+msgs\+::\+Joint\+Trajectory \&}]{posture}
+\end{DoxyParamCaption}
+)}\hypertarget{sm__moveit__node_8cpp_a551dafd613dda701c27ad0b9c8a5a419}{}\label{sm__moveit__node_8cpp_a551dafd613dda701c27ad0b9c8a5a419}
+
+
+Definition at line 13 of file sm\+\_\+moveit\+\_\+node.\+cpp.
+
+
+
+Referenced by place().
+
+
+\begin{DoxyCode}
+14 \{
+15   \textcolor{comment}{// BEGIN\_SUB\_TUTORIAL open\_gripper}
+16   \textcolor{comment}{/* Add both finger joints of panda robot. */}
+17   posture.joint\_names.resize(2);
+18   posture.joint\_names[0] = \textcolor{stringliteral}{"l\_gripper\_finger\_joint"};
+19   posture.joint\_names[1] = \textcolor{stringliteral}{"r\_gripper\_finger\_joint"};
+20 
+21   \textcolor{comment}{/* Set them as open, wide enough for the object to fit. */}
+22   posture.points.resize(1);
+23   posture.points[0].positions.resize(2);
+24   posture.points[0].positions[0] = -0.0;
+25   posture.points[0].positions[1] = -0.0;
+26   posture.points[0].time\_from\_start = ros::Duration(0.5);
+27   \textcolor{comment}{// END\_SUB\_TUTORIAL}
+28 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{sm__moveit__node_8cpp_a551dafd613dda701c27ad0b9c8a5a419_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}!pick@{pick}}
+\index{pick@{pick}!sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{pick(moveit\+::planning\+\_\+interface\+::\+Move\+Group\+Interface \&move\+\_\+group, const geometry\+\_\+msgs\+::\+Pose \&object\+\_\+pose)}{pick(moveit::planning_interface::MoveGroupInterface &move_group, const geometry_msgs::Pose &object_pose)}}]{\setlength{\rightskip}{0pt plus 5cm}void pick (
+\begin{DoxyParamCaption}
+\item[{moveit\+::planning\+\_\+interface\+::\+Move\+Group\+Interface \&}]{move\+\_\+group, }
+\item[{const geometry\+\_\+msgs\+::\+Pose \&}]{object\+\_\+pose}
+\end{DoxyParamCaption}
+)}\hypertarget{sm__moveit__node_8cpp_a95c2ce6b3ffd441a0fb447df3da53789}{}\label{sm__moveit__node_8cpp_a95c2ce6b3ffd441a0fb447df3da53789}
+
+
+Definition at line 47 of file sm\+\_\+moveit\+\_\+node.\+cpp.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+48 \{
+49   \textcolor{comment}{// BEGIN\_SUB\_TUTORIAL pick1}
+50   \textcolor{comment}{// Create a vector of grasps to be attempted, currently only creating single grasp.}
+51   \textcolor{comment}{// This is essentially useful when using a grasp generator to generate and test multiple grasps.}
+52   std::vector<moveit\_msgs::Grasp> grasps;
+53   grasps.resize(1);
+54 
+55   \textcolor{comment}{// Setting grasp pose}
+56   \textcolor{comment}{// ++++++++++++++++++++++}
+57   \textcolor{comment}{// This is the pose of panda\_link8. |br|}
+58   \textcolor{comment}{// Make sure that when you set the grasp\_pose, you are setting it to be the pose of the last link in}
+59   \textcolor{comment}{// your manipulator which in this case would be `"panda\_link8"` You will have to compensate for the}
+60   \textcolor{comment}{// transform from `"panda\_link8"` to the palm of the end effector.}
+61   \textcolor{comment}{//grasps[0].grasp\_pose.header.frame\_id = "panda\_link0";}
+62   \textcolor{comment}{//tf2::Quaternion orientation;}
+63   \textcolor{comment}{//orientation.setRPY(-M\_PI / 2, -M\_PI / 4, -M\_PI / 2);}
+64   \textcolor{comment}{//grasps[0].grasp\_pose.pose.orientation = tf2::toMsg(orientation);}
+65   \textcolor{comment}{//grasps[0].grasp\_pose.pose.position.x = 0.415;}
+66   \textcolor{comment}{//grasps[0].grasp\_pose.pose.position.y = 0;}
+67   \textcolor{comment}{//grasps[0].grasp\_pose.pose.position.z = 0.5;}
+68 
+69   grasps[0].grasp\_pose.header.frame\_id = \textcolor{stringliteral}{"/map"};
+70 
+71   grasps[0].grasp\_pose.pose = object\_pose;
+72   \textcolor{comment}{//grasps[0].grasp\_pose.pose.position.x -= 0.0;}
+73   \textcolor{comment}{//grasps[0].grasp\_pose.pose.position.z += 0.2;}
+74   tf2::Quaternion orientation;
+75   \textcolor{comment}{//orientation.setRPY(0, M\_PI / 2, 0);}
+76   grasps[0].grasp\_pose.pose.orientation.w = 1;
+77   \textcolor{comment}{//grasps[0].grasp\_pose.pose.orientation = tf2::toMsg(orientation);}
+78 
+79   \textcolor{comment}{// // Setting pre-grasp approach}
+80   \textcolor{comment}{// // ++++++++++++++++++++++++++}
+81   \textcolor{comment}{// /* Defined with respect to frame\_id */}
+82   \textcolor{comment}{// grasps[0].pre\_grasp\_approach.direction.header.frame\_id = "panda\_link0";}
+83   \textcolor{comment}{// /* Direction is set as positive x axis */}
+84   \textcolor{comment}{// grasps[0].pre\_grasp\_approach.direction.vector.x = 1.0;}
+85   \textcolor{comment}{// grasps[0].pre\_grasp\_approach.min\_distance = 0.095;}
+86   \textcolor{comment}{// grasps[0].pre\_grasp\_approach.desired\_distance = 0.115;}
+87 
+88   \textcolor{comment}{//openGripper(grasps[0].pre\_grasp\_posture);}
+89 
+90   grasps[0].pre\_grasp\_approach.direction.header.frame\_id = \textcolor{stringliteral}{"/map"};
+91   \textcolor{comment}{/* Direction is set as positive x axis */}
+92   grasps[0].pre\_grasp\_approach.direction.vector.z = -1.0;
+93   grasps[0].pre\_grasp\_approach.min\_distance = 0.0;
+94   grasps[0].pre\_grasp\_approach.desired\_distance = 0.;
+95 
+96   \textcolor{comment}{//closedGripper(grasps[0].grasp\_posture);}
+97 
+98   \textcolor{comment}{// Setting post-grasp retreat}
+99   \textcolor{comment}{// ++++++++++++++++++++++++++}
+100   \textcolor{comment}{/* Defined with respect to frame\_id */}
+101   grasps[0].post\_grasp\_retreat.direction.header.frame\_id = \textcolor{stringliteral}{"/map"};
+102   \textcolor{comment}{/* Direction is set as positive z axis */}
+103   grasps[0].post\_grasp\_retreat.direction.vector.z = 1.0;
+104   grasps[0].post\_grasp\_retreat.min\_distance = 0.0;
+105   grasps[0].post\_grasp\_retreat.desired\_distance = 0.0;
+106 
+107   move\_group.setSupportSurfaceName(\textcolor{stringliteral}{"table\_0"});
+108   \textcolor{comment}{// Call pick to pick up the object using the grasps given}
+109   move\_group.pick(\textcolor{stringliteral}{"cube\_0"}, grasps);
+110   \textcolor{comment}{// END\_SUB\_TUTORIAL}
+111 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{sm__moveit__node_8cpp_a95c2ce6b3ffd441a0fb447df3da53789_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}!place@{place}}
+\index{place@{place}!sm\+\_\+moveit\+\_\+node.\+cpp@{sm\+\_\+moveit\+\_\+node.\+cpp}}
+\subsubsection[{\texorpdfstring{place(moveit\+::planning\+\_\+interface\+::\+Move\+Group\+Interface \&arm)}{place(moveit::planning_interface::MoveGroupInterface &arm)}}]{\setlength{\rightskip}{0pt plus 5cm}void place (
+\begin{DoxyParamCaption}
+\item[{moveit\+::planning\+\_\+interface\+::\+Move\+Group\+Interface \&}]{arm}
+\end{DoxyParamCaption}
+)}\hypertarget{sm__moveit__node_8cpp_af24e4b42acaf37192189dfac64fefab9}{}\label{sm__moveit__node_8cpp_af24e4b42acaf37192189dfac64fefab9}
+
+
+Definition at line 113 of file sm\+\_\+moveit\+\_\+node.\+cpp.
+
+
+
+References open\+Gripper().
+
+
+\begin{DoxyCode}
+114 \{
+115   \textcolor{comment}{// BEGIN\_SUB\_TUTORIAL place}
+116   \textcolor{comment}{// TODO(@ridhwanluthra) - Calling place function may lead to "All supplied place locations failed.
+       Retrying last}
+117   \textcolor{comment}{// location in verbose mode." This is a known issue. |br|}
+118   \textcolor{comment}{// |br|}
+119   \textcolor{comment}{// Ideally, you would create a vector of place locations to be attempted although in this example, we
+       only create}
+120   \textcolor{comment}{// a single place location.}
+121   std::vector<moveit\_msgs::PlaceLocation> place\_location;
+122   place\_location.resize(1);
+123 
+124   \textcolor{comment}{// Setting place location pose}
+125   \textcolor{comment}{// +++++++++++++++++++++++++++}
+126   place\_location[0].place\_pose.header.frame\_id = \textcolor{stringliteral}{"panda\_link0"};
+127   tf2::Quaternion orientation;
+128   orientation.setRPY(0, 0, M\_PI / 2);
+129   place\_location[0].place\_pose.pose.orientation = tf2::toMsg(orientation);
+130 
+131   \textcolor{comment}{/* For place location, we set the value to the exact location of the center of the object. */}
+132   place\_location[0].place\_pose.pose.position.x = 0;
+133   place\_location[0].place\_pose.pose.position.y = 0.5;
+134   place\_location[0].place\_pose.pose.position.z = 0.5;
+135 
+136   \textcolor{comment}{// Setting pre-place approach}
+137   \textcolor{comment}{// ++++++++++++++++++++++++++}
+138   \textcolor{comment}{/* Defined with respect to frame\_id */}
+139   place\_location[0].pre\_place\_approach.direction.header.frame\_id = \textcolor{stringliteral}{"panda\_link0"};
+140   \textcolor{comment}{/* Direction is set as negative z axis */}
+141   place\_location[0].pre\_place\_approach.direction.vector.z = -1.0;
+142   place\_location[0].pre\_place\_approach.min\_distance = 0.095;
+143   place\_location[0].pre\_place\_approach.desired\_distance = 0.115;
+144 
+145   \textcolor{comment}{// Setting post-grasp retreat}
+146   \textcolor{comment}{// ++++++++++++++++++++++++++}
+147   \textcolor{comment}{/* Defined with respect to frame\_id */}
+148   place\_location[0].post\_place\_retreat.direction.header.frame\_id = \textcolor{stringliteral}{"panda\_link0"};
+149   \textcolor{comment}{/* Direction is set as negative y axis */}
+150   place\_location[0].post\_place\_retreat.direction.vector.y = -1.0;
+151   place\_location[0].post\_place\_retreat.min\_distance = 0.1;
+152   place\_location[0].post\_place\_retreat.desired\_distance = 0.25;
+153 
+154   \textcolor{comment}{// Setting posture of eef after placing object}
+155   \textcolor{comment}{// +++++++++++++++++++++++++++++++++++++++++++}
+156   \textcolor{comment}{/* Similar to the pick case */}
+157   \hyperlink{sm__moveit__node_8cpp_a551dafd613dda701c27ad0b9c8a5a419}{openGripper}(place\_location[0].post\_place\_posture);
+158 
+159   \textcolor{comment}{// Set support surface as table2.}
+160   arm.setSupportSurfaceName(\textcolor{stringliteral}{"table2"});
+161   \textcolor{comment}{// Call place to place the object using the place locations given.}
+162   arm.place(\textcolor{stringliteral}{"object"}, place\_location);
+163   \textcolor{comment}{// END\_SUB\_TUTORIAL}
+164 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{sm__moveit__node_8cpp_af24e4b42acaf37192189dfac64fefab9_cgraph}
+\end{center}
+\end{figure}
+
+

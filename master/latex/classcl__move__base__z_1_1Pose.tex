@@ -31,6 +31,8 @@ Collaboration diagram for cl\+\_\+move\+\_\+base\+\_\+z\+:\+:Pose\+:
 \item 
 virtual void \hyperlink{classcl__move__base__z_1_1Pose_abf99d1127cf51a93f97ada2031196114}{update} () override
 \item 
+void \hyperlink{classcl__move__base__z_1_1Pose_a5f8576c3dacfb2f2e7f9df5105c480ea}{wait\+Transform\+Update} (ros\+::\+Rate r=ros\+::\+Rate(20))
+\item 
 geometry\+\_\+msgs\+::\+Pose \hyperlink{classcl__move__base__z_1_1Pose_a6e3d311de54516653d773d9b7eb1d85d}{get} ()
 \item 
 const std\+::string \& \hyperlink{classcl__move__base__z_1_1Pose_aaef18a35d7698fcbf6712149eead8e8d}{get\+Reference\+Frame} () const 
@@ -89,19 +91,35 @@ Definition at line 12 of file cp\+\_\+pose.\+cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcl__move__base__z_1_1Pose_a6e3d311de54516653d773d9b7eb1d85d}{}\label{classcl__move__base__z_1_1Pose_a6e3d311de54516653d773d9b7eb1d85d}
 
 
-Definition at line 25 of file cp\+\_\+pose.\+h.
+Definition at line 27 of file cp\+\_\+pose.\+h.
 
 
 
 References m\+\_\+mutex\+\_\+, and pose\+\_\+.
 
 
+
+Referenced by main().
+
+
 \begin{DoxyCode}
-26     \{
-27         std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\_mutex\_});
-28         \textcolor{keywordflow}{return} this->\hyperlink{classcl__move__base__z_1_1Pose_a07159b1632042a0292ffcc39995da81e}{pose\_};
-29     \}
+28     \{
+29         std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\_mutex\_});
+30         \textcolor{keywordflow}{return} this->\hyperlink{classcl__move__base__z_1_1Pose_a07159b1632042a0292ffcc39995da81e}{pose\_};
+31     \}
 \end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{classcl__move__base__z_1_1Pose_a6e3d311de54516653d773d9b7eb1d85d_icgraph}
+\end{center}
+\end{figure}
+
+
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}!get\+Reference\+Frame@{get\+Reference\+Frame}}
 \index{get\+Reference\+Frame@{get\+Reference\+Frame}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}}
 \subsubsection[{\texorpdfstring{get\+Reference\+Frame() const }{getReferenceFrame() const }}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string\& cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::get\+Reference\+Frame (
@@ -111,7 +129,7 @@ References m\+\_\+mutex\+\_\+, and pose\+\_\+.
 ) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcl__move__base__z_1_1Pose_aaef18a35d7698fcbf6712149eead8e8d}{}\label{classcl__move__base__z_1_1Pose_aaef18a35d7698fcbf6712149eead8e8d}
 
 
-Definition at line 31 of file cp\+\_\+pose.\+h.
+Definition at line 33 of file cp\+\_\+pose.\+h.
 
 
 
@@ -123,9 +141,9 @@ Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position\
 
 
 \begin{DoxyCode}
-32     \{
-33         \textcolor{keywordflow}{return} \hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_};
-34     \}
+34     \{
+35         \textcolor{keywordflow}{return} \hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_};
+36     \}
 \end{DoxyCode}
 
 
@@ -152,7 +170,7 @@ Implements \hyperlink{classsmacc_1_1ISmaccUpdatable_a84ee0520cbefdb1d412bed54650
 
 
 
-Definition at line 17 of file cp\+\_\+pose.\+cpp.
+Definition at line 45 of file cp\+\_\+pose.\+cpp.
 
 
 
@@ -160,25 +178,86 @@ References m\+\_\+mutex\+\_\+, pose\+\_\+, pose\+Frame\+Name\+\_\+, reference\+F
 
 
 \begin{DoxyCode}
-18 \{
-19     tf::StampedTransform transform;
-20     \textcolor{keywordflow}{try}
-21     \{
-22         this->\hyperlink{classcl__move__base__z_1_1Pose_a6d669632db37e0e51734d2a65e8dcd41}{tfListener\_}.lookupTransform(\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}, 
+46 \{
+47     tf::StampedTransform transform;
+48     \textcolor{keywordflow}{try}
+49     \{
+50         this->\hyperlink{classcl__move__base__z_1_1Pose_a6d669632db37e0e51734d2a65e8dcd41}{tfListener\_}.lookupTransform(\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}, 
       \hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_},
-23                                           ros::Time(0), transform);
-24 
-25         \{
-26             std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\_mutex\_});
-27             tf::poseTFToMsg(transform, this->\hyperlink{classcl__move__base__z_1_1Pose_a07159b1632042a0292ffcc39995da81e}{pose\_});
-28         \}
-29     \}
-30     \textcolor{keywordflow}{catch} (tf::TransformException ex)
-31     \{
-32         ROS\_ERROR\_THROTTLE(1, \textcolor{stringliteral}{"Component pose is failing on pose update: %s"}, ex.what());
-33     \}
-34 \}
+51                                           ros::Time(0), transform);
+52 
+53         \{
+54             std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\_mutex\_});
+55             tf::poseTFToMsg(transform, this->\hyperlink{classcl__move__base__z_1_1Pose_a07159b1632042a0292ffcc39995da81e}{pose\_});
+56         \}
+57     \}
+58     \textcolor{keywordflow}{catch} (tf::TransformException ex)
+59     \{
+60         ROS\_ERROR\_THROTTLE(1, \textcolor{stringliteral}{"Component pose is failing on pose update: %s"}, ex.what());
+61     \}
+62 \}
 \end{DoxyCode}
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}!wait\+Transform\+Update@{wait\+Transform\+Update}}
+\index{wait\+Transform\+Update@{wait\+Transform\+Update}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}}
+\subsubsection[{\texorpdfstring{wait\+Transform\+Update(ros\+::\+Rate r=ros\+::\+Rate(20))}{waitTransformUpdate(ros::Rate r=ros::Rate(20))}}]{\setlength{\rightskip}{0pt plus 5cm}void cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::wait\+Transform\+Update (
+\begin{DoxyParamCaption}
+\item[{ros\+::\+Rate}]{r = {\ttfamily ros\+:\+:Rate(20)}}
+\end{DoxyParamCaption}
+)}\hypertarget{classcl__move__base__z_1_1Pose_a5f8576c3dacfb2f2e7f9df5105c480ea}{}\label{classcl__move__base__z_1_1Pose_a5f8576c3dacfb2f2e7f9df5105c480ea}
+
+
+Definition at line 17 of file cp\+\_\+pose.\+cpp.
+
+
+
+References m\+\_\+mutex\+\_\+, pose\+\_\+, pose\+Frame\+Name\+\_\+, reference\+Frame\+\_\+, and tf\+Listener\+\_\+.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+18 \{
+19     \textcolor{keywordtype}{bool} found = \textcolor{keyword}{false};
+20     \textcolor{keywordflow}{while} (ros::ok() && !found)
+21     \{
+22 
+23         tf::StampedTransform transform;
+24         \textcolor{keywordflow}{try}
+25         \{
+26             this->\hyperlink{classcl__move__base__z_1_1Pose_a6d669632db37e0e51734d2a65e8dcd41}{tfListener\_}.lookupTransform(\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}, 
+      \hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_},
+27                                               ros::Time(0), transform);
+28 
+29             \{
+30                 std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\_mutex\_});
+31                 tf::poseTFToMsg(transform, this->\hyperlink{classcl__move__base__z_1_1Pose_a07159b1632042a0292ffcc39995da81e}{pose\_});
+32                 found = \textcolor{keyword}{true};
+33             \}
+34         \}
+35         \textcolor{keywordflow}{catch} (tf::TransformException ex)
+36         \{
+37             ROS\_ERROR\_THROTTLE(1, \textcolor{stringliteral}{"Component pose is failing on pose update: %s"}, ex.what());
+38         \}
+39 
+40         \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
+41         ros::spinOnce();
+42     \}
+43 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{classcl__move__base__z_1_1Pose_a5f8576c3dacfb2f2e7f9df5105c480ea_icgraph}
+\end{center}
+\end{figure}
+
+
 
 
 \subsection{Member Data Documentation}
@@ -187,55 +266,55 @@ References m\+\_\+mutex\+\_\+, pose\+\_\+, pose\+Frame\+Name\+\_\+, reference\+F
 \subsubsection[{\texorpdfstring{m\+\_\+mutex\+\_\+}{m_mutex_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::mutex cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::m\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{}\label{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}
 
 
-Definition at line 42 of file cp\+\_\+pose.\+h.
+Definition at line 44 of file cp\+\_\+pose.\+h.
 
 
 
-Referenced by get(), and update().
+Referenced by get(), update(), and wait\+Transform\+Update().
 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}!pose\+\_\+@{pose\+\_\+}}
 \index{pose\+\_\+@{pose\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}}
 \subsubsection[{\texorpdfstring{pose\+\_\+}{pose_}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Pose cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::pose\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcl__move__base__z_1_1Pose_a07159b1632042a0292ffcc39995da81e}{}\label{classcl__move__base__z_1_1Pose_a07159b1632042a0292ffcc39995da81e}
 
 
-Definition at line 37 of file cp\+\_\+pose.\+h.
+Definition at line 39 of file cp\+\_\+pose.\+h.
 
 
 
-Referenced by get(), and update().
+Referenced by get(), update(), and wait\+Transform\+Update().
 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}!pose\+Frame\+Name\+\_\+@{pose\+Frame\+Name\+\_\+}}
 \index{pose\+Frame\+Name\+\_\+@{pose\+Frame\+Name\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}}
 \subsubsection[{\texorpdfstring{pose\+Frame\+Name\+\_\+}{poseFrameName_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::pose\+Frame\+Name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{}\label{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}
 
 
-Definition at line 39 of file cp\+\_\+pose.\+h.
+Definition at line 41 of file cp\+\_\+pose.\+h.
 
 
 
-Referenced by update().
+Referenced by update(), and wait\+Transform\+Update().
 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}!reference\+Frame\+\_\+@{reference\+Frame\+\_\+}}
 \index{reference\+Frame\+\_\+@{reference\+Frame\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}}
 \subsubsection[{\texorpdfstring{reference\+Frame\+\_\+}{referenceFrame_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::reference\+Frame\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{}\label{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}
 
 
-Definition at line 40 of file cp\+\_\+pose.\+h.
+Definition at line 42 of file cp\+\_\+pose.\+h.
 
 
 
-Referenced by get\+Reference\+Frame(), and update().
+Referenced by get\+Reference\+Frame(), update(), and wait\+Transform\+Update().
 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}!tf\+Listener\+\_\+@{tf\+Listener\+\_\+}}
 \index{tf\+Listener\+\_\+@{tf\+Listener\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}}
 \subsubsection[{\texorpdfstring{tf\+Listener\+\_\+}{tfListener_}}]{\setlength{\rightskip}{0pt plus 5cm}tf\+::\+Transform\+Listener cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::tf\+Listener\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcl__move__base__z_1_1Pose_a6d669632db37e0e51734d2a65e8dcd41}{}\label{classcl__move__base__z_1_1Pose_a6d669632db37e0e51734d2a65e8dcd41}
 
 
-Definition at line 38 of file cp\+\_\+pose.\+h.
+Definition at line 40 of file cp\+\_\+pose.\+h.
 
 
 
-Referenced by update().
+Referenced by update(), and wait\+Transform\+Update().
 
 
 
