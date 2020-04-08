@@ -11,6 +11,7 @@ var searchData=
   ['periodduration_5f',['periodDuration_',['../classsmacc_1_1ISmaccUpdatable.html#ad02d9798ac5609f3ecb9fb8a46febc18',1,'smacc::ISmaccUpdatable']]],
   ['plan_5f',['plan_',['../classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner.html#a929e5d0a9db3027810beb658a2343560',1,'cl_move_base_z::forward_local_planner::ForwardLocalPlanner']]],
   ['planning_5fscene',['planning_scene',['../classfake__cube__perception__node_1_1FakePerceptionNode.html#a9385fd4c339eeaf1ca269ef9e314bb09',1,'fake_cube_perception_node::FakePerceptionNode']]],
+  ['planningsceneinterface',['planningSceneInterface',['../classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup.html#a26b5c9e0aef1cd67ee977a756b69cf76',1,'sm_moveit::cl_movegroup::ClMoveGroup']]],
   ['planpub_5f',['planPub_',['../classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner.html#a561eab039140948c52ec928c191f3f43',1,'cl_move_base_z::backward_global_planner::BackwardGlobalPlanner::planPub_()'],['../classcl__move__base__z_1_1forward__global__planner_1_1ForwardGlobalPlanner.html#a927dc6a687fac3751033d9736cf8dfcf',1,'cl_move_base_z::forward_global_planner::ForwardGlobalPlanner::planPub_()']]],
   ['pose_5f',['pose_',['../classcl__move__base__z_1_1Pose.html#a07159b1632042a0292ffcc39995da81e',1,'cl_move_base_z::Pose']]],
   ['poseframename_5f',['poseFrameName_',['../classcl__move__base__z_1_1Pose.html#a4f45be8e2fd73e618d815582a4ca8efe',1,'cl_move_base_z::Pose']]],
