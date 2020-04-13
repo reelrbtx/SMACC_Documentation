@@ -41,6 +41,8 @@ virtual std\+::string \hyperlink{classsmacc_1_1ISmaccClient_a20846aabfd1de832aa2
 \item 
 {\footnotesize template$<$typename T\+Component $>$ }\\T\+Component $\ast$ \hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{get\+Component} ()
 \item 
+{\footnotesize template$<$typename T\+Component $>$ }\\T\+Component $\ast$ \hyperlink{classsmacc_1_1ISmaccClient_ad72cba3ce7c5b3bd3977747dc6d5fb69}{get\+Component} (std\+::string name)
+\item 
 {\footnotesize template$<$typename T\+Object\+Tag , typename T\+Derived $>$ }\\void \hyperlink{classsmacc_1_1ISmaccClient_a643285b93f2bd33987e0d0d1a12caf10}{configure\+Event\+Source\+Types} ()
 \item 
 virtual \hyperlink{classsmacc_1_1introspection_1_1TypeInfo_aa6ffd9c39811d59f7c771941b7fad860}{smacc\+::introspection\+::\+Type\+Info\+::\+Ptr} \hyperlink{classsmacc_1_1ISmaccClient_ae7faf4e40510c73810e6b0ef9fec8f33}{get\+Type} ()
@@ -58,6 +60,8 @@ void \hyperlink{classsmacc_1_1ISmaccClient_ac6db21c1ec7072178e9f7c721908e07d}{ge
 \item 
 {\footnotesize template$<$typename Smacc\+Component\+Type , typename T\+Orthogonal , typename T\+Client , typename... T\+Args$>$ }\\Smacc\+Component\+Type $\ast$ \hyperlink{classsmacc_1_1ISmaccClient_ad7eee3b9f331a295508ba0514adf5ad0}{create\+Component} (T\+Args...\+targs)
 \item 
+{\footnotesize template$<$typename Smacc\+Component\+Type , typename T\+Orthogonal , typename T\+Client , typename... T\+Args$>$ }\\Smacc\+Component\+Type $\ast$ \hyperlink{classsmacc_1_1ISmaccClient_af85a9d2af6d5465d3a59162548dc0e10}{create\+Named\+Component} (std\+::string name, T\+Args...\+targs)
+\item 
 void \hyperlink{classsmacc_1_1ISmaccClient_a28fd6ca2bcf9c5e57f3cc16fb0a076d3}{set\+State\+Machine} (\hyperlink{classsmacc_1_1ISmaccStateMachine}{I\+Smacc\+State\+Machine} $\ast$state\+Machine)
 \item 
 void \hyperlink{classsmacc_1_1ISmaccClient_a40330788a976dc08e2f726d210564ec4}{set\+Orthogonal} (\hyperlink{classsmacc_1_1ISmaccOrthogonal}{I\+Smacc\+Orthogonal} $\ast$orthogonal)
@@ -65,7 +69,7 @@ void \hyperlink{classsmacc_1_1ISmaccClient_a40330788a976dc08e2f726d210564ec4}{se
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::map$<$ const std\+::type\+\_\+info $\ast$, std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1ISmaccComponent}{smacc\+::\+I\+Smacc\+Component} $>$ $>$ \hyperlink{classsmacc_1_1ISmaccClient_ab983e85d296c9660f5943c1d511634ce}{components\+\_\+}
+std\+::map$<$ \hyperlink{structsmacc_1_1ComponentKey}{Component\+Key}, std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1ISmaccComponent}{smacc\+::\+I\+Smacc\+Component} $>$ $>$ \hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\+\_\+}
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -84,7 +88,7 @@ class \hyperlink{classsmacc_1_1ISmaccClient_a7205cc84a71fea903124d54d01e99a68}{I
 \subsection{Detailed Description}
 
 
-Definition at line 14 of file smacc\+\_\+client.\+h.
+Definition at line 36 of file smacc\+\_\+client.\+h.
 
 
 
@@ -133,28 +137,12 @@ Definition at line 17 of file client.\+cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classsmacc_1_1ISmaccClient_a643285b93f2bd33987e0d0d1a12caf10}{}\label{classsmacc_1_1ISmaccClient_a643285b93f2bd33987e0d0d1a12caf10}
 
 
-Definition at line 35 of file smacc\+\_\+client.\+h.
-
-
-
-References connect\+Signal(), get\+State\+Machine(), get\+Type(), and requires\+Client().
+Definition at line 60 of file smacc\+\_\+client.\+h.
 
 
 \begin{DoxyCode}
-35 \{\}
+60 \{\}
 \end{DoxyCode}
-
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_a643285b93f2bd33987e0d0d1a12caf10_cgraph}
-\end{center}
-\end{figure}
-
-
 \index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!connect\+Signal@{connect\+Signal}}
 \index{connect\+Signal@{connect\+Signal}!smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}}
 \subsubsection[{\texorpdfstring{connect\+Signal(\+T\+Smacc\+Signal \&signal, void(\+T\+::$\ast$callback)(), T $\ast$object)}{connectSignal(TSmaccSignal &signal, void(T::*callback)(), T *object)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+Smacc\+Signal , typename T $>$ void smacc\+::\+I\+Smacc\+Client\+::connect\+Signal (
@@ -166,22 +154,18 @@ Here is the call graph for this function\+:
 )}\hypertarget{classsmacc_1_1ISmaccClient_addce4ebcdebc5a7a3f80c0980862575d}{}\label{classsmacc_1_1ISmaccClient_addce4ebcdebc5a7a3f80c0980862575d}
 
 
-Definition at line 79 of file smacc\+\_\+client\+\_\+impl.\+h.
+Definition at line 95 of file smacc\+\_\+client\+\_\+impl.\+h.
 
 
 
 References smacc\+::\+I\+Smacc\+State\+Machine\+::create\+Signal\+Connection(), and get\+State\+Machine().
 
 
-
-Referenced by configure\+Event\+Source\+Types().
-
-
 \begin{DoxyCode}
-80 \{
-81     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}{getStateMachine}()->\hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{createSignalConnection}(signal, 
+96 \{
+97     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}{getStateMachine}()->\hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{createSignalConnection}(signal, 
       callback, \textcolor{keywordtype}{object});
-82 \}
+98 \}
 \end{DoxyCode}
 
 
@@ -195,18 +179,6 @@ Here is the call graph for this function\+:
 \end{figure}
 
 
-
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_addce4ebcdebc5a7a3f80c0980862575d_icgraph}
-\end{center}
-\end{figure}
-
-
 \index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!create\+Component@{create\+Component}}
 \index{create\+Component@{create\+Component}!smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}}
 \subsubsection[{\texorpdfstring{create\+Component(\+T\+Args...\+targs)}{createComponent(TArgs...targs)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Smacc\+Component\+Type , typename T\+Orthogonal , typename T\+Client , typename... T\+Args$>$ Smacc\+Component\+Type $\ast$ smacc\+::\+I\+Smacc\+Client\+::create\+Component (
@@ -216,7 +188,41 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classsmacc_1_1ISmaccClient_ad7eee3b9f331a295508ba0514adf5ad0}{}\label{classsmacc_1_1ISmaccClient_ad7eee3b9f331a295508ba0514adf5ad0}
 
 
-Definition at line 48 of file smacc\+\_\+client\+\_\+impl.\+h.
+Definition at line 89 of file smacc\+\_\+client\+\_\+impl.\+h.
+
+
+
+Referenced by smacc\+::\+Client\+Handler$<$ T\+Orthogonal, T\+Client $>$\+::create\+Component().
+
+
+\begin{DoxyCode}
+90 \{
+91     \textcolor{keywordflow}{return} this->createNamedComponent<SmaccComponentType, TOrthogonal, TClient>(std::string(), targs...);
+92 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_ad7eee3b9f331a295508ba0514adf5ad0_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!create\+Named\+Component@{create\+Named\+Component}}
+\index{create\+Named\+Component@{create\+Named\+Component}!smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}}
+\subsubsection[{\texorpdfstring{create\+Named\+Component(std\+::string name, T\+Args...\+targs)}{createNamedComponent(std::string name, TArgs...targs)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Smacc\+Component\+Type , typename T\+Orthogonal , typename T\+Client , typename... T\+Args$>$ Smacc\+Component\+Type $\ast$ smacc\+::\+I\+Smacc\+Client\+::create\+Named\+Component (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name, }
+\item[{T\+Args...}]{targs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classsmacc_1_1ISmaccClient_af85a9d2af6d5465d3a59162548dc0e10}{}\label{classsmacc_1_1ISmaccClient_af85a9d2af6d5465d3a59162548dc0e10}
+
+
+Definition at line 57 of file smacc\+\_\+client\+\_\+impl.\+h.
 
 
 
@@ -224,40 +230,41 @@ References components\+\_\+, and get\+State\+Machine().
 
 
 
-Referenced by sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::\+Cl\+Perception\+System(), and smacc\+::\+Client\+Handler$<$ T\+Orthogonal, T\+Client $>$\+::create\+Component().
+Referenced by smacc\+::\+Client\+Handler$<$ T\+Orthogonal, T\+Client $>$\+::create\+Named\+Component().
 
 
 \begin{DoxyCode}
-49 \{
-50     \textcolor{keyword}{const} std::type\_info *componentkey = &\textcolor{keyword}{typeid}(SmaccComponentType);
-51     std::shared\_ptr<SmaccComponentType> ret;
-52 
-53     \textcolor{keyword}{auto} it = this->\hyperlink{classsmacc_1_1ISmaccClient_ab983e85d296c9660f5943c1d511634ce}{components\_}.find(componentkey);
-54 
-55     \textcolor{keywordflow}{if} (it == this->\hyperlink{classsmacc_1_1ISmaccClient_ab983e85d296c9660f5943c1d511634ce}{components\_}.end())
-56     \{
-57         \textcolor{keyword}{auto} tname = demangledTypeName<SmaccComponentType>();
-58         ROS\_DEBUG(\textcolor{stringliteral}{"%s smacc component is required. Creating a new instance."}, tname.c\_str());
-59 
-60         ret = std::shared\_ptr<SmaccComponentType>(\textcolor{keyword}{new} SmaccComponentType(targs...));
-61         ret->setStateMachine(this->\hyperlink{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}{getStateMachine}());
-62         ret->initialize(\textcolor{keyword}{this});
-63         
-64         this->\hyperlink{classsmacc_1_1ISmaccClient_ab983e85d296c9660f5943c1d511634ce}{components\_}[componentkey] = ret; \textcolor{comment}{//
+58 \{
+59     ComponentKey componentkey(&\textcolor{keyword}{typeid}(SmaccComponentType), name);
+60 
+61     std::shared\_ptr<SmaccComponentType> ret;
+62 
+63     \textcolor{keyword}{auto} it = this->\hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_}.find(componentkey);
+64 
+65     \textcolor{keywordflow}{if} (it == this->\hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_}.end())
+66     \{
+67         \textcolor{keyword}{auto} tname = demangledTypeName<SmaccComponentType>();
+68         ROS\_DEBUG(\textcolor{stringliteral}{"%s smacc component is required. Creating a new instance."}, tname.c\_str());
+69 
+70         ret = std::shared\_ptr<SmaccComponentType>(\textcolor{keyword}{new} SmaccComponentType(targs...));
+71         ret->setStateMachine(this->\hyperlink{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}{getStateMachine}());
+72         ret->initialize(\textcolor{keyword}{this});
+73 
+74         this->\hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_}[componentkey] = ret; \textcolor{comment}{//
       std::dynamic\_pointer\_cast<smacc::ISmaccComponent>(ret);}
-65         ROS\_DEBUG(\textcolor{stringliteral}{"%s resource is required. Done."}, tname.c\_str());
-66     \}
-67     \textcolor{keywordflow}{else}
-68     \{
-69         ROS\_DEBUG(\textcolor{stringliteral}{"%s resource is required. Found resource in cache."}, 
+75         ROS\_DEBUG(\textcolor{stringliteral}{"%s resource is required. Done."}, tname.c\_str());
+76     \}
+77     \textcolor{keywordflow}{else}
+78     \{
+79         ROS\_DEBUG(\textcolor{stringliteral}{"%s resource is required. Found resource in cache."}, 
       demangledTypeName<SmaccComponentType>().c\_str());
-70         ret = dynamic\_pointer\_cast<SmaccComponentType>(it->second);
-71     \}
-72 
-73     ret->template configureEventSourceTypes<TOrthogonal, TClient>();
-74 
-75     \textcolor{keywordflow}{return} ret.get();
-76 \}
+80         ret = dynamic\_pointer\_cast<SmaccComponentType>(it->second);
+81     \}
+82 
+83     ret->template configureEventSourceTypes<TOrthogonal, TClient>();
+84 
+85     \textcolor{keywordflow}{return} ret.get();
+86 \}
 \end{DoxyCode}
 
 
@@ -266,7 +273,7 @@ Here is the call graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=348pt]{classsmacc_1_1ISmaccClient_ad7eee3b9f331a295508ba0514adf5ad0_cgraph}
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_af85a9d2af6d5465d3a59162548dc0e10_cgraph}
 \end{center}
 \end{figure}
 
@@ -278,7 +285,7 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_ad7eee3b9f331a295508ba0514adf5ad0_icgraph}
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_af85a9d2af6d5465d3a59162548dc0e10_icgraph}
 \end{center}
 \end{figure}
 
@@ -296,26 +303,13 @@ Definition at line 27 of file smacc\+\_\+client\+\_\+impl.\+h.
 
 
 
-References components\+\_\+.
-
-
-
 Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position\+::go\+To\+Radial\+Start(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::f\+\_\+pattern\+\_\+states\+::\+Sti\+F\+Pattern\+Start\+Loop$<$ Ss\+F\+Pattern1 $>$\+::loop\+Condition(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Rotate\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Backwards\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Forward\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::on\+Exit(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::radial\+\_\+motion\+\_\+states\+::\+Sti\+Radial\+End\+Point\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Forward2\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Forward4\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::f\+\_\+pattern\+\_\+states\+::\+Sti\+F\+Pattern\+Forward1$<$ S\+S $>$\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::\+St\+Navigate\+To\+Waypoints\+X\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+::\+St\+Navigate\+To\+Waypoints\+X\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::\+S\+S5\+::\+Ss\+S\+Pattern1\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::\+S\+S4\+::\+Ss\+F\+Pattern1\+::runtime\+Configure(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Waypoint\+Navigator\+::send\+Next\+Goal().
 
 
 \begin{DoxyCode}
 28 \{
-29     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &component : \hyperlink{classsmacc_1_1ISmaccClient_ab983e85d296c9660f5943c1d511634ce}{components\_})
-30     \{
-31         \textcolor{keyword}{auto} *tcomponent = \textcolor{keyword}{dynamic\_cast<}TComponent *\textcolor{keyword}{>}(component.second.get());
-32         \textcolor{keywordflow}{if} (tcomponent != \textcolor{keyword}{nullptr})
-33         \{
-34             \textcolor{keywordflow}{return} tcomponent;
-35         \}
-36     \}
-37 
-38     \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
-39 \}
+29     \textcolor{keywordflow}{return} this->getComponent<TComponent>(std::string());
+30 \}
 \end{DoxyCode}
 
 
@@ -329,6 +323,39 @@ Here is the caller graph for this function\+:
 \end{figure}
 
 
+\index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!get\+Component@{get\+Component}}
+\index{get\+Component@{get\+Component}!smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}}
+\subsubsection[{\texorpdfstring{get\+Component(std\+::string name)}{getComponent(std::string name)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T\+Component $>$ T\+Component $\ast$ smacc\+::\+I\+Smacc\+Client\+::get\+Component (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{classsmacc_1_1ISmaccClient_ad72cba3ce7c5b3bd3977747dc6d5fb69}{}\label{classsmacc_1_1ISmaccClient_ad72cba3ce7c5b3bd3977747dc6d5fb69}
+
+
+Definition at line 33 of file smacc\+\_\+client\+\_\+impl.\+h.
+
+
+
+References components\+\_\+.
+
+
+\begin{DoxyCode}
+34 \{
+35     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &component : \hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_})
+36     \{
+37         \textcolor{keywordflow}{if} (component.first.name != name)
+38             \textcolor{keywordflow}{continue};
+39 
+40         \textcolor{keyword}{auto} *tcomponent = \textcolor{keyword}{dynamic\_cast<}TComponent *\textcolor{keyword}{>}(component.second.get());
+41         \textcolor{keywordflow}{if} (tcomponent != \textcolor{keyword}{nullptr})
+42         \{
+43             \textcolor{keywordflow}{return} tcomponent;
+44         \}
+45     \}
+46 
+47     \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+48 \}
+\end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!get\+Components@{get\+Components}}
 \index{get\+Components@{get\+Components}!smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}}
 \subsubsection[{\texorpdfstring{get\+Components(std\+::vector$<$ std\+::shared\+\_\+ptr$<$ I\+Smacc\+Component $>$$>$ \&components)}{getComponents(std::vector< std::shared_ptr< ISmaccComponent >> &components)}}]{\setlength{\rightskip}{0pt plus 5cm}void smacc\+::\+I\+Smacc\+Client\+::get\+Components (
@@ -338,20 +365,16 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classsmacc_1_1ISmaccClient_ac6db21c1ec7072178e9f7c721908e07d}{}\label{classsmacc_1_1ISmaccClient_ac6db21c1ec7072178e9f7c721908e07d}
 
 
-Definition at line 47 of file smacc\+\_\+client.\+h.
-
-
-
-References components\+\_\+.
+Definition at line 72 of file smacc\+\_\+client.\+h.
 
 
 \begin{DoxyCode}
-48     \{
-49         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &ce : \hyperlink{classsmacc_1_1ISmaccClient_ab983e85d296c9660f5943c1d511634ce}{components\_})
-50         \{
-51             components.push\_back(ce.second);
-52         \}
-53     \}
+73     \{
+74         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &ce : \hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_})
+75         \{
+76             components.push\_back(ce.second);
+77         \}
+78     \}
 \end{DoxyCode}
 \index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!get\+Name@{get\+Name}}
 \index{get\+Name@{get\+Name}!smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}}
@@ -416,7 +439,7 @@ Here is the caller graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}{}\label{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}
 
 
-Definition at line 42 of file smacc\+\_\+client\+\_\+impl.\+h.
+Definition at line 51 of file smacc\+\_\+client\+\_\+impl.\+h.
 
 
 
@@ -424,13 +447,13 @@ References state\+Machine\+\_\+.
 
 
 
-Referenced by configure\+Event\+Source\+Types(), connect\+Signal(), and create\+Component().
+Referenced by connect\+Signal(), and create\+Named\+Component().
 
 
 \begin{DoxyCode}
-43 \{
-44     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}{stateMachine\_};
-45 \}
+52 \{
+53     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}{stateMachine\_};
+54 \}
 \end{DoxyCode}
 
 
@@ -460,10 +483,6 @@ Definition at line 41 of file client.\+cpp.
 References smacc\+::introspection\+::\+Type\+Info\+::get\+From\+Std\+Type\+Info().
 
 
-
-Referenced by configure\+Event\+Source\+Types().
-
-
 \begin{DoxyCode}
 42 \{
 43     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1introspection_1_1TypeInfo_ada1e604cd8bf968a5f816fbace4af881}{smacc::introspection::TypeInfo::getFromStdTypeInfo}
@@ -478,18 +497,6 @@ Here is the call graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_ae7faf4e40510c73810e6b0ef9fec8f33_cgraph}
-\end{center}
-\end{figure}
-
-
-
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_ae7faf4e40510c73810e6b0ef9fec8f33_icgraph}
 \end{center}
 \end{figure}
 
@@ -589,21 +596,17 @@ Here is the call graph for this function\+:
 )}\hypertarget{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520}{}\label{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520}
 
 
-Definition at line 85 of file smacc\+\_\+client\+\_\+impl.\+h.
+Definition at line 101 of file smacc\+\_\+client\+\_\+impl.\+h.
 
 
 
 References orthogonal\+\_\+, and smacc\+::\+I\+Smacc\+Orthogonal\+::requires\+Client().
 
 
-
-Referenced by configure\+Event\+Source\+Types().
-
-
 \begin{DoxyCode}
-86 \{
-87     this->\hyperlink{classsmacc_1_1ISmaccClient_a571c7f672d9c90128b5498aefc27c136}{orthogonal\_}->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a602e16b09f8a1b3de889f2f3d90a3211}{requiresClient}(storage);
-88 \}
+102 \{
+103     this->\hyperlink{classsmacc_1_1ISmaccClient_a571c7f672d9c90128b5498aefc27c136}{orthogonal\_}->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a602e16b09f8a1b3de889f2f3d90a3211}{requiresClient}(storage);
+104 \}
 \end{DoxyCode}
 
 
@@ -613,18 +616,6 @@ Here is the call graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520_cgraph}
-\end{center}
-\end{figure}
-
-
-
-
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520_icgraph}
 \end{center}
 \end{figure}
 
@@ -711,28 +702,28 @@ Here is the caller graph for this function\+:
 \subsubsection[{\texorpdfstring{I\+Smacc\+Orthogonal}{ISmaccOrthogonal}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf I\+Smacc\+Orthogonal}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classsmacc_1_1ISmaccClient_a7205cc84a71fea903124d54d01e99a68}{}\label{classsmacc_1_1ISmaccClient_a7205cc84a71fea903124d54d01e99a68}
 
 
-Definition at line 72 of file smacc\+\_\+client.\+h.
+Definition at line 100 of file smacc\+\_\+client.\+h.
 
 
 
 \subsection{Member Data Documentation}
 \index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!components\+\_\+@{components\+\_\+}}
 \index{components\+\_\+@{components\+\_\+}!smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}}
-\subsubsection[{\texorpdfstring{components\+\_\+}{components_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<$const std\+::type\+\_\+info $\ast$, std\+::shared\+\_\+ptr$<${\bf smacc\+::\+I\+Smacc\+Component}$>$ $>$ smacc\+::\+I\+Smacc\+Client\+::components\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classsmacc_1_1ISmaccClient_ab983e85d296c9660f5943c1d511634ce}{}\label{classsmacc_1_1ISmaccClient_ab983e85d296c9660f5943c1d511634ce}
+\subsubsection[{\texorpdfstring{components\+\_\+}{components_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::map$<${\bf Component\+Key}, std\+::shared\+\_\+ptr$<${\bf smacc\+::\+I\+Smacc\+Component}$>$ $>$ smacc\+::\+I\+Smacc\+Client\+::components\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{}\label{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}
 
 
-Definition at line 57 of file smacc\+\_\+client.\+h.
+Definition at line 82 of file smacc\+\_\+client.\+h.
 
 
 
-Referenced by create\+Component(), get\+Component(), and get\+Components().
+Referenced by create\+Named\+Component(), and get\+Component().
 
 \index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!orthogonal\+\_\+@{orthogonal\+\_\+}}
 \index{orthogonal\+\_\+@{orthogonal\+\_\+}!smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}}
 \subsubsection[{\texorpdfstring{orthogonal\+\_\+}{orthogonal_}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\+Smacc\+Orthogonal}$\ast$ smacc\+::\+I\+Smacc\+Client\+::orthogonal\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classsmacc_1_1ISmaccClient_a571c7f672d9c90128b5498aefc27c136}{}\label{classsmacc_1_1ISmaccClient_a571c7f672d9c90128b5498aefc27c136}
 
 
-Definition at line 70 of file smacc\+\_\+client.\+h.
+Definition at line 98 of file smacc\+\_\+client.\+h.
 
 
 
@@ -743,7 +734,7 @@ Referenced by requires\+Client(), and set\+Orthogonal().
 \subsubsection[{\texorpdfstring{state\+Machine\+\_\+}{stateMachine_}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\+Smacc\+State\+Machine}$\ast$ smacc\+::\+I\+Smacc\+Client\+::state\+Machine\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}{}\label{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}
 
 
-Definition at line 69 of file smacc\+\_\+client.\+h.
+Definition at line 97 of file smacc\+\_\+client.\+h.
 
 
 

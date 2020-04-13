@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['decissionscount',['decissionsCount',['../classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem.html#ab8272ccb5af7401beeb4e9eaf1d86fa3',1,'sm_moveit::cl_perception_system::ClPerceptionSystem']]],
   ['default',['default',['../namespacegenerate__debs.html#a3d67a92b7eb3a59c397dc9fdd1c67558',1,'generate_debs']]],
   ['deferedeventpropagation',['deferedEventPropagation',['../classcl__multirole__sensor_1_1CbDefaultMultiRoleSensorBehavior.html#a18f86fd2fd9c3575b62a2c58953b7d33',1,'cl_multirole_sensor::CbDefaultMultiRoleSensorBehavior']]],
   ['deferedpublishfn',['deferedPublishFn',['../classcl__ros__publisher_1_1CbDefaultPublishLoop.html#ac0044704637edbd8f79a69d5b06de9ba',1,'cl_ros_publisher::CbDefaultPublishLoop::deferedPublishFn()'],['../classcl__ros__publisher_1_1CbPublishOnce.html#a6222a91fb87cd3118ca9f84ff857c696',1,'cl_ros_publisher::CbPublishOnce::deferedPublishFn()']]],
@@ -8,6 +9,8 @@ var searchData=
   ['desired_5fglobal_5fplanner_5f',['desired_global_planner_',['../classcl__move__base__z_1_1PlannerSwitcher.html#aef047d3778b2993c1df146bbad43e03d',1,'cl_move_base_z::PlannerSwitcher']]],
   ['desired_5flocal_5fplanner_5f',['desired_local_planner_',['../classcl__move__base__z_1_1PlannerSwitcher.html#a6cbf65f11bb69125f913caaabdf7b4cf',1,'cl_move_base_z::PlannerSwitcher']]],
   ['destinystate',['destinyState',['../structsmacc_1_1introspection_1_1SmaccTransitionInfo.html#a041f159a4cd56cfbc005765d093d0d4a',1,'smacc::introspection::SmaccTransitionInfo']]],
+  ['detectedcubepose0',['detectedCubePose0',['../classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem.html#a4bf0838041a73d41008c2cb2daa6fb63',1,'sm_moveit::cl_perception_system::ClPerceptionSystem']]],
+  ['detectedcubepose1',['detectedCubePose1',['../classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem.html#ae09f06cb609d0a233fa9a0d31dcb09c6',1,'sm_moveit::cl_perception_system::ClPerceptionSystem']]],
   ['devicereportsrv',['deviceReportSrv',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#a905c9403005198bb4dd62918721b7d10',1,'cl_microstrain_mips::ClMicrostainMips']]],
   ['direct',['DIRECT',['../LICENSE_8txt.html#a34cac86a32266331f931bceaa138a96d',1,'LICENSE.txt']]],
   ['disablereq',['disableReq',['../classcl__move__base__z_1_1CostmapProxy.html#a798847a9ee787134e26326edc574020f',1,'cl_move_base_z::CostmapProxy']]],

@@ -11,7 +11,7 @@ Inheritance diagram for sm\+\_\+moveit\+:\+:cl\+\_\+perception\+\_\+system\+:\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=247pt]{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem__inherit__graph}
+\includegraphics[width=350pt]{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -30,6 +30,31 @@ Collaboration diagram for sm\+\_\+moveit\+:\+:cl\+\_\+perception\+\_\+system\+:\
 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4b639b726c3ce5dedcf76b2d27af337b}{Cl\+Perception\+System} ()
 \item 
 virtual \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab2ebdb3a000c537ea5d38872c9fcc75b}{$\sim$\+Cl\+Perception\+System} ()
+\item 
+virtual void \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_aaefca9001d3836655d38ee92621c013e}{update} () override
+\item 
+geometry\+\_\+msgs\+::\+Pose\+Stamped \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a334b3cd8a7172d4b55ff712bfa30069b}{decide\+Place\+Pose} (int cube\+Index, int table\+Index)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcl__move__base__z_1_1Pose}{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose} $\ast$ \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4bf0838041a73d41008c2cb2daa6fb63}{detected\+Cube\+Pose0}
+\item 
+\hyperlink{classcl__move__base__z_1_1Pose}{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose} $\ast$ \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ae09f06cb609d0a233fa9a0d31dcb09c6}{detected\+Cube\+Pose1}
+\item 
+boost\+::optional$<$ geometry\+\_\+msgs\+::\+Pose\+Stamped $>$ \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}{original\+Cube0\+Pose}
+\item 
+boost\+::optional$<$ geometry\+\_\+msgs\+::\+Pose\+Stamped $>$ \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{original\+Cube1\+Pose}
+\item 
+boost\+::optional$<$ geometry\+\_\+msgs\+::\+Pose\+Stamped $>$ \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}{cube1\+Destination\+In\+Table0}
+\item 
+boost\+::optional$<$ geometry\+\_\+msgs\+::\+Pose\+Stamped $>$ \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab84bbc2d5e5a7ef7839a0ade56942679}{cube0\+Destination\+In\+Table1}
+\item 
+ros\+::\+Time \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a115fa9b61255bafa00931484f60d993a}{start\+Time}
+\item 
+ros\+::\+Duration \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a9aa5caee6cc5bfbbba2717d2073ead39}{read\+Delay}
+\item 
+int \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8272ccb5af7401beeb4e9eaf1d86fa3}{decissions\+Count}
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -51,31 +76,16 @@ Definition at line 9 of file cl\+\_\+perception\+\_\+system.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4b639b726c3ce5dedcf76b2d27af337b}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4b639b726c3ce5dedcf76b2d27af337b}
 
 
-Definition at line 13 of file cl\+\_\+perception\+\_\+system.\+h.
-
-
-
-References smacc\+::\+I\+Smacc\+Client\+::create\+Component().
+Definition at line 26 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 \begin{DoxyCode}
-14         : \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4b639b726c3ce5dedcf76b2d27af337b}{ClPerceptionSystem}()
-15     \{
-16         this->\hyperlink{classsmacc_1_1ISmaccClient_ad7eee3b9f331a295508ba0514adf5ad0}{createComponent}<
-17     \}
+27     \{
+28         \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a115fa9b61255bafa00931484f60d993a}{startTime} = ros::Time::now();
+29         \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a9aa5caee6cc5bfbbba2717d2073ead39}{readDelay} = ros::Duration(5);
+30         \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8272ccb5af7401beeb4e9eaf1d86fa3}{decissionsCount} = 0;
+31     \}
 \end{DoxyCode}
-
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4b639b726c3ce5dedcf76b2d27af337b_cgraph}
-\end{center}
-\end{figure}
-
-
 \index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!````~Cl\+Perception\+System@{$\sim$\+Cl\+Perception\+System}}
 \index{````~Cl\+Perception\+System@{$\sim$\+Cl\+Perception\+System}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
 \subsubsection[{\texorpdfstring{$\sim$\+Cl\+Perception\+System()}{~ClPerceptionSystem()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::$\sim$\+Cl\+Perception\+System (
@@ -85,13 +95,224 @@ Here is the call graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab2ebdb3a000c537ea5d38872c9fcc75b}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab2ebdb3a000c537ea5d38872c9fcc75b}
 
 
-Definition at line 19 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 33 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 \begin{DoxyCode}
-20     \{
-21     \}
+34     \{
+35     \}
 \end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!decide\+Place\+Pose@{decide\+Place\+Pose}}
+\index{decide\+Place\+Pose@{decide\+Place\+Pose}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection[{\texorpdfstring{decide\+Place\+Pose(int cube\+Index, int table\+Index)}{decidePlacePose(int cubeIndex, int tableIndex)}}]{\setlength{\rightskip}{0pt plus 5cm}geometry\+\_\+msgs\+::\+Pose\+Stamped sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::decide\+Place\+Pose (
+\begin{DoxyParamCaption}
+\item[{int}]{cube\+Index, }
+\item[{int}]{table\+Index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a334b3cd8a7172d4b55ff712bfa30069b}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a334b3cd8a7172d4b55ff712bfa30069b}
+
+
+Definition at line 68 of file cl\+\_\+perception\+\_\+system.\+h.
+
+
+
+References cube0\+Destination\+In\+Table1, cube1\+Destination\+In\+Table0, original\+Cube0\+Pose, and original\+Cube1\+Pose.
+
+
+\begin{DoxyCode}
+69     \{
+70         \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8272ccb5af7401beeb4e9eaf1d86fa3}{decissionsCount}++;
+71         \textcolor{keywordflow}{if} (tableIndex == 0)
+72         \{
+73             \textcolor{keywordflow}{if} (cubeIndex == 0)
+74             \{
+75                 \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8272ccb5af7401beeb4e9eaf1d86fa3}{decissionsCount} % 2 == 0)
+76                     \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}{originalCube0Pose};
+77                 \textcolor{keywordflow}{else}
+78                     \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}{cube1DestinationInTable0};
+79             \}
+80             \textcolor{keywordflow}{else}
+81             \{
+82                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}{cube1DestinationInTable0};
+83             \}
+84         \}
+85         \textcolor{keywordflow}{else}
+86         \{
+87             \textcolor{keywordflow}{if} (cubeIndex == 0)
+88             \{
+89                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab84bbc2d5e5a7ef7839a0ade56942679}{cube0DestinationInTable1};
+90             \}
+91             \textcolor{keywordflow}{else}
+92             \{
+93                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose};
+94             \}
+95         \}
+96     \}
+\end{DoxyCode}
+\index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!update@{update}}
+\index{update@{update}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection[{\texorpdfstring{update() override}{update() override}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_aaefca9001d3836655d38ee92621c013e}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_aaefca9001d3836655d38ee92621c013e}
+
+
+Implements \hyperlink{classsmacc_1_1ISmaccUpdatable_a84ee0520cbefdb1d412bed54650b028e}{smacc\+::\+I\+Smacc\+Updatable}.
+
+
+
+Definition at line 37 of file cl\+\_\+perception\+\_\+system.\+h.
+
+
+
+References cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::is\+Initialized, original\+Cube0\+Pose, original\+Cube1\+Pose, read\+Delay, start\+Time, and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::to\+Pose\+Stamped\+Msg().
+
+
+\begin{DoxyCode}
+38     \{
+39         \textcolor{keyword}{auto} ellapsed = ros::Time::now() - \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a115fa9b61255bafa00931484f60d993a}{startTime};
+40         \textcolor{keywordtype}{bool} applyUpdate = ellapsed > \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a9aa5caee6cc5bfbbba2717d2073ead39}{readDelay};
+41 
+42         \textcolor{keywordflow}{if} (applyUpdate)
+43         \{
+44             \textcolor{keywordflow}{if} (!\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}{originalCube0Pose} && \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4bf0838041a73d41008c2cb2daa6fb63}{detectedCubePose0}->
+      \hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized})
+45             \{
+46                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}{originalCube0Pose} = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4bf0838041a73d41008c2cb2daa6fb63}{detectedCubePose0}->
+      \hyperlink{classcl__move__base__z_1_1Pose_a63887a88c1ac6e9a4a71b8d7d11aed6c}{toPoseStampedMsg}();
+47 
+48                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}{cube1DestinationInTable0} = *
+      \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}{originalCube0Pose};
+49                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}{cube1DestinationInTable0}->pose.position.y += 0.3;
+50                 \textcolor{comment}{//cube1DestinationInTable0->pose.position.x -= 0.15;}
+51 
+52                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[Perception system] Original Cube 0 Pose captured"} << 
+      \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}{originalCube0Pose}->pose);
+53             \}
+54 
+55             \textcolor{keywordflow}{if} (!\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose} && \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ae09f06cb609d0a233fa9a0d31dcb09c6}{detectedCubePose1}->
+      \hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized})
+56             \{
+57                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose} = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ae09f06cb609d0a233fa9a0d31dcb09c6}{detectedCubePose1}->
+      \hyperlink{classcl__move__base__z_1_1Pose_a63887a88c1ac6e9a4a71b8d7d11aed6c}{toPoseStampedMsg}();
+58 
+59                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab84bbc2d5e5a7ef7839a0ade56942679}{cube0DestinationInTable1} = *
+      \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose};
+60                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab84bbc2d5e5a7ef7839a0ade56942679}{cube0DestinationInTable1}->pose.position.y += 0.3;
+61                 \textcolor{comment}{//cube0DestinationInTable1->pose.position.x -= 0.15;}
+62 
+63                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[Perception system] Original Cube 1 Pose captured"} << 
+      \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose}->pose);
+64             \}
+65         \}
+66     \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_aaefca9001d3836655d38ee92621c013e_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!cube0\+Destination\+In\+Table1@{cube0\+Destination\+In\+Table1}}
+\index{cube0\+Destination\+In\+Table1@{cube0\+Destination\+In\+Table1}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection[{\texorpdfstring{cube0\+Destination\+In\+Table1}{cube0DestinationInTable1}}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::optional$<$geometry\+\_\+msgs\+::\+Pose\+Stamped$>$ sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::cube0\+Destination\+In\+Table1}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab84bbc2d5e5a7ef7839a0ade56942679}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab84bbc2d5e5a7ef7839a0ade56942679}
+
+
+Definition at line 19 of file cl\+\_\+perception\+\_\+system.\+h.
+
+
+
+Referenced by decide\+Place\+Pose().
+
+\index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!cube1\+Destination\+In\+Table0@{cube1\+Destination\+In\+Table0}}
+\index{cube1\+Destination\+In\+Table0@{cube1\+Destination\+In\+Table0}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection[{\texorpdfstring{cube1\+Destination\+In\+Table0}{cube1DestinationInTable0}}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::optional$<$geometry\+\_\+msgs\+::\+Pose\+Stamped$>$ sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::cube1\+Destination\+In\+Table0}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}
+
+
+Definition at line 18 of file cl\+\_\+perception\+\_\+system.\+h.
+
+
+
+Referenced by decide\+Place\+Pose().
+
+\index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!decissions\+Count@{decissions\+Count}}
+\index{decissions\+Count@{decissions\+Count}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection[{\texorpdfstring{decissions\+Count}{decissionsCount}}]{\setlength{\rightskip}{0pt plus 5cm}int sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::decissions\+Count}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8272ccb5af7401beeb4e9eaf1d86fa3}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8272ccb5af7401beeb4e9eaf1d86fa3}
+
+
+Definition at line 24 of file cl\+\_\+perception\+\_\+system.\+h.
+
+\index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!detected\+Cube\+Pose0@{detected\+Cube\+Pose0}}
+\index{detected\+Cube\+Pose0@{detected\+Cube\+Pose0}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection[{\texorpdfstring{detected\+Cube\+Pose0}{detectedCubePose0}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}$\ast$ sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::detected\+Cube\+Pose0}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4bf0838041a73d41008c2cb2daa6fb63}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4bf0838041a73d41008c2cb2daa6fb63}
+
+
+Definition at line 12 of file cl\+\_\+perception\+\_\+system.\+h.
+
+\index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!detected\+Cube\+Pose1@{detected\+Cube\+Pose1}}
+\index{detected\+Cube\+Pose1@{detected\+Cube\+Pose1}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection[{\texorpdfstring{detected\+Cube\+Pose1}{detectedCubePose1}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}$\ast$ sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::detected\+Cube\+Pose1}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ae09f06cb609d0a233fa9a0d31dcb09c6}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ae09f06cb609d0a233fa9a0d31dcb09c6}
+
+
+Definition at line 13 of file cl\+\_\+perception\+\_\+system.\+h.
+
+\index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!original\+Cube0\+Pose@{original\+Cube0\+Pose}}
+\index{original\+Cube0\+Pose@{original\+Cube0\+Pose}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection[{\texorpdfstring{original\+Cube0\+Pose}{originalCube0Pose}}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::optional$<$geometry\+\_\+msgs\+::\+Pose\+Stamped$>$ sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::original\+Cube0\+Pose}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}
+
+
+Definition at line 15 of file cl\+\_\+perception\+\_\+system.\+h.
+
+
+
+Referenced by decide\+Place\+Pose(), and update().
+
+\index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!original\+Cube1\+Pose@{original\+Cube1\+Pose}}
+\index{original\+Cube1\+Pose@{original\+Cube1\+Pose}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection[{\texorpdfstring{original\+Cube1\+Pose}{originalCube1Pose}}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::optional$<$geometry\+\_\+msgs\+::\+Pose\+Stamped$>$ sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::original\+Cube1\+Pose}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}
+
+
+Definition at line 16 of file cl\+\_\+perception\+\_\+system.\+h.
+
+
+
+Referenced by decide\+Place\+Pose(), and update().
+
+\index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!read\+Delay@{read\+Delay}}
+\index{read\+Delay@{read\+Delay}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection[{\texorpdfstring{read\+Delay}{readDelay}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Duration sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::read\+Delay}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a9aa5caee6cc5bfbbba2717d2073ead39}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a9aa5caee6cc5bfbbba2717d2073ead39}
+
+
+Definition at line 22 of file cl\+\_\+perception\+\_\+system.\+h.
+
+
+
+Referenced by update().
+
+\index{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!start\+Time@{start\+Time}}
+\index{start\+Time@{start\+Time}!sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection[{\texorpdfstring{start\+Time}{startTime}}]{\setlength{\rightskip}{0pt plus 5cm}ros\+::\+Time sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::start\+Time}\hypertarget{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a115fa9b61255bafa00931484f60d993a}{}\label{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a115fa9b61255bafa00931484f60d993a}
+
+
+Definition at line 21 of file cl\+\_\+perception\+\_\+system.\+h.
+
+
+
+Referenced by update().
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
