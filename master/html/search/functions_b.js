@@ -8,6 +8,7 @@ var searchData=
   ['messagecallback',['messageCallback',['../classsmacc_1_1components_1_1CpTopicSubscriber.html#af1b8b4e1c2fe22ac3ea2968a9a957d8f',1,'smacc::components::CpTopicSubscriber::messageCallback()'],['../classsmacc_1_1client__bases_1_1SmaccSubscriberClient.html#acf85b80439aff5cf2bfa0649e9e45654',1,'smacc::client_bases::SmaccSubscriberClient::messageCallback()']]],
   ['messagecallbackstoredistancetowall',['MessageCallbackStoreDistanceToWall',['../classsm__dance__bot__strikes__back_1_1cl__lidar_1_1CpLidarSensorData.html#aefe481c1441305a6adf5266c49d941a4',1,'sm_dance_bot_strikes_back::cl_lidar::CpLidarSensorData']]],
   ['moveendefectortopose',['moveEndEfectorToPose',['../classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup.html#a63291ecb539af417046c2bcb1227aebf',1,'sm_moveit::cl_movegroup::ClMoveGroup']]],
+  ['moverelative',['moveRelative',['../classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup.html#ad0352e787798f020d24ba9c1c58413bb',1,'sm_moveit::cl_movegroup::ClMoveGroup']]],
   ['moverelativecartesian',['moveRelativeCartesian',['../classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup.html#ad5ca2f92076405346319aa20e5d4dffb',1,'sm_moveit::cl_movegroup::ClMoveGroup']]],
   ['movetoabsolutepose',['moveToAbsolutePose',['../classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup.html#a6b85fe06800db92b08346603e5d2eabb',1,'sm_moveit::cl_movegroup::ClMoveGroup']]],
   ['my_5fcontext',['my_context',['../structsmacc_1_1SmaccState_1_1my__context.html#af9c11c27b17bbf7de0d4e21c87d49f6f',1,'smacc::SmaccState::my_context']]]

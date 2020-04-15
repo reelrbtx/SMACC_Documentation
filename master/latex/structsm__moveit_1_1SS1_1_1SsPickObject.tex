@@ -27,12 +27,14 @@ Collaboration diagram for sm\+\_\+moveit\+:\+:S\+S1\+:\+:Ss\+Pick\+Object\+:
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef mpl\+::list$<$ Transition$<$ Ev\+Sequence\+Finished$<$ S\+S1\+::\+St\+Grasp\+Retreat $>$, \hyperlink{structsm__moveit_1_1SS2_1_1SsPlaceObject}{S\+S2\+::\+Ss\+Place\+Object},E\+N\+D\+L\+O\+OP $>$ $>$ \hyperlink{structsm__moveit_1_1SS1_1_1SsPickObject_a09ca288c69453a5d565bde88ec871ff9}{reactions}
+typedef mpl\+::list$<$ Transition$<$ Ev\+Sequence\+Finished$<$ S\+S1\+::\+St\+Navigation\+Posture $>$, \hyperlink{structsm__moveit_1_1StRotate180}{St\+Rotate180},\hyperlink{classSUCCESS}{S\+U\+C\+C\+E\+SS} $>$ $>$ \hyperlink{structsm__moveit_1_1SS1_1_1SsPickObject_a2d0c00287bd2081d8c92495ef5227e5e}{reactions}
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{structsm__moveit_1_1SS1_1_1SsPickObject_acb8cbbad6e452a98ff2ccf93a6bdd1a4}{runtime\+Configure} ()
+\item 
+void \hyperlink{structsm__moveit_1_1SS1_1_1SsPickObject_aa5ad4c6436b70a13b27a45936876374c}{on\+Moveit\+Error} ()
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -45,14 +47,14 @@ static void \hyperlink{structsm__moveit_1_1SS1_1_1SsPickObject_ab589ae81913b79dd
 \subsection{Detailed Description}
 
 
-Definition at line 19 of file ss\+\_\+pick\+\_\+object.\+h.
+Definition at line 20 of file ss\+\_\+pick\+\_\+object.\+h.
 
 
 
 \subsection{Member Typedef Documentation}
 \index{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object@{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object}!reactions@{reactions}}
 \index{reactions@{reactions}!sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object@{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object}}
-\subsubsection[{\texorpdfstring{reactions}{reactions}}]{\setlength{\rightskip}{0pt plus 5cm}typedef mpl\+::list$<$ Transition$<$Ev\+Sequence\+Finished$<$S\+S1\+::\+St\+Grasp\+Retreat$>$ , {\bf S\+S2\+::\+Ss\+Place\+Object} ,E\+N\+D\+L\+O\+OP$>$ $>$ {\bf sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object\+::reactions}}\hypertarget{structsm__moveit_1_1SS1_1_1SsPickObject_a09ca288c69453a5d565bde88ec871ff9}{}\label{structsm__moveit_1_1SS1_1_1SsPickObject_a09ca288c69453a5d565bde88ec871ff9}
+\subsubsection[{\texorpdfstring{reactions}{reactions}}]{\setlength{\rightskip}{0pt plus 5cm}typedef mpl\+::list$<$ Transition$<$Ev\+Sequence\+Finished$<$S\+S1\+::\+St\+Navigation\+Posture$>$ , {\bf St\+Rotate180} ,{\bf S\+U\+C\+C\+E\+SS}$>$ $>$ {\bf sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object\+::reactions}}\hypertarget{structsm__moveit_1_1SS1_1_1SsPickObject_a2d0c00287bd2081d8c92495ef5227e5e}{}\label{structsm__moveit_1_1SS1_1_1SsPickObject_a2d0c00287bd2081d8c92495ef5227e5e}
 
 
 Definition at line 29 of file ss\+\_\+pick\+\_\+object.\+h.
@@ -60,6 +62,42 @@ Definition at line 29 of file ss\+\_\+pick\+\_\+object.\+h.
 
 
 \subsection{Member Function Documentation}
+\index{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object@{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object}!on\+Moveit\+Error@{on\+Moveit\+Error}}
+\index{on\+Moveit\+Error@{on\+Moveit\+Error}!sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object@{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object}}
+\subsubsection[{\texorpdfstring{on\+Moveit\+Error()}{onMoveitError()}}]{\setlength{\rightskip}{0pt plus 5cm}void sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object\+::on\+Moveit\+Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structsm__moveit_1_1SS1_1_1SsPickObject_aa5ad4c6436b70a13b27a45936876374c}{}\label{structsm__moveit_1_1SS1_1_1SsPickObject_aa5ad4c6436b70a13b27a45936876374c}
+
+
+Definition at line 46 of file ss\+\_\+pick\+\_\+object.\+h.
+
+
+
+Referenced by runtime\+Configure().
+
+
+\begin{DoxyCode}
+47     \{
+48         ROS\_ERROR(\textcolor{stringliteral}{"Moveit motion failed, retrying"});
+49         ClPerceptionSystem *perceptionSystem;
+50         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(perceptionSystem);   
+51         perceptionSystem->retryCubeAfterFail();
+52     \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__moveit_1_1SS1_1_1SsPickObject_aa5ad4c6436b70a13b27a45936876374c_icgraph}
+\end{center}
+\end{figure}
+
+
 \index{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object@{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object}!runtime\+Configure@{runtime\+Configure}}
 \index{runtime\+Configure@{runtime\+Configure}!sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object@{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object}}
 \subsubsection[{\texorpdfstring{runtime\+Configure()}{runtimeConfigure()}}]{\setlength{\rightskip}{0pt plus 5cm}void sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object\+::runtime\+Configure (
@@ -72,11 +110,32 @@ Definition at line 29 of file ss\+\_\+pick\+\_\+object.\+h.
 Definition at line 37 of file ss\+\_\+pick\+\_\+object.\+h.
 
 
+
+References sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::on\+Motion\+Execution\+Failed(), and on\+Moveit\+Error().
+
+
 \begin{DoxyCode}
 38     \{
 39         ROS\_INFO(\textcolor{stringliteral}{"picking object superstate"});
-40     \}
+40         ClMoveGroup *movegroupClient;
+41         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(movegroupClient);
+42 
+43         movegroupClient->onMotionExecutionFailed(&\hyperlink{structsm__moveit_1_1SS1_1_1SsPickObject_aa5ad4c6436b70a13b27a45936876374c}{SsPickObject::onMoveitError}, \textcolor{keyword}{
+      this});
+44     \}
 \end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__moveit_1_1SS1_1_1SsPickObject_acb8cbbad6e452a98ff2ccf93a6bdd1a4_cgraph}
+\end{center}
+\end{figure}
+
+
 \index{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object@{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object}!static\+Configure@{static\+Configure}}
 \index{static\+Configure@{static\+Configure}!sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object@{sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object}}
 \subsubsection[{\texorpdfstring{static\+Configure()}{staticConfigure()}}]{\setlength{\rightskip}{0pt plus 5cm}static void sm\+\_\+moveit\+::\+S\+S1\+::\+Ss\+Pick\+Object\+::static\+Configure (

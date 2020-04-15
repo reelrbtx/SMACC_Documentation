@@ -2,8 +2,6 @@ var searchData=
 [
   ['listcontrollers',['listControllers',['../classsmacc_1_1components_1_1CpRosControlInterface.html#ab5666d2b888f63fd6aeb1056ffec10cb',1,'smacc::components::CpRosControlInterface']]],
   ['listcontrollertypes',['listControllerTypes',['../classsmacc_1_1components_1_1CpRosControlInterface.html#ae900aa88dff13169cdb22c68a7e5d539',1,'smacc::components::CpRosControlInterface']]],
-  ['load_5fgazebo_5fmodels',['load_gazebo_models',['../namespaceconfigure__gazebo__scene.html#a1de44bc5d9559c667441cfb56a72f519',1,'configure_gazebo_scene']]],
-  ['load_5fxacro_5ffile',['load_xacro_file',['../namespaceconfigure__gazebo__scene.html#a9e2008c04a5ca68232c2e385d776d9f8',1,'configure_gazebo_scene']]],
   ['loadcontroller',['loadController',['../classsmacc_1_1components_1_1CpRosControlInterface.html#ab810c680f5429731c9c83345f9821016',1,'smacc::components::CpRosControlInterface']]],
   ['loadwaypointsfromfile',['loadWayPointsFromFile',['../classcl__move__base__z_1_1WaypointNavigator.html#a18d74467ddf0e637a8d5a6e1fa2e93db',1,'cl_move_base_z::WaypointNavigator']]],
   ['loadwaypointsfromyaml',['loadWaypointsFromYaml',['../classsm__dance__bot_1_1OrNavigation.html#a1f092ffe3a1b29ae9ea6623aff00ab16',1,'sm_dance_bot::OrNavigation::loadWaypointsFromYaml()'],['../classsm__dance__bot__strikes__back_1_1OrNavigation.html#abd8811831075be61ad28fe4a68fc738d',1,'sm_dance_bot_strikes_back::OrNavigation::loadWaypointsFromYaml()']]],

@@ -1,13 +1,13 @@
 var searchData=
 [
   ['damages',['DAMAGES',['../LICENSE_8txt.html#ae4e5ba7d6e99370d4c12feff5651d808',1,'LICENSE.txt']]],
-  ['decideplacepose',['decidePlacePose',['../classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem.html#a334b3cd8a7172d4b55ff712bfa30069b',1,'sm_moveit::cl_perception_system::ClPerceptionSystem']]],
+  ['decidepickcubepose',['decidePickCubePose',['../classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem.html#a29beb46b44dbf5617027a6d0e3990037',1,'sm_moveit::cl_perception_system::ClPerceptionSystem']]],
+  ['decideplacepose',['decidePlacePose',['../classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem.html#a354f357ec7bc5438e7eeab2006868261',1,'sm_moveit::cl_perception_system::ClPerceptionSystem']]],
   ['declareobjecttag',['declareObjectTag',['../classsmacc_1_1state__reactors_1_1SrRandomGenerator.html#a3c8db60268bcffc709a482f2cf302d41',1,'smacc::state_reactors::SrRandomGenerator']]],
   ['declaretransition',['declareTransition',['../classsmacc_1_1introspection_1_1SmaccStateInfo.html#ac0b32e5504ccbed161ad50f0b77c2004',1,'smacc::introspection::SmaccStateInfo']]],
   ['deep_5fconstruct',['deep_construct',['../classsmacc_1_1SmaccState.html#aac23d8a6909f75c5e5fca2a7c09b5368',1,'smacc::SmaccState']]],
   ['defaultbackwardcmd',['defaultBackwardCmd',['../classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner.html#aa67cff0737e19f0104576b2d14a1b9f2',1,'cl_move_base_z::backward_local_planner::BackwardLocalPlanner']]],
   ['delayedpostevent',['delayedPostEvent',['../namespacesm__viewer__sim.html#a19b5db17983d5b9bbf21e96ecf9ab5c8',1,'sm_viewer_sim']]],
-  ['delete_5fgazebo_5fmodels',['delete_gazebo_models',['../namespaceconfigure__gazebo__scene.html#aeeae97678050eb8dbd60b01c72a4d3da',1,'configure_gazebo_scene']]],
   ['demangledtypename',['demangledTypeName',['../namespacesmacc_1_1introspection.html#af1b3277706c3299b589c3fa801169286',1,'smacc::introspection']]],
   ['demanglesymbol',['demangleSymbol',['../namespacesmacc_1_1introspection.html#a2f495108db3e57604d8d3ff5ef030302',1,'smacc::introspection::demangleSymbol(const std::string &amp;name)'],['../namespacesmacc_1_1introspection.html#af32c671351d958213f8031bb90767922',1,'smacc::introspection::demangleSymbol(const char *name)'],['../namespacesmacc_1_1introspection.html#aa9158a0ff0cfe83a59877e6af7d7f873',1,'smacc::introspection::demangleSymbol()']]],
   ['demangletype',['demangleType',['../namespacesmacc_1_1introspection.html#a670e39ccea29952859df4e2d0e45077b',1,'smacc::introspection::demangleType(const std::type_info *tinfo)'],['../namespacesmacc_1_1introspection.html#a81ad2fc77a0262640d4b1bd273938603',1,'smacc::introspection::demangleType(const std::type_info &amp;tinfo)']]],
