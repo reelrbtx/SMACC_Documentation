@@ -83,14 +83,14 @@ Definition at line 57 of file cl\+\_\+movegroup.\+h.
 )}\hypertarget{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a996b92fda56d04827995d6a012430f36}{}\label{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a996b92fda56d04827995d6a012430f36}
 
 
-Definition at line 8 of file cl\+\_\+movegroup.\+cpp.
+Definition at line 10 of file cl\+\_\+movegroup.\+cpp.
 
 
 \begin{DoxyCode}
-9     : \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}(groupName)
-10 \{
-11     ros::WallDuration(10.0).sleep();
-12 \}
+11     : \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}(groupName)
+12 \{
+13     ros::WallDuration(10.0).sleep();
+14 \}
 \end{DoxyCode}
 \index{sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group@{sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group}!````~Cl\+Move\+Group@{$\sim$\+Cl\+Move\+Group}}
 \index{````~Cl\+Move\+Group@{$\sim$\+Cl\+Move\+Group}!sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group@{sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group}}
@@ -101,12 +101,12 @@ Definition at line 8 of file cl\+\_\+movegroup.\+cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a4b467d3ba8ede975c2de956037932c82}{}\label{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a4b467d3ba8ede975c2de956037932c82}
 
 
-Definition at line 14 of file cl\+\_\+movegroup.\+cpp.
+Definition at line 16 of file cl\+\_\+movegroup.\+cpp.
 
 
 \begin{DoxyCode}
-15 \{
-16 \}
+17 \{
+18 \}
 \end{DoxyCode}
 
 
@@ -147,7 +147,7 @@ Definition at line 75 of file cl\+\_\+movegroup.\+h.
 )}\hypertarget{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a63291ecb539af417046c2bcb1227aebf}{}\label{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a63291ecb539af417046c2bcb1227aebf}
 
 
-Definition at line 25 of file cl\+\_\+movegroup.\+cpp.
+Definition at line 27 of file cl\+\_\+movegroup.\+cpp.
 
 
 
@@ -159,43 +159,43 @@ Referenced by move\+Relative(), and move\+To\+Absolute\+Pose().
 
 
 \begin{DoxyCode}
-28 \{
-29 
-30     moveGroupInterface.setPlanningTime(1.0);
+30 \{
 31 
-32     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Target End efector Pose: "} << targetObjectPose);
+32     moveGroupInterface.setPlanningTime(1.0);
 33 
-34     moveGroupInterface.setPoseTarget(targetObjectPose);
-35     moveGroupInterface.setPoseReferenceFrame(\textcolor{stringliteral}{"/map"});
-36 
-37     moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
-38     \textcolor{keywordtype}{bool} success = (moveGroupInterface.plan(computedMotionPlan) == 
+34     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Target End efector Pose: "} << targetObjectPose);
+35 
+36     moveGroupInterface.setPoseTarget(targetObjectPose);
+37     moveGroupInterface.setPoseReferenceFrame(\textcolor{stringliteral}{"/map"});
+38 
+39     moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
+40     \textcolor{keywordtype}{bool} success = (moveGroupInterface.plan(computedMotionPlan) == 
       moveit::planning\_interface::MoveItErrorCode::SUCCESS);
-39     ROS\_INFO\_NAMED(\textcolor{stringliteral}{"tutorial"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} : \textcolor{stringliteral}{"FAILED"});
-40 
-41     \textcolor{keywordflow}{if} (success)
-42     \{
-43         \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
-44 
-45         \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
-46         \{
-47             ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] relative motion execution succedded"});
-48             this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a1fde35aad5c4d3c0461d4b75553e6862}{postEventMotionExecutionSucceded}();
-49         \}
-50         \textcolor{keywordflow}{else}
-51         \{
-52             ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] motion execution failed"});
-53             this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
-54         \}
-55     \}
-56     \textcolor{keywordflow}{else}
-57     \{
-58         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] motion execution failed"});
-59         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
-60     \}
-61 
-62     \textcolor{keywordflow}{return} success;
-63 \}
+41     ROS\_INFO\_NAMED(\textcolor{stringliteral}{"tutorial"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} : \textcolor{stringliteral}{"FAILED"});
+42 
+43     \textcolor{keywordflow}{if} (success)
+44     \{
+45         \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
+46 
+47         \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
+48         \{
+49             ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] relative motion execution succedded"});
+50             this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a1fde35aad5c4d3c0461d4b75553e6862}{postEventMotionExecutionSucceded}();
+51         \}
+52         \textcolor{keywordflow}{else}
+53         \{
+54             ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] motion execution failed"});
+55             this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
+56         \}
+57     \}
+58     \textcolor{keywordflow}{else}
+59     \{
+60         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] motion execution failed"});
+61         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
+62     \}
+63 
+64     \textcolor{keywordflow}{return} success;
+65 \}
 \end{DoxyCode}
 
 
@@ -218,7 +218,7 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_ad0352e787798f020d24ba9c1c58413bb}{}\label{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_ad0352e787798f020d24ba9c1c58413bb}
 
 
-Definition at line 65 of file cl\+\_\+movegroup.\+cpp.
+Definition at line 67 of file cl\+\_\+movegroup.\+cpp.
 
 
 
@@ -230,28 +230,28 @@ Referenced by sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Relative\+::on\
 
 
 \begin{DoxyCode}
-66 \{
-67     \textcolor{keyword}{auto} referenceStartPose = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.getCurrentPose();
-68     tf::Quaternion currentOrientation;
-69     tf::quaternionMsgToTF(referenceStartPose.pose.orientation, currentOrientation);
-70     tf::Quaternion desiredRelativeRotation;
-71 
-72     tf::quaternionMsgToTF(transformOffset.rotation, desiredRelativeRotation);
+68 \{
+69     \textcolor{keyword}{auto} referenceStartPose = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.getCurrentPose();
+70     tf::Quaternion currentOrientation;
+71     tf::quaternionMsgToTF(referenceStartPose.pose.orientation, currentOrientation);
+72     tf::Quaternion desiredRelativeRotation;
 73 
-74     \textcolor{keyword}{auto} targetOrientation = desiredRelativeRotation * currentOrientation;
+74     tf::quaternionMsgToTF(transformOffset.rotation, desiredRelativeRotation);
 75 
-76     \textcolor{keyword}{auto} targetPose = referenceStartPose;
+76     \textcolor{keyword}{auto} targetOrientation = desiredRelativeRotation * currentOrientation;
 77 
-78     tf::quaternionTFToMsg(targetOrientation, targetPose.pose.orientation);
-79     targetPose.pose.position.x += transformOffset.translation.x;
-80     targetPose.pose.position.y += transformOffset.translation.y;
-81     targetPose.pose.position.z += transformOffset.translation.z;
-82 
-83     \textcolor{keywordtype}{bool} success = \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a63291ecb539af417046c2bcb1227aebf}{moveEndEfectorToPose}(
+78     \textcolor{keyword}{auto} targetPose = referenceStartPose;
+79 
+80     tf::quaternionTFToMsg(targetOrientation, targetPose.pose.orientation);
+81     targetPose.pose.position.x += transformOffset.translation.x;
+82     targetPose.pose.position.y += transformOffset.translation.y;
+83     targetPose.pose.position.z += transformOffset.translation.z;
+84 
+85     \textcolor{keywordtype}{bool} success = \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a63291ecb539af417046c2bcb1227aebf}{moveEndEfectorToPose}(
       \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface},
-84                                         \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a26b5c9e0aef1cd67ee977a756b69cf76}{planningSceneInterface},
-85                                         targetPose);
-86 \}
+86                                         \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a26b5c9e0aef1cd67ee977a756b69cf76}{planningSceneInterface},
+87                                         targetPose);
+88 \}
 \end{DoxyCode}
 
 
@@ -286,7 +286,7 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_ad5ca2f92076405346319aa20e5d4dffb}{}\label{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_ad5ca2f92076405346319aa20e5d4dffb}
 
 
-Definition at line 89 of file cl\+\_\+movegroup.\+cpp.
+Definition at line 91 of file cl\+\_\+movegroup.\+cpp.
 
 
 
@@ -298,62 +298,62 @@ Referenced by sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Rela
 
 
 \begin{DoxyCode}
-90 \{
-91     std::vector<geometry\_msgs::Pose> waypoints;
-92 
-93     \textcolor{keyword}{auto} referenceStartPose = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.getPoseTarget();
-94     \textcolor{comment}{//auto referenceStartPose = this->moveGroupClientInterface.getCurrentPose();}
-95     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"RELATIVE MOTION, SOURCE POSE: "} << referenceStartPose);
-96     waypoints.push\_back(referenceStartPose.pose); \textcolor{comment}{// up and out}
-97 
-98     \textcolor{keyword}{auto} targetObjectPose = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.getPoseTarget();
+92 \{
+93     std::vector<geometry\_msgs::Pose> waypoints;
+94 
+95     \textcolor{keyword}{auto} referenceStartPose = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.getPoseTarget();
+96     \textcolor{comment}{//auto referenceStartPose = this->moveGroupClientInterface.getCurrentPose();}
+97     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"RELATIVE MOTION, SOURCE POSE: "} << referenceStartPose);
+98     waypoints.push\_back(referenceStartPose.pose); \textcolor{comment}{// up and out}
 99 
-100     \textcolor{keyword}{auto} endPose = referenceStartPose.pose;
+100     \textcolor{keyword}{auto} targetObjectPose = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.getPoseTarget();
 101 
-102     endPose.position.x += offset.x;
-103     endPose.position.y += offset.y;
-104     endPose.position.z += offset.z;
-105 
-106     \textcolor{comment}{//target\_pose2.position.x -= 0.15;}
-107     waypoints.push\_back(endPose); \textcolor{comment}{// left}
-108 
-109     this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.setPoseTarget(endPose);
+102     \textcolor{keyword}{auto} endPose = referenceStartPose.pose;
+103 
+104     endPose.position.x += offset.x;
+105     endPose.position.y += offset.y;
+106     endPose.position.z += offset.z;
+107 
+108     \textcolor{comment}{//target\_pose2.position.x -= 0.15;}
+109     waypoints.push\_back(endPose); \textcolor{comment}{// left}
 110 
-111     this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.setMaxVelocityScalingFactor(0.1);
+111     this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.setPoseTarget(endPose);
 112 
-113     moveit\_msgs::RobotTrajectory trajectory;
-114     \textcolor{keywordtype}{double} fraction = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.computeCartesianPath(waypoints
+113     this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.setMaxVelocityScalingFactor(0.1);
+114 
+115     moveit\_msgs::RobotTrajectory trajectory;
+116     \textcolor{keywordtype}{double} fraction = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.computeCartesianPath(waypoints
       ,
-115                                                                           0.01, \textcolor{comment}{// eef\_step}
-116                                                                           0.0,  \textcolor{comment}{// jump\_threshold}
-117                                                                           trajectory);
-118 
-119     \textcolor{keywordflow}{if} (fraction == -1)
-120     \{
-121         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
-122         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] Absolute motion planning failed. Skipping execution."});
-123         \textcolor{keywordflow}{return};
-124     \}
-125 
-126     moveit::planning\_interface::MoveGroupInterface::Plan grasp\_pose\_plan;
+117                                                                           0.01, \textcolor{comment}{// eef\_step}
+118                                                                           0.0,  \textcolor{comment}{// jump\_threshold}
+119                                                                           trajectory);
+120 
+121     \textcolor{keywordflow}{if} (fraction == -1)
+122     \{
+123         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
+124         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] Absolute motion planning failed. Skipping execution."});
+125         \textcolor{keywordflow}{return};
+126     \}
 127 
-128     \textcolor{comment}{//grasp\_pose\_plan.start\_state\_ = *(moveGroupInterface.getCurrentState());}
-129     grasp\_pose\_plan.trajectory\_ = trajectory;
-130     \textcolor{keyword}{auto} executionResult = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.execute(grasp\_pose\_plan);
-131 
-132     \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
-133     \{
-134         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] relative motion execution succedded: fraction %lf"}, fraction);
-135         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a1fde35aad5c4d3c0461d4b75553e6862}{postEventMotionExecutionSucceded}();
-136     \}
-137     \textcolor{keywordflow}{else}
-138     \{
-139         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] relative motion execution failed"});
-140         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
-141     \}
-142 
-143     ROS\_INFO(\textcolor{stringliteral}{"Visualizing plan 4 (cartesian path) (%.2f%% acheived)"}, fraction * 100.0);
-144 \}
+128     moveit::planning\_interface::MoveGroupInterface::Plan grasp\_pose\_plan;
+129 
+130     \textcolor{comment}{//grasp\_pose\_plan.start\_state\_ = *(moveGroupInterface.getCurrentState());}
+131     grasp\_pose\_plan.trajectory\_ = trajectory;
+132     \textcolor{keyword}{auto} executionResult = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.execute(grasp\_pose\_plan);
+133 
+134     \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
+135     \{
+136         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] relative motion execution succedded: fraction %lf"}, fraction);
+137         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a1fde35aad5c4d3c0461d4b75553e6862}{postEventMotionExecutionSucceded}();
+138     \}
+139     \textcolor{keywordflow}{else}
+140     \{
+141         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] relative motion execution failed"});
+142         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
+143     \}
+144 
+145     ROS\_INFO(\textcolor{stringliteral}{"Visualizing plan 4 (cartesian path) (%.2f%% acheived)"}, fraction * 100.0);
+146 \}
 \end{DoxyCode}
 
 
@@ -376,7 +376,7 @@ Here is the caller graph for this function\+:
 )}\hypertarget{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a6b85fe06800db92b08346603e5d2eabb}{}\label{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a6b85fe06800db92b08346603e5d2eabb}
 
 
-Definition at line 18 of file cl\+\_\+movegroup.\+cpp.
+Definition at line 20 of file cl\+\_\+movegroup.\+cpp.
 
 
 
@@ -388,12 +388,12 @@ Referenced by sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Absolute\+::on\
 
 
 \begin{DoxyCode}
-19 \{
-20     \textcolor{keywordtype}{bool} success = \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a63291ecb539af417046c2bcb1227aebf}{moveEndEfectorToPose}(
+21 \{
+22     \textcolor{keywordtype}{bool} success = \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a63291ecb539af417046c2bcb1227aebf}{moveEndEfectorToPose}(
       \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface},
-21                                         \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a26b5c9e0aef1cd67ee977a756b69cf76}{planningSceneInterface},
-22                                         targetPose);
-23 \}
+23                                         \hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a26b5c9e0aef1cd67ee977a756b69cf76}{planningSceneInterface},
+24                                         targetPose);
+25 \}
 \end{DoxyCode}
 
 

@@ -84,27 +84,34 @@ References sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::on\+Motio
 29         ClPerceptionSystem *perceptionSystem;
 30         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(perceptionSystem);
 31 
-32         \textcolor{comment}{//geometry\_msgs::Transform transform;}
-33         \textcolor{comment}{//transform.rotation.w=1;}
-34         \textcolor{keyword}{auto} moveCartesianRelative = this->getOrthogonal<OrArm>()->getClientBehavior<CbMoveRelative>();
-35 
-36         \textcolor{keyword}{auto} quat = tf::createQuaternionFromRPY(M\_PI, 0, 0);
-37         moveCartesianRelative->transform\_.translation.z = 0.05;
-38         tf::quaternionTFToMsg(quat, moveCartesianRelative->transform\_.rotation);
-39 
-40         \textcolor{keyword}{auto} currentTable = perceptionSystem->getCurrentTable();
-41         \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE0)
-42         \{
-43             moveCartesianRelative->transform\_.translation.x = -0.15;
-44         \}
-45         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE1)
-46         \{
-47             moveCartesianRelative->transform\_.translation.x = 0.15;
-48         \}
-49 
-50         moveGroupClient->onMotionExecutionSuccedded(&
+32         \textcolor{keyword}{auto} moveCartesianRelative = this->getOrthogonal<OrArm>()
+33                                          ->getClientBehavior<CbMoveCartesianRelative>();
+34 
+35         \textcolor{comment}{/*}
+36 \textcolor{comment}{        }
+37 \textcolor{comment}{}
+38 \textcolor{comment}{        //geometry\_msgs::Transform transform;}
+39 \textcolor{comment}{        //transform.rotation.w=1;}
+40 \textcolor{comment}{        auto moveCartesianRelative = this->getOrthogonal<OrArm>()->getClientBehavior<CbMoveRelative>();}
+41 \textcolor{comment}{}
+42 \textcolor{comment}{        auto quat = tf::createQuaternionFromRPY(M\_PI, 0, 0);}
+43 \textcolor{comment}{        moveCartesianRelative->transform\_.translation.z = 0.05;}
+44 \textcolor{comment}{        tf::quaternionTFToMsg(quat, moveCartesianRelative->transform\_.rotation);}
+45 \textcolor{comment}{*/}
+46         moveCartesianRelative->offset\_.z = -0.2;
+47         \textcolor{keyword}{auto} currentTable = perceptionSystem->getCurrentTable();
+48         \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE0)
+49         \{
+50             moveCartesianRelative->offset\_.x = -0.15;
+51         \}
+52         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE1)
+53         \{
+54             moveCartesianRelative->offset\_.x = 0.15;
+55         \}
+56 
+57         moveGroupClient->onMotionExecutionSuccedded(&
       \hyperlink{classsmacc_1_1SmaccState_a49dcfc25824f7e083dd4b999c49ab2b6}{StNavigationPosture::throwSequenceFinishedEvent}, \textcolor{keyword}{this});
-51     \}
+58     \}
 \end{DoxyCode}
 
 
@@ -132,7 +139,7 @@ Definition at line 19 of file st\+\_\+navigation\+\_\+posture.\+h.
 
 \begin{DoxyCode}
 20     \{
-21         configure\_orthogonal<OrArm, CbMoveRelative>();
+21         configure\_orthogonal<OrArm, CbMoveCartesianRelative>();
 22     \}
 \end{DoxyCode}
 
