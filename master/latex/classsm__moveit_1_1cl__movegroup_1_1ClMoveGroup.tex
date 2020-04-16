@@ -304,56 +304,60 @@ Referenced by sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Rela
 95     \textcolor{keyword}{auto} referenceStartPose = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.getPoseTarget();
 96     \textcolor{comment}{//auto referenceStartPose = this->moveGroupClientInterface.getCurrentPose();}
 97     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"RELATIVE MOTION, SOURCE POSE: "} << referenceStartPose);
-98     waypoints.push\_back(referenceStartPose.pose); \textcolor{comment}{// up and out}
+98         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Offset: "} << offset);
 99 
-100     \textcolor{keyword}{auto} targetObjectPose = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.getPoseTarget();
+100     waypoints.push\_back(referenceStartPose.pose); \textcolor{comment}{// up and out}
 101 
-102     \textcolor{keyword}{auto} endPose = referenceStartPose.pose;
+102     \textcolor{keyword}{auto} targetObjectPose = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.getPoseTarget();
 103 
-104     endPose.position.x += offset.x;
-105     endPose.position.y += offset.y;
-106     endPose.position.z += offset.z;
-107 
-108     \textcolor{comment}{//target\_pose2.position.x -= 0.15;}
-109     waypoints.push\_back(endPose); \textcolor{comment}{// left}
-110 
-111     this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.setPoseTarget(endPose);
-112 
-113     this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.setMaxVelocityScalingFactor(0.1);
+104     \textcolor{keyword}{auto} endPose = referenceStartPose.pose;
+105 
+106     endPose.position.x += offset.x;
+107     endPose.position.y += offset.y;
+108     endPose.position.z += offset.z;
+109 
+110     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"DESTINY POSE: "} << endPose);
+111 
+112     \textcolor{comment}{//target\_pose2.position.x -= 0.15;}
+113     waypoints.push\_back(endPose); \textcolor{comment}{// left}
 114 
-115     moveit\_msgs::RobotTrajectory trajectory;
-116     \textcolor{keywordtype}{double} fraction = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.computeCartesianPath(waypoints
+115     this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.setPoseTarget(endPose);
+116 
+117     this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.setMaxVelocityScalingFactor(0.1);
+118 
+119     moveit\_msgs::RobotTrajectory trajectory;
+120     \textcolor{keywordtype}{double} fraction = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.computeCartesianPath(waypoints
       ,
-117                                                                           0.01, \textcolor{comment}{// eef\_step}
-118                                                                           0.0,  \textcolor{comment}{// jump\_threshold}
-119                                                                           trajectory);
-120 
-121     \textcolor{keywordflow}{if} (fraction == -1)
-122     \{
-123         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
-124         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] Absolute motion planning failed. Skipping execution."});
-125         \textcolor{keywordflow}{return};
-126     \}
-127 
-128     moveit::planning\_interface::MoveGroupInterface::Plan grasp\_pose\_plan;
-129 
-130     \textcolor{comment}{//grasp\_pose\_plan.start\_state\_ = *(moveGroupInterface.getCurrentState());}
-131     grasp\_pose\_plan.trajectory\_ = trajectory;
-132     \textcolor{keyword}{auto} executionResult = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.execute(grasp\_pose\_plan);
+121                                                                           0.01, \textcolor{comment}{// eef\_step}
+122                                                                           0.0,  \textcolor{comment}{// jump\_threshold}
+123                                                                           trajectory);
+124 
+125     \textcolor{keywordflow}{if} (fraction == -1)
+126     \{
+127         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
+128         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] Absolute motion planning failed. Skipping execution."});
+129         \textcolor{keywordflow}{return};
+130     \}
+131 
+132     moveit::planning\_interface::MoveGroupInterface::Plan grasp\_pose\_plan;
 133 
-134     \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
-135     \{
-136         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] relative motion execution succedded: fraction %lf"}, fraction);
-137         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a1fde35aad5c4d3c0461d4b75553e6862}{postEventMotionExecutionSucceded}();
-138     \}
-139     \textcolor{keywordflow}{else}
-140     \{
-141         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] relative motion execution failed"});
-142         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
-143     \}
-144 
-145     ROS\_INFO(\textcolor{stringliteral}{"Visualizing plan 4 (cartesian path) (%.2f%% acheived)"}, fraction * 100.0);
-146 \}
+134     \textcolor{comment}{//grasp\_pose\_plan.start\_state\_ = *(moveGroupInterface.getCurrentState());}
+135     grasp\_pose\_plan.trajectory\_ = trajectory;
+136     \textcolor{keyword}{auto} executionResult = this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a23acf6883455566dbab30e4367c2144d}{moveGroupClientInterface}.execute(grasp\_pose\_plan);
+137 
+138     \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
+139     \{
+140         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] relative motion execution succedded: fraction %lf"}, fraction);
+141         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a1fde35aad5c4d3c0461d4b75553e6862}{postEventMotionExecutionSucceded}();
+142     \}
+143     \textcolor{keywordflow}{else}
+144     \{
+145         ROS\_INFO(\textcolor{stringliteral}{"[ClMoveGroup] relative motion execution failed"});
+146         this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1ClMoveGroup_a742a3504755ab7bae290c87290d2bf3f}{postEventMotionExecutionFailed}();
+147     \}
+148 
+149     ROS\_INFO(\textcolor{stringliteral}{"Visualizing plan 4 (cartesian path) (%.2f%% acheived)"}, fraction * 100.0);
+150 \}
 \end{DoxyCode}
 
 
