@@ -27,7 +27,7 @@ Collaboration diagram for sm\+\_\+moveit\+:\+:St\+Forward\+Next\+Table\+:
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-typedef mpl\+::list$<$ Transition$<$ Ev\+Action\+Succeeded$<$ \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{Cl\+Move\+BaseZ}, \hyperlink{classsm__moveit_1_1OrNavigation}{Or\+Navigation} $>$, \hyperlink{structsm__moveit_1_1SS2_1_1SsPlaceObject}{S\+S2\+::\+Ss\+Place\+Object}, \hyperlink{classSUCCESS}{S\+U\+C\+C\+E\+SS} $>$ $>$ \hyperlink{structsm__moveit_1_1StForwardNextTable_a2eca0877f414d4ab939cb4a9f8c72dc5}{reactions}
+typedef mpl\+::list$<$ Transition$<$ Ev\+Action\+Succeeded$<$ \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{Cl\+Move\+BaseZ}, \hyperlink{classsm__moveit_1_1OrNavigation}{Or\+Navigation} $>$, \hyperlink{structsm__moveit_1_1SS2_1_1SsPlaceObject}{S\+S2\+::\+Ss\+Place\+Object}, \hyperlink{classSUCCESS}{S\+U\+C\+C\+E\+SS} $>$, Transition$<$ Ev\+Action\+Aborted$<$ \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{Cl\+Move\+BaseZ}, \hyperlink{classsm__moveit_1_1OrNavigation}{Or\+Navigation} $>$, \hyperlink{structsm__moveit_1_1StUndoIncorrectForward}{St\+Undo\+Incorrect\+Forward}, \hyperlink{classABORT}{A\+B\+O\+RT} $>$ $>$ \hyperlink{structsm__moveit_1_1StForwardNextTable_a00ed94e86d9c85581a167cfdf8e9dbfe}{reactions}
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -52,10 +52,10 @@ Definition at line 5 of file st\+\_\+forward.\+h.
 \subsection{Member Typedef Documentation}
 \index{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table@{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table}!reactions@{reactions}}
 \index{reactions@{reactions}!sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table@{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table}}
-\subsubsection[{\texorpdfstring{reactions}{reactions}}]{\setlength{\rightskip}{0pt plus 5cm}typedef mpl\+::list$<$ Transition$<$Ev\+Action\+Succeeded$<${\bf Cl\+Move\+BaseZ}, {\bf Or\+Navigation}$>$, {\bf S\+S2\+::\+Ss\+Place\+Object}, {\bf S\+U\+C\+C\+E\+SS}$>$ $>$ {\bf sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table\+::reactions}}\hypertarget{structsm__moveit_1_1StForwardNextTable_a2eca0877f414d4ab939cb4a9f8c72dc5}{}\label{structsm__moveit_1_1StForwardNextTable_a2eca0877f414d4ab939cb4a9f8c72dc5}
+\subsubsection[{\texorpdfstring{reactions}{reactions}}]{\setlength{\rightskip}{0pt plus 5cm}typedef mpl\+::list$<$ Transition$<$Ev\+Action\+Succeeded$<${\bf Cl\+Move\+BaseZ}, {\bf Or\+Navigation}$>$, {\bf S\+S2\+::\+Ss\+Place\+Object}, {\bf S\+U\+C\+C\+E\+SS}$>$, Transition$<$Ev\+Action\+Aborted$<${\bf Cl\+Move\+BaseZ}, {\bf Or\+Navigation}$>$, {\bf St\+Undo\+Incorrect\+Forward}, {\bf A\+B\+O\+RT}$>$ $>$ {\bf sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table\+::reactions}}\hypertarget{structsm__moveit_1_1StForwardNextTable_a00ed94e86d9c85581a167cfdf8e9dbfe}{}\label{structsm__moveit_1_1StForwardNextTable_a00ed94e86d9c85581a167cfdf8e9dbfe}
 
 
-Definition at line 17 of file st\+\_\+forward.\+h.
+Definition at line 16 of file st\+\_\+forward.\+h.
 
 
 
@@ -69,7 +69,7 @@ Definition at line 17 of file st\+\_\+forward.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structsm__moveit_1_1StForwardNextTable_a4f6c466efdb91b0eb9aaee71f87a4fc4}{}\label{structsm__moveit_1_1StForwardNextTable_a4f6c466efdb91b0eb9aaee71f87a4fc4}
 
 
-Definition at line 26 of file st\+\_\+forward.\+h.
+Definition at line 25 of file st\+\_\+forward.\+h.
 
 
 
@@ -77,30 +77,30 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), smacc\+::\+I\+Smacc\
 
 
 \begin{DoxyCode}
-27     \{          
-28         ClMoveBaseZ *moveBaseClient\_;
-29         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveBaseClient\_);
-30 
-31         \textcolor{keyword}{auto} pose = moveBaseClient\_->getComponent<Pose>();
-32         \textcolor{keyword}{auto} currentPose = pose->toPoseMsg();
-33 
-34         \textcolor{keyword}{auto} offset = 0.2;
-35         \textcolor{keywordtype}{double} dist;
-36         \textcolor{keywordflow}{if} (currentPose.position.x < -0.2) \textcolor{comment}{// robot is at negative x-axis side}
-37         \{
-38                 \textcolor{comment}{// target is at positive side, at point x=0}
-39                 dist = fabs(0 - currentPose.position.x) + offset;
-40         \}
-41         \textcolor{keywordflow}{else} \textcolor{comment}{// the robot in at positive x-axis side}
-42         \{
-43                 \textcolor{comment}{// target is at negative x-axis side at point x = -1}
-44                 dist = fabs(-1 - currentPose.position.x) + offset;
-45              
-46         \}
-47 
-48         \textcolor{keyword}{auto} forwardBh = this->getOrthogonal<OrNavigation>()->getClientBehavior<CbNavigateForward>();
-49         forwardBh->forwardDistance = dist;
-50     \}
+26     \{          
+27         ClMoveBaseZ *moveBaseClient\_;
+28         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveBaseClient\_);
+29 
+30         \textcolor{keyword}{auto} pose = moveBaseClient\_->getComponent<Pose>();
+31         \textcolor{keyword}{auto} currentPose = pose->toPoseMsg();
+32 
+33         \textcolor{keyword}{auto} offset = 0.2;
+34         \textcolor{keywordtype}{double} dist;
+35         \textcolor{keywordflow}{if} (currentPose.position.x < -0.2) \textcolor{comment}{// robot is at negative x-axis side}
+36         \{
+37                 \textcolor{comment}{// target is at positive side, at point x=0}
+38                 dist = fabs(0 - currentPose.position.x) + offset;
+39         \}
+40         \textcolor{keywordflow}{else} \textcolor{comment}{// the robot in at positive x-axis side}
+41         \{
+42                 \textcolor{comment}{// target is at negative x-axis side at point x = -1}
+43                 dist = fabs(-1. - currentPose.position.x) + offset;
+44              
+45         \}
+46 
+47         \textcolor{keyword}{auto} forwardBh = this->getOrthogonal<OrNavigation>()->getClientBehavior<CbNavigateForward>();
+48         forwardBh->forwardDistance = dist;
+49     \}
 \end{DoxyCode}
 
 
@@ -123,14 +123,14 @@ Here is the call graph for this function\+:
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{structsm__moveit_1_1StForwardNextTable_a2f28979d2a049e53b91802421771bcfb}{}\label{structsm__moveit_1_1StForwardNextTable_a2f28979d2a049e53b91802421771bcfb}
 
 
-Definition at line 20 of file st\+\_\+forward.\+h.
+Definition at line 19 of file st\+\_\+forward.\+h.
 
 
 \begin{DoxyCode}
-21     \{
-22         \textcolor{comment}{//configure\_orthogonal<OrNavigation, CbNavigateGlobalPosition>(-1, 0, M\_PI);}
-23         configure\_orthogonal<OrNavigation, CbNavigateForward>();
-24     \}
+20     \{
+21         \textcolor{comment}{//configure\_orthogonal<OrNavigation, CbNavigateGlobalPosition>(-1, 0, M\_PI);}
+22         configure\_orthogonal<OrNavigation, CbNavigateForward>();
+23     \}
 \end{DoxyCode}
 
 
