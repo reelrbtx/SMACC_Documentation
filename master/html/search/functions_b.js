@@ -7,8 +7,8 @@ var searchData=
   ['mapbehavior',['mapBehavior',['../classsmacc_1_1ISmaccStateMachine.html#acfb75233b79062cc7769ea751b7f320d',1,'smacc::ISmaccStateMachine']]],
   ['messagecallback',['messageCallback',['../classsmacc_1_1components_1_1CpTopicSubscriber.html#af1b8b4e1c2fe22ac3ea2968a9a957d8f',1,'smacc::components::CpTopicSubscriber::messageCallback()'],['../classsmacc_1_1client__bases_1_1SmaccSubscriberClient.html#acf85b80439aff5cf2bfa0649e9e45654',1,'smacc::client_bases::SmaccSubscriberClient::messageCallback()']]],
   ['messagecallbackstoredistancetowall',['MessageCallbackStoreDistanceToWall',['../classsm__dance__bot__strikes__back_1_1cl__lidar_1_1CpLidarSensorData.html#aefe481c1441305a6adf5266c49d941a4',1,'sm_dance_bot_strikes_back::cl_lidar::CpLidarSensorData']]],
-  ['moverelative',['moveRelative',['../classsm__moveit_1_1cl__movegroup_1_1CbMoveRelative.html#ac5ca4111cb8b617ca02b345d28f5c6a6',1,'sm_moveit::cl_movegroup::CbMoveRelative']]],
+  ['moverelative',['moveRelative',['../classsm__moveit_1_1cl__movegroup_1_1CbMoveEndEffectorRelative.html#af70aed79cb2a5c0b1b3d634113fdde3d',1,'sm_moveit::cl_movegroup::CbMoveEndEffectorRelative']]],
   ['moverelativecartesian',['moveRelativeCartesian',['../classsm__moveit_1_1cl__movegroup_1_1CbMoveCartesianRelative.html#a0abbcf6169889ae6788f29fade703c7b',1,'sm_moveit::cl_movegroup::CbMoveCartesianRelative']]],
-  ['movetoabsolutepose',['moveToAbsolutePose',['../classsm__moveit_1_1cl__movegroup_1_1CbMoveAbsolute.html#a728feab8815d609367590e235ec92f0c',1,'sm_moveit::cl_movegroup::CbMoveAbsolute']]],
+  ['movetoabsolutepose',['moveToAbsolutePose',['../classsm__moveit_1_1cl__movegroup_1_1CbMoveEndEffector.html#a334d4e9cb1db83ee4dfa8b8118983dcf',1,'sm_moveit::cl_movegroup::CbMoveEndEffector']]],
   ['my_5fcontext',['my_context',['../structsmacc_1_1SmaccState_1_1my__context.html#af9c11c27b17bbf7de0d4e21c87d49f6f',1,'smacc::SmaccState::my_context']]]
 ];
