@@ -73,7 +73,7 @@ Definition at line 24 of file st\+\_\+navigation\+\_\+posture.\+h.
 
 
 
-References sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::on\+Motion\+Execution\+Succedded(), smacc\+::\+I\+Smacc\+State\+::requires\+Client(), and smacc\+::\+Smacc\+State$<$ St\+Navigation\+Posture, S\+S $>$\+::throw\+Sequence\+Finished\+Event().
+References sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::on\+Motion\+Execution\+Succedded(), smacc\+::\+I\+Smacc\+State\+::requires\+Client(), and smacc\+::\+Smacc\+State$<$ St\+Navigation\+Posture, S\+S $>$\+::throw\+Sequence\+Finished\+Event().
 
 
 \begin{DoxyCode}
@@ -89,29 +89,40 @@ References sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::on\+Motio
 34         \textcolor{keyword}{auto} moveCartesianRelative = this->getOrthogonal<OrArm>()
 35                                          ->getClientBehavior<CbMoveCartesianRelative>();
 36 
-37         \textcolor{comment}{/*}
-38 \textcolor{comment}{        //geometry\_msgs::Transform transform;}
-39 \textcolor{comment}{        //transform.rotation.w=1;}
-40 \textcolor{comment}{        auto moveCartesianRelative = this->getOrthogonal<OrArm>()->getClientBehavior<CbMoveRelative>();}
-41 \textcolor{comment}{}
-42 \textcolor{comment}{        auto quat = tf::createQuaternionFromRPY(M\_PI, 0, 0);}
-43 \textcolor{comment}{        moveCartesianRelative->transform\_.translation.z = 0.05;}
-44 \textcolor{comment}{        tf::quaternionTFToMsg(quat, moveCartesianRelative->transform\_.rotation);}
-45 \textcolor{comment}{*/}
-46         moveCartesianRelative->offset\_.z = -0.35;
-47         \textcolor{keyword}{auto} currentTable = perceptionSystem->getCurrentTable();
-48         \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE0)
-49         \{
-50             moveCartesianRelative->offset\_.x = -0.25;
-51         \}
-52         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE1)
-53         \{
-54             moveCartesianRelative->offset\_.x = 0.25;
-55         \}
-56 
-57         moveGroupClient->onMotionExecutionSuccedded(&
+37         std::vector<std::string> namesposes = moveGroupClient->moveGroupClientInterface.getNamedTargets();
+38 
+39         ROS\_INFO(\textcolor{stringliteral}{"--- named poses: "});
+40         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &posename : namesposes)
+41         \{
+42             ROS\_INFO\_STREAM(\textcolor{stringliteral}{" - named pose: "} << posename);
+43         \}
+44         ROS\_INFO(\textcolor{stringliteral}{"--- named poses"});
+45 
+46         \textcolor{comment}{/*}
+47 \textcolor{comment}{        //geometry\_msgs::Transform transform;}
+48 \textcolor{comment}{        //transform.rotation.w=1;}
+49 \textcolor{comment}{        auto moveCartesianRelative = this->getOrthogonal<OrArm>()->getClientBehavior<CbMoveRelative>();}
+50 \textcolor{comment}{}
+51 \textcolor{comment}{        auto quat = tf::createQuaternionFromRPY(M\_PI, 0, 0);}
+52 \textcolor{comment}{        moveCartesianRelative->transform\_.translation.z = 0.05;}
+53 \textcolor{comment}{        tf::quaternionTFToMsg(quat, moveCartesianRelative->transform\_.rotation);}
+54 \textcolor{comment}{        */}
+55 
+56         moveCartesianRelative->offset\_.z = -0.35;
+57         \textcolor{keyword}{auto} currentTable = perceptionSystem->getCurrentTable();
+58 
+59         \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE0)
+60         \{
+61             moveCartesianRelative->offset\_.x = -0.25;
+62         \}
+63         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE1)
+64         \{
+65             moveCartesianRelative->offset\_.x = 0.25;
+66         \}
+67 
+68         moveGroupClient->onMotionExecutionSuccedded(&
       \hyperlink{classsmacc_1_1SmaccState_a49dcfc25824f7e083dd4b999c49ab2b6}{StNavigationPosture::throwSequenceFinishedEvent}, \textcolor{keyword}{this});
-58     \}
+69     \}
 \end{DoxyCode}
 
 

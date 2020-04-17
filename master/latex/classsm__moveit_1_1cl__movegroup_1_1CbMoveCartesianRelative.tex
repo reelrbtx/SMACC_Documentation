@@ -34,6 +34,8 @@ Collaboration diagram for sm\+\_\+moveit\+:\+:cl\+\_\+movegroup\+:\+:Cb\+Move\+C
 virtual void \hyperlink{classsm__moveit_1_1cl__movegroup_1_1CbMoveCartesianRelative_a92286b179e2b55d93f0c0195a9f05039}{on\+Entry} () override
 \item 
 virtual void \hyperlink{classsm__moveit_1_1cl__movegroup_1_1CbMoveCartesianRelative_ace52bd9a2668c34f1046458c9d3257fa}{on\+Exit} () override
+\item 
+void \hyperlink{classsm__moveit_1_1cl__movegroup_1_1CbMoveCartesianRelative_a0abbcf6169889ae6788f29fade703c7b}{move\+Relative\+Cartesian} (geometry\+\_\+msgs\+::\+Vector3 \&offset)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -87,6 +89,115 @@ Definition at line 11 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
 
 
 \subsection{Member Function Documentation}
+\index{sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Relative@{sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Relative}!move\+Relative\+Cartesian@{move\+Relative\+Cartesian}}
+\index{move\+Relative\+Cartesian@{move\+Relative\+Cartesian}!sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Relative@{sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Relative}}
+\subsubsection[{\texorpdfstring{move\+Relative\+Cartesian(geometry\+\_\+msgs\+::\+Vector3 \&offset)}{moveRelativeCartesian(geometry_msgs::Vector3 &offset)}}]{\setlength{\rightskip}{0pt plus 5cm}void sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Relative\+::move\+Relative\+Cartesian (
+\begin{DoxyParamCaption}
+\item[{geometry\+\_\+msgs\+::\+Vector3 \&}]{offset}
+\end{DoxyParamCaption}
+)}\hypertarget{classsm__moveit_1_1cl__movegroup_1_1CbMoveCartesianRelative_a0abbcf6169889ae6788f29fade703c7b}{}\label{classsm__moveit_1_1cl__movegroup_1_1CbMoveCartesianRelative_a0abbcf6169889ae6788f29fade703c7b}
+
+
+Definition at line 25 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
+
+
+
+References sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), and smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Client().
+
+
+
+Referenced by on\+Entry().
+
+
+\begin{DoxyCode}
+26 \{
+27     ClMoveGroup *movegroupClient;
+28     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(movegroupClient);
+29 
+30     std::vector<geometry\_msgs::Pose> waypoints;
+31 
+32     \textcolor{keyword}{auto} referenceStartPose = movegroupClient->moveGroupClientInterface.getPoseTarget();
+33     \textcolor{comment}{//auto referenceStartPose = this->moveGroupClientInterface.getCurrentPose();}
+34     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] RELATIVE MOTION, SOURCE POSE: "} << referenceStartPose);
+35     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] Offset: "} << offset);
+36 
+37     waypoints.push\_back(referenceStartPose.pose); \textcolor{comment}{// up and out}
+38 
+39     \textcolor{keyword}{auto} targetObjectPose = movegroupClient->moveGroupClientInterface.getPoseTarget();
+40 
+41     \textcolor{keyword}{auto} endPose = referenceStartPose.pose;
+42 
+43     endPose.position.x += offset.x;
+44     endPose.position.y += offset.y;
+45     endPose.position.z += offset.z;
+46 
+47     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] DESTINY POSE: "} << endPose);
+48 
+49     \textcolor{comment}{//target\_pose2.position.x -= 0.15;}
+50     waypoints.push\_back(endPose); \textcolor{comment}{// left}
+51 
+52     movegroupClient->moveGroupClientInterface.setPoseTarget(endPose);
+53 
+54     movegroupClient->moveGroupClientInterface.setMaxVelocityScalingFactor(0.1);
+55 
+56     moveit\_msgs::RobotTrajectory trajectory;
+57     \textcolor{keywordtype}{double} fraction = movegroupClient->moveGroupClientInterface.computeCartesianPath(waypoints,
+58                                                                                      0.01, \textcolor{comment}{// eef\_step}
+59                                                                                      0.0,  \textcolor{comment}{//
+       jump\_threshold}
+60                                                                                      trajectory);
+61 
+62     \textcolor{keywordflow}{if} (fraction == -1)
+63     \{
+64         movegroupClient->postEventMotionExecutionFailed();
+65         ROS\_INFO(\textcolor{stringliteral}{"[CbMoveCartesianRelative] Absolute motion planning failed. Skipping execution."});
+66         \textcolor{keywordflow}{return};
+67     \}
+68 
+69     moveit::planning\_interface::MoveGroupInterface::Plan grasp\_pose\_plan;
+70 
+71     \textcolor{comment}{//grasp\_pose\_plan.start\_state\_ = *(moveGroupInterface.getCurrentState());}
+72     grasp\_pose\_plan.trajectory\_ = trajectory;
+73     \textcolor{keyword}{auto} executionResult = movegroupClient->moveGroupClientInterface.execute(grasp\_pose\_plan);
+74 
+75     \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
+76     \{
+77         ROS\_INFO(\textcolor{stringliteral}{"[CbMoveCartesianRelative] relative motion execution succedded: fraction %lf"}, fraction);
+78         movegroupClient->postEventMotionExecutionSucceded();
+79     \}
+80     \textcolor{keywordflow}{else}
+81     \{
+82         ROS\_INFO(\textcolor{stringliteral}{"[CbMoveCartesianRelative] relative motion execution failed"});
+83         movegroupClient->postEventMotionExecutionFailed();
+84     \}
+85 
+86     ROS\_INFO(\textcolor{stringliteral}{"Visualizing plan 4 (cartesian path) (%.2f%% acheived)"}, fraction * 100.0);
+87 \}
+\end{DoxyCode}
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsm__moveit_1_1cl__movegroup_1_1CbMoveCartesianRelative_a0abbcf6169889ae6788f29fade703c7b_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsm__moveit_1_1cl__movegroup_1_1CbMoveCartesianRelative_a0abbcf6169889ae6788f29fade703c7b_icgraph}
+\end{center}
+\end{figure}
+
+
 \index{sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Relative@{sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Relative}!on\+Entry@{on\+Entry}}
 \index{on\+Entry@{on\+Entry}!sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Relative@{sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Relative}}
 \subsubsection[{\texorpdfstring{on\+Entry() override}{onEntry() override}}]{\setlength{\rightskip}{0pt plus 5cm}void sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cb\+Move\+Cartesian\+Relative\+::on\+Entry (
@@ -104,15 +215,13 @@ Definition at line 15 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
 
 
 
-References sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::move\+Relative\+Cartesian(), offset\+\_\+, and smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Client().
+References move\+Relative\+Cartesian(), and offset\+\_\+.
 
 
 \begin{DoxyCode}
 16 \{
-17     ClMoveGroup *movegroupClient;
-18     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(movegroupClient);
-19     movegroupClient->moveRelativeCartesian(\hyperlink{classsm__moveit_1_1cl__movegroup_1_1CbMoveCartesianRelative_ae6be0657c538de613e203abd9acb761e}{offset\_});
-20 \}
+17     this->\hyperlink{classsm__moveit_1_1cl__movegroup_1_1CbMoveCartesianRelative_a0abbcf6169889ae6788f29fade703c7b}{moveRelativeCartesian}(\hyperlink{classsm__moveit_1_1cl__movegroup_1_1CbMoveCartesianRelative_ae6be0657c538de613e203abd9acb761e}{offset\_});
+18 \}
 \end{DoxyCode}
 
 
@@ -139,12 +248,12 @@ Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ac0cd72d42bd0042
 
 
 
-Definition at line 22 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
+Definition at line 20 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
 
 
 \begin{DoxyCode}
-23 \{
-24 \}
+21 \{
+22 \}
 \end{DoxyCode}
 
 
