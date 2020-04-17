@@ -69,61 +69,51 @@ Definition at line 16 of file st\+\_\+navigation\+\_\+posture.\+h.
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structsm__moveit_1_1pick__states_1_1StNavigationPosture_add5f3d828cb52f6320e5d60fbbf7dec6}{}\label{structsm__moveit_1_1pick__states_1_1StNavigationPosture_add5f3d828cb52f6320e5d60fbbf7dec6}
 
 
-Definition at line 24 of file st\+\_\+navigation\+\_\+posture.\+h.
+Definition at line 41 of file st\+\_\+navigation\+\_\+posture.\+h.
 
 
 
-References sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::on\+Motion\+Execution\+Succedded(), smacc\+::\+I\+Smacc\+State\+::requires\+Client(), and smacc\+::\+Smacc\+State$<$ St\+Navigation\+Posture, S\+S $>$\+::throw\+Sequence\+Finished\+Event().
+References sm\+\_\+moveit\+::cl\+\_\+movegroup\+::\+Cl\+Move\+Group\+::on\+Motion\+Execution\+Succedded(), smacc\+::\+I\+Smacc\+State\+::requires\+Client(), and smacc\+::\+Smacc\+State$<$ St\+Navigation\+Posture, S\+S $>$\+::throw\+Sequence\+Finished\+Event().
 
 
 \begin{DoxyCode}
-25     \{
-26         ros::WallDuration(3).sleep();
-27 
-28         ClMoveGroup *moveGroupClient;
-29         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveGroupClient);
-30 
-31         ClPerceptionSystem *perceptionSystem;
-32         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(perceptionSystem);
-33 
-34         \textcolor{keyword}{auto} moveCartesianRelative = this->getOrthogonal<OrArm>()
-35                                          ->getClientBehavior<CbMoveCartesianRelative>();
-36 
-37         std::vector<std::string> namesposes = moveGroupClient->moveGroupClientInterface.getNamedTargets();
-38 
-39         ROS\_INFO(\textcolor{stringliteral}{"--- named poses: "});
-40         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &posename : namesposes)
-41         \{
-42             ROS\_INFO\_STREAM(\textcolor{stringliteral}{" - named pose: "} << posename);
-43         \}
-44         ROS\_INFO(\textcolor{stringliteral}{"--- named poses"});
-45 
-46         \textcolor{comment}{/*}
-47 \textcolor{comment}{        //geometry\_msgs::Transform transform;}
-48 \textcolor{comment}{        //transform.rotation.w=1;}
-49 \textcolor{comment}{        auto moveCartesianRelative =
-       this->getOrthogonal<OrArm>()->getClientBehavior<CbMoveEndEffectorRelative>();}
-50 \textcolor{comment}{}
-51 \textcolor{comment}{        auto quat = tf::createQuaternionFromRPY(M\_PI, 0, 0);}
-52 \textcolor{comment}{        moveCartesianRelative->transform\_.translation.z = 0.05;}
-53 \textcolor{comment}{        tf::quaternionTFToMsg(quat, moveCartesianRelative->transform\_.rotation);}
-54 \textcolor{comment}{        */}
-55 
-56         moveCartesianRelative->offset\_.z = -0.35;
-57         \textcolor{keyword}{auto} currentTable = perceptionSystem->getCurrentTable();
-58 
-59         \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE0)
-60         \{
-61             moveCartesianRelative->offset\_.x = -0.25;
-62         \}
-63         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE1)
-64         \{
-65             moveCartesianRelative->offset\_.x = 0.25;
-66         \}
-67 
-68         moveGroupClient->onMotionExecutionSuccedded(&
+42     \{
+43         ClMoveGroup *moveGroupClient;
+44         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveGroupClient);
+45         moveGroupClient->onMotionExecutionSuccedded(&
       \hyperlink{classsmacc_1_1SmaccState_a49dcfc25824f7e083dd4b999c49ab2b6}{StNavigationPosture::throwSequenceFinishedEvent}, \textcolor{keyword}{this});
-69     \}
+46 
+47         \textcolor{comment}{/*}
+48 \textcolor{comment}{        ros::WallDuration(3).sleep();}
+49 \textcolor{comment}{}
+50 \textcolor{comment}{        ClPerceptionSystem *perceptionSystem;}
+51 \textcolor{comment}{        this->requiresClient(perceptionSystem);}
+52 \textcolor{comment}{}
+53 \textcolor{comment}{        auto moveCartesianRelative = this->getOrthogonal<OrArm>()}
+54 \textcolor{comment}{                                         ->getClientBehavior<CbMoveCartesianRelative>();}
+55 \textcolor{comment}{}
+56 \textcolor{comment}{        std::vector<std::string> namesposes = moveGroupClient->moveGroupClientInterface.getNamedTargets();}
+57 \textcolor{comment}{}
+58 \textcolor{comment}{        ROS\_INFO("--- named poses: ");}
+59 \textcolor{comment}{        for (auto &posename : namesposes)}
+60 \textcolor{comment}{        \{}
+61 \textcolor{comment}{            ROS\_INFO\_STREAM(" - named pose: " << posename);}
+62 \textcolor{comment}{        \}}
+63 \textcolor{comment}{        ROS\_INFO("--- named poses");}
+64 \textcolor{comment}{}
+65 \textcolor{comment}{        moveCartesianRelative->offset\_.z = -0.35;}
+66 \textcolor{comment}{        auto currentTable = perceptionSystem->getCurrentTable();}
+67 \textcolor{comment}{}
+68 \textcolor{comment}{        if (currentTable == RobotProcessStatus::TABLE0)}
+69 \textcolor{comment}{        \{}
+70 \textcolor{comment}{            moveCartesianRelative->offset\_.x = -0.25;}
+71 \textcolor{comment}{        \}}
+72 \textcolor{comment}{        else if (currentTable == RobotProcessStatus::TABLE1)}
+73 \textcolor{comment}{        \{}
+74 \textcolor{comment}{            moveCartesianRelative->offset\_.x = 0.25;}
+75 \textcolor{comment}{        \}}
+76 \textcolor{comment}{    */}
+77     \}
 \end{DoxyCode}
 
 
@@ -151,8 +141,25 @@ Definition at line 19 of file st\+\_\+navigation\+\_\+posture.\+h.
 
 \begin{DoxyCode}
 20     \{
-21         configure\_orthogonal<OrArm, CbMoveCartesianRelative>();
-22     \}
+21         std::map<std::string, double> jointValues\{
+22             \{\textcolor{stringliteral}{"l\_wheel\_joint"}, 0.2032989263112741\},
+23             \{\textcolor{stringliteral}{"r\_wheel\_joint"}, -0.25798452342087597\},
+24             \{\textcolor{stringliteral}{"torso\_lift\_joint"}, -1.2577603815717127e-05\},
+25             \{\textcolor{stringliteral}{"bellows\_joint"}, 0.006785193726937263\},
+26             \{\textcolor{stringliteral}{"head\_pan\_joint"}, 0.0053190193943049024\},
+27             \{\textcolor{stringliteral}{"head\_tilt\_joint"}, 0.0037173708013753526\},
+28             \{\textcolor{stringliteral}{"shoulder\_pan\_joint"}, 1.3199986235290062\},
+29             \{\textcolor{stringliteral}{"shoulder\_lift\_joint"}, 0.7000699976533715\},
+30             \{\textcolor{stringliteral}{"upperarm\_roll\_joint"}, -7.398079828480064e-05\},
+31             \{\textcolor{stringliteral}{"elbow\_flex\_joint"}, -1.99994794099468\},
+32             \{\textcolor{stringliteral}{"forearm\_roll\_joint"}, 0.00021030168417901507\},
+33             \{\textcolor{stringliteral}{"wrist\_flex\_joint"}, -0.5700976747076689\},
+34             \{\textcolor{stringliteral}{"wrist\_roll\_joint"}, -0.00023467601597193521\},
+35             \{\textcolor{stringliteral}{"l\_gripper\_finger\_joint"}, 0.05001998415439018\},
+36             \{\textcolor{stringliteral}{"r\_gripper\_finger\_joint"}, 0.050039698895249535\}\};
+37 
+38         configure\_orthogonal<OrNavigation, CbMoveJoints>(jointValues);
+39     \}
 \end{DoxyCode}
 
 
