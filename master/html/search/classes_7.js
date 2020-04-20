@@ -7,6 +7,6 @@ var searchData=
   ['ismaccorthogonal',['ISmaccOrthogonal',['../classsmacc_1_1ISmaccOrthogonal.html',1,'smacc']]],
   ['ismaccstate',['ISmaccState',['../classsmacc_1_1ISmaccState.html',1,'smacc']]],
   ['ismaccstatemachine',['ISmaccStateMachine',['../classsmacc_1_1ISmaccStateMachine.html',1,'smacc']]],
-  ['ismaccupdatable',['ISmaccUpdatable',['../classISmaccUpdatable.html',1,'']]],
-  ['ismaccupdatable',['ISmaccUpdatable',['../classsmacc_1_1ISmaccUpdatable.html',1,'smacc']]]
+  ['ismaccupdatable',['ISmaccUpdatable',['../classsmacc_1_1ISmaccUpdatable.html',1,'smacc']]],
+  ['ismaccupdatable',['ISmaccUpdatable',['../classISmaccUpdatable.html',1,'']]]
 ];
