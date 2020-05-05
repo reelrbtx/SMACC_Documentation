@@ -1,0 +1,98 @@
+\hypertarget{namespacecl__move__base__z_1_1forward__local__planner}{}\section{cl\+\_\+move\+\_\+base\+\_\+z\+:\+:forward\+\_\+local\+\_\+planner Namespace Reference}
+\label{namespacecl__move__base__z_1_1forward__local__planner}\index{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner}{Forward\+Local\+Planner}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \hyperlink{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}{optional\+Robot\+Pose} (costmap\+\_\+2d\+::\+Costmap2\+D\+R\+OS $\ast$costmap\+Ros)
+\item 
+void \hyperlink{namespacecl__move__base__z_1_1forward__local__planner_a6cd0f1c55d79df6809ad5d726e190607}{clamp} (geometry\+\_\+msgs\+::\+Twist \&cmd\+\_\+vel, double max\+\_\+linear\+\_\+x\+\_\+speed\+\_\+, double max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner}!clamp@{clamp}}
+\index{clamp@{clamp}!cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner}}
+\subsubsection[{\texorpdfstring{clamp(geometry\+\_\+msgs\+::\+Twist \&cmd\+\_\+vel, double max\+\_\+linear\+\_\+x\+\_\+speed\+\_\+, double max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+)}{clamp(geometry_msgs::Twist &cmd_vel, double max_linear_x_speed_, double max_angular_z_speed_)}}]{\setlength{\rightskip}{0pt plus 5cm}void cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::clamp (
+\begin{DoxyParamCaption}
+\item[{geometry\+\_\+msgs\+::\+Twist \&}]{cmd\+\_\+vel, }
+\item[{double}]{max\+\_\+linear\+\_\+x\+\_\+speed\+\_\+, }
+\item[{double}]{max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecl__move__base__z_1_1forward__local__planner_a6cd0f1c55d79df6809ad5d726e190607}{}\label{namespacecl__move__base__z_1_1forward__local__planner_a6cd0f1c55d79df6809ad5d726e190607}
+
+
+Definition at line 221 of file forward\+\_\+local\+\_\+planner.\+cpp.
+
+
+\begin{DoxyCode}
+222 \{
+223     \textcolor{keywordflow}{if} (max\_angular\_z\_speed\_ == 0 || max\_linear\_x\_speed\_ == 0)
+224         \textcolor{keywordflow}{return};
+225 
+226     \textcolor{keywordflow}{if} (cmd\_vel.angular.z == 0)
+227     \{
+228         cmd\_vel.linear.x = max\_linear\_x\_speed\_;
+229     \}
+230     \textcolor{keywordflow}{else}
+231     \{
+232         \textcolor{keywordtype}{double} kurvature = cmd\_vel.linear.x / cmd\_vel.angular.z;
+233 
+234         \textcolor{keywordtype}{double} linearAuthority = fabs(cmd\_vel.linear.x / max\_linear\_x\_speed\_);
+235         \textcolor{keywordtype}{double} angularAuthority = fabs(cmd\_vel.angular.z / max\_angular\_z\_speed\_);
+236         \textcolor{keywordflow}{if} (linearAuthority < angularAuthority)
+237         \{
+238             \textcolor{comment}{// lets go to maximum linear speed}
+239             cmd\_vel.linear.x = max\_linear\_x\_speed\_;
+240             cmd\_vel.angular.z = kurvature / max\_linear\_x\_speed\_;
+241             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"k="} << kurvature << \textcolor{stringliteral}{"lets go to maximum linear capacity: "} << cmd\_vel);
+242         \}
+243         \textcolor{keywordflow}{else}
+244         \{
+245             \textcolor{comment}{// lets go with maximum angular speed}
+246             cmd\_vel.angular.x = max\_angular\_z\_speed\_;
+247             cmd\_vel.linear.x = kurvature * max\_angular\_z\_speed\_;
+248             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"lets go to maximum angular capacity: "} << cmd\_vel);
+249         \}
+250     \}
+251 \}
+\end{DoxyCode}
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner}!optional\+Robot\+Pose@{optional\+Robot\+Pose}}
+\index{optional\+Robot\+Pose@{optional\+Robot\+Pose}!cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner}}
+\subsubsection[{\texorpdfstring{optional\+Robot\+Pose(costmap\+\_\+2d\+::\+Costmap2\+D\+R\+O\+S $\ast$costmap\+Ros)}{optionalRobotPose(costmap_2d::Costmap2DROS *costmapRos)}}]{\setlength{\rightskip}{0pt plus 5cm}tf\+::\+Stamped$<$tf\+::\+Pose$>$ cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::optional\+Robot\+Pose (
+\begin{DoxyParamCaption}
+\item[{costmap\+\_\+2d\+::\+Costmap2\+D\+R\+OS $\ast$}]{costmap\+Ros}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}{}\label{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}
+
+
+Definition at line 213 of file forward\+\_\+local\+\_\+planner.\+cpp.
+
+
+
+Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner\+::compute\+Velocity\+Commands(), and cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner\+::publish\+Goal\+Marker().
+
+
+\begin{DoxyCode}
+214 \{
+215     tf::Stamped<tf::Pose> tfpose;
+216     costmapRos->getRobotPose(tfpose);
+217     \textcolor{keywordflow}{return} tfpose;
+218 \}
+\end{DoxyCode}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997_icgraph}
+\end{center}
+\end{figure}
+
+

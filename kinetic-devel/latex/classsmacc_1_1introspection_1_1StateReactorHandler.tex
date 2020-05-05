@@ -17,7 +17,7 @@ Collaboration diagram for smacc\+:\+:introspection\+:\+:State\+Reactor\+Handler\
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_ae1a4c47a7ad70ce51a453540a040c0c8}{configure\+State\+Reactor} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1StateReactor}{smacc\+::\+State\+Reactor} $>$ sb)
+void \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_aa77393a686c942744851e4c97f197aba}{configure\+State\+Reactor} (std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1StateReactor}{smacc\+::\+State\+Reactor} $>$ sr)
 \item 
 {\footnotesize template$<$typename T\+Ev $>$ }\\void \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_aef392b9521dc4484ef84082844cd3538}{add\+Input\+Event} ()
 \item 
@@ -26,7 +26,7 @@ void \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_ae1a4c47a7ad7
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::shared\+\_\+ptr$<$ \hyperlink{structsmacc_1_1introspection_1_1SmaccStateReactorInfo}{smacc\+::introspection\+::\+Smacc\+State\+Reactor\+Info} $>$ \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a6dbf5d1458265c3565e18ac77851ae63}{sb\+Info\+\_\+}
+std\+::shared\+\_\+ptr$<$ \hyperlink{structsmacc_1_1introspection_1_1SmaccStateReactorInfo}{smacc\+::introspection\+::\+Smacc\+State\+Reactor\+Info} $>$ \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a30bb48cbd4712aff2683c21b85ef3e8e}{sr\+Info\+\_\+}
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -52,7 +52,7 @@ Definition at line 68 of file smacc\+\_\+state\+\_\+info.\+h.
 )}\hypertarget{classsmacc_1_1introspection_1_1StateReactorHandler_aef392b9521dc4484ef84082844cd3538}{}\label{classsmacc_1_1introspection_1_1StateReactorHandler_aef392b9521dc4484ef84082844cd3538}
 
 
-Definition at line 53 of file smacc\+\_\+state\+\_\+reactor\+\_\+impl.\+h.
+Definition at line 66 of file smacc\+\_\+state\+\_\+reactor\+\_\+impl.\+h.
 
 
 
@@ -60,22 +60,22 @@ References smacc\+::introspection\+::demangle\+Type(), smacc\+::introspection\+:
 
 
 \begin{DoxyCode}
-54 \{
-55     CallbackFunctor functor;
-56     functor.fn = [=](std::shared\_ptr<smacc::StateReactor> sb) \{
-57         ROS\_INFO(\textcolor{stringliteral}{"[%s] State Reactor adding input event: %s"}, \hyperlink{namespacesmacc_1_1introspection_a670e39ccea29952859df4e2d0e45077b}{demangleType}(
-      \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a6dbf5d1458265c3565e18ac77851ae63}{sbInfo\_}->stateReactorType).c\_str(), demangledTypeName<TEv>().c\_str());
-58         sb->addInputEvent<TEv>();
-59     \};
-60 
-61     this->\hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a36afd8fbef7a62112c3a7c81ed364876}{callbacks\_}.push\_back(functor);
-62 
-63     \textcolor{keyword}{auto} evtype = \hyperlink{classsmacc_1_1introspection_1_1TypeInfo_ada1e604cd8bf968a5f816fbace4af881}{TypeInfo::getFromStdTypeInfo}(\textcolor{keyword}{typeid}(TEv));
-64     \textcolor{keyword}{auto} evinfo = std::make\_shared<SmaccEventInfo>(evtype);
-65     EventLabel<TEv>(evinfo->label);
-66 
-67     \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a6dbf5d1458265c3565e18ac77851ae63}{sbInfo\_}->sourceEventTypes.push\_back(evinfo);
-68 \}
+67 \{
+68     CallbackFunctor functor;
+69     functor.fn = [=](std::shared\_ptr<smacc::StateReactor> sr) \{
+70         ROS\_INFO(\textcolor{stringliteral}{"[%s] State Reactor adding input event: %s"}, \hyperlink{namespacesmacc_1_1introspection_a670e39ccea29952859df4e2d0e45077b}{demangleType}(
+      \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a30bb48cbd4712aff2683c21b85ef3e8e}{srInfo\_}->stateReactorType).c\_str(), demangledTypeName<TEv>().c\_str());
+71         sr->addInputEvent<TEv>();
+72     \};
+73 
+74     this->\hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a36afd8fbef7a62112c3a7c81ed364876}{callbacks\_}.push\_back(functor);
+75 
+76     \textcolor{keyword}{auto} evtype = \hyperlink{classsmacc_1_1introspection_1_1TypeInfo_ada1e604cd8bf968a5f816fbace4af881}{TypeInfo::getFromStdTypeInfo}(\textcolor{keyword}{typeid}(TEv));
+77     \textcolor{keyword}{auto} evinfo = std::make\_shared<SmaccEventInfo>(evtype);
+78     EventLabel<TEv>(evinfo->label);
+79 
+80     \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a30bb48cbd4712aff2683c21b85ef3e8e}{srInfo\_}->sourceEventTypes.push\_back(evinfo);
+81 \}
 \end{DoxyCode}
 
 
@@ -91,23 +91,23 @@ Here is the call graph for this function\+:
 
 \index{smacc\+::introspection\+::\+State\+Reactor\+Handler@{smacc\+::introspection\+::\+State\+Reactor\+Handler}!configure\+State\+Reactor@{configure\+State\+Reactor}}
 \index{configure\+State\+Reactor@{configure\+State\+Reactor}!smacc\+::introspection\+::\+State\+Reactor\+Handler@{smacc\+::introspection\+::\+State\+Reactor\+Handler}}
-\subsubsection[{\texorpdfstring{configure\+State\+Reactor(std\+::shared\+\_\+ptr$<$ smacc\+::\+State\+Reactor $>$ sb)}{configureStateReactor(std::shared_ptr< smacc::StateReactor > sb)}}]{\setlength{\rightskip}{0pt plus 5cm}void smacc\+::introspection\+::\+State\+Reactor\+Handler\+::configure\+State\+Reactor (
+\subsubsection[{\texorpdfstring{configure\+State\+Reactor(std\+::shared\+\_\+ptr$<$ smacc\+::\+State\+Reactor $>$ sr)}{configureStateReactor(std::shared_ptr< smacc::StateReactor > sr)}}]{\setlength{\rightskip}{0pt plus 5cm}void smacc\+::introspection\+::\+State\+Reactor\+Handler\+::configure\+State\+Reactor (
 \begin{DoxyParamCaption}
-\item[{std\+::shared\+\_\+ptr$<$ {\bf smacc\+::\+State\+Reactor} $>$}]{sb}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf smacc\+::\+State\+Reactor} $>$}]{sr}
 \end{DoxyParamCaption}
-)}\hypertarget{classsmacc_1_1introspection_1_1StateReactorHandler_ae1a4c47a7ad70ce51a453540a040c0c8}{}\label{classsmacc_1_1introspection_1_1StateReactorHandler_ae1a4c47a7ad70ce51a453540a040c0c8}
+)}\hypertarget{classsmacc_1_1introspection_1_1StateReactorHandler_aa77393a686c942744851e4c97f197aba}{}\label{classsmacc_1_1introspection_1_1StateReactorHandler_aa77393a686c942744851e4c97f197aba}
 
 
-Definition at line 37 of file state\+\_\+behavior.\+cpp.
+Definition at line 42 of file state\+\_\+behavior.\+cpp.
 
 
 \begin{DoxyCode}
-38 \{
-39     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} callback : this->\hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a36afd8fbef7a62112c3a7c81ed364876}{callbacks\_})
-40     \{
-41         callback.fn(sb);
-42     \}
-43 \}
+43 \{
+44     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} callback : this->\hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a36afd8fbef7a62112c3a7c81ed364876}{callbacks\_})
+45     \{
+46         callback.fn(sb);
+47     \}
+48 \}
 \end{DoxyCode}
 \index{smacc\+::introspection\+::\+State\+Reactor\+Handler@{smacc\+::introspection\+::\+State\+Reactor\+Handler}!set\+Output\+Event@{set\+Output\+Event}}
 \index{set\+Output\+Event@{set\+Output\+Event}!smacc\+::introspection\+::\+State\+Reactor\+Handler@{smacc\+::introspection\+::\+State\+Reactor\+Handler}}
@@ -118,7 +118,7 @@ Definition at line 37 of file state\+\_\+behavior.\+cpp.
 )}\hypertarget{classsmacc_1_1introspection_1_1StateReactorHandler_a19af3db16879ed02048f08d9221d361a}{}\label{classsmacc_1_1introspection_1_1StateReactorHandler_a19af3db16879ed02048f08d9221d361a}
 
 
-Definition at line 71 of file smacc\+\_\+state\+\_\+reactor\+\_\+impl.\+h.
+Definition at line 84 of file smacc\+\_\+state\+\_\+reactor\+\_\+impl.\+h.
 
 
 
@@ -126,16 +126,16 @@ References smacc\+::introspection\+::demangle\+Type(), and smacc\+::introspectio
 
 
 \begin{DoxyCode}
-72 \{
-73     CallbackFunctor functor;
-74     functor.fn = [=](std::shared\_ptr<smacc::StateReactor> sb) \{
-75         ROS\_INFO(\textcolor{stringliteral}{"[%s] State Reactor setting output event: %s"}, \hyperlink{namespacesmacc_1_1introspection_a670e39ccea29952859df4e2d0e45077b}{demangleType}(
-      \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a6dbf5d1458265c3565e18ac77851ae63}{sbInfo\_}->stateReactorType).c\_str(), demangledTypeName<TEv>().c\_str());
-76         sb->setOutputEvent<TEv>();
-77     \};
-78 
-79     this->\hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a36afd8fbef7a62112c3a7c81ed364876}{callbacks\_}.push\_back(functor);
-80 \}
+85 \{
+86     CallbackFunctor functor;
+87     functor.fn = [=](std::shared\_ptr<smacc::StateReactor> sr) \{
+88         ROS\_INFO(\textcolor{stringliteral}{"[%s] State Reactor setting output event: %s"}, \hyperlink{namespacesmacc_1_1introspection_a670e39ccea29952859df4e2d0e45077b}{demangleType}(
+      \hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a30bb48cbd4712aff2683c21b85ef3e8e}{srInfo\_}->stateReactorType).c\_str(), demangledTypeName<TEv>().c\_str());
+89         sr->setOutputEvent<TEv>();
+90     \};
+91 
+92     this->\hyperlink{classsmacc_1_1introspection_1_1StateReactorHandler_a36afd8fbef7a62112c3a7c81ed364876}{callbacks\_}.push\_back(functor);
+93 \}
 \end{DoxyCode}
 
 
@@ -159,9 +159,9 @@ Here is the call graph for this function\+:
 
 Definition at line 71 of file smacc\+\_\+state\+\_\+info.\+h.
 
-\index{smacc\+::introspection\+::\+State\+Reactor\+Handler@{smacc\+::introspection\+::\+State\+Reactor\+Handler}!sb\+Info\+\_\+@{sb\+Info\+\_\+}}
-\index{sb\+Info\+\_\+@{sb\+Info\+\_\+}!smacc\+::introspection\+::\+State\+Reactor\+Handler@{smacc\+::introspection\+::\+State\+Reactor\+Handler}}
-\subsubsection[{\texorpdfstring{sb\+Info\+\_\+}{sbInfo_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf smacc\+::introspection\+::\+Smacc\+State\+Reactor\+Info}$>$ smacc\+::introspection\+::\+State\+Reactor\+Handler\+::sb\+Info\+\_\+}\hypertarget{classsmacc_1_1introspection_1_1StateReactorHandler_a6dbf5d1458265c3565e18ac77851ae63}{}\label{classsmacc_1_1introspection_1_1StateReactorHandler_a6dbf5d1458265c3565e18ac77851ae63}
+\index{smacc\+::introspection\+::\+State\+Reactor\+Handler@{smacc\+::introspection\+::\+State\+Reactor\+Handler}!sr\+Info\+\_\+@{sr\+Info\+\_\+}}
+\index{sr\+Info\+\_\+@{sr\+Info\+\_\+}!smacc\+::introspection\+::\+State\+Reactor\+Handler@{smacc\+::introspection\+::\+State\+Reactor\+Handler}}
+\subsubsection[{\texorpdfstring{sr\+Info\+\_\+}{srInfo_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::shared\+\_\+ptr$<${\bf smacc\+::introspection\+::\+Smacc\+State\+Reactor\+Info}$>$ smacc\+::introspection\+::\+State\+Reactor\+Handler\+::sr\+Info\+\_\+}\hypertarget{classsmacc_1_1introspection_1_1StateReactorHandler_a30bb48cbd4712aff2683c21b85ef3e8e}{}\label{classsmacc_1_1introspection_1_1StateReactorHandler_a30bb48cbd4712aff2683c21b85ef3e8e}
 
 
 Definition at line 82 of file smacc\+\_\+state\+\_\+info.\+h.

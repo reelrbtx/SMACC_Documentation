@@ -1,0 +1,122 @@
+\hypertarget{structsm__test2_1_1State1}{}\section{sm\+\_\+test2\+:\+:State1 Struct Reference}
+\label{structsm__test2_1_1State1}\index{sm\+\_\+test2\+::\+State1@{sm\+\_\+test2\+::\+State1}}
+
+
+{\ttfamily \#include $<$st\+\_\+state\+\_\+1.\+h$>$}
+
+
+
+Inheritance diagram for sm\+\_\+test2\+:\+:State1\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{structsm__test2_1_1State1__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sm\+\_\+test2\+:\+:State1\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__test2_1_1State1__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef mpl\+::list$<$ Transition$<$ \hyperlink{structsm__test2_1_1AutomaticTransitionEvent}{Automatic\+Transition\+Event}, \hyperlink{structsm__test2_1_1State2}{State2}, \hyperlink{classSUCCESS}{S\+U\+C\+C\+E\+SS} $>$ $>$ \hyperlink{structsm__test2_1_1State1_a8c6681c606915f444d9286235745b312}{reactions}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{structsm__test2_1_1State1_a1681290d4b5b0480dccbf80848026611}{on\+Entry} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{structsm__test2_1_1State1_a3252c7af0ed6045e6860531fa9ab5120}{static\+Configure} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 11 of file st\+\_\+state\+\_\+1.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{sm\+\_\+test2\+::\+State1@{sm\+\_\+test2\+::\+State1}!reactions@{reactions}}
+\index{reactions@{reactions}!sm\+\_\+test2\+::\+State1@{sm\+\_\+test2\+::\+State1}}
+\subsubsection[{\texorpdfstring{reactions}{reactions}}]{\setlength{\rightskip}{0pt plus 5cm}typedef mpl\+::list$<$ Transition$<${\bf Automatic\+Transition\+Event}, {\bf State2}, {\bf S\+U\+C\+C\+E\+SS}$>$ $>$ {\bf sm\+\_\+test2\+::\+State1\+::reactions}}\hypertarget{structsm__test2_1_1State1_a8c6681c606915f444d9286235745b312}{}\label{structsm__test2_1_1State1_a8c6681c606915f444d9286235745b312}
+
+
+Definition at line 19 of file st\+\_\+state\+\_\+1.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{sm\+\_\+test2\+::\+State1@{sm\+\_\+test2\+::\+State1}!on\+Entry@{on\+Entry}}
+\index{on\+Entry@{on\+Entry}!sm\+\_\+test2\+::\+State1@{sm\+\_\+test2\+::\+State1}}
+\subsubsection[{\texorpdfstring{on\+Entry()}{onEntry()}}]{\setlength{\rightskip}{0pt plus 5cm}void sm\+\_\+test2\+::\+State1\+::on\+Entry (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structsm__test2_1_1State1_a1681290d4b5b0480dccbf80848026611}{}\label{structsm__test2_1_1State1_a1681290d4b5b0480dccbf80848026611}
+
+
+Definition at line 26 of file st\+\_\+state\+\_\+1.\+h.
+
+
+
+References iteration\+Check, and sm\+\_\+test2\+::start\+Time.
+
+
+\begin{DoxyCode}
+27     \{
+28         \hyperlink{namespacesm__test2_a42c85e52b584387fd269df67f8e6c732}{counter}++;
+29                 
+30         \textcolor{keywordflow}{if} (\hyperlink{namespacesm__test2_a42c85e52b584387fd269df67f8e6c732}{counter} > \hyperlink{smacc__diagnostics_2sm__test2_2include_2sm__test2_2states_2st__state__1_8h_a2caa50abf4ceb27dbb5ee2f4fd637031}{iterationCheck} )
+31         \{
+32             ROS\_ERROR(\textcolor{stringliteral}{"ey"});
+33             \textcolor{keyword}{auto} now = ros::Time::now();;
+34             \textcolor{keyword}{auto} ellapsed =  now - \hyperlink{namespacesm__test2_a0b4e1ce52146b421cf6062a0900035aa}{startTime} ;
+35             \textcolor{keyword}{auto} freqHz = \hyperlink{smacc__diagnostics_2sm__test2_2include_2sm__test2_2states_2st__state__1_8h_a2caa50abf4ceb27dbb5ee2f4fd637031}{iterationCheck} / ellapsed.toSec();
+36 
+37             startTime = now;
+38             \textcolor{keywordflow}{while}(ros::ok())
+39             \{
+40                 ros::Duration(0.2).sleep();
+41                 ROS\_ERROR(\textcolor{stringliteral}{"A %d iterations in %lf seconds. Ferquency: %lf Hz"}, 
+      \hyperlink{smacc__diagnostics_2sm__test2_2include_2sm__test2_2states_2st__state__1_8h_a2caa50abf4ceb27dbb5ee2f4fd637031}{iterationCheck},  ellapsed.toSec(), freqHz);
+42             \}
+43         \}
+44 
+45         this->postEvent<AutomaticTransitionEvent>();
+46     \}
+\end{DoxyCode}
+\index{sm\+\_\+test2\+::\+State1@{sm\+\_\+test2\+::\+State1}!static\+Configure@{static\+Configure}}
+\index{static\+Configure@{static\+Configure}!sm\+\_\+test2\+::\+State1@{sm\+\_\+test2\+::\+State1}}
+\subsubsection[{\texorpdfstring{static\+Configure()}{staticConfigure()}}]{\setlength{\rightskip}{0pt plus 5cm}static void sm\+\_\+test2\+::\+State1\+::static\+Configure (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{structsm__test2_1_1State1_a3252c7af0ed6045e6860531fa9ab5120}{}\label{structsm__test2_1_1State1_a3252c7af0ed6045e6860531fa9ab5120}
+
+
+Definition at line 22 of file st\+\_\+state\+\_\+1.\+h.
+
+
+\begin{DoxyCode}
+23     \{
+24     \}
+\end{DoxyCode}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+diagnostics/sm\+\_\+test2/include/sm\+\_\+test2/states/\hyperlink{smacc__diagnostics_2sm__test2_2include_2sm__test2_2states_2st__state__1_8h}{st\+\_\+state\+\_\+1.\+h}\end{DoxyCompactItemize}
