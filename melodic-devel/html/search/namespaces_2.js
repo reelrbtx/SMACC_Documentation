@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keyboard_5fclient',['keyboard_client',['../namespacekeyboard__client.html',1,'']]]
+  ['generate_5fdebs',['generate_debs',['../namespacegenerate__debs.html',1,'']]]
 ];

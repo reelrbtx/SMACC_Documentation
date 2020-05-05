@@ -236,21 +236,21 @@ Referenced by compute\+All\+State\+Message().
 125         \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_abd1d6ca5060c87f6bd11fde3e5b2ac4d}{SmaccStateInfo::stateReactorsInfo}.count(statetid) > 0)
 126         \{
 127             \textcolor{keywordtype}{int} k = 0;
-128             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &sbinfo : \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_abd1d6ca5060c87f6bd11fde3e5b2ac4d}{SmaccStateInfo::stateReactorsInfo}[statetid
+128             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &srinfo : \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_abd1d6ca5060c87f6bd11fde3e5b2ac4d}{SmaccStateInfo::stateReactorsInfo}[statetid
       ])
 129             \{
 130                 smacc\_msgs::SmaccStateReactor stateReactorMsg;
 131                 stateReactorMsg.index = k++;
-132                 stateReactorMsg.type\_name = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(sbinfo->stateReactorType->name());
+132                 stateReactorMsg.type\_name = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(srinfo->stateReactorType->name());
 133 
 134                 ss << \textcolor{stringliteral}{" - state reactor: "} << stateReactorMsg.type\_name << std::endl;
-135                 \textcolor{keywordflow}{if} (sbinfo->objectTagType != \textcolor{keyword}{nullptr})
+135                 \textcolor{keywordflow}{if} (srinfo->objectTagType != \textcolor{keyword}{nullptr})
 136                 \{
-137                     stateReactorMsg.object\_tag = sbinfo->objectTagType->getFullName();
+137                     stateReactorMsg.object\_tag = srinfo->objectTagType->getFullName();
 138                     ss << \textcolor{stringliteral}{"        - object tag: "} << stateReactorMsg.object\_tag << std::endl;
 139                 \}
 140 
-141                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &tev : sbinfo->sourceEventTypes)
+141                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &tev : srinfo->sourceEventTypes)
 142                 \{
 143                     \textcolor{comment}{// WE SHOULD CREATE A SMACC\_EVENT\_INFO TYPE, also using in typewalker transition}
 144                     \textcolor{keyword}{auto} eventTypeName = tev->getEventTypeName();
