@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['smacc_5faction_5fclient_5fdefinition',['SMACC_ACTION_CLIENT_DEFINITION',['../smacc__action__client__base_8h.html#a2f7b218da8ed393458556e0401ffc419',1,'smacc_action_client_base.h']]]
+  ['waypoints_5feventcount',['WAYPOINTS_EVENTCOUNT',['../waypoints__event__dispatcher_8h.html#add4ce0c5d955be6047a4820c63e7df08',1,'waypoints_event_dispatcher.h']]]
 ];
