@@ -203,237 +203,241 @@ References alpha\+\_\+offset\+\_\+, betta\+\_\+offset\+\_\+, carrot\+\_\+distanc
 265     tf::Stamped<tf::Pose> tfpose = \hyperlink{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}{optionalRobotPose}(
       \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a37791fea67ce92c6e38e3727311e533b}{costmapRos\_});
 266 
-267     tf::Quaternion q = tfpose.getRotation();
-268 
-269     \textcolor{keywordtype}{bool} ok = \textcolor{keyword}{false};
-270     \textcolor{keywordflow}{while} (!ok)
-271     \{
-272         \textcolor{comment}{// iterate the point from the current position and ahead until reaching a new goal point in the
+267     geometry\_msgs::PoseStamped currentPose;
+268     tf::poseStampedTFToMsg(tfpose,currentPose);
+269     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[ForwardLocalPlanner] current robot pose "} << currentPose);
+270 
+271     tf::Quaternion q = tfpose.getRotation();
+272 
+273     \textcolor{keywordtype}{bool} ok = \textcolor{keyword}{false};
+274     \textcolor{keywordflow}{while} (!ok)
+275     \{
+276         \textcolor{comment}{// iterate the point from the current position and ahead until reaching a new goal point in the
        path}
-273         \textcolor{keywordflow}{while} (!ok && \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} < \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size())
-274         \{
-275             \textcolor{keyword}{auto} &pose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}[\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}];
-276             \textcolor{keyword}{const} geometry\_msgs::Point &p = pose.pose.position;
-277             tf::Quaternion q;
-278             tf::quaternionMsgToTF(pose.pose.orientation, q);
-279 
-280             \textcolor{comment}{// take error from the current position to the path point}
-281             \textcolor{keywordtype}{double} dx = p.x - tfpose.getOrigin().x();
-282             \textcolor{keywordtype}{double} dy = p.y - tfpose.getOrigin().y();
-283             \textcolor{keywordtype}{double} dist = sqrt(dx * dx + dy * dy);
-284 
-285             \textcolor{keywordtype}{double} pangle = tf::getYaw(q);
-286             \textcolor{keywordtype}{double} angle = tf::getYaw(tfpose.getRotation());
-287             \textcolor{keywordtype}{double} angular\_error = angles::shortest\_angular\_distance(pangle, angle);
+277         \textcolor{keywordflow}{while} (!ok && \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} < \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size())
+278         \{
+279             \textcolor{keyword}{auto} &pose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}[\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}];
+280             \textcolor{keyword}{const} geometry\_msgs::Point &p = pose.pose.position;
+281             tf::Quaternion q;
+282             tf::quaternionMsgToTF(pose.pose.orientation, q);
+283 
+284             \textcolor{comment}{// take error from the current position to the path point}
+285             \textcolor{keywordtype}{double} dx = p.x - tfpose.getOrigin().x();
+286             \textcolor{keywordtype}{double} dy = p.y - tfpose.getOrigin().y();
+287             \textcolor{keywordtype}{double} dist = sqrt(dx * dx + dy * dy);
 288 
-289             \textcolor{keywordflow}{if} (dist >= \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a4101afebb7e2a5eb0a2144a5fb553a92}{carrot\_distance\_} || angular\_error > 0.1)
-290             \{
-291                 \textcolor{comment}{// the target pose is enough different to be defined as a target}
-292                 ok = \textcolor{keyword}{true};
-293                 ROS\_INFO(\textcolor{stringliteral}{"current index: %d, carrot goal percentaje: %lf, dist: %lf, maxdist: %lf,
+289             \textcolor{keywordtype}{double} pangle = tf::getYaw(q);
+290             \textcolor{keywordtype}{double} angle = tf::getYaw(tfpose.getRotation());
+291             \textcolor{keywordtype}{double} angular\_error = angles::shortest\_angular\_distance(pangle, angle);
+292 
+293             \textcolor{keywordflow}{if} (dist >= \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a4101afebb7e2a5eb0a2144a5fb553a92}{carrot\_distance\_} || angular\_error > 0.1)
+294             \{
+295                 \textcolor{comment}{// the target pose is enough different to be defined as a target}
+296                 ok = \textcolor{keyword}{true};
+297                 ROS\_INFO(\textcolor{stringliteral}{"current index: %d, carrot goal percentaje: %lf, dist: %lf, maxdist: %lf,
        angle\_error: %lf"}, \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}, 100.0 * \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} / 
       \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size(), dist, \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a4101afebb7e2a5eb0a2144a5fb553a92}{carrot\_distance\_}, angular\_error);
-294             \}
-295             \textcolor{keywordflow}{else}
-296             \{
-297                 \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}++;
 298             \}
-299         \}
-300 
-301         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} >= \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size())
-302         \{
-303             \textcolor{comment}{// even the latest point is quite similar, then take the last since it is the final goal}
-304             cmd\_vel.linear.x = 0;
-305             cmd\_vel.angular.z = 0;
-306             \textcolor{comment}{//ROS\_INFO("End Local planner");}
-307             ok = \textcolor{keyword}{true};
-308             \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size() - 1;
-309             \textcolor{comment}{//return true;}
-310         \}
-311     \}
-312 
-313     \textcolor{comment}{//ROS\_INFO("pose control algorithm");}
-314 
-315     \textcolor{keyword}{const} geometry\_msgs::PoseStamped &finalgoalpose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.back();
-316     \textcolor{keyword}{const} geometry\_msgs::PoseStamped &goalpose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}[\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}];
-317     \textcolor{keyword}{const} geometry\_msgs::Point &goalposition = goalpose.pose.position;
+299             \textcolor{keywordflow}{else}
+300             \{
+301                 \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}++;
+302             \}
+303         \}
+304 
+305         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} >= \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size())
+306         \{
+307             \textcolor{comment}{// even the latest point is quite similar, then take the last since it is the final goal}
+308             cmd\_vel.linear.x = 0;
+309             cmd\_vel.angular.z = 0;
+310             \textcolor{comment}{//ROS\_INFO("End Local planner");}
+311             ok = \textcolor{keyword}{true};
+312             \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size() - 1;
+313             \textcolor{comment}{//return true;}
+314         \}
+315     \}
+316 
+317     \textcolor{comment}{//ROS\_INFO("pose control algorithm");}
 318 
-319     tf::Quaternion goalQ;
-320     tf::quaternionMsgToTF(goalpose.pose.orientation, goalQ);
-321     \textcolor{comment}{//ROS\_INFO\_STREAM("Plan goal quaternion at "<< goalpose.pose.orientation);}
+319     \textcolor{keyword}{const} geometry\_msgs::PoseStamped &finalgoalpose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.back();
+320     \textcolor{keyword}{const} geometry\_msgs::PoseStamped &goalpose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}[\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}];
+321     \textcolor{keyword}{const} geometry\_msgs::Point &goalposition = goalpose.pose.position;
 322 
-323     \textcolor{comment}{//goal orientation (global frame)}
-324     \textcolor{keywordtype}{double} betta = tf::getYaw(goalpose.pose.orientation) + \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a935db3e785e3276d42b34d58011e793c}{betta\_offset\_};
-325 
-326     \textcolor{keywordtype}{double} dx = goalposition.x - tfpose.getOrigin().x();
-327     \textcolor{keywordtype}{double} dy = goalposition.y - tfpose.getOrigin().y();
-328 
-329     \textcolor{comment}{//distance error to the targetpoint}
-330     \textcolor{keywordtype}{double} rho\_error = sqrt(dx * dx + dy * dy);
-331 
-332     \textcolor{comment}{//current angle}
-333     \textcolor{keywordtype}{double} theta = tf::getYaw(q);
-334     \textcolor{keywordtype}{double} alpha = atan2(dy, dx);
-335     alpha = alpha + \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a3d1b7e2ddf54efd67e4935875c7b6a67}{alpha\_offset\_};
-336 
-337     \textcolor{keywordtype}{double} alpha\_error = angles::shortest\_angular\_distance(alpha, theta);
-338     \textcolor{keywordtype}{double} betta\_error = angles::shortest\_angular\_distance(betta, theta);
-339 
-340     \textcolor{keywordtype}{double} vetta; \textcolor{comment}{// = k\_rho\_ * rho\_error;}
-341     \textcolor{keywordtype}{double} gamma; \textcolor{comment}{//= k\_alpha\_ * alpha\_error + k\_betta\_ * betta\_error;}
-342 
-343     \textcolor{keywordflow}{if} (rho\_error > \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_acd2ed91ee166f03faeeb9d6a4b91084b}{xy\_goal\_tolerance\_})
-344     \{
-345         vetta = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a8ad1b04b0bdaa8a7bb878f5e5cebd4f8}{k\_rho\_} * rho\_error;
-346         gamma = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a530117a51f06e426b6aacc08bbd38fff}{k\_alpha\_} * alpha\_error;
-347     \}
-348     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (fabs(betta\_error) >= \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a7ea1ca266850c7b847a2355f489e6041}{yaw\_goal\_tolerance\_}) \textcolor{comment}{// pureSpining}
-349     \{
-350         vetta = 0;
-351         gamma = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a7b89ccccd288e5384154e7d5b64b4014}{k\_betta\_} * betta\_error;
-352     \}
-353     \textcolor{keywordflow}{else}
-354     \{
-355         ROS\_DEBUG(\textcolor{stringliteral}{"GOAL REACHED"});
-356         vetta = 0;
-357         gamma = 0;
-358         \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a9d51ad6f0eb364ebd830526280bdf4fc}{goalReached\_} = \textcolor{keyword}{true};
-359     \}
-360 
-361     \textcolor{comment}{// linear speed clamp}
-362     \textcolor{keywordflow}{if} (vetta > \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ab2e354dca208a2df60e905c9ee1fcd75}{max\_linear\_x\_speed\_})
-363     \{
-364         vetta = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ab2e354dca208a2df60e905c9ee1fcd75}{max\_linear\_x\_speed\_};
-365     \}
-366     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (vetta < -\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ab2e354dca208a2df60e905c9ee1fcd75}{max\_linear\_x\_speed\_})
+323     tf::Quaternion goalQ;
+324     tf::quaternionMsgToTF(goalpose.pose.orientation, goalQ);
+325     \textcolor{comment}{//ROS\_INFO\_STREAM("Plan goal quaternion at "<< goalpose.pose.orientation);}
+326 
+327     \textcolor{comment}{//goal orientation (global frame)}
+328     \textcolor{keywordtype}{double} betta = tf::getYaw(goalpose.pose.orientation) + \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a935db3e785e3276d42b34d58011e793c}{betta\_offset\_};
+329 
+330     \textcolor{keywordtype}{double} dx = goalposition.x - tfpose.getOrigin().x();
+331     \textcolor{keywordtype}{double} dy = goalposition.y - tfpose.getOrigin().y();
+332 
+333     \textcolor{comment}{//distance error to the targetpoint}
+334     \textcolor{keywordtype}{double} rho\_error = sqrt(dx * dx + dy * dy);
+335 
+336     \textcolor{comment}{//current angle}
+337     \textcolor{keywordtype}{double} theta = tf::getYaw(q);
+338     \textcolor{keywordtype}{double} alpha = atan2(dy, dx);
+339     alpha = alpha + \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a3d1b7e2ddf54efd67e4935875c7b6a67}{alpha\_offset\_};
+340 
+341     \textcolor{keywordtype}{double} alpha\_error = angles::shortest\_angular\_distance(alpha, theta);
+342     \textcolor{keywordtype}{double} betta\_error = angles::shortest\_angular\_distance(betta, theta);
+343 
+344     \textcolor{keywordtype}{double} vetta; \textcolor{comment}{// = k\_rho\_ * rho\_error;}
+345     \textcolor{keywordtype}{double} gamma; \textcolor{comment}{//= k\_alpha\_ * alpha\_error + k\_betta\_ * betta\_error;}
+346 
+347     \textcolor{keywordflow}{if} (rho\_error > \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_acd2ed91ee166f03faeeb9d6a4b91084b}{xy\_goal\_tolerance\_})
+348     \{
+349         vetta = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a8ad1b04b0bdaa8a7bb878f5e5cebd4f8}{k\_rho\_} * rho\_error;
+350         gamma = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a530117a51f06e426b6aacc08bbd38fff}{k\_alpha\_} * alpha\_error;
+351     \}
+352     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (fabs(betta\_error) >= \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a7ea1ca266850c7b847a2355f489e6041}{yaw\_goal\_tolerance\_}) \textcolor{comment}{// pureSpining}
+353     \{
+354         vetta = 0;
+355         gamma = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a7b89ccccd288e5384154e7d5b64b4014}{k\_betta\_} * betta\_error;
+356     \}
+357     \textcolor{keywordflow}{else}
+358     \{
+359         ROS\_DEBUG(\textcolor{stringliteral}{"GOAL REACHED"});
+360         vetta = 0;
+361         gamma = 0;
+362         \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a9d51ad6f0eb364ebd830526280bdf4fc}{goalReached\_} = \textcolor{keyword}{true};
+363     \}
+364 
+365     \textcolor{comment}{// linear speed clamp}
+366     \textcolor{keywordflow}{if} (vetta > \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ab2e354dca208a2df60e905c9ee1fcd75}{max\_linear\_x\_speed\_})
 367     \{
-368         vetta = -\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ab2e354dca208a2df60e905c9ee1fcd75}{max\_linear\_x\_speed\_};
+368         vetta = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ab2e354dca208a2df60e905c9ee1fcd75}{max\_linear\_x\_speed\_};
 369     \}
-370 
-371     \textcolor{comment}{// angular speed clamp}
-372     \textcolor{keywordflow}{if} (gamma > \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a198154e40443d46292d8eba1d81ad34f}{max\_angular\_z\_speed\_})
-373     \{
-374         gamma = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a198154e40443d46292d8eba1d81ad34f}{max\_angular\_z\_speed\_};
-375     \}
-376     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gamma < -\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a198154e40443d46292d8eba1d81ad34f}{max\_angular\_z\_speed\_})
+370     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (vetta < -\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ab2e354dca208a2df60e905c9ee1fcd75}{max\_linear\_x\_speed\_})
+371     \{
+372         vetta = -\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ab2e354dca208a2df60e905c9ee1fcd75}{max\_linear\_x\_speed\_};
+373     \}
+374 
+375     \textcolor{comment}{// angular speed clamp}
+376     \textcolor{keywordflow}{if} (gamma > \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a198154e40443d46292d8eba1d81ad34f}{max\_angular\_z\_speed\_})
 377     \{
-378         gamma = -\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a198154e40443d46292d8eba1d81ad34f}{max\_angular\_z\_speed\_};
+378         gamma = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a198154e40443d46292d8eba1d81ad34f}{max\_angular\_z\_speed\_};
 379     \}
-380 
-381     cmd\_vel.linear.x = vetta;
-382     cmd\_vel.angular.z = gamma;
-383 
-384     \textcolor{comment}{//clamp(cmd\_vel, max\_linear\_x\_speed\_, max\_angular\_z\_speed\_);}
-385 
-386     \textcolor{comment}{//ROS\_INFO\_STREAM("Local planner: "<< cmd\_vel);}
+380     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gamma < -\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a198154e40443d46292d8eba1d81ad34f}{max\_angular\_z\_speed\_})
+381     \{
+382         gamma = -\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a198154e40443d46292d8eba1d81ad34f}{max\_angular\_z\_speed\_};
+383     \}
+384 
+385     cmd\_vel.linear.x = vetta;
+386     cmd\_vel.angular.z = gamma;
 387 
-388     \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ae2ef5a1d00495eb7a6c22ec35ab8baf2}{publishGoalMarker}(goalposition.x, goalposition.y, betta);
+388     \textcolor{comment}{//clamp(cmd\_vel, max\_linear\_x\_speed\_, max\_angular\_z\_speed\_);}
 389 
-390     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"Forward local planner,"} << std::endl
-391                                               << \textcolor{stringliteral}{" theta: "} << theta << std::endl
-392                                               << \textcolor{stringliteral}{" betta: "} << betta << std::endl
-393                                               << \textcolor{stringliteral}{" err\_x: "} << dx << std::endl
-394                                               << \textcolor{stringliteral}{" err\_y:"} << dy << std::endl
-395                                               << \textcolor{stringliteral}{" rho\_error:"} << rho\_error << std::endl
-396                                               << \textcolor{stringliteral}{" alpha\_error:"} << alpha\_error << std::endl
-397                                               << \textcolor{stringliteral}{" betta\_error:"} << betta\_error << std::endl
-398                                               << \textcolor{stringliteral}{" vetta:"} << vetta << std::endl
-399                                               << \textcolor{stringliteral}{" gamma:"} << gamma << std::endl
-400                                               << \textcolor{stringliteral}{" xy\_goal\_tolerance:"} << 
+390     \textcolor{comment}{//ROS\_INFO\_STREAM("Local planner: "<< cmd\_vel);}
+391 
+392     \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ae2ef5a1d00495eb7a6c22ec35ab8baf2}{publishGoalMarker}(goalposition.x, goalposition.y, betta);
+393 
+394     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"Forward local planner,"} << std::endl
+395                                               << \textcolor{stringliteral}{" theta: "} << theta << std::endl
+396                                               << \textcolor{stringliteral}{" betta: "} << betta << std::endl
+397                                               << \textcolor{stringliteral}{" err\_x: "} << dx << std::endl
+398                                               << \textcolor{stringliteral}{" err\_y:"} << dy << std::endl
+399                                               << \textcolor{stringliteral}{" rho\_error:"} << rho\_error << std::endl
+400                                               << \textcolor{stringliteral}{" alpha\_error:"} << alpha\_error << std::endl
+401                                               << \textcolor{stringliteral}{" betta\_error:"} << betta\_error << std::endl
+402                                               << \textcolor{stringliteral}{" vetta:"} << vetta << std::endl
+403                                               << \textcolor{stringliteral}{" gamma:"} << gamma << std::endl
+404                                               << \textcolor{stringliteral}{" xy\_goal\_tolerance:"} << 
       \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_acd2ed91ee166f03faeeb9d6a4b91084b}{xy\_goal\_tolerance\_} << std::endl
-401                                               << \textcolor{stringliteral}{" yaw\_goal\_tolerance:"} << 
+405                                               << \textcolor{stringliteral}{" yaw\_goal\_tolerance:"} << 
       \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a7ea1ca266850c7b847a2355f489e6041}{yaw\_goal\_tolerance\_} << std::endl);
-402 
-403     \textcolor{comment}{//if(cmd\_vel.linear.x==0 && cmd\_vel.angular.z == 0 )}
-404     \textcolor{comment}{//\{}
-405     \textcolor{comment}{//\}}
 406 
-407     \textcolor{comment}{//integrate trajectory and check collision}
-408 
-409     tf::Stamped<tf::Pose> global\_pose = \hyperlink{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}{optionalRobotPose}(
-      \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a37791fea67ce92c6e38e3727311e533b}{costmapRos\_});
+407     \textcolor{comment}{//if(cmd\_vel.linear.x==0 && cmd\_vel.angular.z == 0 )}
+408     \textcolor{comment}{//\{}
+409     \textcolor{comment}{//\}}
 410 
-411     \textcolor{comment}{//->getRobotPose(global\_pose);}
+411     \textcolor{comment}{//integrate trajectory and check collision}
 412 
-413     \textcolor{keyword}{auto} *costmap2d = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a37791fea67ce92c6e38e3727311e533b}{costmapRos\_}->getCostmap();
-414     \textcolor{keyword}{auto} yaw = tf::getYaw(global\_pose.getRotation());
-415 
-416     \textcolor{keyword}{auto} &pos = global\_pose.getOrigin();
-417 
-418     Eigen::Vector3f currentpose(pos.x(), pos.y(), yaw);
-419     Eigen::Vector3f currentvel(cmd\_vel.linear.x, cmd\_vel.linear.y, cmd\_vel.angular.z);
-420     std::vector<Eigen::Vector3f> trajectory;
-421     this->\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a3e852f81ccae82c56d7f25e56def899c}{generateTrajectory}(currentpose, currentvel, 0.8 \textcolor{comment}{/*meters*/}, M\_PI / 8 \textcolor{comment}{/*rads*/}, 
+413     tf::Stamped<tf::Pose> global\_pose = \hyperlink{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}{optionalRobotPose}(
+      \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a37791fea67ce92c6e38e3727311e533b}{costmapRos\_});
+414 
+415     \textcolor{comment}{//->getRobotPose(global\_pose);}
+416 
+417     \textcolor{keyword}{auto} *costmap2d = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a37791fea67ce92c6e38e3727311e533b}{costmapRos\_}->getCostmap();
+418     \textcolor{keyword}{auto} yaw = tf::getYaw(global\_pose.getRotation());
+419 
+420     \textcolor{keyword}{auto} &pos = global\_pose.getOrigin();
+421 
+422     Eigen::Vector3f currentpose(pos.x(), pos.y(), yaw);
+423     Eigen::Vector3f currentvel(cmd\_vel.linear.x, cmd\_vel.linear.y, cmd\_vel.angular.z);
+424     std::vector<Eigen::Vector3f> trajectory;
+425     this->\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a3e852f81ccae82c56d7f25e56def899c}{generateTrajectory}(currentpose, currentvel, 0.8 \textcolor{comment}{/*meters*/}, M\_PI / 8 \textcolor{comment}{/*rads*/}, 
       3.0 \textcolor{comment}{/*seconds*/}, 0.05 \textcolor{comment}{/*seconds*/}, trajectory);
-422 
-423     \textcolor{comment}{// check plan rejection}
-424     \textcolor{keywordtype}{bool} aceptedplan = \textcolor{keyword}{true};
-425 
-426     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
-427 
-428     \textcolor{keywordtype}{int} i = 0;
-429     \textcolor{comment}{// ROS\_INFO\_STREAM("lplanner goal: " << finalgoalpose.pose.position);}
-430     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
-431     \{
-432         \textcolor{keywordtype}{float} dx = p[0] - finalgoalpose.pose.position.x;
-433         \textcolor{keywordtype}{float} dy = p[1] - finalgoalpose.pose.position.y;
-434 
-435         \textcolor{keywordtype}{float} dst = sqrt(dx * dx + dy * dy);
-436         \textcolor{keywordflow}{if} (dst < \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_acd2ed91ee166f03faeeb9d6a4b91084b}{xy\_goal\_tolerance\_})
-437         \{
-438             \textcolor{comment}{//  ROS\_INFO("trajectory checking skipped, goal reached");}
-439             \textcolor{keywordflow}{break};
-440         \}
-441 
-442         costmap2d->worldToMap(p[0], p[1], mx, my);
-443         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cost = costmap2d->getCost(mx, my);
-444 
-445         \textcolor{comment}{// ROS\_INFO("checking cost pt %d [%lf, %lf] cell[%d,%d] = %d", i, p[0], p[1], mx, my, cost);}
-446         \textcolor{comment}{// ROS\_INFO\_STREAM("cost: " << cost);}
-447 
-448         \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
-449         \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
-450         \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
-451         \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
-452 
-453         \textcolor{keywordflow}{if} (costmap2d->getCost(mx, my) >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
-454         \{
-455             aceptedplan = \textcolor{keyword}{false};
-456             \textcolor{comment}{// ROS\_WARN("ABORTED LOCAL PLAN BECAUSE OBSTACLE DETEDTED");}
-457             \textcolor{keywordflow}{break};
-458         \}
-459         i++;
-460     \}
-461 
-462     \textcolor{keywordflow}{if} (aceptedplan)
-463     \{
-464         \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a5061c2aa0d8d2309f1669e402741f0fa}{waiting\_} = \textcolor{keyword}{false};
-465         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-466     \}
-467     \textcolor{keywordflow}{else}
-468     \{
-469         \textcolor{comment}{// stop and wait}
-470         cmd\_vel.linear.x = 0;
-471         cmd\_vel.angular.z = 0;
-472 
-473         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a5061c2aa0d8d2309f1669e402741f0fa}{waiting\_} == \textcolor{keyword}{false})
-474         \{
-475             \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a5061c2aa0d8d2309f1669e402741f0fa}{waiting\_} = \textcolor{keyword}{true};
-476             \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a85799b3050ae9125ee74c46c38cb2267}{waitingStamp\_} = ros::Time::now();
-477         \}
-478         \textcolor{keywordflow}{else}
-479         \{
-480             \textcolor{keyword}{auto} waitingduration = ros::Time::now() - \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a85799b3050ae9125ee74c46c38cb2267}{waitingStamp\_};
-481 
-482             \textcolor{keywordflow}{if} (waitingduration > this->\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_aaac5a8ee9921d71ada7061df5180de4b}{waitingTimeout\_})
-483             \{
-484                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-485             \}
-486         \}
-487 
-488         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-489     \}
-490 \}
+426 
+427     \textcolor{comment}{// check plan rejection}
+428     \textcolor{keywordtype}{bool} aceptedplan = \textcolor{keyword}{true};
+429 
+430     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
+431 
+432     \textcolor{keywordtype}{int} i = 0;
+433     \textcolor{comment}{// ROS\_INFO\_STREAM("lplanner goal: " << finalgoalpose.pose.position);}
+434     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
+435     \{
+436         \textcolor{keywordtype}{float} dx = p[0] - finalgoalpose.pose.position.x;
+437         \textcolor{keywordtype}{float} dy = p[1] - finalgoalpose.pose.position.y;
+438 
+439         \textcolor{keywordtype}{float} dst = sqrt(dx * dx + dy * dy);
+440         \textcolor{keywordflow}{if} (dst < \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_acd2ed91ee166f03faeeb9d6a4b91084b}{xy\_goal\_tolerance\_})
+441         \{
+442             \textcolor{comment}{//  ROS\_INFO("trajectory checking skipped, goal reached");}
+443             \textcolor{keywordflow}{break};
+444         \}
+445 
+446         costmap2d->worldToMap(p[0], p[1], mx, my);
+447         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cost = costmap2d->getCost(mx, my);
+448 
+449         \textcolor{comment}{// ROS\_INFO("checking cost pt %d [%lf, %lf] cell[%d,%d] = %d", i, p[0], p[1], mx, my, cost);}
+450         \textcolor{comment}{// ROS\_INFO\_STREAM("cost: " << cost);}
+451 
+452         \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
+453         \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
+454         \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
+455         \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
+456 
+457         \textcolor{keywordflow}{if} (costmap2d->getCost(mx, my) >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
+458         \{
+459             aceptedplan = \textcolor{keyword}{false};
+460             \textcolor{comment}{// ROS\_WARN("ABORTED LOCAL PLAN BECAUSE OBSTACLE DETEDTED");}
+461             \textcolor{keywordflow}{break};
+462         \}
+463         i++;
+464     \}
+465 
+466     \textcolor{keywordflow}{if} (aceptedplan)
+467     \{
+468         \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a5061c2aa0d8d2309f1669e402741f0fa}{waiting\_} = \textcolor{keyword}{false};
+469         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+470     \}
+471     \textcolor{keywordflow}{else}
+472     \{
+473         \textcolor{comment}{// stop and wait}
+474         cmd\_vel.linear.x = 0;
+475         cmd\_vel.angular.z = 0;
+476 
+477         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a5061c2aa0d8d2309f1669e402741f0fa}{waiting\_} == \textcolor{keyword}{false})
+478         \{
+479             \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a5061c2aa0d8d2309f1669e402741f0fa}{waiting\_} = \textcolor{keyword}{true};
+480             \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a85799b3050ae9125ee74c46c38cb2267}{waitingStamp\_} = ros::Time::now();
+481         \}
+482         \textcolor{keywordflow}{else}
+483         \{
+484             \textcolor{keyword}{auto} waitingduration = ros::Time::now() - \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a85799b3050ae9125ee74c46c38cb2267}{waitingStamp\_};
+485 
+486             \textcolor{keywordflow}{if} (waitingduration > this->\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_aaac5a8ee9921d71ada7061df5180de4b}{waitingTimeout\_})
+487             \{
+488                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+489             \}
+490         \}
+491 
+492         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+493     \}
+494 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -692,7 +696,7 @@ True if achieved, false otherwise
 \end{DoxyReturn}
 \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_aafab1572c86c2e9d0b003e36fe9bfb88}{is\+Goal\+Reached()} 
 
-Definition at line 497 of file forward\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 501 of file forward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -700,9 +704,9 @@ References goal\+Reached\+\_\+.
 
 
 \begin{DoxyCode}
-498 \{
-499     \textcolor{keywordflow}{return} \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a9d51ad6f0eb364ebd830526280bdf4fc}{goalReached\_};
-500 \}
+502 \{
+503     \textcolor{keywordflow}{return} \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a9d51ad6f0eb364ebd830526280bdf4fc}{goalReached\_};
+504 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ae2ef5a1d00495eb7a6c22ec35ab8baf2}\label{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_ae2ef5a1d00495eb7a6c22ec35ab8baf2}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner}!publish\+Goal\+Marker@{publish\+Goal\+Marker}}
@@ -795,7 +799,7 @@ True if the plan was updated successfully, false otherwise
 \end{DoxyReturn}
 \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_aac2e1031779520d47a4864acbc312939}{set\+Plan()} 
 
-Definition at line 507 of file forward\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 511 of file forward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -803,11 +807,11 @@ References goal\+Reached\+\_\+, and plan\+\_\+.
 
 
 \begin{DoxyCode}
-508 \{
-509     \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_} = plan;
-510     \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a9d51ad6f0eb364ebd830526280bdf4fc}{goalReached\_} = \textcolor{keyword}{false};
-511     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-512 \}
+512 \{
+513     \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_} = plan;
+514     \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a9d51ad6f0eb364ebd830526280bdf4fc}{goalReached\_} = \textcolor{keyword}{false};
+515     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+516 \}
 \end{DoxyCode}
 
 

@@ -89,7 +89,9 @@ References pose\+\_\+, and reference\+Frame\+\_\+.
 15     , \hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized}(\textcolor{keyword}{false})
 16 \{
 17     this->\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}.header.frame\_id = \hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_};
-18 \}
+18     ROS\_INFO(\textcolor{stringliteral}{"[Pose] Creating Pose tracker component to track %s in the reference frame %s"}, targetFrame.
+      c\_str(), referenceFrame.c\_str());
+19 \}
 \end{DoxyCode}
 
 
@@ -204,7 +206,7 @@ Implements \hyperlink{classsmacc_1_1ISmaccUpdatable_a84ee0520cbefdb1d412bed54650
 
 
 
-Definition at line 50 of file cp\+\_\+pose.\+cpp.
+Definition at line 51 of file cp\+\_\+pose.\+cpp.
 
 
 
@@ -212,26 +214,26 @@ References is\+Initialized, m\+\_\+mutex\+\_\+, pose\+\_\+, pose\+Frame\+Name\+\
 
 
 \begin{DoxyCode}
-51 \{
-52     tf::StampedTransform transform;
-53     \textcolor{keywordflow}{try}
-54     \{
-55         this->\hyperlink{classcl__move__base__z_1_1Pose_a6d669632db37e0e51734d2a65e8dcd41}{tfListener\_}.lookupTransform(\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}, 
+52 \{
+53     tf::StampedTransform transform;
+54     \textcolor{keywordflow}{try}
+55     \{
+56         this->\hyperlink{classcl__move__base__z_1_1Pose_a6d669632db37e0e51734d2a65e8dcd41}{tfListener\_}.lookupTransform(\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}, 
       \hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_},
-56                                           ros::Time(0), transform);
-57 
-58         \{
-59             std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\_mutex\_});
-60             tf::poseTFToMsg(transform, this->\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}.pose);
-61             this->\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}.header.stamp = transform.stamp\_;
-62             this->\hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized} = \textcolor{keyword}{true};
-63         \}
-64     \}
-65     \textcolor{keywordflow}{catch} (tf::TransformException ex)
-66     \{
-67         ROS\_ERROR\_THROTTLE(1, \textcolor{stringliteral}{"Component pose is failing on pose update: %s"}, ex.what());
-68     \}
-69 \}
+57                                           ros::Time(0), transform);
+58 
+59         \{
+60             std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\_mutex\_});
+61             tf::poseTFToMsg(transform, this->\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}.pose);
+62             this->\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}.header.stamp = transform.stamp\_;
+63             this->\hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized} = \textcolor{keyword}{true};
+64         \}
+65     \}
+66     \textcolor{keywordflow}{catch} (tf::TransformException ex)
+67     \{
+68         ROS\_ERROR\_THROTTLE(1, \textcolor{stringliteral}{"Component pose is failing on pose update: %s"}, ex.what());
+69     \}
+70 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classcl__move__base__z_1_1Pose_a5f8576c3dacfb2f2e7f9df5105c480ea}\label{classcl__move__base__z_1_1Pose_a5f8576c3dacfb2f2e7f9df5105c480ea}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose}!wait\+Transform\+Update@{wait\+Transform\+Update}}
@@ -241,7 +243,7 @@ References is\+Initialized, m\+\_\+mutex\+\_\+, pose\+\_\+, pose\+Frame\+Name\+\
 
 
 
-Definition at line 20 of file cp\+\_\+pose.\+cpp.
+Definition at line 21 of file cp\+\_\+pose.\+cpp.
 
 
 
@@ -253,35 +255,35 @@ Referenced by sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Percepti
 
 
 \begin{DoxyCode}
-21 \{
-22     \textcolor{keywordtype}{bool} found = \textcolor{keyword}{false};
-23     \textcolor{keywordflow}{while} (ros::ok() && !found)
-24     \{
-25 
-26         tf::StampedTransform transform;
-27         \textcolor{keywordflow}{try}
-28         \{
-29             this->\hyperlink{classcl__move__base__z_1_1Pose_a6d669632db37e0e51734d2a65e8dcd41}{tfListener\_}.lookupTransform(\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}, 
+22 \{
+23     \textcolor{keywordtype}{bool} found = \textcolor{keyword}{false};
+24     \textcolor{keywordflow}{while} (ros::ok() && !found)
+25     \{
+26 
+27         tf::StampedTransform transform;
+28         \textcolor{keywordflow}{try}
+29         \{
+30             this->\hyperlink{classcl__move__base__z_1_1Pose_a6d669632db37e0e51734d2a65e8dcd41}{tfListener\_}.lookupTransform(\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}, 
       \hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_},
-30                                               ros::Time(0), transform);
-31 
-32             \{
-33                 std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\_mutex\_});
-34                 tf::poseTFToMsg(transform, this->\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}.pose);
-35                 this->\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}.header.stamp = transform.stamp\_;
-36                 found = \textcolor{keyword}{true};
-37                 this->\hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized} = \textcolor{keyword}{true};
-38             \}
-39         \}
-40         \textcolor{keywordflow}{catch} (tf::TransformException ex)
-41         \{
-42             ROS\_ERROR\_THROTTLE(1, \textcolor{stringliteral}{"Component pose is failing on pose update: %s"}, ex.what());
-43         \}
-44 
-45         \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
-46         ros::spinOnce();
-47     \}
-48 \}
+31                                               ros::Time(0), transform);
+32 
+33             \{
+34                 std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\_mutex\_});
+35                 tf::poseTFToMsg(transform, this->\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}.pose);
+36                 this->\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}.header.stamp = transform.stamp\_;
+37                 found = \textcolor{keyword}{true};
+38                 this->\hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized} = \textcolor{keyword}{true};
+39             \}
+40         \}
+41         \textcolor{keywordflow}{catch} (tf::TransformException ex)
+42         \{
+43             ROS\_ERROR\_THROTTLE(1, \textcolor{stringliteral}{"Component pose is failing on pose update: %s"}, ex.what());
+44         \}
+45 
+46         \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
+47         ros::spinOnce();
+48     \}
+49 \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
