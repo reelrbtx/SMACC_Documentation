@@ -13,7 +13,6 @@ var searchData=
   ['detectedcubepose1',['detectedCubePose1',['../classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem.html#ae09f06cb609d0a233fa9a0d31dcb09c6',1,'sm_moveit::cl_perception_system::ClPerceptionSystem']]],
   ['detectedcubepose2',['detectedCubePose2',['../classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem.html#a92801878ea69fb584f459a502bb77dad',1,'sm_moveit::cl_perception_system::ClPerceptionSystem']]],
   ['devicereportsrv',['deviceReportSrv',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#a905c9403005198bb4dd62918721b7d10',1,'cl_microstrain_mips::ClMicrostainMips']]],
-  ['direct',['DIRECT',['../LICENSE_8txt.html#a34cac86a32266331f931bceaa138a96d',1,'LICENSE.txt']]],
   ['disablereq',['disableReq',['../classcl__move__base__z_1_1CostmapProxy.html#a798847a9ee787134e26326edc574020f',1,'cl_move_base_z::CostmapProxy']]],
   ['done_5fcb',['done_cb',['../classsmacc_1_1client__bases_1_1SmaccActionClientBase.html#a39fc5030e98f1e30e9919a9d9737b78a',1,'smacc::client_bases::SmaccActionClientBase']]],
   ['duration',['duration',['../classcl__ros__timer_1_1ClRosTimer.html#a39a5666044409eca94562fcceca8b0ea',1,'cl_ros_timer::ClRosTimer']]],
