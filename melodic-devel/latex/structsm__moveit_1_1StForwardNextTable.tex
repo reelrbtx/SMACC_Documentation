@@ -33,6 +33,10 @@ typedef mpl\+::list$<$ Transition$<$ Ev\+Action\+Succeeded$<$ \hyperlink{classcl
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{structsm__moveit_1_1StForwardNextTable_a4f6c466efdb91b0eb9aaee71f87a4fc4}{runtime\+Configure} ()
+\item 
+void \hyperlink{structsm__moveit_1_1StForwardNextTable_ac3b63f25fad5cecd8faa51b427719d07}{configure\+Global\+Navigation} ()
+\item 
+void \hyperlink{structsm__moveit_1_1StForwardNextTable_a6ecfa1c16ac130f4063cea5a90325b66}{configure\+Forward\+Behavior} ()
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -58,11 +62,125 @@ Definition at line 5 of file st\+\_\+forward.\+h.
 
 
 
-Definition at line 16 of file st\+\_\+forward.\+h.
+Definition at line 14 of file st\+\_\+forward.\+h.
 
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{structsm__moveit_1_1StForwardNextTable_a6ecfa1c16ac130f4063cea5a90325b66}\label{structsm__moveit_1_1StForwardNextTable_a6ecfa1c16ac130f4063cea5a90325b66}} 
+\index{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table@{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table}!configure\+Forward\+Behavior@{configure\+Forward\+Behavior}}
+\index{configure\+Forward\+Behavior@{configure\+Forward\+Behavior}!sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table@{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table}}
+\subsubsection{\texorpdfstring{configure\+Forward\+Behavior()}{configureForwardBehavior()}}
+{\footnotesize\ttfamily void sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table\+::configure\+Forward\+Behavior (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 59 of file st\+\_\+forward.\+h.
+
+
+
+References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), smacc\+::\+I\+Smacc\+State\+::requires\+Client(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::to\+Pose\+Msg().
+
+
+\begin{DoxyCode}
+60   \{
+61     ClMoveBaseZ *moveBaseClient\_;
+62     this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveBaseClient\_);
+63 
+64     \textcolor{keyword}{auto} pose = moveBaseClient\_->getComponent<Pose>();
+65     \textcolor{keyword}{auto} currentPose = pose->toPoseMsg();
+66 
+67     \textcolor{keyword}{auto} offset = 0.2;
+68     \textcolor{keywordtype}{double} dist;
+69     \textcolor{keywordflow}{if} (currentPose.position.x < -0.2)  \textcolor{comment}{// robot is at negative x-axis side}
+70     \{
+71       \textcolor{comment}{// target is at positive side, at point x=0}
+72       dist = 2 + offset;
+73     \}
+74     \textcolor{keywordflow}{else}  \textcolor{comment}{// the robot in at positive x-axis side}
+75     \{
+76       \textcolor{comment}{// target is at negative x-axis side at point x = -1}
+77       dist = 2 + offset;
+78     \}
+79 
+80     \textcolor{keyword}{auto} forwardBh = this->getOrthogonal<OrNavigation>()->getClientBehavior<CbNavigateForward>();
+81     forwardBh->forwardDistance = dist;
+82   \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__moveit_1_1StForwardNextTable_a6ecfa1c16ac130f4063cea5a90325b66_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{structsm__moveit_1_1StForwardNextTable_ac3b63f25fad5cecd8faa51b427719d07}\label{structsm__moveit_1_1StForwardNextTable_ac3b63f25fad5cecd8faa51b427719d07}} 
+\index{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table@{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table}!configure\+Global\+Navigation@{configure\+Global\+Navigation}}
+\index{configure\+Global\+Navigation@{configure\+Global\+Navigation}!sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table@{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table}}
+\subsubsection{\texorpdfstring{configure\+Global\+Navigation()}{configureGlobalNavigation()}}
+{\footnotesize\ttfamily void sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table\+::configure\+Global\+Navigation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 29 of file st\+\_\+forward.\+h.
+
+
+
+References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), smacc\+::\+I\+Smacc\+State\+::requires\+Client(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::to\+Pose\+Msg().
+
+
+
+Referenced by runtime\+Configure().
+
+
+\begin{DoxyCode}
+30   \{
+31     ClMoveBaseZ *moveBaseClient\_;
+32     this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveBaseClient\_);
+33 
+34     \textcolor{keyword}{auto} pose = moveBaseClient\_->getComponent<Pose>();
+35     \textcolor{keyword}{auto} currentPose = pose->toPoseMsg();
+36 
+37     geometry\_msgs::Point goalPoint;
+38     goalPoint.z = 0;
+39     goalPoint.y = 0;
+40     \textcolor{keywordtype}{double} yaw = 0;
+41     \textcolor{keywordflow}{if} (currentPose.position.x < -0.2)  \textcolor{comment}{// robot is at negative x-axis side}
+42     \{
+43       \textcolor{comment}{// target is at positive side, at point x=0}
+44       goalPoint.x = 1.2;
+45       yaw = 0;
+46     \}
+47     \textcolor{keywordflow}{else}  \textcolor{comment}{// the robot in at positive x-axis side}
+48     \{
+49       \textcolor{comment}{// target is at negative x-axis side at point x = -1}
+50       goalPoint.x = -1.2;
+51       yaw = -M\_PI;
+52     \}
+53 
+54     \textcolor{keyword}{auto} globalNavigationBh = this->getOrthogonal<OrNavigation>()->
+      getClientBehavior<CbNavigateGlobalPosition>();
+55     globalNavigationBh->goalPoint = goalPoint;
+56     globalNavigationBh->goalYaw = yaw;
+57   \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__moveit_1_1StForwardNextTable_ac3b63f25fad5cecd8faa51b427719d07_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__moveit_1_1StForwardNextTable_ac3b63f25fad5cecd8faa51b427719d07_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{structsm__moveit_1_1StForwardNextTable_a4f6c466efdb91b0eb9aaee71f87a4fc4}\label{structsm__moveit_1_1StForwardNextTable_a4f6c466efdb91b0eb9aaee71f87a4fc4}} 
 \index{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table@{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table}!runtime\+Configure@{runtime\+Configure}}
 \index{runtime\+Configure@{runtime\+Configure}!sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table@{sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table}}
@@ -71,38 +189,18 @@ Definition at line 16 of file st\+\_\+forward.\+h.
 
 
 
-Definition at line 25 of file st\+\_\+forward.\+h.
+Definition at line 23 of file st\+\_\+forward.\+h.
 
 
 
-References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), smacc\+::\+I\+Smacc\+State\+::requires\+Client(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::to\+Pose\+Msg().
+References configure\+Global\+Navigation().
 
 
 \begin{DoxyCode}
-26     \{          
-27         ClMoveBaseZ *moveBaseClient\_;
-28         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveBaseClient\_);
-29 
-30         \textcolor{keyword}{auto} pose = moveBaseClient\_->getComponent<Pose>();
-31         \textcolor{keyword}{auto} currentPose = pose->toPoseMsg();
-32 
-33         \textcolor{keyword}{auto} offset = 0.2;
-34         \textcolor{keywordtype}{double} dist;
-35         \textcolor{keywordflow}{if} (currentPose.position.x < -0.2) \textcolor{comment}{// robot is at negative x-axis side}
-36         \{
-37                 \textcolor{comment}{// target is at positive side, at point x=0}
-38                 dist = fabs(0 - currentPose.position.x) + offset;
-39         \}
-40         \textcolor{keywordflow}{else} \textcolor{comment}{// the robot in at positive x-axis side}
-41         \{
-42                 \textcolor{comment}{// target is at negative x-axis side at point x = -1}
-43                 dist = fabs(-1. - currentPose.position.x) + offset;
-44              
-45         \}
-46 
-47         \textcolor{keyword}{auto} forwardBh = this->getOrthogonal<OrNavigation>()->getClientBehavior<CbNavigateForward>();
-48         forwardBh->forwardDistance = dist;
-49     \}
+24   \{
+25     \hyperlink{structsm__moveit_1_1StForwardNextTable_ac3b63f25fad5cecd8faa51b427719d07}{configureGlobalNavigation}();
+26     \textcolor{comment}{//configureForwardBehavior();}
+27   \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -120,14 +218,14 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 19 of file st\+\_\+forward.\+h.
+Definition at line 17 of file st\+\_\+forward.\+h.
 
 
 \begin{DoxyCode}
-20     \{
-21         \textcolor{comment}{//configure\_orthogonal<OrNavigation, CbNavigateGlobalPosition>(-1, 0, M\_PI);}
-22         configure\_orthogonal<OrNavigation, CbNavigateForward>();
-23     \}
+18   \{
+19      configure\_orthogonal<OrNavigation, CbNavigateGlobalPosition>();
+20     \textcolor{comment}{//configure\_orthogonal<OrNavigation, CbNavigateForward>();}
+21   \}
 \end{DoxyCode}
 
 

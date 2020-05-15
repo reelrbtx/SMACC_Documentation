@@ -91,7 +91,7 @@ Definition at line 11 of file fake\+\_\+cube\+\_\+perception\+\_\+node.\+py.
 
 
 
-Definition at line 82 of file fake\+\_\+cube\+\_\+perception\+\_\+node.\+py.
+Definition at line 83 of file fake\+\_\+cube\+\_\+perception\+\_\+node.\+py.
 
 
 
@@ -99,24 +99,24 @@ References fake\+\_\+cube\+\_\+perception\+\_\+node.\+Fake\+Perception\+Node.\+t
 
 
 \begin{DoxyCode}
-82     \textcolor{keyword}{def }propagate\_link\_states\_to\_tf(self, linksmsg,  link\_name\_filter, object\_prefix, global\_frame):
-83         filteredLinkPoses = [b \textcolor{keywordflow}{for} i, b \textcolor{keywordflow}{in} enumerate(
-84             linksmsg.pose) \textcolor{keywordflow}{if} link\_name\_filter \textcolor{keywordflow}{in} linksmsg.name[i]]
-85 
-86         transforms = []
-87         \textcolor{keywordflow}{for} i, cubepose \textcolor{keywordflow}{in} enumerate(filteredLinkPoses):
-88             quat = [cubepose.orientation.x, cubepose.orientation.y,
-89                     cubepose.orientation.z, cubepose.orientation.w]
-90             trans = [cubepose.position.x,
-91                      cubepose.position.y, cubepose.position.z]
-92             self.tf\_broacaster.sendTransform(
-93                 trans, quat, rospy.Time.now(), object\_prefix + str(i), global\_frame)
-94 
-95             transforms.append([trans, quat])
-96 
-97         \textcolor{keywordflow}{return} transforms
-98 
+83     \textcolor{keyword}{def }propagate\_link\_states\_to\_tf(self, linksmsg,  link\_name\_filter, object\_prefix, global\_frame):
+84         filteredLinkPoses = [b \textcolor{keywordflow}{for} i, b \textcolor{keywordflow}{in} enumerate(
+85             linksmsg.pose) \textcolor{keywordflow}{if} link\_name\_filter \textcolor{keywordflow}{in} linksmsg.name[i]]
+86 
+87         transforms = []
+88         \textcolor{keywordflow}{for} i, cubepose \textcolor{keywordflow}{in} enumerate(filteredLinkPoses):
+89             quat = [cubepose.orientation.x, cubepose.orientation.y,
+90                     cubepose.orientation.z, cubepose.orientation.w]
+91             trans = [cubepose.position.x,
+92                      cubepose.position.y, cubepose.position.z]
+93             self.tf\_broacaster.sendTransform(
+94                 trans, quat, rospy.Time.now(), object\_prefix + str(i), global\_frame)
+95 
+96             transforms.append([trans, quat])
+97 
+98         \textcolor{keywordflow}{return} transforms
 99 
+100 
 \end{DoxyCode}
 \mbox{\Hypertarget{classfake__cube__perception__node_1_1FakePerceptionNode_ac1127eae8d2eda994b22873529bd198f}\label{classfake__cube__perception__node_1_1FakePerceptionNode_ac1127eae8d2eda994b22873529bd198f}} 
 \index{fake\+\_\+cube\+\_\+perception\+\_\+node\+::\+Fake\+Perception\+Node@{fake\+\_\+cube\+\_\+perception\+\_\+node\+::\+Fake\+Perception\+Node}!simulated\+\_\+link\+\_\+state\+\_\+callback@{simulated\+\_\+link\+\_\+state\+\_\+callback}}
@@ -192,18 +192,20 @@ Definition at line 29 of file fake\+\_\+cube\+\_\+perception\+\_\+node.\+py.
 67             \textcolor{keywordflow}{if} self.table\_collision \textcolor{keywordflow}{and} \textcolor{keywordflow}{not} \textcolor{stringliteral}{"cube\_0"} \textcolor{keywordflow}{in} attached\_objects:
 68                 \textcolor{keywordflow}{for} i, table\_transf \textcolor{keywordflow}{in} enumerate(table\_transforms):
 69                     \textcolor{comment}{#self.planning\_scene.removeCollisionObject("table\_" + str(i))}
-70                     pos = table\_transf[0]
-71                     self.planning\_scene.addBox(
-72                         \textcolor{stringliteral}{"table\_"} + str(i), 1.2, 1.2, 0.001, pos[0],  pos[1],  0.7)  \textcolor{comment}{# 0.68}
-73 
-74             \textcolor{keywordflow}{if} self.cube\_collision \textcolor{keywordflow}{and} \textcolor{keywordflow}{not} \textcolor{stringliteral}{"cube\_0"} \textcolor{keywordflow}{in} attached\_objects:
-75                 \textcolor{keywordflow}{for} i, cube\_transf \textcolor{keywordflow}{in} enumerate(cube\_transforms):
-76                     \textcolor{comment}{#self.planning\_scene.removeCollisionObject("cube\_" + str(i))}
-77                     pos = cube\_transf[0]
-78                     self.planning\_scene.addCube(
-79                         \textcolor{stringliteral}{"cube\_"} + str(i), 0.06, pos[0],  pos[1],  pos[2])
-80                     \textcolor{comment}{#self.cube\_collision = False}
-81 
+70                     thickness = 0.3
+71                     pos = table\_transf[0]
+72                     self.planning\_scene.addBox(
+73                         \textcolor{stringliteral}{"table\_"} + str(i), 1.2, 1.3, 0.001 + thickness, pos[0],  pos[1],  0.7 -  thickness*
+      0.5)  \textcolor{comment}{# 0.68}
+74 
+75             \textcolor{keywordflow}{if} self.cube\_collision \textcolor{keywordflow}{and} \textcolor{keywordflow}{not} \textcolor{stringliteral}{"cube\_0"} \textcolor{keywordflow}{in} attached\_objects:
+76                 \textcolor{keywordflow}{for} i, cube\_transf \textcolor{keywordflow}{in} enumerate(cube\_transforms):
+77                     \textcolor{comment}{#self.planning\_scene.removeCollisionObject("cube\_" + str(i))}
+78                     pos = cube\_transf[0]
+79                     self.planning\_scene.addCube(
+80                         \textcolor{stringliteral}{"cube\_"} + str(i), 0.06, pos[0],  pos[1],  pos[2])
+81                     \textcolor{comment}{#self.cube\_collision = False}
+82 
 \end{DoxyCode}
 \mbox{\Hypertarget{classfake__cube__perception__node_1_1FakePerceptionNode_ae73741e7f84f057cbf109698e70a2515}\label{classfake__cube__perception__node_1_1FakePerceptionNode_ae73741e7f84f057cbf109698e70a2515}} 
 \index{fake\+\_\+cube\+\_\+perception\+\_\+node\+::\+Fake\+Perception\+Node@{fake\+\_\+cube\+\_\+perception\+\_\+node\+::\+Fake\+Perception\+Node}!update@{update}}

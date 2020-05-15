@@ -72,6 +72,5 @@ var searchData=
   ['gettypeinfofromtype',['getTypeInfoFromType',['../classsmacc_1_1introspection_1_1TypeInfo.html#a8716ca6ac890b4582986d9fe4f5962ad',1,'smacc::introspection::TypeInfo']]],
   ['getwaypoints',['getWaypoints',['../classcl__move__base__z_1_1WaypointNavigator.html#a553cdd4ddc20ff26c1bdcb6dad42911f',1,'cl_move_base_z::WaypointNavigator']]],
   ['getzeroangleupdatethreshold',['getZeroAngleUpdateThreshold',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#afca57a1888e4e57f6dba69083e53442d',1,'cl_microstrain_mips::ClMicrostainMips']]],
-  ['gotoradialstart',['goToRadialStart',['../classcl__move__base__z_1_1CbNavigateGlobalPosition.html#a489aaab9282dea9253fcf6b02e5f8aa4',1,'cl_move_base_z::CbNavigateGlobalPosition']]],
   ['gyrobiascapture',['gyroBiasCapture',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#ada40a42a0d479c9651bc4a735a76ce39',1,'cl_microstrain_mips::ClMicrostainMips']]]
 ];
