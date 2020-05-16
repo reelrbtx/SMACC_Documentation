@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['backward_5fcurved_5flocal_5fplanner_2ecpp',['backward_curved_local_planner.cpp',['../backward__curved__local__planner_8cpp.html',1,'']]],
-  ['backward_5fglobal_5fplanner_2ecpp',['backward_global_planner.cpp',['../backward__global__planner_8cpp.html',1,'']]],
-  ['backward_5fglobal_5fplanner_2eh',['backward_global_planner.h',['../backward__global__planner_8h.html',1,'']]],
-  ['backward_5flocal_5fplanner_2eh',['backward_local_planner.h',['../backward__local__planner_8h.html',1,'']]]
+  ['_5f_5finit_5f_5f_2epy',['__init__.py',['../servers_2service__node__3_2____init_____8py.html',1,'(Global Namespace)'],['../strikes__back_2servers_2service__node__3_2____init_____8py.html',1,'(Global Namespace)']]]
 ];
