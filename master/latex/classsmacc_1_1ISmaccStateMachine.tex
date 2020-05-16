@@ -69,7 +69,7 @@ virtual void \hyperlink{classsmacc_1_1ISmaccStateMachine_ac2982c6c8283663e5e1e8a
 \begin{DoxyCompactList}\small\item\em this function should be implemented by the user to create the orthogonals \end{DoxyCompactList}\item 
 \hyperlink{classbool}{bool} \hyperlink{classsmacc_1_1ISmaccStateMachine_a7508f4e398e263cdce308c8074bd5151}{get\+Transition\+Log\+History} (smacc\+\_\+msgs\+::\+Smacc\+Get\+Transition\+History\+::\+Request \&req, smacc\+\_\+msgs\+::\+Smacc\+Get\+Transition\+History\+::\+Response \&res)
 \item 
-{\footnotesize template$<$typename T\+Smacc\+Signal , typename T\+Member\+Function\+Prototype , typename T\+Smacc\+Object\+Type $>$ }\\boost\+::signals2\+::connection \hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{create\+Signal\+Connection} (T\+Smacc\+Signal \&signal, T\+Member\+Function\+Prototype callback, T\+Smacc\+Object\+Type $\ast$object)
+{\footnotesize template$<$typename T\+Smacc\+Signal , typename T\+Member\+Function\+Prototype , typename T\+Smacc\+Object\+Type $>$ }\\boost\+::signals2\+::connection \hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{create\+Signal\+Connection} (T\+Smacc\+Signal \&signal, T\+Member\+Function\+Prototype \hyperlink{3_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}, T\+Smacc\+Object\+Type $\ast$object)
 \item 
 {\footnotesize template$<$typename State\+Type $>$ }\\void \hyperlink{classsmacc_1_1ISmaccStateMachine_aeec54e997d715b105ebfeb5caadc4fbf}{notify\+On\+State\+Entry\+Start} (State\+Type $\ast$state)
 \item 
@@ -410,10 +410,11 @@ Referenced by smacc\+::\+I\+Smacc\+Client\+::connect\+Signal(), cl\+\_\+ros\+\_\
       std::is\_base\_of<StateReactor, TSmaccObjectType>::value || std::is\_base\_of<ISmaccComponent, TSmaccObjectType>::value, \textcolor{stringliteral}{"Only
        are accepted smacc types as subscribers for smacc signals"});
 288 
-289     \textcolor{keyword}{typedef} decltype(callback) ft;
+289     \textcolor{keyword}{typedef} decltype(\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}) ft;
 290     \hyperlink{structsmacc_1_1utils_1_1Bind}{Bind<boost::function\_types::function\_arity<ft>::value}
       > binder;
-291     boost::signals2::connection connection = binder.\hyperlink{structsmacc_1_1utils_1_1Bind_aa0f4ba76fbd5fdb865df51b61d4269f3}{bindaux}(signal, callback, \textcolor{keywordtype}{object});
+291     boost::signals2::connection connection = binder.\hyperlink{structsmacc_1_1utils_1_1Bind_aa0f4ba76fbd5fdb865df51b61d4269f3}{bindaux}(signal, 
+      \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}, \textcolor{keywordtype}{object});
 292 
 293     \textcolor{comment}{// long life-time objects}
 294     \textcolor{keywordflow}{if} (std::is\_base\_of<ISmaccComponent, TSmaccObjectType>::value || std::is\_base\_of<ISmaccClient,
@@ -552,9 +553,21 @@ Here is the caller graph for this function\+:
 Definition at line 78 of file smacc\+\_\+state\+\_\+machine.\+h.
 
 
+
+References callback().
+
+
 \begin{DoxyCode}
 78 \{ \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccStateMachine_a95e42f735cecdc231ad5372bf9fe7eaf}{currentStateInfo\_}; \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccStateMachine_a4738679e8e5f7adab35e610dce0bfff7_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1ISmaccStateMachine_aeda2d6813c6c428bf318a5792e014b61}\label{classsmacc_1_1ISmaccStateMachine_aeda2d6813c6c428bf318a5792e014b61}} 
 \index{smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}!get\+Global\+S\+M\+Data@{get\+Global\+S\+M\+Data}}
 \index{get\+Global\+S\+M\+Data@{get\+Global\+S\+M\+Data}!smacc\+::\+I\+Smacc\+State\+Machine@{smacc\+::\+I\+Smacc\+State\+Machine}}

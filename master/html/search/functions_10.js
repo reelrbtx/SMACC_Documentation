@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['segmentcolor',['segmentColor',['../servers_2opencv__perception__node_2opencv__perception__node_8cpp.html#aa483d0ec97a846bd4bfa13d793f5c1e1',1,'segmentColor(const cv::Mat &amp;inputRGB, int hueMean, int hueWindow, cv::Mat &amp;out):&#160;opencv_perception_node.cpp'],['../2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp.html#aa483d0ec97a846bd4bfa13d793f5c1e1',1,'segmentColor(const cv::Mat &amp;inputRGB, int hueMean, int hueWindow, cv::Mat &amp;out):&#160;opencv_perception_node.cpp'],['../3_2servers_2opencv__perception__node_2opencv__perception__node_8cpp.html#aa483d0ec97a846bd4bfa13d793f5c1e1',1,'segmentColor(const cv::Mat &amp;inputRGB, int hueMean, int hueWindow, cv::Mat &amp;out):&#160;opencv_perception_node.cpp']]],
   ['sendgoal',['sendGoal',['../classsmacc_1_1client__bases_1_1SmaccActionClientBase.html#a9c47a5094ac8afb01680307fe5eca922',1,'smacc::client_bases::SmaccActionClientBase']]],
   ['sendnextgoal',['sendNextGoal',['../classcl__move__base__z_1_1WaypointNavigator.html#a1e0a8ff536d2d01a01063fd903029347',1,'cl_move_base_z::WaypointNavigator']]],
   ['setacceladaptivevals',['setAccelAdaptiveVals',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#a4687c5a4ea6de01c41d96f3aeb58fa24',1,'cl_microstrain_mips::ClMicrostainMips']]],

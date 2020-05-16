@@ -39,9 +39,9 @@ virtual void \hyperlink{classsmacc_1_1StateReactor_a17646b3c68a6d80d1e4da8c14238
 \item 
 {\footnotesize template$<$typename Event\+Type $>$ }\\void \hyperlink{classsmacc_1_1StateReactor_a3d149851c5540110a29e9a7b3228239d}{post\+Event} ()
 \item 
-{\footnotesize template$<$typename T , typename T\+Class $>$ }\\void \hyperlink{classsmacc_1_1StateReactor_a68482e08f6449694a0bcda843b14b376}{create\+Event\+Callback} (void(T\+Class\+::$\ast$callback)(T $\ast$), T\+Class $\ast$object)
+{\footnotesize template$<$typename T , typename T\+Class $>$ }\\void \hyperlink{classsmacc_1_1StateReactor_a68482e08f6449694a0bcda843b14b376}{create\+Event\+Callback} (void(T\+Class\+::$\ast$\hyperlink{3_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback})(T $\ast$), T\+Class $\ast$object)
 \item 
-{\footnotesize template$<$typename T $>$ }\\void \hyperlink{classsmacc_1_1StateReactor_ac6b3a604009e5a68123aed27e70cf2be}{create\+Event\+Callback} (std\+::function$<$ void(T $\ast$)$>$ callback)
+{\footnotesize template$<$typename T $>$ }\\void \hyperlink{classsmacc_1_1StateReactor_ac6b3a604009e5a68123aed27e70cf2be}{create\+Event\+Callback} (std\+::function$<$ void(T $\ast$)$>$ \hyperlink{3_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback})
 \item 
 void \hyperlink{classsmacc_1_1StateReactor_aca5d4f7af06532272db55943b7810a43}{update} ()
 \item 
@@ -136,7 +136,7 @@ Definition at line 43 of file smacc\+\_\+state\+\_\+reactor\+\_\+impl.\+h.
 
 
 
-References event\+Callbacks\+\_\+.
+References callback(), and event\+Callbacks\+\_\+.
 
 
 \begin{DoxyCode}
@@ -144,10 +144,18 @@ References event\+Callbacks\+\_\+.
 45     \textcolor{keyword}{const} \textcolor{keyword}{auto} *eventtype = &\textcolor{keyword}{typeid}(T);
 46     this->\hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}[eventtype] = [=](\textcolor{keywordtype}{void} *msg) \{
 47         T *evptr = (T *)msg;
-48         (\textcolor{keywordtype}{object}->*callback)(evptr);
+48         (\textcolor{keywordtype}{object}->*\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback})(evptr);
 49     \};
 50 \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1StateReactor_a68482e08f6449694a0bcda843b14b376_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_ac6b3a604009e5a68123aed27e70cf2be}\label{classsmacc_1_1StateReactor_ac6b3a604009e5a68123aed27e70cf2be}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!create\+Event\+Callback@{create\+Event\+Callback}}
 \index{create\+Event\+Callback@{create\+Event\+Callback}!smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}}
@@ -161,7 +169,7 @@ Definition at line 53 of file smacc\+\_\+state\+\_\+reactor\+\_\+impl.\+h.
 
 
 
-References event\+Callbacks\+\_\+.
+References callback(), and event\+Callbacks\+\_\+.
 
 
 \begin{DoxyCode}
@@ -169,10 +177,18 @@ References event\+Callbacks\+\_\+.
 55     \textcolor{keyword}{const} \textcolor{keyword}{auto} *eventtype = &\textcolor{keyword}{typeid}(T);
 56     this->\hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}[eventtype] = [=](\textcolor{keywordtype}{void} *msg) \{
 57         T *evptr = (T *)msg;
-58         callback(evptr);
+58         \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}(evptr);
 59     \};
 60 \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1StateReactor_ac6b3a604009e5a68123aed27e70cf2be_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_a5c1d734e3a495fa0f2b01229a3dbac3f}\label{classsmacc_1_1StateReactor_a5c1d734e3a495fa0f2b01229a3dbac3f}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!initialize@{initialize}}
 \index{initialize@{initialize}!smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}}
@@ -215,6 +231,10 @@ void smacc\+::\+State\+Reactor\+::notify\+Event (\begin{DoxyParamCaption}\item[{
 Definition at line 92 of file smacc\+\_\+state\+\_\+reactor.\+h.
 
 
+
+References update().
+
+
 \begin{DoxyCode}
 93     \{
 94         \textcolor{comment}{//the state machine uses this method to notify this state reactor some event happened.}
@@ -232,6 +252,14 @@ Definition at line 92 of file smacc\+\_\+state\+\_\+reactor.\+h.
 105         \}
 106     \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{classsmacc_1_1StateReactor_a9e1b551ab97d1c18b2e1bb60a60455da_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_a11ed02721fd751b8272540645b88f4a6}\label{classsmacc_1_1StateReactor_a11ed02721fd751b8272540645b88f4a6}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!on\+Entry@{on\+Entry}}
 \index{on\+Entry@{on\+Entry}!smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}}
