@@ -28,5 +28,5 @@ var searchData=
   ['_7esmaccstate',['~SmaccState',['../classsmacc_1_1SmaccState.html#a41b2515faf76648c6d69fe09108d2691',1,'smacc::SmaccState']]],
   ['_7esmaccstatemachinebase',['~SmaccStateMachineBase',['../structsmacc_1_1SmaccStateMachineBase.html#af08edc30fb749631b5459eb7438129ec',1,'smacc::SmaccStateMachineBase']]],
   ['_7esmaccsubscriberclient',['~SmaccSubscriberClient',['../classsmacc_1_1client__bases_1_1SmaccSubscriberClient.html#a91b9206c97b4acc76d4202639d24a53b',1,'smacc::client_bases::SmaccSubscriberClient']]],
-  ['_7esrconditional',['~SrConditional',['../classsmacc_1_1state__reactors_1_1SrConditional.html#a36266efcfd8ba0582ed500bd51e7d2b6',1,'smacc::state_reactors::SrConditional']]]
+  ['_7esrsr_5fconditional',['~Srsr_conditional',['../classsmacc_1_1state__reactors_1_1Srsr__conditional.html#a711473830935c7c4fb1d0939e41fb2cb',1,'smacc::state_reactors::Srsr_conditional']]]
 ];
