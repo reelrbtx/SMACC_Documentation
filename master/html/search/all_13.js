@@ -652,6 +652,7 @@ var searchData=
   ['state_5fbehavior_2ecpp',['state_behavior.cpp',['../state__behavior_8cpp.html',1,'']]],
   ['state_5fiterator',['state_iterator',['../classsmacc_1_1SmaccState.html#a12497b38e710f07cacb5d45efc024339',1,'smacc::SmaccState']]],
   ['state_5fmachine_5fvisualization',['state_machine_visualization',['../classsmacc_1_1ISmaccStateMachine.html#ac03029f770422d0ea77ea9856b8cb1a8',1,'smacc::ISmaccStateMachine']]],
+  ['state_5fname',['STATE_NAME',['../smacc__state__base_8h.html#a0d7815723706a488b5bb65f7e3acf584',1,'smacc_state_base.h']]],
   ['state_5freactors',['state_reactors',['../namespacesmacc_1_1state__reactors.html',1,'smacc']]],
   ['statecallbackconnections',['stateCallbackConnections',['../classsmacc_1_1ISmaccStateMachine.html#aaf98bb0edaa5d8c84767e4acfad3548d',1,'smacc::ISmaccStateMachine']]],
   ['stateindex_5f',['stateIndex_',['../classsmacc_1_1introspection_1_1SmaccStateInfo.html#a2354fa7abf158f0c29ab71c3125c9801',1,'smacc::introspection::SmaccStateInfo']]],

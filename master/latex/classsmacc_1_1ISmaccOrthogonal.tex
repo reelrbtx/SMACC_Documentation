@@ -100,21 +100,22 @@ References client\+Behaviors\+\_\+, get\+Name(), and get\+State\+Machine().
 
 
 \begin{DoxyCode}
-14 \{
-15   \textcolor{keywordflow}{if} (clBehavior != \textcolor{keyword}{nullptr})
-16   \{
-17     ROS\_INFO(\textcolor{stringliteral}{"Setting Ortho %s client behavior: %s"}, this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str(), clBehavior->getName().
-      c\_str());
-18     clBehavior->stateMachine\_ = this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_aae265ec480b8ed552ddc79afd2d93a62}{getStateMachine}();
-19     clBehavior->currentOrthogonal = \textcolor{keyword}{this};
+14   \{
+15     \textcolor{keywordflow}{if} (clBehavior != \textcolor{keyword}{nullptr})
+16     \{
+17       ROS\_INFO(\textcolor{stringliteral}{"[Orthogonal %s] adding client behavior: %s"}, this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str(), clBehavior->
+      getName().c\_str());
+18       clBehavior->stateMachine\_ = this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_aae265ec480b8ed552ddc79afd2d93a62}{getStateMachine}();
+19       clBehavior->currentOrthogonal = \textcolor{keyword}{this};
 20 
-21     \hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_}.push\_back(clBehavior);
-22   \}
-23   \textcolor{keywordflow}{else}
-24   \{
-25     ROS\_INFO(\textcolor{stringliteral}{"Not behavioral State by orthogonal"});
-26   \}
-27 \}
+21       \hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_}.push\_back(clBehavior);
+22     \}
+23     \textcolor{keywordflow}{else}
+24     \{
+25       ROS\_INFO(\textcolor{stringliteral}{"[orthogonal %s] no client behaviors in this state"}, this->
+      \hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str());
+26     \}
+27   \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -144,10 +145,10 @@ Referenced by smacc\+::\+Orthogonal$<$ Or\+Service3 $>$\+::create\+Client().
 
 
 \begin{DoxyCode}
-50 \{
-51   client->\hyperlink{classsmacc_1_1ISmaccClient_a28fd6ca2bcf9c5e57f3cc16fb0a076d3}{setStateMachine}(\hyperlink{classsmacc_1_1ISmaccOrthogonal_aae265ec480b8ed552ddc79afd2d93a62}{getStateMachine}());
-52   client->\hyperlink{classsmacc_1_1ISmaccClient_a40330788a976dc08e2f726d210564ec4}{setOrthogonal}(\textcolor{keyword}{this});
-53 \}
+50   \{
+51     client->\hyperlink{classsmacc_1_1ISmaccClient_a28fd6ca2bcf9c5e57f3cc16fb0a076d3}{setStateMachine}(\hyperlink{classsmacc_1_1ISmaccOrthogonal_aae265ec480b8ed552ddc79afd2d93a62}{getStateMachine}());
+52     client->\hyperlink{classsmacc_1_1ISmaccClient_a40330788a976dc08e2f726d210564ec4}{setOrthogonal}(\textcolor{keyword}{this});
+53   \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -284,9 +285,9 @@ Referenced by add\+Client\+Behavior(), on\+Entry(), on\+Exit(), and runtime\+Con
 
 
 \begin{DoxyCode}
-34 \{
-35   \textcolor{keywordflow}{return} \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(*this).name());
-36 \}
+34   \{
+35     \textcolor{keywordflow}{return} \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(*this).name());
+36   \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -350,31 +351,31 @@ References client\+Behaviors\+\_\+, and get\+Name().
 
 
 \begin{DoxyCode}
-56 \{
-57   \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_}.size() > 0)
-58   \{
-59     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &clBehavior : \hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_})
-60     \{
-61       \textcolor{keyword}{auto} cbname = clBehavior->getName().c\_str();
-62       ROS\_INFO(\textcolor{stringliteral}{"Orthogonal %s OnEntry, current Behavior: %s"}, this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str(), cbname);
-63 
-64       \textcolor{keywordflow}{try}
-65       \{
-66         clBehavior->onEntry();
-67       \}
-68       \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception &e)
-69       \{
-70         ROS\_ERROR(\textcolor{stringliteral}{"[ClientBehavior %s] Exception on Entry - continuing with next client behavior. Exception
-       info: %s"},
-71                   cbname, e.what());
+56   \{
+57     \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_}.size() > 0)
+58     \{
+59       \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &clBehavior : \hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_})
+60       \{
+61         ROS\_INFO(\textcolor{stringliteral}{"[Orthogonal %s] OnEntry, current Behavior: %s"}, this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str(), 
+      clBehavior->getName().c\_str());
+62 
+63         \textcolor{keywordflow}{try}
+64         \{
+65           clBehavior->onEntry();
+66         \}
+67         \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception &e)
+68         \{
+69           ROS\_ERROR(\textcolor{stringliteral}{"[ClientBehavior %s] Exception on Entry - continuing with next client behavior.
+       Exception info: %s"},
+70                     clBehavior->getName().c\_str(), e.what());
+71         \}
 72       \}
 73     \}
-74   \}
-75   \textcolor{keywordflow}{else}
-76   \{
-77     ROS\_INFO(\textcolor{stringliteral}{"Orthogonal %s OnEntry"}, this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str());
+74     \textcolor{keywordflow}{else}
+75     \{
+76       ROS\_INFO(\textcolor{stringliteral}{"[Orthogonal %s] OnEntry"}, this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str());
+77     \}
 78   \}
-79 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -392,7 +393,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 81 of file orthogonal.\+cpp.
+Definition at line 80 of file orthogonal.\+cpp.
 
 
 
@@ -400,31 +401,30 @@ References client\+Behaviors\+\_\+, and get\+Name().
 
 
 \begin{DoxyCode}
-82 \{
-83   \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_}.size() > 0)
-84   \{
-85     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &clBehavior : \hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_})
-86     \{
-87       \textcolor{keyword}{auto} cbname = clBehavior->getName().c\_str();
-88       ROS\_INFO(\textcolor{stringliteral}{"Orthogonal %s OnExit, current Behavior: %s"}, this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str(), cbname);
-89       \textcolor{keywordflow}{try}
-90       \{
-91         clBehavior->onExit();
-92       \}
-93       \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception &e)
-94       \{
-95         ROS\_ERROR(\textcolor{stringliteral}{"[ClientBehavior %s] Exception onExit - continuing with next client behavior. Exception
-       info: %s"},
-96                   cbname, e.what());
-97       \}
-98     \}
-99     clientBehaviors\_.clear();
-100   \}
-101   \textcolor{keywordflow}{else}
-102   \{
-103     ROS\_INFO(\textcolor{stringliteral}{"Orthogonal %s OnExit"}, this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str());
-104   \}
-105 \}
+81   \{
+82     \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_}.size() > 0)
+83     \{
+84       \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &clBehavior : \hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_})
+85       \{
+86         ROS\_INFO(\textcolor{stringliteral}{"[Orthogonal %s] OnExit, current Behavior: %s"}, this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str(), clBehavior
+      ->getName().c\_str());
+87         \textcolor{keywordflow}{try}
+88         \{
+89           clBehavior->onExit();
+90         \}
+91         \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception &e)
+92         \{
+93           ROS\_ERROR(\textcolor{stringliteral}{"[ClientBehavior %s] Exception onExit - continuing with next client behavior. Exception
+       info: %s"}, clBehavior->getName().c\_str(), e.what());
+94         \}
+95       \}
+96       clientBehaviors\_.clear();
+97     \}
+98     \textcolor{keywordflow}{else}
+99     \{
+100       ROS\_INFO(\textcolor{stringliteral}{"[Orthogonal %s] OnExit"}, this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str());
+101     \}
+102   \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -454,8 +454,8 @@ Referenced by set\+State\+Machine().
 
 
 \begin{DoxyCode}
-30 \{
-31 \}
+30   \{
+31   \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -580,16 +580,16 @@ References client\+Behaviors\+\_\+, and get\+Name().
 
 
 \begin{DoxyCode}
-39 \{
-40   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &clBehavior : \hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_})
-41   \{
-42     ROS\_INFO(\textcolor{stringliteral}{"Orthogonal %s runtimeConfigure, current Behavior: %s"}, this->
+39   \{
+40     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &clBehavior : \hyperlink{classsmacc_1_1ISmaccOrthogonal_ad9e6c0f9055e51a61c9728ac7117dae2}{clientBehaviors\_})
+41     \{
+42       ROS\_INFO(\textcolor{stringliteral}{"[Orthogonal %s] runtimeConfigure, current Behavior: %s"}, this->
       \hyperlink{classsmacc_1_1ISmaccOrthogonal_a45a444be97410cb061f8b9d5d77ee9b7}{getName}().c\_str(),
-43              clBehavior->getName().c\_str());
+43                clBehavior->getName().c\_str());
 44 
-45     clBehavior->runtimeConfigure();
-46   \}
-47 \}
+45       clBehavior->runtimeConfigure();
+46     \}
+47   \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -648,10 +648,10 @@ Referenced by smacc\+::\+I\+Smacc\+State\+Machine\+::create\+Orthogonal().
 
 
 \begin{DoxyCode}
-8 \{
-9   this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a418b2e094a65013444ec1fca7e94f28d}{stateMachine\_} = value;
-10   this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a6bb31c620cb64dd7b8417f8705c79c7a}{onInitialize}();
-11 \}
+8   \{
+9     this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a418b2e094a65013444ec1fca7e94f28d}{stateMachine\_} = value;
+10     this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a6bb31c620cb64dd7b8417f8705c79c7a}{onInitialize}();
+11   \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak

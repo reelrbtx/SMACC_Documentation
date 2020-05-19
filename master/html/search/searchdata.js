@@ -10,7 +10,7 @@ var indexSectionsWithContent =
   7: "rstw",
   8: "bcdfgiloprstv",
   9: "is",
-  10: "hsw",
+  10: "hstw",
   11: "drt"
 };
 
