@@ -33,15 +33,17 @@ virtual void \hyperlink{classsmacc_1_1StateReactor_aa10b2c6b7d1e80f01b00cbdac526
 \item 
 virtual void \hyperlink{classsmacc_1_1StateReactor_a11ed02721fd751b8272540645b88f4a6}{on\+Entry} ()
 \item 
+virtual void \hyperlink{classsmacc_1_1StateReactor_ace125d986cc787c3940306b90bb67f07}{on\+Exit} ()
+\item 
 virtual void \hyperlink{classsmacc_1_1StateReactor_a17646b3c68a6d80d1e4da8c14238ce36}{on\+Event\+Notified} (const std\+::type\+\_\+info $\ast$event\+Type)
 \item 
 {\footnotesize template$<$typename Event\+Type $>$ }\\void \hyperlink{classsmacc_1_1StateReactor_a06303bdf908d04d5a6eb5f63131e68bd}{post\+Event} (const Event\+Type \&ev)
 \item 
 {\footnotesize template$<$typename Event\+Type $>$ }\\void \hyperlink{classsmacc_1_1StateReactor_a3d149851c5540110a29e9a7b3228239d}{post\+Event} ()
 \item 
-{\footnotesize template$<$typename T , typename T\+Class $>$ }\\void \hyperlink{classsmacc_1_1StateReactor_a68482e08f6449694a0bcda843b14b376}{create\+Event\+Callback} (void(T\+Class\+::$\ast$callback)(T $\ast$), T\+Class $\ast$object)
+{\footnotesize template$<$typename T , typename T\+Class $>$ }\\void \hyperlink{classsmacc_1_1StateReactor_a68482e08f6449694a0bcda843b14b376}{create\+Event\+Callback} (void(T\+Class\+::$\ast$\hyperlink{3_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback})(T $\ast$), T\+Class $\ast$object)
 \item 
-{\footnotesize template$<$typename T $>$ }\\void \hyperlink{classsmacc_1_1StateReactor_ac6b3a604009e5a68123aed27e70cf2be}{create\+Event\+Callback} (std\+::function$<$ void(T $\ast$)$>$ callback)
+{\footnotesize template$<$typename T $>$ }\\void \hyperlink{classsmacc_1_1StateReactor_ac6b3a604009e5a68123aed27e70cf2be}{create\+Event\+Callback} (std\+::function$<$ void(T $\ast$)$>$ \hyperlink{3_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback})
 \item 
 void \hyperlink{classsmacc_1_1StateReactor_aca5d4f7af06532272db55943b7810a43}{update} ()
 \item 
@@ -136,18 +138,26 @@ Definition at line 43 of file smacc\+\_\+state\+\_\+reactor\+\_\+impl.\+h.
 
 
 
-References event\+Callbacks\+\_\+.
+References callback(), event\+Callbacks\+\_\+, and battery\+\_\+monitor\+\_\+node\+::msg.
 
 
 \begin{DoxyCode}
 44 \{
 45     \textcolor{keyword}{const} \textcolor{keyword}{auto} *eventtype = &\textcolor{keyword}{typeid}(T);
-46     this->\hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}[eventtype] = [=](\textcolor{keywordtype}{void} *msg) \{
-47         T *evptr = (T *)msg;
-48         (\textcolor{keywordtype}{object}->*callback)(evptr);
+46     this->\hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}[eventtype] = [=](\textcolor{keywordtype}{void} *\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}) \{
+47         T *evptr = (T *)\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg};
+48         (\textcolor{keywordtype}{object}->*\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback})(evptr);
 49     \};
 50 \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1StateReactor_a68482e08f6449694a0bcda843b14b376_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_ac6b3a604009e5a68123aed27e70cf2be}\label{classsmacc_1_1StateReactor_ac6b3a604009e5a68123aed27e70cf2be}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!create\+Event\+Callback@{create\+Event\+Callback}}
 \index{create\+Event\+Callback@{create\+Event\+Callback}!smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}}
@@ -161,18 +171,26 @@ Definition at line 53 of file smacc\+\_\+state\+\_\+reactor\+\_\+impl.\+h.
 
 
 
-References event\+Callbacks\+\_\+.
+References callback(), event\+Callbacks\+\_\+, and battery\+\_\+monitor\+\_\+node\+::msg.
 
 
 \begin{DoxyCode}
 54 \{
 55     \textcolor{keyword}{const} \textcolor{keyword}{auto} *eventtype = &\textcolor{keyword}{typeid}(T);
-56     this->\hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}[eventtype] = [=](\textcolor{keywordtype}{void} *msg) \{
-57         T *evptr = (T *)msg;
-58         callback(evptr);
+56     this->\hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}[eventtype] = [=](\textcolor{keywordtype}{void} *\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}) \{
+57         T *evptr = (T *)\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg};
+58         \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}(evptr);
 59     \};
 60 \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1StateReactor_ac6b3a604009e5a68123aed27e70cf2be_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_a5c1d734e3a495fa0f2b01229a3dbac3f}\label{classsmacc_1_1StateReactor_a5c1d734e3a495fa0f2b01229a3dbac3f}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!initialize@{initialize}}
 \index{initialize@{initialize}!smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}}
@@ -212,26 +230,38 @@ void smacc\+::\+State\+Reactor\+::notify\+Event (\begin{DoxyParamCaption}\item[{
 
 
 
-Definition at line 92 of file smacc\+\_\+state\+\_\+reactor.\+h.
+Definition at line 93 of file smacc\+\_\+state\+\_\+reactor.\+h.
+
+
+
+References update().
 
 
 \begin{DoxyCode}
-93     \{
-94         \textcolor{comment}{//the state machine uses this method to notify this state reactor some event happened.}
-95         \textcolor{keyword}{auto} tid = &(\textcolor{keyword}{typeid}(TEvent));
-96         \textcolor{keywordflow}{if} (std::find(\hyperlink{classsmacc_1_1StateReactor_a65c8ddfce40e7859e5c73fff1cf6c04b}{eventTypes}.begin(), \hyperlink{classsmacc_1_1StateReactor_a65c8ddfce40e7859e5c73fff1cf6c04b}{eventTypes}.end(), tid) != 
+94     \{
+95         \textcolor{comment}{//the state machine uses this method to notify this state reactor some event happened.}
+96         \textcolor{keyword}{auto} tid = &(\textcolor{keyword}{typeid}(TEvent));
+97         \textcolor{keywordflow}{if} (std::find(\hyperlink{classsmacc_1_1StateReactor_a65c8ddfce40e7859e5c73fff1cf6c04b}{eventTypes}.begin(), \hyperlink{classsmacc_1_1StateReactor_a65c8ddfce40e7859e5c73fff1cf6c04b}{eventTypes}.end(), tid) != 
       \hyperlink{classsmacc_1_1StateReactor_a65c8ddfce40e7859e5c73fff1cf6c04b}{eventTypes}.end())
-97         \{
-98             this->\hyperlink{classsmacc_1_1StateReactor_a17646b3c68a6d80d1e4da8c14238ce36}{onEventNotified}(tid);
-99             this->\hyperlink{classsmacc_1_1StateReactor_aca5d4f7af06532272db55943b7810a43}{update}();
-100 
-101             \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}.count(tid))
-102             \{
-103                 \hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}[tid]((\textcolor{keywordtype}{void} *)ev);
-104             \}
-105         \}
-106     \}
+98         \{
+99             this->\hyperlink{classsmacc_1_1StateReactor_a17646b3c68a6d80d1e4da8c14238ce36}{onEventNotified}(tid);
+100             this->\hyperlink{classsmacc_1_1StateReactor_aca5d4f7af06532272db55943b7810a43}{update}();
+101 
+102             \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}.count(tid))
+103             \{
+104                 \hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}[tid]((\textcolor{keywordtype}{void} *)ev);
+105             \}
+106         \}
+107     \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{classsmacc_1_1StateReactor_a9e1b551ab97d1c18b2e1bb60a60455da_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_a11ed02721fd751b8272540645b88f4a6}\label{classsmacc_1_1StateReactor_a11ed02721fd751b8272540645b88f4a6}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!on\+Entry@{on\+Entry}}
 \index{on\+Entry@{on\+Entry}!smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}}
@@ -270,6 +300,22 @@ Definition at line 22 of file state\+\_\+behavior.\+cpp.
 \begin{DoxyCode}
 23 \{
 24 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classsmacc_1_1StateReactor_ace125d986cc787c3940306b90bb67f07}\label{classsmacc_1_1StateReactor_ace125d986cc787c3940306b90bb67f07}} 
+\index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!on\+Exit@{on\+Exit}}
+\index{on\+Exit@{on\+Exit}!smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}}
+\subsubsection{\texorpdfstring{on\+Exit()}{onExit()}}
+{\footnotesize\ttfamily void smacc\+::\+State\+Reactor\+::on\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Definition at line 31 of file state\+\_\+behavior.\+cpp.
+
+
+\begin{DoxyCode}
+32 \{
+33 
+34 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_aa10b2c6b7d1e80f01b00cbdac526a2bf}\label{classsmacc_1_1StateReactor_aa10b2c6b7d1e80f01b00cbdac526a2bf}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!on\+Initialized@{on\+Initialized}}
@@ -401,7 +447,7 @@ Here is the call graph for this function\+:
 
 
 
-Implemented in \hyperlink{classsmacc_1_1state__reactors_1_1SrConditional_acbd91c59644957faac4e9d7716513cb4}{smacc\+::state\+\_\+reactors\+::\+Sr\+Conditional}, \hyperlink{classsmacc_1_1state__reactors_1_1SrEventCountdown_aff678113dbd07339e5e3736e4aa00c81}{smacc\+::state\+\_\+reactors\+::\+Sr\+Event\+Countdown}, and \hyperlink{classsmacc_1_1state__reactors_1_1SrAllEventsGo_ab752043eda070661d2a676b580c679b7}{smacc\+::state\+\_\+reactors\+::\+Sr\+All\+Events\+Go}.
+Implemented in \hyperlink{classsmacc_1_1state__reactors_1_1Srsr__conditional_aa95877afb569902015924e5e7d1da35a}{smacc\+::state\+\_\+reactors\+::\+Srsr\+\_\+conditional}, \hyperlink{classsmacc_1_1state__reactors_1_1SrEventCountdown_aff678113dbd07339e5e3736e4aa00c81}{smacc\+::state\+\_\+reactors\+::\+Sr\+Event\+Countdown}, and \hyperlink{classsmacc_1_1state__reactors_1_1SrAllEventsGo_ab752043eda070661d2a676b580c679b7}{smacc\+::state\+\_\+reactors\+::\+Sr\+All\+Events\+Go}.
 
 
 
@@ -423,7 +469,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 31 of file state\+\_\+behavior.\+cpp.
+Definition at line 36 of file state\+\_\+behavior.\+cpp.
 
 
 
@@ -431,13 +477,13 @@ References post\+Event\+Fn, and triggers().
 
 
 \begin{DoxyCode}
-32 \{
-33     \textcolor{keywordflow}{if} (this->\hyperlink{classsmacc_1_1StateReactor_a445bc3c90980d75d7d815b85cfb68b21}{triggers}())
-34     \{
-35         ROS\_INFO(\textcolor{stringliteral}{"State reactor base REALLY TRIGGERS!!"});
-36         this->\hyperlink{classsmacc_1_1StateReactor_a1d97ae5c1689b6716c60c19c94a7eeae}{postEventFn}();
-37     \}
-38 \}
+37 \{
+38     \textcolor{keywordflow}{if} (this->\hyperlink{classsmacc_1_1StateReactor_a445bc3c90980d75d7d815b85cfb68b21}{triggers}())
+39     \{
+40         ROS\_INFO(\textcolor{stringliteral}{"State reactor base REALLY TRIGGERS!!"});
+41         this->\hyperlink{classsmacc_1_1StateReactor_a1d97ae5c1689b6716c60c19c94a7eeae}{postEventFn}();
+42     \}
+43 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -486,7 +532,7 @@ Referenced by add\+Input\+Event(), and smacc\+::state\+\_\+reactors\+::\+Sr\+Eve
 
 
 
-Definition at line 89 of file smacc\+\_\+state\+\_\+reactor.\+h.
+Definition at line 90 of file smacc\+\_\+state\+\_\+reactor.\+h.
 
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_aabd30af9412a8fea9ec5906f173d9d4a}\label{classsmacc_1_1StateReactor_aabd30af9412a8fea9ec5906f173d9d4a}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!owner\+State@{owner\+State}}

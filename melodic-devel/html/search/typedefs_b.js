@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['server',['Server',['../odom__tracker__node_8cpp.html#a9884574d0480319430f628f79afc0500',1,'odom_tracker_node.cpp']]],
+  ['server',['Server',['../odom__tracker__node_8cpp.html#a9884574d0480319430f628f79afc0500',1,'Server():&#160;odom_tracker_node.cpp'],['../servers_2led__action__server_2src_2led__action__server__node_8cpp.html#aa8767d1286539545f6d13f200fefb5ff',1,'Server():&#160;led_action_server_node.cpp'],['../strikes__back_2servers_2led__action__server_2src_2led__action__server__node_8cpp.html#a2036ae39d23f8e14a2cc8ddcd46dea5a',1,'Server():&#160;led_action_server_node.cpp']]],
   ['shallow_5fhistory',['shallow_history',['../structsm__dance__bot_1_1SmDanceBot.html#a780b2408077887cc9c888ed0a95bff68',1,'sm_dance_bot::SmDanceBot::shallow_history()'],['../structsm__dance__bot__strikes__back_1_1SmDanceBotStrikesBack.html#a193a12436ca97e49e143e642f314656b',1,'sm_dance_bot_strikes_back::SmDanceBotStrikesBack::shallow_history()']]],
   ['simpleactivecallback',['SimpleActiveCallback',['../classsmacc_1_1client__bases_1_1SmaccActionClientBase.html#acfd06f7c33418c03a340e74b00a4dddc',1,'smacc::client_bases::SmaccActionClientBase']]],
   ['simpledonecallback',['SimpleDoneCallback',['../classsmacc_1_1client__bases_1_1SmaccActionClientBase.html#a56eb842a85c65248fda43909b1aaeac1',1,'smacc::client_bases::SmaccActionClientBase']]],
