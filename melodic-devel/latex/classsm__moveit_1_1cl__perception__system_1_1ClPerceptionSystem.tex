@@ -127,7 +127,7 @@ Definition at line 47 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
-Definition at line 119 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 122 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
@@ -135,25 +135,25 @@ References cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::to\+Pose\+Stamped\+Msg(), 
 
 
 \begin{DoxyCode}
-120     \{
-121         \hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose} *targetObjectPose;
-122 
-123         \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 0)
-124         \{
-125             targetObjectPose = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4bf0838041a73d41008c2cb2daa6fb63}{detectedCubePose0};
-126         \}
-127         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 1)
-128         \{
-129             targetObjectPose = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ae09f06cb609d0a233fa9a0d31dcb09c6}{detectedCubePose1};
-130         \}
-131         \textcolor{keywordflow}{else}
-132         \{
-133             targetObjectPose = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a92801878ea69fb584f459a502bb77dad}{detectedCubePose2};
-134         \}
-135 
-136         targetObjectPose->\hyperlink{classcl__move__base__z_1_1Pose_a5f8576c3dacfb2f2e7f9df5105c480ea}{waitTransformUpdate}();
-137         \textcolor{keywordflow}{return} targetObjectPose->\hyperlink{classcl__move__base__z_1_1Pose_a63887a88c1ac6e9a4a71b8d7d11aed6c}{toPoseStampedMsg}();
-138     \}
+123     \{
+124         \hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose} *targetObjectPose;
+125 
+126         \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 0)
+127         \{
+128             targetObjectPose = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a4bf0838041a73d41008c2cb2daa6fb63}{detectedCubePose0};
+129         \}
+130         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 1)
+131         \{
+132             targetObjectPose = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ae09f06cb609d0a233fa9a0d31dcb09c6}{detectedCubePose1};
+133         \}
+134         \textcolor{keywordflow}{else}
+135         \{
+136             targetObjectPose = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a92801878ea69fb584f459a502bb77dad}{detectedCubePose2};
+137         \}
+138 
+139         targetObjectPose->\hyperlink{classcl__move__base__z_1_1Pose_a5f8576c3dacfb2f2e7f9df5105c480ea}{waitTransformUpdate}();
+140         \textcolor{keywordflow}{return} targetObjectPose->\hyperlink{classcl__move__base__z_1_1Pose_a63887a88c1ac6e9a4a71b8d7d11aed6c}{toPoseStampedMsg}();
+141     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -171,7 +171,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 140 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 143 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
@@ -179,64 +179,64 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), and cl\+\_\+move\+\_
 
 
 \begin{DoxyCode}
-141     \{
-142         \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{cl\_move\_base\_z::ClMoveBaseZ} *moveBaseclient;
-143         this->\hyperlink{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520}{requiresClient}(moveBaseclient);
-144         \textcolor{keyword}{auto} pose = moveBaseclient->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
+144     \{
+145         \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{cl\_move\_base\_z::ClMoveBaseZ} *moveBaseclient;
+146         this->\hyperlink{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520}{requiresClient}(moveBaseclient);
+147         \textcolor{keyword}{auto} pose = moveBaseclient->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
       \hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose}>();
-145         \textcolor{keyword}{auto} currentPose = pose->\hyperlink{classcl__move__base__z_1_1Pose_a9faf8c6b437ff6b19c8bddd692908dca}{toPoseMsg}();
-146 
-147         \textcolor{keywordtype}{int} tableIndex = 0;
-148         \textcolor{keywordflow}{if} (currentPose.position.x > -0.2) \textcolor{comment}{//negative side}
-149         \{
-150             ROS\_INFO(\textcolor{stringliteral}{"[StOpenGripper] locate cube in table 0"});
-151             tableIndex = 0;
-152         \}
-153         \textcolor{keywordflow}{else}
-154         \{
-155             ROS\_INFO(\textcolor{stringliteral}{"[StOpenGripper] locate cube in table 1"});
-156             tableIndex = 1;
-157         \}
-158 
-159         \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8272ccb5af7401beeb4e9eaf1d86fa3}{decissionsCount}++;
-160         \textcolor{keywordflow}{if} (tableIndex == 0)
-161         \{
-162             ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target in table 0"});
-163             \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 0)
-164             \{
-165                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 0 in table 0"});
-166                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}{originalCube0Pose};
-167             \}
-168             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 1)
-169             \{
-170                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 1 in table 0"});
-171                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}{cube1DestinationInTable0};
-172             \}
-173             \textcolor{keywordflow}{else}
-174             \{
-175                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 2 in table 0"});
-176                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a7d8cdfe20da5b47871adf9d3dce11338}{originalCube2Pose};
-177             \}
-178         \}
-179         \textcolor{keywordflow}{else}
-180         \{
-181             \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 0)
-182             \{
-183                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 0 in table 1"});
-184                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab84bbc2d5e5a7ef7839a0ade56942679}{cube0DestinationInTable1};
-185             \}
-186             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 1)
-187             \{
-188                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 1 in table 1"});
-189                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose};
-190             \}
-191             \textcolor{keywordflow}{else}
-192             \{
-193                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 2 in table 1"});
-194                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_abb792620853ba381aa0736b884dabe92}{cube2DestinationInTable1};
-195             \}
-196         \}
-197     \}
+148         \textcolor{keyword}{auto} currentPose = pose->\hyperlink{classcl__move__base__z_1_1Pose_a9faf8c6b437ff6b19c8bddd692908dca}{toPoseMsg}();
+149 
+150         \textcolor{keywordtype}{int} tableIndex = 0;
+151         \textcolor{keywordflow}{if} (currentPose.position.x > -0.2) \textcolor{comment}{//negative side}
+152         \{
+153             ROS\_INFO(\textcolor{stringliteral}{"[StOpenGripper] locate cube in table 0"});
+154             tableIndex = 0;
+155         \}
+156         \textcolor{keywordflow}{else}
+157         \{
+158             ROS\_INFO(\textcolor{stringliteral}{"[StOpenGripper] locate cube in table 1"});
+159             tableIndex = 1;
+160         \}
+161 
+162         \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8272ccb5af7401beeb4e9eaf1d86fa3}{decissionsCount}++;
+163         \textcolor{keywordflow}{if} (tableIndex == 0)
+164         \{
+165             ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target in table 0"});
+166             \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 0)
+167             \{
+168                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 0 in table 0"});
+169                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}{originalCube0Pose};
+170             \}
+171             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 1)
+172             \{
+173                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 1 in table 0"});
+174                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}{cube1DestinationInTable0};
+175             \}
+176             \textcolor{keywordflow}{else}
+177             \{
+178                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 2 in table 0"});
+179                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a7d8cdfe20da5b47871adf9d3dce11338}{originalCube2Pose};
+180             \}
+181         \}
+182         \textcolor{keywordflow}{else}
+183         \{
+184             \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 0)
+185             \{
+186                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 0 in table 1"});
+187                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab84bbc2d5e5a7ef7839a0ade56942679}{cube0DestinationInTable1};
+188             \}
+189             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a0ffeadfa41480c9d4d0fcc509237dff6}{currentCube} == 1)
+190             \{
+191                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 1 in table 1"});
+192                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose};
+193             \}
+194             \textcolor{keywordflow}{else}
+195             \{
+196                 ROS\_INFO(\textcolor{stringliteral}{"[Perception System] deciding cube target 2 in table 1"});
+197                 \textcolor{keywordflow}{return} *\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_abb792620853ba381aa0736b884dabe92}{cube2DestinationInTable1};
+198             \}
+199         \}
+200     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -254,7 +254,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 103 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 106 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
@@ -262,21 +262,21 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), sm\+\_\+moveit\+::cl
 
 
 \begin{DoxyCode}
-104     \{
-105         \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{cl\_move\_base\_z::ClMoveBaseZ} *moveBaseclient;
-106         this->\hyperlink{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520}{requiresClient}(moveBaseclient);
-107         \textcolor{keyword}{auto} pose = moveBaseclient->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
+107     \{
+108         \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{cl\_move\_base\_z::ClMoveBaseZ} *moveBaseclient;
+109         this->\hyperlink{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520}{requiresClient}(moveBaseclient);
+110         \textcolor{keyword}{auto} pose = moveBaseclient->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
       \hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose}>();
-108         \textcolor{keyword}{auto} currentPose = pose->\hyperlink{classcl__move__base__z_1_1Pose_a9faf8c6b437ff6b19c8bddd692908dca}{toPoseMsg}();
-109 
-110         \textcolor{keywordtype}{int} tableIndex = 0;
-111         \textcolor{keywordflow}{if} (currentPose.position.x > -0.2)
-112             \textcolor{keywordflow}{return} \hyperlink{namespacesm__moveit_1_1cl__perception__system_a730c3fd4da64d10a75ca4ab014fdbe40a1fd65c0ced0ead229bf6dd6a59067a4f}{RobotProcessStatus::TABLE0};
-113         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentPose.position.x < -0.8)
-114             \textcolor{keywordflow}{return} \hyperlink{namespacesm__moveit_1_1cl__perception__system_a730c3fd4da64d10a75ca4ab014fdbe40a5b22e42e5d94a94037a4486a4976c49d}{RobotProcessStatus::TABLE1};
-115         \textcolor{keywordflow}{else}
-116             \textcolor{keywordflow}{return} \hyperlink{namespacesm__moveit_1_1cl__perception__system_a730c3fd4da64d10a75ca4ab014fdbe40a92f7ea3097b3fdb1b7a25669cfc1b8bd}{RobotProcessStatus::ONTHEWAY};
-117     \}
+111         \textcolor{keyword}{auto} currentPose = pose->\hyperlink{classcl__move__base__z_1_1Pose_a9faf8c6b437ff6b19c8bddd692908dca}{toPoseMsg}();
+112 
+113         \textcolor{keywordtype}{int} tableIndex = 0;
+114         \textcolor{keywordflow}{if} (currentPose.position.x > -0.2)
+115             \textcolor{keywordflow}{return} \hyperlink{namespacesm__moveit_1_1cl__perception__system_a730c3fd4da64d10a75ca4ab014fdbe40a1fd65c0ced0ead229bf6dd6a59067a4f}{RobotProcessStatus::TABLE0};
+116         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentPose.position.x < -0.8)
+117             \textcolor{keywordflow}{return} \hyperlink{namespacesm__moveit_1_1cl__perception__system_a730c3fd4da64d10a75ca4ab014fdbe40a5b22e42e5d94a94037a4486a4976c49d}{RobotProcessStatus::TABLE1};
+118         \textcolor{keywordflow}{else}
+119             \textcolor{keywordflow}{return} \hyperlink{namespacesm__moveit_1_1cl__perception__system_a730c3fd4da64d10a75ca4ab014fdbe40a92f7ea3097b3fdb1b7a25669cfc1b8bd}{RobotProcessStatus::ONTHEWAY};
+120     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -359,39 +359,45 @@ References cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::is\+Initialized, and cl\+\
 76 
 77                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[Perception system] Original Cube 0 Pose captured"} << 
       \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}{originalCube0Pose}->pose);
-78             \}
-79 
-80             \textcolor{keywordflow}{if} (!\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose} && \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ae09f06cb609d0a233fa9a0d31dcb09c6}{detectedCubePose1}->
+78                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[Perception system] Cube 0 Pose table 1 destination"} << (*
+      \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab84bbc2d5e5a7ef7839a0ade56942679}{cube0DestinationInTable1}));
+79             \}
+80 
+81             \textcolor{keywordflow}{if} (!\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose} && \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ae09f06cb609d0a233fa9a0d31dcb09c6}{detectedCubePose1}->
       \hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized})
-81             \{
-82                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose} = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ae09f06cb609d0a233fa9a0d31dcb09c6}{detectedCubePose1}->
+82             \{
+83                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose} = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ae09f06cb609d0a233fa9a0d31dcb09c6}{detectedCubePose1}->
       \hyperlink{classcl__move__base__z_1_1Pose_a63887a88c1ac6e9a4a71b8d7d11aed6c}{toPoseStampedMsg}();
-83 
-84                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}{cube1DestinationInTable0} = 
+84 
+85                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}{cube1DestinationInTable0} = 
       \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose};
-85                 (*cube1DestinationInTable0).pose.position.x = - 
+86                 (*cube1DestinationInTable0).pose.position.x = - 
       \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose}->pose.position.x;
-86 
-87                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[Perception system] Original Cube 1 Pose captured"} << 
+87 
+88                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[Perception system] Original Cube 1 Pose captured"} << 
       \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_ab8851b53535efa7e154248c119e8c3cd}{originalCube1Pose}->pose);
-88             \}
-89 
-90             \textcolor{keywordflow}{if} (!\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a7d8cdfe20da5b47871adf9d3dce11338}{originalCube2Pose} && \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a92801878ea69fb584f459a502bb77dad}{detectedCubePose2}->
+89                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[Perception system] Cube 1 Pose table 0 destination"} << (*
+      \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a13cf34b1fb711829c4ddb9a9e2899ae9}{cube1DestinationInTable0}));
+90             \}
+91 
+92             \textcolor{keywordflow}{if} (!\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a7d8cdfe20da5b47871adf9d3dce11338}{originalCube2Pose} && \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a92801878ea69fb584f459a502bb77dad}{detectedCubePose2}->
       \hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized})
-91             \{
-92                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a7d8cdfe20da5b47871adf9d3dce11338}{originalCube2Pose} = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a92801878ea69fb584f459a502bb77dad}{detectedCubePose2}->
+93             \{
+94                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a7d8cdfe20da5b47871adf9d3dce11338}{originalCube2Pose} = \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a92801878ea69fb584f459a502bb77dad}{detectedCubePose2}->
       \hyperlink{classcl__move__base__z_1_1Pose_a63887a88c1ac6e9a4a71b8d7d11aed6c}{toPoseStampedMsg}();
-93 
-94                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_abb792620853ba381aa0736b884dabe92}{cube2DestinationInTable1} = 
+95 
+96                 \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_abb792620853ba381aa0736b884dabe92}{cube2DestinationInTable1} = 
       \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a7d8cdfe20da5b47871adf9d3dce11338}{originalCube2Pose};
-95                 (*cube2DestinationInTable1).pose.position.x -= \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a7d8cdfe20da5b47871adf9d3dce11338}{originalCube2Pose}->pose.
+97                 (*cube2DestinationInTable1).pose.position.x = -\hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a7d8cdfe20da5b47871adf9d3dce11338}{originalCube2Pose}->pose.
       position.x;
-96 
-97                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[Perception system] Original Cube 2 Pose captured"} << 
-      \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a763b8723ae96eb30fd21e039e3f52c47}{originalCube0Pose}->pose);
-98             \}
-99         \}
-100     \}
+98 
+99                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[Perception system] Original Cube 2 Pose captured"} << 
+      \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_a7d8cdfe20da5b47871adf9d3dce11338}{originalCube2Pose}->pose);
+100                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[Perception system] Cube 2 Pose table 1 destination"} << (*
+      \hyperlink{classsm__moveit_1_1cl__perception__system_1_1ClPerceptionSystem_abb792620853ba381aa0736b884dabe92}{cube2DestinationInTable1}));
+101             \}
+102         \}
+103     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak

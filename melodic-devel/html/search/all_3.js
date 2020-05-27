@@ -211,7 +211,6 @@ var searchData=
   ['cptopicsubscriber_3c_20microstrain_5fmips_3a_3astatus_5fmsg_20_3e',['CpTopicSubscriber&lt; microstrain_mips::status_msg &gt;',['../classsmacc_1_1components_1_1CpTopicSubscriber.html',1,'smacc::components']]],
   ['cptopicsubscriber_3c_20sensor_5fmsgs_3a_3aimu_20_3e',['CpTopicSubscriber&lt; sensor_msgs::Imu &gt;',['../classsmacc_1_1components_1_1CpTopicSubscriber.html',1,'smacc::components']]],
   ['create_5fand_5fpush_5fsmacc_5fdebians',['create_and_push_smacc_debians',['../namespacegenerate__debs.html#af7237c463c8e5b4df369e6befc154c50',1,'generate_debs']]],
-  ['create_5fand_5fpush_5fsmacc_5fviewer_5fdebians',['create_and_push_smacc_viewer_debians',['../namespacegenerate__debs.html#a9a6167ed98fbdc7b1e1c56da5652cf19',1,'generate_debs']]],
   ['createcarrotgoal',['createCarrotGoal',['../classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner.html#a786337a838e58b38b724bc342cf76e10',1,'cl_move_base_z::backward_local_planner::BackwardLocalPlanner']]],
   ['createchildstate',['createChildState',['../classsmacc_1_1introspection_1_1SmaccStateInfo.html#a287664f0ac1c0380bad11ef6973cde8d',1,'smacc::introspection::SmaccStateInfo']]],
   ['createclient',['createClient',['../classsmacc_1_1Orthogonal.html#aea19bfe584fe9c9580784a24b4690eab',1,'smacc::Orthogonal']]],

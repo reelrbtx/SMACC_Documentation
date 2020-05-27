@@ -75,7 +75,7 @@ Definition at line 14 of file st\+\_\+forward.\+h.
 
 
 
-Definition at line 59 of file st\+\_\+forward.\+h.
+Definition at line 60 of file st\+\_\+forward.\+h.
 
 
 
@@ -83,29 +83,22 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), smacc\+::\+I\+Smacc\
 
 
 \begin{DoxyCode}
-60   \{
-61     ClMoveBaseZ *moveBaseClient\_;
-62     this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveBaseClient\_);
-63 
-64     \textcolor{keyword}{auto} pose = moveBaseClient\_->getComponent<Pose>();
-65     \textcolor{keyword}{auto} currentPose = pose->toPoseMsg();
-66 
-67     \textcolor{keyword}{auto} offset = 0.2;
-68     \textcolor{keywordtype}{double} dist;
-69     \textcolor{keywordflow}{if} (currentPose.position.x < -0.2)  \textcolor{comment}{// robot is at negative x-axis side}
-70     \{
-71       \textcolor{comment}{// target is at positive side, at point x=0}
-72       dist = 2 + offset;
-73     \}
-74     \textcolor{keywordflow}{else}  \textcolor{comment}{// the robot in at positive x-axis side}
-75     \{
-76       \textcolor{comment}{// target is at negative x-axis side at point x = -1}
-77       dist = 2 + offset;
-78     \}
-79 
-80     \textcolor{keyword}{auto} forwardBh = this->getOrthogonal<OrNavigation>()->getClientBehavior<CbNavigateForward>();
-81     forwardBh->forwardDistance = dist;
-82   \}
+61   \{
+62     ClMoveBaseZ *moveBaseClient\_;
+63     this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveBaseClient\_);
+64 
+65     \textcolor{keyword}{auto} pose = moveBaseClient\_->getComponent<Pose>();
+66     \textcolor{keyword}{auto} currentPose = pose->toPoseMsg();
+67 
+68     \textcolor{keyword}{auto} offset = 0.15;
+69     \textcolor{keyword}{auto} forwardDistance = 2.0;
+70     \textcolor{keywordtype}{double} dist;
+71     
+72     dist = forwardDistance + offset;
+73 
+74     \textcolor{keyword}{auto} forwardBh = this->getOrthogonal<OrNavigation>()->getClientBehavior<CbNavigateForward>();
+75     forwardBh->forwardDistance = dist;
+76   \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -146,24 +139,25 @@ Referenced by runtime\+Configure().
 38     goalPoint.z = 0;
 39     goalPoint.y = 0;
 40     \textcolor{keywordtype}{double} yaw = 0;
-41     \textcolor{keywordflow}{if} (currentPose.position.x < -0.2)  \textcolor{comment}{// robot is at negative x-axis side}
-42     \{
-43       \textcolor{comment}{// target is at positive side, at point x=0}
-44       goalPoint.x = 1.2;
-45       yaw = 0;
-46     \}
-47     \textcolor{keywordflow}{else}  \textcolor{comment}{// the robot in at positive x-axis side}
-48     \{
-49       \textcolor{comment}{// target is at negative x-axis side at point x = -1}
-50       goalPoint.x = -1.2;
-51       yaw = -M\_PI;
-52     \}
-53 
-54     \textcolor{keyword}{auto} globalNavigationBh = this->getOrthogonal<OrNavigation>()->
+41     \textcolor{keywordtype}{double} forwardOffset = 1.2;
+42     \textcolor{keywordflow}{if} (currentPose.position.x < -0.2)  \textcolor{comment}{// robot is at negative x-axis side}
+43     \{
+44       \textcolor{comment}{// target is at positive side, at point x=0}
+45       goalPoint.x = forwardOffset;
+46       yaw = 0;
+47     \}
+48     \textcolor{keywordflow}{else}  \textcolor{comment}{// the robot in at positive x-axis side}
+49     \{
+50       \textcolor{comment}{// target is at negative x-axis side at point x = -1}
+51       goalPoint.x = -forwardOffset;
+52       yaw = -M\_PI;
+53     \}
+54 
+55     \textcolor{keyword}{auto} globalNavigationBh = this->getOrthogonal<OrNavigation>()->
       getClientBehavior<CbNavigateGlobalPosition>();
-55     globalNavigationBh->goalPoint = goalPoint;
-56     globalNavigationBh->goalYaw = yaw;
-57   \}
+56     globalNavigationBh->goalPoint = goalPoint;
+57     globalNavigationBh->goalYaw = yaw;
+58   \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak

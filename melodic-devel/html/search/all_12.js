@@ -47,7 +47,6 @@ var searchData=
   ['registerproxyfromdynamicreconfigureserver',['registerProxyFromDynamicReconfigureServer',['../classcl__move__base__z_1_1CostmapSwitch.html#a0d04ca7b655f850ba3107393f1c437cb',1,'cl_move_base_z::CostmapSwitch']]],
   ['reject',['REJECT',['../structsmacc_1_1default__transition__tags_1_1REJECT.html',1,'smacc::default_transition_tags']]],
   ['relative_5fsmacc_5ffolder',['relative_smacc_folder',['../namespacegenerate__debs.html#abf6925bd06ac1da3981fe638eefb5a61',1,'generate_debs']]],
-  ['relative_5fsmacc_5fviewer_5ffolder',['relative_smacc_viewer_folder',['../namespacegenerate__debs.html#a22d892b78adfce583710d78737eb4747',1,'generate_debs']]],
   ['release',['RELEASE',['../namespacesmacc.html#a3e4f79486ea6ea6342dd3c712d16a4f6a7d649ef069df9885e382417c79f3d5cd',1,'smacc']]],
   ['reloadcontrollerlibraries',['reloadControllerLibraries',['../classsmacc_1_1components_1_1CpRosControlInterface.html#acd3534897ecf6b28ee3804dcbefedae9',1,'smacc::components::CpRosControlInterface']]],
   ['remove_5fdebian_5ffiles',['remove_debian_files',['../namespacegenerate__debs.html#a08095040d038b3613ad0e77fd4e7f60e',1,'generate_debs']]],
