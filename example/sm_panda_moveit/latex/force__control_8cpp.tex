@@ -1,0 +1,154 @@
+\hypertarget{force__control_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/force\+\_\+control.cpp File Reference}
+\label{force__control_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/force\+\_\+control.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/force\+\_\+control.\+cpp}}
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$Eigen/\+Core$>$}\newline
+{\ttfamily \#include $<$franka/duration.\+h$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/model.\+h$>$}\newline
+{\ttfamily \#include $<$franka/robot.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}examples\+\_\+common.\+h\char`\"{}}\newline
+Include dependency graph for force\+\_\+control.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{force__control_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{force__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{force__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{force__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{force\+\_\+control.\+cpp@{force\+\_\+control.\+cpp}!main@{main}}
+\index{main@{main}!force\+\_\+control.\+cpp@{force\+\_\+control.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 26 of file force\+\_\+control.\+cpp.
+
+
+
+References franka\+::\+Robot\+::control(), franka\+::\+Model\+::gravity(), franka\+::k\+End\+Effector, franka\+::\+Robot\+::load\+Model(), franka\+::\+Robot\+::read\+Once(), franka\+::\+Robot\+::set\+Collision\+Behavior(), set\+Default\+Behavior(), franka\+::\+Robot\+State\+::tau\+\_\+J, and franka\+::\+Model\+::zero\+Jacobian().
+
+
+\begin{DoxyCode}
+26                                 \{
+27   \textcolor{comment}{// Check whether the required arguments were passed}
+28   \textcolor{keywordflow}{if} (argc != 2) \{
+29     std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" <robot-hostname>"} << std::endl;
+30     \textcolor{keywordflow}{return} -1;
+31   \}
+32   \textcolor{comment}{// parameters}
+33   \textcolor{keywordtype}{double} desired\_mass\{0.0\};
+34   constexpr \textcolor{keywordtype}{double} target\_mass\{1.0\};    \textcolor{comment}{// NOLINT(readability-identifier-naming)}
+35   constexpr \textcolor{keywordtype}{double} k\_p\{1.0\};            \textcolor{comment}{// NOLINT(readability-identifier-naming)}
+36   constexpr \textcolor{keywordtype}{double} k\_i\{2.0\};            \textcolor{comment}{// NOLINT(readability-identifier-naming)}
+37   constexpr \textcolor{keywordtype}{double} filter\_gain\{0.001\};  \textcolor{comment}{// NOLINT(readability-identifier-naming)}
+38 
+39   \textcolor{keywordflow}{try} \{
+40     \textcolor{comment}{// connect to robot}
+41     \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(argv[1]);
+42     \hyperlink{examples__common_8cpp_ad0c6e1cb044845ee8a01b5aa1e801a45}{setDefaultBehavior}(robot);
+43     \textcolor{comment}{// load the kinematics and dynamics model}
+44     \hyperlink{classfranka_1_1Model}{franka::Model} model = robot.loadModel();
+45 
+46     \textcolor{comment}{// set collision behavior}
+47     robot.setCollisionBehavior(\{\{100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0\}\},
+48                                \{\{100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0\}\},
+49                                \{\{100.0, 100.0, 100.0, 100.0, 100.0, 100.0\}\},
+50                                \{\{100.0, 100.0, 100.0, 100.0, 100.0, 100.0\}\});
+51 
+52     \hyperlink{structfranka_1_1RobotState}{franka::RobotState} initial\_state = robot.readOnce();
+53 
+54     Eigen::VectorXd initial\_tau\_ext(7), tau\_error\_integral(7);
+55     \textcolor{comment}{// Bias torque sensor}
+56     std::array<double, 7> gravity\_array = model.\hyperlink{classfranka_1_1Model_a9ebf2dbe37a78071fd74d2e552125cb4}{gravity}(initial\_state);
+57     Eigen::Map<Eigen::Matrix<double, 7, 1> > initial\_tau\_measured(initial\_state.
+      \hyperlink{structfranka_1_1RobotState_ad90e2518d661da0d8fa4c864bae210e5}{tau\_J}.data());
+58     Eigen::Map<Eigen::Matrix<double, 7, 1> > initial\_gravity(gravity\_array.data());
+59     initial\_tau\_ext = initial\_tau\_measured - initial\_gravity;
+60 
+61     \textcolor{comment}{// init integrator}
+62     tau\_error\_integral.setZero();
+63 
+64     \textcolor{comment}{// define callback for the torque control loop}
+65     Eigen::Vector3d initial\_position;
+66     \textcolor{keywordtype}{double} time = 0.0;
+67     \textcolor{keyword}{auto} get\_position = [](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}& robot\_state) \{
+68       \textcolor{keywordflow}{return} Eigen::Vector3d(robot\_state.O\_T\_EE[12], robot\_state.O\_T\_EE[13],
+69                              robot\_state.O\_T\_EE[14]);
+70     \};
+71     \textcolor{keyword}{auto} force\_control\_callback = [&](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}& robot\_state,
+72                                       \hyperlink{classfranka_1_1Duration}{franka::Duration} period) -> 
+      \hyperlink{classfranka_1_1Torques}{franka::Torques} \{
+73       time += period.toSec();
+74 
+75       \textcolor{keywordflow}{if} (time == 0.0) \{
+76         initial\_position = get\_position(robot\_state);
+77       \}
+78 
+79       \textcolor{keywordflow}{if} (time > 0 && (get\_position(robot\_state) - initial\_position).norm() > 0.01) \{
+80         \textcolor{keywordflow}{throw} std::runtime\_error(\textcolor{stringliteral}{"Aborting; too far away from starting pose!"});
+81       \}
+82 
+83       \textcolor{comment}{// get state variables}
+84       std::array<double, 42> jacobian\_array =
+85           model.\hyperlink{classfranka_1_1Model_a0b0fb1bf5f54be87bfaa023e4d0c5b9f}{zeroJacobian}(\hyperlink{namespacefranka_a00b729ddce916481d3f0d10febec4f5ba3617dcc7555dbca3c3e86e7535914fdf}{franka::Frame::kEndEffector}, 
+      robot\_state);
+86 
+87       Eigen::Map<const Eigen::Matrix<double, 6, 7> > jacobian(jacobian\_array.data());
+88       Eigen::Map<const Eigen::Matrix<double, 7, 1> > tau\_measured(robot\_state.
+      \hyperlink{structfranka_1_1RobotState_ad90e2518d661da0d8fa4c864bae210e5}{tau\_J}.data());
+89       Eigen::Map<const Eigen::Matrix<double, 7, 1> > gravity(gravity\_array.data());
+90 
+91       Eigen::VectorXd tau\_d(7), desired\_force\_torque(6), tau\_cmd(7), tau\_ext(7);
+92       desired\_force\_torque.setZero();
+93       desired\_force\_torque(2) = desired\_mass * -9.81;
+94       tau\_ext << tau\_measured - gravity - initial\_tau\_ext;
+95       tau\_d << jacobian.transpose() * desired\_force\_torque;
+96       tau\_error\_integral += period.toSec() * (tau\_d - tau\_ext);
+97       \textcolor{comment}{// FF + PI control}
+98       tau\_cmd << tau\_d + k\_p * (tau\_d - tau\_ext) + k\_i * tau\_error\_integral;
+99 
+100       \textcolor{comment}{// Smoothly update the mass to reach the desired target value}
+101       desired\_mass = filter\_gain * target\_mass + (1 - filter\_gain) * desired\_mass;
+102 
+103       std::array<double, 7> tau\_d\_array\{\};
+104       Eigen::VectorXd::Map(&tau\_d\_array[0], 7) = tau\_cmd;
+105       \textcolor{keywordflow}{return} tau\_d\_array;
+106     \};
+107     std::cout << \textcolor{stringliteral}{"WARNING: Make sure sure that no endeffector is mounted and that the robot's last "}
+108                  \textcolor{stringliteral}{"joint is "}
+109                  \textcolor{stringliteral}{"in contact with a horizontal rigid surface before starting. Keep in mind that "}
+110                  \textcolor{stringliteral}{"collision thresholds are set to high values."}
+111               << std::endl
+112               << \textcolor{stringliteral}{"Press Enter to continue..."} << std::endl;
+113     std::cin.ignore();
+114     \textcolor{comment}{// start real-time control loop}
+115     robot.control(force\_control\_callback);
+116 
+117   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception& ex) \{
+118     \textcolor{comment}{// print exception}
+119     std::cout << ex.what() << std::endl;
+120   \}
+121   \textcolor{keywordflow}{return} 0;
+122 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{force__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

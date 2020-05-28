@@ -1,0 +1,198 @@
+\hypertarget{classfranka_1_1LibraryDownloader}{}\section{franka\+:\+:Library\+Downloader Class Reference}
+\label{classfranka_1_1LibraryDownloader}\index{franka\+::\+Library\+Downloader@{franka\+::\+Library\+Downloader}}
+
+
+{\ttfamily \#include $<$library\+\_\+downloader.\+h$>$}
+
+
+
+Collaboration diagram for franka\+:\+:Library\+Downloader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{classfranka_1_1LibraryDownloader__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfranka_1_1LibraryDownloader_acf92ea08d6799c36eb57df91ab876544}{Library\+Downloader} (\hyperlink{classfranka_1_1Network}{Network} \&network)
+\item 
+\hyperlink{classfranka_1_1LibraryDownloader_a036c9b6d446b873446a41c6ce3feffbe}{$\sim$\+Library\+Downloader} ()
+\item 
+const std\+::string \& \hyperlink{classfranka_1_1LibraryDownloader_ac33161b97cad34550de02c67f4feb15c}{path} () const noexcept
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Poco\+::\+File \hyperlink{classfranka_1_1LibraryDownloader_a40ea4c7b49484ed554b915e4d1df24f7}{model\+\_\+library\+\_\+file\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 13 of file library\+\_\+downloader.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfranka_1_1LibraryDownloader_acf92ea08d6799c36eb57df91ab876544}\label{classfranka_1_1LibraryDownloader_acf92ea08d6799c36eb57df91ab876544}} 
+\index{franka\+::\+Library\+Downloader@{franka\+::\+Library\+Downloader}!Library\+Downloader@{Library\+Downloader}}
+\index{Library\+Downloader@{Library\+Downloader}!franka\+::\+Library\+Downloader@{franka\+::\+Library\+Downloader}}
+\subsubsection{\texorpdfstring{Library\+Downloader()}{LibraryDownloader()}}
+{\footnotesize\ttfamily franka\+::\+Library\+Downloader\+::\+Library\+Downloader (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Network}{Network} \&}]{network }\end{DoxyParamCaption})}
+
+
+
+Definition at line 18 of file library\+\_\+downloader.\+cpp.
+
+
+
+References path().
+
+
+\begin{DoxyCode}
+19     : \hyperlink{classfranka_1_1LibraryDownloader_a40ea4c7b49484ed554b915e4d1df24f7}{model\_library\_file\_}\{Poco::TemporaryFile::tempName() + Poco::SharedLibrary::suffix(
+      )\} \{
+20   \textcolor{keyword}{using} \hyperlink{structresearch__interface_1_1robot_1_1LoadModelLibrary}{research\_interface::robot::LoadModelLibrary};
+21   LoadModelLibrary::Architecture architecture;
+22   LoadModelLibrary::System operating\_system;
+23 
+24 \textcolor{preprocessor}{#if defined(LIBFRANKA\_X64)}
+25   architecture = LoadModelLibrary::Architecture::kX64;
+26 \textcolor{preprocessor}{#elif defined(LIBFRANKA\_X86)}
+27   architecture = LoadModelLibrary::Architecture::kX86;
+28 \textcolor{preprocessor}{#elif defined(LIBFRANKA\_ARM64)}
+29   architecture = LoadModelLibrary::Architecture::kARM64;
+30 \textcolor{preprocessor}{#elif defined(LIBFRANKA\_ARM)}
+31   architecture = LoadModelLibrary::Architecture::kARM;
+32 \textcolor{preprocessor}{#else}
+33   \textcolor{keywordflow}{throw} ModelException(\textcolor{stringliteral}{"libfranka: Unsupported architecture!"});
+34 \textcolor{preprocessor}{#endif}
+35 
+36 \textcolor{preprocessor}{#if defined(LIBFRANKA\_WINDOWS)}
+37   operating\_system = LoadModelLibrary::System::kWindows;
+38 \textcolor{preprocessor}{#elif defined(LIBFRANKA\_LINUX)}
+39   operating\_system = LoadModelLibrary::System::kLinux;
+40 \textcolor{preprocessor}{#else}
+41   \textcolor{keywordflow}{throw} ModelException(\textcolor{stringliteral}{"libfranka: Unsupported operating system!"});
+42 \textcolor{preprocessor}{#endif}
+43 
+44   uint32\_t command\_id = network.tcpSendRequest<LoadModelLibrary>(architecture, operating\_system);
+45   std::vector<uint8\_t> buffer;
+46   LoadModelLibrary::Response response =
+47       network.tcpBlockingReceiveResponse<LoadModelLibrary>(command\_id, &buffer);
+48   \textcolor{keywordflow}{if} (response.status != LoadModelLibrary::Status::kSuccess) \{
+49     \textcolor{keywordflow}{throw} ModelException(\textcolor{stringliteral}{"libfranka: Server reports error when loading model library."});
+50   \}
+51 
+52   \textcolor{keywordflow}{try} \{
+53     std::ofstream model\_library\_stream(\hyperlink{classfranka_1_1LibraryDownloader_ac33161b97cad34550de02c67f4feb15c}{path}().c\_str(), std::ios\_base::out | std::ios\_base::binary);
+54     model\_library\_stream.write(reinterpret\_cast<char*>(buffer.data()), buffer.size());
+55   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception& ex) \{
+56     \textcolor{keywordflow}{throw} ModelException(\textcolor{stringliteral}{"libfranka: Cannot save model library."});
+57   \}
+58 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1LibraryDownloader_acf92ea08d6799c36eb57df91ab876544_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1LibraryDownloader_a036c9b6d446b873446a41c6ce3feffbe}\label{classfranka_1_1LibraryDownloader_a036c9b6d446b873446a41c6ce3feffbe}} 
+\index{franka\+::\+Library\+Downloader@{franka\+::\+Library\+Downloader}!````~Library\+Downloader@{$\sim$\+Library\+Downloader}}
+\index{````~Library\+Downloader@{$\sim$\+Library\+Downloader}!franka\+::\+Library\+Downloader@{franka\+::\+Library\+Downloader}}
+\subsubsection{\texorpdfstring{$\sim$\+Library\+Downloader()}{~LibraryDownloader()}}
+{\footnotesize\ttfamily franka\+::\+Library\+Downloader\+::$\sim$\+Library\+Downloader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 60 of file library\+\_\+downloader.\+cpp.
+
+
+
+References model\+\_\+library\+\_\+file\+\_\+, and path().
+
+
+\begin{DoxyCode}
+60                                       \{
+61   \textcolor{keywordflow}{try} \{
+62     \textcolor{keywordflow}{if} (\hyperlink{classfranka_1_1LibraryDownloader_a40ea4c7b49484ed554b915e4d1df24f7}{model\_library\_file\_}.exists()) \{
+63       Poco::TemporaryFile::registerForDeletion(\hyperlink{classfranka_1_1LibraryDownloader_ac33161b97cad34550de02c67f4feb15c}{path}());
+64       \hyperlink{classfranka_1_1LibraryDownloader_a40ea4c7b49484ed554b915e4d1df24f7}{model\_library\_file\_}.remove();
+65     \}
+66   \} \textcolor{keywordflow}{catch} (...) \{
+67   \}
+68 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1LibraryDownloader_a036c9b6d446b873446a41c6ce3feffbe_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka_1_1LibraryDownloader_ac33161b97cad34550de02c67f4feb15c}\label{classfranka_1_1LibraryDownloader_ac33161b97cad34550de02c67f4feb15c}} 
+\index{franka\+::\+Library\+Downloader@{franka\+::\+Library\+Downloader}!path@{path}}
+\index{path@{path}!franka\+::\+Library\+Downloader@{franka\+::\+Library\+Downloader}}
+\subsubsection{\texorpdfstring{path()}{path()}}
+{\footnotesize\ttfamily const std\+::string \& franka\+::\+Library\+Downloader\+::path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Definition at line 70 of file library\+\_\+downloader.\+cpp.
+
+
+
+References model\+\_\+library\+\_\+file\+\_\+.
+
+
+
+Referenced by Library\+Downloader(), and $\sim$\+Library\+Downloader().
+
+
+\begin{DoxyCode}
+70                                                         \{
+71   \textcolor{keywordflow}{return} \hyperlink{classfranka_1_1LibraryDownloader_a40ea4c7b49484ed554b915e4d1df24f7}{model\_library\_file\_}.path();
+72 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1LibraryDownloader_ac33161b97cad34550de02c67f4feb15c_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka_1_1LibraryDownloader_a40ea4c7b49484ed554b915e4d1df24f7}\label{classfranka_1_1LibraryDownloader_a40ea4c7b49484ed554b915e4d1df24f7}} 
+\index{franka\+::\+Library\+Downloader@{franka\+::\+Library\+Downloader}!model\+\_\+library\+\_\+file\+\_\+@{model\+\_\+library\+\_\+file\+\_\+}}
+\index{model\+\_\+library\+\_\+file\+\_\+@{model\+\_\+library\+\_\+file\+\_\+}!franka\+::\+Library\+Downloader@{franka\+::\+Library\+Downloader}}
+\subsubsection{\texorpdfstring{model\+\_\+library\+\_\+file\+\_\+}{model\_library\_file\_}}
+{\footnotesize\ttfamily Poco\+::\+File franka\+::\+Library\+Downloader\+::model\+\_\+library\+\_\+file\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 21 of file library\+\_\+downloader.\+h.
+
+
+
+Referenced by path(), and $\sim$\+Library\+Downloader().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/src/\hyperlink{library__downloader_8h}{library\+\_\+downloader.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/src/\hyperlink{library__downloader_8cpp}{library\+\_\+downloader.\+cpp}\end{DoxyCompactItemize}

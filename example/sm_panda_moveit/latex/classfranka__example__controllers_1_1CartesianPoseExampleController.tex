@@ -1,0 +1,249 @@
+\hypertarget{classfranka__example__controllers_1_1CartesianPoseExampleController}{}\section{franka\+\_\+example\+\_\+controllers\+:\+:Cartesian\+Pose\+Example\+Controller Class Reference}
+\label{classfranka__example__controllers_1_1CartesianPoseExampleController}\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}}
+
+
+{\ttfamily \#include $<$cartesian\+\_\+pose\+\_\+example\+\_\+controller.\+h$>$}
+
+
+
+Inheritance diagram for franka\+\_\+example\+\_\+controllers\+:\+:Cartesian\+Pose\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{classfranka__example__controllers_1_1CartesianPoseExampleController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for franka\+\_\+example\+\_\+controllers\+:\+:Cartesian\+Pose\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1CartesianPoseExampleController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a461de40a8f5d8a76b80b25fc581e0376}{init} (hardware\+\_\+interface\+::\+Robot\+HW $\ast$robot\+\_\+hardware, ros\+::\+Node\+Handle \&node\+\_\+handle) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a80a14c57df1285078330b8d70bd7308b}{starting} (const ros\+::\+Time \&) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_aaecae953c1aeeaa8d08b569f0ef4723d}{update} (const ros\+::\+Time \&, const ros\+::\+Duration \&period) override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfranka__hw_1_1FrankaPoseCartesianInterface}{franka\+\_\+hw\+::\+Franka\+Pose\+Cartesian\+Interface} $\ast$ \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a19b9c7a7046c8e94d9bbd877f2e5f113}{cartesian\+\_\+pose\+\_\+interface\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classfranka__hw_1_1FrankaCartesianPoseHandle}{franka\+\_\+hw\+::\+Franka\+Cartesian\+Pose\+Handle} $>$ \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a23b7a3e97178593a7ae854f6c513ede7}{cartesian\+\_\+pose\+\_\+handle\+\_\+}
+\item 
+ros\+::\+Duration \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_ab671f506567721b65a9607a216cf4a47}{elapsed\+\_\+time\+\_\+}
+\item 
+std\+::array$<$ double, 16 $>$ \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a43c4db7364e30dbbb5fa64e6457d639e}{initial\+\_\+pose\+\_\+} \{\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file cartesian\+\_\+pose\+\_\+example\+\_\+controller.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianPoseExampleController_a461de40a8f5d8a76b80b25fc581e0376}\label{classfranka__example__controllers_1_1CartesianPoseExampleController_a461de40a8f5d8a76b80b25fc581e0376}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}!init@{init}}
+\index{init@{init}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller\+::init (\begin{DoxyParamCaption}\item[{hardware\+\_\+interface\+::\+Robot\+HW $\ast$}]{robot\+\_\+hardware,  }\item[{ros\+::\+Node\+Handle \&}]{node\+\_\+handle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 18 of file cartesian\+\_\+pose\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References cartesian\+\_\+pose\+\_\+handle\+\_\+, and cartesian\+\_\+pose\+\_\+interface\+\_\+.
+
+
+\begin{DoxyCode}
+19                                                                       \{
+20   \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a19b9c7a7046c8e94d9bbd877f2e5f113}{cartesian\_pose\_interface\_} = robot\_hardware->get<
+      \hyperlink{classfranka__hw_1_1FrankaPoseCartesianInterface}{franka\_hw::FrankaPoseCartesianInterface}>();
+21   \textcolor{keywordflow}{if} (\hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a19b9c7a7046c8e94d9bbd877f2e5f113}{cartesian\_pose\_interface\_} == \textcolor{keyword}{nullptr}) \{
+22     ROS\_ERROR(
+23         \textcolor{stringliteral}{"CartesianPoseExampleController: Could not get Cartesian Pose "}
+24         \textcolor{stringliteral}{"interface from hardware"});
+25     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+26   \}
+27 
+28   \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} arm\_id;
+29   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"arm\_id"}, arm\_id)) \{
+30     ROS\_ERROR(\textcolor{stringliteral}{"CartesianPoseExampleController: Could not get parameter arm\_id"});
+31     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+32   \}
+33 
+34   \textcolor{keywordflow}{try} \{
+35     \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a23b7a3e97178593a7ae854f6c513ede7}{cartesian\_pose\_handle\_} = std::make\_unique<franka\_hw::FrankaCartesianPoseHandle>(
+36         \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a19b9c7a7046c8e94d9bbd877f2e5f113}{cartesian\_pose\_interface\_}->getHandle(arm\_id + \textcolor{stringliteral}{"\_robot"}));
+37   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} hardware\_interface::HardwareInterfaceException& e) \{
+38     ROS\_ERROR\_STREAM(
+39         \textcolor{stringliteral}{"CartesianPoseExampleController: Exception getting Cartesian handle: "} << e.what());
+40     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+41   \}
+42 
+43   \textcolor{keyword}{auto} state\_interface = robot\_hardware->get<\hyperlink{classfranka__hw_1_1FrankaStateInterface}{franka\_hw::FrankaStateInterface}
+      >();
+44   \textcolor{keywordflow}{if} (state\_interface == \textcolor{keyword}{nullptr}) \{
+45     ROS\_ERROR(\textcolor{stringliteral}{"CartesianPoseExampleController: Could not get state interface from hardware"});
+46     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+47   \}
+48 
+49   \textcolor{keywordflow}{try} \{
+50     \textcolor{keyword}{auto} state\_handle = state\_interface->getHandle(arm\_id + \textcolor{stringliteral}{"\_robot"});
+51 
+52     std::array<double, 7> q\_start\{\{0, -M\_PI\_4, 0, -3 * M\_PI\_4, 0, M\_PI\_2, M\_PI\_4\}\};
+53     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < q\_start.size(); i++) \{
+54       \textcolor{keywordflow}{if} (std::abs(state\_handle.getRobotState().q\_d[i] - q\_start[i]) > 0.1) \{
+55         ROS\_ERROR\_STREAM(
+56             \textcolor{stringliteral}{"CartesianPoseExampleController: Robot is not in the expected starting position for "}
+57             \textcolor{stringliteral}{"running this example. Run `roslaunch franka\_example\_controllers move\_to\_start.launch "}
+58             \textcolor{stringliteral}{"robot\_ip:=<robot-ip> load\_gripper:=<has-attached-gripper>` first."});
+59         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+60       \}
+61     \}
+62   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} hardware\_interface::HardwareInterfaceException& e) \{
+63     ROS\_ERROR\_STREAM(
+64         \textcolor{stringliteral}{"CartesianPoseExampleController: Exception getting state handle: "} << e.what());
+65     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+66   \}
+67 
+68   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+69 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianPoseExampleController_a80a14c57df1285078330b8d70bd7308b}\label{classfranka__example__controllers_1_1CartesianPoseExampleController_a80a14c57df1285078330b8d70bd7308b}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}!starting@{starting}}
+\index{starting@{starting}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}}
+\subsubsection{\texorpdfstring{starting()}{starting()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller\+::starting (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 71 of file cartesian\+\_\+pose\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References cartesian\+\_\+pose\+\_\+handle\+\_\+, elapsed\+\_\+time\+\_\+, and initial\+\_\+pose\+\_\+.
+
+
+\begin{DoxyCode}
+71                                                               \{
+72   \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a43c4db7364e30dbbb5fa64e6457d639e}{initial\_pose\_} = \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a23b7a3e97178593a7ae854f6c513ede7}{cartesian\_pose\_handle\_}->getRobotState().O\_T\_EE\_d;
+73   \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_ab671f506567721b65a9607a216cf4a47}{elapsed\_time\_} = ros::Duration(0.0);
+74 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianPoseExampleController_aaecae953c1aeeaa8d08b569f0ef4723d}\label{classfranka__example__controllers_1_1CartesianPoseExampleController_aaecae953c1aeeaa8d08b569f0ef4723d}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}!update@{update}}
+\index{update@{update}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{,  }\item[{const ros\+::\+Duration \&}]{period }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 76 of file cartesian\+\_\+pose\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References cartesian\+\_\+pose\+\_\+handle\+\_\+, elapsed\+\_\+time\+\_\+, initial\+\_\+pose\+\_\+, and P\+L\+U\+G\+I\+N\+L\+I\+B\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+C\+L\+A\+S\+S().
+
+
+\begin{DoxyCode}
+77                                                                        \{
+78   \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_ab671f506567721b65a9607a216cf4a47}{elapsed\_time\_} += period;
+79 
+80   \textcolor{keywordtype}{double} radius = 0.3;
+81   \textcolor{keywordtype}{double} angle = M\_PI / 4 * (1 - std::cos(M\_PI / 5.0 * \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_ab671f506567721b65a9607a216cf4a47}{elapsed\_time\_}.toSec()));
+82   \textcolor{keywordtype}{double} delta\_x = radius * std::sin(angle);
+83   \textcolor{keywordtype}{double} delta\_z = radius * (std::cos(angle) - 1);
+84   std::array<double, 16> new\_pose = \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a43c4db7364e30dbbb5fa64e6457d639e}{initial\_pose\_};
+85   new\_pose[12] -= delta\_x;
+86   new\_pose[14] -= delta\_z;
+87   \hyperlink{classfranka__example__controllers_1_1CartesianPoseExampleController_a23b7a3e97178593a7ae854f6c513ede7}{cartesian\_pose\_handle\_}->setCommand(new\_pose);
+88 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1CartesianPoseExampleController_aaecae953c1aeeaa8d08b569f0ef4723d_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianPoseExampleController_a23b7a3e97178593a7ae854f6c513ede7}\label{classfranka__example__controllers_1_1CartesianPoseExampleController_a23b7a3e97178593a7ae854f6c513ede7}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}!cartesian\+\_\+pose\+\_\+handle\+\_\+@{cartesian\+\_\+pose\+\_\+handle\+\_\+}}
+\index{cartesian\+\_\+pose\+\_\+handle\+\_\+@{cartesian\+\_\+pose\+\_\+handle\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}}
+\subsubsection{\texorpdfstring{cartesian\+\_\+pose\+\_\+handle\+\_\+}{cartesian\_pose\_handle\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classfranka__hw_1_1FrankaCartesianPoseHandle}{franka\+\_\+hw\+::\+Franka\+Cartesian\+Pose\+Handle}$>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller\+::cartesian\+\_\+pose\+\_\+handle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file cartesian\+\_\+pose\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianPoseExampleController_a19b9c7a7046c8e94d9bbd877f2e5f113}\label{classfranka__example__controllers_1_1CartesianPoseExampleController_a19b9c7a7046c8e94d9bbd877f2e5f113}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}!cartesian\+\_\+pose\+\_\+interface\+\_\+@{cartesian\+\_\+pose\+\_\+interface\+\_\+}}
+\index{cartesian\+\_\+pose\+\_\+interface\+\_\+@{cartesian\+\_\+pose\+\_\+interface\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}}
+\subsubsection{\texorpdfstring{cartesian\+\_\+pose\+\_\+interface\+\_\+}{cartesian\_pose\_interface\_}}
+{\footnotesize\ttfamily \hyperlink{classfranka__hw_1_1FrankaPoseCartesianInterface}{franka\+\_\+hw\+::\+Franka\+Pose\+Cartesian\+Interface}$\ast$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller\+::cartesian\+\_\+pose\+\_\+interface\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 28 of file cartesian\+\_\+pose\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianPoseExampleController_ab671f506567721b65a9607a216cf4a47}\label{classfranka__example__controllers_1_1CartesianPoseExampleController_ab671f506567721b65a9607a216cf4a47}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}!elapsed\+\_\+time\+\_\+@{elapsed\+\_\+time\+\_\+}}
+\index{elapsed\+\_\+time\+\_\+@{elapsed\+\_\+time\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}}
+\subsubsection{\texorpdfstring{elapsed\+\_\+time\+\_\+}{elapsed\_time\_}}
+{\footnotesize\ttfamily ros\+::\+Duration franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller\+::elapsed\+\_\+time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 30 of file cartesian\+\_\+pose\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianPoseExampleController_a43c4db7364e30dbbb5fa64e6457d639e}\label{classfranka__example__controllers_1_1CartesianPoseExampleController_a43c4db7364e30dbbb5fa64e6457d639e}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}!initial\+\_\+pose\+\_\+@{initial\+\_\+pose\+\_\+}}
+\index{initial\+\_\+pose\+\_\+@{initial\+\_\+pose\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller}}
+\subsubsection{\texorpdfstring{initial\+\_\+pose\+\_\+}{initial\_pose\_}}
+{\footnotesize\ttfamily std\+::array$<$double, 16$>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Pose\+Example\+Controller\+::initial\+\_\+pose\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 31 of file cartesian\+\_\+pose\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by starting(), and update().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/include/franka\+\_\+example\+\_\+controllers/\hyperlink{cartesian__pose__example__controller_8h}{cartesian\+\_\+pose\+\_\+example\+\_\+controller.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/src/\hyperlink{cartesian__pose__example__controller_8cpp}{cartesian\+\_\+pose\+\_\+example\+\_\+controller.\+cpp}\end{DoxyCompactItemize}

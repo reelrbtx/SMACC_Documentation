@@ -1,0 +1,381 @@
+\hypertarget{namespacefranka__gripper}{}\section{franka\+\_\+gripper Namespace Reference}
+\label{namespacefranka__gripper}\index{franka\+\_\+gripper@{franka\+\_\+gripper}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbool}{bool} \hyperlink{namespacefranka__gripper_a8d26c346602cc39ab2495f2fffc99d9c}{update\+Gripper\+State} (const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&gripper, \hyperlink{structfranka_1_1GripperState}{franka\+::\+Gripper\+State} $\ast$state)
+\item 
+void \hyperlink{namespacefranka__gripper_ae9fb03aae11c03a4ad2c5d5c88b80166}{gripper\+Command\+Execute\+Callback} (const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&gripper, const Grasp\+Epsilon \&grasp\+\_\+epsilon, double default\+\_\+speed, actionlib\+::\+Simple\+Action\+Server$<$ control\+\_\+msgs\+::\+Gripper\+Command\+Action $>$ $\ast$action\+\_\+server, const control\+\_\+msgs\+::\+Gripper\+Command\+Goal\+Const\+Ptr \&goal)
+\item 
+\hyperlink{classbool}{bool} \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{move} (const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&gripper, const Move\+Goal\+Const\+Ptr \&goal)
+\item 
+\hyperlink{classbool}{bool} \hyperlink{namespacefranka__gripper_a098e502a3ba4aed6147ec76f1421e803}{homing} (const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&gripper, const Homing\+Goal\+Const\+Ptr \&)
+\item 
+\hyperlink{classbool}{bool} \hyperlink{namespacefranka__gripper_a4030b4a443c096b625233396f4314a04}{stop} (const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&gripper, const Stop\+Goal\+Const\+Ptr \&)
+\item 
+\hyperlink{classbool}{bool} \hyperlink{namespacefranka__gripper_a0233f74b5d7107ae71083e17a024c676}{grasp} (const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&gripper, const Grasp\+Goal\+Const\+Ptr \&goal)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacefranka__gripper_a0233f74b5d7107ae71083e17a024c676}\label{namespacefranka__gripper_a0233f74b5d7107ae71083e17a024c676}} 
+\index{franka\+\_\+gripper@{franka\+\_\+gripper}!grasp@{grasp}}
+\index{grasp@{grasp}!franka\+\_\+gripper@{franka\+\_\+gripper}}
+\subsubsection{\texorpdfstring{grasp()}{grasp()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+gripper\+::grasp (\begin{DoxyParamCaption}\item[{const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&}]{gripper,  }\item[{const Grasp\+Goal\+Const\+Ptr \&}]{goal }\end{DoxyParamCaption})}
+
+Calls the libfranka grasp service of the gripper
+
+An object is considered grasped if the distance $d$ between the gripper fingers satisfies $(\text{width} - \text{epsilon_inner}) < d < (\text{width} + \text{epsilon_outer})$.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em gripper} & A gripper instance to execute the command \\
+\hline
+\mbox{\tt in}  & {\em goal} & A grasp goal with target width, epsilon\+\_\+inner, epsilon\+\_\+outer, velocity and effort \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if an object has been grasped, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 89 of file franka\+\_\+gripper.\+cpp.
+
+
+
+References franka\+::\+Gripper\+::grasp().
+
+
+
+Referenced by anonymous\+\_\+namespace\{franka\+\_\+gripper\+\_\+node.\+cpp\}\+::handle\+Errors(), and main().
+
+
+\begin{DoxyCode}
+89                                                                         \{
+90   \textcolor{keywordflow}{return} gripper.\hyperlink{classfranka_1_1Gripper_abff6a03a6c75b9079bd4b9b5ca380254}{grasp}(goal->width, goal->speed, goal->force, goal->epsilon.inner,
+91                        goal->epsilon.outer);
+92 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__gripper_a0233f74b5d7107ae71083e17a024c676_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__gripper_a0233f74b5d7107ae71083e17a024c676_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__gripper_ae9fb03aae11c03a4ad2c5d5c88b80166}\label{namespacefranka__gripper_ae9fb03aae11c03a4ad2c5d5c88b80166}} 
+\index{franka\+\_\+gripper@{franka\+\_\+gripper}!gripper\+Command\+Execute\+Callback@{gripper\+Command\+Execute\+Callback}}
+\index{gripper\+Command\+Execute\+Callback@{gripper\+Command\+Execute\+Callback}!franka\+\_\+gripper@{franka\+\_\+gripper}}
+\subsubsection{\texorpdfstring{gripper\+Command\+Execute\+Callback()}{gripperCommandExecuteCallback()}}
+{\footnotesize\ttfamily void franka\+\_\+gripper\+::gripper\+Command\+Execute\+Callback (\begin{DoxyParamCaption}\item[{const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&}]{gripper,  }\item[{const Grasp\+Epsilon \&}]{grasp\+\_\+epsilon,  }\item[{double}]{default\+\_\+speed,  }\item[{actionlib\+::\+Simple\+Action\+Server$<$ control\+\_\+msgs\+::\+Gripper\+Command\+Action $>$ $\ast$}]{action\+\_\+server,  }\item[{const control\+\_\+msgs\+::\+Gripper\+Command\+Goal\+Const\+Ptr \&}]{goal }\end{DoxyParamCaption})}
+
+Wraps the execution of a gripper command action to catch exceptions and report results
+
+\begin{DoxyNote}{Note}
+For compatibility with current Move\+It! behavior, the given goal\textquotesingle{}s command position is multiplied by a factor of 2 before being commanded to the gripper!
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em gripper} & A pointer to a franka gripper \\
+\hline
+\mbox{\tt in}  & {\em default\+\_\+speed} & The default speed for a gripper action \\
+\hline
+\mbox{\tt in}  & {\em grasp\+\_\+epsilon} & The epsilon window of the grasp. \\
+\hline
+\mbox{\tt in}  & {\em action\+\_\+server} & A pointer to a gripper action server \\
+\hline
+\mbox{\tt in}  & {\em goal} & A gripper action goal \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 30 of file franka\+\_\+gripper.\+cpp.
+
+
+
+References franka\+::\+Gripper\+::grasp(), franka\+::\+Gripper\+State\+::max\+\_\+width, franka\+::\+Gripper\+::move(), franka\+::\+Gripper\+::read\+Once(), update\+Gripper\+State(), and franka\+::\+Gripper\+State\+::width.
+
+
+
+Referenced by anonymous\+\_\+namespace\{franka\+\_\+gripper\+\_\+node.\+cpp\}\+::handle\+Errors(), and main().
+
+
+\begin{DoxyCode}
+35                                                         \{
+36   \textcolor{keyword}{auto} gripper\_command\_handler = [goal, grasp\_epsilon, default\_speed, &gripper]() \{
+37     \textcolor{comment}{// HACK: As one gripper finger is <mimic>, MoveIt!'s trajectory execution manager}
+38     \textcolor{comment}{// only sends us the width of one finger. Multiply by 2 to get the intended width.}
+39     \textcolor{keywordtype}{double} target\_width = 2 * goal->command.position;
+40 
+41     \hyperlink{structfranka_1_1GripperState}{franka::GripperState} state = gripper.\hyperlink{classfranka_1_1Gripper_ab0afc8a41c9c5fff808e76851dcf23ce}{readOnce}();
+42     \textcolor{keywordflow}{if} (target\_width > state.\hyperlink{structfranka_1_1GripperState_ab71a26356c2898c49609bf991843e166}{max\_width} || target\_width < 0.0) \{
+43       ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"GripperServer: Commanding out of range width! max\_width = "}
+44                        << state.\hyperlink{structfranka_1_1GripperState_ab71a26356c2898c49609bf991843e166}{max\_width} << \textcolor{stringliteral}{" command = "} << target\_width);
+45       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+46     \}
+47     constexpr \textcolor{keywordtype}{double} kSamePositionThreshold = 1e-4;
+48     \textcolor{keywordflow}{if} (std::abs(target\_width - state.\hyperlink{structfranka_1_1GripperState_adf095f446ec39a9a48e120b209dcd6e9}{width}) < kSamePositionThreshold) \{
+49       \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+50     \}
+51     \textcolor{keywordflow}{if} (target\_width >= state.\hyperlink{structfranka_1_1GripperState_adf095f446ec39a9a48e120b209dcd6e9}{width}) \{
+52       \textcolor{keywordflow}{return} gripper.\hyperlink{classfranka_1_1Gripper_a047bc39267d66d6fb26c4c70669d68c2}{move}(target\_width, default\_speed);
+53     \}
+54     \textcolor{keywordflow}{return} gripper.\hyperlink{classfranka_1_1Gripper_abff6a03a6c75b9079bd4b9b5ca380254}{grasp}(target\_width, default\_speed, goal->command.max\_effort, grasp\_epsilon.inner,
+55                          grasp\_epsilon.outer);
+56   \};
+57 
+58   \textcolor{keywordflow}{try} \{
+59     \textcolor{keywordflow}{if} (gripper\_command\_handler()) \{
+60       \hyperlink{structfranka_1_1GripperState}{franka::GripperState} state;
+61       \textcolor{keywordflow}{if} (\hyperlink{namespacefranka__gripper_a8d26c346602cc39ab2495f2fffc99d9c}{updateGripperState}(gripper, &state)) \{
+62         control\_msgs::GripperCommandResult result;
+63         result.effort = 0.0;
+64         result.position = state.\hyperlink{structfranka_1_1GripperState_adf095f446ec39a9a48e120b209dcd6e9}{width};
+65         result.reached\_goal = \textcolor{keyword}{static\_cast<}decltype(result.reached\_goal)\textcolor{keyword}{>}(\textcolor{keyword}{true});
+66         result.stalled = \textcolor{keyword}{static\_cast<}decltype(result.stalled)\textcolor{keyword}{>}(\textcolor{keyword}{false});
+67         action\_server->setSucceeded(result);
+68         \textcolor{keywordflow}{return};
+69       \}
+70     \}
+71   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& ex) \{
+72     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{""} << ex.what());
+73   \}
+74   action\_server->setAborted();
+75 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__gripper_ae9fb03aae11c03a4ad2c5d5c88b80166_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__gripper_ae9fb03aae11c03a4ad2c5d5c88b80166_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__gripper_a098e502a3ba4aed6147ec76f1421e803}\label{namespacefranka__gripper_a098e502a3ba4aed6147ec76f1421e803}} 
+\index{franka\+\_\+gripper@{franka\+\_\+gripper}!homing@{homing}}
+\index{homing@{homing}!franka\+\_\+gripper@{franka\+\_\+gripper}}
+\subsubsection{\texorpdfstring{homing()}{homing()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+gripper\+::homing (\begin{DoxyParamCaption}\item[{const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&}]{gripper,  }\item[{const Homing\+Goal\+Const\+Ptr \&}]{ }\end{DoxyParamCaption})}
+
+Calls the libfranka homing service of the gripper
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em gripper} & A gripper instance to execute the command\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if command was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 81 of file franka\+\_\+gripper.\+cpp.
+
+
+
+References franka\+::\+Gripper\+::homing().
+
+
+
+Referenced by anonymous\+\_\+namespace\{franka\+\_\+gripper\+\_\+node.\+cpp\}\+::handle\+Errors(), and main().
+
+
+\begin{DoxyCode}
+81                                                                        \{
+82   \textcolor{keywordflow}{return} gripper.\hyperlink{classfranka_1_1Gripper_aef356f93a4c3b9d6b2532c29126d478c}{homing}();
+83 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__gripper_a098e502a3ba4aed6147ec76f1421e803_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__gripper_a098e502a3ba4aed6147ec76f1421e803_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}\label{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}} 
+\index{franka\+\_\+gripper@{franka\+\_\+gripper}!move@{move}}
+\index{move@{move}!franka\+\_\+gripper@{franka\+\_\+gripper}}
+\subsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+gripper\+::move (\begin{DoxyParamCaption}\item[{const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&}]{gripper,  }\item[{const Move\+Goal\+Const\+Ptr \&}]{goal }\end{DoxyParamCaption})}
+
+Calls the libfranka move service of the gripper
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em gripper} & A gripper instance to execute the command \\
+\hline
+\mbox{\tt in}  & {\em goal} & A move goal with target width and velocity\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if command was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 77 of file franka\+\_\+gripper.\+cpp.
+
+
+
+References franka\+::\+Gripper\+::move().
+
+
+
+Referenced by testing\+::\+By\+Move(), testing\+::internal\+::edit\+\_\+distance\+::\+Calculate\+Optimal\+Edits(), franka\+::\+Robot\+::control(), extract\+Obstacle\+From\+Json(), anonymous\+\_\+namespace\{franka\+\_\+gripper\+\_\+node.\+cpp\}\+::handle\+Errors(), franka\+::\+Robot\+::\+Impl\+::\+Impl(), main(), franka\+::\+Robot\+::operator=(), testing\+::\+Return(), franka\+::\+Robot\+::\+Robot(), and testing\+::internal\+::\+Reference\+Or\+Value\+Wrapper$<$ T $>$\+::\+Unwrap().
+
+
+\begin{DoxyCode}
+77                                                                       \{
+78   \textcolor{keywordflow}{return} gripper.\hyperlink{classfranka_1_1Gripper_a047bc39267d66d6fb26c4c70669d68c2}{move}(goal->width, goal->speed);
+79 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__gripper_a4030b4a443c096b625233396f4314a04}\label{namespacefranka__gripper_a4030b4a443c096b625233396f4314a04}} 
+\index{franka\+\_\+gripper@{franka\+\_\+gripper}!stop@{stop}}
+\index{stop@{stop}!franka\+\_\+gripper@{franka\+\_\+gripper}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+gripper\+::stop (\begin{DoxyParamCaption}\item[{const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&}]{gripper,  }\item[{const Stop\+Goal\+Const\+Ptr \&}]{ }\end{DoxyParamCaption})}
+
+Calls the libfranka stop service of the gripper to stop applying force
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em gripper} & A gripper instance to execute the command\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if command was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 85 of file franka\+\_\+gripper.\+cpp.
+
+
+
+References franka\+::\+Gripper\+::stop().
+
+
+
+Referenced by anonymous\+\_\+namespace\{franka\+\_\+gripper\+\_\+node.\+cpp\}\+::handle\+Errors(), and main().
+
+
+\begin{DoxyCode}
+85                                                                    \{
+86   \textcolor{keywordflow}{return} gripper.\hyperlink{classfranka_1_1Gripper_add7397fb6c5631650c139d26a85c8e1d}{stop}();
+87 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{namespacefranka__gripper_a4030b4a443c096b625233396f4314a04_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__gripper_a4030b4a443c096b625233396f4314a04_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__gripper_a8d26c346602cc39ab2495f2fffc99d9c}\label{namespacefranka__gripper_a8d26c346602cc39ab2495f2fffc99d9c}} 
+\index{franka\+\_\+gripper@{franka\+\_\+gripper}!update\+Gripper\+State@{update\+Gripper\+State}}
+\index{update\+Gripper\+State@{update\+Gripper\+State}!franka\+\_\+gripper@{franka\+\_\+gripper}}
+\subsubsection{\texorpdfstring{update\+Gripper\+State()}{updateGripperState()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+gripper\+::update\+Gripper\+State (\begin{DoxyParamCaption}\item[{const \hyperlink{classfranka_1_1Gripper}{franka\+::\+Gripper} \&}]{gripper,  }\item[{\hyperlink{structfranka_1_1GripperState}{franka\+::\+Gripper\+State} $\ast$}]{state }\end{DoxyParamCaption})}
+
+Reads a gripper state if possible
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em state} & A gripper state to update \\
+\hline
+\mbox{\tt in}  & {\em gripper} & A pointer to a franka gripper\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if update was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 20 of file franka\+\_\+gripper.\+cpp.
+
+
+
+References franka\+::\+Gripper\+::read\+Once().
+
+
+
+Referenced by gripper\+Command\+Execute\+Callback(), anonymous\+\_\+namespace\{franka\+\_\+gripper\+\_\+node.\+cpp\}\+::handle\+Errors(), and main().
+
+
+\begin{DoxyCode}
+20                                                                                  \{
+21   \textcolor{keywordflow}{try} \{
+22     *state = gripper.\hyperlink{classfranka_1_1Gripper_ab0afc8a41c9c5fff808e76851dcf23ce}{readOnce}();
+23   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& ex) \{
+24     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"GripperServer: Exception reading gripper state: "} << ex.what());
+25     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+26   \}
+27   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+28 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__gripper_a8d26c346602cc39ab2495f2fffc99d9c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__gripper_a8d26c346602cc39ab2495f2fffc99d9c_icgraph}
+\end{center}
+\end{figure}

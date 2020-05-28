@@ -1,0 +1,60 @@
+\hypertarget{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03}{}\section{anonymous\+\_\+namespace\{franka\+\_\+gripper\+\_\+node.\+cpp\} Namespace Reference}
+\label{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03}\index{anonymous\+\_\+namespace\lcurly{}franka\+\_\+gripper\+\_\+node.\+cpp\rcurly{}@{anonymous\+\_\+namespace\lcurly{}franka\+\_\+gripper\+\_\+node.\+cpp\rcurly{}}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T\+\_\+action , typename T\+\_\+goal , typename T\+\_\+result $>$ }\\void \hyperlink{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03_a303e12e3dde7803ab11935d394c258c7}{handle\+Errors} (actionlib\+::\+Simple\+Action\+Server$<$ T\+\_\+action $>$ $\ast$server, std\+::function$<$ \hyperlink{classbool}{bool}(const T\+\_\+goal \&)$>$ handler, const T\+\_\+goal \&goal)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03_a303e12e3dde7803ab11935d394c258c7}\label{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03_a303e12e3dde7803ab11935d394c258c7}} 
+\index{anonymous\+\_\+namespace\lcurly{}franka\+\_\+gripper\+\_\+node.\+cpp\rcurly{}@{anonymous\+\_\+namespace\lcurly{}franka\+\_\+gripper\+\_\+node.\+cpp\rcurly{}}!handle\+Errors@{handle\+Errors}}
+\index{handle\+Errors@{handle\+Errors}!anonymous\+\_\+namespace\lcurly{}franka\+\_\+gripper\+\_\+node.\+cpp\rcurly{}@{anonymous\+\_\+namespace\lcurly{}franka\+\_\+gripper\+\_\+node.\+cpp\rcurly{}}}
+\subsubsection{\texorpdfstring{handle\+Errors()}{handleErrors()}}
+{\footnotesize\ttfamily template$<$typename T\+\_\+action , typename T\+\_\+goal , typename T\+\_\+result $>$ \\
+void anonymous\+\_\+namespace\{franka\+\_\+gripper\+\_\+node.\+cpp\}\+::handle\+Errors (\begin{DoxyParamCaption}\item[{actionlib\+::\+Simple\+Action\+Server$<$ T\+\_\+action $>$ $\ast$}]{server,  }\item[{std\+::function$<$ \hyperlink{classbool}{bool}(const T\+\_\+goal \&)$>$}]{handler,  }\item[{const T\+\_\+goal \&}]{goal }\end{DoxyParamCaption})}
+
+
+
+Definition at line 21 of file franka\+\_\+gripper\+\_\+node.\+cpp.
+
+
+
+References franka\+\_\+gripper\+::grasp(), franka\+\_\+gripper\+::gripper\+Command\+Execute\+Callback(), franka\+\_\+gripper\+::homing(), franka\+\_\+gripper\+::move(), franka\+\_\+gripper\+::stop(), and franka\+\_\+gripper\+::update\+Gripper\+State().
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+23                                       \{
+24   T\_result result;
+25   \textcolor{keywordflow}{try} \{
+26     result.success = handler(goal);
+27     \hyperlink{namespaceinteractive__marker_a0913a920340099e56f9b000d508380eb}{server}->setSucceeded(result);
+28   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& ex) \{
+29     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{""} << ex.what());
+30     result.success = \textcolor{keyword}{false};
+31     result.error = ex.what();
+32     \hyperlink{namespaceinteractive__marker_a0913a920340099e56f9b000d508380eb}{server}->setAborted(result);
+33   \}
+34 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03_a303e12e3dde7803ab11935d394c258c7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03_a303e12e3dde7803ab11935d394c258c7_icgraph}
+\end{center}
+\end{figure}

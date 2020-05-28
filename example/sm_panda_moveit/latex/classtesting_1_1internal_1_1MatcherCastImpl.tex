@@ -1,0 +1,136 @@
+\hypertarget{classtesting_1_1internal_1_1MatcherCastImpl}{}\section{testing\+:\+:internal\+:\+:Matcher\+Cast\+Impl$<$ T, M $>$ Class Template Reference}
+\label{classtesting_1_1internal_1_1MatcherCastImpl}\index{testing\+::internal\+::\+Matcher\+Cast\+Impl$<$ T, M $>$@{testing\+::internal\+::\+Matcher\+Cast\+Impl$<$ T, M $>$}}
+
+
+{\ttfamily \#include $<$gmock-\/matchers.\+h$>$}
+
+
+
+Collaboration diagram for testing\+:\+:internal\+:\+:Matcher\+Cast\+Impl$<$ T, M $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classtesting_1_1internal_1_1MatcherCastImpl__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classtesting_1_1Matcher}{Matcher}$<$ T $>$ \hyperlink{classtesting_1_1internal_1_1MatcherCastImpl_a488bb69a7845f9198bbb198d8dbe41a8}{Cast} (const M \&polymorphic\+\_\+matcher\+\_\+or\+\_\+value)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classtesting_1_1Matcher}{Matcher}$<$ T $>$ \hyperlink{classtesting_1_1internal_1_1MatcherCastImpl_a378d5cc463b518803c8fddb16f12e1ab}{Cast\+Impl} (const M \&value, \hyperlink{structtesting_1_1internal_1_1BooleanConstant}{Boolean\+Constant}$<$ false $>$)
+\item 
+static \hyperlink{classtesting_1_1Matcher}{Matcher}$<$ T $>$ \hyperlink{classtesting_1_1internal_1_1MatcherCastImpl_a7eef3c9675414f138bf27def2fccd2c7}{Cast\+Impl} (const M \&polymorphic\+\_\+matcher\+\_\+or\+\_\+value, \hyperlink{structtesting_1_1internal_1_1BooleanConstant}{Boolean\+Constant}$<$ true $>$)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T, typename M$>$\newline
+class testing\+::internal\+::\+Matcher\+Cast\+Impl$<$ T, M $>$}
+
+
+
+Definition at line 515 of file gmock-\/matchers.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1MatcherCastImpl_a488bb69a7845f9198bbb198d8dbe41a8}\label{classtesting_1_1internal_1_1MatcherCastImpl_a488bb69a7845f9198bbb198d8dbe41a8}} 
+\index{testing\+::internal\+::\+Matcher\+Cast\+Impl@{testing\+::internal\+::\+Matcher\+Cast\+Impl}!Cast@{Cast}}
+\index{Cast@{Cast}!testing\+::internal\+::\+Matcher\+Cast\+Impl@{testing\+::internal\+::\+Matcher\+Cast\+Impl}}
+\subsubsection{\texorpdfstring{Cast()}{Cast()}}
+{\footnotesize\ttfamily template$<$typename T , typename M $>$ \\
+static \hyperlink{classtesting_1_1Matcher}{Matcher}$<$T$>$ \hyperlink{classtesting_1_1internal_1_1MatcherCastImpl}{testing\+::internal\+::\+Matcher\+Cast\+Impl}$<$ T, M $>$\+::Cast (\begin{DoxyParamCaption}\item[{const M \&}]{polymorphic\+\_\+matcher\+\_\+or\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line 517 of file gmock-\/matchers.\+h.
+
+
+
+Referenced by testing\+::\+Safe\+Matcher\+Cast\+Impl$<$ T $>$\+::\+Cast(), and testing\+::\+Matcher\+Cast().
+
+
+\begin{DoxyCode}
+517                                                                 \{
+518     \textcolor{comment}{// M can be a polymorhic matcher, in which case we want to use}
+519     \textcolor{comment}{// its conversion operator to create Matcher<T>.  Or it can be a value}
+520     \textcolor{comment}{// that should be passed to the Matcher<T>'s constructor.}
+521     \textcolor{comment}{//}
+522     \textcolor{comment}{// We can't call Matcher<T>(polymorphic\_matcher\_or\_value) when M is a}
+523     \textcolor{comment}{// polymorphic matcher because it'll be ambiguous if T has an implicit}
+524     \textcolor{comment}{// constructor from M (this usually happens when T has an implicit}
+525     \textcolor{comment}{// constructor from any type).}
+526     \textcolor{comment}{//}
+527     \textcolor{comment}{// It won't work to unconditionally implict\_cast}
+528     \textcolor{comment}{// polymorphic\_matcher\_or\_value to Matcher<T> because it won't trigger}
+529     \textcolor{comment}{// a user-defined conversion from M to T if one exists (assuming M is}
+530     \textcolor{comment}{// a value).}
+531     \textcolor{keywordflow}{return} \hyperlink{classtesting_1_1internal_1_1MatcherCastImpl_a378d5cc463b518803c8fddb16f12e1ab}{CastImpl}(
+532         polymorphic\_matcher\_or\_value,
+533         BooleanConstant<
+534             internal::ImplicitlyConvertible<M, Matcher<T> >::value>());
+535   \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classtesting_1_1internal_1_1MatcherCastImpl_a488bb69a7845f9198bbb198d8dbe41a8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1MatcherCastImpl_a378d5cc463b518803c8fddb16f12e1ab}\label{classtesting_1_1internal_1_1MatcherCastImpl_a378d5cc463b518803c8fddb16f12e1ab}} 
+\index{testing\+::internal\+::\+Matcher\+Cast\+Impl@{testing\+::internal\+::\+Matcher\+Cast\+Impl}!Cast\+Impl@{Cast\+Impl}}
+\index{Cast\+Impl@{Cast\+Impl}!testing\+::internal\+::\+Matcher\+Cast\+Impl@{testing\+::internal\+::\+Matcher\+Cast\+Impl}}
+\subsubsection{\texorpdfstring{Cast\+Impl()}{CastImpl()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , typename M $>$ \\
+static \hyperlink{classtesting_1_1Matcher}{Matcher}$<$T$>$ \hyperlink{classtesting_1_1internal_1_1MatcherCastImpl}{testing\+::internal\+::\+Matcher\+Cast\+Impl}$<$ T, M $>$\+::Cast\+Impl (\begin{DoxyParamCaption}\item[{const M \&}]{value,  }\item[{\hyperlink{structtesting_1_1internal_1_1BooleanConstant}{Boolean\+Constant}$<$ false $>$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 538 of file gmock-\/matchers.\+h.
+
+
+\begin{DoxyCode}
+538                                                                      \{
+539     \textcolor{comment}{// M can't be implicitly converted to Matcher<T>, so M isn't a polymorphic}
+540     \textcolor{comment}{// matcher.  It must be a value then.  Use direct initialization to create}
+541     \textcolor{comment}{// a matcher.}
+542     \textcolor{keywordflow}{return} Matcher<T>(ImplicitCast\_<T>(value));
+543   \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classtesting_1_1internal_1_1MatcherCastImpl_a7eef3c9675414f138bf27def2fccd2c7}\label{classtesting_1_1internal_1_1MatcherCastImpl_a7eef3c9675414f138bf27def2fccd2c7}} 
+\index{testing\+::internal\+::\+Matcher\+Cast\+Impl@{testing\+::internal\+::\+Matcher\+Cast\+Impl}!Cast\+Impl@{Cast\+Impl}}
+\index{Cast\+Impl@{Cast\+Impl}!testing\+::internal\+::\+Matcher\+Cast\+Impl@{testing\+::internal\+::\+Matcher\+Cast\+Impl}}
+\subsubsection{\texorpdfstring{Cast\+Impl()}{CastImpl()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , typename M $>$ \\
+static \hyperlink{classtesting_1_1Matcher}{Matcher}$<$T$>$ \hyperlink{classtesting_1_1internal_1_1MatcherCastImpl}{testing\+::internal\+::\+Matcher\+Cast\+Impl}$<$ T, M $>$\+::Cast\+Impl (\begin{DoxyParamCaption}\item[{const M \&}]{polymorphic\+\_\+matcher\+\_\+or\+\_\+value,  }\item[{\hyperlink{structtesting_1_1internal_1_1BooleanConstant}{Boolean\+Constant}$<$ true $>$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 545 of file gmock-\/matchers.\+h.
+
+
+\begin{DoxyCode}
+546                                                     \{
+547     \textcolor{comment}{// M is implicitly convertible to Matcher<T>, which means that either}
+548     \textcolor{comment}{// M is a polymorhpic matcher or Matcher<T> has an implicit constructor}
+549     \textcolor{comment}{// from M.  In both cases using the implicit conversion will produce a}
+550     \textcolor{comment}{// matcher.}
+551     \textcolor{comment}{//}
+552     \textcolor{comment}{// Even if T has an implicit constructor from M, it won't be called because}
+553     \textcolor{comment}{// creating Matcher<T> would require a chain of two user-defined conversions}
+554     \textcolor{comment}{// (first to create T from M and then to create Matcher<T> from T).}
+555     \textcolor{keywordflow}{return} polymorphic\_matcher\_or\_value;
+556   \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/3rdparty/googletest/googlemock/include/gmock/\hyperlink{gmock-matchers_8h}{gmock-\/matchers.\+h}\end{DoxyCompactItemize}

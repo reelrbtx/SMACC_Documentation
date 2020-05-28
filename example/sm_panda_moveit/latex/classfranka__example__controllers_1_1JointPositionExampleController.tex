@@ -1,0 +1,242 @@
+\hypertarget{classfranka__example__controllers_1_1JointPositionExampleController}{}\section{franka\+\_\+example\+\_\+controllers\+:\+:Joint\+Position\+Example\+Controller Class Reference}
+\label{classfranka__example__controllers_1_1JointPositionExampleController}\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}}
+
+
+{\ttfamily \#include $<$joint\+\_\+position\+\_\+example\+\_\+controller.\+h$>$}
+
+
+
+Inheritance diagram for franka\+\_\+example\+\_\+controllers\+:\+:Joint\+Position\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=269pt]{classfranka__example__controllers_1_1JointPositionExampleController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for franka\+\_\+example\+\_\+controllers\+:\+:Joint\+Position\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1JointPositionExampleController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_a958b27b475476717543b8cc107bd6c1b}{init} (hardware\+\_\+interface\+::\+Robot\+HW $\ast$robot\+\_\+hardware, ros\+::\+Node\+Handle \&node\+\_\+handle) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_a2b8711e7421963f686c7383d624e38a8}{starting} (const ros\+::\+Time \&) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_a3475db8f06dde9e37fd03660ef4d1cb0}{update} (const ros\+::\+Time \&, const ros\+::\+Duration \&period) override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+hardware\+\_\+interface\+::\+Position\+Joint\+Interface $\ast$ \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_a04b7891338d07eeb78febf6085190f83}{position\+\_\+joint\+\_\+interface\+\_\+}
+\item 
+std\+::vector$<$ hardware\+\_\+interface\+::\+Joint\+Handle $>$ \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_acaa5902db27586e01e48939526e27e5a}{position\+\_\+joint\+\_\+handles\+\_\+}
+\item 
+ros\+::\+Duration \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_acdbb7dc1611653a0c6bed1d94dc0c979}{elapsed\+\_\+time\+\_\+}
+\item 
+std\+::array$<$ double, 7 $>$ \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_aec370794d28554126ba021f10c8216ce}{initial\+\_\+pose\+\_\+} \{\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 17 of file joint\+\_\+position\+\_\+example\+\_\+controller.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointPositionExampleController_a958b27b475476717543b8cc107bd6c1b}\label{classfranka__example__controllers_1_1JointPositionExampleController_a958b27b475476717543b8cc107bd6c1b}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}!init@{init}}
+\index{init@{init}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller\+::init (\begin{DoxyParamCaption}\item[{hardware\+\_\+interface\+::\+Robot\+HW $\ast$}]{robot\+\_\+hardware,  }\item[{ros\+::\+Node\+Handle \&}]{node\+\_\+handle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 15 of file joint\+\_\+position\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References position\+\_\+joint\+\_\+handles\+\_\+, and position\+\_\+joint\+\_\+interface\+\_\+.
+
+
+\begin{DoxyCode}
+16                                                                       \{
+17   \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_a04b7891338d07eeb78febf6085190f83}{position\_joint\_interface\_} = robot\_hardware->get<
+      hardware\_interface::PositionJointInterface>();
+18   \textcolor{keywordflow}{if} (\hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_a04b7891338d07eeb78febf6085190f83}{position\_joint\_interface\_} == \textcolor{keyword}{nullptr}) \{
+19     ROS\_ERROR(
+20         \textcolor{stringliteral}{"JointPositionExampleController: Error getting position joint interface from hardware!"});
+21     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+22   \}
+23   std::vector<std::string> joint\_names;
+24   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"joint\_names"}, joint\_names)) \{
+25     ROS\_ERROR(\textcolor{stringliteral}{"JointPositionExampleController: Could not parse joint names"});
+26   \}
+27   \textcolor{keywordflow}{if} (joint\_names.size() != 7) \{
+28     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"JointPositionExampleController: Wrong number of joint names, got "}
+29                      << joint\_names.size() << \textcolor{stringliteral}{" instead of 7 names!"});
+30     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+31   \}
+32   \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_acaa5902db27586e01e48939526e27e5a}{position\_joint\_handles\_}.resize(7);
+33   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 7; ++i) \{
+34     \textcolor{keywordflow}{try} \{
+35       \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_acaa5902db27586e01e48939526e27e5a}{position\_joint\_handles\_}[i] = 
+      \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_a04b7891338d07eeb78febf6085190f83}{position\_joint\_interface\_}->getHandle(joint\_names[i]);
+36     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} hardware\_interface::HardwareInterfaceException& e) \{
+37       ROS\_ERROR\_STREAM(
+38           \textcolor{stringliteral}{"JointPositionExampleController: Exception getting joint handles: "} << e.what());
+39       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+40     \}
+41   \}
+42 
+43   std::array<double, 7> q\_start\{\{0, -M\_PI\_4, 0, -3 * M\_PI\_4, 0, M\_PI\_2, M\_PI\_4\}\};
+44   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < q\_start.size(); i++) \{
+45     \textcolor{keywordflow}{if} (std::abs(\hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_acaa5902db27586e01e48939526e27e5a}{position\_joint\_handles\_}[i].getPosition() - q\_start[i]) > 0.1) \{
+46       ROS\_ERROR\_STREAM(
+47           \textcolor{stringliteral}{"JointPositionExampleController: Robot is not in the expected starting position for "}
+48           \textcolor{stringliteral}{"running this example. Run `roslaunch franka\_example\_controllers move\_to\_start.launch "}
+49           \textcolor{stringliteral}{"robot\_ip:=<robot-ip> load\_gripper:=<has-attached-gripper>` first."});
+50       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+51     \}
+52   \}
+53 
+54   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+55 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointPositionExampleController_a2b8711e7421963f686c7383d624e38a8}\label{classfranka__example__controllers_1_1JointPositionExampleController_a2b8711e7421963f686c7383d624e38a8}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}!starting@{starting}}
+\index{starting@{starting}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}}
+\subsubsection{\texorpdfstring{starting()}{starting()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller\+::starting (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 57 of file joint\+\_\+position\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References elapsed\+\_\+time\+\_\+, initial\+\_\+pose\+\_\+, and position\+\_\+joint\+\_\+handles\+\_\+.
+
+
+\begin{DoxyCode}
+57                                                               \{
+58   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 7; ++i) \{
+59     \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_aec370794d28554126ba021f10c8216ce}{initial\_pose\_}[i] = \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_acaa5902db27586e01e48939526e27e5a}{position\_joint\_handles\_}[i].getPosition();
+60   \}
+61   \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_acdbb7dc1611653a0c6bed1d94dc0c979}{elapsed\_time\_} = ros::Duration(0.0);
+62 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointPositionExampleController_a3475db8f06dde9e37fd03660ef4d1cb0}\label{classfranka__example__controllers_1_1JointPositionExampleController_a3475db8f06dde9e37fd03660ef4d1cb0}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}!update@{update}}
+\index{update@{update}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{,  }\item[{const ros\+::\+Duration \&}]{period }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 64 of file joint\+\_\+position\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References elapsed\+\_\+time\+\_\+, initial\+\_\+pose\+\_\+, P\+L\+U\+G\+I\+N\+L\+I\+B\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+C\+L\+A\+S\+S(), and position\+\_\+joint\+\_\+handles\+\_\+.
+
+
+\begin{DoxyCode}
+65                                                                        \{
+66   \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_acdbb7dc1611653a0c6bed1d94dc0c979}{elapsed\_time\_} += period;
+67 
+68   \textcolor{keywordtype}{double} delta\_angle = M\_PI / 16 * (1 - std::cos(M\_PI / 5.0 * \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_acdbb7dc1611653a0c6bed1d94dc0c979}{elapsed\_time\_}.toSec())) * 0.2;
+69   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 7; ++i) \{
+70     \textcolor{keywordflow}{if} (i == 4) \{
+71       \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_acaa5902db27586e01e48939526e27e5a}{position\_joint\_handles\_}[i].setCommand(\hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_aec370794d28554126ba021f10c8216ce}{initial\_pose\_}[i] - 
+      delta\_angle);
+72     \} \textcolor{keywordflow}{else} \{
+73       \hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_acaa5902db27586e01e48939526e27e5a}{position\_joint\_handles\_}[i].setCommand(\hyperlink{classfranka__example__controllers_1_1JointPositionExampleController_aec370794d28554126ba021f10c8216ce}{initial\_pose\_}[i] + 
+      delta\_angle);
+74     \}
+75   \}
+76 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1JointPositionExampleController_a3475db8f06dde9e37fd03660ef4d1cb0_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointPositionExampleController_acdbb7dc1611653a0c6bed1d94dc0c979}\label{classfranka__example__controllers_1_1JointPositionExampleController_acdbb7dc1611653a0c6bed1d94dc0c979}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}!elapsed\+\_\+time\+\_\+@{elapsed\+\_\+time\+\_\+}}
+\index{elapsed\+\_\+time\+\_\+@{elapsed\+\_\+time\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}}
+\subsubsection{\texorpdfstring{elapsed\+\_\+time\+\_\+}{elapsed\_time\_}}
+{\footnotesize\ttfamily ros\+::\+Duration franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller\+::elapsed\+\_\+time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 27 of file joint\+\_\+position\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointPositionExampleController_aec370794d28554126ba021f10c8216ce}\label{classfranka__example__controllers_1_1JointPositionExampleController_aec370794d28554126ba021f10c8216ce}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}!initial\+\_\+pose\+\_\+@{initial\+\_\+pose\+\_\+}}
+\index{initial\+\_\+pose\+\_\+@{initial\+\_\+pose\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}}
+\subsubsection{\texorpdfstring{initial\+\_\+pose\+\_\+}{initial\_pose\_}}
+{\footnotesize\ttfamily std\+::array$<$double, 7$>$ franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller\+::initial\+\_\+pose\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 28 of file joint\+\_\+position\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointPositionExampleController_acaa5902db27586e01e48939526e27e5a}\label{classfranka__example__controllers_1_1JointPositionExampleController_acaa5902db27586e01e48939526e27e5a}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}!position\+\_\+joint\+\_\+handles\+\_\+@{position\+\_\+joint\+\_\+handles\+\_\+}}
+\index{position\+\_\+joint\+\_\+handles\+\_\+@{position\+\_\+joint\+\_\+handles\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}}
+\subsubsection{\texorpdfstring{position\+\_\+joint\+\_\+handles\+\_\+}{position\_joint\_handles\_}}
+{\footnotesize\ttfamily std\+::vector$<$hardware\+\_\+interface\+::\+Joint\+Handle$>$ franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller\+::position\+\_\+joint\+\_\+handles\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 26 of file joint\+\_\+position\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointPositionExampleController_a04b7891338d07eeb78febf6085190f83}\label{classfranka__example__controllers_1_1JointPositionExampleController_a04b7891338d07eeb78febf6085190f83}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}!position\+\_\+joint\+\_\+interface\+\_\+@{position\+\_\+joint\+\_\+interface\+\_\+}}
+\index{position\+\_\+joint\+\_\+interface\+\_\+@{position\+\_\+joint\+\_\+interface\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller}}
+\subsubsection{\texorpdfstring{position\+\_\+joint\+\_\+interface\+\_\+}{position\_joint\_interface\_}}
+{\footnotesize\ttfamily hardware\+\_\+interface\+::\+Position\+Joint\+Interface$\ast$ franka\+\_\+example\+\_\+controllers\+::\+Joint\+Position\+Example\+Controller\+::position\+\_\+joint\+\_\+interface\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 25 of file joint\+\_\+position\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/include/franka\+\_\+example\+\_\+controllers/\hyperlink{joint__position__example__controller_8h}{joint\+\_\+position\+\_\+example\+\_\+controller.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/src/\hyperlink{joint__position__example__controller_8cpp}{joint\+\_\+position\+\_\+example\+\_\+controller.\+cpp}\end{DoxyCompactItemize}

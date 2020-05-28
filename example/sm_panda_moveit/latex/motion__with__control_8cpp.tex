@@ -1,0 +1,207 @@
+\hypertarget{motion__with__control_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/motion\+\_\+with\+\_\+control.cpp File Reference}
+\label{motion__with__control_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/motion\+\_\+with\+\_\+control.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/motion\+\_\+with\+\_\+control.\+cpp}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$Poco/\+Date\+Time\+Formatter.\+h$>$}\newline
+{\ttfamily \#include $<$Poco/\+File.\+h$>$}\newline
+{\ttfamily \#include $<$Poco/\+Path.\+h$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/robot.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}examples\+\_\+common.\+h\char`\"{}}\newline
+Include dependency graph for motion\+\_\+with\+\_\+control.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{motion__with__control_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classanonymous__namespace_02motion__with__control_8cpp_03_1_1Controller}{anonymous\+\_\+namespace\{motion\+\_\+with\+\_\+control.\+cpp\}\+::\+Controller}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceanonymous__namespace_02motion__with__control_8cpp_03}{anonymous\+\_\+namespace\{motion\+\_\+with\+\_\+control.\+cpp\}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{namespaceanonymous__namespace_02motion__with__control_8cpp_03_a96cf55e603f54e4305aaff129fc95d0a}{anonymous\+\_\+namespace\{motion\+\_\+with\+\_\+control.\+cpp\}\+::generate\+Trajectory} (double a\+\_\+max)
+\item 
+void \hyperlink{motion__with__control_8cpp_a397445de3998c2e842c0695616b385f3}{write\+Log\+To\+File} (const std\+::vector$<$ \hyperlink{structfranka_1_1Record}{franka\+::\+Record} $>$ \&log)
+\item 
+int \hyperlink{motion__with__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{motion__with__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{motion__with__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{motion\+\_\+with\+\_\+control.\+cpp@{motion\+\_\+with\+\_\+control.\+cpp}!main@{main}}
+\index{main@{main}!motion\+\_\+with\+\_\+control.\+cpp@{motion\+\_\+with\+\_\+control.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 110 of file motion\+\_\+with\+\_\+control.\+cpp.
+
+
+
+References franka\+::\+Robot\+::control(), franka\+::\+Joint\+Velocities\+::dq, anonymous\+\_\+namespace\{motion\+\_\+with\+\_\+control.\+cpp\}\+::generate\+Trajectory(), franka\+::\+Control\+Exception\+::log, franka\+::\+Motion\+Finished(), franka\+::\+Robot\+::set\+Collision\+Behavior(), set\+Default\+Behavior(), and write\+Log\+To\+File().
+
+
+\begin{DoxyCode}
+110                                 \{
+111   \textcolor{keywordflow}{if} (argc != 2) \{
+112     std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" <robot-hostname>"} << std::endl;
+113     \textcolor{keywordflow}{return} -1;
+114   \}
+115 
+116   \textcolor{comment}{// Parameters}
+117   \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} joint\_number\{3\};
+118   \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} filter\_size\{5\};
+119 
+120   \textcolor{comment}{// NOLINTNEXTLINE(readability-identifier-naming)}
+121   \textcolor{keyword}{const} std::array<double, 7> K\_P\{\{200.0, 200.0, 200.0, 200.0, 200.0, 200.0, 200.0\}\};
+122   \textcolor{comment}{// NOLINTNEXTLINE(readability-identifier-naming)}
+123   \textcolor{keyword}{const} std::array<double, 7> K\_D\{\{10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0\}\};
+124   \textcolor{keyword}{const} \textcolor{keywordtype}{double} max\_acceleration\{1.0\};
+125 
+126   Controller controller(filter\_size, K\_P, K\_D);
+127 
+128   \textcolor{keywordflow}{try} \{
+129     \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(argv[1]);
+130     \hyperlink{examples__common_8cpp_ad0c6e1cb044845ee8a01b5aa1e801a45}{setDefaultBehavior}(robot);
+131 
+132     \textcolor{comment}{// First move the robot to a suitable joint configuration}
+133     std::array<double, 7> q\_goal = \{\{0, -M\_PI\_4, 0, -3 * M\_PI\_4, 0, M\_PI\_2, M\_PI\_4\}\};
+134     \hyperlink{classMotionGenerator}{MotionGenerator} motion\_generator(0.5, q\_goal);
+135     std::cout << \textcolor{stringliteral}{"WARNING: This example will move the robot! "}
+136               << \textcolor{stringliteral}{"Please make sure to have the user stop button at hand!"} << std::endl
+137               << \textcolor{stringliteral}{"Press Enter to continue..."} << std::endl;
+138     std::cin.ignore();
+139     robot.control(motion\_generator);
+140     std::cout << \textcolor{stringliteral}{"Finished moving to initial joint configuration."} << std::endl;
+141 
+142     \textcolor{comment}{// Set additional parameters always before the control loop, NEVER in the control loop!}
+143     \textcolor{comment}{// Set collision behavior.}
+144     robot.setCollisionBehavior(
+145         \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\}, \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\},
+146         \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\}, \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\},
+147         \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\}, \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\},
+148         \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\}, \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\});
+149 
+150     \textcolor{keywordtype}{size\_t} index = 0;
+151     std::vector<double> trajectory = \hyperlink{namespaceanonymous__namespace_02motion__with__control_8cpp_03_a96cf55e603f54e4305aaff129fc95d0a}{generateTrajectory}(max\_acceleration);
+152 
+153     robot.control(
+154         [&](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}& robot\_state, 
+      \hyperlink{classfranka_1_1Duration}{franka::Duration}) -> \hyperlink{classfranka_1_1Torques}{franka::Torques} \{
+155           \textcolor{keywordflow}{return} controller.step(robot\_state);
+156         \},
+157         [&](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}&, \hyperlink{classfranka_1_1Duration}{franka::Duration} period) -> 
+      \hyperlink{classfranka_1_1JointVelocities}{franka::JointVelocities} \{
+158           index += period.toMSec();
+159 
+160           \textcolor{keywordflow}{if} (index >= trajectory.size()) \{
+161             index = trajectory.size() - 1;
+162           \}
+163 
+164           \hyperlink{classfranka_1_1JointVelocities}{franka::JointVelocities} velocities\{\{0, 0, 0, 0, 0, 0, 0\}\};
+165           velocities.\hyperlink{classfranka_1_1JointVelocities_a14fddb6fe7a7c4034dc82c283de8c2d3}{dq}[joint\_number] = trajectory[index];
+166 
+167           \textcolor{keywordflow}{if} (index >= trajectory.size() - 1) \{
+168             \textcolor{keywordflow}{return} \hyperlink{namespacefranka_a20791f7142d78bbbe3c957cc66a23ade}{franka::MotionFinished}(velocities);
+169           \}
+170           \textcolor{keywordflow}{return} velocities;
+171         \});
+172   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1ControlException}{franka::ControlException}& e) \{
+173     std::cout << e.what() << std::endl;
+174     \hyperlink{motion__with__control_8cpp_a397445de3998c2e842c0695616b385f3}{writeLogToFile}(e.\hyperlink{structfranka_1_1ControlException_ae57f0ac0a9aa195057af1f1cc712b41e}{log});
+175     \textcolor{keywordflow}{return} -1;
+176   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& e) \{
+177     std::cout << e.what() << std::endl;
+178     \textcolor{keywordflow}{return} -1;
+179   \}
+180 
+181   \textcolor{keywordflow}{return} 0;
+182 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{motion__with__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{motion__with__control_8cpp_a397445de3998c2e842c0695616b385f3}\label{motion__with__control_8cpp_a397445de3998c2e842c0695616b385f3}} 
+\index{motion\+\_\+with\+\_\+control.\+cpp@{motion\+\_\+with\+\_\+control.\+cpp}!write\+Log\+To\+File@{write\+Log\+To\+File}}
+\index{write\+Log\+To\+File@{write\+Log\+To\+File}!motion\+\_\+with\+\_\+control.\+cpp@{motion\+\_\+with\+\_\+control.\+cpp}}
+\subsubsection{\texorpdfstring{write\+Log\+To\+File()}{writeLogToFile()}}
+{\footnotesize\ttfamily void write\+Log\+To\+File (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \hyperlink{structfranka_1_1Record}{franka\+::\+Record} $>$ \&}]{log }\end{DoxyParamCaption})}
+
+
+
+Definition at line 184 of file motion\+\_\+with\+\_\+control.\+cpp.
+
+
+
+References franka\+::log\+To\+C\+S\+V().
+
+
+
+Referenced by anonymous\+\_\+namespace\{motion\+\_\+with\+\_\+control.\+cpp\}\+::generate\+Trajectory(), and main().
+
+
+\begin{DoxyCode}
+184                                                         \{
+185   \textcolor{keywordflow}{if} (log.empty()) \{
+186     \textcolor{keywordflow}{return};
+187   \}
+188   \textcolor{keywordflow}{try} \{
+189     Poco::Path temp\_dir\_path(Poco::Path::temp());
+190     temp\_dir\_path.pushDirectory(\textcolor{stringliteral}{"libfranka-logs"});
+191 
+192     Poco::File temp\_dir(temp\_dir\_path);
+193     temp\_dir.createDirectories();
+194 
+195     \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} now\_string =
+196         Poco::DateTimeFormatter::format(Poco::Timestamp\{\}, \textcolor{stringliteral}{"%Y-%m-%d-%h-%m-%S-%i"});
+197     \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} filename = \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string}\{\textcolor{stringliteral}{"log-"} + now\_string + \textcolor{stringliteral}{".csv"}\};
+198     Poco::File log\_file(Poco::Path(temp\_dir\_path, filename));
+199     \textcolor{keywordflow}{if} (!log\_file.createFile()) \{
+200       std::cout << \textcolor{stringliteral}{"Failed to write log file."} << std::endl;
+201       \textcolor{keywordflow}{return};
+202     \}
+203     std::ofstream log\_stream(log\_file.path().c\_str());
+204     log\_stream << \hyperlink{namespacefranka_a01fbdb37b0e6beb04ba108d5f5024fd9}{franka::logToCSV}(log);
+205 
+206     std::cout << \textcolor{stringliteral}{"Log file written to: "} << log\_file.path() << std::endl;
+207   \} \textcolor{keywordflow}{catch} (...) \{
+208     std::cout << \textcolor{stringliteral}{"Failed to write log file."} << std::endl;
+209   \}
+210 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{motion__with__control_8cpp_a397445de3998c2e842c0695616b385f3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{motion__with__control_8cpp_a397445de3998c2e842c0695616b385f3_icgraph}
+\end{center}
+\end{figure}

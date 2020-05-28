@@ -1,0 +1,259 @@
+\hypertarget{classfranka__example__controllers_1_1ElbowExampleController}{}\section{franka\+\_\+example\+\_\+controllers\+:\+:Elbow\+Example\+Controller Class Reference}
+\label{classfranka__example__controllers_1_1ElbowExampleController}\index{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}}
+
+
+{\ttfamily \#include $<$elbow\+\_\+example\+\_\+controller.\+h$>$}
+
+
+
+Inheritance diagram for franka\+\_\+example\+\_\+controllers\+:\+:Elbow\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{classfranka__example__controllers_1_1ElbowExampleController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for franka\+\_\+example\+\_\+controllers\+:\+:Elbow\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1ElbowExampleController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_ae289eee8c389d5b2d9e2f2cf13fcc475}{init} (hardware\+\_\+interface\+::\+Robot\+HW $\ast$robot\+\_\+hardware, ros\+::\+Node\+Handle \&node\+\_\+handle) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a0ed0bd6a0db321eda30ddf0f038021df}{starting} (const ros\+::\+Time \&) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a0f3e4ef04d7d4eba6019ae68c621a3a0}{update} (const ros\+::\+Time \&, const ros\+::\+Duration \&period) override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfranka__hw_1_1FrankaPoseCartesianInterface}{franka\+\_\+hw\+::\+Franka\+Pose\+Cartesian\+Interface} $\ast$ \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a77b32f28520c2db59b4fd7209c50d578}{cartesian\+\_\+pose\+\_\+interface\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classfranka__hw_1_1FrankaCartesianPoseHandle}{franka\+\_\+hw\+::\+Franka\+Cartesian\+Pose\+Handle} $>$ \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a911a7a82e55ba8f023ec8c0a9c8d2bd9}{cartesian\+\_\+pose\+\_\+handle\+\_\+}
+\item 
+ros\+::\+Duration \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_adbacbe4e9d5314fc0a881f16b7ffa3c2}{elapsed\+\_\+time\+\_\+}
+\item 
+std\+::array$<$ double, 16 $>$ \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a93ff73dad84295cd4c822b6bb843bc3c}{initial\+\_\+pose\+\_\+} \{\}
+\item 
+std\+::array$<$ double, 2 $>$ \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a5addb6a766aa1ad5e193796976307ef1}{initial\+\_\+elbow\+\_\+} \{\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file elbow\+\_\+example\+\_\+controller.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ElbowExampleController_ae289eee8c389d5b2d9e2f2cf13fcc475}\label{classfranka__example__controllers_1_1ElbowExampleController_ae289eee8c389d5b2d9e2f2cf13fcc475}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}!init@{init}}
+\index{init@{init}!franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller\+::init (\begin{DoxyParamCaption}\item[{hardware\+\_\+interface\+::\+Robot\+HW $\ast$}]{robot\+\_\+hardware,  }\item[{ros\+::\+Node\+Handle \&}]{node\+\_\+handle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 18 of file elbow\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References cartesian\+\_\+pose\+\_\+handle\+\_\+, and cartesian\+\_\+pose\+\_\+interface\+\_\+.
+
+
+\begin{DoxyCode}
+19                                                               \{
+20   \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a77b32f28520c2db59b4fd7209c50d578}{cartesian\_pose\_interface\_} = robot\_hardware->get<
+      \hyperlink{classfranka__hw_1_1FrankaPoseCartesianInterface}{franka\_hw::FrankaPoseCartesianInterface}>();
+21   \textcolor{keywordflow}{if} (\hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a77b32f28520c2db59b4fd7209c50d578}{cartesian\_pose\_interface\_} == \textcolor{keyword}{nullptr}) \{
+22     ROS\_ERROR(\textcolor{stringliteral}{"ElbowExampleController: Could not get Cartesian Pose interface from hardware"});
+23     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+24   \}
+25 
+26   \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} arm\_id;
+27   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"arm\_id"}, arm\_id)) \{
+28     ROS\_ERROR(\textcolor{stringliteral}{"ElbowExampleController: Could not get parameter arm\_id"});
+29     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+30   \}
+31 
+32   \textcolor{keywordflow}{try} \{
+33     \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a911a7a82e55ba8f023ec8c0a9c8d2bd9}{cartesian\_pose\_handle\_} = std::make\_unique<franka\_hw::FrankaCartesianPoseHandle>(
+34         \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a77b32f28520c2db59b4fd7209c50d578}{cartesian\_pose\_interface\_}->getHandle(arm\_id + \textcolor{stringliteral}{"\_robot"}));
+35   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} hardware\_interface::HardwareInterfaceException& e) \{
+36     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"ElbowExampleController: Exception getting Cartesian handle: "} << e.what());
+37     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+38   \}
+39 
+40   \textcolor{keyword}{auto} state\_interface = robot\_hardware->get<\hyperlink{classfranka__hw_1_1FrankaStateInterface}{franka\_hw::FrankaStateInterface}
+      >();
+41   \textcolor{keywordflow}{if} (state\_interface == \textcolor{keyword}{nullptr}) \{
+42     ROS\_ERROR(\textcolor{stringliteral}{"ElbowExampleController: Could not get state interface from hardware"});
+43     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+44   \}
+45 
+46   \textcolor{keywordflow}{try} \{
+47     \textcolor{keyword}{auto} state\_handle = state\_interface->getHandle(arm\_id + \textcolor{stringliteral}{"\_robot"});
+48 
+49     std::array<double, 7> q\_start\{\{0, -M\_PI\_4, 0, -3 * M\_PI\_4, 0, M\_PI\_2, M\_PI\_4\}\};
+50     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < q\_start.size(); i++) \{
+51       \textcolor{keywordflow}{if} (std::abs(state\_handle.getRobotState().q\_d[i] - q\_start[i]) > 0.1) \{
+52         ROS\_ERROR\_STREAM(
+53             \textcolor{stringliteral}{"ElbowExampleController: Robot is not in the expected starting position for "}
+54             \textcolor{stringliteral}{"running this example. Run `roslaunch franka\_example\_controllers move\_to\_start.launch "}
+55             \textcolor{stringliteral}{"robot\_ip:=<robot-ip> load\_gripper:=<has-attached-gripper>` first."});
+56         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+57       \}
+58     \}
+59   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} hardware\_interface::HardwareInterfaceException& e) \{
+60     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"ElbowExampleController: Exception getting state handle: "} << e.what());
+61     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+62   \}
+63 
+64   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+65 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ElbowExampleController_a0ed0bd6a0db321eda30ddf0f038021df}\label{classfranka__example__controllers_1_1ElbowExampleController_a0ed0bd6a0db321eda30ddf0f038021df}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}!starting@{starting}}
+\index{starting@{starting}!franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}}
+\subsubsection{\texorpdfstring{starting()}{starting()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller\+::starting (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 67 of file elbow\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References cartesian\+\_\+pose\+\_\+handle\+\_\+, elapsed\+\_\+time\+\_\+, initial\+\_\+elbow\+\_\+, and initial\+\_\+pose\+\_\+.
+
+
+\begin{DoxyCode}
+67                                                       \{
+68   \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a93ff73dad84295cd4c822b6bb843bc3c}{initial\_pose\_} = \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a911a7a82e55ba8f023ec8c0a9c8d2bd9}{cartesian\_pose\_handle\_}->getRobotState().O\_T\_EE\_d;
+69   \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a5addb6a766aa1ad5e193796976307ef1}{initial\_elbow\_} = \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a911a7a82e55ba8f023ec8c0a9c8d2bd9}{cartesian\_pose\_handle\_}->getRobotState().elbow\_d;
+70   \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_adbacbe4e9d5314fc0a881f16b7ffa3c2}{elapsed\_time\_} = ros::Duration(0.0);
+71 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ElbowExampleController_a0f3e4ef04d7d4eba6019ae68c621a3a0}\label{classfranka__example__controllers_1_1ElbowExampleController_a0f3e4ef04d7d4eba6019ae68c621a3a0}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}!update@{update}}
+\index{update@{update}!franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{,  }\item[{const ros\+::\+Duration \&}]{period }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 73 of file elbow\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References cartesian\+\_\+pose\+\_\+handle\+\_\+, elapsed\+\_\+time\+\_\+, initial\+\_\+elbow\+\_\+, initial\+\_\+pose\+\_\+, and P\+L\+U\+G\+I\+N\+L\+I\+B\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+C\+L\+A\+S\+S().
+
+
+\begin{DoxyCode}
+73                                                                                \{
+74   \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_adbacbe4e9d5314fc0a881f16b7ffa3c2}{elapsed\_time\_} += period;
+75 
+76   \textcolor{keywordtype}{double} angle = M\_PI / 10.0 * (1.0 - std::cos(M\_PI / 5.0 * \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_adbacbe4e9d5314fc0a881f16b7ffa3c2}{elapsed\_time\_}.toSec()));
+77   \textcolor{keyword}{auto} elbow = \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a5addb6a766aa1ad5e193796976307ef1}{initial\_elbow\_};
+78   elbow[0] += angle;
+79 
+80   \hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a911a7a82e55ba8f023ec8c0a9c8d2bd9}{cartesian\_pose\_handle\_}->setCommand(\hyperlink{classfranka__example__controllers_1_1ElbowExampleController_a93ff73dad84295cd4c822b6bb843bc3c}{initial\_pose\_}, elbow);
+81 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1ElbowExampleController_a0f3e4ef04d7d4eba6019ae68c621a3a0_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ElbowExampleController_a911a7a82e55ba8f023ec8c0a9c8d2bd9}\label{classfranka__example__controllers_1_1ElbowExampleController_a911a7a82e55ba8f023ec8c0a9c8d2bd9}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}!cartesian\+\_\+pose\+\_\+handle\+\_\+@{cartesian\+\_\+pose\+\_\+handle\+\_\+}}
+\index{cartesian\+\_\+pose\+\_\+handle\+\_\+@{cartesian\+\_\+pose\+\_\+handle\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}}
+\subsubsection{\texorpdfstring{cartesian\+\_\+pose\+\_\+handle\+\_\+}{cartesian\_pose\_handle\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classfranka__hw_1_1FrankaCartesianPoseHandle}{franka\+\_\+hw\+::\+Franka\+Cartesian\+Pose\+Handle}$>$ franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller\+::cartesian\+\_\+pose\+\_\+handle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file elbow\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ElbowExampleController_a77b32f28520c2db59b4fd7209c50d578}\label{classfranka__example__controllers_1_1ElbowExampleController_a77b32f28520c2db59b4fd7209c50d578}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}!cartesian\+\_\+pose\+\_\+interface\+\_\+@{cartesian\+\_\+pose\+\_\+interface\+\_\+}}
+\index{cartesian\+\_\+pose\+\_\+interface\+\_\+@{cartesian\+\_\+pose\+\_\+interface\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}}
+\subsubsection{\texorpdfstring{cartesian\+\_\+pose\+\_\+interface\+\_\+}{cartesian\_pose\_interface\_}}
+{\footnotesize\ttfamily \hyperlink{classfranka__hw_1_1FrankaPoseCartesianInterface}{franka\+\_\+hw\+::\+Franka\+Pose\+Cartesian\+Interface}$\ast$ franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller\+::cartesian\+\_\+pose\+\_\+interface\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 28 of file elbow\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ElbowExampleController_adbacbe4e9d5314fc0a881f16b7ffa3c2}\label{classfranka__example__controllers_1_1ElbowExampleController_adbacbe4e9d5314fc0a881f16b7ffa3c2}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}!elapsed\+\_\+time\+\_\+@{elapsed\+\_\+time\+\_\+}}
+\index{elapsed\+\_\+time\+\_\+@{elapsed\+\_\+time\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}}
+\subsubsection{\texorpdfstring{elapsed\+\_\+time\+\_\+}{elapsed\_time\_}}
+{\footnotesize\ttfamily ros\+::\+Duration franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller\+::elapsed\+\_\+time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 30 of file elbow\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ElbowExampleController_a5addb6a766aa1ad5e193796976307ef1}\label{classfranka__example__controllers_1_1ElbowExampleController_a5addb6a766aa1ad5e193796976307ef1}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}!initial\+\_\+elbow\+\_\+@{initial\+\_\+elbow\+\_\+}}
+\index{initial\+\_\+elbow\+\_\+@{initial\+\_\+elbow\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}}
+\subsubsection{\texorpdfstring{initial\+\_\+elbow\+\_\+}{initial\_elbow\_}}
+{\footnotesize\ttfamily std\+::array$<$double, 2$>$ franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller\+::initial\+\_\+elbow\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 32 of file elbow\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ElbowExampleController_a93ff73dad84295cd4c822b6bb843bc3c}\label{classfranka__example__controllers_1_1ElbowExampleController_a93ff73dad84295cd4c822b6bb843bc3c}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}!initial\+\_\+pose\+\_\+@{initial\+\_\+pose\+\_\+}}
+\index{initial\+\_\+pose\+\_\+@{initial\+\_\+pose\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller}}
+\subsubsection{\texorpdfstring{initial\+\_\+pose\+\_\+}{initial\_pose\_}}
+{\footnotesize\ttfamily std\+::array$<$double, 16$>$ franka\+\_\+example\+\_\+controllers\+::\+Elbow\+Example\+Controller\+::initial\+\_\+pose\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 31 of file elbow\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by starting(), and update().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/include/franka\+\_\+example\+\_\+controllers/\hyperlink{elbow__example__controller_8h}{elbow\+\_\+example\+\_\+controller.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/src/\hyperlink{elbow__example__controller_8cpp}{elbow\+\_\+example\+\_\+controller.\+cpp}\end{DoxyCompactItemize}

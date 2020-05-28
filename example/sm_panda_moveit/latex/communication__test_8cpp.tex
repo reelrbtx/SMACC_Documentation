@@ -1,0 +1,158 @@
+\hypertarget{communication__test_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/communication\+\_\+test.cpp File Reference}
+\label{communication__test_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/communication\+\_\+test.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/communication\+\_\+test.\+cpp}}
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$franka/duration.\+h$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/robot.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}examples\+\_\+common.\+h\char`\"{}}\newline
+Include dependency graph for communication\+\_\+test.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{communication__test_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{communication__test_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{communication__test_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{communication__test_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{communication\+\_\+test.\+cpp@{communication\+\_\+test.\+cpp}!main@{main}}
+\index{main@{main}!communication\+\_\+test.\+cpp@{communication\+\_\+test.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 20 of file communication\+\_\+test.\+cpp.
+
+
+
+References franka\+::\+Robot\+::control(), franka\+::\+Robot\+State\+::control\+\_\+command\+\_\+success\+\_\+rate, franka\+::\+Motion\+Finished(), franka\+::\+Robot\+::set\+Collision\+Behavior(), set\+Default\+Behavior(), and franka\+::\+Duration\+::to\+M\+Sec().
+
+
+\begin{DoxyCode}
+20                                 \{
+21   \textcolor{keywordflow}{if} (argc != 2) \{
+22     std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" <robot-hostname>"} << std::endl;
+23     \textcolor{keywordflow}{return} -1;
+24   \}
+25 
+26   uint64\_t counter = 0;
+27   \textcolor{keywordtype}{double} avg\_success\_rate = 0.0;
+28   \textcolor{keywordtype}{double} min\_success\_rate = 1.0;
+29   \textcolor{keywordtype}{double} max\_success\_rate = 0.0;
+30   uint64\_t time = 0;
+31   std::cout.precision(2);
+32   std::cout << std::fixed;
+33 
+34   \textcolor{keywordflow}{try} \{
+35     \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(argv[1]);
+36     \hyperlink{examples__common_8cpp_ad0c6e1cb044845ee8a01b5aa1e801a45}{setDefaultBehavior}(robot);
+37 
+38     \textcolor{comment}{// First move the robot to a suitable joint configuration}
+39     std::array<double, 7> q\_goal = \{\{0, -M\_PI\_4, 0, -3 * M\_PI\_4, 0, M\_PI\_2, M\_PI\_4\}\};
+40     \hyperlink{classMotionGenerator}{MotionGenerator} motion\_generator(0.5, q\_goal);
+41     std::cout << \textcolor{stringliteral}{"WARNING: This example will move the robot! "}
+42               << \textcolor{stringliteral}{"Please make sure to have the user stop button at hand!"} << std::endl
+43               << \textcolor{stringliteral}{"Press Enter to continue..."} << std::endl;
+44     std::cin.ignore();
+45     robot.control(motion\_generator);
+46     std::cout << \textcolor{stringliteral}{"Finished moving to initial joint configuration."} << std::endl << std::endl;
+47     std::cout << \textcolor{stringliteral}{"Starting communication test."} << std::endl;
+48 
+49     robot.setCollisionBehavior(
+50         \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\}, \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\},
+51         \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\}, \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\},
+52         \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\}, \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\},
+53         \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\}, \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\});
+54 
+55     \hyperlink{classfranka_1_1Torques}{franka::Torques} zero\_torques\{\{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0\}\};
+56     robot.control(
+57         [&time, &counter, &avg\_success\_rate, &min\_success\_rate, &max\_success\_rate, zero\_torques](
+58             \textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}& robot\_state, 
+      \hyperlink{classfranka_1_1Duration}{franka::Duration} period) -> \hyperlink{classfranka_1_1Torques}{franka::Torques} \{
+59           time += period.\hyperlink{classfranka_1_1Duration_a2a25ae33c8739b8f705f13798aa9e162}{toMSec}();
+60           \textcolor{keywordflow}{if} (time == 0.0) \{
+61             \textcolor{keywordflow}{return} zero\_torques;
+62           \}
+63           counter++;
+64 
+65           \textcolor{keywordflow}{if} (counter % 100 == 0) \{
+66             std::cout << \textcolor{stringliteral}{"#"} << counter
+67                       << \textcolor{stringliteral}{" Current success rate: "} << robot\_state.
+      \hyperlink{structfranka_1_1RobotState_af208572613a6afcdc61a24970c71fa28}{control\_command\_success\_rate}
+68                       << std::endl;
+69           \}
+70           std::this\_thread::sleep\_for(std::chrono::microseconds(100));
+71 
+72           avg\_success\_rate += robot\_state.\hyperlink{structfranka_1_1RobotState_af208572613a6afcdc61a24970c71fa28}{control\_command\_success\_rate};
+73           \textcolor{keywordflow}{if} (robot\_state.\hyperlink{structfranka_1_1RobotState_af208572613a6afcdc61a24970c71fa28}{control\_command\_success\_rate} > max\_success\_rate) \{
+74             max\_success\_rate = robot\_state.\hyperlink{structfranka_1_1RobotState_af208572613a6afcdc61a24970c71fa28}{control\_command\_success\_rate};
+75           \}
+76           \textcolor{keywordflow}{if} (robot\_state.\hyperlink{structfranka_1_1RobotState_af208572613a6afcdc61a24970c71fa28}{control\_command\_success\_rate} < min\_success\_rate) \{
+77             min\_success\_rate = robot\_state.\hyperlink{structfranka_1_1RobotState_af208572613a6afcdc61a24970c71fa28}{control\_command\_success\_rate};
+78           \}
+79 
+80           \textcolor{keywordflow}{if} (time >= 10000) \{
+81             std::cout << std::endl << \textcolor{stringliteral}{"Finished test, shutting down example"} << std::endl;
+82             \textcolor{keywordflow}{return} \hyperlink{namespacefranka_a20791f7142d78bbbe3c957cc66a23ade}{franka::MotionFinished}(zero\_torques);
+83           \}
+84 
+85           \textcolor{comment}{// Sending zero torques - if EE is configured correctly, robot should not move}
+86           \textcolor{keywordflow}{return} zero\_torques;
+87         \},
+88         \textcolor{keyword}{false}, 1000);
+89   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& e) \{
+90     std::cout << e.what() << std::endl;
+91     \textcolor{keywordflow}{return} -1;
+92   \}
+93 
+94   avg\_success\_rate = avg\_success\_rate / counter;
+95 
+96   std::cout << std::endl
+97             << std::endl
+98             << \textcolor{stringliteral}{"#######################################################"} << std::endl;
+99   uint64\_t lost\_robot\_states = time - counter;
+100   \textcolor{keywordflow}{if} (lost\_robot\_states > 0) \{
+101     std::cout << \textcolor{stringliteral}{"The control loop did not get executed "} << lost\_robot\_states << \textcolor{stringliteral}{" times in the"}
+102               << std::endl
+103               << \textcolor{stringliteral}{"last "} << time << \textcolor{stringliteral}{" milliseconds! (lost "} << lost\_robot\_states << \textcolor{stringliteral}{" robot states)"}
+104               << std::endl
+105               << std::endl;
+106   \}
+107 
+108   std::cout << \textcolor{stringliteral}{"Control command success rate of "} << counter << \textcolor{stringliteral}{" samples: "} << std::endl;
+109   std::cout << \textcolor{stringliteral}{"Max: "} << max\_success\_rate << std::endl;
+110   std::cout << \textcolor{stringliteral}{"Avg: "} << avg\_success\_rate << std::endl;
+111   std::cout << \textcolor{stringliteral}{"Min: "} << min\_success\_rate << std::endl;
+112 
+113   \textcolor{keywordflow}{if} (avg\_success\_rate < 0.90) \{
+114     std::cout << std::endl
+115               << \textcolor{stringliteral}{"WARNING: THIS SETUP IS PROBABLY NOT SUFFICIENT FOR FCI!"} << std::endl;
+116     std::cout << \textcolor{stringliteral}{"PLEASE TRY OUT A DIFFERENT PC / NIC"} << std::endl;
+117   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (avg\_success\_rate < 0.95) \{
+118     std::cout << std::endl << \textcolor{stringliteral}{"WARNING: MANY PACKETS GOT LOST!"} << std::endl;
+119     std::cout << \textcolor{stringliteral}{"PLEASE INSPECT YOUR SETUP AND FOLLOW ADVICE ON"} << std::endl
+120               << \textcolor{stringliteral}{"https://frankaemika.github.io/docs/troubleshooting.html"} << std::endl;
+121   \}
+122   std::cout << \textcolor{stringliteral}{"#######################################################"} << std::endl << std::endl;
+123 
+124   \textcolor{keywordflow}{return} 0;
+125 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{communication__test_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

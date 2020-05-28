@@ -1,0 +1,102 @@
+\hypertarget{grasp__object_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/grasp\+\_\+object.cpp File Reference}
+\label{grasp__object_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/grasp\+\_\+object.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/grasp\+\_\+object.\+cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/gripper.\+h$>$}\newline
+Include dependency graph for grasp\+\_\+object.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{grasp__object_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{grasp__object_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{grasp__object_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{grasp__object_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{grasp\+\_\+object.\+cpp@{grasp\+\_\+object.\+cpp}!main@{main}}
+\index{main@{main}!grasp\+\_\+object.\+cpp@{grasp\+\_\+object.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 16 of file grasp\+\_\+object.\+cpp.
+
+
+
+References franka\+::\+Gripper\+::grasp(), franka\+\_\+gripper\+::homing(), franka\+::\+Gripper\+::homing(), franka\+::\+Gripper\+State\+::is\+\_\+grasped, franka\+::\+Gripper\+State\+::max\+\_\+width, franka\+::\+Gripper\+::read\+Once(), and franka\+::\+Gripper\+::stop().
+
+
+\begin{DoxyCode}
+16                                 \{
+17   \textcolor{keywordflow}{if} (argc != 4) \{
+18     std::cerr << \textcolor{stringliteral}{"Usage: ./grasp\_object <gripper-hostname> <homing> <object-width>"} << std::endl;
+19     \textcolor{keywordflow}{return} -1;
+20   \}
+21 
+22   \textcolor{keywordflow}{try} \{
+23     \hyperlink{classfranka_1_1Gripper}{franka::Gripper} gripper(argv[1]);
+24     \textcolor{keywordtype}{double} grasping\_width = std::stod(argv[3]);
+25 
+26     std::stringstream ss(argv[2]);
+27     \textcolor{keywordtype}{bool} \hyperlink{namespacefranka__gripper_a098e502a3ba4aed6147ec76f1421e803}{homing};
+28     \textcolor{keywordflow}{if} (!(ss >> homing)) \{
+29       std::cerr << \textcolor{stringliteral}{"<homing> can be 0 or 1."} << std::endl;
+30       \textcolor{keywordflow}{return} -1;
+31     \}
+32 
+33     \textcolor{keywordflow}{if} (homing) \{
+34       \textcolor{comment}{// Do a homing in order to estimate the maximum grasping width with the current fingers.}
+35       gripper.homing();
+36     \}
+37 
+38     \textcolor{comment}{// Check for the maximum grasping width.}
+39     \hyperlink{structfranka_1_1GripperState}{franka::GripperState} gripper\_state = gripper.readOnce();
+40     \textcolor{keywordflow}{if} (gripper\_state.\hyperlink{structfranka_1_1GripperState_ab71a26356c2898c49609bf991843e166}{max\_width} < grasping\_width) \{
+41       std::cout << \textcolor{stringliteral}{"Object is too large for the current fingers on the gripper."} << std::endl;
+42       \textcolor{keywordflow}{return} -1;
+43     \}
+44 
+45     \textcolor{comment}{// Grasp the object.}
+46     \textcolor{keywordflow}{if} (!gripper.grasp(grasping\_width, 0.1, 60)) \{
+47       std::cout << \textcolor{stringliteral}{"Failed to grasp object."} << std::endl;
+48       \textcolor{keywordflow}{return} -1;
+49     \}
+50 
+51     \textcolor{comment}{// Wait 3s and check afterwards, if the object is still grasped.}
+52     std::this\_thread::sleep\_for(std::chrono::duration<double, std::milli>(3000));
+53 
+54     gripper\_state = gripper.readOnce();
+55     \textcolor{keywordflow}{if} (!gripper\_state.\hyperlink{structfranka_1_1GripperState_aa65b46313e740454ead9c9ea27e7bf8d}{is\_grasped}) \{
+56       std::cout << \textcolor{stringliteral}{"Object lost."} << std::endl;
+57       \textcolor{keywordflow}{return} -1;
+58     \}
+59 
+60     std::cout << \textcolor{stringliteral}{"Grasped object, will release it now."} << std::endl;
+61     gripper.stop();
+62   \} \textcolor{keywordflow}{catch} (\hyperlink{structfranka_1_1Exception}{franka::Exception} \textcolor{keyword}{const}& e) \{
+63     std::cout << e.what() << std::endl;
+64     \textcolor{keywordflow}{return} -1;
+65   \}
+66 
+67   \textcolor{keywordflow}{return} 0;
+68 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{grasp__object_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,1792 @@
+\hypertarget{classfranka_1_1Robot}{}\section{franka\+:\+:Robot Class Reference}
+\label{classfranka_1_1Robot}\index{franka\+::\+Robot@{franka\+::\+Robot}}
+
+
+{\ttfamily \#include $<$robot.\+h$>$}
+
+
+
+Collaboration diagram for franka\+:\+:Robot\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classfranka_1_1Robot__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classfranka_1_1Robot_1_1Impl}{Impl}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classfranka_1_1Robot_ad1dd3dccff6f33691d2c66eaa5ac5a10}{Server\+Version} = uint16\+\_\+t
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}{Robot} (const std\+::string \&franka\+\_\+address, \hyperlink{namespacefranka_aeede4f4629390fea21ca5e5a35a8a943}{Realtime\+Config} realtime\+\_\+config=\hyperlink{namespacefranka_aeede4f4629390fea21ca5e5a35a8a943a024bd586d70db805d622b85815bfa0de}{Realtime\+Config\+::k\+Enforce}, size\+\_\+t log\+\_\+size=50)
+\item 
+\hyperlink{classfranka_1_1Robot_a378d415475336082e81a35b9811dc6c2}{Robot} (\hyperlink{classfranka_1_1Robot}{Robot} \&\&other) noexcept
+\item 
+\hyperlink{classfranka_1_1Robot}{Robot} \& \hyperlink{classfranka_1_1Robot_a2ea3ee0a2e18796972fd8d93822e7998}{operator=} (\hyperlink{classfranka_1_1Robot}{Robot} \&\&other) noexcept
+\item 
+\hyperlink{classfranka_1_1Robot_a28abb25d25b5a1ce4463e32a518682e4}{$\sim$\+Robot} () noexcept
+\item 
+void \hyperlink{classfranka_1_1Robot_a82f85eed20426901a7e77b66c041664b}{read} (std\+::function$<$ \hyperlink{classbool}{bool}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&)$>$ read\+\_\+callback)
+\item 
+\hyperlink{structfranka_1_1RobotState}{Robot\+State} \hyperlink{classfranka_1_1Robot_a7ea7074a07b63fcf6933e97b078c7168}{read\+Once} ()
+\item 
+\hyperlink{classfranka_1_1Model}{Model} \hyperlink{classfranka_1_1Robot_a2da598c539469827409ac7e3bb61d5da}{load\+Model} ()
+\item 
+\hyperlink{classfranka_1_1Robot_ad1dd3dccff6f33691d2c66eaa5ac5a10}{Server\+Version} \hyperlink{classfranka_1_1Robot_a7cc1883114afecff80259615e40d9af8}{server\+Version} () const noexcept
+\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Motion generation and joint-\/level torque commands}\par
+{\em The following methods allow to perform motion generation and/or send joint-\/level torque commands without gravity and friction by providing callback functions.
+
+Only one of these methods can be active at the same time; a \hyperlink{structfranka_1_1ControlException}{franka\+::\+Control\+Exception} is thrown otherwise.
+
+\label{classfranka_1_1Robot_callback-docs}%
+\Hypertarget{classfranka_1_1Robot_callback-docs}%
+When a robot state is received, the callback function is used to calculate the response\+: the desired values for that time step. After sending back the response, the callback function will be called again with the most recently received robot state. Since the robot is controlled with a 1 k\+Hz frequency, the callback functions have to compute their result in a short time frame in order to be accepted. Callback functions take two parameters\+:
+
+
+\begin{DoxyItemize}
+\item A \hyperlink{structfranka_1_1RobotState}{franka\+::\+Robot\+State} showing the current robot state.
+\item A \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration} to indicate the time since the last callback invocation. Thus, the duration is zero on the first invocation of the callback function!
+\end{DoxyItemize}
+
+The following incomplete example shows the general structure of a callback function\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{double} time = 0.0;
+\textcolor{keyword}{auto} control\_callback = [&time](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}& robot\_state,
+                                \hyperlink{classfranka_1_1Duration}{franka::Duration} time\_step) -> 
+      \hyperlink{classfranka_1_1JointPositions}{franka::JointPositions} \{
+  time += time\_step.toSec();  \textcolor{comment}{// Update time at the beginning of the callback.}
+
+  \hyperlink{classfranka_1_1JointPositions}{franka::JointPositions} output = getJointPositions(time);
+
+  \textcolor{keywordflow}{if} (time >= max\_time) \{
+    \textcolor{comment}{// Return MotionFinished at the end of the trajectory.}
+    \textcolor{keywordflow}{return} \hyperlink{namespacefranka_a20791f7142d78bbbe3c957cc66a23ade}{franka::MotionFinished}(output);
+  \}
+
+  \textcolor{keywordflow}{return} output;
+\}
+\end{DoxyCode}
+ }\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classfranka_1_1Robot_a5b5ba0a4f2bfd20be963b05622e629e1}{control} (std\+::function$<$ \hyperlink{classfranka_1_1Torques}{Torques}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ control\+\_\+callback, \hyperlink{classbool}{bool} limit\+\_\+rate=true, double cutoff\+\_\+frequency=\hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency})
+\item 
+void \hyperlink{classfranka_1_1Robot_a5f012ef276eb94d2a98a077bafb49bfe}{control} (std\+::function$<$ \hyperlink{classfranka_1_1Torques}{Torques}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ control\+\_\+callback, std\+::function$<$ \hyperlink{classfranka_1_1JointPositions}{Joint\+Positions}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ motion\+\_\+generator\+\_\+callback, \hyperlink{classbool}{bool} limit\+\_\+rate=true, double cutoff\+\_\+frequency=\hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency})
+\item 
+void \hyperlink{classfranka_1_1Robot_ab16874af2fa32c9ab901683c1666888b}{control} (std\+::function$<$ \hyperlink{classfranka_1_1Torques}{Torques}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ control\+\_\+callback, std\+::function$<$ \hyperlink{classfranka_1_1JointVelocities}{Joint\+Velocities}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ motion\+\_\+generator\+\_\+callback, \hyperlink{classbool}{bool} limit\+\_\+rate=true, double cutoff\+\_\+frequency=\hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency})
+\item 
+void \hyperlink{classfranka_1_1Robot_a368c282fca42f4214864d0d39893fc6e}{control} (std\+::function$<$ \hyperlink{classfranka_1_1Torques}{Torques}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ control\+\_\+callback, std\+::function$<$ \hyperlink{classfranka_1_1CartesianPose}{Cartesian\+Pose}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ motion\+\_\+generator\+\_\+callback, \hyperlink{classbool}{bool} limit\+\_\+rate=true, double cutoff\+\_\+frequency=\hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency})
+\item 
+void \hyperlink{classfranka_1_1Robot_a3cc02de96810eebc74f499f5821f2ac9}{control} (std\+::function$<$ \hyperlink{classfranka_1_1Torques}{Torques}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ control\+\_\+callback, std\+::function$<$ \hyperlink{classfranka_1_1CartesianVelocities}{Cartesian\+Velocities}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ motion\+\_\+generator\+\_\+callback, \hyperlink{classbool}{bool} limit\+\_\+rate=true, double cutoff\+\_\+frequency=\hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency})
+\item 
+void \hyperlink{classfranka_1_1Robot_a8a41a2f208cc0c7e68569a550af4e1b2}{control} (std\+::function$<$ \hyperlink{classfranka_1_1JointPositions}{Joint\+Positions}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ motion\+\_\+generator\+\_\+callback, \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816b}{Controller\+Mode} controller\+\_\+mode=\hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816baa7cd8fc7552b5b9c50684e57f032d724}{Controller\+Mode\+::k\+Joint\+Impedance}, \hyperlink{classbool}{bool} limit\+\_\+rate=true, double cutoff\+\_\+frequency=\hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency})
+\item 
+void \hyperlink{classfranka_1_1Robot_a7b2856e3c3c7a5582fd16f7414c30221}{control} (std\+::function$<$ \hyperlink{classfranka_1_1JointVelocities}{Joint\+Velocities}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ motion\+\_\+generator\+\_\+callback, \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816b}{Controller\+Mode} controller\+\_\+mode=\hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816baa7cd8fc7552b5b9c50684e57f032d724}{Controller\+Mode\+::k\+Joint\+Impedance}, \hyperlink{classbool}{bool} limit\+\_\+rate=true, double cutoff\+\_\+frequency=\hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency})
+\item 
+void \hyperlink{classfranka_1_1Robot_a6e59bd7b50b2de2e9e54f0b60d1a552e}{control} (std\+::function$<$ \hyperlink{classfranka_1_1CartesianPose}{Cartesian\+Pose}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ motion\+\_\+generator\+\_\+callback, \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816b}{Controller\+Mode} controller\+\_\+mode=\hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816baa7cd8fc7552b5b9c50684e57f032d724}{Controller\+Mode\+::k\+Joint\+Impedance}, \hyperlink{classbool}{bool} limit\+\_\+rate=true, double cutoff\+\_\+frequency=\hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency})
+\item 
+void \hyperlink{classfranka_1_1Robot_a5d39a89a41edee89a776c3491dd20738}{control} (std\+::function$<$ \hyperlink{classfranka_1_1CartesianVelocities}{Cartesian\+Velocities}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$ motion\+\_\+generator\+\_\+callback, \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816b}{Controller\+Mode} controller\+\_\+mode=\hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816baa7cd8fc7552b5b9c50684e57f032d724}{Controller\+Mode\+::k\+Joint\+Impedance}, \hyperlink{classbool}{bool} limit\+\_\+rate=true, double cutoff\+\_\+frequency=\hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency})
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Commands}\par
+{\em Commands are executed by communicating with the robot over the network. These functions should therefore not be called from within control or motion generator loops. }\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structfranka_1_1VirtualWallCuboid}{Virtual\+Wall\+Cuboid} \hyperlink{classfranka_1_1Robot_a1739f6dc13f0c33b3213375323c93399}{get\+Virtual\+Wall} (int32\+\_\+t id)
+\item 
+void \hyperlink{classfranka_1_1Robot_a168e1214ac36d74ac64f894332b84534}{set\+Collision\+Behavior} (const std\+::array$<$ double, 7 $>$ \&lower\+\_\+torque\+\_\+thresholds\+\_\+acceleration, const std\+::array$<$ double, 7 $>$ \&upper\+\_\+torque\+\_\+thresholds\+\_\+acceleration, const std\+::array$<$ double, 7 $>$ \&lower\+\_\+torque\+\_\+thresholds\+\_\+nominal, const std\+::array$<$ double, 7 $>$ \&upper\+\_\+torque\+\_\+thresholds\+\_\+nominal, const std\+::array$<$ double, 6 $>$ \&lower\+\_\+force\+\_\+thresholds\+\_\+acceleration, const std\+::array$<$ double, 6 $>$ \&upper\+\_\+force\+\_\+thresholds\+\_\+acceleration, const std\+::array$<$ double, 6 $>$ \&lower\+\_\+force\+\_\+thresholds\+\_\+nominal, const std\+::array$<$ double, 6 $>$ \&upper\+\_\+force\+\_\+thresholds\+\_\+nominal)
+\item 
+void \hyperlink{classfranka_1_1Robot_aa188f58c9025594be4d1700da744a962}{set\+Collision\+Behavior} (const std\+::array$<$ double, 7 $>$ \&lower\+\_\+torque\+\_\+thresholds, const std\+::array$<$ double, 7 $>$ \&upper\+\_\+torque\+\_\+thresholds, const std\+::array$<$ double, 6 $>$ \&lower\+\_\+force\+\_\+thresholds, const std\+::array$<$ double, 6 $>$ \&upper\+\_\+force\+\_\+thresholds)
+\item 
+void \hyperlink{classfranka_1_1Robot_aa18a28697cf6e3be16c6cff2dd839560}{set\+Joint\+Impedance} (const std\+::array$<$ double, 7 $>$ \&K\+\_\+theta)
+\item 
+void \hyperlink{classfranka_1_1Robot_ac2678c5c31cc8c0627ecda7485f81f6d}{set\+Cartesian\+Impedance} (const std\+::array$<$ double, 6 $>$ \&K\+\_\+x)
+\item 
+void \hyperlink{classfranka_1_1Robot_a7992cee203e66f9a61fe2f318ef88a26}{set\+Guiding\+Mode} (const std\+::array$<$ \hyperlink{classbool}{bool}, 6 $>$ \&guiding\+\_\+mode, \hyperlink{classbool}{bool} elbow)
+\item 
+void \hyperlink{classfranka_1_1Robot_ad1cf59d1b11306d80cd3c7144a989c56}{setK} (const std\+::array$<$ double, 16 $>$ \&E\+E\+\_\+\+T\+\_\+K)
+\item 
+void \hyperlink{classfranka_1_1Robot_a5043fca4c35f63b492d9e67c74ddc73b}{set\+EE} (const std\+::array$<$ double, 16 $>$ \&F\+\_\+\+T\+\_\+\+EE)
+\item 
+void \hyperlink{classfranka_1_1Robot_afcb708df10f24563dbcf7d5b907b4a15}{set\+Load} (double load\+\_\+mass, const std\+::array$<$ double, 3 $>$ \&F\+\_\+x\+\_\+\+Cload, const std\+::array$<$ double, 9 $>$ \&load\+\_\+inertia)
+\item 
+void \hyperlink{classfranka_1_1Robot_aebce1a0dbe3b139bb24001845b2afe07}{set\+Filters} (double joint\+\_\+position\+\_\+filter\+\_\+frequency, double joint\+\_\+velocity\+\_\+filter\+\_\+frequency, double cartesian\+\_\+position\+\_\+filter\+\_\+frequency, double cartesian\+\_\+velocity\+\_\+filter\+\_\+frequency, double controller\+\_\+filter\+\_\+frequency)
+\item 
+void \hyperlink{classfranka_1_1Robot_af682aa673415718715bd859116bc2fed}{automatic\+Error\+Recovery} ()
+\item 
+void \hyperlink{classfranka_1_1Robot_a69cb08e075a81ecf3f26e94d26a06296}{stop} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classfranka_1_1Robot_1_1Impl}{Impl} $>$ \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\+\_\+}
+\item 
+std\+::mutex \hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\+\_\+mutex\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Maintains a network connection to the robot, provides the current robot state, gives access to the model library and allows to control the robot.
+
+\begin{DoxyNote}{Note}
+The members of this class are threadsafe.
+\end{DoxyNote}
+\begin{DoxyParagraph}{End effector frame EE}
+While the end effector parameters are set in a configuration file, it is possible to change the end effector frame with \hyperlink{classfranka_1_1Robot_a5043fca4c35f63b492d9e67c74ddc73b}{Robot\+::set\+EE}.
+\end{DoxyParagraph}
+\label{classfranka_1_1Robot_k-frame}%
+\Hypertarget{classfranka_1_1Robot_k-frame}%
+\begin{DoxyParagraph}{Stiffness frame K}
+The stiffness frame is used for Cartesian impedance control, and for measuring and applying forces. It can be set with \hyperlink{classfranka_1_1Robot_ad1cf59d1b11306d80cd3c7144a989c56}{Robot\+::setK}. 
+\end{DoxyParagraph}
+
+
+Definition at line 42 of file robot.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classfranka_1_1Robot_ad1dd3dccff6f33691d2c66eaa5ac5a10}\label{classfranka_1_1Robot_ad1dd3dccff6f33691d2c66eaa5ac5a10}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!Server\+Version@{Server\+Version}}
+\index{Server\+Version@{Server\+Version}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{Server\+Version}{ServerVersion}}
+{\footnotesize\ttfamily using \hyperlink{classfranka_1_1Robot_ad1dd3dccff6f33691d2c66eaa5ac5a10}{franka\+::\+Robot\+::\+Server\+Version} =  uint16\+\_\+t}
+
+Version of the robot server. 
+
+Definition at line 47 of file robot.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}\label{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!Robot@{Robot}}
+\index{Robot@{Robot}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{Robot()}{Robot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily franka\+::\+Robot\+::\+Robot (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{franka\+\_\+address,  }\item[{\hyperlink{namespacefranka_aeede4f4629390fea21ca5e5a35a8a943}{Realtime\+Config}}]{realtime\+\_\+config = {\ttfamily \hyperlink{namespacefranka_aeede4f4629390fea21ca5e5a35a8a943a024bd586d70db805d622b85815bfa0de}{Realtime\+Config\+::k\+Enforce}},  }\item[{size\+\_\+t}]{log\+\_\+size = {\ttfamily 50} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Establishes a connection with the robot.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em franka\+\_\+address} & I\+P/hostname of the robot. \\
+\hline
+\mbox{\tt in}  & {\em realtime\+\_\+config} & if set to Enforce, an exception will be thrown if realtime priority cannot be set when required. Setting realtime\+\_\+config to Ignore disables this behavior. \\
+\hline
+\mbox{\tt in}  & {\em log\+\_\+size} & sets how many last states should be kept for logging purposes. The log is provided when a \hyperlink{structfranka_1_1ControlException}{Control\+Exception} is thrown.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is unsuccessful. \\
+\hline
+{\em \hyperlink{structfranka_1_1IncompatibleVersionException}{Incompatible\+Version\+Exception}} & if this version of {\ttfamily libfranka} is not supported. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 13 of file robot.\+cpp.
+
+
+
+References research\+\_\+interface\+::robot\+::k\+Command\+Port, and $\sim$\+Robot().
+
+
+\begin{DoxyCode}
+14     : \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}\{\textcolor{keyword}{new} Robot::Impl(
+15           std::make\_unique<Network>(franka\_address, 
+      \hyperlink{namespaceresearch__interface_1_1robot_a7485024e26d10cbc7ad99a2f76091274}{research\_interface::robot::kCommandPort}),
+16           log\_size,
+17           realtime\_config)\} \{\}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a378d415475336082e81a35b9811dc6c2}\label{classfranka_1_1Robot_a378d415475336082e81a35b9811dc6c2}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!Robot@{Robot}}
+\index{Robot@{Robot}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{Robot()}{Robot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily franka\+::\+Robot\+::\+Robot (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Robot}{Robot} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Move-\/constructs a new \hyperlink{classfranka_1_1Robot}{Robot} instance.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em other} & Other \hyperlink{classfranka_1_1Robot}{Robot} instance. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 22 of file robot.\+cpp.
+
+
+
+References testing\+::\+\_\+, impl\+\_\+, and franka\+\_\+gripper\+::move().
+
+
+\begin{DoxyCode}
+22                                    \{
+23   std::lock\_guard<std::mutex> \hyperlink{namespacetesting_a4ba77a3f5b67166ff1b59d96a32346a2}{\_}(other.control\_mutex\_);
+24   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_} = \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(other.impl\_);
+25 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a378d415475336082e81a35b9811dc6c2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a28abb25d25b5a1ce4463e32a518682e4}\label{classfranka_1_1Robot_a28abb25d25b5a1ce4463e32a518682e4}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!````~Robot@{$\sim$\+Robot}}
+\index{````~Robot@{$\sim$\+Robot}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{$\sim$\+Robot()}{~Robot()}}
+{\footnotesize\ttfamily franka\+::\+Robot\+::$\sim$\+Robot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+Closes the connection. 
+
+Referenced by Robot().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a28abb25d25b5a1ce4463e32a518682e4_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka_1_1Robot_af682aa673415718715bd859116bc2fed}\label{classfranka_1_1Robot_af682aa673415718715bd859116bc2fed}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!automatic\+Error\+Recovery@{automatic\+Error\+Recovery}}
+\index{automatic\+Error\+Recovery@{automatic\+Error\+Recovery}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{automatic\+Error\+Recovery()}{automaticErrorRecovery()}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::automatic\+Error\+Recovery (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Runs automatic error recovery on the robot.
+
+Automatic error recovery e.\+g. resets the robot after a collision occurred.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 298 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+298                                    \{
+299   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1AutomaticErrorRecovery}{research\_interface::robot::AutomaticErrorRecovery}
+      >();
+300 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{classfranka_1_1Robot_af682aa673415718715bd859116bc2fed_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a5b5ba0a4f2bfd20be963b05622e629e1}\label{classfranka_1_1Robot_a5b5ba0a4f2bfd20be963b05622e629e1}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!control@{control}}
+\index{control@{control}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{control()}{control()}\hspace{0.1cm}{\footnotesize\ttfamily [1/9]}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::control (\begin{DoxyParamCaption}\item[{std\+::function$<$ \hyperlink{classfranka_1_1Torques}{Torques}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{control\+\_\+callback,  }\item[{\hyperlink{classbool}{bool}}]{limit\+\_\+rate = {\ttfamily true},  }\item[{double}]{cutoff\+\_\+frequency = {\ttfamily \hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency}} }\end{DoxyParamCaption})}
+
+Starts a control loop for sending joint-\/level torque commands.
+
+Sets realtime priority for the current thread. Cannot be executed while another control or motion generator loop is active.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em control\+\_\+callback} & Callback function providing joint-\/level torque commands. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em limit\+\_\+rate} & True if rate limiting should be activated. True by default. This could distort your motion! \\
+\hline
+\mbox{\tt in}  & {\em cutoff\+\_\+frequency} & Cutoff frequency for a first order low-\/pass filter applied on the user commanded signal. Set to \hyperlink{namespacefranka_adb10b364af8deb9e17d9bcc1ff2695be}{franka\+::k\+Max\+Cutoff\+Frequency} to disable.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1ControlException}{Control\+Exception}} & if an error related to torque control or motion generation occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if a conflicting operation is already running. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+{\em \hyperlink{structfranka_1_1RealtimeException}{Realtime\+Exception}} & if realtime priority cannot be set for the current thread. \\
+\hline
+{\em std\+::invalid\+\_\+argument} & if joint-\/level torque commands are NaN or infinity.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}{Robot\+::\+Robot} to change behavior if realtime priority cannot be set. 
+\end{DoxySeeAlso}
+
+
+Definition at line 41 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, impl\+\_\+, and franka\+\_\+gripper\+::move().
+
+
+
+Referenced by main(), and franka\+\_\+hw\+::\+Franka\+H\+W\+::prepare\+Switch().
+
+
+\begin{DoxyCode}
+43                                              \{
+44   std::unique\_lock<std::mutex> l(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::try\_to\_lock);
+45   \textcolor{keywordflow}{if} (!l.owns\_lock()) \{
+46     \textcolor{keywordflow}{throw} InvalidOperationException(
+47         \textcolor{stringliteral}{"libfranka robot: Cannot perform this operation while another control or read operation "}
+48         \textcolor{stringliteral}{"is running."});
+49   \}
+50 
+51   ControlLoop<JointVelocities> loop(*\hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}, \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(control\_callback),
+52                                     [](\textcolor{keyword}{const} RobotState&, Duration) -> JointVelocities \{
+53                                       \textcolor{keywordflow}{return} \{\{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0\}\};
+54                                     \},
+55                                     limit\_rate, cutoff\_frequency);
+56   loop();
+57 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a5b5ba0a4f2bfd20be963b05622e629e1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a5b5ba0a4f2bfd20be963b05622e629e1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a5f012ef276eb94d2a98a077bafb49bfe}\label{classfranka_1_1Robot_a5f012ef276eb94d2a98a077bafb49bfe}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!control@{control}}
+\index{control@{control}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{control()}{control()}\hspace{0.1cm}{\footnotesize\ttfamily [2/9]}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::control (\begin{DoxyParamCaption}\item[{std\+::function$<$ \hyperlink{classfranka_1_1Torques}{Torques}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{control\+\_\+callback,  }\item[{std\+::function$<$ \hyperlink{classfranka_1_1JointPositions}{Joint\+Positions}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{motion\+\_\+generator\+\_\+callback,  }\item[{\hyperlink{classbool}{bool}}]{limit\+\_\+rate = {\ttfamily true},  }\item[{double}]{cutoff\+\_\+frequency = {\ttfamily \hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency}} }\end{DoxyParamCaption})}
+
+Starts a control loop for sending joint-\/level torque commands and joint positions.
+
+Sets realtime priority for the current thread. Cannot be executed while another control or motion generator loop is active.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em control\+\_\+callback} & Callback function providing joint-\/level torque commands. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em motion\+\_\+generator\+\_\+callback} & Callback function for motion generation. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em limit\+\_\+rate} & True if rate limiting should be activated. True by default. This could distort your motion! \\
+\hline
+\mbox{\tt in}  & {\em cutoff\+\_\+frequency} & Cutoff frequency for a first order low-\/pass filter applied on the user commanded signal. Set to \hyperlink{namespacefranka_adb10b364af8deb9e17d9bcc1ff2695be}{franka\+::k\+Max\+Cutoff\+Frequency} to disable.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1ControlException}{Control\+Exception}} & if an error related to torque control or motion generation occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if a conflicting operation is already running. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+{\em \hyperlink{structfranka_1_1RealtimeException}{Realtime\+Exception}} & if realtime priority cannot be set for the current thread. \\
+\hline
+{\em std\+::invalid\+\_\+argument} & if joint-\/level torque or joint position commands are NaN or infinity.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}{Robot\+::\+Robot} to change behavior if realtime priority cannot be set. 
+\end{DoxySeeAlso}
+
+
+Definition at line 59 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, impl\+\_\+, and franka\+\_\+gripper\+::move().
+
+
+\begin{DoxyCode}
+63                              \{
+64   std::unique\_lock<std::mutex> l(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::try\_to\_lock);
+65   \textcolor{keywordflow}{if} (!l.owns\_lock()) \{
+66     \textcolor{keywordflow}{throw} InvalidOperationException(
+67         \textcolor{stringliteral}{"libfranka robot: Cannot perform this operation while another control or read operation "}
+68         \textcolor{stringliteral}{"is running."});
+69   \}
+70 
+71   ControlLoop<JointPositions> loop(*\hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}, \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(control\_callback),
+72                                    \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(motion\_generator\_callback), limit\_rate,
+73                                    cutoff\_frequency);
+74   loop();
+75 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a5f012ef276eb94d2a98a077bafb49bfe_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_ab16874af2fa32c9ab901683c1666888b}\label{classfranka_1_1Robot_ab16874af2fa32c9ab901683c1666888b}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!control@{control}}
+\index{control@{control}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{control()}{control()}\hspace{0.1cm}{\footnotesize\ttfamily [3/9]}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::control (\begin{DoxyParamCaption}\item[{std\+::function$<$ \hyperlink{classfranka_1_1Torques}{Torques}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{control\+\_\+callback,  }\item[{std\+::function$<$ \hyperlink{classfranka_1_1JointVelocities}{Joint\+Velocities}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{motion\+\_\+generator\+\_\+callback,  }\item[{\hyperlink{classbool}{bool}}]{limit\+\_\+rate = {\ttfamily true},  }\item[{double}]{cutoff\+\_\+frequency = {\ttfamily \hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency}} }\end{DoxyParamCaption})}
+
+Starts a control loop for sending joint-\/level torque commands and joint velocities.
+
+Sets realtime priority for the current thread. Cannot be executed while another control or motion generator loop is active.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em control\+\_\+callback} & Callback function providing joint-\/level torque commands. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em motion\+\_\+generator\+\_\+callback} & Callback function for motion generation. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em limit\+\_\+rate} & True if rate limiting should be activated. True by default. This could distort your motion! \\
+\hline
+\mbox{\tt in}  & {\em cutoff\+\_\+frequency} & Cutoff frequency for a first order low-\/pass filter applied on the user commanded signal. Set to \hyperlink{namespacefranka_adb10b364af8deb9e17d9bcc1ff2695be}{franka\+::k\+Max\+Cutoff\+Frequency} to disable.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1ControlException}{Control\+Exception}} & if an error related to torque control or motion generation occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if a conflicting operation is already running. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+{\em \hyperlink{structfranka_1_1RealtimeException}{Realtime\+Exception}} & if realtime priority cannot be set for the current thread. \\
+\hline
+{\em std\+::invalid\+\_\+argument} & if joint-\/level torque or joint velocitiy commands are NaN or infinity.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}{Robot\+::\+Robot} to change behavior if realtime priority cannot be set. 
+\end{DoxySeeAlso}
+
+
+Definition at line 77 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, impl\+\_\+, and franka\+\_\+gripper\+::move().
+
+
+\begin{DoxyCode}
+81                              \{
+82   std::unique\_lock<std::mutex> l(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::try\_to\_lock);
+83   \textcolor{keywordflow}{if} (!l.owns\_lock()) \{
+84     \textcolor{keywordflow}{throw} InvalidOperationException(
+85         \textcolor{stringliteral}{"libfranka robot: Cannot perform this operation while another control or read operation "}
+86         \textcolor{stringliteral}{"is running."});
+87   \}
+88 
+89   ControlLoop<JointVelocities> loop(*\hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}, \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(control\_callback),
+90                                     \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(motion\_generator\_callback), limit\_rate,
+91                                     cutoff\_frequency);
+92   loop();
+93 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_ab16874af2fa32c9ab901683c1666888b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a368c282fca42f4214864d0d39893fc6e}\label{classfranka_1_1Robot_a368c282fca42f4214864d0d39893fc6e}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!control@{control}}
+\index{control@{control}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{control()}{control()}\hspace{0.1cm}{\footnotesize\ttfamily [4/9]}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::control (\begin{DoxyParamCaption}\item[{std\+::function$<$ \hyperlink{classfranka_1_1Torques}{Torques}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{control\+\_\+callback,  }\item[{std\+::function$<$ \hyperlink{classfranka_1_1CartesianPose}{Cartesian\+Pose}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{motion\+\_\+generator\+\_\+callback,  }\item[{\hyperlink{classbool}{bool}}]{limit\+\_\+rate = {\ttfamily true},  }\item[{double}]{cutoff\+\_\+frequency = {\ttfamily \hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency}} }\end{DoxyParamCaption})}
+
+Starts a control loop for sending joint-\/level torque commands and Cartesian poses.
+
+Sets realtime priority for the current thread. Cannot be executed while another control or motion generator loop is active.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em control\+\_\+callback} & Callback function providing joint-\/level torque commands. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em motion\+\_\+generator\+\_\+callback} & Callback function for motion generation. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em limit\+\_\+rate} & True if rate limiting should be activated. True by default. This could distort your motion! \\
+\hline
+\mbox{\tt in}  & {\em cutoff\+\_\+frequency} & Cutoff frequency for a first order low-\/pass filter applied on the user commanded signal. Set to \hyperlink{namespacefranka_adb10b364af8deb9e17d9bcc1ff2695be}{franka\+::k\+Max\+Cutoff\+Frequency} to disable.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1ControlException}{Control\+Exception}} & if an error related to torque control or motion generation occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if a conflicting operation is already running. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+{\em \hyperlink{structfranka_1_1RealtimeException}{Realtime\+Exception}} & if realtime priority cannot be set for the current thread. \\
+\hline
+{\em std\+::invalid\+\_\+argument} & if joint-\/level torque or Cartesian pose command elements are NaN or infinity.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}{Robot\+::\+Robot} to change behavior if realtime priority cannot be set. 
+\end{DoxySeeAlso}
+
+
+Definition at line 95 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, impl\+\_\+, and franka\+\_\+gripper\+::move().
+
+
+\begin{DoxyCode}
+99                              \{
+100   std::unique\_lock<std::mutex> l(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::try\_to\_lock);
+101   \textcolor{keywordflow}{if} (!l.owns\_lock()) \{
+102     \textcolor{keywordflow}{throw} InvalidOperationException(
+103         \textcolor{stringliteral}{"libfranka robot: Cannot perform this operation while another control or read operation "}
+104         \textcolor{stringliteral}{"is running."});
+105   \}
+106 
+107   ControlLoop<CartesianPose> loop(*\hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}, \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(control\_callback),
+108                                   \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(motion\_generator\_callback), limit\_rate,
+109                                   cutoff\_frequency);
+110   loop();
+111 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a368c282fca42f4214864d0d39893fc6e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a3cc02de96810eebc74f499f5821f2ac9}\label{classfranka_1_1Robot_a3cc02de96810eebc74f499f5821f2ac9}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!control@{control}}
+\index{control@{control}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{control()}{control()}\hspace{0.1cm}{\footnotesize\ttfamily [5/9]}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::control (\begin{DoxyParamCaption}\item[{std\+::function$<$ \hyperlink{classfranka_1_1Torques}{Torques}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{control\+\_\+callback,  }\item[{std\+::function$<$ \hyperlink{classfranka_1_1CartesianVelocities}{Cartesian\+Velocities}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{motion\+\_\+generator\+\_\+callback,  }\item[{\hyperlink{classbool}{bool}}]{limit\+\_\+rate = {\ttfamily true},  }\item[{double}]{cutoff\+\_\+frequency = {\ttfamily \hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency}} }\end{DoxyParamCaption})}
+
+Starts a control loop for sending joint-\/level torque commands and Cartesian velocities.
+
+Sets realtime priority for the current thread. Cannot be executed while another control or motion generator loop is active.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em control\+\_\+callback} & Callback function providing joint-\/level torque commands. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em motion\+\_\+generator\+\_\+callback} & Callback function for motion generation. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em limit\+\_\+rate} & True if rate limiting should be activated. True by default. This could distort your motion! \\
+\hline
+\mbox{\tt in}  & {\em cutoff\+\_\+frequency} & Cutoff frequency for a first order low-\/pass filter applied on the user commanded signal. Set to \hyperlink{namespacefranka_adb10b364af8deb9e17d9bcc1ff2695be}{franka\+::k\+Max\+Cutoff\+Frequency} to disable.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1ControlException}{Control\+Exception}} & if an error related to torque control or motion generation occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if a conflicting operation is already running. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+{\em \hyperlink{structfranka_1_1RealtimeException}{Realtime\+Exception}} & if realtime priority cannot be set for the current thread. \\
+\hline
+{\em std\+::invalid\+\_\+argument} & if joint-\/level torque or Cartesian velocity command elements are NaN or infinity.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}{Robot\+::\+Robot} to change behavior if realtime priority cannot be set. 
+\end{DoxySeeAlso}
+
+
+Definition at line 113 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, impl\+\_\+, and franka\+\_\+gripper\+::move().
+
+
+\begin{DoxyCode}
+117                                              \{
+118   std::unique\_lock<std::mutex> l(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::try\_to\_lock);
+119   \textcolor{keywordflow}{if} (!l.owns\_lock()) \{
+120     \textcolor{keywordflow}{throw} InvalidOperationException(
+121         \textcolor{stringliteral}{"libfranka robot: Cannot perform this operation while another control or read operation "}
+122         \textcolor{stringliteral}{"is running."});
+123   \}
+124 
+125   ControlLoop<CartesianVelocities> loop(*\hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}, \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(control\_callback),
+126                                         \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(motion\_generator\_callback), limit\_rate,
+127                                         cutoff\_frequency);
+128   loop();
+129 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a3cc02de96810eebc74f499f5821f2ac9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a8a41a2f208cc0c7e68569a550af4e1b2}\label{classfranka_1_1Robot_a8a41a2f208cc0c7e68569a550af4e1b2}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!control@{control}}
+\index{control@{control}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{control()}{control()}\hspace{0.1cm}{\footnotesize\ttfamily [6/9]}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::control (\begin{DoxyParamCaption}\item[{std\+::function$<$ \hyperlink{classfranka_1_1JointPositions}{Joint\+Positions}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{motion\+\_\+generator\+\_\+callback,  }\item[{\hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816b}{Controller\+Mode}}]{controller\+\_\+mode = {\ttfamily \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816baa7cd8fc7552b5b9c50684e57f032d724}{Controller\+Mode\+::k\+Joint\+Impedance}},  }\item[{\hyperlink{classbool}{bool}}]{limit\+\_\+rate = {\ttfamily true},  }\item[{double}]{cutoff\+\_\+frequency = {\ttfamily \hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency}} }\end{DoxyParamCaption})}
+
+Starts a control loop for a joint position motion generator with a given controller mode.
+
+Sets realtime priority for the current thread. Cannot be executed while another control or motion generator loop is active.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em motion\+\_\+generator\+\_\+callback} & Callback function for motion generation. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em controller\+\_\+mode} & Controller to use to execute the motion. \\
+\hline
+\mbox{\tt in}  & {\em limit\+\_\+rate} & True if rate limiting should be activated. True by default. This could distort your motion! \\
+\hline
+\mbox{\tt in}  & {\em cutoff\+\_\+frequency} & Cutoff frequency for a first order low-\/pass filter applied on the user commanded signal. Set to \hyperlink{namespacefranka_adb10b364af8deb9e17d9bcc1ff2695be}{franka\+::k\+Max\+Cutoff\+Frequency} to disable.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1ControlException}{Control\+Exception}} & if an error related to motion generation occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if a conflicting operation is already running. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+{\em \hyperlink{structfranka_1_1RealtimeException}{Realtime\+Exception}} & if realtime priority cannot be set for the current thread. \\
+\hline
+{\em std\+::invalid\+\_\+argument} & if joint position commands are NaN or infinity.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}{Robot\+::\+Robot} to change behavior if realtime priority cannot be set. 
+\end{DoxySeeAlso}
+
+
+Definition at line 131 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, impl\+\_\+, and franka\+\_\+gripper\+::move().
+
+
+\begin{DoxyCode}
+135                              \{
+136   std::unique\_lock<std::mutex> l(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::try\_to\_lock);
+137   \textcolor{keywordflow}{if} (!l.owns\_lock()) \{
+138     \textcolor{keywordflow}{throw} InvalidOperationException(
+139         \textcolor{stringliteral}{"libfranka robot: Cannot perform this operation while another control or read operation "}
+140         \textcolor{stringliteral}{"is running."});
+141   \}
+142 
+143   ControlLoop<JointPositions> loop(*\hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}, controller\_mode, \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(
+      motion\_generator\_callback),
+144                                    limit\_rate, cutoff\_frequency);
+145   loop();
+146 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a8a41a2f208cc0c7e68569a550af4e1b2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a7b2856e3c3c7a5582fd16f7414c30221}\label{classfranka_1_1Robot_a7b2856e3c3c7a5582fd16f7414c30221}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!control@{control}}
+\index{control@{control}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{control()}{control()}\hspace{0.1cm}{\footnotesize\ttfamily [7/9]}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::control (\begin{DoxyParamCaption}\item[{std\+::function$<$ \hyperlink{classfranka_1_1JointVelocities}{Joint\+Velocities}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{motion\+\_\+generator\+\_\+callback,  }\item[{\hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816b}{Controller\+Mode}}]{controller\+\_\+mode = {\ttfamily \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816baa7cd8fc7552b5b9c50684e57f032d724}{Controller\+Mode\+::k\+Joint\+Impedance}},  }\item[{\hyperlink{classbool}{bool}}]{limit\+\_\+rate = {\ttfamily true},  }\item[{double}]{cutoff\+\_\+frequency = {\ttfamily \hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency}} }\end{DoxyParamCaption})}
+
+Starts a control loop for a joint velocity motion generator with a given controller mode.
+
+Sets realtime priority for the current thread. Cannot be executed while another control or motion generator loop is active.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em motion\+\_\+generator\+\_\+callback} & Callback function for motion generation. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em controller\+\_\+mode} & Controller to use to execute the motion. \\
+\hline
+\mbox{\tt in}  & {\em limit\+\_\+rate} & True if rate limiting should be activated. True by default. This could distort your motion! \\
+\hline
+\mbox{\tt in}  & {\em cutoff\+\_\+frequency} & Cutoff frequency for a first order low-\/pass filter applied on the user commanded signal. Set to \hyperlink{namespacefranka_adb10b364af8deb9e17d9bcc1ff2695be}{franka\+::k\+Max\+Cutoff\+Frequency} to disable.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1ControlException}{Control\+Exception}} & if an error related to motion generation occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if a conflicting operation is already running. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+{\em \hyperlink{structfranka_1_1RealtimeException}{Realtime\+Exception}} & if realtime priority cannot be set for the current thread. \\
+\hline
+{\em std\+::invalid\+\_\+argument} & if joint velocity commands are NaN or infinity.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}{Robot\+::\+Robot} to change behavior if realtime priority cannot be set. 
+\end{DoxySeeAlso}
+
+
+Definition at line 148 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, impl\+\_\+, and franka\+\_\+gripper\+::move().
+
+
+\begin{DoxyCode}
+152                              \{
+153   std::unique\_lock<std::mutex> l(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::try\_to\_lock);
+154   \textcolor{keywordflow}{if} (!l.owns\_lock()) \{
+155     \textcolor{keywordflow}{throw} InvalidOperationException(
+156         \textcolor{stringliteral}{"libfranka robot: Cannot perform this operation while another control or read operation "}
+157         \textcolor{stringliteral}{"is running."});
+158   \}
+159 
+160   ControlLoop<JointVelocities> loop(*\hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}, controller\_mode, \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(
+      motion\_generator\_callback),
+161                                     limit\_rate, cutoff\_frequency);
+162   loop();
+163 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a7b2856e3c3c7a5582fd16f7414c30221_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a6e59bd7b50b2de2e9e54f0b60d1a552e}\label{classfranka_1_1Robot_a6e59bd7b50b2de2e9e54f0b60d1a552e}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!control@{control}}
+\index{control@{control}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{control()}{control()}\hspace{0.1cm}{\footnotesize\ttfamily [8/9]}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::control (\begin{DoxyParamCaption}\item[{std\+::function$<$ \hyperlink{classfranka_1_1CartesianPose}{Cartesian\+Pose}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{motion\+\_\+generator\+\_\+callback,  }\item[{\hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816b}{Controller\+Mode}}]{controller\+\_\+mode = {\ttfamily \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816baa7cd8fc7552b5b9c50684e57f032d724}{Controller\+Mode\+::k\+Joint\+Impedance}},  }\item[{\hyperlink{classbool}{bool}}]{limit\+\_\+rate = {\ttfamily true},  }\item[{double}]{cutoff\+\_\+frequency = {\ttfamily \hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency}} }\end{DoxyParamCaption})}
+
+Starts a control loop for a Cartesian pose motion generator with a given controller mode.
+
+Sets realtime priority for the current thread. Cannot be executed while another control or motion generator loop is active.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em motion\+\_\+generator\+\_\+callback} & Callback function for motion generation. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em controller\+\_\+mode} & Controller to use to execute the motion. \\
+\hline
+\mbox{\tt in}  & {\em limit\+\_\+rate} & True if rate limiting should be activated. True by default. This could distort your motion! \\
+\hline
+\mbox{\tt in}  & {\em cutoff\+\_\+frequency} & Cutoff frequency for a first order low-\/pass filter applied on the user commanded signal. Set to \hyperlink{namespacefranka_adb10b364af8deb9e17d9bcc1ff2695be}{franka\+::k\+Max\+Cutoff\+Frequency} to disable.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1ControlException}{Control\+Exception}} & if an error related to motion generation occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if a conflicting operation is already running. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+{\em \hyperlink{structfranka_1_1RealtimeException}{Realtime\+Exception}} & if realtime priority cannot be set for the current thread. \\
+\hline
+{\em std\+::invalid\+\_\+argument} & if Cartesian pose command elements are NaN or infinity.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}{Robot\+::\+Robot} to change behavior if realtime priority cannot be set. 
+\end{DoxySeeAlso}
+
+
+Definition at line 165 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, impl\+\_\+, and franka\+\_\+gripper\+::move().
+
+
+\begin{DoxyCode}
+169                              \{
+170   std::unique\_lock<std::mutex> l(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::try\_to\_lock);
+171   \textcolor{keywordflow}{if} (!l.owns\_lock()) \{
+172     \textcolor{keywordflow}{throw} InvalidOperationException(
+173         \textcolor{stringliteral}{"libfranka robot: Cannot perform this operation while another control or read operation "}
+174         \textcolor{stringliteral}{"is running."});
+175   \}
+176 
+177   ControlLoop<CartesianPose> loop(*\hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}, controller\_mode, \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(
+      motion\_generator\_callback),
+178                                   limit\_rate, cutoff\_frequency);
+179   loop();
+180 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a6e59bd7b50b2de2e9e54f0b60d1a552e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a5d39a89a41edee89a776c3491dd20738}\label{classfranka_1_1Robot_a5d39a89a41edee89a776c3491dd20738}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!control@{control}}
+\index{control@{control}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{control()}{control()}\hspace{0.1cm}{\footnotesize\ttfamily [9/9]}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::control (\begin{DoxyParamCaption}\item[{std\+::function$<$ \hyperlink{classfranka_1_1CartesianVelocities}{Cartesian\+Velocities}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration})$>$}]{motion\+\_\+generator\+\_\+callback,  }\item[{\hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816b}{Controller\+Mode}}]{controller\+\_\+mode = {\ttfamily \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816baa7cd8fc7552b5b9c50684e57f032d724}{Controller\+Mode\+::k\+Joint\+Impedance}},  }\item[{\hyperlink{classbool}{bool}}]{limit\+\_\+rate = {\ttfamily true},  }\item[{double}]{cutoff\+\_\+frequency = {\ttfamily \hyperlink{namespacefranka_ad8e3b7da346e03181ab5ac138a4171d4}{k\+Default\+Cutoff\+Frequency}} }\end{DoxyParamCaption})}
+
+Starts a control loop for a Cartesian velocity motion generator with a given controller mode.
+
+Sets realtime priority for the current thread. Cannot be executed while another control or motion generator loop is active.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em motion\+\_\+generator\+\_\+callback} & Callback function for motion generation. See \hyperlink{classfranka_1_1Robot_callback-docs}{here} for more details. \\
+\hline
+\mbox{\tt in}  & {\em controller\+\_\+mode} & Controller to use to execute the motion. \\
+\hline
+\mbox{\tt in}  & {\em limit\+\_\+rate} & True if rate limiting should be activated. True by default. This could distort your motion! \\
+\hline
+\mbox{\tt in}  & {\em cutoff\+\_\+frequency} & Cutoff frequency for a first order low-\/pass filter applied on the user commanded signal. Set to \hyperlink{namespacefranka_adb10b364af8deb9e17d9bcc1ff2695be}{franka\+::k\+Max\+Cutoff\+Frequency} to disable.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1ControlException}{Control\+Exception}} & if an error related to motion generation occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if a conflicting operation is already running. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+{\em \hyperlink{structfranka_1_1RealtimeException}{Realtime\+Exception}} & if realtime priority cannot be set for the current thread. \\
+\hline
+{\em std\+::invalid\+\_\+argument} & if Cartesian velocity command elements are NaN or infinity.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classfranka_1_1Robot_ae63bc19390df3d54f3a270814df35eb6}{Robot\+::\+Robot} to change behavior if realtime priority cannot be set. 
+\end{DoxySeeAlso}
+
+
+Definition at line 182 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, impl\+\_\+, and franka\+\_\+gripper\+::move().
+
+
+\begin{DoxyCode}
+186                                              \{
+187   std::unique\_lock<std::mutex> l(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::try\_to\_lock);
+188   \textcolor{keywordflow}{if} (!l.owns\_lock()) \{
+189     \textcolor{keywordflow}{throw} InvalidOperationException(
+190         \textcolor{stringliteral}{"libfranka robot: Cannot perform this operation while another control or read operation "}
+191         \textcolor{stringliteral}{"is running."});
+192   \}
+193 
+194   ControlLoop<CartesianVelocities> loop(
+195       *\hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}, controller\_mode, \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(motion\_generator\_callback), limit\_rate, 
+      cutoff\_frequency);
+196   loop();
+197 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a5d39a89a41edee89a776c3491dd20738_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a1739f6dc13f0c33b3213375323c93399}\label{classfranka_1_1Robot_a1739f6dc13f0c33b3213375323c93399}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!get\+Virtual\+Wall@{get\+Virtual\+Wall}}
+\index{get\+Virtual\+Wall@{get\+Virtual\+Wall}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{get\+Virtual\+Wall()}{getVirtualWall()}}
+{\footnotesize\ttfamily \hyperlink{structfranka_1_1VirtualWallCuboid}{Virtual\+Wall\+Cuboid} franka\+::\+Robot\+::get\+Virtual\+Wall (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id }\end{DoxyParamCaption})}
+
+Returns the parameters of a virtual wall.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em id} & ID of the virtual wall.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Parameters of virtual wall.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 227 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+\begin{DoxyCode}
+227                                                   \{
+228   VirtualWallCuboid virtual\_wall;
+229   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1GetCartesianLimit}{research\_interface::robot::GetCartesianLimit}
+      >(id, &virtual\_wall);
+230   \textcolor{keywordflow}{return} virtual\_wall;
+231 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Robot_a2da598c539469827409ac7e3bb61d5da}\label{classfranka_1_1Robot_a2da598c539469827409ac7e3bb61d5da}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!load\+Model@{load\+Model}}
+\index{load\+Model@{load\+Model}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{load\+Model()}{loadModel()}}
+{\footnotesize\ttfamily \hyperlink{classfranka_1_1Model}{Model} franka\+::\+Robot\+::load\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Loads the model library from the robot.
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classfranka_1_1Model}{Model} instance.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1ModelException}{Model\+Exception}} & if the model library cannot be loaded. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 306 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+306                        \{
+307   \textcolor{keywordflow}{return} \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->loadModel();
+308 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{classfranka_1_1Robot_a2da598c539469827409ac7e3bb61d5da_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a2ea3ee0a2e18796972fd8d93822e7998}\label{classfranka_1_1Robot_a2ea3ee0a2e18796972fd8d93822e7998}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!operator=@{operator=}}
+\index{operator=@{operator=}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{classfranka_1_1Robot}{Robot} \& franka\+::\+Robot\+::operator= (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Robot}{Robot} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Move-\/assigns this \hyperlink{classfranka_1_1Robot}{Robot} from another \hyperlink{classfranka_1_1Robot}{Robot} instance.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em other} & Other \hyperlink{classfranka_1_1Robot}{Robot} instance.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classfranka_1_1Robot}{Robot} instance. 
+\end{DoxyReturn}
+
+
+Definition at line 27 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, impl\+\_\+, and franka\+\_\+gripper\+::move().
+
+
+\begin{DoxyCode}
+27                                               \{
+28   \textcolor{keywordflow}{if} (&other != \textcolor{keyword}{this}) \{
+29     std::unique\_lock<std::mutex> this\_lock(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::defer\_lock);
+30     std::unique\_lock<std::mutex> other\_lock(other.control\_mutex\_, std::defer\_lock);
+31     std::lock(this\_lock, other\_lock);
+32     \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_} = \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(other.impl\_);
+33   \}
+34   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+35 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a2ea3ee0a2e18796972fd8d93822e7998_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a82f85eed20426901a7e77b66c041664b}\label{classfranka_1_1Robot_a82f85eed20426901a7e77b66c041664b}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!read@{read}}
+\index{read@{read}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::read (\begin{DoxyParamCaption}\item[{std\+::function$<$ \hyperlink{classbool}{bool}(const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&)$>$}]{read\+\_\+callback }\end{DoxyParamCaption})}
+
+Starts a loop for reading the current robot state.
+
+Cannot be executed while a control or motion generator loop is running.
+
+This minimal example will print the robot state 100 times\+: 
+\begin{DoxyCode}
+\hyperlink{classfranka_1_1Robot}{franka::Robot} robot(\textcolor{stringliteral}{"robot.franka.de"});
+\textcolor{keywordtype}{size\_t} count = 0;
+robot.read([&count](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}& robot\_state) \{
+  std::cout << robot\_state << std::endl;
+  \textcolor{keywordflow}{return} count++ < 100;
+\});
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em read\+\_\+callback} & Callback function for robot state reading.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if a conflicting operation is already running. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 200 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, and impl\+\_\+.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+200                                                                    \{
+201   std::unique\_lock<std::mutex> l(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::try\_to\_lock);
+202   \textcolor{keywordflow}{if} (!l.owns\_lock()) \{
+203     \textcolor{keywordflow}{throw} InvalidOperationException(
+204         \textcolor{stringliteral}{"libfranka robot: Cannot perform this operation while another control or read operation "}
+205         \textcolor{stringliteral}{"is running."});
+206   \}
+207 
+208   \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{
+209     RobotState robot\_state = \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->update(\textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr});
+210     \textcolor{keywordflow}{if} (!read\_callback(robot\_state)) \{
+211       \textcolor{keywordflow}{break};
+212     \}
+213   \}
+214 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{classfranka_1_1Robot_a82f85eed20426901a7e77b66c041664b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a7ea7074a07b63fcf6933e97b078c7168}\label{classfranka_1_1Robot_a7ea7074a07b63fcf6933e97b078c7168}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!read\+Once@{read\+Once}}
+\index{read\+Once@{read\+Once}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{read\+Once()}{readOnce()}}
+{\footnotesize\ttfamily \hyperlink{structfranka_1_1RobotState}{Robot\+State} franka\+::\+Robot\+::read\+Once (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Waits for a robot state update and returns it.
+
+Cannot be executed while a control or motion generator loop is running.
+
+\begin{DoxyReturn}{Returns}
+Current robot state.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if a conflicting operation is already running. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classfranka_1_1Robot_a82f85eed20426901a7e77b66c041664b}{Robot\+::read} for a way to repeatedly receive the robot state. 
+\end{DoxySeeAlso}
+
+
+Definition at line 216 of file robot.\+cpp.
+
+
+
+References control\+\_\+mutex\+\_\+, and impl\+\_\+.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+216                            \{
+217   std::unique\_lock<std::mutex> l(\hyperlink{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}{control\_mutex\_}, std::try\_to\_lock);
+218   \textcolor{keywordflow}{if} (!l.owns\_lock()) \{
+219     \textcolor{keywordflow}{throw} InvalidOperationException(
+220         \textcolor{stringliteral}{"libfranka robot: Cannot perform this operation while another control or read operation "}
+221         \textcolor{stringliteral}{"is running."});
+222   \}
+223 
+224   \textcolor{keywordflow}{return} \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->readOnce();
+225 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{classfranka_1_1Robot_a7ea7074a07b63fcf6933e97b078c7168_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a7cc1883114afecff80259615e40d9af8}\label{classfranka_1_1Robot_a7cc1883114afecff80259615e40d9af8}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!server\+Version@{server\+Version}}
+\index{server\+Version@{server\+Version}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{server\+Version()}{serverVersion()}}
+{\footnotesize\ttfamily \hyperlink{classfranka_1_1Robot_ad1dd3dccff6f33691d2c66eaa5ac5a10}{Robot\+::\+Server\+Version} franka\+::\+Robot\+::server\+Version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the software version reported by the connected server.
+
+\begin{DoxyReturn}{Returns}
+Software version of the connected server. 
+\end{DoxyReturn}
+
+
+Definition at line 37 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+\begin{DoxyCode}
+37                                                        \{
+38   \textcolor{keywordflow}{return} \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->serverVersion();
+39 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Robot_ac2678c5c31cc8c0627ecda7485f81f6d}\label{classfranka_1_1Robot_ac2678c5c31cc8c0627ecda7485f81f6d}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!set\+Cartesian\+Impedance@{set\+Cartesian\+Impedance}}
+\index{set\+Cartesian\+Impedance@{set\+Cartesian\+Impedance}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{set\+Cartesian\+Impedance()}{setCartesianImpedance()}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::set\+Cartesian\+Impedance (\begin{DoxyParamCaption}\item[{const std\+::array$<$ double, 6 $>$ \&}]{K\+\_\+x }\end{DoxyParamCaption})}
+
+Sets the Cartesian impedance for (x, y, z, roll, pitch, yaw) in the internal controller.
+
+User-\/provided torques are not affected by this setting.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em K\+\_\+x} & Cartesian impedance values $K_x=(x, y, z, R, P, Y)$.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 263 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+
+Referenced by franka\+\_\+control\+::set\+Cartesian\+Impedance(), and set\+Default\+Behavior().
+
+
+\begin{DoxyCode}
+264                                     \{  \textcolor{comment}{// NOLINT(readability-identifier-naming)}
+265   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1SetCartesianImpedance}{research\_interface::robot::SetCartesianImpedance}
+      >(K\_x);
+266 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_ac2678c5c31cc8c0627ecda7485f81f6d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a168e1214ac36d74ac64f894332b84534}\label{classfranka_1_1Robot_a168e1214ac36d74ac64f894332b84534}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!set\+Collision\+Behavior@{set\+Collision\+Behavior}}
+\index{set\+Collision\+Behavior@{set\+Collision\+Behavior}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{set\+Collision\+Behavior()}{setCollisionBehavior()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::set\+Collision\+Behavior (\begin{DoxyParamCaption}\item[{const std\+::array$<$ double, 7 $>$ \&}]{lower\+\_\+torque\+\_\+thresholds\+\_\+acceleration,  }\item[{const std\+::array$<$ double, 7 $>$ \&}]{upper\+\_\+torque\+\_\+thresholds\+\_\+acceleration,  }\item[{const std\+::array$<$ double, 7 $>$ \&}]{lower\+\_\+torque\+\_\+thresholds\+\_\+nominal,  }\item[{const std\+::array$<$ double, 7 $>$ \&}]{upper\+\_\+torque\+\_\+thresholds\+\_\+nominal,  }\item[{const std\+::array$<$ double, 6 $>$ \&}]{lower\+\_\+force\+\_\+thresholds\+\_\+acceleration,  }\item[{const std\+::array$<$ double, 6 $>$ \&}]{upper\+\_\+force\+\_\+thresholds\+\_\+acceleration,  }\item[{const std\+::array$<$ double, 6 $>$ \&}]{lower\+\_\+force\+\_\+thresholds\+\_\+nominal,  }\item[{const std\+::array$<$ double, 6 $>$ \&}]{upper\+\_\+force\+\_\+thresholds\+\_\+nominal }\end{DoxyParamCaption})}
+
+Changes the collision behavior.
+
+Set separate torque and force boundaries for acceleration/deceleration and constant velocity movement phases.
+
+Forces or torques between lower and upper threshold are shown as contacts in the \hyperlink{structfranka_1_1RobotState}{Robot\+State}. Forces or torques above the upper threshold are registered as collision and cause the robot to stop moving.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em lower\+\_\+torque\+\_\+thresholds\+\_\+acceleration} & Contact torque thresholds during acceleration/deceleration for each joint in $[Nm]$. \\
+\hline
+\mbox{\tt in}  & {\em upper\+\_\+torque\+\_\+thresholds\+\_\+acceleration} & Collision torque thresholds during acceleration/deceleration for each joint in $[Nm]$. \\
+\hline
+\mbox{\tt in}  & {\em lower\+\_\+torque\+\_\+thresholds\+\_\+nominal} & Contact torque thresholds for each joint in $[Nm]$. \\
+\hline
+\mbox{\tt in}  & {\em upper\+\_\+torque\+\_\+thresholds\+\_\+nominal} & Collision torque thresholds for each joint in $[Nm]$. \\
+\hline
+\mbox{\tt in}  & {\em lower\+\_\+force\+\_\+thresholds\+\_\+acceleration} & Contact force thresholds during acceleration/deceleration for $(x,y,z,R,P,Y)$ in $[N]$. \\
+\hline
+\mbox{\tt in}  & {\em upper\+\_\+force\+\_\+thresholds\+\_\+acceleration} & Collision force thresholds during acceleration/deceleration for $(x,y,z,R,P,Y)$ in $[N]$. \\
+\hline
+\mbox{\tt in}  & {\em lower\+\_\+force\+\_\+thresholds\+\_\+nominal} & Contact force thresholds for $(x,y,z,R,P,Y)$ in $[N]$. \\
+\hline
+\mbox{\tt in}  & {\em upper\+\_\+force\+\_\+thresholds\+\_\+nominal} & Collision force thresholds for $(x,y,z,R,P,Y)$ in $[N]$.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{structfranka_1_1RobotState_a7fc1f0358d2104d39d301d70544fa6c1}{Robot\+State\+::cartesian\+\_\+contact} 
+
+\hyperlink{structfranka_1_1RobotState_a52c20478f4c1e162df38582ea9bda044}{Robot\+State\+::cartesian\+\_\+collision} 
+
+\hyperlink{structfranka_1_1RobotState_a7243c652a8efe58c343a0d1252302fa4}{Robot\+State\+::joint\+\_\+contact} 
+
+\hyperlink{structfranka_1_1RobotState_a38757bafd4dd8e138410de1dca0c36f8}{Robot\+State\+::joint\+\_\+collision} 
+
+\hyperlink{classfranka_1_1Robot_af682aa673415718715bd859116bc2fed}{Robot\+::automatic\+Error\+Recovery} for performing a reset after a collision. 
+\end{DoxySeeAlso}
+
+
+Definition at line 233 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+
+Referenced by main(), set\+Default\+Behavior(), franka\+\_\+control\+::set\+Force\+Torque\+Collision\+Behavior(), and franka\+\_\+control\+::set\+Full\+Collision\+Behavior().
+
+
+\begin{DoxyCode}
+240                                                                                             \{
+241   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1SetCollisionBehavior}{research\_interface::robot::SetCollisionBehavior}
+      >(
+242       lower\_torque\_thresholds\_acceleration, upper\_torque\_thresholds\_acceleration,
+243       lower\_torque\_thresholds\_nominal, upper\_torque\_thresholds\_nominal,
+244       lower\_force\_thresholds\_acceleration, upper\_force\_thresholds\_acceleration,
+245       lower\_force\_thresholds\_nominal, upper\_force\_thresholds\_nominal);
+246 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a168e1214ac36d74ac64f894332b84534_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_aa188f58c9025594be4d1700da744a962}\label{classfranka_1_1Robot_aa188f58c9025594be4d1700da744a962}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!set\+Collision\+Behavior@{set\+Collision\+Behavior}}
+\index{set\+Collision\+Behavior@{set\+Collision\+Behavior}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{set\+Collision\+Behavior()}{setCollisionBehavior()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::set\+Collision\+Behavior (\begin{DoxyParamCaption}\item[{const std\+::array$<$ double, 7 $>$ \&}]{lower\+\_\+torque\+\_\+thresholds,  }\item[{const std\+::array$<$ double, 7 $>$ \&}]{upper\+\_\+torque\+\_\+thresholds,  }\item[{const std\+::array$<$ double, 6 $>$ \&}]{lower\+\_\+force\+\_\+thresholds,  }\item[{const std\+::array$<$ double, 6 $>$ \&}]{upper\+\_\+force\+\_\+thresholds }\end{DoxyParamCaption})}
+
+Changes the collision behavior.
+
+Set common torque and force boundaries for acceleration/deceleration and constant velocity movement phases.
+
+Forces or torques between lower and upper threshold are shown as contacts in the \hyperlink{structfranka_1_1RobotState}{Robot\+State}. Forces or torques above the upper threshold are registered as collision and cause the robot to stop moving.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em lower\+\_\+torque\+\_\+thresholds} & Contact torque thresholds for each joint in $[Nm]$. \\
+\hline
+\mbox{\tt in}  & {\em upper\+\_\+torque\+\_\+thresholds} & Collision torque thresholds for each joint in $[Nm]$. \\
+\hline
+\mbox{\tt in}  & {\em lower\+\_\+force\+\_\+thresholds} & Contact force thresholds for $(x,y,z,R,P,Y)$ in $[N]$. \\
+\hline
+\mbox{\tt in}  & {\em upper\+\_\+force\+\_\+thresholds} & Collision force thresholds for $(x,y,z,R,P,Y)$ in $[N]$.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{structfranka_1_1RobotState_a7fc1f0358d2104d39d301d70544fa6c1}{Robot\+State\+::cartesian\+\_\+contact} 
+
+\hyperlink{structfranka_1_1RobotState_a52c20478f4c1e162df38582ea9bda044}{Robot\+State\+::cartesian\+\_\+collision} 
+
+\hyperlink{structfranka_1_1RobotState_a7243c652a8efe58c343a0d1252302fa4}{Robot\+State\+::joint\+\_\+contact} 
+
+\hyperlink{structfranka_1_1RobotState_a38757bafd4dd8e138410de1dca0c36f8}{Robot\+State\+::joint\+\_\+collision} 
+
+\hyperlink{classfranka_1_1Robot_af682aa673415718715bd859116bc2fed}{Robot\+::automatic\+Error\+Recovery} for performing a reset after a collision. 
+\end{DoxySeeAlso}
+
+
+Definition at line 248 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+\begin{DoxyCode}
+251                                                                                     \{
+252   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1SetCollisionBehavior}{research\_interface::robot::SetCollisionBehavior}
+      >(
+253       lower\_torque\_thresholds, upper\_torque\_thresholds, lower\_torque\_thresholds,
+254       upper\_torque\_thresholds, lower\_force\_thresholds, upper\_force\_thresholds,
+255       lower\_force\_thresholds, upper\_force\_thresholds);
+256 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Robot_a5043fca4c35f63b492d9e67c74ddc73b}\label{classfranka_1_1Robot_a5043fca4c35f63b492d9e67c74ddc73b}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!set\+EE@{set\+EE}}
+\index{set\+EE@{set\+EE}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{set\+E\+E()}{setEE()}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::set\+EE (\begin{DoxyParamCaption}\item[{const std\+::array$<$ double, 16 $>$ \&}]{F\+\_\+\+T\+\_\+\+EE }\end{DoxyParamCaption})}
+
+Sets the transformation $^FT_{EE}$ from flange to end effector frame.
+
+The transformation matrix is represented as a vectorized 4x4 matrix in column-\/major format.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em F\+\_\+\+T\+\_\+\+EE} & Vectorized flange-\/to-\/\+EE transformation matrix $^FT_{EE}$, column-\/major.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{structfranka_1_1RobotState_a193781d47722b32925e0ea7ac415f442}{Robot\+State\+::\+O\+\_\+\+T\+\_\+\+EE} for end effector pose in world base frame. 
+
+\hyperlink{classfranka_1_1Robot}{Robot} for an explanation of the EE frame. 
+\end{DoxySeeAlso}
+
+
+Definition at line 276 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+
+Referenced by franka\+\_\+control\+::set\+E\+E\+Frame().
+
+
+\begin{DoxyCode}
+276                                                     \{  \textcolor{comment}{// NOLINT(readability-identifier-naming)}
+277   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1SetFToEE}{research\_interface::robot::SetFToEE}>(F\_T\_EE
+      );
+278 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_a5043fca4c35f63b492d9e67c74ddc73b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_aebce1a0dbe3b139bb24001845b2afe07}\label{classfranka_1_1Robot_aebce1a0dbe3b139bb24001845b2afe07}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!set\+Filters@{set\+Filters}}
+\index{set\+Filters@{set\+Filters}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{set\+Filters()}{setFilters()}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::set\+Filters (\begin{DoxyParamCaption}\item[{double}]{joint\+\_\+position\+\_\+filter\+\_\+frequency,  }\item[{double}]{joint\+\_\+velocity\+\_\+filter\+\_\+frequency,  }\item[{double}]{cartesian\+\_\+position\+\_\+filter\+\_\+frequency,  }\item[{double}]{cartesian\+\_\+velocity\+\_\+filter\+\_\+frequency,  }\item[{double}]{controller\+\_\+filter\+\_\+frequency }\end{DoxyParamCaption})}
+
+Sets the cut off frequency for the given motion generator or controller.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000001}{Deprecated}]Use \hyperlink{namespacefranka_a94c21b0e87afce0147a9cd6025c239ca}{franka\+::lowpass\+Filter()} instead.\end{DoxyRefDesc}
+
+
+Allowed input range for all the filters is between 1.\+0 Hz and 1000.\+0 Hz. If the value is set to maximum (1000\+Hz) then no filtering is done.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em joint\+\_\+position\+\_\+filter\+\_\+frequency} & Frequency at which the commanded joint position is cut off. \\
+\hline
+\mbox{\tt in}  & {\em joint\+\_\+velocity\+\_\+filter\+\_\+frequency} & Frequency at which the commanded joint velocity is cut off. \\
+\hline
+\mbox{\tt in}  & {\em cartesian\+\_\+position\+\_\+filter\+\_\+frequency} & Frequency at which the commanded Cartesian position is cut off. \\
+\hline
+\mbox{\tt in}  & {\em cartesian\+\_\+velocity\+\_\+filter\+\_\+frequency} & Frequency at which the commanded Cartesian velocity is cut off. \\
+\hline
+\mbox{\tt in}  & {\em controller\+\_\+filter\+\_\+frequency} & Frequency at which the commanded torque is cut off.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 287 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+\begin{DoxyCode}
+291                                                            \{
+292   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1SetFilters}{research\_interface::robot::SetFilters}>(
+293       joint\_position\_filter\_frequency, joint\_velocity\_filter\_frequency,
+294       cartesian\_position\_filter\_frequency, cartesian\_velocity\_filter\_frequency,
+295       controller\_filter\_frequency);
+296 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Robot_a7992cee203e66f9a61fe2f318ef88a26}\label{classfranka_1_1Robot_a7992cee203e66f9a61fe2f318ef88a26}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!set\+Guiding\+Mode@{set\+Guiding\+Mode}}
+\index{set\+Guiding\+Mode@{set\+Guiding\+Mode}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{set\+Guiding\+Mode()}{setGuidingMode()}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::set\+Guiding\+Mode (\begin{DoxyParamCaption}\item[{const std\+::array$<$ \hyperlink{classbool}{bool}, 6 $>$ \&}]{guiding\+\_\+mode,  }\item[{\hyperlink{classbool}{bool}}]{elbow }\end{DoxyParamCaption})}
+
+Locks or unlocks guiding mode movement in (x, y, z, roll, pitch, yaw).
+
+If a flag is set to true, movement is unlocked.
+
+\begin{DoxyNote}{Note}
+Guiding mode can be enabled by pressing the two opposing buttons near the robot\textquotesingle{}s flange.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em guiding\+\_\+mode} & Unlocked movement in (x, y, z, R, P, Y) in guiding mode. \\
+\hline
+\mbox{\tt in}  & {\em elbow} & True if the elbow is free in guiding mode, false otherwise.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 268 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+\begin{DoxyCode}
+268                                                                             \{
+269   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1SetGuidingMode}{research\_interface::robot::SetGuidingMode}
+      >(guiding\_mode, elbow);
+270 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Robot_aa18a28697cf6e3be16c6cff2dd839560}\label{classfranka_1_1Robot_aa18a28697cf6e3be16c6cff2dd839560}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!set\+Joint\+Impedance@{set\+Joint\+Impedance}}
+\index{set\+Joint\+Impedance@{set\+Joint\+Impedance}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{set\+Joint\+Impedance()}{setJointImpedance()}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::set\+Joint\+Impedance (\begin{DoxyParamCaption}\item[{const std\+::array$<$ double, 7 $>$ \&}]{K\+\_\+theta }\end{DoxyParamCaption})}
+
+Sets the impedance for each joint in the internal controller.
+
+User-\/provided torques are not affected by this setting.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em K\+\_\+theta} & Joint impedance values $K_{\theta}$.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 258 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+
+Referenced by main(), set\+Default\+Behavior(), and franka\+\_\+control\+::set\+Joint\+Impedance().
+
+
+\begin{DoxyCode}
+259                                         \{  \textcolor{comment}{// NOLINT(readability-identifier-naming)}
+260   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1SetJointImpedance}{research\_interface::robot::SetJointImpedance}
+      >(K\_theta);
+261 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_aa18a28697cf6e3be16c6cff2dd839560_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_ad1cf59d1b11306d80cd3c7144a989c56}\label{classfranka_1_1Robot_ad1cf59d1b11306d80cd3c7144a989c56}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!setK@{setK}}
+\index{setK@{setK}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{set\+K()}{setK()}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::setK (\begin{DoxyParamCaption}\item[{const std\+::array$<$ double, 16 $>$ \&}]{E\+E\+\_\+\+T\+\_\+K }\end{DoxyParamCaption})}
+
+Sets the transformation $^{EE}T_K$ from end effector frame to stiffness frame.
+
+The transformation matrix is represented as a vectorized 4x4 matrix in column-\/major format.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em E\+E\+\_\+\+T\+\_\+K} & Vectorized E\+E-\/to-\/K transformation matrix $^{EE}T_K$, column-\/major.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classfranka_1_1Robot}{Robot} for an explanation of the stiffness frame. 
+\end{DoxySeeAlso}
+
+
+Definition at line 272 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+
+Referenced by franka\+\_\+control\+::set\+K\+Frame().
+
+
+\begin{DoxyCode}
+272                                                    \{  \textcolor{comment}{// NOLINT(readability-identifier-naming)}
+273   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1SetEEToK}{research\_interface::robot::SetEEToK}>(EE\_T\_K
+      );
+274 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_ad1cf59d1b11306d80cd3c7144a989c56_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_afcb708df10f24563dbcf7d5b907b4a15}\label{classfranka_1_1Robot_afcb708df10f24563dbcf7d5b907b4a15}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!set\+Load@{set\+Load}}
+\index{set\+Load@{set\+Load}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{set\+Load()}{setLoad()}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::set\+Load (\begin{DoxyParamCaption}\item[{double}]{load\+\_\+mass,  }\item[{const std\+::array$<$ double, 3 $>$ \&}]{F\+\_\+x\+\_\+\+Cload,  }\item[{const std\+::array$<$ double, 9 $>$ \&}]{load\+\_\+inertia }\end{DoxyParamCaption})}
+
+Sets dynamic parameters of a payload.
+
+\begin{DoxyNote}{Note}
+This is not for setting end effector parameters, which have to be set in the administrator\textquotesingle{}s interface.
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em load\+\_\+mass} & Mass of the load in $[kg]$. \\
+\hline
+\mbox{\tt in}  & {\em F\+\_\+x\+\_\+\+Cload} & Translation from flange to center of mass of load $^Fx_{C_\text{load}}$ in $[m]$. \\
+\hline
+\mbox{\tt in}  & {\em load\+\_\+inertia} & Inertia matrix $I_\text{load}$ in $[kg \times m^2]$, column-\/major.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 280 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+
+Referenced by franka\+\_\+control\+::set\+Load().
+
+
+\begin{DoxyCode}
+283                                              \{
+284   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1SetLoad}{research\_interface::robot::SetLoad}>(
+      load\_mass, F\_x\_Cload, load\_inertia);
+285 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Robot_afcb708df10f24563dbcf7d5b907b4a15_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Robot_a69cb08e075a81ecf3f26e94d26a06296}\label{classfranka_1_1Robot_a69cb08e075a81ecf3f26e94d26a06296}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!stop@{stop}}
+\index{stop@{stop}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void franka\+::\+Robot\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Stops all currently running motions.
+
+If a control or motion generator loop is running in another thread, it will be preempted with a \hyperlink{structfranka_1_1ControlException}{franka\+::\+Control\+Exception}.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if the Control reports an error. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 302 of file robot.\+cpp.
+
+
+
+References impl\+\_\+.
+
+
+\begin{DoxyCode}
+302                  \{
+303   \hyperlink{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}{impl\_}->executeCommand<\hyperlink{structresearch__interface_1_1robot_1_1StopMove}{research\_interface::robot::StopMove}>();
+304 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}\label{classfranka_1_1Robot_a719ad1fab76f8edfc9f6f761671c1375}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!control\+\_\+mutex\+\_\+@{control\+\_\+mutex\+\_\+}}
+\index{control\+\_\+mutex\+\_\+@{control\+\_\+mutex\+\_\+}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{control\+\_\+mutex\+\_\+}{control\_mutex\_}}
+{\footnotesize\ttfamily std\+::mutex franka\+::\+Robot\+::control\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 689 of file robot.\+h.
+
+
+
+Referenced by control(), operator=(), read(), and read\+Once().
+
+\mbox{\Hypertarget{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}\label{classfranka_1_1Robot_aca155054184e5b6478942fd6a1b82ba4}} 
+\index{franka\+::\+Robot@{franka\+::\+Robot}!impl\+\_\+@{impl\+\_\+}}
+\index{impl\+\_\+@{impl\+\_\+}!franka\+::\+Robot@{franka\+::\+Robot}}
+\subsubsection{\texorpdfstring{impl\+\_\+}{impl\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classfranka_1_1Robot_1_1Impl}{Impl}$>$ franka\+::\+Robot\+::impl\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 685 of file robot.\+h.
+
+
+
+Referenced by automatic\+Error\+Recovery(), control(), get\+Virtual\+Wall(), load\+Model(), operator=(), read(), read\+Once(), Robot(), server\+Version(), set\+Cartesian\+Impedance(), set\+Collision\+Behavior(), set\+E\+E(), set\+Filters(), set\+Guiding\+Mode(), set\+Joint\+Impedance(), set\+K(), set\+Load(), and stop().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/include/franka/\hyperlink{robot_8h}{robot.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/src/\hyperlink{robot_8cpp}{robot.\+cpp}\end{DoxyCompactItemize}

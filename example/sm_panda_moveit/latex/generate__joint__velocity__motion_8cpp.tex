@@ -1,0 +1,102 @@
+\hypertarget{generate__joint__velocity__motion_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+joint\+\_\+velocity\+\_\+motion.cpp File Reference}
+\label{generate__joint__velocity__motion_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+joint\+\_\+velocity\+\_\+motion.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+joint\+\_\+velocity\+\_\+motion.\+cpp}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/robot.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}examples\+\_\+common.\+h\char`\"{}}\newline
+Include dependency graph for generate\+\_\+joint\+\_\+velocity\+\_\+motion.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{generate__joint__velocity__motion_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{generate__joint__velocity__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{generate__joint__velocity__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{generate__joint__velocity__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{generate\+\_\+joint\+\_\+velocity\+\_\+motion.\+cpp@{generate\+\_\+joint\+\_\+velocity\+\_\+motion.\+cpp}!main@{main}}
+\index{main@{main}!generate\+\_\+joint\+\_\+velocity\+\_\+motion.\+cpp@{generate\+\_\+joint\+\_\+velocity\+\_\+motion.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 18 of file generate\+\_\+joint\+\_\+velocity\+\_\+motion.\+cpp.
+
+
+
+References franka\+::\+Robot\+::control(), franka\+::\+Motion\+Finished(), franka\+::\+Robot\+::set\+Collision\+Behavior(), set\+Default\+Behavior(), and franka\+::\+Duration\+::to\+Sec().
+
+
+\begin{DoxyCode}
+18                                 \{
+19   \textcolor{keywordflow}{if} (argc != 2) \{
+20     std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" <robot-hostname>"} << std::endl;
+21     \textcolor{keywordflow}{return} -1;
+22   \}
+23   \textcolor{keywordflow}{try} \{
+24     \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(argv[1]);
+25     \hyperlink{examples__common_8cpp_ad0c6e1cb044845ee8a01b5aa1e801a45}{setDefaultBehavior}(robot);
+26 
+27     \textcolor{comment}{// First move the robot to a suitable joint configuration}
+28     std::array<double, 7> q\_goal = \{\{0, -M\_PI\_4, 0, -3 * M\_PI\_4, 0, M\_PI\_2, M\_PI\_4\}\};
+29     \hyperlink{classMotionGenerator}{MotionGenerator} motion\_generator(0.5, q\_goal);
+30     std::cout << \textcolor{stringliteral}{"WARNING: This example will move the robot! "}
+31               << \textcolor{stringliteral}{"Please make sure to have the user stop button at hand!"} << std::endl
+32               << \textcolor{stringliteral}{"Press Enter to continue..."} << std::endl;
+33     std::cin.ignore();
+34     robot.control(motion\_generator);
+35     std::cout << \textcolor{stringliteral}{"Finished moving to initial joint configuration."} << std::endl;
+36 
+37     \textcolor{comment}{// Set additional parameters always before the control loop, NEVER in the control loop!}
+38     \textcolor{comment}{// Set collision behavior.}
+39     robot.setCollisionBehavior(
+40         \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\}, \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\},
+41         \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\}, \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\},
+42         \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\}, \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\},
+43         \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\}, \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\});
+44 
+45     \textcolor{keywordtype}{double} time\_max = 1.0;
+46     \textcolor{keywordtype}{double} omega\_max = 1.0;
+47     \textcolor{keywordtype}{double} time = 0.0;
+48     robot.control(
+49         [=, &time](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}&, \hyperlink{classfranka_1_1Duration}{franka::Duration} period) ->
+       \hyperlink{classfranka_1_1JointVelocities}{franka::JointVelocities} \{
+50           time += period.\hyperlink{classfranka_1_1Duration_a497af77a3280159547f231f0374e9ac1}{toSec}();
+51 
+52           \textcolor{keywordtype}{double} cycle = std::floor(std::pow(-1.0, (time - std::fmod(time, time\_max)) / time\_max));
+53           \textcolor{keywordtype}{double} omega = cycle * omega\_max / 2.0 * (1.0 - std::cos(2.0 * M\_PI / time\_max * time));
+54 
+55           \hyperlink{classfranka_1_1JointVelocities}{franka::JointVelocities} velocities = \{\{0.0, 0.0, 0.0, omega, omega, omega,
+       omega\}\};
+56 
+57           \textcolor{keywordflow}{if} (time >= 2 * time\_max) \{
+58             std::cout << std::endl << \textcolor{stringliteral}{"Finished motion, shutting down example"} << std::endl;
+59             \textcolor{keywordflow}{return} \hyperlink{namespacefranka_a20791f7142d78bbbe3c957cc66a23ade}{franka::MotionFinished}(velocities);
+60           \}
+61           \textcolor{keywordflow}{return} velocities;
+62         \});
+63   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& e) \{
+64     std::cout << e.what() << std::endl;
+65     \textcolor{keywordflow}{return} -1;
+66   \}
+67 
+68   \textcolor{keywordflow}{return} 0;
+69 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{generate__joint__velocity__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

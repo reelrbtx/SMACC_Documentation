@@ -1,0 +1,256 @@
+\hypertarget{robot__control__node_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/panda\+\_\+simulation/src/robot\+\_\+control\+\_\+node.cpp File Reference}
+\label{robot__control__node_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/panda\+\_\+simulation/src/robot\+\_\+control\+\_\+node.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/panda\+\_\+simulation/src/robot\+\_\+control\+\_\+node.\+cpp}}
+{\ttfamily \#include $<$jsoncpp/json/json.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/move\+\_\+group\+\_\+interface/move\+\_\+group\+\_\+interface.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/planning\+\_\+scene/planning\+\_\+scene.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/planning\+\_\+scene\+\_\+interface/planning\+\_\+scene\+\_\+interface.\+h$>$}\newline
+{\ttfamily \#include $<$moveit\+\_\+visual\+\_\+tools/moveit\+\_\+visual\+\_\+tools.\+h$>$}\newline
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$boost/filesystem.\+hpp$>$}\newline
+Include dependency graph for robot\+\_\+control\+\_\+node.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{robot__control__node_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+moveit\+\_\+msgs\+::\+Collision\+Object \hyperlink{robot__control__node_8cpp_a0cd8843dca1c3eac3ea70f16fb57cbf8}{extract\+Obstacle\+From\+Json} (Json\+::\+Value \&root, std\+::string name)
+\item 
+int \hyperlink{robot__control__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const std\+::string \hyperlink{robot__control__node_8cpp_a19cf8ea4075bbdc47c4caef4587cf045}{P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM} = \char`\"{}panda\+\_\+arm\char`\"{}
+\item 
+static const std\+::string \hyperlink{robot__control__node_8cpp_a3c41e3cdf6bdf130a18f939ffcb10e3b}{A\+P\+P\+\_\+\+D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+N\+A\+ME} = \char`\"{}.panda\+\_\+simulation\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{robot__control__node_8cpp_a0cd8843dca1c3eac3ea70f16fb57cbf8}\label{robot__control__node_8cpp_a0cd8843dca1c3eac3ea70f16fb57cbf8}} 
+\index{robot\+\_\+control\+\_\+node.\+cpp@{robot\+\_\+control\+\_\+node.\+cpp}!extract\+Obstacle\+From\+Json@{extract\+Obstacle\+From\+Json}}
+\index{extract\+Obstacle\+From\+Json@{extract\+Obstacle\+From\+Json}!robot\+\_\+control\+\_\+node.\+cpp@{robot\+\_\+control\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{extract\+Obstacle\+From\+Json()}{extractObstacleFromJson()}}
+{\footnotesize\ttfamily moveit\+\_\+msgs\+::\+Collision\+Object extract\+Obstacle\+From\+Json (\begin{DoxyParamCaption}\item[{Json\+::\+Value \&}]{root,  }\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+
+
+Definition at line 12 of file robot\+\_\+control\+\_\+node.\+cpp.
+
+
+
+References franka\+\_\+gripper\+::move(), interactive\+\_\+marker\+::name, and testing\+::\+Value().
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+13 \{
+14   moveit\_msgs::CollisionObject collision\_object;
+15   collision\_object.header.frame\_id = \textcolor{stringliteral}{"world"};
+16   collision\_object.id = \hyperlink{namespaceinteractive__marker_a447655961b3d3ca3c5a2a9d3d769436d}{name};
+17 
+18   \textcolor{keyword}{const} \hyperlink{namespacetesting_ae44c50a3a7f0a46f05c8a0b0592b4a62}{Json::Value} dimensions = root[\textcolor{stringliteral}{"dimensions"}];
+19   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Extracted dimensions: "} << dimensions);
+20   \textcolor{comment}{// Define a box to add to the world.}
+21   shape\_msgs::SolidPrimitive primitive;
+22   primitive.type = primitive.BOX;
+23   primitive.dimensions.resize(3);
+24   primitive.dimensions[0] = dimensions[\textcolor{stringliteral}{"x"}].asDouble();
+25   primitive.dimensions[1] = dimensions[\textcolor{stringliteral}{"y"}].asDouble();
+26   primitive.dimensions[2] = dimensions[\textcolor{stringliteral}{"z"}].asDouble();
+27 
+28   \textcolor{keyword}{const} \hyperlink{namespacetesting_ae44c50a3a7f0a46f05c8a0b0592b4a62}{Json::Value} position = root[\textcolor{stringliteral}{"position"}];
+29   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Extracted position: "} << position);
+30 
+31   \textcolor{keyword}{const} \hyperlink{namespacetesting_ae44c50a3a7f0a46f05c8a0b0592b4a62}{Json::Value} orientation = root[\textcolor{stringliteral}{"orientation"}];
+32   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Extracted orientation: "} << orientation);
+33   \textcolor{comment}{// Define a pose for the box (specified relative to frame\_id)}
+34   geometry\_msgs::Pose box\_pose;
+35   box\_pose.orientation.w = orientation[\textcolor{stringliteral}{"w"}].asDouble();
+36   box\_pose.orientation.x = orientation[\textcolor{stringliteral}{"x"}].asDouble();
+37   box\_pose.orientation.y = orientation[\textcolor{stringliteral}{"y"}].asDouble();
+38   box\_pose.orientation.z = orientation[\textcolor{stringliteral}{"z"}].asDouble();
+39 
+40   \textcolor{comment}{// MoveIt! planning scene expects the center of the object as position.}
+41   \textcolor{comment}{// We add half of its dimension to its position}
+42   box\_pose.position.x = position[\textcolor{stringliteral}{"x"}].asDouble() + primitive.dimensions[0] / 2.0;
+43   box\_pose.position.y = position[\textcolor{stringliteral}{"y"}].asDouble() + primitive.dimensions[1] / 2.0;
+44   box\_pose.position.z = position[\textcolor{stringliteral}{"z"}].asDouble() + primitive.dimensions[2] / 2.0;
+45 
+46   collision\_object.primitives.push\_back(primitive);
+47   collision\_object.primitive\_poses.push\_back(box\_pose);
+48   collision\_object.operation = collision\_object.ADD;
+49 
+50   \textcolor{keywordflow}{return} \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{std::move}(collision\_object);
+51 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{robot__control__node_8cpp_a0cd8843dca1c3eac3ea70f16fb57cbf8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{robot__control__node_8cpp_a0cd8843dca1c3eac3ea70f16fb57cbf8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{robot__control__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{robot__control__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{robot\+\_\+control\+\_\+node.\+cpp@{robot\+\_\+control\+\_\+node.\+cpp}!main@{main}}
+\index{main@{main}!robot\+\_\+control\+\_\+node.\+cpp@{robot\+\_\+control\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 53 of file robot\+\_\+control\+\_\+node.\+cpp.
+
+
+
+References A\+P\+P\+\_\+\+D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+N\+A\+ME, extract\+Obstacle\+From\+Json(), P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM, and testing\+::\+Value().
+
+
+\begin{DoxyCode}
+54 \{
+55   \textcolor{keyword}{namespace }fs = boost::filesystem;
+56   ROS\_INFO(\textcolor{stringliteral}{"RUNNING robot\_control\_node"});
+57 
+58   ros::init(argc, argv, \textcolor{stringliteral}{"robot\_control\_node"});
+59 
+60   ros::NodeHandle node\_handle;
+61   ros::AsyncSpinner spinner(1);
+62   spinner.start();
+63 
+64   moveit::planning\_interface::MoveGroupInterface move\_group\_arm(
+      \hyperlink{robot__control__node_8cpp_a19cf8ea4075bbdc47c4caef4587cf045}{PLANNING\_GROUP\_ARM});
+65 
+66   ros::Publisher planning\_scene\_diff\_publisher = node\_handle.advertise<moveit\_msgs::PlanningScene>(\textcolor{stringliteral}{"
+      planning\_scene"}, 1);
+67   ros::WallDuration sleep\_t(0.5);
+68   \textcolor{keywordflow}{while} (planning\_scene\_diff\_publisher.getNumSubscribers() < 1)
+69   \{
+70     sleep\_t.sleep();
+71   \}
+72   moveit\_msgs::PlanningScene planning\_scene;
+73 
+74   \textcolor{comment}{// read JSON files from ~/.panda\_simulation}
+75   fs::path home(getenv(\textcolor{stringliteral}{"HOME"}));
+76   \textcolor{keywordflow}{if} (fs::is\_directory(home))
+77   \{
+78     fs::path app\_directory(home);
+79     app\_directory /= \hyperlink{robot__control__node_8cpp_a3c41e3cdf6bdf130a18f939ffcb10e3b}{APP\_DIRECTORY\_NAME};
+80 
+81     \textcolor{keywordflow}{if} (!fs::exists(app\_directory) && !fs::is\_directory(app\_directory))
+82     \{
+83       ROS\_WARN\_STREAM(app\_directory << \textcolor{stringliteral}{" does not exist"});
+84 
+85       \textcolor{comment}{// Create .panda\_simulation directory}
+86       \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} path(getenv(\textcolor{stringliteral}{"HOME"}));
+87       path += \textcolor{stringliteral}{"/.panda\_simulation"};
+88       ROS\_INFO(\textcolor{stringliteral}{"Creating %s collision objects directory."}, path);
+89       \textcolor{keywordflow}{try}
+90       \{
+91         boost::filesystem::create\_directory(path);
+92       \}
+93       \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception&)
+94       \{
+95         ROS\_ERROR(
+96           \textcolor{stringliteral}{"%s directory could not be created."}
+97           \textcolor{stringliteral}{"Please create this directory yourself "}
+98           \textcolor{stringliteral}{"if you want to specify collision objects."}, path.c\_str());
+99         \textcolor{keywordflow}{return} -1;
+100       \}
+101     \}
+102 
+103     std::vector<moveit\_msgs::CollisionObject> collision\_objects;
+104     ROS\_INFO\_STREAM(app\_directory << \textcolor{stringliteral}{" is a directory containing:"});
+105     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &entry : boost::make\_iterator\_range(fs::directory\_iterator(app\_directory), \{\}))
+106     \{
+107       ROS\_INFO\_STREAM(entry);
+108 
+109       std::ifstream file\_stream(entry.path().string(), std::ifstream::binary);
+110       \textcolor{keywordflow}{if} (file\_stream)
+111       \{
+112         \hyperlink{namespacetesting_ae44c50a3a7f0a46f05c8a0b0592b4a62}{Json::Value} root;
+113         file\_stream >> root;
+114 
+115         moveit\_msgs::CollisionObject collision\_object = \hyperlink{robot__control__node_8cpp_a0cd8843dca1c3eac3ea70f16fb57cbf8}{extractObstacleFromJson}(root
+      , entry.path().stem().string());
+116         collision\_objects.push\_back(collision\_object);
+117       \}
+118       \textcolor{keywordflow}{else}
+119       \{
+120         ROS\_WARN\_STREAM(\textcolor{stringliteral}{"could not open file "} << entry.path());
+121       \}
+122     \}
+123 
+124     \textcolor{comment}{// Publish the collision objects to the scene}
+125     \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} &collision\_object : collision\_objects)
+126     \{
+127       collision\_object.header.frame\_id = move\_group\_arm.getPlanningFrame();
+128       planning\_scene.world.collision\_objects.push\_back(collision\_object);
+129     \}
+130 
+131     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"# collision objects "} << planning\_scene.world.collision\_objects.size());
+132     planning\_scene.is\_diff = \textcolor{keyword}{true};
+133     planning\_scene\_diff\_publisher.publish(planning\_scene);
+134 
+135     ROS\_INFO(\textcolor{stringliteral}{"robot\_control\_node is ready"});
+136     ros::waitForShutdown();
+137 
+138     \textcolor{keywordflow}{return} 0;
+139   \}
+140 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{robot__control__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{robot__control__node_8cpp_a3c41e3cdf6bdf130a18f939ffcb10e3b}\label{robot__control__node_8cpp_a3c41e3cdf6bdf130a18f939ffcb10e3b}} 
+\index{robot\+\_\+control\+\_\+node.\+cpp@{robot\+\_\+control\+\_\+node.\+cpp}!A\+P\+P\+\_\+\+D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+N\+A\+ME@{A\+P\+P\+\_\+\+D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+N\+A\+ME}}
+\index{A\+P\+P\+\_\+\+D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+N\+A\+ME@{A\+P\+P\+\_\+\+D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+N\+A\+ME}!robot\+\_\+control\+\_\+node.\+cpp@{robot\+\_\+control\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{A\+P\+P\+\_\+\+D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+N\+A\+ME}{APP\_DIRECTORY\_NAME}}
+{\footnotesize\ttfamily const std\+::string A\+P\+P\+\_\+\+D\+I\+R\+E\+C\+T\+O\+R\+Y\+\_\+\+N\+A\+ME = \char`\"{}.panda\+\_\+simulation\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 10 of file robot\+\_\+control\+\_\+node.\+cpp.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{robot__control__node_8cpp_a19cf8ea4075bbdc47c4caef4587cf045}\label{robot__control__node_8cpp_a19cf8ea4075bbdc47c4caef4587cf045}} 
+\index{robot\+\_\+control\+\_\+node.\+cpp@{robot\+\_\+control\+\_\+node.\+cpp}!P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM@{P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM}}
+\index{P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM@{P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM}!robot\+\_\+control\+\_\+node.\+cpp@{robot\+\_\+control\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM}{PLANNING\_GROUP\_ARM}}
+{\footnotesize\ttfamily const std\+::string P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM = \char`\"{}panda\+\_\+arm\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 9 of file robot\+\_\+control\+\_\+node.\+cpp.
+
+
+
+Referenced by main().
+

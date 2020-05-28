@@ -1,0 +1,91 @@
+\hypertarget{joint__point__to__point__motion_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/joint\+\_\+point\+\_\+to\+\_\+point\+\_\+motion.cpp File Reference}
+\label{joint__point__to__point__motion_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/joint\+\_\+point\+\_\+to\+\_\+point\+\_\+motion.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/joint\+\_\+point\+\_\+to\+\_\+point\+\_\+motion.\+cpp}}
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/robot.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}examples\+\_\+common.\+h\char`\"{}}\newline
+Include dependency graph for joint\+\_\+point\+\_\+to\+\_\+point\+\_\+motion.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{joint__point__to__point__motion_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{joint__point__to__point__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{joint__point__to__point__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{joint__point__to__point__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{joint\+\_\+point\+\_\+to\+\_\+point\+\_\+motion.\+cpp@{joint\+\_\+point\+\_\+to\+\_\+point\+\_\+motion.\+cpp}!main@{main}}
+\index{main@{main}!joint\+\_\+point\+\_\+to\+\_\+point\+\_\+motion.\+cpp@{joint\+\_\+point\+\_\+to\+\_\+point\+\_\+motion.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 20 of file joint\+\_\+point\+\_\+to\+\_\+point\+\_\+motion.\+cpp.
+
+
+
+References franka\+::\+Robot\+::control(), franka\+::\+Robot\+::set\+Collision\+Behavior(), and set\+Default\+Behavior().
+
+
+\begin{DoxyCode}
+20                                 \{
+21   \textcolor{keywordflow}{if} (argc != 10) \{
+22     std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" <robot-hostname> "}
+23               << \textcolor{stringliteral}{"<joint0> <joint1> <joint2> <joint3> <joint4> <joint5> <joint6> "}
+24               << \textcolor{stringliteral}{"<speed-factor>"} << std::endl
+25               << \textcolor{stringliteral}{"joint0 to joint6 are joint angles in [rad]."} << std::endl
+26               << \textcolor{stringliteral}{"speed-factor must be between zero and one."} << std::endl;
+27     \textcolor{keywordflow}{return} -1;
+28   \}
+29   \textcolor{keywordflow}{try} \{
+30     \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(argv[1]);
+31     \hyperlink{examples__common_8cpp_ad0c6e1cb044845ee8a01b5aa1e801a45}{setDefaultBehavior}(robot);
+32 
+33     std::array<double, 7> q\_goal;
+34     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 7; i++) \{
+35       q\_goal[i] = std::stod(argv[i + 2]);
+36     \}
+37     \textcolor{keywordtype}{double} speed\_factor = std::stod(argv[9]);
+38 
+39     \textcolor{comment}{// Set additional parameters always before the control loop, NEVER in the control loop!}
+40     \textcolor{comment}{// Set collision behavior.}
+41     robot.setCollisionBehavior(
+42         \{\{20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0\}\}, \{\{20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0\}\},
+43         \{\{10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0\}\}, \{\{10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0\}\},
+44         \{\{20.0, 20.0, 20.0, 20.0, 20.0, 20.0\}\}, \{\{20.0, 20.0, 20.0, 20.0, 20.0, 20.0\}\},
+45         \{\{10.0, 10.0, 10.0, 10.0, 10.0, 10.0\}\}, \{\{10.0, 10.0, 10.0, 10.0, 10.0, 10.0\}\});
+46 
+47     \hyperlink{classMotionGenerator}{MotionGenerator} motion\_generator(speed\_factor, q\_goal);
+48     std::cout << \textcolor{stringliteral}{"WARNING: This example will move the robot! "}
+49               << \textcolor{stringliteral}{"Please make sure to have the user stop button at hand!"} << std::endl
+50               << \textcolor{stringliteral}{"Press Enter to continue..."} << std::endl;
+51     std::cin.ignore();
+52     robot.control(motion\_generator);
+53     std::cout << \textcolor{stringliteral}{"Motion finished"} << std::endl;
+54   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& e) \{
+55     std::cout << e.what() << std::endl;
+56     \textcolor{keywordflow}{return} -1;
+57   \}
+58 
+59   \textcolor{keywordflow}{return} 0;
+60 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{joint__point__to__point__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

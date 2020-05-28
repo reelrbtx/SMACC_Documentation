@@ -1,0 +1,113 @@
+\hypertarget{robot__state__initializer_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/panda\+\_\+simulation/src/robot\+\_\+state\+\_\+initializer.cpp File Reference}
+\label{robot__state__initializer_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/panda\+\_\+simulation/src/robot\+\_\+state\+\_\+initializer.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/panda\+\_\+simulation/src/robot\+\_\+state\+\_\+initializer.\+cpp}}
+{\ttfamily \#include $<$controller\+\_\+manager\+\_\+msgs/\+Switch\+Controller.\+h$>$}\newline
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$std\+\_\+msgs/\+Float64\+Multi\+Array.\+h$>$}\newline
+Include dependency graph for robot\+\_\+state\+\_\+initializer.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{robot__state__initializer_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{robot__state__initializer_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{robot__state__initializer_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{robot__state__initializer_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{robot\+\_\+state\+\_\+initializer.\+cpp@{robot\+\_\+state\+\_\+initializer.\+cpp}!main@{main}}
+\index{main@{main}!robot\+\_\+state\+\_\+initializer.\+cpp@{robot\+\_\+state\+\_\+initializer.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 5 of file robot\+\_\+state\+\_\+initializer.\+cpp.
+
+
+
+References smacc\+::components\+::\+B\+E\+S\+T\+\_\+\+E\+F\+F\+O\+RT.
+
+
+\begin{DoxyCode}
+5                                 \{
+6   ros::init(argc, argv, \textcolor{stringliteral}{"robot\_state\_initializer\_node"});
+7   ros::NodeHandle node\_handle;
+8 
+9   std::vector<double> panda\_ready\_state\{0, -0.785, 0, -2.356, 0, 1.571, 0.785\};
+10 
+11   \textcolor{comment}{// define variables}
+12   \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} joint\_position\_command\_topic\{\textcolor{stringliteral}{"/joint\_position\_controller/command"}\},
+13       controller\_manager\_switch\_topic\{\textcolor{stringliteral}{"/controller\_manager/switch\_controller"}\};
+14   ros::ServiceClient switch\_controller\_client =
+15       node\_handle.serviceClient<controller\_manager\_msgs::SwitchController>(controller\_manager\_switch\_topic)
+      ;
+16   ros::Publisher joint\_position\_publisher =
+17       node\_handle.advertise<std\_msgs::Float64MultiArray>(joint\_position\_command\_topic, 1);
+18 
+19   \textcolor{comment}{// sleep for 2 seconds in order to make sure that the system is up and running}
+20   ros::Duration(2.0).sleep();
+21 
+22   \textcolor{comment}{// 1. switch from default joint trajectory controller to custom position controller}
+23   \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} panda\_arm\_controller\{\textcolor{stringliteral}{"panda\_arm\_controller"}\}, panda\_hand\_controller\{\textcolor{stringliteral}{"
+      panda\_hand\_controller"}\},
+24       joint\_position\_controller\{\textcolor{stringliteral}{"joint\_position\_controller"}\};
+25   std::vector<std::string> stop\_controllers\{panda\_arm\_controller, panda\_hand\_controller\};
+26   std::vector<std::string> start\_controllers\{joint\_position\_controller\};
+27 
+28   controller\_manager\_msgs::SwitchController srv\_switch\_controller;
+29   srv\_switch\_controller.request.stop\_controllers = stop\_controllers;
+30   srv\_switch\_controller.request.start\_controllers = start\_controllers;
+31   srv\_switch\_controller.request.strictness = 
+      \hyperlink{namespacesmacc_1_1components_a18117d6a71feb2471fb4e07f47674e4cac068971243fbd65b8e03256ec6cc3ca7}{controller\_manager\_msgs::SwitchControllerRequest::BEST\_EFFORT}
+      ;
+32 
+33   \textcolor{comment}{// housekeeping for logging}
+34   std::ostringstream stream\_start\_controllers, stream\_stop\_controllers;
+35   \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} &elem : start\_controllers) \{
+36     stream\_start\_controllers << elem << \textcolor{stringliteral}{", "};
+37   \}
+38   \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} &elem : stop\_controllers) \{
+39     stream\_stop\_controllers << elem << \textcolor{stringliteral}{", "};
+40   \}
+41 
+42   \textcolor{keywordflow}{if} (switch\_controller\_client.call(srv\_switch\_controller)) \{
+43     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Success switching controllers from "} << stream\_stop\_controllers.str() << \textcolor{stringliteral}{" to "}
+44                                                           << stream\_start\_controllers.str());
+45   \} \textcolor{keywordflow}{else} \{
+46     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"Error switching controllers from "} << stream\_stop\_controllers.str() << \textcolor{stringliteral}{" to "}
+47                                                         << stream\_start\_controllers.str());
+48     \textcolor{keywordflow}{return} -1;
+49   \}
+50 
+51   \textcolor{comment}{// 2. publish the desired joint position to the custom controller}
+52   std\_msgs::Float64MultiArray command\_msg;
+53   command\_msg.data = panda\_ready\_state;
+54   joint\_position\_publisher.publish(command\_msg);
+55 
+56   \textcolor{comment}{// sleep for 1 seconds in order to make sure that the controller finishes moving the robot}
+57   ros::Duration(1.0).sleep();
+58 
+59   \textcolor{comment}{// 3. Restore default controllers}
+60   std::swap(stop\_controllers, start\_controllers);
+61   srv\_switch\_controller.request.stop\_controllers = stop\_controllers;
+62   srv\_switch\_controller.request.start\_controllers = start\_controllers;
+63 
+64   \textcolor{keywordflow}{if} (switch\_controller\_client.call(srv\_switch\_controller)) \{
+65     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Success switching controllers from "} << stream\_stop\_controllers.str() << \textcolor{stringliteral}{" to "}
+66                                                           << stream\_start\_controllers.str());
+67   \} \textcolor{keywordflow}{else} \{
+68     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"Error switching controllers from "} << stream\_stop\_controllers.str() << \textcolor{stringliteral}{" to "}
+69                                                         << stream\_start\_controllers.str());
+70     \textcolor{keywordflow}{return} -1;
+71   \}
+72 
+73   ros::spin();
+74   \textcolor{keywordflow}{return} 0;
+75 \}
+\end{DoxyCode}

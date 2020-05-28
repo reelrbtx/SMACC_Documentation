@@ -1,0 +1,143 @@
+\hypertarget{classfranka_1_1LibraryLoader}{}\section{franka\+:\+:Library\+Loader Class Reference}
+\label{classfranka_1_1LibraryLoader}\index{franka\+::\+Library\+Loader@{franka\+::\+Library\+Loader}}
+
+
+{\ttfamily \#include $<$library\+\_\+loader.\+h$>$}
+
+
+
+Collaboration diagram for franka\+:\+:Library\+Loader\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{classfranka_1_1LibraryLoader__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfranka_1_1LibraryLoader_aa971ea69a2dab305b1be14b39e74c4ea}{Library\+Loader} (const std\+::string \&filepath)
+\item 
+\hyperlink{classfranka_1_1LibraryLoader_afe13947a39603d6ba07a4c93bd5d7650}{$\sim$\+Library\+Loader} ()
+\item 
+void $\ast$ \hyperlink{classfranka_1_1LibraryLoader_aa1ca9b340a61553992e9bc43d04c5376}{get\+Symbol} (const std\+::string \&symbol\+\_\+name)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Poco\+::\+Shared\+Library \hyperlink{classfranka_1_1LibraryLoader_aa60d8a00447a53d4c754c9959adf39e1}{library\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 12 of file library\+\_\+loader.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfranka_1_1LibraryLoader_aa971ea69a2dab305b1be14b39e74c4ea}\label{classfranka_1_1LibraryLoader_aa971ea69a2dab305b1be14b39e74c4ea}} 
+\index{franka\+::\+Library\+Loader@{franka\+::\+Library\+Loader}!Library\+Loader@{Library\+Loader}}
+\index{Library\+Loader@{Library\+Loader}!franka\+::\+Library\+Loader@{franka\+::\+Library\+Loader}}
+\subsubsection{\texorpdfstring{Library\+Loader()}{LibraryLoader()}}
+{\footnotesize\ttfamily franka\+::\+Library\+Loader\+::\+Library\+Loader (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filepath }\end{DoxyParamCaption})}
+
+
+
+Definition at line 13 of file library\+\_\+loader.\+cpp.
+
+
+
+References service\+\_\+node\+\_\+3\+::s.
+
+
+\begin{DoxyCode}
+13                                                           \{
+14   \hyperlink{classfranka_1_1LibraryLoader_aa60d8a00447a53d4c754c9959adf39e1}{library\_}.load(filepath);
+15 \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::LibraryAlreadyLoadedException& e) \{
+16   \textcolor{keywordflow}{throw} ModelException(\textcolor{stringliteral}{"libfranka: Model library already loaded"}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s});
+17 \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::LibraryLoadException& e) \{
+18   \textcolor{keywordflow}{throw} ModelException(\textcolor{stringliteral}{"libfranka: Cannot load model library: "}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s} + e.what());
+19 \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::Exception& e) \{
+20   \textcolor{keywordflow}{throw} ModelException(\textcolor{stringliteral}{"libfranka: Error while loading library: "}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s} + e.what());
+21 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1LibraryLoader_afe13947a39603d6ba07a4c93bd5d7650}\label{classfranka_1_1LibraryLoader_afe13947a39603d6ba07a4c93bd5d7650}} 
+\index{franka\+::\+Library\+Loader@{franka\+::\+Library\+Loader}!````~Library\+Loader@{$\sim$\+Library\+Loader}}
+\index{````~Library\+Loader@{$\sim$\+Library\+Loader}!franka\+::\+Library\+Loader@{franka\+::\+Library\+Loader}}
+\subsubsection{\texorpdfstring{$\sim$\+Library\+Loader()}{~LibraryLoader()}}
+{\footnotesize\ttfamily franka\+::\+Library\+Loader\+::$\sim$\+Library\+Loader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 23 of file library\+\_\+loader.\+cpp.
+
+
+\begin{DoxyCode}
+23                               \{
+24   \textcolor{keywordflow}{try} \{
+25     \hyperlink{classfranka_1_1LibraryLoader_aa60d8a00447a53d4c754c9959adf39e1}{library\_}.unload();
+26   \} \textcolor{keywordflow}{catch} (...) \{
+27   \}
+28 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka_1_1LibraryLoader_aa1ca9b340a61553992e9bc43d04c5376}\label{classfranka_1_1LibraryLoader_aa1ca9b340a61553992e9bc43d04c5376}} 
+\index{franka\+::\+Library\+Loader@{franka\+::\+Library\+Loader}!get\+Symbol@{get\+Symbol}}
+\index{get\+Symbol@{get\+Symbol}!franka\+::\+Library\+Loader@{franka\+::\+Library\+Loader}}
+\subsubsection{\texorpdfstring{get\+Symbol()}{getSymbol()}}
+{\footnotesize\ttfamily void $\ast$ franka\+::\+Library\+Loader\+::get\+Symbol (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{symbol\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Definition at line 30 of file library\+\_\+loader.\+cpp.
+
+
+
+References service\+\_\+node\+\_\+3\+::s.
+
+
+
+Referenced by franka\+::\+Model\+Library\+::\+Model\+Library().
+
+
+\begin{DoxyCode}
+30                                                                \{
+31   \textcolor{keywordflow}{return} \hyperlink{classfranka_1_1LibraryLoader_aa60d8a00447a53d4c754c9959adf39e1}{library\_}.getSymbol(symbol\_name);
+32 \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::NotFoundException& e) \{
+33   \textcolor{keywordflow}{throw} ModelException(\textcolor{stringliteral}{"libfranka: Symbol cannot be found: "}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s} + e.what());
+34 \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::Exception& e) \{
+35   \textcolor{keywordflow}{throw} ModelException(\textcolor{stringliteral}{"libfranka: Error while fetching symbols: "}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s} + e.what());
+36 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1LibraryLoader_aa1ca9b340a61553992e9bc43d04c5376_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka_1_1LibraryLoader_aa60d8a00447a53d4c754c9959adf39e1}\label{classfranka_1_1LibraryLoader_aa60d8a00447a53d4c754c9959adf39e1}} 
+\index{franka\+::\+Library\+Loader@{franka\+::\+Library\+Loader}!library\+\_\+@{library\+\_\+}}
+\index{library\+\_\+@{library\+\_\+}!franka\+::\+Library\+Loader@{franka\+::\+Library\+Loader}}
+\subsubsection{\texorpdfstring{library\+\_\+}{library\_}}
+{\footnotesize\ttfamily Poco\+::\+Shared\+Library franka\+::\+Library\+Loader\+::library\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 20 of file library\+\_\+loader.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/src/\hyperlink{library__loader_8h}{library\+\_\+loader.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/src/\hyperlink{library__loader_8cpp}{library\+\_\+loader.\+cpp}\end{DoxyCompactItemize}

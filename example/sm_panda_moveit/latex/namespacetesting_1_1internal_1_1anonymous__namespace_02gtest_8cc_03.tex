@@ -1,0 +1,62 @@
+\hypertarget{namespacetesting_1_1internal_1_1anonymous__namespace_02gtest_8cc_03}{}\section{testing\+:\+:internal\+:\+:anonymous\+\_\+namespace\{gtest.\+cc\} Namespace Reference}
+\label{namespacetesting_1_1internal_1_1anonymous__namespace_02gtest_8cc_03}\index{testing\+::internal\+::anonymous\+\_\+namespace\lcurly{}gtest.\+cc\rcurly{}@{testing\+::internal\+::anonymous\+\_\+namespace\lcurly{}gtest.\+cc\rcurly{}}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classtesting_1_1internal_1_1anonymous__namespace_02gtest_8cc_03_1_1ClassUniqueToAlwaysTrue}{Class\+Unique\+To\+Always\+True}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{namespacetesting_1_1internal_1_1anonymous__namespace_02gtest_8cc_03_a87e3d38ad422ce7018c6fcd4d1f3a938}{Split\+Escaped\+String} (const std\+::string \&str)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacetesting_1_1internal_1_1anonymous__namespace_02gtest_8cc_03_a87e3d38ad422ce7018c6fcd4d1f3a938}\label{namespacetesting_1_1internal_1_1anonymous__namespace_02gtest_8cc_03_a87e3d38ad422ce7018c6fcd4d1f3a938}} 
+\index{testing\+::internal\+::anonymous\+\_\+namespace\lcurly{}gtest.\+cc\rcurly{}@{testing\+::internal\+::anonymous\+\_\+namespace\lcurly{}gtest.\+cc\rcurly{}}!Split\+Escaped\+String@{Split\+Escaped\+String}}
+\index{Split\+Escaped\+String@{Split\+Escaped\+String}!testing\+::internal\+::anonymous\+\_\+namespace\lcurly{}gtest.\+cc\rcurly{}@{testing\+::internal\+::anonymous\+\_\+namespace\lcurly{}gtest.\+cc\rcurly{}}}
+\subsubsection{\texorpdfstring{Split\+Escaped\+String()}{SplitEscapedString()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ testing\+::internal\+::anonymous\+\_\+namespace\{gtest.\+cc\}\+::Split\+Escaped\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1272 of file gtest.\+cc.
+
+
+
+Referenced by testing\+::internal\+::\+Eq\+Failure().
+
+
+\begin{DoxyCode}
+1272                                                               \{
+1273   std::vector<std::string> lines;
+1274   \textcolor{keywordtype}{size\_t} start = 0, end = str.size();
+1275   \textcolor{keywordflow}{if} (end > 2 && str[0] == \textcolor{charliteral}{'"'} && str[end - 1] == \textcolor{charliteral}{'"'}) \{
+1276     ++start;
+1277     --end;
+1278   \}
+1279   \textcolor{keywordtype}{bool} escaped = \textcolor{keyword}{false};
+1280   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = start; i + 1 < end; ++i) \{
+1281     \textcolor{keywordflow}{if} (escaped) \{
+1282       escaped = \textcolor{keyword}{false};
+1283       \textcolor{keywordflow}{if} (str[i] == \textcolor{charliteral}{'n'}) \{
+1284         lines.push\_back(str.substr(start, i - start - 1));
+1285         start = i + 1;
+1286       \}
+1287     \} \textcolor{keywordflow}{else} \{
+1288       escaped = str[i] == \textcolor{charliteral}{'\(\backslash\)\(\backslash\)'};
+1289     \}
+1290   \}
+1291   lines.push\_back(str.substr(start, end - start));
+1292   \textcolor{keywordflow}{return} lines;
+1293 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetesting_1_1internal_1_1anonymous__namespace_02gtest_8cc_03_a87e3d38ad422ce7018c6fcd4d1f3a938_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,156 @@
+\hypertarget{cartesian__impedance__control_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/cartesian\+\_\+impedance\+\_\+control.cpp File Reference}
+\label{cartesian__impedance__control_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/cartesian\+\_\+impedance\+\_\+control.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/cartesian\+\_\+impedance\+\_\+control.\+cpp}}
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$Eigen/\+Dense$>$}\newline
+{\ttfamily \#include $<$franka/duration.\+h$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/model.\+h$>$}\newline
+{\ttfamily \#include $<$franka/robot.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}examples\+\_\+common.\+h\char`\"{}}\newline
+Include dependency graph for cartesian\+\_\+impedance\+\_\+control.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cartesian__impedance__control_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{cartesian__impedance__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{cartesian__impedance__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{cartesian__impedance__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{cartesian\+\_\+impedance\+\_\+control.\+cpp@{cartesian\+\_\+impedance\+\_\+control.\+cpp}!main@{main}}
+\index{main@{main}!cartesian\+\_\+impedance\+\_\+control.\+cpp@{cartesian\+\_\+impedance\+\_\+control.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 26 of file cartesian\+\_\+impedance\+\_\+control.\+cpp.
+
+
+
+References franka\+::\+Robot\+::control(), franka\+::\+Model\+::coriolis(), franka\+::\+Robot\+State\+::dq, franka\+::k\+End\+Effector, franka\+::\+Robot\+::load\+Model(), franka\+::\+Robot\+State\+::\+O\+\_\+\+T\+\_\+\+EE, franka\+::\+Robot\+State\+::q, franka\+::\+Robot\+::read\+Once(), franka\+::\+Robot\+::set\+Collision\+Behavior(), set\+Default\+Behavior(), and franka\+::\+Model\+::zero\+Jacobian().
+
+
+\begin{DoxyCode}
+26                                 \{
+27   \textcolor{comment}{// Check whether the required arguments were passed}
+28   \textcolor{keywordflow}{if} (argc != 2) \{
+29     std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" <robot-hostname>"} << std::endl;
+30     \textcolor{keywordflow}{return} -1;
+31   \}
+32 
+33   \textcolor{comment}{// Compliance parameters}
+34   \textcolor{keyword}{const} \textcolor{keywordtype}{double} translational\_stiffness\{150.0\};
+35   \textcolor{keyword}{const} \textcolor{keywordtype}{double} rotational\_stiffness\{10.0\};
+36   Eigen::MatrixXd stiffness(6, 6), damping(6, 6);
+37   stiffness.setZero();
+38   stiffness.topLeftCorner(3, 3) << translational\_stiffness * Eigen::MatrixXd::Identity(3, 3);
+39   stiffness.bottomRightCorner(3, 3) << rotational\_stiffness * Eigen::MatrixXd::Identity(3, 3);
+40   damping.setZero();
+41   damping.topLeftCorner(3, 3) << 2.0 * sqrt(translational\_stiffness) *
+42                                      Eigen::MatrixXd::Identity(3, 3);
+43   damping.bottomRightCorner(3, 3) << 2.0 * sqrt(rotational\_stiffness) *
+44                                          Eigen::MatrixXd::Identity(3, 3);
+45 
+46   \textcolor{keywordflow}{try} \{
+47     \textcolor{comment}{// connect to robot}
+48     \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(argv[1]);
+49     \hyperlink{examples__common_8cpp_ad0c6e1cb044845ee8a01b5aa1e801a45}{setDefaultBehavior}(robot);
+50     \textcolor{comment}{// load the kinematics and dynamics model}
+51     \hyperlink{classfranka_1_1Model}{franka::Model} model = robot.loadModel();
+52 
+53     \hyperlink{structfranka_1_1RobotState}{franka::RobotState} initial\_state = robot.readOnce();
+54 
+55     \textcolor{comment}{// equilibrium point is the initial position}
+56     Eigen::Affine3d initial\_transform(Eigen::Matrix4d::Map(initial\_state.\hyperlink{structfranka_1_1RobotState_a193781d47722b32925e0ea7ac415f442}{O\_T\_EE}.data()));
+57     Eigen::Vector3d position\_d(initial\_transform.translation());
+58     Eigen::Quaterniond orientation\_d(initial\_transform.linear());
+59 
+60     \textcolor{comment}{// set collision behavior}
+61     robot.setCollisionBehavior(\{\{100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0\}\},
+62                                \{\{100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0\}\},
+63                                \{\{100.0, 100.0, 100.0, 100.0, 100.0, 100.0\}\},
+64                                \{\{100.0, 100.0, 100.0, 100.0, 100.0, 100.0\}\});
+65 
+66     \textcolor{comment}{// define callback for the torque control loop}
+67     std::function<franka::Torques(const franka::RobotState&, franka::Duration)>
+68         impedance\_control\_callback = [&](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}& robot\_state,
+69                                          \hyperlink{classfranka_1_1Duration}{franka::Duration} \textcolor{comment}{/*duration*/}) -> 
+      \hyperlink{classfranka_1_1Torques}{franka::Torques} \{
+70       \textcolor{comment}{// get state variables}
+71       std::array<double, 7> coriolis\_array = model.\hyperlink{classfranka_1_1Model_a9be45a91c3288088dd222f2e55870aa8}{coriolis}(robot\_state);
+72       std::array<double, 42> jacobian\_array =
+73           model.\hyperlink{classfranka_1_1Model_a0b0fb1bf5f54be87bfaa023e4d0c5b9f}{zeroJacobian}(\hyperlink{namespacefranka_a00b729ddce916481d3f0d10febec4f5ba3617dcc7555dbca3c3e86e7535914fdf}{franka::Frame::kEndEffector}, 
+      robot\_state);
+74 
+75       \textcolor{comment}{// convert to Eigen}
+76       Eigen::Map<const Eigen::Matrix<double, 7, 1> > coriolis(coriolis\_array.data());
+77       Eigen::Map<const Eigen::Matrix<double, 6, 7> > jacobian(jacobian\_array.data());
+78       Eigen::Map<const Eigen::Matrix<double, 7, 1> > q(robot\_state.\hyperlink{structfranka_1_1RobotState_ade3335d1ac2f6c44741a916d565f7091}{q}.data());
+79       Eigen::Map<const Eigen::Matrix<double, 7, 1> > dq(robot\_state.\hyperlink{structfranka_1_1RobotState_af372a0081d72bc7b4fe873f99c7b2d8c}{dq}.data());
+80       Eigen::Affine3d transform(Eigen::Matrix4d::Map(robot\_state.\hyperlink{structfranka_1_1RobotState_a193781d47722b32925e0ea7ac415f442}{O\_T\_EE}.data()));
+81       Eigen::Vector3d position(transform.translation());
+82       Eigen::Quaterniond orientation(transform.linear());
+83 
+84       \textcolor{comment}{// compute error to desired equilibrium pose}
+85       \textcolor{comment}{// position error}
+86       Eigen::Matrix<double, 6, 1> error;
+87       error.head(3) << position - position\_d;
+88 
+89       \textcolor{comment}{// orientation error}
+90       \textcolor{comment}{// "difference" quaternion}
+91       \textcolor{keywordflow}{if} (orientation\_d.coeffs().dot(orientation.coeffs()) < 0.0) \{
+92         orientation.coeffs() << -orientation.coeffs();
+93       \}
+94       \textcolor{comment}{// "difference" quaternion}
+95       Eigen::Quaterniond error\_quaternion(orientation.inverse() * orientation\_d);
+96       error.tail(3) << error\_quaternion.x(), error\_quaternion.y(), error\_quaternion.z();
+97       \textcolor{comment}{// Transform to base frame}
+98       error.tail(3) << -transform.linear() * error.tail(3);
+99 
+100       \textcolor{comment}{// compute control}
+101       Eigen::VectorXd tau\_task(7), tau\_d(7);
+102 
+103       \textcolor{comment}{// Spring damper system with damping ratio=1}
+104       tau\_task << jacobian.transpose() * (-stiffness * error - damping * (jacobian * dq));
+105       tau\_d << tau\_task + coriolis;
+106 
+107       std::array<double, 7> tau\_d\_array\{\};
+108       Eigen::VectorXd::Map(&tau\_d\_array[0], 7) = tau\_d;
+109       \textcolor{keywordflow}{return} tau\_d\_array;
+110     \};
+111 
+112     \textcolor{comment}{// start real-time control loop}
+113     std::cout << \textcolor{stringliteral}{"WARNING: Collision thresholds are set to high values. "}
+114               << \textcolor{stringliteral}{"Make sure you have the user stop at hand!"} << std::endl
+115               << \textcolor{stringliteral}{"After starting try to push the robot and see how it reacts."} << std::endl
+116               << \textcolor{stringliteral}{"Press Enter to continue..."} << std::endl;
+117     std::cin.ignore();
+118     robot.control(impedance\_control\_callback);
+119 
+120   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& ex) \{
+121     \textcolor{comment}{// print exception}
+122     std::cout << ex.what() << std::endl;
+123   \}
+124 
+125   \textcolor{keywordflow}{return} 0;
+126 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cartesian__impedance__control_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

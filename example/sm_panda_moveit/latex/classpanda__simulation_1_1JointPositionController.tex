@@ -1,0 +1,256 @@
+\hypertarget{classpanda__simulation_1_1JointPositionController}{}\section{panda\+\_\+simulation\+:\+:Joint\+Position\+Controller Class Reference}
+\label{classpanda__simulation_1_1JointPositionController}\index{panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}}
+
+
+Inheritance diagram for panda\+\_\+simulation\+:\+:Joint\+Position\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{classpanda__simulation_1_1JointPositionController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for panda\+\_\+simulation\+:\+:Joint\+Position\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpanda__simulation_1_1JointPositionController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classpanda__simulation_1_1JointPositionController_a51edb4326fc39dafe64995e0361ba42c}{init} (hardware\+\_\+interface\+::\+Position\+Joint\+Interface $\ast$hw, ros\+::\+Node\+Handle \&n)
+\item 
+void \hyperlink{classpanda__simulation_1_1JointPositionController_a150196b32f6c3b16e12f5e1299ff7d1f}{update} (const ros\+::\+Time \&time, const ros\+::\+Duration \&period)
+\item 
+void \hyperlink{classpanda__simulation_1_1JointPositionController_a047694491f9c2f2f2c241050eb4bc31b}{set\+Command\+Callback} (const std\+\_\+msgs\+::\+Float64\+Multi\+Array\+Const\+Ptr \&msg)
+\item 
+void \hyperlink{classpanda__simulation_1_1JointPositionController_abf14b8f401436166eff03fff6a74da3c}{starting} (const ros\+::\+Time \&time)
+\item 
+void \hyperlink{classpanda__simulation_1_1JointPositionController_ae9f9e37acb3adfe43d282b1ade9e24f2}{stopping} (const ros\+::\+Time \&time)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ hardware\+\_\+interface\+::\+Joint\+Handle $>$ \hyperlink{classpanda__simulation_1_1JointPositionController_ada43d341b944aece64c6c6928cbc9060}{joint\+\_\+handles\+\_\+}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classpanda__simulation_1_1JointPositionController_ad673fc63239d994614aa233965d391e9}{gains\+\_\+vec\+\_\+}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classpanda__simulation_1_1JointPositionController_ab383d39c84291789c8b51c2b4ea08439}{command\+\_\+}
+\item 
+ros\+::\+Subscriber \hyperlink{classpanda__simulation_1_1JointPositionController_a770fa8018c5ee48c3142ee03c44a2941}{sub\+\_\+command\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 10 of file joint\+\_\+position\+\_\+controller.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classpanda__simulation_1_1JointPositionController_a51edb4326fc39dafe64995e0361ba42c}\label{classpanda__simulation_1_1JointPositionController_a51edb4326fc39dafe64995e0361ba42c}} 
+\index{panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}!init@{init}}
+\index{init@{init}!panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} panda\+\_\+simulation\+::\+Joint\+Position\+Controller\+::init (\begin{DoxyParamCaption}\item[{hardware\+\_\+interface\+::\+Position\+Joint\+Interface $\ast$}]{hw,  }\item[{ros\+::\+Node\+Handle \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 11 of file joint\+\_\+position\+\_\+controller.\+cpp.
+
+
+
+References command\+\_\+, gains\+\_\+vec\+\_\+, joint\+\_\+handles\+\_\+, set\+Command\+Callback(), and sub\+\_\+command\+\_\+.
+
+
+\begin{DoxyCode}
+11                                                                             \{
+12     std::vector<std::string> joint\_names;
+13     \textcolor{keywordflow}{if} (!n.getParam(\textcolor{stringliteral}{"joint\_names"}, joint\_names)) \{
+14       ROS\_ERROR(\textcolor{stringliteral}{"Could not read joint names from param server"});
+15       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+16     \}
+17 
+18     \textcolor{comment}{// retrieve gains}
+19     \textcolor{keywordflow}{if} (!n.getParam(\textcolor{stringliteral}{"gains"}, \hyperlink{classpanda__simulation_1_1JointPositionController_ad673fc63239d994614aa233965d391e9}{gains\_vec\_})) \{
+20       ROS\_ERROR(\textcolor{stringliteral}{"Could not read joint gains from param server"});
+21       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+22     \}
+23 
+24     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &joint\_name : joint\_names) \{
+25       \hyperlink{classpanda__simulation_1_1JointPositionController_ada43d341b944aece64c6c6928cbc9060}{joint\_handles\_}.push\_back(hw->getHandle(joint\_name));
+26     \}
+27 
+28     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &joint\_handle : \hyperlink{classpanda__simulation_1_1JointPositionController_ada43d341b944aece64c6c6928cbc9060}{joint\_handles\_}) \{
+29       \hyperlink{classpanda__simulation_1_1JointPositionController_ab383d39c84291789c8b51c2b4ea08439}{command\_}.push\_back(joint\_handle.getPosition());
+30     \}
+31 
+32     \hyperlink{classpanda__simulation_1_1JointPositionController_a770fa8018c5ee48c3142ee03c44a2941}{sub\_command\_} = n.subscribe<std\_msgs::Float64MultiArray>(
+      \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string}(\textcolor{stringliteral}{"command"}), 1,
+33                                                             &
+      \hyperlink{classpanda__simulation_1_1JointPositionController_a047694491f9c2f2f2c241050eb4bc31b}{JointPositionController::setCommandCallback}, \textcolor{keyword}{this});
+34 
+35     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+36   \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpanda__simulation_1_1JointPositionController_a51edb4326fc39dafe64995e0361ba42c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpanda__simulation_1_1JointPositionController_a047694491f9c2f2f2c241050eb4bc31b}\label{classpanda__simulation_1_1JointPositionController_a047694491f9c2f2f2c241050eb4bc31b}} 
+\index{panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}!set\+Command\+Callback@{set\+Command\+Callback}}
+\index{set\+Command\+Callback@{set\+Command\+Callback}!panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}}
+\subsubsection{\texorpdfstring{set\+Command\+Callback()}{setCommandCallback()}}
+{\footnotesize\ttfamily void panda\+\_\+simulation\+::\+Joint\+Position\+Controller\+::set\+Command\+Callback (\begin{DoxyParamCaption}\item[{const std\+\_\+msgs\+::\+Float64\+Multi\+Array\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 47 of file joint\+\_\+position\+\_\+controller.\+cpp.
+
+
+
+References command\+\_\+.
+
+
+
+Referenced by init().
+
+
+\begin{DoxyCode}
+47 \{ \hyperlink{classpanda__simulation_1_1JointPositionController_ab383d39c84291789c8b51c2b4ea08439}{command\_} = \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}->data; \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpanda__simulation_1_1JointPositionController_a047694491f9c2f2f2c241050eb4bc31b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpanda__simulation_1_1JointPositionController_abf14b8f401436166eff03fff6a74da3c}\label{classpanda__simulation_1_1JointPositionController_abf14b8f401436166eff03fff6a74da3c}} 
+\index{panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}!starting@{starting}}
+\index{starting@{starting}!panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}}
+\subsubsection{\texorpdfstring{starting()}{starting()}}
+{\footnotesize\ttfamily void panda\+\_\+simulation\+::\+Joint\+Position\+Controller\+::starting (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 49 of file joint\+\_\+position\+\_\+controller.\+cpp.
+
+
+\begin{DoxyCode}
+49 \{\}
+\end{DoxyCode}
+\mbox{\Hypertarget{classpanda__simulation_1_1JointPositionController_ae9f9e37acb3adfe43d282b1ade9e24f2}\label{classpanda__simulation_1_1JointPositionController_ae9f9e37acb3adfe43d282b1ade9e24f2}} 
+\index{panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}!stopping@{stopping}}
+\index{stopping@{stopping}!panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}}
+\subsubsection{\texorpdfstring{stopping()}{stopping()}}
+{\footnotesize\ttfamily void panda\+\_\+simulation\+::\+Joint\+Position\+Controller\+::stopping (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 51 of file joint\+\_\+position\+\_\+controller.\+cpp.
+
+
+\begin{DoxyCode}
+51 \{\}
+\end{DoxyCode}
+\mbox{\Hypertarget{classpanda__simulation_1_1JointPositionController_a150196b32f6c3b16e12f5e1299ff7d1f}\label{classpanda__simulation_1_1JointPositionController_a150196b32f6c3b16e12f5e1299ff7d1f}} 
+\index{panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}!update@{update}}
+\index{update@{update}!panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void panda\+\_\+simulation\+::\+Joint\+Position\+Controller\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{time,  }\item[{const ros\+::\+Duration \&}]{period }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 38 of file joint\+\_\+position\+\_\+controller.\+cpp.
+
+
+
+References command\+\_\+, gains\+\_\+vec\+\_\+, and joint\+\_\+handles\+\_\+.
+
+
+\begin{DoxyCode}
+38                                                               \{
+39     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \hyperlink{classpanda__simulation_1_1JointPositionController_ada43d341b944aece64c6c6928cbc9060}{joint\_handles\_}.size(); i++) \{
+40       \textcolor{keywordtype}{double} error = \hyperlink{classpanda__simulation_1_1JointPositionController_ab383d39c84291789c8b51c2b4ea08439}{command\_}.at(i) - \hyperlink{classpanda__simulation_1_1JointPositionController_ada43d341b944aece64c6c6928cbc9060}{joint\_handles\_}.at(i).getPosition();
+41       \textcolor{keywordtype}{double} commanded\_effort = error * \hyperlink{classpanda__simulation_1_1JointPositionController_ad673fc63239d994614aa233965d391e9}{gains\_vec\_}.at(i);
+42 
+43       \hyperlink{classpanda__simulation_1_1JointPositionController_ada43d341b944aece64c6c6928cbc9060}{joint\_handles\_}.at(i).setCommand(commanded\_effort);
+44     \}
+45   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classpanda__simulation_1_1JointPositionController_ab383d39c84291789c8b51c2b4ea08439}\label{classpanda__simulation_1_1JointPositionController_ab383d39c84291789c8b51c2b4ea08439}} 
+\index{panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}!command\+\_\+@{command\+\_\+}}
+\index{command\+\_\+@{command\+\_\+}!panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}}
+\subsubsection{\texorpdfstring{command\+\_\+}{command\_}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ panda\+\_\+simulation\+::\+Joint\+Position\+Controller\+::command\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 56 of file joint\+\_\+position\+\_\+controller.\+cpp.
+
+
+
+Referenced by init(), set\+Command\+Callback(), and update().
+
+\mbox{\Hypertarget{classpanda__simulation_1_1JointPositionController_ad673fc63239d994614aa233965d391e9}\label{classpanda__simulation_1_1JointPositionController_ad673fc63239d994614aa233965d391e9}} 
+\index{panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}!gains\+\_\+vec\+\_\+@{gains\+\_\+vec\+\_\+}}
+\index{gains\+\_\+vec\+\_\+@{gains\+\_\+vec\+\_\+}!panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}}
+\subsubsection{\texorpdfstring{gains\+\_\+vec\+\_\+}{gains\_vec\_}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ panda\+\_\+simulation\+::\+Joint\+Position\+Controller\+::gains\+\_\+vec\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 55 of file joint\+\_\+position\+\_\+controller.\+cpp.
+
+
+
+Referenced by init(), and update().
+
+\mbox{\Hypertarget{classpanda__simulation_1_1JointPositionController_ada43d341b944aece64c6c6928cbc9060}\label{classpanda__simulation_1_1JointPositionController_ada43d341b944aece64c6c6928cbc9060}} 
+\index{panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}!joint\+\_\+handles\+\_\+@{joint\+\_\+handles\+\_\+}}
+\index{joint\+\_\+handles\+\_\+@{joint\+\_\+handles\+\_\+}!panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}}
+\subsubsection{\texorpdfstring{joint\+\_\+handles\+\_\+}{joint\_handles\_}}
+{\footnotesize\ttfamily std\+::vector$<$hardware\+\_\+interface\+::\+Joint\+Handle$>$ panda\+\_\+simulation\+::\+Joint\+Position\+Controller\+::joint\+\_\+handles\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 54 of file joint\+\_\+position\+\_\+controller.\+cpp.
+
+
+
+Referenced by init(), and update().
+
+\mbox{\Hypertarget{classpanda__simulation_1_1JointPositionController_a770fa8018c5ee48c3142ee03c44a2941}\label{classpanda__simulation_1_1JointPositionController_a770fa8018c5ee48c3142ee03c44a2941}} 
+\index{panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}!sub\+\_\+command\+\_\+@{sub\+\_\+command\+\_\+}}
+\index{sub\+\_\+command\+\_\+@{sub\+\_\+command\+\_\+}!panda\+\_\+simulation\+::\+Joint\+Position\+Controller@{panda\+\_\+simulation\+::\+Joint\+Position\+Controller}}
+\subsubsection{\texorpdfstring{sub\+\_\+command\+\_\+}{sub\_command\_}}
+{\footnotesize\ttfamily ros\+::\+Subscriber panda\+\_\+simulation\+::\+Joint\+Position\+Controller\+::sub\+\_\+command\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 57 of file joint\+\_\+position\+\_\+controller.\+cpp.
+
+
+
+Referenced by init().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/panda\+\_\+simulation/src/\hyperlink{joint__position__controller_8cpp}{joint\+\_\+position\+\_\+controller.\+cpp}\end{DoxyCompactItemize}

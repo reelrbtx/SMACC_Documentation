@@ -1,0 +1,112 @@
+\hypertarget{generate__consecutive__motions_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+consecutive\+\_\+motions.cpp File Reference}
+\label{generate__consecutive__motions_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+consecutive\+\_\+motions.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+consecutive\+\_\+motions.\+cpp}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/robot.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}examples\+\_\+common.\+h\char`\"{}}\newline
+Include dependency graph for generate\+\_\+consecutive\+\_\+motions.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{generate__consecutive__motions_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{generate__consecutive__motions_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{generate__consecutive__motions_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{generate__consecutive__motions_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{generate\+\_\+consecutive\+\_\+motions.\+cpp@{generate\+\_\+consecutive\+\_\+motions.\+cpp}!main@{main}}
+\index{main@{main}!generate\+\_\+consecutive\+\_\+motions.\+cpp@{generate\+\_\+consecutive\+\_\+motions.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 19 of file generate\+\_\+consecutive\+\_\+motions.\+cpp.
+
+
+
+References franka\+::\+Robot\+::automatic\+Error\+Recovery(), franka\+::\+Robot\+::control(), franka\+::\+Motion\+Finished(), franka\+::\+Robot\+::set\+Collision\+Behavior(), set\+Default\+Behavior(), and franka\+::\+Duration\+::to\+Sec().
+
+
+\begin{DoxyCode}
+19                                 \{
+20   \textcolor{keywordflow}{if} (argc != 2) \{
+21     std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" <robot-hostname>"} << std::endl;
+22     \textcolor{keywordflow}{return} -1;
+23   \}
+24   \textcolor{keywordflow}{try} \{
+25     \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(argv[1]);
+26     \hyperlink{examples__common_8cpp_ad0c6e1cb044845ee8a01b5aa1e801a45}{setDefaultBehavior}(robot);
+27 
+28     \textcolor{comment}{// First move the robot to a suitable joint configuration}
+29     std::array<double, 7> q\_goal = \{\{0, -M\_PI\_4, 0, -3 * M\_PI\_4, 0, M\_PI\_2, M\_PI\_4\}\};
+30     \hyperlink{classMotionGenerator}{MotionGenerator} motion\_generator(0.5, q\_goal);
+31     std::cout << \textcolor{stringliteral}{"WARNING: This example will move the robot! "}
+32               << \textcolor{stringliteral}{"Please make sure to have the user stop button at hand!"} << std::endl
+33               << \textcolor{stringliteral}{"Press Enter to continue..."} << std::endl;
+34     std::cin.ignore();
+35     robot.control(motion\_generator);
+36     std::cout << \textcolor{stringliteral}{"Finished moving to initial joint configuration."} << std::endl;
+37 
+38     \textcolor{comment}{// Set additional parameters always before the control loop, NEVER in the control loop!}
+39     \textcolor{comment}{// Set collision behavior.}
+40     robot.setCollisionBehavior(
+41         \{\{10.0, 10.0, 9.0, 9.0, 8.0, 7.0, 6.0\}\}, \{\{10.0, 10.0, 9.0, 9.0, 8.0, 7.0, 6.0\}\},
+42         \{\{10.0, 10.0, 9.0, 9.0, 8.0, 7.0, 6.0\}\}, \{\{10.0, 10.0, 9.0, 9.0, 8.0, 7.0, 6.0\}\},
+43         \{\{10.0, 10.0, 10.0, 12.5, 12.5, 12.5\}\}, \{\{10.0, 10.0, 10.0, 12.5, 12.5, 12.5\}\},
+44         \{\{10.0, 10.0, 10.0, 12.5, 12.5, 12.5\}\}, \{\{10.0, 10.0, 10.0, 12.5, 12.5, 12.5\}\});
+45 
+46     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 5; i++) \{
+47       std::cout << \textcolor{stringliteral}{"Executing motion."} << std::endl;
+48       \textcolor{keywordflow}{try} \{
+49         \textcolor{keywordtype}{double} time\_max = 4.0;
+50         \textcolor{keywordtype}{double} omega\_max = 0.2;
+51         \textcolor{keywordtype}{double} time = 0.0;
+52         robot.control([=, &time](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}&,
+53                                  \hyperlink{classfranka_1_1Duration}{franka::Duration} period) -> 
+      \hyperlink{classfranka_1_1JointVelocities}{franka::JointVelocities} \{
+54           time += period.\hyperlink{classfranka_1_1Duration_a497af77a3280159547f231f0374e9ac1}{toSec}();
+55 
+56           \textcolor{keywordtype}{double} cycle = std::floor(std::pow(-1.0, (time - std::fmod(time, time\_max)) / time\_max));
+57           \textcolor{keywordtype}{double} omega = cycle * omega\_max / 2.0 * (1.0 - std::cos(2.0 * M\_PI / time\_max * time));
+58 
+59           \hyperlink{classfranka_1_1JointVelocities}{franka::JointVelocities} velocities = \{\{0.0, 0.0, omega, 0.0, 0.0, 0.0, 0.0
+      \}\};
+60           \textcolor{keywordflow}{if} (time >= 2 * time\_max) \{
+61             std::cout << std::endl << \textcolor{stringliteral}{"Finished motion."} << std::endl;
+62             \textcolor{keywordflow}{return} \hyperlink{namespacefranka_a20791f7142d78bbbe3c957cc66a23ade}{franka::MotionFinished}(velocities);
+63           \}
+64           \textcolor{keywordflow}{return} velocities;
+65         \});
+66       \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1ControlException}{franka::ControlException}& e) \{
+67         std::cout << e.what() << std::endl;
+68         std::cout << \textcolor{stringliteral}{"Running error recovery..."} << std::endl;
+69         robot.automaticErrorRecovery();
+70       \}
+71     \}
+72   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& e) \{
+73     std::cout << e.what() << std::endl;
+74     \textcolor{keywordflow}{return} -1;
+75   \}
+76 
+77   std::cout << \textcolor{stringliteral}{"Finished."} << std::endl;
+78 
+79   \textcolor{keywordflow}{return} 0;
+80 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{generate__consecutive__motions_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,196 @@
+\hypertarget{franka__gripper__node_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+gripper/src/franka\+\_\+gripper\+\_\+node.cpp File Reference}
+\label{franka__gripper__node_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+gripper/src/franka\+\_\+gripper\+\_\+node.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+gripper/src/franka\+\_\+gripper\+\_\+node.\+cpp}}
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$ros/init.\+h$>$}\newline
+{\ttfamily \#include $<$ros/node\+\_\+handle.\+h$>$}\newline
+{\ttfamily \#include $<$ros/rate.\+h$>$}\newline
+{\ttfamily \#include $<$ros/spinner.\+h$>$}\newline
+{\ttfamily \#include $<$sensor\+\_\+msgs/\+Joint\+State.\+h$>$}\newline
+{\ttfamily \#include $<$franka/gripper\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$franka\+\_\+gripper/franka\+\_\+gripper.\+h$>$}\newline
+Include dependency graph for franka\+\_\+gripper\+\_\+node.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{franka__gripper__node_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03}{anonymous\+\_\+namespace\{franka\+\_\+gripper\+\_\+node.\+cpp\}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T\+\_\+action , typename T\+\_\+goal , typename T\+\_\+result $>$ }\\void \hyperlink{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03_a303e12e3dde7803ab11935d394c258c7}{anonymous\+\_\+namespace\{franka\+\_\+gripper\+\_\+node.\+cpp\}\+::handle\+Errors} (actionlib\+::\+Simple\+Action\+Server$<$ T\+\_\+action $>$ $\ast$server, std\+::function$<$ \hyperlink{classbool}{bool}(const T\+\_\+goal \&)$>$ handler, const T\+\_\+goal \&goal)
+\item 
+int \hyperlink{franka__gripper__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{franka__gripper__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{franka__gripper__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{franka\+\_\+gripper\+\_\+node.\+cpp@{franka\+\_\+gripper\+\_\+node.\+cpp}!main@{main}}
+\index{main@{main}!franka\+\_\+gripper\+\_\+node.\+cpp@{franka\+\_\+gripper\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 60 of file franka\+\_\+gripper\+\_\+node.\+cpp.
+
+
+
+References testing\+::\+\_\+, franka\+\_\+gripper\+::grasp(), franka\+\_\+gripper\+::gripper\+Command\+Execute\+Callback(), anonymous\+\_\+namespace\{franka\+\_\+gripper\+\_\+node.\+cpp\}\+::handle\+Errors(), franka\+\_\+gripper\+::homing(), franka\+\_\+gripper\+::move(), franka\+\_\+gripper\+::stop(), franka\+\_\+gripper\+::update\+Gripper\+State(), and franka\+::\+Gripper\+State\+::width.
+
+
+\begin{DoxyCode}
+60                                 \{
+61   ros::init(argc, argv, \textcolor{stringliteral}{"franka\_gripper\_node"});
+62   ros::NodeHandle node\_handle(\textcolor{stringliteral}{"~"});
+63   \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} robot\_ip;
+64   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"robot\_ip"}, robot\_ip)) \{
+65     ROS\_ERROR(\textcolor{stringliteral}{"franka\_gripper\_node: Could not parse robot\_ip parameter"});
+66     \textcolor{keywordflow}{return} -1;
+67   \}
+68 
+69   \textcolor{keywordtype}{double} default\_speed(0.1);
+70   \textcolor{keywordflow}{if} (node\_handle.getParam(\textcolor{stringliteral}{"default\_speed"}, default\_speed)) \{
+71     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"franka\_gripper\_node: Found default\_speed "} << default\_speed);
+72   \}
+73 
+74   GraspEpsilon default\_grasp\_epsilon;
+75   default\_grasp\_epsilon.inner = 0.005;
+76   default\_grasp\_epsilon.outer = 0.005;
+77   std::map<std::string, double> epsilon\_map;
+78   \textcolor{keywordflow}{if} (node\_handle.getParam(\textcolor{stringliteral}{"default\_grasp\_epsilon"}, epsilon\_map)) \{
+79     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"franka\_gripper\_node: Found default\_grasp\_epsilon "}
+80                     << \textcolor{stringliteral}{"inner: "} << epsilon\_map[\textcolor{stringliteral}{"inner"}] << \textcolor{stringliteral}{", outer: "} << epsilon\_map[\textcolor{stringliteral}{"outer"}]);
+81     default\_grasp\_epsilon.inner = epsilon\_map[\textcolor{stringliteral}{"inner"}];
+82     default\_grasp\_epsilon.outer = epsilon\_map[\textcolor{stringliteral}{"outer"}];
+83   \}
+84 
+85   \hyperlink{classfranka_1_1Gripper}{franka::Gripper} gripper(robot\_ip);
+86 
+87   \textcolor{keyword}{auto} homing\_handler = [&gripper](\textcolor{keyword}{auto}&& goal) \{ \textcolor{keywordflow}{return} \hyperlink{namespacefranka__gripper_a098e502a3ba4aed6147ec76f1421e803}{homing}(gripper, goal); \};
+88   \textcolor{keyword}{auto} stop\_handler = [&gripper](\textcolor{keyword}{auto}&& goal) \{ \textcolor{keywordflow}{return} \hyperlink{namespacefranka__gripper_a4030b4a443c096b625233396f4314a04}{stop}(gripper, goal); \};
+89   \textcolor{keyword}{auto} grasp\_handler = [&gripper](\textcolor{keyword}{auto}&& goal) \{ \textcolor{keywordflow}{return} \hyperlink{namespacefranka__gripper_a0233f74b5d7107ae71083e17a024c676}{grasp}(gripper, goal); \};
+90   \textcolor{keyword}{auto} move\_handler = [&gripper](\textcolor{keyword}{auto}&& goal) \{ \textcolor{keywordflow}{return} \hyperlink{namespacefranka__gripper_a1356a87108d2229401d3755bd3e53bdf}{move}(gripper, goal); \};
+91 
+92   SimpleActionServer<HomingAction> homing\_action\_server(
+93       node\_handle, \textcolor{stringliteral}{"homing"},
+94       [=, &homing\_action\_server](\textcolor{keyword}{auto}&& goal) \{
+95         \textcolor{keywordflow}{return} \hyperlink{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03_a303e12e3dde7803ab11935d394c258c7}{handleErrors}<franka\_gripper::HomingAction, franka\_gripper::HomingGoalConstPtr,
+96                             franka\_gripper::HomingResult>(&homing\_action\_server, homing\_handler,
+97                                                           goal);
+98       \},
+99       \textcolor{keyword}{false});
+100 
+101   SimpleActionServer<StopAction> stop\_action\_server(
+102       node\_handle, \textcolor{stringliteral}{"stop"},
+103       [=, &stop\_action\_server](\textcolor{keyword}{auto}&& goal) \{
+104         \textcolor{keywordflow}{return} \hyperlink{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03_a303e12e3dde7803ab11935d394c258c7}{handleErrors}<franka\_gripper::StopAction, franka\_gripper::StopGoalConstPtr,
+105                             franka\_gripper::StopResult>(&stop\_action\_server, stop\_handler, goal);
+106       \},
+107       \textcolor{keyword}{false});
+108 
+109   SimpleActionServer<MoveAction> move\_action\_server(
+110       node\_handle, \textcolor{stringliteral}{"move"},
+111       [=, &move\_action\_server](\textcolor{keyword}{auto}&& goal) \{
+112         \textcolor{keywordflow}{return} \hyperlink{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03_a303e12e3dde7803ab11935d394c258c7}{handleErrors}<franka\_gripper::MoveAction, franka\_gripper::MoveGoalConstPtr,
+113                             franka\_gripper::MoveResult>(&move\_action\_server, move\_handler, goal);
+114       \},
+115       \textcolor{keyword}{false});
+116 
+117   SimpleActionServer<GraspAction> grasp\_action\_server(
+118       node\_handle, \textcolor{stringliteral}{"grasp"},
+119       [=, &grasp\_action\_server](\textcolor{keyword}{auto}&& goal) \{
+120         \textcolor{keywordflow}{return} \hyperlink{namespaceanonymous__namespace_02franka__gripper__node_8cpp_03_a303e12e3dde7803ab11935d394c258c7}{handleErrors}<franka\_gripper::GraspAction, franka\_gripper::GraspGoalConstPtr,
+121                             franka\_gripper::GraspResult>(&grasp\_action\_server, grasp\_handler, goal);
+122       \},
+123       \textcolor{keyword}{false});
+124 
+125   SimpleActionServer<GripperCommandAction> gripper\_command\_action\_server(
+126       node\_handle, \textcolor{stringliteral}{"gripper\_action"},
+127       [=, &gripper, &gripper\_command\_action\_server](\textcolor{keyword}{auto}&& goal) \{
+128         \textcolor{keywordflow}{return} \hyperlink{namespacefranka__gripper_ae9fb03aae11c03a4ad2c5d5c88b80166}{gripperCommandExecuteCallback}(gripper, default\_grasp\_epsilon, 
+      default\_speed,
+129                                              &gripper\_command\_action\_server, goal);
+130       \},
+131       \textcolor{keyword}{false});
+132 
+133   homing\_action\_server.start();
+134   stop\_action\_server.start();
+135   move\_action\_server.start();
+136   grasp\_action\_server.start();
+137   gripper\_command\_action\_server.start();
+138 
+139   \textcolor{keywordtype}{double} publish\_rate(30.0);
+140   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"publish\_rate"}, publish\_rate)) \{
+141     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"franka\_gripper\_node: Could not find parameter publish\_rate. Defaulting to "}
+142                     << publish\_rate);
+143   \}
+144 
+145   std::vector<std::string> joint\_names;
+146   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"joint\_names"}, joint\_names)) \{
+147     ROS\_ERROR(\textcolor{stringliteral}{"franka\_gripper\_node: Could not parse joint\_names!"});
+148     \textcolor{keywordflow}{return} -1;
+149   \}
+150   \textcolor{keywordflow}{if} (joint\_names.size() != 2) \{
+151     ROS\_ERROR(\textcolor{stringliteral}{"franka\_gripper\_node: Got wrong number of joint\_names!"});
+152     \textcolor{keywordflow}{return} -1;
+153   \}
+154 
+155   \hyperlink{structfranka_1_1GripperState}{franka::GripperState} gripper\_state;
+156   std::mutex gripper\_state\_mutex;
+157   std::thread read\_thread([&gripper\_state, &gripper, &gripper\_state\_mutex]() \{
+158     ros::Rate read\_rate(10);
+159     \textcolor{keywordflow}{while} (ros::ok()) \{
+160       \{
+161         std::lock\_guard<std::mutex> \hyperlink{namespacetesting_a4ba77a3f5b67166ff1b59d96a32346a2}{\_}(gripper\_state\_mutex);
+162         \hyperlink{namespacefranka__gripper_a8d26c346602cc39ab2495f2fffc99d9c}{updateGripperState}(gripper, &gripper\_state);
+163       \}
+164       read\_rate.sleep();
+165     \}
+166   \});
+167 
+168   ros::Publisher gripper\_state\_publisher =
+169       node\_handle.advertise<sensor\_msgs::JointState>(\textcolor{stringliteral}{"joint\_states"}, 1);
+170   ros::AsyncSpinner spinner(2);
+171   spinner.start();
+172   ros::Rate rate(publish\_rate);
+173   \textcolor{keywordflow}{while} (ros::ok()) \{
+174     \textcolor{keywordflow}{if} (gripper\_state\_mutex.try\_lock()) \{
+175       sensor\_msgs::JointState joint\_states;
+176       joint\_states.header.stamp = ros::Time::now();
+177       joint\_states.name.push\_back(joint\_names[0]);
+178       joint\_states.name.push\_back(joint\_names[1]);
+179       joint\_states.position.push\_back(gripper\_state.\hyperlink{structfranka_1_1GripperState_adf095f446ec39a9a48e120b209dcd6e9}{width} * 0.5);
+180       joint\_states.position.push\_back(gripper\_state.\hyperlink{structfranka_1_1GripperState_adf095f446ec39a9a48e120b209dcd6e9}{width} * 0.5);
+181       joint\_states.velocity.push\_back(0.0);
+182       joint\_states.velocity.push\_back(0.0);
+183       joint\_states.effort.push\_back(0.0);
+184       joint\_states.effort.push\_back(0.0);
+185       gripper\_state\_publisher.publish(joint\_states);
+186       gripper\_state\_mutex.unlock();
+187     \}
+188     rate.sleep();
+189   \}
+190   read\_thread.join();
+191   \textcolor{keywordflow}{return} 0;
+192 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{franka__gripper__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,239 @@
+\hypertarget{classfranka__example__controllers_1_1ModelExampleController}{}\section{franka\+\_\+example\+\_\+controllers\+:\+:Model\+Example\+Controller Class Reference}
+\label{classfranka__example__controllers_1_1ModelExampleController}\index{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}}
+
+
+{\ttfamily \#include $<$model\+\_\+example\+\_\+controller.\+h$>$}
+
+
+
+Inheritance diagram for franka\+\_\+example\+\_\+controllers\+:\+:Model\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{classfranka__example__controllers_1_1ModelExampleController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for franka\+\_\+example\+\_\+controllers\+:\+:Model\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1ModelExampleController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a423f7ebfd4e0b81cdfbefbdb002cde37}{init} (hardware\+\_\+interface\+::\+Robot\+HW $\ast$robot\+\_\+hw, ros\+::\+Node\+Handle \&node\+\_\+handle) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1ModelExampleController_ac80410c22f5e1c98da93ba150a390d2d}{update} (const ros\+::\+Time \&, const ros\+::\+Duration \&) override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfranka__hw_1_1FrankaStateInterface}{franka\+\_\+hw\+::\+Franka\+State\+Interface} $\ast$ \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a299d64b2e65f3d2259ea2468638337e2}{franka\+\_\+state\+\_\+interface\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classfranka__hw_1_1FrankaStateHandle}{franka\+\_\+hw\+::\+Franka\+State\+Handle} $>$ \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a6619cd4e5d970fde0779dfa8d5da2b71}{franka\+\_\+state\+\_\+handle\+\_\+}
+\item 
+\hyperlink{classfranka__hw_1_1FrankaModelInterface}{franka\+\_\+hw\+::\+Franka\+Model\+Interface} $\ast$ \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a832283a8b75f7e65ee03839a18b54f18}{model\+\_\+interface\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classfranka__hw_1_1FrankaModelHandle}{franka\+\_\+hw\+::\+Franka\+Model\+Handle} $>$ \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a6eb1270e267595e0e281ee765f0ec550}{model\+\_\+handle\+\_\+}
+\item 
+\hyperlink{classfranka__hw_1_1TriggerRate}{franka\+\_\+hw\+::\+Trigger\+Rate} \hyperlink{classfranka__example__controllers_1_1ModelExampleController_aff2c4d48db198405dd9f4366cdedb82f}{rate\+\_\+trigger\+\_\+} \{1.\+0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file model\+\_\+example\+\_\+controller.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ModelExampleController_a423f7ebfd4e0b81cdfbefbdb002cde37}\label{classfranka__example__controllers_1_1ModelExampleController_a423f7ebfd4e0b81cdfbefbdb002cde37}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}!init@{init}}
+\index{init@{init}!franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller\+::init (\begin{DoxyParamCaption}\item[{hardware\+\_\+interface\+::\+Robot\+HW $\ast$}]{robot\+\_\+hw,  }\item[{ros\+::\+Node\+Handle \&}]{node\+\_\+handle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 33 of file model\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References franka\+\_\+state\+\_\+handle\+\_\+, franka\+\_\+state\+\_\+interface\+\_\+, model\+\_\+handle\+\_\+, and model\+\_\+interface\+\_\+.
+
+
+\begin{DoxyCode}
+34                                                               \{
+35   \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a299d64b2e65f3d2259ea2468638337e2}{franka\_state\_interface\_} = robot\_hw->get<
+      \hyperlink{classfranka__hw_1_1FrankaStateInterface}{franka\_hw::FrankaStateInterface}>();
+36   \textcolor{keywordflow}{if} (\hyperlink{classfranka__example__controllers_1_1ModelExampleController_a299d64b2e65f3d2259ea2468638337e2}{franka\_state\_interface\_} == \textcolor{keyword}{nullptr}) \{
+37     ROS\_ERROR(\textcolor{stringliteral}{"ModelExampleController: Could not get Franka state interface from hardware"});
+38     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+39   \}
+40   \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} arm\_id;
+41   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"arm\_id"}, arm\_id)) \{
+42     ROS\_ERROR(\textcolor{stringliteral}{"ModelExampleController: Could not read parameter arm\_id"});
+43     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+44   \}
+45   \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a832283a8b75f7e65ee03839a18b54f18}{model\_interface\_} = robot\_hw->get<
+      \hyperlink{classfranka__hw_1_1FrankaModelInterface}{franka\_hw::FrankaModelInterface}>();
+46   \textcolor{keywordflow}{if} (\hyperlink{classfranka__example__controllers_1_1ModelExampleController_a832283a8b75f7e65ee03839a18b54f18}{model\_interface\_} == \textcolor{keyword}{nullptr}) \{
+47     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"ModelExampleController: Error getting model interface from hardware"});
+48     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+49   \}
+50 
+51   \textcolor{keywordflow}{try} \{
+52     \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a6619cd4e5d970fde0779dfa8d5da2b71}{franka\_state\_handle\_} = std::make\_unique<franka\_hw::FrankaStateHandle>(
+53         \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a299d64b2e65f3d2259ea2468638337e2}{franka\_state\_interface\_}->getHandle(arm\_id + \textcolor{stringliteral}{"\_robot"}));
+54   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} hardware\_interface::HardwareInterfaceException& ex) \{
+55     ROS\_ERROR\_STREAM(
+56         \textcolor{stringliteral}{"ModelExampleController: Exception getting franka state handle: "} << ex.what());
+57     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+58   \}
+59 
+60   \textcolor{keywordflow}{try} \{
+61     \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a6eb1270e267595e0e281ee765f0ec550}{model\_handle\_} = std::make\_unique<franka\_hw::FrankaModelHandle>(
+62         \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a832283a8b75f7e65ee03839a18b54f18}{model\_interface\_}->getHandle(arm\_id + \textcolor{stringliteral}{"\_model"}));
+63   \} \textcolor{keywordflow}{catch} (hardware\_interface::HardwareInterfaceException& ex) \{
+64     ROS\_ERROR\_STREAM(
+65         \textcolor{stringliteral}{"ModelExampleController: Exception getting model handle from interface: "} << ex.what());
+66     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+67   \}
+68   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+69 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ModelExampleController_ac80410c22f5e1c98da93ba150a390d2d}\label{classfranka__example__controllers_1_1ModelExampleController_ac80410c22f5e1c98da93ba150a390d2d}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}!update@{update}}
+\index{update@{update}!franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{,  }\item[{const ros\+::\+Duration \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 71 of file model\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References franka\+\_\+state\+\_\+handle\+\_\+, franka\+::k\+End\+Effector, franka\+::k\+Joint4, model\+\_\+handle\+\_\+, P\+L\+U\+G\+I\+N\+L\+I\+B\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+C\+L\+A\+S\+S(), interactive\+\_\+marker\+::pose, and rate\+\_\+trigger\+\_\+.
+
+
+\begin{DoxyCode}
+71                                                                           \{
+72   \textcolor{keywordflow}{if} (\hyperlink{classfranka__example__controllers_1_1ModelExampleController_aff2c4d48db198405dd9f4366cdedb82f}{rate\_trigger\_}()) \{
+73     \hyperlink{structfranka_1_1RobotState}{franka::RobotState} robot\_state = \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a6619cd4e5d970fde0779dfa8d5da2b71}{franka\_state\_handle\_}->
+      getRobotState();
+74     std::array<double, 49> mass = \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a6eb1270e267595e0e281ee765f0ec550}{model\_handle\_}->getMass();
+75     std::array<double, 7> coriolis = \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a6eb1270e267595e0e281ee765f0ec550}{model\_handle\_}->getCoriolis();
+76     std::array<double, 7> gravity = \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a6eb1270e267595e0e281ee765f0ec550}{model\_handle\_}->getGravity();
+77     std::array<double, 16> \hyperlink{namespaceinteractive__marker_a06e4691dc5f93e0da6dc9a6efa8d99b5}{pose} = \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a6eb1270e267595e0e281ee765f0ec550}{model\_handle\_}->getPose(
+      \hyperlink{namespacefranka_a00b729ddce916481d3f0d10febec4f5baee68341b1d0398c4cf2b5fc46bf23936}{franka::Frame::kJoint4});
+78     std::array<double, 42> joint4\_body\_jacobian =
+79         \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a6eb1270e267595e0e281ee765f0ec550}{model\_handle\_}->getBodyJacobian(\hyperlink{namespacefranka_a00b729ddce916481d3f0d10febec4f5baee68341b1d0398c4cf2b5fc46bf23936}{franka::Frame::kJoint4});
+80     std::array<double, 42> endeffector\_zero\_jacobian =
+81         \hyperlink{classfranka__example__controllers_1_1ModelExampleController_a6eb1270e267595e0e281ee765f0ec550}{model\_handle\_}->getZeroJacobian(\hyperlink{namespacefranka_a00b729ddce916481d3f0d10febec4f5ba3617dcc7555dbca3c3e86e7535914fdf}{franka::Frame::kEndEffector})
+      ;
+82 
+83     ROS\_INFO(\textcolor{stringliteral}{"--------------------------------------------------"});
+84     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"mass :"} << mass);
+85     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"coriolis: "} << coriolis);
+86     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"gravity :"} << gravity);
+87     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"joint\_pose :"} << pose);
+88     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"joint4\_body\_jacobian :"} << joint4\_body\_jacobian);
+89     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"joint\_zero\_jacobian :"} << endeffector\_zero\_jacobian);
+90   \}
+91 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1ModelExampleController_ac80410c22f5e1c98da93ba150a390d2d_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ModelExampleController_a6619cd4e5d970fde0779dfa8d5da2b71}\label{classfranka__example__controllers_1_1ModelExampleController_a6619cd4e5d970fde0779dfa8d5da2b71}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}!franka\+\_\+state\+\_\+handle\+\_\+@{franka\+\_\+state\+\_\+handle\+\_\+}}
+\index{franka\+\_\+state\+\_\+handle\+\_\+@{franka\+\_\+state\+\_\+handle\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}}
+\subsubsection{\texorpdfstring{franka\+\_\+state\+\_\+handle\+\_\+}{franka\_state\_handle\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classfranka__hw_1_1FrankaStateHandle}{franka\+\_\+hw\+::\+Franka\+State\+Handle}$>$ franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller\+::franka\+\_\+state\+\_\+handle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 28 of file model\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ModelExampleController_a299d64b2e65f3d2259ea2468638337e2}\label{classfranka__example__controllers_1_1ModelExampleController_a299d64b2e65f3d2259ea2468638337e2}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}!franka\+\_\+state\+\_\+interface\+\_\+@{franka\+\_\+state\+\_\+interface\+\_\+}}
+\index{franka\+\_\+state\+\_\+interface\+\_\+@{franka\+\_\+state\+\_\+interface\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}}
+\subsubsection{\texorpdfstring{franka\+\_\+state\+\_\+interface\+\_\+}{franka\_state\_interface\_}}
+{\footnotesize\ttfamily \hyperlink{classfranka__hw_1_1FrankaStateInterface}{franka\+\_\+hw\+::\+Franka\+State\+Interface}$\ast$ franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller\+::franka\+\_\+state\+\_\+interface\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 27 of file model\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ModelExampleController_a6eb1270e267595e0e281ee765f0ec550}\label{classfranka__example__controllers_1_1ModelExampleController_a6eb1270e267595e0e281ee765f0ec550}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}!model\+\_\+handle\+\_\+@{model\+\_\+handle\+\_\+}}
+\index{model\+\_\+handle\+\_\+@{model\+\_\+handle\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}}
+\subsubsection{\texorpdfstring{model\+\_\+handle\+\_\+}{model\_handle\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classfranka__hw_1_1FrankaModelHandle}{franka\+\_\+hw\+::\+Franka\+Model\+Handle}$>$ franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller\+::model\+\_\+handle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 30 of file model\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ModelExampleController_a832283a8b75f7e65ee03839a18b54f18}\label{classfranka__example__controllers_1_1ModelExampleController_a832283a8b75f7e65ee03839a18b54f18}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}!model\+\_\+interface\+\_\+@{model\+\_\+interface\+\_\+}}
+\index{model\+\_\+interface\+\_\+@{model\+\_\+interface\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}}
+\subsubsection{\texorpdfstring{model\+\_\+interface\+\_\+}{model\_interface\_}}
+{\footnotesize\ttfamily \hyperlink{classfranka__hw_1_1FrankaModelInterface}{franka\+\_\+hw\+::\+Franka\+Model\+Interface}$\ast$ franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller\+::model\+\_\+interface\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file model\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1ModelExampleController_aff2c4d48db198405dd9f4366cdedb82f}\label{classfranka__example__controllers_1_1ModelExampleController_aff2c4d48db198405dd9f4366cdedb82f}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}!rate\+\_\+trigger\+\_\+@{rate\+\_\+trigger\+\_\+}}
+\index{rate\+\_\+trigger\+\_\+@{rate\+\_\+trigger\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller}}
+\subsubsection{\texorpdfstring{rate\+\_\+trigger\+\_\+}{rate\_trigger\_}}
+{\footnotesize\ttfamily \hyperlink{classfranka__hw_1_1TriggerRate}{franka\+\_\+hw\+::\+Trigger\+Rate} franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller\+::rate\+\_\+trigger\+\_\+ \{1.\+0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 31 of file model\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by update().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/include/franka\+\_\+example\+\_\+controllers/\hyperlink{model__example__controller_8h}{model\+\_\+example\+\_\+controller.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/src/\hyperlink{model__example__controller_8cpp}{model\+\_\+example\+\_\+controller.\+cpp}\end{DoxyCompactItemize}

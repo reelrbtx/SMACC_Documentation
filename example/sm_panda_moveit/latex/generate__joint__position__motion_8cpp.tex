@@ -1,0 +1,106 @@
+\hypertarget{generate__joint__position__motion_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+joint\+\_\+position\+\_\+motion.cpp File Reference}
+\label{generate__joint__position__motion_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+joint\+\_\+position\+\_\+motion.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+joint\+\_\+position\+\_\+motion.\+cpp}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/robot.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}examples\+\_\+common.\+h\char`\"{}}\newline
+Include dependency graph for generate\+\_\+joint\+\_\+position\+\_\+motion.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{generate__joint__position__motion_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{generate__joint__position__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{generate__joint__position__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{generate__joint__position__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{generate\+\_\+joint\+\_\+position\+\_\+motion.\+cpp@{generate\+\_\+joint\+\_\+position\+\_\+motion.\+cpp}!main@{main}}
+\index{main@{main}!generate\+\_\+joint\+\_\+position\+\_\+motion.\+cpp@{generate\+\_\+joint\+\_\+position\+\_\+motion.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 18 of file generate\+\_\+joint\+\_\+position\+\_\+motion.\+cpp.
+
+
+
+References franka\+::\+Robot\+::control(), franka\+::\+Motion\+Finished(), franka\+::\+Robot\+State\+::q\+\_\+d, franka\+::\+Robot\+::set\+Collision\+Behavior(), set\+Default\+Behavior(), and franka\+::\+Duration\+::to\+Sec().
+
+
+\begin{DoxyCode}
+18                                 \{
+19   \textcolor{keywordflow}{if} (argc != 2) \{
+20     std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" <robot-hostname>"} << std::endl;
+21     \textcolor{keywordflow}{return} -1;
+22   \}
+23   \textcolor{keywordflow}{try} \{
+24     \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(argv[1]);
+25     \hyperlink{examples__common_8cpp_ad0c6e1cb044845ee8a01b5aa1e801a45}{setDefaultBehavior}(robot);
+26 
+27     \textcolor{comment}{// First move the robot to a suitable joint configuration}
+28     std::array<double, 7> q\_goal = \{\{0, -M\_PI\_4, 0, -3 * M\_PI\_4, 0, M\_PI\_2, M\_PI\_4\}\};
+29     \hyperlink{classMotionGenerator}{MotionGenerator} motion\_generator(0.5, q\_goal);
+30     std::cout << \textcolor{stringliteral}{"WARNING: This example will move the robot! "}
+31               << \textcolor{stringliteral}{"Please make sure to have the user stop button at hand!"} << std::endl
+32               << \textcolor{stringliteral}{"Press Enter to continue..."} << std::endl;
+33     std::cin.ignore();
+34     robot.control(motion\_generator);
+35     std::cout << \textcolor{stringliteral}{"Finished moving to initial joint configuration."} << std::endl;
+36 
+37     \textcolor{comment}{// Set additional parameters always before the control loop, NEVER in the control loop!}
+38     \textcolor{comment}{// Set collision behavior.}
+39     robot.setCollisionBehavior(
+40         \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\}, \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\},
+41         \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\}, \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\},
+42         \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\}, \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\},
+43         \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\}, \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\});
+44 
+45     std::array<double, 7> initial\_position;
+46     \textcolor{keywordtype}{double} time = 0.0;
+47     robot.control([&initial\_position, &time](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}& robot\_state,
+48                                              \hyperlink{classfranka_1_1Duration}{franka::Duration} period) -> 
+      \hyperlink{classfranka_1_1JointPositions}{franka::JointPositions} \{
+49       time += period.\hyperlink{classfranka_1_1Duration_a497af77a3280159547f231f0374e9ac1}{toSec}();
+50 
+51       \textcolor{keywordflow}{if} (time == 0.0) \{
+52         initial\_position = robot\_state.\hyperlink{structfranka_1_1RobotState_a706045af1b176049e9e56df755325bd2}{q\_d};
+53       \}
+54 
+55       \textcolor{keywordtype}{double} delta\_angle = M\_PI / 8.0 * (1 - std::cos(M\_PI / 2.5 * time));
+56 
+57       \hyperlink{classfranka_1_1JointPositions}{franka::JointPositions} output = \{\{initial\_position[0], initial\_position[1],
+58                                         initial\_position[2], initial\_position[3] + delta\_angle,
+59                                         initial\_position[4] + delta\_angle, initial\_position[5],
+60                                         initial\_position[6] + delta\_angle\}\};
+61 
+62       \textcolor{keywordflow}{if} (time >= 5.0) \{
+63         std::cout << std::endl << \textcolor{stringliteral}{"Finished motion, shutting down example"} << std::endl;
+64         \textcolor{keywordflow}{return} \hyperlink{namespacefranka_a20791f7142d78bbbe3c957cc66a23ade}{franka::MotionFinished}(output);
+65       \}
+66       \textcolor{keywordflow}{return} output;
+67     \});
+68   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& e) \{
+69     std::cout << e.what() << std::endl;
+70     \textcolor{keywordflow}{return} -1;
+71   \}
+72 
+73   \textcolor{keywordflow}{return} 0;
+74 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{generate__joint__position__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,531 @@
+\hypertarget{classMotionGenerator}{}\section{Motion\+Generator Class Reference}
+\label{classMotionGenerator}\index{Motion\+Generator@{Motion\+Generator}}
+
+
+{\ttfamily \#include $<$examples\+\_\+common.\+h$>$}
+
+
+
+Collaboration diagram for Motion\+Generator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMotionGenerator__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMotionGenerator_a23dd564a60401c539fb7f1bf63470894}{Motion\+Generator} (double speed\+\_\+factor, const std\+::array$<$ double, 7 $>$ q\+\_\+goal)
+\item 
+\hyperlink{classfranka_1_1JointPositions}{franka\+::\+Joint\+Positions} \hyperlink{classMotionGenerator_aefd763e7c31c54b56404f33d2295fda9}{operator()} (const \hyperlink{structfranka_1_1RobotState}{franka\+::\+Robot\+State} \&robot\+\_\+state, \hyperlink{classfranka_1_1Duration}{franka\+::\+Duration} period)
+\end{DoxyCompactItemize}
+\subsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} = Eigen\+::\+Matrix$<$ double, 7, 1, Eigen\+::\+Col\+Major $>$
+\item 
+using \hyperlink{classMotionGenerator_ad0a869ececb7689b512dbfbf8f507924}{Vector7i} = Eigen\+::\+Matrix$<$ int, 7, 1, Eigen\+::\+Col\+Major $>$
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classMotionGenerator_a7d436455ec33c3cbe8427b6d8611c83f}{calculate\+Desired\+Values} (double t, \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} $\ast$delta\+\_\+q\+\_\+d) const
+\item 
+void \hyperlink{classMotionGenerator_aa366f6b1183f1c0f8c4fb745d7a927d2}{calculate\+Synchronized\+Values} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} \hyperlink{classMotionGenerator_a181e3ac9ca9d23a813e06a69e4583ec7}{q\+\_\+goal\+\_\+}
+\item 
+\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} \hyperlink{classMotionGenerator_a11a7cfc3fa6c19202c7dcc2f5282046e}{q\+\_\+start\+\_\+}
+\item 
+\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} \hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\+\_\+q\+\_\+}
+\item 
+\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} \hyperlink{classMotionGenerator_a4924578b9275d362c015b16f80232263}{dq\+\_\+max\+\_\+sync\+\_\+}
+\item 
+\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} \hyperlink{classMotionGenerator_a0b580a9e6904d925146081c870f76266}{t\+\_\+1\+\_\+sync\+\_\+}
+\item 
+\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} \hyperlink{classMotionGenerator_a5b25974dfd22aefacc286a01211ff93d}{t\+\_\+2\+\_\+sync\+\_\+}
+\item 
+\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} \hyperlink{classMotionGenerator_a7119bd48c0d8b0f838a3a81e8f52a8b2}{t\+\_\+f\+\_\+sync\+\_\+}
+\item 
+\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} \hyperlink{classMotionGenerator_a9e8620af632e541116e9b5e219f1ccbd}{q\+\_\+1\+\_\+}
+\item 
+double \hyperlink{classMotionGenerator_a42b90532e4f257bb592b3c2a8e8e370f}{time\+\_\+} = 0.\+0
+\item 
+\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} \hyperlink{classMotionGenerator_af7cb3714dc8d242ac0a827838c4a977d}{dq\+\_\+max\+\_\+} = (\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d}() $<$$<$ 2.\+0, 2.\+0, 2.\+0, 2.\+0, 2.\+5, 2.\+5, 2.\+5).finished()
+\item 
+\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} \hyperlink{classMotionGenerator_aba35338c7023ab218a3c2991a36a79d4}{ddq\+\_\+max\+\_\+start\+\_\+} = (\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d}() $<$$<$ 5, 5, 5, 5, 5, 5, 5).finished()
+\item 
+\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} \hyperlink{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}{ddq\+\_\+max\+\_\+goal\+\_\+} = (\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d}() $<$$<$ 5, 5, 5, 5, 5, 5, 5).finished()
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr double \hyperlink{classMotionGenerator_a03e73e0857236b6e3061457bc969efb2}{k\+Delta\+Q\+Motion\+Finished} = 1e-\/6
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An example showing how to generate a joint pose motion to a goal position. Adapted from\+: Wisama Khalil and Etienne Dombre. 2002. Modeling, Identification and Control of Robots (Kogan Page Science Paper edition). 
+
+Definition at line 31 of file examples\+\_\+common.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}\label{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}} 
+\index{Motion\+Generator@{Motion\+Generator}!Vector7d@{Vector7d}}
+\index{Vector7d@{Vector7d}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{Vector7d}{Vector7d}}
+{\footnotesize\ttfamily using \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Motion\+Generator\+::\+Vector7d} =  Eigen\+::\+Matrix$<$double, 7, 1, Eigen\+::\+Col\+Major$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 52 of file examples\+\_\+common.\+h.
+
+\mbox{\Hypertarget{classMotionGenerator_ad0a869ececb7689b512dbfbf8f507924}\label{classMotionGenerator_ad0a869ececb7689b512dbfbf8f507924}} 
+\index{Motion\+Generator@{Motion\+Generator}!Vector7i@{Vector7i}}
+\index{Vector7i@{Vector7i}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{Vector7i}{Vector7i}}
+{\footnotesize\ttfamily using \hyperlink{classMotionGenerator_ad0a869ececb7689b512dbfbf8f507924}{Motion\+Generator\+::\+Vector7i} =  Eigen\+::\+Matrix$<$int, 7, 1, Eigen\+::\+Col\+Major$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 53 of file examples\+\_\+common.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMotionGenerator_a23dd564a60401c539fb7f1bf63470894}\label{classMotionGenerator_a23dd564a60401c539fb7f1bf63470894}} 
+\index{Motion\+Generator@{Motion\+Generator}!Motion\+Generator@{Motion\+Generator}}
+\index{Motion\+Generator@{Motion\+Generator}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{Motion\+Generator()}{MotionGenerator()}}
+{\footnotesize\ttfamily Motion\+Generator\+::\+Motion\+Generator (\begin{DoxyParamCaption}\item[{double}]{speed\+\_\+factor,  }\item[{const std\+::array$<$ double, 7 $>$}]{q\+\_\+goal }\end{DoxyParamCaption})}
+
+Creates a new \hyperlink{classMotionGenerator}{Motion\+Generator} instance for a target q.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em speed\+\_\+factor} & General speed factor in range \mbox{[}0, 1\mbox{]}. \\
+\hline
+\mbox{\tt in}  & {\em q\+\_\+goal} & Target joint positions. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 22 of file examples\+\_\+common.\+cpp.
+
+
+
+References ddq\+\_\+max\+\_\+goal\+\_\+, ddq\+\_\+max\+\_\+start\+\_\+, delta\+\_\+q\+\_\+, dq\+\_\+max\+\_\+, dq\+\_\+max\+\_\+sync\+\_\+, q\+\_\+1\+\_\+, q\+\_\+start\+\_\+, t\+\_\+1\+\_\+sync\+\_\+, t\+\_\+2\+\_\+sync\+\_\+, and t\+\_\+f\+\_\+sync\+\_\+.
+
+
+\begin{DoxyCode}
+23     : \hyperlink{classMotionGenerator_a181e3ac9ca9d23a813e06a69e4583ec7}{q\_goal\_}(q\_goal.data()) \{
+24   \hyperlink{classMotionGenerator_af7cb3714dc8d242ac0a827838c4a977d}{dq\_max\_} *= speed\_factor;
+25   \hyperlink{classMotionGenerator_aba35338c7023ab218a3c2991a36a79d4}{ddq\_max\_start\_} *= speed\_factor;
+26   \hyperlink{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}{ddq\_max\_goal\_} *= speed\_factor;
+27   \hyperlink{classMotionGenerator_a4924578b9275d362c015b16f80232263}{dq\_max\_sync\_}.setZero();
+28   \hyperlink{classMotionGenerator_a11a7cfc3fa6c19202c7dcc2f5282046e}{q\_start\_}.setZero();
+29   \hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}.setZero();
+30   \hyperlink{classMotionGenerator_a0b580a9e6904d925146081c870f76266}{t\_1\_sync\_}.setZero();
+31   \hyperlink{classMotionGenerator_a5b25974dfd22aefacc286a01211ff93d}{t\_2\_sync\_}.setZero();
+32   \hyperlink{classMotionGenerator_a7119bd48c0d8b0f838a3a81e8f52a8b2}{t\_f\_sync\_}.setZero();
+33   \hyperlink{classMotionGenerator_a9e8620af632e541116e9b5e219f1ccbd}{q\_1\_}.setZero();
+34 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMotionGenerator_a7d436455ec33c3cbe8427b6d8611c83f}\label{classMotionGenerator_a7d436455ec33c3cbe8427b6d8611c83f}} 
+\index{Motion\+Generator@{Motion\+Generator}!calculate\+Desired\+Values@{calculate\+Desired\+Values}}
+\index{calculate\+Desired\+Values@{calculate\+Desired\+Values}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{calculate\+Desired\+Values()}{calculateDesiredValues()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} Motion\+Generator\+::calculate\+Desired\+Values (\begin{DoxyParamCaption}\item[{double}]{t,  }\item[{\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} $\ast$}]{delta\+\_\+q\+\_\+d }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 36 of file examples\+\_\+common.\+cpp.
+
+
+
+References delta\+\_\+q\+\_\+, dq\+\_\+max\+\_\+sync\+\_\+, k\+Delta\+Q\+Motion\+Finished, q\+\_\+1\+\_\+, t\+\_\+1\+\_\+sync\+\_\+, t\+\_\+2\+\_\+sync\+\_\+, t\+\_\+f\+\_\+sync\+\_\+, and interactive\+\_\+marker\+::x.
+
+
+
+Referenced by operator()().
+
+
+\begin{DoxyCode}
+36                                                                                 \{
+37   \hyperlink{classMotionGenerator_ad0a869ececb7689b512dbfbf8f507924}{Vector7i} sign\_delta\_q;
+38   sign\_delta\_q << \hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}.cwiseSign().cast<\textcolor{keywordtype}{int}>();
+39   \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} t\_d = \hyperlink{classMotionGenerator_a5b25974dfd22aefacc286a01211ff93d}{t\_2\_sync\_} - \hyperlink{classMotionGenerator_a0b580a9e6904d925146081c870f76266}{t\_1\_sync\_};
+40   \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} delta\_t\_2\_sync = \hyperlink{classMotionGenerator_a7119bd48c0d8b0f838a3a81e8f52a8b2}{t\_f\_sync\_} - \hyperlink{classMotionGenerator_a5b25974dfd22aefacc286a01211ff93d}{t\_2\_sync\_};
+41   std::array<bool, 7> joint\_motion\_finished\{\};
+42 
+43   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 7; i++) \{
+44     \textcolor{keywordflow}{if} (std::abs(\hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}[i]) < \hyperlink{classMotionGenerator_a03e73e0857236b6e3061457bc969efb2}{kDeltaQMotionFinished}) \{
+45       (*delta\_q\_d)[i] = 0;
+46       joint\_motion\_finished[i] = \textcolor{keyword}{true};
+47     \} \textcolor{keywordflow}{else} \{
+48       \textcolor{keywordflow}{if} (\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} < t\_1\_sync\_[i]) \{
+49         (*delta\_q\_d)[i] = -1.0 / std::pow(t\_1\_sync\_[i], 3.0) * \hyperlink{classMotionGenerator_a4924578b9275d362c015b16f80232263}{dq\_max\_sync\_}[i] * sign\_delta\_q[i
+      ] *
+50                           (0.5 * \hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} - t\_1\_sync\_[i]) * std::pow(\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}, 3.0);
+51       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} >= t\_1\_sync\_[i] && \hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} < t\_2\_sync\_[i]) \{
+52         (*delta\_q\_d)[i] = \hyperlink{classMotionGenerator_a9e8620af632e541116e9b5e219f1ccbd}{q\_1\_}[i] + (\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} - t\_1\_sync\_[i]) * \hyperlink{classMotionGenerator_a4924578b9275d362c015b16f80232263}{dq\_max\_sync\_}[i] * sign\_delta\_q[i]
+      ;
+53       \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} >= t\_2\_sync\_[i] && \hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} < \hyperlink{classMotionGenerator_a7119bd48c0d8b0f838a3a81e8f52a8b2}{t\_f\_sync\_}[i]) \{
+54         (*delta\_q\_d)[i] =
+55             \hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}[i] + 0.5 *
+56                               (1.0 / std::pow(delta\_t\_2\_sync[i], 3.0) *
+57                                    (\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} - t\_1\_sync\_[i] - 2.0 * delta\_t\_2\_sync[i] - t\_d[i]) *
+58                                    std::pow((\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} - t\_1\_sync\_[i] - t\_d[i]), 3.0) +
+59                                (2.0 * \hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} - 2.0 * t\_1\_sync\_[i] - delta\_t\_2\_sync[i] - 2.0 * t\_d[i])) *
+60                               \hyperlink{classMotionGenerator_a4924578b9275d362c015b16f80232263}{dq\_max\_sync\_}[i] * sign\_delta\_q[i];
+61       \} \textcolor{keywordflow}{else} \{
+62         (*delta\_q\_d)[i] = \hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}[i];
+63         joint\_motion\_finished[i] = \textcolor{keyword}{true};
+64       \}
+65     \}
+66   \}
+67   \textcolor{keywordflow}{return} std::all\_of(joint\_motion\_finished.cbegin(), joint\_motion\_finished.cend(),
+68                      [](\textcolor{keywordtype}{bool} \hyperlink{namespaceinteractive__marker_acda52804aef30b460a72fb21ee01d69d}{x}) \{ \textcolor{keywordflow}{return} \hyperlink{namespaceinteractive__marker_acda52804aef30b460a72fb21ee01d69d}{x}; \});
+69 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMotionGenerator_a7d436455ec33c3cbe8427b6d8611c83f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classMotionGenerator_aa366f6b1183f1c0f8c4fb745d7a927d2}\label{classMotionGenerator_aa366f6b1183f1c0f8c4fb745d7a927d2}} 
+\index{Motion\+Generator@{Motion\+Generator}!calculate\+Synchronized\+Values@{calculate\+Synchronized\+Values}}
+\index{calculate\+Synchronized\+Values@{calculate\+Synchronized\+Values}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{calculate\+Synchronized\+Values()}{calculateSynchronizedValues()}}
+{\footnotesize\ttfamily void Motion\+Generator\+::calculate\+Synchronized\+Values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 71 of file examples\+\_\+common.\+cpp.
+
+
+
+References ddq\+\_\+max\+\_\+goal\+\_\+, ddq\+\_\+max\+\_\+start\+\_\+, delta\+\_\+q\+\_\+, dq\+\_\+max\+\_\+, dq\+\_\+max\+\_\+sync\+\_\+, k\+Delta\+Q\+Motion\+Finished, q\+\_\+1\+\_\+, t\+\_\+1\+\_\+sync\+\_\+, t\+\_\+2\+\_\+sync\+\_\+, and t\+\_\+f\+\_\+sync\+\_\+.
+
+
+
+Referenced by operator()().
+
+
+\begin{DoxyCode}
+71                                                   \{
+72   \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} dq\_max\_reach(\hyperlink{classMotionGenerator_af7cb3714dc8d242ac0a827838c4a977d}{dq\_max\_});
+73   \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} t\_f = Vector7d::Zero();
+74   \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} delta\_t\_2 = Vector7d::Zero();
+75   \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} t\_1 = Vector7d::Zero();
+76   \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} delta\_t\_2\_sync = Vector7d::Zero();
+77   \hyperlink{classMotionGenerator_ad0a869ececb7689b512dbfbf8f507924}{Vector7i} sign\_delta\_q;
+78   sign\_delta\_q << \hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}.cwiseSign().cast<\textcolor{keywordtype}{int}>();
+79 
+80   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 7; i++) \{
+81     \textcolor{keywordflow}{if} (std::abs(\hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}[i]) > \hyperlink{classMotionGenerator_a03e73e0857236b6e3061457bc969efb2}{kDeltaQMotionFinished}) \{
+82       \textcolor{keywordflow}{if} (std::abs(\hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}[i]) < (3.0 / 4.0 * (std::pow(\hyperlink{classMotionGenerator_af7cb3714dc8d242ac0a827838c4a977d}{dq\_max\_}[i], 2.0) / 
+      \hyperlink{classMotionGenerator_aba35338c7023ab218a3c2991a36a79d4}{ddq\_max\_start\_}[i]) +
+83                                    3.0 / 4.0 * (std::pow(\hyperlink{classMotionGenerator_af7cb3714dc8d242ac0a827838c4a977d}{dq\_max\_}[i], 2.0) / 
+      \hyperlink{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}{ddq\_max\_goal\_}[i]))) \{
+84         dq\_max\_reach[i] = std::sqrt(4.0 / 3.0 * \hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}[i] * sign\_delta\_q[i] *
+85                                     (\hyperlink{classMotionGenerator_aba35338c7023ab218a3c2991a36a79d4}{ddq\_max\_start\_}[i] * 
+      \hyperlink{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}{ddq\_max\_goal\_}[i]) /
+86                                     (\hyperlink{classMotionGenerator_aba35338c7023ab218a3c2991a36a79d4}{ddq\_max\_start\_}[i] + 
+      \hyperlink{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}{ddq\_max\_goal\_}[i]));
+87       \}
+88       t\_1[i] = 1.5 * dq\_max\_reach[i] / \hyperlink{classMotionGenerator_aba35338c7023ab218a3c2991a36a79d4}{ddq\_max\_start\_}[i];
+89       delta\_t\_2[i] = 1.5 * dq\_max\_reach[i] / \hyperlink{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}{ddq\_max\_goal\_}[i];
+90       t\_f[i] = t\_1[i] / 2.0 + delta\_t\_2[i] / 2.0 + std::abs(\hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}[i]) / dq\_max\_reach[i];
+91     \}
+92   \}
+93   \textcolor{keywordtype}{double} max\_t\_f = t\_f.maxCoeff();
+94   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 7; i++) \{
+95     \textcolor{keywordflow}{if} (std::abs(\hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}[i]) > \hyperlink{classMotionGenerator_a03e73e0857236b6e3061457bc969efb2}{kDeltaQMotionFinished}) \{
+96       \textcolor{keywordtype}{double} a = 1.5 / 2.0 * (\hyperlink{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}{ddq\_max\_goal\_}[i] + \hyperlink{classMotionGenerator_aba35338c7023ab218a3c2991a36a79d4}{ddq\_max\_start\_}[i]);
+97       \textcolor{keywordtype}{double} b = -1.0 * max\_t\_f * \hyperlink{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}{ddq\_max\_goal\_}[i] * \hyperlink{classMotionGenerator_aba35338c7023ab218a3c2991a36a79d4}{ddq\_max\_start\_}[i];
+98       \textcolor{keywordtype}{double} c = std::abs(\hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}[i]) * \hyperlink{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}{ddq\_max\_goal\_}[i] * ddq\_max\_start\_[i];
+99       \textcolor{keywordtype}{double} delta = b * b - 4.0 * a * c;
+100       \textcolor{keywordflow}{if} (delta < 0.0) \{
+101         delta = 0.0;
+102       \}
+103       \hyperlink{classMotionGenerator_a4924578b9275d362c015b16f80232263}{dq\_max\_sync\_}[i] = (-1.0 * b - std::sqrt(delta)) / (2.0 * a);
+104       \hyperlink{classMotionGenerator_a0b580a9e6904d925146081c870f76266}{t\_1\_sync\_}[i] = 1.5 * \hyperlink{classMotionGenerator_a4924578b9275d362c015b16f80232263}{dq\_max\_sync\_}[i] / ddq\_max\_start\_[i];
+105       delta\_t\_2\_sync[i] = 1.5 * \hyperlink{classMotionGenerator_a4924578b9275d362c015b16f80232263}{dq\_max\_sync\_}[i] / \hyperlink{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}{ddq\_max\_goal\_}[i];
+106       \hyperlink{classMotionGenerator_a7119bd48c0d8b0f838a3a81e8f52a8b2}{t\_f\_sync\_}[i] =
+107           (\hyperlink{classMotionGenerator_a0b580a9e6904d925146081c870f76266}{t\_1\_sync\_})[i] / 2.0 + delta\_t\_2\_sync[i] / 2.0 + std::abs(
+      \hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_}[i] / \hyperlink{classMotionGenerator_a4924578b9275d362c015b16f80232263}{dq\_max\_sync\_}[i]);
+108       \hyperlink{classMotionGenerator_a5b25974dfd22aefacc286a01211ff93d}{t\_2\_sync\_}[i] = (\hyperlink{classMotionGenerator_a7119bd48c0d8b0f838a3a81e8f52a8b2}{t\_f\_sync\_})[i] - delta\_t\_2\_sync[i];
+109       \hyperlink{classMotionGenerator_a9e8620af632e541116e9b5e219f1ccbd}{q\_1\_}[i] = (\hyperlink{classMotionGenerator_a4924578b9275d362c015b16f80232263}{dq\_max\_sync\_})[i] * sign\_delta\_q[i] * (0.5 * (
+      \hyperlink{classMotionGenerator_a0b580a9e6904d925146081c870f76266}{t\_1\_sync\_})[i]);
+110     \}
+111   \}
+112 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMotionGenerator_aa366f6b1183f1c0f8c4fb745d7a927d2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classMotionGenerator_aefd763e7c31c54b56404f33d2295fda9}\label{classMotionGenerator_aefd763e7c31c54b56404f33d2295fda9}} 
+\index{Motion\+Generator@{Motion\+Generator}!operator()@{operator()}}
+\index{operator()@{operator()}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \hyperlink{classfranka_1_1JointPositions}{franka\+::\+Joint\+Positions} Motion\+Generator\+::operator() (\begin{DoxyParamCaption}\item[{const \hyperlink{structfranka_1_1RobotState}{franka\+::\+Robot\+State} \&}]{robot\+\_\+state,  }\item[{\hyperlink{classfranka_1_1Duration}{franka\+::\+Duration}}]{period }\end{DoxyParamCaption})}
+
+Sends joint position calculations
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em robot\+\_\+state} & Current state of the robot. \\
+\hline
+\mbox{\tt in}  & {\em period} & Duration of execution.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Joint positions for use inside a control loop. 
+\end{DoxyReturn}
+
+
+Definition at line 114 of file examples\+\_\+common.\+cpp.
+
+
+
+References calculate\+Desired\+Values(), calculate\+Synchronized\+Values(), delta\+\_\+q\+\_\+, franka\+::\+Finishable\+::motion\+\_\+finished, franka\+::\+Robot\+State\+::q\+\_\+d, q\+\_\+goal\+\_\+, q\+\_\+start\+\_\+, time\+\_\+, and franka\+::\+Duration\+::to\+Sec().
+
+
+\begin{DoxyCode}
+115                                                                           \{
+116   \hyperlink{classMotionGenerator_a42b90532e4f257bb592b3c2a8e8e370f}{time\_} += period.\hyperlink{classfranka_1_1Duration_a497af77a3280159547f231f0374e9ac1}{toSec}();
+117 
+118   \textcolor{keywordflow}{if} (\hyperlink{classMotionGenerator_a42b90532e4f257bb592b3c2a8e8e370f}{time\_} == 0.0) \{
+119     \hyperlink{classMotionGenerator_a11a7cfc3fa6c19202c7dcc2f5282046e}{q\_start\_} = \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d}(robot\_state.\hyperlink{structfranka_1_1RobotState_a706045af1b176049e9e56df755325bd2}{q\_d}.data());
+120     \hyperlink{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}{delta\_q\_} = \hyperlink{classMotionGenerator_a181e3ac9ca9d23a813e06a69e4583ec7}{q\_goal\_} - \hyperlink{classMotionGenerator_a11a7cfc3fa6c19202c7dcc2f5282046e}{q\_start\_};
+121     \hyperlink{classMotionGenerator_aa366f6b1183f1c0f8c4fb745d7a927d2}{calculateSynchronizedValues}();
+122   \}
+123 
+124   \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} delta\_q\_d;
+125   \textcolor{keywordtype}{bool} motion\_finished = \hyperlink{classMotionGenerator_a7d436455ec33c3cbe8427b6d8611c83f}{calculateDesiredValues}(\hyperlink{classMotionGenerator_a42b90532e4f257bb592b3c2a8e8e370f}{time\_}, &delta\_q\_d);
+126 
+127   std::array<double, 7> joint\_positions;
+128   Eigen::VectorXd::Map(&joint\_positions[0], 7) = (\hyperlink{classMotionGenerator_a11a7cfc3fa6c19202c7dcc2f5282046e}{q\_start\_} + delta\_q\_d);
+129   \hyperlink{classfranka_1_1JointPositions}{franka::JointPositions} output(joint\_positions);
+130   output.motion\_finished = motion\_finished;
+131   \textcolor{keywordflow}{return} output;
+132 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classMotionGenerator_aefd763e7c31c54b56404f33d2295fda9_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}\label{classMotionGenerator_afa25b16e5c66c9f23c9869fa992b0bd4}} 
+\index{Motion\+Generator@{Motion\+Generator}!ddq\+\_\+max\+\_\+goal\+\_\+@{ddq\+\_\+max\+\_\+goal\+\_\+}}
+\index{ddq\+\_\+max\+\_\+goal\+\_\+@{ddq\+\_\+max\+\_\+goal\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{ddq\+\_\+max\+\_\+goal\+\_\+}{ddq\_max\_goal\_}}
+{\footnotesize\ttfamily \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} Motion\+Generator\+::ddq\+\_\+max\+\_\+goal\+\_\+ = (\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d}() $<$$<$ 5, 5, 5, 5, 5, 5, 5).finished()\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 74 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by calculate\+Synchronized\+Values(), and Motion\+Generator().
+
+\mbox{\Hypertarget{classMotionGenerator_aba35338c7023ab218a3c2991a36a79d4}\label{classMotionGenerator_aba35338c7023ab218a3c2991a36a79d4}} 
+\index{Motion\+Generator@{Motion\+Generator}!ddq\+\_\+max\+\_\+start\+\_\+@{ddq\+\_\+max\+\_\+start\+\_\+}}
+\index{ddq\+\_\+max\+\_\+start\+\_\+@{ddq\+\_\+max\+\_\+start\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{ddq\+\_\+max\+\_\+start\+\_\+}{ddq\_max\_start\_}}
+{\footnotesize\ttfamily \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} Motion\+Generator\+::ddq\+\_\+max\+\_\+start\+\_\+ = (\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d}() $<$$<$ 5, 5, 5, 5, 5, 5, 5).finished()\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 73 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by calculate\+Synchronized\+Values(), and Motion\+Generator().
+
+\mbox{\Hypertarget{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}\label{classMotionGenerator_a943798bdc9c985f66548c59d562fd8b7}} 
+\index{Motion\+Generator@{Motion\+Generator}!delta\+\_\+q\+\_\+@{delta\+\_\+q\+\_\+}}
+\index{delta\+\_\+q\+\_\+@{delta\+\_\+q\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{delta\+\_\+q\+\_\+}{delta\_q\_}}
+{\footnotesize\ttfamily \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} Motion\+Generator\+::delta\+\_\+q\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 62 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by calculate\+Desired\+Values(), calculate\+Synchronized\+Values(), Motion\+Generator(), and operator()().
+
+\mbox{\Hypertarget{classMotionGenerator_af7cb3714dc8d242ac0a827838c4a977d}\label{classMotionGenerator_af7cb3714dc8d242ac0a827838c4a977d}} 
+\index{Motion\+Generator@{Motion\+Generator}!dq\+\_\+max\+\_\+@{dq\+\_\+max\+\_\+}}
+\index{dq\+\_\+max\+\_\+@{dq\+\_\+max\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{dq\+\_\+max\+\_\+}{dq\_max\_}}
+{\footnotesize\ttfamily \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} Motion\+Generator\+::dq\+\_\+max\+\_\+ = (\hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d}() $<$$<$ 2.\+0, 2.\+0, 2.\+0, 2.\+0, 2.\+5, 2.\+5, 2.\+5).finished()\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 72 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by calculate\+Synchronized\+Values(), and Motion\+Generator().
+
+\mbox{\Hypertarget{classMotionGenerator_a4924578b9275d362c015b16f80232263}\label{classMotionGenerator_a4924578b9275d362c015b16f80232263}} 
+\index{Motion\+Generator@{Motion\+Generator}!dq\+\_\+max\+\_\+sync\+\_\+@{dq\+\_\+max\+\_\+sync\+\_\+}}
+\index{dq\+\_\+max\+\_\+sync\+\_\+@{dq\+\_\+max\+\_\+sync\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{dq\+\_\+max\+\_\+sync\+\_\+}{dq\_max\_sync\_}}
+{\footnotesize\ttfamily \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} Motion\+Generator\+::dq\+\_\+max\+\_\+sync\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 64 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by calculate\+Desired\+Values(), calculate\+Synchronized\+Values(), and Motion\+Generator().
+
+\mbox{\Hypertarget{classMotionGenerator_a03e73e0857236b6e3061457bc969efb2}\label{classMotionGenerator_a03e73e0857236b6e3061457bc969efb2}} 
+\index{Motion\+Generator@{Motion\+Generator}!k\+Delta\+Q\+Motion\+Finished@{k\+Delta\+Q\+Motion\+Finished}}
+\index{k\+Delta\+Q\+Motion\+Finished@{k\+Delta\+Q\+Motion\+Finished}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{k\+Delta\+Q\+Motion\+Finished}{kDeltaQMotionFinished}}
+{\footnotesize\ttfamily constexpr double Motion\+Generator\+::k\+Delta\+Q\+Motion\+Finished = 1e-\/6\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 58 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by calculate\+Desired\+Values(), and calculate\+Synchronized\+Values().
+
+\mbox{\Hypertarget{classMotionGenerator_a9e8620af632e541116e9b5e219f1ccbd}\label{classMotionGenerator_a9e8620af632e541116e9b5e219f1ccbd}} 
+\index{Motion\+Generator@{Motion\+Generator}!q\+\_\+1\+\_\+@{q\+\_\+1\+\_\+}}
+\index{q\+\_\+1\+\_\+@{q\+\_\+1\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{q\+\_\+1\+\_\+}{q\_1\_}}
+{\footnotesize\ttfamily \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} Motion\+Generator\+::q\+\_\+1\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 68 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by calculate\+Desired\+Values(), calculate\+Synchronized\+Values(), and Motion\+Generator().
+
+\mbox{\Hypertarget{classMotionGenerator_a181e3ac9ca9d23a813e06a69e4583ec7}\label{classMotionGenerator_a181e3ac9ca9d23a813e06a69e4583ec7}} 
+\index{Motion\+Generator@{Motion\+Generator}!q\+\_\+goal\+\_\+@{q\+\_\+goal\+\_\+}}
+\index{q\+\_\+goal\+\_\+@{q\+\_\+goal\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{q\+\_\+goal\+\_\+}{q\_goal\_}}
+{\footnotesize\ttfamily const \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} Motion\+Generator\+::q\+\_\+goal\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 59 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by operator()().
+
+\mbox{\Hypertarget{classMotionGenerator_a11a7cfc3fa6c19202c7dcc2f5282046e}\label{classMotionGenerator_a11a7cfc3fa6c19202c7dcc2f5282046e}} 
+\index{Motion\+Generator@{Motion\+Generator}!q\+\_\+start\+\_\+@{q\+\_\+start\+\_\+}}
+\index{q\+\_\+start\+\_\+@{q\+\_\+start\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{q\+\_\+start\+\_\+}{q\_start\_}}
+{\footnotesize\ttfamily \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} Motion\+Generator\+::q\+\_\+start\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 61 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by Motion\+Generator(), and operator()().
+
+\mbox{\Hypertarget{classMotionGenerator_a0b580a9e6904d925146081c870f76266}\label{classMotionGenerator_a0b580a9e6904d925146081c870f76266}} 
+\index{Motion\+Generator@{Motion\+Generator}!t\+\_\+1\+\_\+sync\+\_\+@{t\+\_\+1\+\_\+sync\+\_\+}}
+\index{t\+\_\+1\+\_\+sync\+\_\+@{t\+\_\+1\+\_\+sync\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{t\+\_\+1\+\_\+sync\+\_\+}{t\_1\_sync\_}}
+{\footnotesize\ttfamily \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} Motion\+Generator\+::t\+\_\+1\+\_\+sync\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 65 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by calculate\+Desired\+Values(), calculate\+Synchronized\+Values(), and Motion\+Generator().
+
+\mbox{\Hypertarget{classMotionGenerator_a5b25974dfd22aefacc286a01211ff93d}\label{classMotionGenerator_a5b25974dfd22aefacc286a01211ff93d}} 
+\index{Motion\+Generator@{Motion\+Generator}!t\+\_\+2\+\_\+sync\+\_\+@{t\+\_\+2\+\_\+sync\+\_\+}}
+\index{t\+\_\+2\+\_\+sync\+\_\+@{t\+\_\+2\+\_\+sync\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{t\+\_\+2\+\_\+sync\+\_\+}{t\_2\_sync\_}}
+{\footnotesize\ttfamily \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} Motion\+Generator\+::t\+\_\+2\+\_\+sync\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 66 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by calculate\+Desired\+Values(), calculate\+Synchronized\+Values(), and Motion\+Generator().
+
+\mbox{\Hypertarget{classMotionGenerator_a7119bd48c0d8b0f838a3a81e8f52a8b2}\label{classMotionGenerator_a7119bd48c0d8b0f838a3a81e8f52a8b2}} 
+\index{Motion\+Generator@{Motion\+Generator}!t\+\_\+f\+\_\+sync\+\_\+@{t\+\_\+f\+\_\+sync\+\_\+}}
+\index{t\+\_\+f\+\_\+sync\+\_\+@{t\+\_\+f\+\_\+sync\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{t\+\_\+f\+\_\+sync\+\_\+}{t\_f\_sync\_}}
+{\footnotesize\ttfamily \hyperlink{classMotionGenerator_a499bd17d3a5c7583b4c06923f532185d}{Vector7d} Motion\+Generator\+::t\+\_\+f\+\_\+sync\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 67 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by calculate\+Desired\+Values(), calculate\+Synchronized\+Values(), and Motion\+Generator().
+
+\mbox{\Hypertarget{classMotionGenerator_a42b90532e4f257bb592b3c2a8e8e370f}\label{classMotionGenerator_a42b90532e4f257bb592b3c2a8e8e370f}} 
+\index{Motion\+Generator@{Motion\+Generator}!time\+\_\+@{time\+\_\+}}
+\index{time\+\_\+@{time\+\_\+}!Motion\+Generator@{Motion\+Generator}}
+\subsubsection{\texorpdfstring{time\+\_\+}{time\_}}
+{\footnotesize\ttfamily double Motion\+Generator\+::time\+\_\+ = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 70 of file examples\+\_\+common.\+h.
+
+
+
+Referenced by operator()().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/\hyperlink{examples__common_8h}{examples\+\_\+common.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/\hyperlink{examples__common_8cpp}{examples\+\_\+common.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,251 @@
+\hypertarget{classfranka_1_1Logger}{}\section{franka\+:\+:Logger Class Reference}
+\label{classfranka_1_1Logger}\index{franka\+::\+Logger@{franka\+::\+Logger}}
+
+
+{\ttfamily \#include $<$logger.\+h$>$}
+
+
+
+Collaboration diagram for franka\+:\+:Logger\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Logger__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfranka_1_1Logger_acc350f37e055aad0d47c7a90695354d2}{Logger} (size\+\_\+t log\+\_\+size)
+\item 
+void \hyperlink{classfranka_1_1Logger_aee4bfea6a4081c4ed9ee2abd2f62a0cd}{log} (const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&state, const \hyperlink{structresearch__interface_1_1robot_1_1RobotCommand}{research\+\_\+interface\+::robot\+::\+Robot\+Command} \&command)
+\item 
+std\+::vector$<$ \hyperlink{structfranka_1_1Record}{franka\+::\+Record} $>$ \hyperlink{classfranka_1_1Logger_a44b15a95e25dabe93f797c1d9651fb6e}{flush} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \hyperlink{structfranka_1_1RobotState}{Robot\+State} $>$ \hyperlink{classfranka_1_1Logger_aea60d37797979d786e7653168cf49ecb}{states\+\_\+}
+\item 
+std\+::vector$<$ \hyperlink{structresearch__interface_1_1robot_1_1RobotCommand}{research\+\_\+interface\+::robot\+::\+Robot\+Command} $>$ \hyperlink{classfranka_1_1Logger_acbc69d24663395732ac72d274146eb5f}{commands\+\_\+}
+\item 
+size\+\_\+t \hyperlink{classfranka_1_1Logger_ac8b62b201f384202b095b68babe0a8da}{ring\+\_\+front\+\_\+} \{0\}
+\item 
+size\+\_\+t \hyperlink{classfranka_1_1Logger_ab70ce51d314081d2f467a6dfbf1f80a4}{ring\+\_\+size\+\_\+} \{0\}
+\item 
+const size\+\_\+t \hyperlink{classfranka_1_1Logger_ac4d8294e724b3e1ada3ddbcdfc14e245}{log\+\_\+size\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 15 of file logger.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfranka_1_1Logger_acc350f37e055aad0d47c7a90695354d2}\label{classfranka_1_1Logger_acc350f37e055aad0d47c7a90695354d2}} 
+\index{franka\+::\+Logger@{franka\+::\+Logger}!Logger@{Logger}}
+\index{Logger@{Logger}!franka\+::\+Logger@{franka\+::\+Logger}}
+\subsubsection{\texorpdfstring{Logger()}{Logger()}}
+{\footnotesize\ttfamily franka\+::\+Logger\+::\+Logger (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{log\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Definition at line 7 of file logger.\+cpp.
+
+
+
+References commands\+\_\+, and states\+\_\+.
+
+
+\begin{DoxyCode}
+7                               : \hyperlink{classfranka_1_1Logger_ac4d8294e724b3e1ada3ddbcdfc14e245}{log\_size\_}(log\_size) \{
+8   \hyperlink{classfranka_1_1Logger_aea60d37797979d786e7653168cf49ecb}{states\_}.resize(log\_size);
+9   \hyperlink{classfranka_1_1Logger_acbc69d24663395732ac72d274146eb5f}{commands\_}.resize(log\_size);
+10 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka_1_1Logger_a44b15a95e25dabe93f797c1d9651fb6e}\label{classfranka_1_1Logger_a44b15a95e25dabe93f797c1d9651fb6e}} 
+\index{franka\+::\+Logger@{franka\+::\+Logger}!flush@{flush}}
+\index{flush@{flush}!franka\+::\+Logger@{franka\+::\+Logger}}
+\subsubsection{\texorpdfstring{flush()}{flush()}}
+{\footnotesize\ttfamily std\+::vector$<$ \hyperlink{structfranka_1_1Record}{Record} $>$ franka\+::\+Logger\+::flush (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 24 of file logger.\+cpp.
+
+
+
+References franka\+::\+Robot\+Command\+::cartesian\+\_\+pose, franka\+::\+Robot\+Command\+::cartesian\+\_\+velocities, franka\+::\+Record\+::command, commands\+\_\+, franka\+::\+Robot\+Command\+::joint\+\_\+positions, franka\+::\+Robot\+Command\+::joint\+\_\+velocities, log(), franka\+::\+Cartesian\+Velocities\+::\+O\+\_\+d\+P\+\_\+\+EE, franka\+::\+Cartesian\+Pose\+::\+O\+\_\+\+T\+\_\+\+EE, ring\+\_\+front\+\_\+, ring\+\_\+size\+\_\+, franka\+::\+Record\+::state, states\+\_\+, franka\+::\+Torques\+::tau\+\_\+J, and franka\+::\+Robot\+Command\+::torques.
+
+
+
+Referenced by franka\+::\+Robot\+::\+Impl\+::finish\+Motion(), franka\+::\+Robot\+::\+Impl\+::start\+Motion(), and franka\+::\+Robot\+::\+Impl\+::throw\+On\+Motion\+Error().
+
+
+\begin{DoxyCode}
+24                                 \{
+25   std::vector<Record> \hyperlink{classfranka_1_1Logger_aee4bfea6a4081c4ed9ee2abd2f62a0cd}{log};
+26 
+27   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \hyperlink{classfranka_1_1Logger_ab70ce51d314081d2f467a6dfbf1f80a4}{ring\_size\_}; i++) \{
+28     \textcolor{keywordtype}{size\_t} wrapped\_index = (\hyperlink{classfranka_1_1Logger_ac8b62b201f384202b095b68babe0a8da}{ring\_front\_} + i) % ring\_size\_;
+29 
+30     RobotCommand command;
+31     command.joint\_positions = \hyperlink{classfranka_1_1Logger_acbc69d24663395732ac72d274146eb5f}{commands\_}[wrapped\_index].motion.q\_c;
+32     command.joint\_velocities = \hyperlink{classfranka_1_1Logger_acbc69d24663395732ac72d274146eb5f}{commands\_}[wrapped\_index].motion.dq\_c;
+33     command.cartesian\_pose.O\_T\_EE = \hyperlink{classfranka_1_1Logger_acbc69d24663395732ac72d274146eb5f}{commands\_}[wrapped\_index].motion.O\_T\_EE\_c;
+34     command.cartesian\_velocities.O\_dP\_EE = \hyperlink{classfranka_1_1Logger_acbc69d24663395732ac72d274146eb5f}{commands\_}[wrapped\_index].motion.O\_dP\_EE\_c;
+35     command.torques.tau\_J = \hyperlink{classfranka_1_1Logger_acbc69d24663395732ac72d274146eb5f}{commands\_}[wrapped\_index].control.tau\_J\_d;
+36 
+37     Record record;
+38     record.state = \hyperlink{classfranka_1_1Logger_aea60d37797979d786e7653168cf49ecb}{states\_}[wrapped\_index];
+39     record.command = command;
+40     log.push\_back(record);
+41   \}
+42 
+43   \hyperlink{classfranka_1_1Logger_ac8b62b201f384202b095b68babe0a8da}{ring\_front\_} = 0;
+44   ring\_size\_ = 0;
+45   \textcolor{keywordflow}{return} \hyperlink{classfranka_1_1Logger_aee4bfea6a4081c4ed9ee2abd2f62a0cd}{log};
+46 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{classfranka_1_1Logger_a44b15a95e25dabe93f797c1d9651fb6e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Logger_a44b15a95e25dabe93f797c1d9651fb6e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Logger_aee4bfea6a4081c4ed9ee2abd2f62a0cd}\label{classfranka_1_1Logger_aee4bfea6a4081c4ed9ee2abd2f62a0cd}} 
+\index{franka\+::\+Logger@{franka\+::\+Logger}!log@{log}}
+\index{log@{log}!franka\+::\+Logger@{franka\+::\+Logger}}
+\subsubsection{\texorpdfstring{log()}{log()}}
+{\footnotesize\ttfamily void franka\+::\+Logger\+::log (\begin{DoxyParamCaption}\item[{const \hyperlink{structfranka_1_1RobotState}{Robot\+State} \&}]{state,  }\item[{const \hyperlink{structresearch__interface_1_1robot_1_1RobotCommand}{research\+\_\+interface\+::robot\+::\+Robot\+Command} \&}]{command }\end{DoxyParamCaption})}
+
+
+
+Definition at line 12 of file logger.\+cpp.
+
+
+
+References commands\+\_\+, log\+\_\+size\+\_\+, ring\+\_\+front\+\_\+, ring\+\_\+size\+\_\+, and states\+\_\+.
+
+
+
+Referenced by flush(), and franka\+::\+Robot\+::\+Impl\+::update().
+
+
+\begin{DoxyCode}
+12                                                                                             \{
+13   \textcolor{keywordflow}{if} (\hyperlink{classfranka_1_1Logger_ac4d8294e724b3e1ada3ddbcdfc14e245}{log\_size\_} == 0) \{
+14     \textcolor{keywordflow}{return};
+15   \}
+16 
+17   \hyperlink{classfranka_1_1Logger_acbc69d24663395732ac72d274146eb5f}{commands\_}[\hyperlink{classfranka_1_1Logger_ac8b62b201f384202b095b68babe0a8da}{ring\_front\_}] = command;
+18   \hyperlink{classfranka_1_1Logger_aea60d37797979d786e7653168cf49ecb}{states\_}[\hyperlink{classfranka_1_1Logger_ac8b62b201f384202b095b68babe0a8da}{ring\_front\_}] = state;
+19 
+20   \hyperlink{classfranka_1_1Logger_ac8b62b201f384202b095b68babe0a8da}{ring\_front\_} = (\hyperlink{classfranka_1_1Logger_ac8b62b201f384202b095b68babe0a8da}{ring\_front\_} + 1) % \hyperlink{classfranka_1_1Logger_ac4d8294e724b3e1ada3ddbcdfc14e245}{log\_size\_};
+21   \hyperlink{classfranka_1_1Logger_ab70ce51d314081d2f467a6dfbf1f80a4}{ring\_size\_} = std::min(\hyperlink{classfranka_1_1Logger_ac4d8294e724b3e1ada3ddbcdfc14e245}{log\_size\_}, \hyperlink{classfranka_1_1Logger_ab70ce51d314081d2f467a6dfbf1f80a4}{ring\_size\_} + 1);
+22 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Logger_aee4bfea6a4081c4ed9ee2abd2f62a0cd_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka_1_1Logger_acbc69d24663395732ac72d274146eb5f}\label{classfranka_1_1Logger_acbc69d24663395732ac72d274146eb5f}} 
+\index{franka\+::\+Logger@{franka\+::\+Logger}!commands\+\_\+@{commands\+\_\+}}
+\index{commands\+\_\+@{commands\+\_\+}!franka\+::\+Logger@{franka\+::\+Logger}}
+\subsubsection{\texorpdfstring{commands\+\_\+}{commands\_}}
+{\footnotesize\ttfamily std\+::vector$<$\hyperlink{structresearch__interface_1_1robot_1_1RobotCommand}{research\+\_\+interface\+::robot\+::\+Robot\+Command}$>$ franka\+::\+Logger\+::commands\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 25 of file logger.\+h.
+
+
+
+Referenced by flush(), log(), and Logger().
+
+\mbox{\Hypertarget{classfranka_1_1Logger_ac4d8294e724b3e1ada3ddbcdfc14e245}\label{classfranka_1_1Logger_ac4d8294e724b3e1ada3ddbcdfc14e245}} 
+\index{franka\+::\+Logger@{franka\+::\+Logger}!log\+\_\+size\+\_\+@{log\+\_\+size\+\_\+}}
+\index{log\+\_\+size\+\_\+@{log\+\_\+size\+\_\+}!franka\+::\+Logger@{franka\+::\+Logger}}
+\subsubsection{\texorpdfstring{log\+\_\+size\+\_\+}{log\_size\_}}
+{\footnotesize\ttfamily const size\+\_\+t franka\+::\+Logger\+::log\+\_\+size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file logger.\+h.
+
+
+
+Referenced by log().
+
+\mbox{\Hypertarget{classfranka_1_1Logger_ac8b62b201f384202b095b68babe0a8da}\label{classfranka_1_1Logger_ac8b62b201f384202b095b68babe0a8da}} 
+\index{franka\+::\+Logger@{franka\+::\+Logger}!ring\+\_\+front\+\_\+@{ring\+\_\+front\+\_\+}}
+\index{ring\+\_\+front\+\_\+@{ring\+\_\+front\+\_\+}!franka\+::\+Logger@{franka\+::\+Logger}}
+\subsubsection{\texorpdfstring{ring\+\_\+front\+\_\+}{ring\_front\_}}
+{\footnotesize\ttfamily size\+\_\+t franka\+::\+Logger\+::ring\+\_\+front\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 26 of file logger.\+h.
+
+
+
+Referenced by flush(), and log().
+
+\mbox{\Hypertarget{classfranka_1_1Logger_ab70ce51d314081d2f467a6dfbf1f80a4}\label{classfranka_1_1Logger_ab70ce51d314081d2f467a6dfbf1f80a4}} 
+\index{franka\+::\+Logger@{franka\+::\+Logger}!ring\+\_\+size\+\_\+@{ring\+\_\+size\+\_\+}}
+\index{ring\+\_\+size\+\_\+@{ring\+\_\+size\+\_\+}!franka\+::\+Logger@{franka\+::\+Logger}}
+\subsubsection{\texorpdfstring{ring\+\_\+size\+\_\+}{ring\_size\_}}
+{\footnotesize\ttfamily size\+\_\+t franka\+::\+Logger\+::ring\+\_\+size\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 27 of file logger.\+h.
+
+
+
+Referenced by flush(), and log().
+
+\mbox{\Hypertarget{classfranka_1_1Logger_aea60d37797979d786e7653168cf49ecb}\label{classfranka_1_1Logger_aea60d37797979d786e7653168cf49ecb}} 
+\index{franka\+::\+Logger@{franka\+::\+Logger}!states\+\_\+@{states\+\_\+}}
+\index{states\+\_\+@{states\+\_\+}!franka\+::\+Logger@{franka\+::\+Logger}}
+\subsubsection{\texorpdfstring{states\+\_\+}{states\_}}
+{\footnotesize\ttfamily std\+::vector$<$\hyperlink{structfranka_1_1RobotState}{Robot\+State}$>$ franka\+::\+Logger\+::states\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 24 of file logger.\+h.
+
+
+
+Referenced by flush(), log(), and Logger().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/src/\hyperlink{logger_8h}{logger.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/src/\hyperlink{logger_8cpp}{logger.\+cpp}\end{DoxyCompactItemize}

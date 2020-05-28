@@ -1,0 +1,118 @@
+\hypertarget{generate__cartesian__velocity__motion_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+cartesian\+\_\+velocity\+\_\+motion.cpp File Reference}
+\label{generate__cartesian__velocity__motion_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+cartesian\+\_\+velocity\+\_\+motion.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/generate\+\_\+cartesian\+\_\+velocity\+\_\+motion.\+cpp}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/robot.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}examples\+\_\+common.\+h\char`\"{}}\newline
+Include dependency graph for generate\+\_\+cartesian\+\_\+velocity\+\_\+motion.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{generate__cartesian__velocity__motion_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{generate__cartesian__velocity__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{generate__cartesian__velocity__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{generate__cartesian__velocity__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{generate\+\_\+cartesian\+\_\+velocity\+\_\+motion.\+cpp@{generate\+\_\+cartesian\+\_\+velocity\+\_\+motion.\+cpp}!main@{main}}
+\index{main@{main}!generate\+\_\+cartesian\+\_\+velocity\+\_\+motion.\+cpp@{generate\+\_\+cartesian\+\_\+velocity\+\_\+motion.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 18 of file generate\+\_\+cartesian\+\_\+velocity\+\_\+motion.\+cpp.
+
+
+
+References franka\+::\+Robot\+::control(), franka\+::\+Motion\+Finished(), franka\+::\+Robot\+::set\+Collision\+Behavior(), set\+Default\+Behavior(), franka\+::\+Robot\+::set\+Joint\+Impedance(), and franka\+::\+Duration\+::to\+Sec().
+
+
+\begin{DoxyCode}
+18                                 \{
+19   \textcolor{keywordflow}{if} (argc != 2) \{
+20     std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" <robot-hostname>"} << std::endl;
+21     \textcolor{keywordflow}{return} -1;
+22   \}
+23   \textcolor{keywordflow}{try} \{
+24     \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(argv[1]);
+25     \hyperlink{examples__common_8cpp_ad0c6e1cb044845ee8a01b5aa1e801a45}{setDefaultBehavior}(robot);
+26 
+27     \textcolor{comment}{// First move the robot to a suitable joint configuration}
+28     std::array<double, 7> q\_goal = \{\{0, -M\_PI\_4, 0, -3 * M\_PI\_4, 0, M\_PI\_2, M\_PI\_4\}\};
+29     \hyperlink{classMotionGenerator}{MotionGenerator} motion\_generator(0.5, q\_goal);
+30     std::cout << \textcolor{stringliteral}{"WARNING: This example will move the robot! "}
+31               << \textcolor{stringliteral}{"Please make sure to have the user stop button at hand!"} << std::endl
+32               << \textcolor{stringliteral}{"Press Enter to continue..."} << std::endl;
+33     std::cin.ignore();
+34     robot.control(motion\_generator);
+35     std::cout << \textcolor{stringliteral}{"Finished moving to initial joint configuration."} << std::endl;
+36 
+37     \textcolor{comment}{// Set additional parameters always before the control loop, NEVER in the control loop!}
+38     \textcolor{comment}{// Set the joint impedance.}
+39     robot.setJointImpedance(\{\{3000, 3000, 3000, 2500, 2500, 2000, 2000\}\});
+40 
+41     \textcolor{comment}{// Set the collision behavior.}
+42     std::array<double, 7> lower\_torque\_thresholds\_nominal\{
+43         \{25.0, 25.0, 22.0, 20.0, 19.0, 17.0, 14.\}\};
+44     std::array<double, 7> upper\_torque\_thresholds\_nominal\{
+45         \{35.0, 35.0, 32.0, 30.0, 29.0, 27.0, 24.0\}\};
+46     std::array<double, 7> lower\_torque\_thresholds\_acceleration\{
+47         \{25.0, 25.0, 22.0, 20.0, 19.0, 17.0, 14.0\}\};
+48     std::array<double, 7> upper\_torque\_thresholds\_acceleration\{
+49         \{35.0, 35.0, 32.0, 30.0, 29.0, 27.0, 24.0\}\};
+50     std::array<double, 6> lower\_force\_thresholds\_nominal\{\{30.0, 30.0, 30.0, 25.0, 25.0, 25.0\}\};
+51     std::array<double, 6> upper\_force\_thresholds\_nominal\{\{40.0, 40.0, 40.0, 35.0, 35.0, 35.0\}\};
+52     std::array<double, 6> lower\_force\_thresholds\_acceleration\{\{30.0, 30.0, 30.0, 25.0, 25.0, 25.0\}\};
+53     std::array<double, 6> upper\_force\_thresholds\_acceleration\{\{40.0, 40.0, 40.0, 35.0, 35.0, 35.0\}\};
+54     robot.setCollisionBehavior(
+55         lower\_torque\_thresholds\_acceleration, upper\_torque\_thresholds\_acceleration,
+56         lower\_torque\_thresholds\_nominal, upper\_torque\_thresholds\_nominal,
+57         lower\_force\_thresholds\_acceleration, upper\_force\_thresholds\_acceleration,
+58         lower\_force\_thresholds\_nominal, upper\_force\_thresholds\_nominal);
+59 
+60     \textcolor{keywordtype}{double} time\_max = 4.0;
+61     \textcolor{keywordtype}{double} v\_max = 0.1;
+62     \textcolor{keywordtype}{double} angle = M\_PI / 4.0;
+63     \textcolor{keywordtype}{double} time = 0.0;
+64     robot.control([=, &time](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}&,
+65                              \hyperlink{classfranka_1_1Duration}{franka::Duration} period) -> 
+      \hyperlink{classfranka_1_1CartesianVelocities}{franka::CartesianVelocities} \{
+66       time += period.\hyperlink{classfranka_1_1Duration_a497af77a3280159547f231f0374e9ac1}{toSec}();
+67 
+68       \textcolor{keywordtype}{double} cycle = std::floor(pow(-1.0, (time - std::fmod(time, time\_max)) / time\_max));
+69       \textcolor{keywordtype}{double} v = cycle * v\_max / 2.0 * (1.0 - std::cos(2.0 * M\_PI / time\_max * time));
+70       \textcolor{keywordtype}{double} v\_x = std::cos(angle) * v;
+71       \textcolor{keywordtype}{double} v\_z = -std::sin(angle) * v;
+72 
+73       \hyperlink{classfranka_1_1CartesianVelocities}{franka::CartesianVelocities} output = \{\{v\_x, 0.0, v\_z, 0.0, 0.0, 0.0\}\};
+74       \textcolor{keywordflow}{if} (time >= 2 * time\_max) \{
+75         std::cout << std::endl << \textcolor{stringliteral}{"Finished motion, shutting down example"} << std::endl;
+76         \textcolor{keywordflow}{return} \hyperlink{namespacefranka_a20791f7142d78bbbe3c957cc66a23ade}{franka::MotionFinished}(output);
+77       \}
+78       \textcolor{keywordflow}{return} output;
+79     \});
+80   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& e) \{
+81     std::cout << e.what() << std::endl;
+82     \textcolor{keywordflow}{return} -1;
+83   \}
+84 
+85   \textcolor{keywordflow}{return} 0;
+86 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{generate__cartesian__velocity__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

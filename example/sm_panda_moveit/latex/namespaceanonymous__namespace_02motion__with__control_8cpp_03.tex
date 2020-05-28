@@ -1,0 +1,80 @@
+\hypertarget{namespaceanonymous__namespace_02motion__with__control_8cpp_03}{}\section{anonymous\+\_\+namespace\{motion\+\_\+with\+\_\+control.\+cpp\} Namespace Reference}
+\label{namespaceanonymous__namespace_02motion__with__control_8cpp_03}\index{anonymous\+\_\+namespace\lcurly{}motion\+\_\+with\+\_\+control.\+cpp\rcurly{}@{anonymous\+\_\+namespace\lcurly{}motion\+\_\+with\+\_\+control.\+cpp\rcurly{}}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classanonymous__namespace_02motion__with__control_8cpp_03_1_1Controller}{Controller}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{namespaceanonymous__namespace_02motion__with__control_8cpp_03_a96cf55e603f54e4305aaff129fc95d0a}{generate\+Trajectory} (double a\+\_\+max)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceanonymous__namespace_02motion__with__control_8cpp_03_a96cf55e603f54e4305aaff129fc95d0a}\label{namespaceanonymous__namespace_02motion__with__control_8cpp_03_a96cf55e603f54e4305aaff129fc95d0a}} 
+\index{anonymous\+\_\+namespace\lcurly{}motion\+\_\+with\+\_\+control.\+cpp\rcurly{}@{anonymous\+\_\+namespace\lcurly{}motion\+\_\+with\+\_\+control.\+cpp\rcurly{}}!generate\+Trajectory@{generate\+Trajectory}}
+\index{generate\+Trajectory@{generate\+Trajectory}!anonymous\+\_\+namespace\lcurly{}motion\+\_\+with\+\_\+control.\+cpp\rcurly{}@{anonymous\+\_\+namespace\lcurly{}motion\+\_\+with\+\_\+control.\+cpp\rcurly{}}}
+\subsubsection{\texorpdfstring{generate\+Trajectory()}{generateTrajectory()}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ anonymous\+\_\+namespace\{motion\+\_\+with\+\_\+control.\+cpp\}\+::generate\+Trajectory (\begin{DoxyParamCaption}\item[{double}]{a\+\_\+max }\end{DoxyParamCaption})}
+
+
+
+Definition at line 77 of file motion\+\_\+with\+\_\+control.\+cpp.
+
+
+
+References battery\+\_\+monitor\+\_\+node\+::t, and write\+Log\+To\+File().
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+77                                                    \{
+78   \textcolor{comment}{// Generating a motion with smooth velocity and acceleration.}
+79   \textcolor{comment}{// Squared sine is used for the acceleration/deceleration phase.}
+80   std::vector<double> trajectory;
+81   constexpr \textcolor{keywordtype}{double} kTimeStep = 0.001;          \textcolor{comment}{// [s]}
+82   constexpr \textcolor{keywordtype}{double} kAccelerationTime = 1;      \textcolor{comment}{// time spend accelerating and decelerating [s]}
+83   constexpr \textcolor{keywordtype}{double} kConstantVelocityTime = 1;  \textcolor{comment}{// time spend with constant speed [s]}
+84   \textcolor{comment}{// obtained during the speed up}
+85   \textcolor{comment}{// and slow down [rad/s^2]}
+86   \textcolor{keywordtype}{double} a = 0;  \textcolor{comment}{// [rad/s^2]}
+87   \textcolor{keywordtype}{double} v = 0;  \textcolor{comment}{// [rad/s]}
+88   \textcolor{keywordtype}{double} \hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} = 0;  \textcolor{comment}{// [s]}
+89   \textcolor{keywordflow}{while} (t < (2 * kAccelerationTime + kConstantVelocityTime)) \{
+90     \textcolor{keywordflow}{if} (t <= kAccelerationTime) \{
+91       a = pow(sin(t * M\_PI / kAccelerationTime), 2) * a\_max;
+92     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (t <= (kAccelerationTime + kConstantVelocityTime)) \{
+93       a = 0;
+94     \} \textcolor{keywordflow}{else} \{
+95       \textcolor{keyword}{const} \textcolor{keywordtype}{double} deceleration\_time =
+96           (kAccelerationTime + kConstantVelocityTime) - t;  \textcolor{comment}{// time spent in the deceleration phase}
+97       a = -pow(sin(deceleration\_time * M\_PI / kAccelerationTime), 2) * a\_max;
+98     \}
+99     v += a * kTimeStep;
+100     t += kTimeStep;
+101     trajectory.push\_back(v);
+102   \}
+103   \textcolor{keywordflow}{return} trajectory;
+104 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceanonymous__namespace_02motion__with__control_8cpp_03_a96cf55e603f54e4305aaff129fc95d0a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{namespaceanonymous__namespace_02motion__with__control_8cpp_03_a96cf55e603f54e4305aaff129fc95d0a_icgraph}
+\end{center}
+\end{figure}

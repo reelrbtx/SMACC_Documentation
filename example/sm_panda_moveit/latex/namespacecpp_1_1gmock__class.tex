@@ -1,0 +1,346 @@
+\hypertarget{namespacecpp_1_1gmock__class}{}\section{cpp.\+gmock\+\_\+class Namespace Reference}
+\label{namespacecpp_1_1gmock__class}\index{cpp.\+gmock\+\_\+class@{cpp.\+gmock\+\_\+class}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacecpp_1_1gmock__class_ae1b91676e6a4c7ae21c3ef2394a096a1}{\+\_\+\+Generate\+Methods} (output\+\_\+lines, source, class\+\_\+node)
+\item 
+def \hyperlink{namespacecpp_1_1gmock__class_a3f8d5ceabb0bd6143422efeccc900ca9}{\+\_\+\+Generate\+Mocks} (filename, source, ast\+\_\+list, desired\+\_\+class\+\_\+names)
+\item 
+def \hyperlink{namespacecpp_1_1gmock__class_a8f99cfdd2b4f0a547d6585b1de78bac0}{main} (argv=sys.\+argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{namespacecpp_1_1gmock__class_a4a765064f65186f17ff74a9ebb5d27b8}{\+\_\+\+\_\+author\+\_\+\+\_\+} = \textquotesingle{}nnorwitz@google.\+com (Neal Norwitz)\textquotesingle{}
+\item 
+\hyperlink{namespacecpp_1_1gmock__class_ab4128a969856897356b7956c5ba4fc01}{\+\_\+dummy} = \hyperlink{namespacecpp_1_1gmock__class_a2157e96eee0b4bf9ca6d195ab76f59c2}{set}
+\item 
+\hyperlink{namespacecpp_1_1gmock__class_a2157e96eee0b4bf9ca6d195ab76f59c2}{set} = sets.\+Set
+\item 
+tuple \hyperlink{namespacecpp_1_1gmock__class_ae5d7185c5f485142460e91de1394283c}{\+\_\+\+V\+E\+R\+S\+I\+ON} = (1, 0, 1)
+\item 
+int \hyperlink{namespacecpp_1_1gmock__class_aa09d38d618dd2e76366852c660a832e8}{\+\_\+\+I\+N\+D\+E\+NT} = 2
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacecpp_1_1gmock__class_ae1b91676e6a4c7ae21c3ef2394a096a1}\label{namespacecpp_1_1gmock__class_ae1b91676e6a4c7ae21c3ef2394a096a1}} 
+\index{cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}!\+\_\+\+Generate\+Methods@{\+\_\+\+Generate\+Methods}}
+\index{\+\_\+\+Generate\+Methods@{\+\_\+\+Generate\+Methods}!cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}}
+\subsubsection{\texorpdfstring{\+\_\+\+Generate\+Methods()}{\_GenerateMethods()}}
+{\footnotesize\ttfamily def cpp.\+gmock\+\_\+class.\+\_\+\+Generate\+Methods (\begin{DoxyParamCaption}\item[{}]{output\+\_\+lines,  }\item[{}]{source,  }\item[{}]{class\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 51 of file gmock\+\_\+class.\+py.
+
+
+
+Referenced by cpp.\+gmock\+\_\+class.\+\_\+\+Generate\+Mocks().
+
+
+\begin{DoxyCode}
+51 \textcolor{keyword}{def }\hyperlink{namespacecpp_1_1gmock__class_ae1b91676e6a4c7ae21c3ef2394a096a1}{\_GenerateMethods}(output\_lines, source, class\_node):
+52   function\_type = (ast.FUNCTION\_VIRTUAL | ast.FUNCTION\_PURE\_VIRTUAL |
+53                    ast.FUNCTION\_OVERRIDE)
+54   ctor\_or\_dtor = ast.FUNCTION\_CTOR | ast.FUNCTION\_DTOR
+55   indent = \textcolor{stringliteral}{' '} * \_INDENT
+56 
+57   \textcolor{keywordflow}{for} node \textcolor{keywordflow}{in} class\_node.body:
+58     \textcolor{comment}{# We only care about virtual functions.}
+59     \textcolor{keywordflow}{if} (isinstance(node, ast.Function) \textcolor{keywordflow}{and}
+60         node.modifiers & function\_type \textcolor{keywordflow}{and}
+61         \textcolor{keywordflow}{not} node.modifiers & ctor\_or\_dtor):
+62       \textcolor{comment}{# Pick out all the elements we need from the original function.}
+63       const = \textcolor{stringliteral}{''}
+64       \textcolor{keywordflow}{if} node.modifiers & ast.FUNCTION\_CONST:
+65         const = \textcolor{stringliteral}{'CONST\_'}
+66       return\_type = \textcolor{stringliteral}{'void'}
+67       \textcolor{keywordflow}{if} node.return\_type:
+68         \textcolor{comment}{# Add modifiers like 'const'.}
+69         modifiers = \textcolor{stringliteral}{''}
+70         \textcolor{keywordflow}{if} node.return\_type.modifiers:
+71           modifiers = \textcolor{stringliteral}{' '}.join(node.return\_type.modifiers) + \textcolor{stringliteral}{' '}
+72         return\_type = modifiers + node.return\_type.name
+73         template\_args = [arg.name \textcolor{keywordflow}{for} arg \textcolor{keywordflow}{in} node.return\_type.templated\_types]
+74         \textcolor{keywordflow}{if} template\_args:
+75           return\_type += \textcolor{stringliteral}{'<'} + \textcolor{stringliteral}{', '}.join(template\_args) + \textcolor{stringliteral}{'>'}
+76           \textcolor{keywordflow}{if} len(template\_args) > 1:
+77             \textcolor{keywordflow}{for} line \textcolor{keywordflow}{in} [
+78                 \textcolor{stringliteral}{'// The following line won\(\backslash\)'t really compile, as the return'},
+79                 \textcolor{stringliteral}{'// type has multiple template arguments.  To fix it, use a'},
+80                 \textcolor{stringliteral}{'// typedef for the return type.'}]:
+81               output\_lines.append(indent + line)
+82         \textcolor{keywordflow}{if} node.return\_type.pointer:
+83           return\_type += \textcolor{stringliteral}{'*'}
+84         \textcolor{keywordflow}{if} node.return\_type.reference:
+85           return\_type += \textcolor{stringliteral}{'&'}
+86         num\_parameters = len(node.parameters)
+87         \textcolor{keywordflow}{if} len(node.parameters) == 1:
+88           first\_param = node.parameters[0]
+89           \textcolor{keywordflow}{if} source[first\_param.start:first\_param.end].strip() == \textcolor{stringliteral}{'void'}:
+90             \textcolor{comment}{# We must treat T(void) as a function with no parameters.}
+91             num\_parameters = 0
+92       tmpl = \textcolor{stringliteral}{''}
+93       \textcolor{keywordflow}{if} class\_node.templated\_types:
+94         tmpl = \textcolor{stringliteral}{'\_T'}
+95       mock\_method\_macro = \textcolor{stringliteral}{'MOCK\_%sMETHOD%d%s'} % (const, num\_parameters, tmpl)
+96 
+97       args = \textcolor{stringliteral}{''}
+98       \textcolor{keywordflow}{if} node.parameters:
+99         \textcolor{comment}{# Due to the parser limitations, it is impossible to keep comments}
+100         \textcolor{comment}{# while stripping the default parameters.  When defaults are}
+101         \textcolor{comment}{# present, we choose to strip them and comments (and produce}
+102         \textcolor{comment}{# compilable code).}
+103         \textcolor{comment}{# TODO(nnorwitz@google.com): Investigate whether it is possible to}
+104         \textcolor{comment}{# preserve parameter name when reconstructing parameter text from}
+105         \textcolor{comment}{# the AST.}
+106         \textcolor{keywordflow}{if} len([param \textcolor{keywordflow}{for} param \textcolor{keywordflow}{in} node.parameters \textcolor{keywordflow}{if} param.default]) > 0:
+107           args = \textcolor{stringliteral}{', '}.join(param.type.name \textcolor{keywordflow}{for} param \textcolor{keywordflow}{in} node.parameters)
+108         \textcolor{keywordflow}{else}:
+109           \textcolor{comment}{# Get the full text of the parameters from the start}
+110           \textcolor{comment}{# of the first parameter to the end of the last parameter.}
+111           start = node.parameters[0].start
+112           end = node.parameters[-1].end
+113           \textcolor{comment}{# Remove // comments.}
+114           args\_strings = re.sub(\textcolor{stringliteral}{r'//.*'}, \textcolor{stringliteral}{''}, source[start:end])
+115           \textcolor{comment}{# Condense multiple spaces and eliminate newlines putting the}
+116           \textcolor{comment}{# parameters together on a single line.  Ensure there is a}
+117           \textcolor{comment}{# space in an argument which is split by a newline without}
+118           \textcolor{comment}{# intervening whitespace, e.g.: int\(\backslash\)nBar}
+119           args = re.sub(\textcolor{stringliteral}{'  +'}, \textcolor{stringliteral}{' '}, args\_strings.replace(\textcolor{stringliteral}{'\(\backslash\)n'}, \textcolor{stringliteral}{' '}))
+120 
+121       \textcolor{comment}{# Create the mock method definition.}
+122       output\_lines.extend([\textcolor{stringliteral}{'%s%s(%s,'} % (indent, mock\_method\_macro, node.name),
+123                            \textcolor{stringliteral}{'%s%s(%s));'} % (indent*3, return\_type, args)])
+124 
+125 
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacecpp_1_1gmock__class_ae1b91676e6a4c7ae21c3ef2394a096a1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacecpp_1_1gmock__class_a3f8d5ceabb0bd6143422efeccc900ca9}\label{namespacecpp_1_1gmock__class_a3f8d5ceabb0bd6143422efeccc900ca9}} 
+\index{cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}!\+\_\+\+Generate\+Mocks@{\+\_\+\+Generate\+Mocks}}
+\index{\+\_\+\+Generate\+Mocks@{\+\_\+\+Generate\+Mocks}!cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}}
+\subsubsection{\texorpdfstring{\+\_\+\+Generate\+Mocks()}{\_GenerateMocks()}}
+{\footnotesize\ttfamily def cpp.\+gmock\+\_\+class.\+\_\+\+Generate\+Mocks (\begin{DoxyParamCaption}\item[{}]{filename,  }\item[{}]{source,  }\item[{}]{ast\+\_\+list,  }\item[{}]{desired\+\_\+class\+\_\+names }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 126 of file gmock\+\_\+class.\+py.
+
+
+
+References cpp.\+gmock\+\_\+class.\+\_\+\+Generate\+Methods(), and cpp.\+gmock\+\_\+class.\+set.
+
+
+
+Referenced by cpp.\+gmock\+\_\+class.\+main().
+
+
+\begin{DoxyCode}
+126 \textcolor{keyword}{def }\hyperlink{namespacecpp_1_1gmock__class_a3f8d5ceabb0bd6143422efeccc900ca9}{\_GenerateMocks}(filename, source, ast\_list, desired\_class\_names):
+127   processed\_class\_names = \hyperlink{namespacecpp_1_1gmock__class_a2157e96eee0b4bf9ca6d195ab76f59c2}{set}()
+128   lines = []
+129   \textcolor{keywordflow}{for} node \textcolor{keywordflow}{in} ast\_list:
+130     \textcolor{keywordflow}{if} (isinstance(node, ast.Class) \textcolor{keywordflow}{and} node.body \textcolor{keywordflow}{and}
+131         \textcolor{comment}{# desired\_class\_names being None means that all classes are selected.}
+132         (\textcolor{keywordflow}{not} desired\_class\_names \textcolor{keywordflow}{or} node.name \textcolor{keywordflow}{in} desired\_class\_names)):
+133       class\_name = node.name
+134       parent\_name = class\_name
+135       processed\_class\_names.add(class\_name)
+136       class\_node = node
+137       \textcolor{comment}{# Add namespace before the class.}
+138       \textcolor{keywordflow}{if} class\_node.namespace:
+139         lines.extend([\textcolor{stringliteral}{'namespace %s \{'} % n \textcolor{keywordflow}{for} n \textcolor{keywordflow}{in} class\_node.namespace])  \textcolor{comment}{# \}}
+140         lines.append(\textcolor{stringliteral}{''})
+141 
+142       \textcolor{comment}{# Add template args for templated classes.}
+143       \textcolor{keywordflow}{if} class\_node.templated\_types:
+144         \textcolor{comment}{# TODO(paulchang): The AST doesn't preserve template argument order,}
+145         \textcolor{comment}{# so we have to make up names here.}
+146         \textcolor{comment}{# TODO(paulchang): Handle non-type template arguments (e.g.}
+147         \textcolor{comment}{# template<typename T, int N>).}
+148         template\_arg\_count = len(class\_node.templated\_types.keys())
+149         template\_args = [\textcolor{stringliteral}{'T%d'} % n \textcolor{keywordflow}{for} n \textcolor{keywordflow}{in} range(template\_arg\_count)]
+150         template\_decls = [\textcolor{stringliteral}{'typename '} + arg \textcolor{keywordflow}{for} arg \textcolor{keywordflow}{in} template\_args]
+151         lines.append(\textcolor{stringliteral}{'template <'} + \textcolor{stringliteral}{', '}.join(template\_decls) + \textcolor{stringliteral}{'>'})
+152         parent\_name += \textcolor{stringliteral}{'<'} + \textcolor{stringliteral}{', '}.join(template\_args) + \textcolor{stringliteral}{'>'}
+153 
+154       \textcolor{comment}{# Add the class prolog.}
+155       lines.append(\textcolor{stringliteral}{'class Mock%s : public %s \{'}  \textcolor{comment}{# \}}
+156                    % (class\_name, parent\_name))
+157       lines.append(\textcolor{stringliteral}{'%spublic:'} % (\textcolor{stringliteral}{' '} * (\_INDENT // 2)))
+158 
+159       \textcolor{comment}{# Add all the methods.}
+160       \hyperlink{namespacecpp_1_1gmock__class_ae1b91676e6a4c7ae21c3ef2394a096a1}{\_GenerateMethods}(lines, source, class\_node)
+161 
+162       \textcolor{comment}{# Close the class.}
+163       \textcolor{keywordflow}{if} lines:
+164         \textcolor{comment}{# If there are no virtual methods, no need for a public label.}
+165         \textcolor{keywordflow}{if} len(lines) == 2:
+166           del lines[-1]
+167 
+168         \textcolor{comment}{# Only close the class if there really is a class.}
+169         lines.append(\textcolor{stringliteral}{'\};'})
+170         lines.append(\textcolor{stringliteral}{''})  \textcolor{comment}{# Add an extra newline.}
+171 
+172       \textcolor{comment}{# Close the namespace.}
+173       \textcolor{keywordflow}{if} class\_node.namespace:
+174         \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(len(class\_node.namespace)-1, -1, -1):
+175           lines.append(\textcolor{stringliteral}{'\}  // namespace %s'} % class\_node.namespace[i])
+176         lines.append(\textcolor{stringliteral}{''})  \textcolor{comment}{# Add an extra newline.}
+177 
+178   \textcolor{keywordflow}{if} desired\_class\_names:
+179     missing\_class\_name\_list = list(desired\_class\_names - processed\_class\_names)
+180     \textcolor{keywordflow}{if} missing\_class\_name\_list:
+181       missing\_class\_name\_list.sort()
+182       sys.stderr.write(\textcolor{stringliteral}{'Class(es) not found in %s: %s\(\backslash\)n'} %
+183                        (filename, \textcolor{stringliteral}{', '}.join(missing\_class\_name\_list)))
+184   \textcolor{keywordflow}{elif} \textcolor{keywordflow}{not} processed\_class\_names:
+185     sys.stderr.write(\textcolor{stringliteral}{'No class found in %s\(\backslash\)n'} % filename)
+186 
+187   \textcolor{keywordflow}{return} lines
+188 
+189 
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacecpp_1_1gmock__class_a3f8d5ceabb0bd6143422efeccc900ca9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacecpp_1_1gmock__class_a3f8d5ceabb0bd6143422efeccc900ca9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacecpp_1_1gmock__class_a8f99cfdd2b4f0a547d6585b1de78bac0}\label{namespacecpp_1_1gmock__class_a8f99cfdd2b4f0a547d6585b1de78bac0}} 
+\index{cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}!main@{main}}
+\index{main@{main}!cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def cpp.\+gmock\+\_\+class.\+main (\begin{DoxyParamCaption}\item[{}]{argv = {\ttfamily sys.argv} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 190 of file gmock\+\_\+class.\+py.
+
+
+
+References cpp.\+gmock\+\_\+class.\+\_\+\+Generate\+Mocks(), and cpp.\+gmock\+\_\+class.\+set.
+
+
+\begin{DoxyCode}
+190 \textcolor{keyword}{def }\hyperlink{namespacecpp_1_1gmock__class_a8f99cfdd2b4f0a547d6585b1de78bac0}{main}(argv=sys.argv):
+191   \textcolor{keywordflow}{if} len(argv) < 2:
+192     sys.stderr.write(\textcolor{stringliteral}{'Google Mock Class Generator v%s\(\backslash\)n\(\backslash\)n'} %
+193                      \textcolor{stringliteral}{'.'}.join(map(str, \_VERSION)))
+194     sys.stderr.write(\_\_doc\_\_)
+195     \textcolor{keywordflow}{return} 1
+196 
+197   \textcolor{keyword}{global} \_INDENT
+198   \textcolor{keywordflow}{try}:
+199     \_INDENT = int(os.environ[\textcolor{stringliteral}{'INDENT'}])
+200   \textcolor{keywordflow}{except} KeyError:
+201     \textcolor{keywordflow}{pass}
+202   \textcolor{keywordflow}{except}:
+203     sys.stderr.write(\textcolor{stringliteral}{'Unable to use indent of %s\(\backslash\)n'} % os.environ.get(\textcolor{stringliteral}{'INDENT'}))
+204 
+205   filename = argv[1]
+206   desired\_class\_names = \textcolor{keywordtype}{None}  \textcolor{comment}{# None means all classes in the source file.}
+207   \textcolor{keywordflow}{if} len(argv) >= 3:
+208     desired\_class\_names = \hyperlink{namespacecpp_1_1gmock__class_a2157e96eee0b4bf9ca6d195ab76f59c2}{set}(argv[2:])
+209   source = utils.ReadFile(filename)
+210   \textcolor{keywordflow}{if} source \textcolor{keywordflow}{is} \textcolor{keywordtype}{None}:
+211     \textcolor{keywordflow}{return} 1
+212 
+213   builder = ast.BuilderFromSource(source, filename)
+214   \textcolor{keywordflow}{try}:
+215     entire\_ast = filter(\textcolor{keywordtype}{None}, builder.Generate())
+216   \textcolor{keywordflow}{except} KeyboardInterrupt:
+217     \textcolor{keywordflow}{return}
+218   \textcolor{keywordflow}{except}:
+219     \textcolor{comment}{# An error message was already printed since we couldn't parse.}
+220     sys.exit(1)
+221   \textcolor{keywordflow}{else}:
+222     lines = \hyperlink{namespacecpp_1_1gmock__class_a3f8d5ceabb0bd6143422efeccc900ca9}{\_GenerateMocks}(filename, source, entire\_ast, desired\_class\_names)
+223     sys.stdout.write(\textcolor{stringliteral}{'\(\backslash\)n'}.join(lines))
+224 
+225 
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacecpp_1_1gmock__class_a8f99cfdd2b4f0a547d6585b1de78bac0_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespacecpp_1_1gmock__class_a4a765064f65186f17ff74a9ebb5d27b8}\label{namespacecpp_1_1gmock__class_a4a765064f65186f17ff74a9ebb5d27b8}} 
+\index{cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}!\+\_\+\+\_\+author\+\_\+\+\_\+@{\+\_\+\+\_\+author\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+author\+\_\+\+\_\+@{\+\_\+\+\_\+author\+\_\+\+\_\+}!cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+author\+\_\+\+\_\+}{\_\_author\_\_}}
+{\footnotesize\ttfamily string cpp.\+gmock\+\_\+class.\+\_\+\+\_\+author\+\_\+\+\_\+ = \textquotesingle{}nnorwitz@google.\+com (Neal Norwitz)\textquotesingle{}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file gmock\+\_\+class.\+py.
+
+\mbox{\Hypertarget{namespacecpp_1_1gmock__class_ab4128a969856897356b7956c5ba4fc01}\label{namespacecpp_1_1gmock__class_ab4128a969856897356b7956c5ba4fc01}} 
+\index{cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}!\+\_\+dummy@{\+\_\+dummy}}
+\index{\+\_\+dummy@{\+\_\+dummy}!cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}}
+\subsubsection{\texorpdfstring{\+\_\+dummy}{\_dummy}}
+{\footnotesize\ttfamily cpp.\+gmock\+\_\+class.\+\_\+dummy = \hyperlink{namespacecpp_1_1gmock__class_a2157e96eee0b4bf9ca6d195ab76f59c2}{set}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 41 of file gmock\+\_\+class.\+py.
+
+\mbox{\Hypertarget{namespacecpp_1_1gmock__class_aa09d38d618dd2e76366852c660a832e8}\label{namespacecpp_1_1gmock__class_aa09d38d618dd2e76366852c660a832e8}} 
+\index{cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}!\+\_\+\+I\+N\+D\+E\+NT@{\+\_\+\+I\+N\+D\+E\+NT}}
+\index{\+\_\+\+I\+N\+D\+E\+NT@{\+\_\+\+I\+N\+D\+E\+NT}!cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}}
+\subsubsection{\texorpdfstring{\+\_\+\+I\+N\+D\+E\+NT}{\_INDENT}}
+{\footnotesize\ttfamily int cpp.\+gmock\+\_\+class.\+\_\+\+I\+N\+D\+E\+NT = 2\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 48 of file gmock\+\_\+class.\+py.
+
+\mbox{\Hypertarget{namespacecpp_1_1gmock__class_ae5d7185c5f485142460e91de1394283c}\label{namespacecpp_1_1gmock__class_ae5d7185c5f485142460e91de1394283c}} 
+\index{cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}!\+\_\+\+V\+E\+R\+S\+I\+ON@{\+\_\+\+V\+E\+R\+S\+I\+ON}}
+\index{\+\_\+\+V\+E\+R\+S\+I\+ON@{\+\_\+\+V\+E\+R\+S\+I\+ON}!cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}}
+\subsubsection{\texorpdfstring{\+\_\+\+V\+E\+R\+S\+I\+ON}{\_VERSION}}
+{\footnotesize\ttfamily tuple cpp.\+gmock\+\_\+class.\+\_\+\+V\+E\+R\+S\+I\+ON = (1, 0, 1)\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 46 of file gmock\+\_\+class.\+py.
+
+\mbox{\Hypertarget{namespacecpp_1_1gmock__class_a2157e96eee0b4bf9ca6d195ab76f59c2}\label{namespacecpp_1_1gmock__class_a2157e96eee0b4bf9ca6d195ab76f59c2}} 
+\index{cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}!set@{set}}
+\index{set@{set}!cpp\+::gmock\+\_\+class@{cpp\+::gmock\+\_\+class}}
+\subsubsection{\texorpdfstring{set}{set}}
+{\footnotesize\ttfamily cpp.\+gmock\+\_\+class.\+set = sets.\+Set}
+
+
+
+Definition at line 44 of file gmock\+\_\+class.\+py.
+
+
+
+Referenced by cpp.\+gmock\+\_\+class.\+\_\+\+Generate\+Mocks(), fuse\+\_\+gtest\+\_\+files.\+Fuse\+G\+Test\+All\+Cc\+To\+File(), fuse\+\_\+gtest\+\_\+files.\+Fuse\+G\+Test\+H(), cpp.\+tokenize.\+Get\+Tokens(), and cpp.\+gmock\+\_\+class.\+main().
+

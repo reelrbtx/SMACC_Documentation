@@ -1,0 +1,71 @@
+\hypertarget{echo__robot__state_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/echo\+\_\+robot\+\_\+state.cpp File Reference}
+\label{echo__robot__state_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/echo\+\_\+robot\+\_\+state.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/echo\+\_\+robot\+\_\+state.\+cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/robot.\+h$>$}\newline
+Include dependency graph for echo\+\_\+robot\+\_\+state.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{echo__robot__state_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{echo__robot__state_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{echo__robot__state_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{echo__robot__state_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{echo\+\_\+robot\+\_\+state.\+cpp@{echo\+\_\+robot\+\_\+state.\+cpp}!main@{main}}
+\index{main@{main}!echo\+\_\+robot\+\_\+state.\+cpp@{echo\+\_\+robot\+\_\+state.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 13 of file echo\+\_\+robot\+\_\+state.\+cpp.
+
+
+
+References franka\+::\+Robot\+::read().
+
+
+\begin{DoxyCode}
+13                                 \{
+14   \textcolor{keywordflow}{if} (argc != 2) \{
+15     std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" <robot-hostname>"} << std::endl;
+16     \textcolor{keywordflow}{return} -1;
+17   \}
+18 
+19   \textcolor{keywordflow}{try} \{
+20     \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(argv[1]);
+21 
+22     \textcolor{keywordtype}{size\_t} count = 0;
+23     robot.read([&count](\textcolor{keyword}{const} \hyperlink{structfranka_1_1RobotState}{franka::RobotState}& robot\_state) \{
+24       \textcolor{comment}{// Printing to std::cout adds a delay. This is acceptable for a read loop such as this, but}
+25       \textcolor{comment}{// should not be done in a control loop.}
+26       std::cout << robot\_state << std::endl;
+27       \textcolor{keywordflow}{return} count++ < 100;
+28     \});
+29 
+30     std::cout << \textcolor{stringliteral}{"Done."} << std::endl;
+31   \} \textcolor{keywordflow}{catch} (\hyperlink{structfranka_1_1Exception}{franka::Exception} \textcolor{keyword}{const}& e) \{
+32     std::cout << e.what() << std::endl;
+33     \textcolor{keywordflow}{return} -1;
+34   \}
+35 
+36   \textcolor{keywordflow}{return} 0;
+37 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{echo__robot__state_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

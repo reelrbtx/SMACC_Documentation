@@ -1,0 +1,412 @@
+\hypertarget{namespacefranka__control}{}\section{franka\+\_\+control Namespace Reference}
+\label{namespacefranka__control}\index{franka\+\_\+control@{franka\+\_\+control}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classfranka__control_1_1FrankaStateController}{Franka\+State\+Controller}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\ros\+::\+Service\+Server \hyperlink{namespacefranka__control_ad9a13c60c284e90d4a1663071e5e1f33}{advertise\+Service} (ros\+::\+Node\+Handle \&node\+\_\+handle, const std\+::string \&name, std\+::function$<$ void(typename T\+::\+Request \&, typename T\+::\+Response \&)$>$ handler)
+\item 
+void \hyperlink{namespacefranka__control_a6c82cc16e5790da8663f879332670421}{set\+Cartesian\+Impedance} (\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&robot, const Set\+Cartesian\+Impedance\+::\+Request \&req, Set\+Cartesian\+Impedance\+::\+Response \&res)
+\item 
+void \hyperlink{namespacefranka__control_a38bda5f02b38367b199e8599993994ca}{set\+Joint\+Impedance} (\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&robot, const Set\+Joint\+Impedance\+::\+Request \&req, Set\+Joint\+Impedance\+::\+Response \&res)
+\item 
+void \hyperlink{namespacefranka__control_aaab1e3e96b01a8589336c39998422dad}{set\+E\+E\+Frame} (\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&robot, const Set\+E\+E\+Frame\+::\+Request \&req, Set\+E\+E\+Frame\+::\+Response \&res)
+\item 
+void \hyperlink{namespacefranka__control_a733bf6cd47763b70eaf44b7b5a237af9}{set\+K\+Frame} (\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&robot, const Set\+K\+Frame\+::\+Request \&req, Set\+K\+Frame\+::\+Response \&res)
+\item 
+void \hyperlink{namespacefranka__control_a7ea982d94110cc6f522d42a140d608af}{set\+Force\+Torque\+Collision\+Behavior} (\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&robot, const Set\+Force\+Torque\+Collision\+Behavior\+::\+Request \&req, Set\+Force\+Torque\+Collision\+Behavior\+::\+Response \&res)
+\item 
+void \hyperlink{namespacefranka__control_a13e02b7048c013bf57506f927ce6745d}{set\+Full\+Collision\+Behavior} (\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&robot, const Set\+Full\+Collision\+Behavior\+::\+Request \&req, Set\+Full\+Collision\+Behavior\+::\+Response \&res)
+\item 
+void \hyperlink{namespacefranka__control_a3fbd42b0a097186b01181eb159ef1785}{set\+Load} (\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&robot, const Set\+Load\+::\+Request \&req, Set\+Load\+::\+Response \&res)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacefranka__control_ad9a13c60c284e90d4a1663071e5e1f33}\label{namespacefranka__control_ad9a13c60c284e90d4a1663071e5e1f33}} 
+\index{franka\+\_\+control@{franka\+\_\+control}!advertise\+Service@{advertise\+Service}}
+\index{advertise\+Service@{advertise\+Service}!franka\+\_\+control@{franka\+\_\+control}}
+\subsubsection{\texorpdfstring{advertise\+Service()}{advertiseService()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+ros\+::\+Service\+Server franka\+\_\+control\+::advertise\+Service (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{node\+\_\+handle,  }\item[{const std\+::string \&}]{name,  }\item[{std\+::function$<$ void(typename T\+::\+Request \&, typename T\+::\+Response \&)$>$}]{handler }\end{DoxyParamCaption})}
+
+
+
+Definition at line 22 of file services.\+h.
+
+
+
+References interactive\+\_\+marker\+::name, set\+Cartesian\+Impedance(), set\+E\+E\+Frame(), set\+Force\+Torque\+Collision\+Behavior(), set\+Full\+Collision\+Behavior(), set\+Joint\+Impedance(), set\+K\+Frame(), and set\+Load().
+
+
+\begin{DoxyCode}
+25                                                                         \{
+26   \textcolor{keywordflow}{return} node\_handle.advertiseService<\textcolor{keyword}{typename} T::Request, \textcolor{keyword}{typename} T::Response>(
+27       \hyperlink{namespaceinteractive__marker_a447655961b3d3ca3c5a2a9d3d769436d}{name}, [\hyperlink{namespaceinteractive__marker_a447655961b3d3ca3c5a2a9d3d769436d}{name}, handler](\textcolor{keyword}{typename} T::Request& request, \textcolor{keyword}{typename} T::Response& response) \{
+28         \textcolor{keywordflow}{try} \{
+29           handler(request, response);
+30           response.success = \textcolor{keyword}{true};
+31           ROS\_DEBUG\_STREAM(name << \textcolor{stringliteral}{" succeeded."});
+32         \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& ex) \{
+33           ROS\_ERROR\_STREAM(name << \textcolor{stringliteral}{" failed: "} << ex.what());
+34           response.success = \textcolor{keyword}{false};
+35           response.error = ex.what();
+36         \}
+37         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+38       \});
+39 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_ad9a13c60c284e90d4a1663071e5e1f33_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__control_a6c82cc16e5790da8663f879332670421}\label{namespacefranka__control_a6c82cc16e5790da8663f879332670421}} 
+\index{franka\+\_\+control@{franka\+\_\+control}!set\+Cartesian\+Impedance@{set\+Cartesian\+Impedance}}
+\index{set\+Cartesian\+Impedance@{set\+Cartesian\+Impedance}!franka\+\_\+control@{franka\+\_\+control}}
+\subsubsection{\texorpdfstring{set\+Cartesian\+Impedance()}{setCartesianImpedance()}}
+{\footnotesize\ttfamily void franka\+\_\+control\+::set\+Cartesian\+Impedance (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&}]{robot,  }\item[{const Set\+Cartesian\+Impedance\+::\+Request \&}]{req,  }\item[{Set\+Cartesian\+Impedance\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Definition at line 7 of file services.\+cpp.
+
+
+
+References franka\+::\+Robot\+::set\+Cartesian\+Impedance().
+
+
+
+Referenced by advertise\+Service(), and main().
+
+
+\begin{DoxyCode}
+9                                                              \{
+10   std::array<double, 6> cartesian\_stiffness;
+11   std::copy(req.cartesian\_stiffness.cbegin(), req.cartesian\_stiffness.cend(),
+12             cartesian\_stiffness.begin());
+13   robot.\hyperlink{classfranka_1_1Robot_ac2678c5c31cc8c0627ecda7485f81f6d}{setCartesianImpedance}(cartesian\_stiffness);
+14 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a6c82cc16e5790da8663f879332670421_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a6c82cc16e5790da8663f879332670421_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__control_aaab1e3e96b01a8589336c39998422dad}\label{namespacefranka__control_aaab1e3e96b01a8589336c39998422dad}} 
+\index{franka\+\_\+control@{franka\+\_\+control}!set\+E\+E\+Frame@{set\+E\+E\+Frame}}
+\index{set\+E\+E\+Frame@{set\+E\+E\+Frame}!franka\+\_\+control@{franka\+\_\+control}}
+\subsubsection{\texorpdfstring{set\+E\+E\+Frame()}{setEEFrame()}}
+{\footnotesize\ttfamily void franka\+\_\+control\+::set\+E\+E\+Frame (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&}]{robot,  }\item[{const Set\+E\+E\+Frame\+::\+Request \&}]{req,  }\item[{Set\+E\+E\+Frame\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Definition at line 24 of file services.\+cpp.
+
+
+
+References franka\+::\+Robot\+::set\+E\+E().
+
+
+
+Referenced by advertise\+Service(), and main().
+
+
+\begin{DoxyCode}
+26                                        \{
+27   std::array<double, 16> F\_T\_EE;  \textcolor{comment}{// NOLINT [readability-identifier-naming]}
+28   std::copy(req.F\_T\_EE.cbegin(), req.F\_T\_EE.cend(), F\_T\_EE.begin());
+29   robot.\hyperlink{classfranka_1_1Robot_a5043fca4c35f63b492d9e67c74ddc73b}{setEE}(F\_T\_EE);
+30 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_aaab1e3e96b01a8589336c39998422dad_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_aaab1e3e96b01a8589336c39998422dad_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__control_a7ea982d94110cc6f522d42a140d608af}\label{namespacefranka__control_a7ea982d94110cc6f522d42a140d608af}} 
+\index{franka\+\_\+control@{franka\+\_\+control}!set\+Force\+Torque\+Collision\+Behavior@{set\+Force\+Torque\+Collision\+Behavior}}
+\index{set\+Force\+Torque\+Collision\+Behavior@{set\+Force\+Torque\+Collision\+Behavior}!franka\+\_\+control@{franka\+\_\+control}}
+\subsubsection{\texorpdfstring{set\+Force\+Torque\+Collision\+Behavior()}{setForceTorqueCollisionBehavior()}}
+{\footnotesize\ttfamily void franka\+\_\+control\+::set\+Force\+Torque\+Collision\+Behavior (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&}]{robot,  }\item[{const Set\+Force\+Torque\+Collision\+Behavior\+::\+Request \&}]{req,  }\item[{Set\+Force\+Torque\+Collision\+Behavior\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Definition at line 40 of file services.\+cpp.
+
+
+
+References franka\+::\+Robot\+::set\+Collision\+Behavior().
+
+
+
+Referenced by advertise\+Service(), and main().
+
+
+\begin{DoxyCode}
+43   \{
+44   std::array<double, 7> lower\_torque\_thresholds\_nominal;
+45   std::copy(req.lower\_torque\_thresholds\_nominal.cbegin(),
+46             req.lower\_torque\_thresholds\_nominal.cend(), lower\_torque\_thresholds\_nominal.begin());
+47   std::array<double, 7> upper\_torque\_thresholds\_nominal;
+48   std::copy(req.upper\_torque\_thresholds\_nominal.cbegin(),
+49             req.upper\_torque\_thresholds\_nominal.cend(), upper\_torque\_thresholds\_nominal.begin());
+50   std::array<double, 6> lower\_force\_thresholds\_nominal;
+51   std::copy(req.lower\_force\_thresholds\_nominal.cbegin(), req.lower\_force\_thresholds\_nominal.cend(),
+52             lower\_force\_thresholds\_nominal.begin());
+53   std::array<double, 6> upper\_force\_thresholds\_nominal;
+54   std::copy(req.upper\_force\_thresholds\_nominal.cbegin(), req.upper\_force\_thresholds\_nominal.cend(),
+55             upper\_force\_thresholds\_nominal.begin());
+56 
+57   robot.\hyperlink{classfranka_1_1Robot_a168e1214ac36d74ac64f894332b84534}{setCollisionBehavior}(lower\_torque\_thresholds\_nominal, 
+      upper\_torque\_thresholds\_nominal,
+58                              lower\_force\_thresholds\_nominal, upper\_force\_thresholds\_nominal);
+59 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a7ea982d94110cc6f522d42a140d608af_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a7ea982d94110cc6f522d42a140d608af_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__control_a13e02b7048c013bf57506f927ce6745d}\label{namespacefranka__control_a13e02b7048c013bf57506f927ce6745d}} 
+\index{franka\+\_\+control@{franka\+\_\+control}!set\+Full\+Collision\+Behavior@{set\+Full\+Collision\+Behavior}}
+\index{set\+Full\+Collision\+Behavior@{set\+Full\+Collision\+Behavior}!franka\+\_\+control@{franka\+\_\+control}}
+\subsubsection{\texorpdfstring{set\+Full\+Collision\+Behavior()}{setFullCollisionBehavior()}}
+{\footnotesize\ttfamily void franka\+\_\+control\+::set\+Full\+Collision\+Behavior (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&}]{robot,  }\item[{const Set\+Full\+Collision\+Behavior\+::\+Request \&}]{req,  }\item[{Set\+Full\+Collision\+Behavior\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Definition at line 61 of file services.\+cpp.
+
+
+
+References franka\+::\+Robot\+::set\+Collision\+Behavior().
+
+
+
+Referenced by advertise\+Service(), and main().
+
+
+\begin{DoxyCode}
+63                                                                    \{
+64   std::array<double, 7> lower\_torque\_thresholds\_acceleration;
+65   std::copy(req.lower\_torque\_thresholds\_acceleration.cbegin(),
+66             req.lower\_torque\_thresholds\_acceleration.cend(),
+67             lower\_torque\_thresholds\_acceleration.begin());
+68   std::array<double, 7> upper\_torque\_thresholds\_acceleration;
+69   std::copy(req.upper\_torque\_thresholds\_acceleration.cbegin(),
+70             req.upper\_torque\_thresholds\_acceleration.cend(),
+71             upper\_torque\_thresholds\_acceleration.begin());
+72   std::array<double, 7> lower\_torque\_thresholds\_nominal;
+73   std::copy(req.lower\_torque\_thresholds\_nominal.cbegin(),
+74             req.lower\_torque\_thresholds\_nominal.cend(), lower\_torque\_thresholds\_nominal.begin());
+75   std::array<double, 7> upper\_torque\_thresholds\_nominal;
+76   std::copy(req.upper\_torque\_thresholds\_nominal.cbegin(),
+77             req.upper\_torque\_thresholds\_nominal.cend(), upper\_torque\_thresholds\_nominal.begin());
+78   std::array<double, 6> lower\_force\_thresholds\_acceleration;
+79   std::copy(req.lower\_force\_thresholds\_acceleration.cbegin(),
+80             req.lower\_force\_thresholds\_acceleration.cend(),
+81             lower\_force\_thresholds\_acceleration.begin());
+82   std::array<double, 6> upper\_force\_thresholds\_acceleration;
+83   std::copy(req.upper\_force\_thresholds\_acceleration.cbegin(),
+84             req.upper\_force\_thresholds\_acceleration.cend(),
+85             upper\_force\_thresholds\_acceleration.begin());
+86   std::array<double, 6> lower\_force\_thresholds\_nominal;
+87   std::copy(req.lower\_force\_thresholds\_nominal.cbegin(), req.lower\_force\_thresholds\_nominal.cend(),
+88             lower\_force\_thresholds\_nominal.begin());
+89   std::array<double, 6> upper\_force\_thresholds\_nominal;
+90   std::copy(req.upper\_force\_thresholds\_nominal.cbegin(), req.upper\_force\_thresholds\_nominal.cend(),
+91             upper\_force\_thresholds\_nominal.begin());
+92   robot.\hyperlink{classfranka_1_1Robot_a168e1214ac36d74ac64f894332b84534}{setCollisionBehavior}(lower\_torque\_thresholds\_acceleration,
+93                              upper\_torque\_thresholds\_acceleration, lower\_torque\_thresholds\_nominal,
+94                              upper\_torque\_thresholds\_nominal, lower\_force\_thresholds\_acceleration,
+95                              upper\_force\_thresholds\_acceleration, lower\_force\_thresholds\_nominal,
+96                              upper\_force\_thresholds\_nominal);
+97 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a13e02b7048c013bf57506f927ce6745d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a13e02b7048c013bf57506f927ce6745d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__control_a38bda5f02b38367b199e8599993994ca}\label{namespacefranka__control_a38bda5f02b38367b199e8599993994ca}} 
+\index{franka\+\_\+control@{franka\+\_\+control}!set\+Joint\+Impedance@{set\+Joint\+Impedance}}
+\index{set\+Joint\+Impedance@{set\+Joint\+Impedance}!franka\+\_\+control@{franka\+\_\+control}}
+\subsubsection{\texorpdfstring{set\+Joint\+Impedance()}{setJointImpedance()}}
+{\footnotesize\ttfamily void franka\+\_\+control\+::set\+Joint\+Impedance (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&}]{robot,  }\item[{const Set\+Joint\+Impedance\+::\+Request \&}]{req,  }\item[{Set\+Joint\+Impedance\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Definition at line 16 of file services.\+cpp.
+
+
+
+References franka\+::\+Robot\+::set\+Joint\+Impedance().
+
+
+
+Referenced by advertise\+Service(), and main().
+
+
+\begin{DoxyCode}
+18                                                      \{
+19   std::array<double, 7> joint\_stiffness;
+20   std::copy(req.joint\_stiffness.cbegin(), req.joint\_stiffness.cend(), joint\_stiffness.begin());
+21   robot.\hyperlink{classfranka_1_1Robot_aa18a28697cf6e3be16c6cff2dd839560}{setJointImpedance}(joint\_stiffness);
+22 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a38bda5f02b38367b199e8599993994ca_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a38bda5f02b38367b199e8599993994ca_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__control_a733bf6cd47763b70eaf44b7b5a237af9}\label{namespacefranka__control_a733bf6cd47763b70eaf44b7b5a237af9}} 
+\index{franka\+\_\+control@{franka\+\_\+control}!set\+K\+Frame@{set\+K\+Frame}}
+\index{set\+K\+Frame@{set\+K\+Frame}!franka\+\_\+control@{franka\+\_\+control}}
+\subsubsection{\texorpdfstring{set\+K\+Frame()}{setKFrame()}}
+{\footnotesize\ttfamily void franka\+\_\+control\+::set\+K\+Frame (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&}]{robot,  }\item[{const Set\+K\+Frame\+::\+Request \&}]{req,  }\item[{Set\+K\+Frame\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Definition at line 32 of file services.\+cpp.
+
+
+
+References franka\+::\+Robot\+::set\+K().
+
+
+
+Referenced by advertise\+Service(), and main().
+
+
+\begin{DoxyCode}
+34                                      \{
+35   std::array<double, 16> EE\_T\_K;  \textcolor{comment}{// NOLINT [readability-identifier-naming]}
+36   std::copy(req.EE\_T\_K.cbegin(), req.EE\_T\_K.cend(), EE\_T\_K.begin());
+37   robot.\hyperlink{classfranka_1_1Robot_ad1cf59d1b11306d80cd3c7144a989c56}{setK}(EE\_T\_K);
+38 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a733bf6cd47763b70eaf44b7b5a237af9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a733bf6cd47763b70eaf44b7b5a237af9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefranka__control_a3fbd42b0a097186b01181eb159ef1785}\label{namespacefranka__control_a3fbd42b0a097186b01181eb159ef1785}} 
+\index{franka\+\_\+control@{franka\+\_\+control}!set\+Load@{set\+Load}}
+\index{set\+Load@{set\+Load}!franka\+\_\+control@{franka\+\_\+control}}
+\subsubsection{\texorpdfstring{set\+Load()}{setLoad()}}
+{\footnotesize\ttfamily void franka\+\_\+control\+::set\+Load (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Robot}{franka\+::\+Robot} \&}]{robot,  }\item[{const Set\+Load\+::\+Request \&}]{req,  }\item[{Set\+Load\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Definition at line 99 of file services.\+cpp.
+
+
+
+References franka\+::\+Robot\+::set\+Load().
+
+
+
+Referenced by advertise\+Service(), and main().
+
+
+\begin{DoxyCode}
+99                                                                                 \{
+100   \textcolor{keywordtype}{double} mass(req.mass);
+101   std::array<double, 3> F\_x\_center\_load;  \textcolor{comment}{// NOLINT [readability-identifier-naming]}
+102   std::copy(req.F\_x\_center\_load.cbegin(), req.F\_x\_center\_load.cend(), F\_x\_center\_load.begin());
+103   std::array<double, 9> load\_inertia;
+104   std::copy(req.load\_inertia.cbegin(), req.load\_inertia.cend(), load\_inertia.begin());
+105 
+106   robot.\hyperlink{classfranka_1_1Robot_afcb708df10f24563dbcf7d5b907b4a15}{setLoad}(mass, F\_x\_center\_load, load\_inertia);
+107 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a3fbd42b0a097186b01181eb159ef1785_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka__control_a3fbd42b0a097186b01181eb159ef1785_icgraph}
+\end{center}
+\end{figure}

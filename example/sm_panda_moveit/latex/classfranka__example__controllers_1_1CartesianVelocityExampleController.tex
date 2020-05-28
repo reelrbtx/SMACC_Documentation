@@ -1,0 +1,262 @@
+\hypertarget{classfranka__example__controllers_1_1CartesianVelocityExampleController}{}\section{franka\+\_\+example\+\_\+controllers\+:\+:Cartesian\+Velocity\+Example\+Controller Class Reference}
+\label{classfranka__example__controllers_1_1CartesianVelocityExampleController}\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}}
+
+
+{\ttfamily \#include $<$cartesian\+\_\+velocity\+\_\+example\+\_\+controller.\+h$>$}
+
+
+
+Inheritance diagram for franka\+\_\+example\+\_\+controllers\+:\+:Cartesian\+Velocity\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{classfranka__example__controllers_1_1CartesianVelocityExampleController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for franka\+\_\+example\+\_\+controllers\+:\+:Cartesian\+Velocity\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1CartesianVelocityExampleController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_a74c17e2afdd736f29e0d165362ddc212}{init} (hardware\+\_\+interface\+::\+Robot\+HW $\ast$robot\+\_\+hardware, ros\+::\+Node\+Handle \&node\+\_\+handle) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_ab39ae92f4a9059066d6f18a6dddeb2b3}{update} (const ros\+::\+Time \&, const ros\+::\+Duration \&period) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_a9326c6506dc721e03447fef88c5c59f7}{starting} (const ros\+::\+Time \&) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_a03ffcb4dd32fa51329f7600384ff22d6}{stopping} (const ros\+::\+Time \&) override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfranka__hw_1_1FrankaVelocityCartesianInterface}{franka\+\_\+hw\+::\+Franka\+Velocity\+Cartesian\+Interface} $\ast$ \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_a252b7cc51863ad43fe4fb01bd07c6947}{velocity\+\_\+cartesian\+\_\+interface\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classfranka__hw_1_1FrankaCartesianVelocityHandle}{franka\+\_\+hw\+::\+Franka\+Cartesian\+Velocity\+Handle} $>$ \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_a70d748ed0786497d2ca847e011c237c9}{velocity\+\_\+cartesian\+\_\+handle\+\_\+}
+\item 
+ros\+::\+Duration \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_aea64d1bd4901f1b2a3f953f53c9d973c}{elapsed\+\_\+time\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 17 of file cartesian\+\_\+velocity\+\_\+example\+\_\+controller.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianVelocityExampleController_a74c17e2afdd736f29e0d165362ddc212}\label{classfranka__example__controllers_1_1CartesianVelocityExampleController_a74c17e2afdd736f29e0d165362ddc212}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}!init@{init}}
+\index{init@{init}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller\+::init (\begin{DoxyParamCaption}\item[{hardware\+\_\+interface\+::\+Robot\+HW $\ast$}]{robot\+\_\+hardware,  }\item[{ros\+::\+Node\+Handle \&}]{node\+\_\+handle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 18 of file cartesian\+\_\+velocity\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References velocity\+\_\+cartesian\+\_\+handle\+\_\+, and velocity\+\_\+cartesian\+\_\+interface\+\_\+.
+
+
+\begin{DoxyCode}
+19                                                                           \{
+20   \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} arm\_id;
+21   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"arm\_id"}, arm\_id)) \{
+22     ROS\_ERROR(\textcolor{stringliteral}{"CartesianVelocityExampleController: Could not get parameter arm\_id"});
+23     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+24   \}
+25 
+26   \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_a252b7cc51863ad43fe4fb01bd07c6947}{velocity\_cartesian\_interface\_} =
+27       robot\_hardware->get<\hyperlink{classfranka__hw_1_1FrankaVelocityCartesianInterface}{franka\_hw::FrankaVelocityCartesianInterface}
+      >();
+28   \textcolor{keywordflow}{if} (\hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_a252b7cc51863ad43fe4fb01bd07c6947}{velocity\_cartesian\_interface\_} == \textcolor{keyword}{nullptr}) \{
+29     ROS\_ERROR(
+30         \textcolor{stringliteral}{"CartesianVelocityExampleController: Could not get Cartesian velocity interface from "}
+31         \textcolor{stringliteral}{"hardware"});
+32     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+33   \}
+34   \textcolor{keywordflow}{try} \{
+35     \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_a70d748ed0786497d2ca847e011c237c9}{velocity\_cartesian\_handle\_} = 
+      std::make\_unique<franka\_hw::FrankaCartesianVelocityHandle>(
+36         \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_a252b7cc51863ad43fe4fb01bd07c6947}{velocity\_cartesian\_interface\_}->getHandle(arm\_id + \textcolor{stringliteral}{"\_robot"}));
+37   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} hardware\_interface::HardwareInterfaceException& e) \{
+38     ROS\_ERROR\_STREAM(
+39         \textcolor{stringliteral}{"CartesianVelocityExampleController: Exception getting Cartesian handle: "} << e.what());
+40     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+41   \}
+42 
+43   \textcolor{keyword}{auto} state\_interface = robot\_hardware->get<\hyperlink{classfranka__hw_1_1FrankaStateInterface}{franka\_hw::FrankaStateInterface}
+      >();
+44   \textcolor{keywordflow}{if} (state\_interface == \textcolor{keyword}{nullptr}) \{
+45     ROS\_ERROR(\textcolor{stringliteral}{"CartesianVelocityExampleController: Could not get state interface from hardware"});
+46     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+47   \}
+48 
+49   \textcolor{keywordflow}{try} \{
+50     \textcolor{keyword}{auto} state\_handle = state\_interface->getHandle(arm\_id + \textcolor{stringliteral}{"\_robot"});
+51 
+52     std::array<double, 7> q\_start = \{\{0, -M\_PI\_4, 0, -3 * M\_PI\_4, 0, M\_PI\_2, M\_PI\_4\}\};
+53     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < q\_start.size(); i++) \{
+54       \textcolor{keywordflow}{if} (std::abs(state\_handle.getRobotState().q\_d[i] - q\_start[i]) > 0.1) \{
+55         ROS\_ERROR\_STREAM(
+56             \textcolor{stringliteral}{"CartesianVelocityExampleController: Robot is not in the expected starting position "}
+57             \textcolor{stringliteral}{"for running this example. Run `roslaunch franka\_example\_controllers "}
+58             \textcolor{stringliteral}{"move\_to\_start.launch robot\_ip:=<robot-ip> load\_gripper:=<has-attached-gripper>` "}
+59             \textcolor{stringliteral}{"first."});
+60         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+61       \}
+62     \}
+63   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} hardware\_interface::HardwareInterfaceException& e) \{
+64     ROS\_ERROR\_STREAM(
+65         \textcolor{stringliteral}{"CartesianVelocityExampleController: Exception getting state handle: "} << e.what());
+66     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+67   \}
+68 
+69   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+70 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianVelocityExampleController_a9326c6506dc721e03447fef88c5c59f7}\label{classfranka__example__controllers_1_1CartesianVelocityExampleController_a9326c6506dc721e03447fef88c5c59f7}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}!starting@{starting}}
+\index{starting@{starting}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{starting()}{starting()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller\+::starting (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 72 of file cartesian\+\_\+velocity\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References elapsed\+\_\+time\+\_\+.
+
+
+\begin{DoxyCode}
+72                                                                   \{
+73   \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_aea64d1bd4901f1b2a3f953f53c9d973c}{elapsed\_time\_} = ros::Duration(0.0);
+74 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianVelocityExampleController_a03ffcb4dd32fa51329f7600384ff22d6}\label{classfranka__example__controllers_1_1CartesianVelocityExampleController_a03ffcb4dd32fa51329f7600384ff22d6}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}!stopping@{stopping}}
+\index{stopping@{stopping}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{stopping()}{stopping()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller\+::stopping (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 92 of file cartesian\+\_\+velocity\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References P\+L\+U\+G\+I\+N\+L\+I\+B\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+C\+L\+A\+S\+S().
+
+
+\begin{DoxyCode}
+92                                                                   \{
+93   \textcolor{comment}{// WARNING: DO NOT SEND ZERO VELOCITIES HERE AS IN CASE OF ABORTING DURING MOTION}
+94   \textcolor{comment}{// A JUMP TO ZERO WILL BE COMMANDED PUTTING HIGH LOADS ON THE ROBOT. LET THE DEFAULT}
+95   \textcolor{comment}{// BUILT-IN STOPPING BEHAVIOR SLOW DOWN THE ROBOT.}
+96 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1CartesianVelocityExampleController_a03ffcb4dd32fa51329f7600384ff22d6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianVelocityExampleController_ab39ae92f4a9059066d6f18a6dddeb2b3}\label{classfranka__example__controllers_1_1CartesianVelocityExampleController_ab39ae92f4a9059066d6f18a6dddeb2b3}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}!update@{update}}
+\index{update@{update}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{,  }\item[{const ros\+::\+Duration \&}]{period }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 76 of file cartesian\+\_\+velocity\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References elapsed\+\_\+time\+\_\+, and velocity\+\_\+cartesian\+\_\+handle\+\_\+.
+
+
+\begin{DoxyCode}
+77                                                                            \{
+78   \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_aea64d1bd4901f1b2a3f953f53c9d973c}{elapsed\_time\_} += period;
+79 
+80   \textcolor{keywordtype}{double} time\_max = 4.0;
+81   \textcolor{keywordtype}{double} v\_max = 0.05;
+82   \textcolor{keywordtype}{double} angle = M\_PI / 4.0;
+83   \textcolor{keywordtype}{double} cycle = std::floor(
+84       pow(-1.0, (\hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_aea64d1bd4901f1b2a3f953f53c9d973c}{elapsed\_time\_}.toSec() - std::fmod(\hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_aea64d1bd4901f1b2a3f953f53c9d973c}{elapsed\_time\_}.toSec(), 
+      time\_max)) / time\_max));
+85   \textcolor{keywordtype}{double} v = cycle * v\_max / 2.0 * (1.0 - std::cos(2.0 * M\_PI / time\_max * 
+      \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_aea64d1bd4901f1b2a3f953f53c9d973c}{elapsed\_time\_}.toSec()));
+86   \textcolor{keywordtype}{double} v\_x = std::cos(angle) * v;
+87   \textcolor{keywordtype}{double} v\_z = -std::sin(angle) * v;
+88   std::array<double, 6> command = \{\{v\_x, 0.0, v\_z, 0.0, 0.0, 0.0\}\};
+89   \hyperlink{classfranka__example__controllers_1_1CartesianVelocityExampleController_a70d748ed0786497d2ca847e011c237c9}{velocity\_cartesian\_handle\_}->setCommand(command);
+90 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianVelocityExampleController_aea64d1bd4901f1b2a3f953f53c9d973c}\label{classfranka__example__controllers_1_1CartesianVelocityExampleController_aea64d1bd4901f1b2a3f953f53c9d973c}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}!elapsed\+\_\+time\+\_\+@{elapsed\+\_\+time\+\_\+}}
+\index{elapsed\+\_\+time\+\_\+@{elapsed\+\_\+time\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{elapsed\+\_\+time\+\_\+}{elapsed\_time\_}}
+{\footnotesize\ttfamily ros\+::\+Duration franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller\+::elapsed\+\_\+time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file cartesian\+\_\+velocity\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianVelocityExampleController_a70d748ed0786497d2ca847e011c237c9}\label{classfranka__example__controllers_1_1CartesianVelocityExampleController_a70d748ed0786497d2ca847e011c237c9}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}!velocity\+\_\+cartesian\+\_\+handle\+\_\+@{velocity\+\_\+cartesian\+\_\+handle\+\_\+}}
+\index{velocity\+\_\+cartesian\+\_\+handle\+\_\+@{velocity\+\_\+cartesian\+\_\+handle\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{velocity\+\_\+cartesian\+\_\+handle\+\_\+}{velocity\_cartesian\_handle\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classfranka__hw_1_1FrankaCartesianVelocityHandle}{franka\+\_\+hw\+::\+Franka\+Cartesian\+Velocity\+Handle}$>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller\+::velocity\+\_\+cartesian\+\_\+handle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 28 of file cartesian\+\_\+velocity\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianVelocityExampleController_a252b7cc51863ad43fe4fb01bd07c6947}\label{classfranka__example__controllers_1_1CartesianVelocityExampleController_a252b7cc51863ad43fe4fb01bd07c6947}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}!velocity\+\_\+cartesian\+\_\+interface\+\_\+@{velocity\+\_\+cartesian\+\_\+interface\+\_\+}}
+\index{velocity\+\_\+cartesian\+\_\+interface\+\_\+@{velocity\+\_\+cartesian\+\_\+interface\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{velocity\+\_\+cartesian\+\_\+interface\+\_\+}{velocity\_cartesian\_interface\_}}
+{\footnotesize\ttfamily \hyperlink{classfranka__hw_1_1FrankaVelocityCartesianInterface}{franka\+\_\+hw\+::\+Franka\+Velocity\+Cartesian\+Interface}$\ast$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Velocity\+Example\+Controller\+::velocity\+\_\+cartesian\+\_\+interface\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 27 of file cartesian\+\_\+velocity\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/include/franka\+\_\+example\+\_\+controllers/\hyperlink{cartesian__velocity__example__controller_8h}{cartesian\+\_\+velocity\+\_\+example\+\_\+controller.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/src/\hyperlink{cartesian__velocity__example__controller_8cpp}{cartesian\+\_\+velocity\+\_\+example\+\_\+controller.\+cpp}\end{DoxyCompactItemize}

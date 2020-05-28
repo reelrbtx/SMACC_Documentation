@@ -1,0 +1,65 @@
+\hypertarget{namespacefranka_1_1anonymous__namespace_02rate__limiting_8cpp_03}{}\section{franka\+:\+:anonymous\+\_\+namespace\{rate\+\_\+limiting.\+cpp\} Namespace Reference}
+\label{namespacefranka_1_1anonymous__namespace_02rate__limiting_8cpp_03}\index{franka\+::anonymous\+\_\+namespace\lcurly{}rate\+\_\+limiting.\+cpp\rcurly{}@{franka\+::anonymous\+\_\+namespace\lcurly{}rate\+\_\+limiting.\+cpp\rcurly{}}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Eigen\+::\+Vector3d \hyperlink{namespacefranka_1_1anonymous__namespace_02rate__limiting_8cpp_03_aa1d64bbd7b303af83e6a76b92298d73a}{limit\+Rate} (double max\+\_\+velocity, double max\+\_\+acceleration, double max\+\_\+jerk, const Eigen\+::\+Vector3d \&commanded\+\_\+velocity, const Eigen\+::\+Vector3d \&last\+\_\+commanded\+\_\+velocity, const Eigen\+::\+Vector3d \&last\+\_\+commanded\+\_\+acceleration)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacefranka_1_1anonymous__namespace_02rate__limiting_8cpp_03_aa1d64bbd7b303af83e6a76b92298d73a}\label{namespacefranka_1_1anonymous__namespace_02rate__limiting_8cpp_03_aa1d64bbd7b303af83e6a76b92298d73a}} 
+\index{franka\+::anonymous\+\_\+namespace\lcurly{}rate\+\_\+limiting.\+cpp\rcurly{}@{franka\+::anonymous\+\_\+namespace\lcurly{}rate\+\_\+limiting.\+cpp\rcurly{}}!limit\+Rate@{limit\+Rate}}
+\index{limit\+Rate@{limit\+Rate}!franka\+::anonymous\+\_\+namespace\lcurly{}rate\+\_\+limiting.\+cpp\rcurly{}@{franka\+::anonymous\+\_\+namespace\lcurly{}rate\+\_\+limiting.\+cpp\rcurly{}}}
+\subsubsection{\texorpdfstring{limit\+Rate()}{limitRate()}}
+{\footnotesize\ttfamily Eigen\+::\+Vector3d franka\+::anonymous\+\_\+namespace\{rate\+\_\+limiting.\+cpp\}\+::limit\+Rate (\begin{DoxyParamCaption}\item[{double}]{max\+\_\+velocity,  }\item[{double}]{max\+\_\+acceleration,  }\item[{double}]{max\+\_\+jerk,  }\item[{const Eigen\+::\+Vector3d \&}]{commanded\+\_\+velocity,  }\item[{const Eigen\+::\+Vector3d \&}]{last\+\_\+commanded\+\_\+velocity,  }\item[{const Eigen\+::\+Vector3d \&}]{last\+\_\+commanded\+\_\+acceleration }\end{DoxyParamCaption})}
+
+
+
+Definition at line 13 of file rate\+\_\+limiting.\+cpp.
+
+
+
+References franka\+::k\+DeltaT, and franka\+::k\+Norm\+Eps.
+
+
+\begin{DoxyCode}
+18                                                                             \{
+19   \textcolor{comment}{// Differentiate to get jerk}
+20   Eigen::Vector3d commanded\_jerk =
+21       (((commanded\_velocity - last\_commanded\_velocity) / \hyperlink{namespacefranka_a1e207a0d5a6e90c1e1a78e6e1057120a}{kDeltaT}) - last\_commanded\_acceleration) /
+22       \hyperlink{namespacefranka_a1e207a0d5a6e90c1e1a78e6e1057120a}{kDeltaT};
+23 
+24   \textcolor{comment}{// Limit jerk and integrate to get desired acceleration}
+25   Eigen::Vector3d commanded\_acceleration = last\_commanded\_acceleration;
+26   \textcolor{keywordflow}{if} (commanded\_jerk.norm() > \hyperlink{namespacefranka_a420d72830a872ef375d9d6cbb1c439b5}{kNormEps}) \{
+27     commanded\_acceleration += (commanded\_jerk / commanded\_jerk.norm()) *
+28                               std::max(std::min(commanded\_jerk.norm(), max\_jerk), -max\_jerk) *
+29                               \hyperlink{namespacefranka_a1e207a0d5a6e90c1e1a78e6e1057120a}{kDeltaT};
+30   \}
+31 
+32   \textcolor{comment}{// Compute Euclidean distance to the max velocity vector that would be reached starting from}
+33   \textcolor{comment}{// last\_commanded\_velocity with the direction of the desired acceleration}
+34   Eigen::Vector3d unit\_commanded\_acceleration =
+35       commanded\_acceleration / commanded\_acceleration.norm();
+36   \textcolor{keywordtype}{double} dot\_product = unit\_commanded\_acceleration.transpose() * last\_commanded\_velocity;
+37   \textcolor{keywordtype}{double} distance\_to\_max\_velocity =
+38       -dot\_product + std::sqrt(pow(dot\_product, 2.0) - last\_commanded\_velocity.squaredNorm() +
+39                                pow(max\_velocity, 2.0));
+40 
+41   \textcolor{comment}{// Compute safe acceleration limits}
+42   \textcolor{keywordtype}{double} safe\_max\_acceleration =
+43       std::min((max\_jerk / max\_acceleration) * distance\_to\_max\_velocity, max\_acceleration);
+44 
+45   \textcolor{comment}{// Limit acceleration and integrate to get desired velocities}
+46   Eigen::Vector3d limited\_commanded\_velocity = last\_commanded\_velocity;
+47 
+48   \textcolor{keywordflow}{if} (commanded\_acceleration.norm() > \hyperlink{namespacefranka_a420d72830a872ef375d9d6cbb1c439b5}{kNormEps}) \{
+49     limited\_commanded\_velocity += unit\_commanded\_acceleration *
+50                                   std::min(commanded\_acceleration.norm(), safe\_max\_acceleration) *
+51                                   \hyperlink{namespacefranka_a1e207a0d5a6e90c1e1a78e6e1057120a}{kDeltaT};
+52   \}
+53 
+54   \textcolor{keywordflow}{return} limited\_commanded\_velocity;
+55 \}
+\end{DoxyCode}

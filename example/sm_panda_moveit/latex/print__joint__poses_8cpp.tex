@@ -1,0 +1,94 @@
+\hypertarget{print__joint__poses_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/print\+\_\+joint\+\_\+poses.cpp File Reference}
+\label{print__joint__poses_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/print\+\_\+joint\+\_\+poses.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/examples/print\+\_\+joint\+\_\+poses.\+cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$iterator$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/model.\+h$>$}\newline
+Include dependency graph for print\+\_\+joint\+\_\+poses.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{print__joint__poses_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T , size\+\_\+t N$>$ }\\std\+::ostream \& \hyperlink{print__joint__poses_8cpp_a9ffb9e980847451a3c5a687f5701d5fa}{operator$<$$<$} (std\+::ostream \&ostream, const std\+::array$<$ T, N $>$ \&array)
+\item 
+int \hyperlink{print__joint__poses_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{print__joint__poses_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{print__joint__poses_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{print\+\_\+joint\+\_\+poses.\+cpp@{print\+\_\+joint\+\_\+poses.\+cpp}!main@{main}}
+\index{main@{main}!print\+\_\+joint\+\_\+poses.\+cpp@{print\+\_\+joint\+\_\+poses.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 24 of file print\+\_\+joint\+\_\+poses.\+cpp.
+
+
+
+References franka\+::k\+End\+Effector, franka\+::k\+Joint1, franka\+::\+Robot\+::load\+Model(), franka\+::\+Model\+::pose(), and franka\+::\+Robot\+::read\+Once().
+
+
+\begin{DoxyCode}
+24                                 \{
+25   \textcolor{keywordflow}{if} (argc != 2) \{
+26     std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" <robot-hostname>"} << std::endl;
+27     \textcolor{keywordflow}{return} -1;
+28   \}
+29 
+30   \textcolor{keywordflow}{try} \{
+31     \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(argv[1]);
+32 
+33     \hyperlink{structfranka_1_1RobotState}{franka::RobotState} state = robot.readOnce();
+34 
+35     \hyperlink{classfranka_1_1Model}{franka::Model} model(robot.loadModel());
+36     \textcolor{keywordflow}{for} (\hyperlink{namespacefranka_a00b729ddce916481d3f0d10febec4f5b}{franka::Frame} frame = \hyperlink{namespacefranka_a00b729ddce916481d3f0d10febec4f5ba63d7910434fd319f86f05a4f0210dc26}{franka::Frame::kJoint1}; frame <= 
+      \hyperlink{namespacefranka_a00b729ddce916481d3f0d10febec4f5ba3617dcc7555dbca3c3e86e7535914fdf}{franka::Frame::kEndEffector};
+37          frame++) \{
+38       std::cout << model.\hyperlink{classfranka_1_1Model_adcd68a474d3843e5d9699c0f37fc76e8}{pose}(frame, state) << std::endl;
+39     \}
+40   \} \textcolor{keywordflow}{catch} (\hyperlink{structfranka_1_1Exception}{franka::Exception} \textcolor{keyword}{const}& e) \{
+41     std::cout << e.what() << std::endl;
+42     \textcolor{keywordflow}{return} -1;
+43   \}
+44 
+45   \textcolor{keywordflow}{return} 0;
+46 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{print__joint__poses_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{print__joint__poses_8cpp_a9ffb9e980847451a3c5a687f5701d5fa}\label{print__joint__poses_8cpp_a9ffb9e980847451a3c5a687f5701d5fa}} 
+\index{print\+\_\+joint\+\_\+poses.\+cpp@{print\+\_\+joint\+\_\+poses.\+cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!print\+\_\+joint\+\_\+poses.\+cpp@{print\+\_\+joint\+\_\+poses.\+cpp}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily template$<$class T , size\+\_\+t N$>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{ostream,  }\item[{const std\+::array$<$ T, N $>$ \&}]{array }\end{DoxyParamCaption})}
+
+
+
+Definition at line 16 of file print\+\_\+joint\+\_\+poses.\+cpp.
+
+
+\begin{DoxyCode}
+16                                                                          \{
+17   ostream << \textcolor{stringliteral}{"["};
+18   std::copy(array.cbegin(), array.cend() - 1, std::ostream\_iterator<T>(ostream, \textcolor{stringliteral}{","}));
+19   std::copy(array.cend() - 1, array.cend(), std::ostream\_iterator<T>(ostream));
+20   ostream << \textcolor{stringliteral}{"]"};
+21   \textcolor{keywordflow}{return} ostream;
+22 \}
+\end{DoxyCode}

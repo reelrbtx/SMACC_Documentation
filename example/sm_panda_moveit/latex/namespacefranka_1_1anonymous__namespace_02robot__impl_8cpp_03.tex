@@ -1,0 +1,59 @@
+\hypertarget{namespacefranka_1_1anonymous__namespace_02robot__impl_8cpp_03}{}\section{franka\+:\+:anonymous\+\_\+namespace\{robot\+\_\+impl.\+cpp\} Namespace Reference}
+\label{namespacefranka_1_1anonymous__namespace_02robot__impl_8cpp_03}\index{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+impl.\+cpp\rcurly{}@{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+impl.\+cpp\rcurly{}}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structfranka_1_1ControlException}{Control\+Exception} \hyperlink{namespacefranka_1_1anonymous__namespace_02robot__impl_8cpp_03_ad774a35737682bade54336046f9d09b2}{create\+Control\+Exception} (const char $\ast$message, \hyperlink{structresearch__interface_1_1robot_1_1Move_a74e15d249324a1b2d28f0a7cf50dc794}{research\+\_\+interface\+::robot\+::\+Move\+::\+Status} move\+\_\+status, const \hyperlink{structfranka_1_1Errors}{Errors} \&reflex\+\_\+errors, const std\+::vector$<$ \hyperlink{structfranka_1_1Record}{Record} $>$ \&log)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacefranka_1_1anonymous__namespace_02robot__impl_8cpp_03_ad774a35737682bade54336046f9d09b2}\label{namespacefranka_1_1anonymous__namespace_02robot__impl_8cpp_03_ad774a35737682bade54336046f9d09b2}} 
+\index{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+impl.\+cpp\rcurly{}@{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+impl.\+cpp\rcurly{}}!create\+Control\+Exception@{create\+Control\+Exception}}
+\index{create\+Control\+Exception@{create\+Control\+Exception}!franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+impl.\+cpp\rcurly{}@{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+impl.\+cpp\rcurly{}}}
+\subsubsection{\texorpdfstring{create\+Control\+Exception()}{createControlException()}}
+{\footnotesize\ttfamily \hyperlink{structfranka_1_1ControlException}{Control\+Exception} franka\+::anonymous\+\_\+namespace\{robot\+\_\+impl.\+cpp\}\+::create\+Control\+Exception (\begin{DoxyParamCaption}\item[{const char $\ast$}]{message,  }\item[{\hyperlink{structresearch__interface_1_1robot_1_1Move_a74e15d249324a1b2d28f0a7cf50dc794}{research\+\_\+interface\+::robot\+::\+Move\+::\+Status}}]{move\+\_\+status,  }\item[{const \hyperlink{structfranka_1_1Errors}{Errors} \&}]{reflex\+\_\+errors,  }\item[{const std\+::vector$<$ \hyperlink{structfranka_1_1Record}{Record} $>$ \&}]{log }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 13 of file robot\+\_\+impl.\+cpp.
+
+
+
+Referenced by franka\+::\+Robot\+::\+Impl\+::finish\+Motion(), and franka\+::\+Robot\+::\+Impl\+::throw\+On\+Motion\+Error().
+
+
+\begin{DoxyCode}
+16                                                                              \{
+17   std::ostringstream message\_stream;
+18   message\_stream << message;
+19   \textcolor{keywordflow}{if} (move\_status == decltype(move\_status)::kReflexAborted) \{
+20     message\_stream << \textcolor{stringliteral}{" "} << reflex\_errors;
+21 
+22     \textcolor{keywordflow}{if} (log.size() >= 2) \{
+23       \textcolor{comment}{// Count number of lost packets in the last and before last packets.}
+24       uint64\_t lost\_packets =
+25           log[log.size() - 1].state.time.toMSec() - log[log.size() - 2].state.time.toMSec() - 1;
+26       \textcolor{comment}{// Read second to last control\_command\_success\_rate since the last one will always be zero and}
+27       \textcolor{comment}{// consider in the success rate assumming all previous packets were lost.}
+28       message\_stream << std::endl
+29                      << \textcolor{stringliteral}{"control\_command\_success\_rate: "}
+30                      << (log[log.size() - 2].state.control\_command\_success\_rate *
+31                          (1 - \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(lost\_packets) / 100));
+32       \textcolor{comment}{// Packets lost in a row}
+33       \textcolor{keywordflow}{if} (lost\_packets > 0) \{
+34         message\_stream << \textcolor{stringliteral}{" packets lost in a row in the last sample: "} << lost\_packets;
+35       \}
+36     \}
+37   \}
+38   \textcolor{keywordflow}{return} ControlException(message\_stream.str(), log);
+39 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefranka_1_1anonymous__namespace_02robot__impl_8cpp_03_ad774a35737682bade54336046f9d09b2_icgraph}
+\end{center}
+\end{figure}

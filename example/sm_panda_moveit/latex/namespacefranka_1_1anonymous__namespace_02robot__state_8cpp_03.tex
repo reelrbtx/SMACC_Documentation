@@ -1,0 +1,78 @@
+\hypertarget{namespacefranka_1_1anonymous__namespace_02robot__state_8cpp_03}{}\section{franka\+:\+:anonymous\+\_\+namespace\{robot\+\_\+state.\+cpp\} Namespace Reference}
+\label{namespacefranka_1_1anonymous__namespace_02robot__state_8cpp_03}\index{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+state.\+cpp\rcurly{}@{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+state.\+cpp\rcurly{}}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T , size\+\_\+t N$>$ }\\std\+::ostream \& \hyperlink{namespacefranka_1_1anonymous__namespace_02robot__state_8cpp_03_a17af721f376e4c8955c455c1db15bdf6}{operator$<$$<$} (std\+::ostream \&ostream, const std\+::array$<$ T, N $>$ \&array)
+\item 
+std\+::ostream \& \hyperlink{namespacefranka_1_1anonymous__namespace_02robot__state_8cpp_03_a2cbd43861678488f626f5e01c62b8cc2}{operator$<$$<$} (std\+::ostream \&ostream, const \hyperlink{namespacefranka_adfe059ae23ebbad59e421edaa879651a}{Robot\+Mode} robot\+\_\+mode)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacefranka_1_1anonymous__namespace_02robot__state_8cpp_03_a17af721f376e4c8955c455c1db15bdf6}\label{namespacefranka_1_1anonymous__namespace_02robot__state_8cpp_03_a17af721f376e4c8955c455c1db15bdf6}} 
+\index{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+state.\+cpp\rcurly{}@{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+state.\+cpp\rcurly{}}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+state.\+cpp\rcurly{}@{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+state.\+cpp\rcurly{}}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T , size\+\_\+t N$>$ \\
+std\+::ostream\& franka\+::anonymous\+\_\+namespace\{robot\+\_\+state.\+cpp\}\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{ostream,  }\item[{const std\+::array$<$ T, N $>$ \&}]{array }\end{DoxyParamCaption})}
+
+
+
+Definition at line 14 of file robot\+\_\+state.\+cpp.
+
+
+\begin{DoxyCode}
+14                                                                          \{
+15   ostream << \textcolor{stringliteral}{"["};
+16   std::copy(array.cbegin(), array.cend() - 1, std::ostream\_iterator<T>(ostream, \textcolor{stringliteral}{","}));
+17   std::copy(array.cend() - 1, array.cend(), std::ostream\_iterator<T>(ostream));
+18   ostream << \textcolor{stringliteral}{"]"};
+19   \textcolor{keywordflow}{return} ostream;
+20 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacefranka_1_1anonymous__namespace_02robot__state_8cpp_03_a2cbd43861678488f626f5e01c62b8cc2}\label{namespacefranka_1_1anonymous__namespace_02robot__state_8cpp_03_a2cbd43861678488f626f5e01c62b8cc2}} 
+\index{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+state.\+cpp\rcurly{}@{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+state.\+cpp\rcurly{}}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+state.\+cpp\rcurly{}@{franka\+::anonymous\+\_\+namespace\lcurly{}robot\+\_\+state.\+cpp\rcurly{}}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::ostream\& franka\+::anonymous\+\_\+namespace\{robot\+\_\+state.\+cpp\}\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{ostream,  }\item[{const \hyperlink{namespacefranka_adfe059ae23ebbad59e421edaa879651a}{Robot\+Mode}}]{robot\+\_\+mode }\end{DoxyParamCaption})}
+
+
+
+Definition at line 22 of file robot\+\_\+state.\+cpp.
+
+
+
+References franka\+::k\+Automatic\+Error\+Recovery, franka\+::k\+Guiding, franka\+::k\+Idle, franka\+::k\+Move, franka\+::k\+Other, franka\+::k\+Reflex, and franka\+::k\+User\+Stopped.
+
+
+\begin{DoxyCode}
+22                                                                         \{
+23   ostream << \textcolor{stringliteral}{"\(\backslash\)""};
+24   \textcolor{keywordflow}{switch} (robot\_mode) \{
+25     \textcolor{keywordflow}{case} (RobotMode::kUserStopped):
+26       ostream << \textcolor{stringliteral}{"User stopped"};
+27       \textcolor{keywordflow}{break};
+28     \textcolor{keywordflow}{case} (RobotMode::kIdle):
+29       ostream << \textcolor{stringliteral}{"Idle"};
+30       \textcolor{keywordflow}{break};
+31     \textcolor{keywordflow}{case} (RobotMode::kMove):
+32       ostream << \textcolor{stringliteral}{"Move"};
+33       \textcolor{keywordflow}{break};
+34     \textcolor{keywordflow}{case} (RobotMode::kGuiding):
+35       ostream << \textcolor{stringliteral}{"Guiding"};
+36       \textcolor{keywordflow}{break};
+37     \textcolor{keywordflow}{case} (RobotMode::kReflex):
+38       ostream << \textcolor{stringliteral}{"Reflex"};
+39       \textcolor{keywordflow}{break};
+40     \textcolor{keywordflow}{case} (RobotMode::kAutomaticErrorRecovery):
+41       ostream << \textcolor{stringliteral}{"Automatic error recovery"};
+42       \textcolor{keywordflow}{break};
+43     \textcolor{keywordflow}{case} (\hyperlink{namespacetesting_1_1internal_aa8747bda20137c9aa7f846dee830e686ad47f29150ab7a9ec8ce2491f44537347}{RobotMode::kOther}):
+44       ostream << \textcolor{stringliteral}{"Other"};
+45       \textcolor{keywordflow}{break};
+46   \}
+47   ostream << \textcolor{stringliteral}{"\(\backslash\)""};
+48   \textcolor{keywordflow}{return} ostream;
+49 \}
+\end{DoxyCode}

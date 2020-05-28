@@ -1,0 +1,264 @@
+\hypertarget{classfranka__example__controllers_1_1JointVelocityExampleController}{}\section{franka\+\_\+example\+\_\+controllers\+:\+:Joint\+Velocity\+Example\+Controller Class Reference}
+\label{classfranka__example__controllers_1_1JointVelocityExampleController}\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}}
+
+
+{\ttfamily \#include $<$joint\+\_\+velocity\+\_\+example\+\_\+controller.\+h$>$}
+
+
+
+Inheritance diagram for franka\+\_\+example\+\_\+controllers\+:\+:Joint\+Velocity\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{classfranka__example__controllers_1_1JointVelocityExampleController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for franka\+\_\+example\+\_\+controllers\+:\+:Joint\+Velocity\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1JointVelocityExampleController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a97f6b9f2bd26bdb3700844549a5a803c}{init} (hardware\+\_\+interface\+::\+Robot\+HW $\ast$robot\+\_\+hardware, ros\+::\+Node\+Handle \&node\+\_\+handle) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_af25c5523cd2f79a7bd2da9cc1a5348d6}{update} (const ros\+::\+Time \&, const ros\+::\+Duration \&period) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a6f0a4d2a40e3b3fd827de7a882401a35}{starting} (const ros\+::\+Time \&) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_ae7557a0ea289d4d427f393fd5a4866b5}{stopping} (const ros\+::\+Time \&) override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+hardware\+\_\+interface\+::\+Velocity\+Joint\+Interface $\ast$ \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a34769e0599ac754774227087859986dd}{velocity\+\_\+joint\+\_\+interface\+\_\+}
+\item 
+std\+::vector$<$ hardware\+\_\+interface\+::\+Joint\+Handle $>$ \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_ab88c025c1a93924c079416fe2dbe011e}{velocity\+\_\+joint\+\_\+handles\+\_\+}
+\item 
+ros\+::\+Duration \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a39a8d082e948e285156244f678b8e627}{elapsed\+\_\+time\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 17 of file joint\+\_\+velocity\+\_\+example\+\_\+controller.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointVelocityExampleController_a97f6b9f2bd26bdb3700844549a5a803c}\label{classfranka__example__controllers_1_1JointVelocityExampleController_a97f6b9f2bd26bdb3700844549a5a803c}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}!init@{init}}
+\index{init@{init}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller\+::init (\begin{DoxyParamCaption}\item[{hardware\+\_\+interface\+::\+Robot\+HW $\ast$}]{robot\+\_\+hardware,  }\item[{ros\+::\+Node\+Handle \&}]{node\+\_\+handle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 15 of file joint\+\_\+velocity\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References velocity\+\_\+joint\+\_\+handles\+\_\+, and velocity\+\_\+joint\+\_\+interface\+\_\+.
+
+
+\begin{DoxyCode}
+16                                                                       \{
+17   \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a34769e0599ac754774227087859986dd}{velocity\_joint\_interface\_} = robot\_hardware->get<
+      hardware\_interface::VelocityJointInterface>();
+18   \textcolor{keywordflow}{if} (\hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a34769e0599ac754774227087859986dd}{velocity\_joint\_interface\_} == \textcolor{keyword}{nullptr}) \{
+19     ROS\_ERROR(
+20         \textcolor{stringliteral}{"JointVelocityExampleController: Error getting velocity joint interface from hardware!"});
+21     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+22   \}
+23   std::vector<std::string> joint\_names;
+24   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"joint\_names"}, joint\_names)) \{
+25     ROS\_ERROR(\textcolor{stringliteral}{"JointVelocityExampleController: Could not parse joint names"});
+26   \}
+27   \textcolor{keywordflow}{if} (joint\_names.size() != 7) \{
+28     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"JointVelocityExampleController: Wrong number of joint names, got "}
+29                      << joint\_names.size() << \textcolor{stringliteral}{" instead of 7 names!"});
+30     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+31   \}
+32   \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_ab88c025c1a93924c079416fe2dbe011e}{velocity\_joint\_handles\_}.resize(7);
+33   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 7; ++i) \{
+34     \textcolor{keywordflow}{try} \{
+35       \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_ab88c025c1a93924c079416fe2dbe011e}{velocity\_joint\_handles\_}[i] = 
+      \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a34769e0599ac754774227087859986dd}{velocity\_joint\_interface\_}->getHandle(joint\_names[i]);
+36     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} hardware\_interface::HardwareInterfaceException& ex) \{
+37       ROS\_ERROR\_STREAM(
+38           \textcolor{stringliteral}{"JointVelocityExampleController: Exception getting joint handles: "} << ex.what());
+39       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+40     \}
+41   \}
+42 
+43   \textcolor{keyword}{auto} state\_interface = robot\_hardware->get<\hyperlink{classfranka__hw_1_1FrankaStateInterface}{franka\_hw::FrankaStateInterface}
+      >();
+44   \textcolor{keywordflow}{if} (state\_interface == \textcolor{keyword}{nullptr}) \{
+45     ROS\_ERROR(\textcolor{stringliteral}{"JointVelocityExampleController: Could not get state interface from hardware"});
+46     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+47   \}
+48 
+49   \textcolor{keywordflow}{try} \{
+50     \textcolor{keyword}{auto} state\_handle = state\_interface->getHandle(\textcolor{stringliteral}{"panda\_robot"});
+51 
+52     std::array<double, 7> q\_start\{\{0, -M\_PI\_4, 0, -3 * M\_PI\_4, 0, M\_PI\_2, M\_PI\_4\}\};
+53     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < q\_start.size(); i++) \{
+54       \textcolor{keywordflow}{if} (std::abs(state\_handle.getRobotState().q\_d[i] - q\_start[i]) > 0.1) \{
+55         ROS\_ERROR\_STREAM(
+56             \textcolor{stringliteral}{"JointVelocityExampleController: Robot is not in the expected starting position for "}
+57             \textcolor{stringliteral}{"running this example. Run `roslaunch franka\_example\_controllers move\_to\_start.launch "}
+58             \textcolor{stringliteral}{"robot\_ip:=<robot-ip> load\_gripper:=<has-attached-gripper>` first."});
+59         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+60       \}
+61     \}
+62   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} hardware\_interface::HardwareInterfaceException& e) \{
+63     ROS\_ERROR\_STREAM(
+64         \textcolor{stringliteral}{"JointVelocityExampleController: Exception getting state handle: "} << e.what());
+65     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+66   \}
+67 
+68   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+69 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointVelocityExampleController_a6f0a4d2a40e3b3fd827de7a882401a35}\label{classfranka__example__controllers_1_1JointVelocityExampleController_a6f0a4d2a40e3b3fd827de7a882401a35}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}!starting@{starting}}
+\index{starting@{starting}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{starting()}{starting()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller\+::starting (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 71 of file joint\+\_\+velocity\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References elapsed\+\_\+time\+\_\+.
+
+
+\begin{DoxyCode}
+71                                                               \{
+72   \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a39a8d082e948e285156244f678b8e627}{elapsed\_time\_} = ros::Duration(0.0);
+73 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointVelocityExampleController_ae7557a0ea289d4d427f393fd5a4866b5}\label{classfranka__example__controllers_1_1JointVelocityExampleController_ae7557a0ea289d4d427f393fd5a4866b5}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}!stopping@{stopping}}
+\index{stopping@{stopping}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{stopping()}{stopping()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller\+::stopping (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 92 of file joint\+\_\+velocity\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References P\+L\+U\+G\+I\+N\+L\+I\+B\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+C\+L\+A\+S\+S().
+
+
+\begin{DoxyCode}
+92                                                               \{
+93   \textcolor{comment}{// WARNING: DO NOT SEND ZERO VELOCITIES HERE AS IN CASE OF ABORTING DURING MOTION}
+94   \textcolor{comment}{// A JUMP TO ZERO WILL BE COMMANDED PUTTING HIGH LOADS ON THE ROBOT. LET THE DEFAULT}
+95   \textcolor{comment}{// BUILT-IN STOPPING BEHAVIOR SLOW DOWN THE ROBOT.}
+96 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1JointVelocityExampleController_ae7557a0ea289d4d427f393fd5a4866b5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointVelocityExampleController_af25c5523cd2f79a7bd2da9cc1a5348d6}\label{classfranka__example__controllers_1_1JointVelocityExampleController_af25c5523cd2f79a7bd2da9cc1a5348d6}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}!update@{update}}
+\index{update@{update}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{,  }\item[{const ros\+::\+Duration \&}]{period }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 75 of file joint\+\_\+velocity\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References elapsed\+\_\+time\+\_\+, and velocity\+\_\+joint\+\_\+handles\+\_\+.
+
+
+\begin{DoxyCode}
+76                                                                        \{
+77   \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a39a8d082e948e285156244f678b8e627}{elapsed\_time\_} += period;
+78 
+79   ros::Duration time\_max(8.0);
+80   \textcolor{keywordtype}{double} omega\_max = 0.1;
+81   \textcolor{keywordtype}{double} cycle = std::floor(
+82       std::pow(-1.0, (\hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a39a8d082e948e285156244f678b8e627}{elapsed\_time\_}.toSec() - std::fmod(
+      \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a39a8d082e948e285156244f678b8e627}{elapsed\_time\_}.toSec(), time\_max.toSec())) /
+83                          time\_max.toSec()));
+84   \textcolor{keywordtype}{double} omega = cycle * omega\_max / 2.0 *
+85                  (1.0 - std::cos(2.0 * M\_PI / time\_max.toSec() * \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_a39a8d082e948e285156244f678b8e627}{elapsed\_time\_}.toSec()));
+86 
+87   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} joint\_handle : \hyperlink{classfranka__example__controllers_1_1JointVelocityExampleController_ab88c025c1a93924c079416fe2dbe011e}{velocity\_joint\_handles\_}) \{
+88     joint\_handle.setCommand(omega);
+89   \}
+90 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointVelocityExampleController_a39a8d082e948e285156244f678b8e627}\label{classfranka__example__controllers_1_1JointVelocityExampleController_a39a8d082e948e285156244f678b8e627}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}!elapsed\+\_\+time\+\_\+@{elapsed\+\_\+time\+\_\+}}
+\index{elapsed\+\_\+time\+\_\+@{elapsed\+\_\+time\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{elapsed\+\_\+time\+\_\+}{elapsed\_time\_}}
+{\footnotesize\ttfamily ros\+::\+Duration franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller\+::elapsed\+\_\+time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 29 of file joint\+\_\+velocity\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointVelocityExampleController_ab88c025c1a93924c079416fe2dbe011e}\label{classfranka__example__controllers_1_1JointVelocityExampleController_ab88c025c1a93924c079416fe2dbe011e}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}!velocity\+\_\+joint\+\_\+handles\+\_\+@{velocity\+\_\+joint\+\_\+handles\+\_\+}}
+\index{velocity\+\_\+joint\+\_\+handles\+\_\+@{velocity\+\_\+joint\+\_\+handles\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{velocity\+\_\+joint\+\_\+handles\+\_\+}{velocity\_joint\_handles\_}}
+{\footnotesize\ttfamily std\+::vector$<$hardware\+\_\+interface\+::\+Joint\+Handle$>$ franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller\+::velocity\+\_\+joint\+\_\+handles\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 28 of file joint\+\_\+velocity\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1JointVelocityExampleController_a34769e0599ac754774227087859986dd}\label{classfranka__example__controllers_1_1JointVelocityExampleController_a34769e0599ac754774227087859986dd}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}!velocity\+\_\+joint\+\_\+interface\+\_\+@{velocity\+\_\+joint\+\_\+interface\+\_\+}}
+\index{velocity\+\_\+joint\+\_\+interface\+\_\+@{velocity\+\_\+joint\+\_\+interface\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller}}
+\subsubsection{\texorpdfstring{velocity\+\_\+joint\+\_\+interface\+\_\+}{velocity\_joint\_interface\_}}
+{\footnotesize\ttfamily hardware\+\_\+interface\+::\+Velocity\+Joint\+Interface$\ast$ franka\+\_\+example\+\_\+controllers\+::\+Joint\+Velocity\+Example\+Controller\+::velocity\+\_\+joint\+\_\+interface\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 27 of file joint\+\_\+velocity\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/include/franka\+\_\+example\+\_\+controllers/\hyperlink{joint__velocity__example__controller_8h}{joint\+\_\+velocity\+\_\+example\+\_\+controller.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/src/\hyperlink{joint__velocity__example__controller_8cpp}{joint\+\_\+velocity\+\_\+example\+\_\+controller.\+cpp}\end{DoxyCompactItemize}

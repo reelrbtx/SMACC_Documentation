@@ -1,0 +1,238 @@
+\hypertarget{box__publisher_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/panda\+\_\+simulation/src/box\+\_\+publisher.cpp File Reference}
+\label{box__publisher_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/panda\+\_\+simulation/src/box\+\_\+publisher.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/panda\+\_\+simulation/src/box\+\_\+publisher.\+cpp}}
+{\ttfamily \#include $<$gazebo\+\_\+msgs/\+Set\+Model\+State.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/move\+\_\+group\+\_\+interface/move\+\_\+group\+\_\+interface.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/robot\+\_\+model\+\_\+loader/robot\+\_\+model\+\_\+loader.\+h$>$}\newline
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$sensor\+\_\+msgs/\+Joint\+State.\+h$>$}\newline
+Include dependency graph for box\+\_\+publisher.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box__publisher_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{box__publisher_8cpp_af1e41aacbcc6af0afd6606ed0563bb8d}{joint\+States\+Callback} (const sensor\+\_\+msgs\+::\+Joint\+State \&joint\+\_\+states\+\_\+current)
+\item 
+int \hyperlink{box__publisher_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const std\+::string \hyperlink{box__publisher_8cpp_a19cf8ea4075bbdc47c4caef4587cf045}{P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM} = \char`\"{}panda\+\_\+arm\char`\"{}
+\item 
+static const double \hyperlink{box__publisher_8cpp_a75d9aca5c549b5ba838a89ab85967311}{P\+A\+N\+D\+A\+\_\+\+A\+R\+M\+\_\+\+T\+O\+\_\+\+H\+A\+N\+D\+\_\+\+O\+F\+F\+S\+ET} = 0.\+12
+\item 
+static const double \hyperlink{box__publisher_8cpp_a985e4f8df1931eee48a63114fb562147}{P\+A\+N\+D\+A\+\_\+\+H\+A\+N\+D\+\_\+\+T\+O\+\_\+\+F\+I\+N\+G\+E\+R\+\_\+\+O\+F\+F\+S\+ET} = 0.\+04
+\item 
+ros\+::\+Publisher \hyperlink{box__publisher_8cpp_ad269f79cf96f9f0a4048f9b7524b2ee5}{gazebo\+\_\+model\+\_\+state\+\_\+pub}
+\item 
+robot\+\_\+model\+::\+Robot\+Model\+Ptr \hyperlink{box__publisher_8cpp_ac3a47e3c43f0b9fa2991f6d4f0b93fa6}{kinematic\+\_\+model}
+\item 
+robot\+\_\+state\+::\+Robot\+State\+Ptr \hyperlink{box__publisher_8cpp_a778174597ac1069bec845914da0d0506}{kinematic\+\_\+state}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{box__publisher_8cpp_af1e41aacbcc6af0afd6606ed0563bb8d}\label{box__publisher_8cpp_af1e41aacbcc6af0afd6606ed0563bb8d}} 
+\index{box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}!joint\+States\+Callback@{joint\+States\+Callback}}
+\index{joint\+States\+Callback@{joint\+States\+Callback}!box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}}
+\subsubsection{\texorpdfstring{joint\+States\+Callback()}{jointStatesCallback()}}
+{\footnotesize\ttfamily void joint\+States\+Callback (\begin{DoxyParamCaption}\item[{const sensor\+\_\+msgs\+::\+Joint\+State \&}]{joint\+\_\+states\+\_\+current }\end{DoxyParamCaption})}
+
+
+
+Definition at line 14 of file box\+\_\+publisher.\+cpp.
+
+
+
+References gazebo\+\_\+model\+\_\+state\+\_\+pub, kinematic\+\_\+model, kinematic\+\_\+state, P\+A\+N\+D\+A\+\_\+\+A\+R\+M\+\_\+\+T\+O\+\_\+\+H\+A\+N\+D\+\_\+\+O\+F\+F\+S\+ET, P\+A\+N\+D\+A\+\_\+\+H\+A\+N\+D\+\_\+\+T\+O\+\_\+\+F\+I\+N\+G\+E\+R\+\_\+\+O\+F\+F\+S\+ET, and interactive\+\_\+marker\+::pose.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+15 \{
+16   \textcolor{keyword}{const} robot\_state::JointModelGroup *joint\_model\_group = \hyperlink{box__publisher_8cpp_ac3a47e3c43f0b9fa2991f6d4f0b93fa6}{kinematic\_model}->
+      getJointModelGroup(\textcolor{stringliteral}{"panda\_arm"});
+17   \textcolor{keyword}{const} std::vector<std::string> &joint\_names = joint\_model\_group->getJointModelNames();
+18 
+19   std::vector<double> joint\_states;
+20   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < joint\_states\_current.position.size() - 2; ++i)
+21   \{
+22     joint\_states.push\_back(joint\_states\_current.position[i + 2]);
+23   \}
+24   \hyperlink{box__publisher_8cpp_a778174597ac1069bec845914da0d0506}{kinematic\_state}->setJointGroupPositions(joint\_model\_group, joint\_states);
+25 
+26   \textcolor{keyword}{const} Eigen::Affine3d &end\_effector\_state = \hyperlink{box__publisher_8cpp_a778174597ac1069bec845914da0d0506}{kinematic\_state}->getGlobalLinkTransform(\textcolor{stringliteral}{"
+      panda\_link8"});
+27 
+28   \textcolor{keywordtype}{double} end\_effector\_z\_offset = \hyperlink{box__publisher_8cpp_a75d9aca5c549b5ba838a89ab85967311}{PANDA\_ARM\_TO\_HAND\_OFFSET} + 
+      \hyperlink{box__publisher_8cpp_a985e4f8df1931eee48a63114fb562147}{PANDA\_HAND\_TO\_FINGER\_OFFSET};
+29   Eigen::Affine3d tmp\_transform(Eigen::Translation3d(Eigen::Vector3d(0.0, 0.0, end\_effector\_z\_offset)));
+30 
+31   Eigen::Affine3d newState = end\_effector\_state * tmp\_transform;
+32 
+33   geometry\_msgs::Pose \hyperlink{namespaceinteractive__marker_a06e4691dc5f93e0da6dc9a6efa8d99b5}{pose};
+34   pose.position.x = newState.translation().x();
+35   pose.position.y = newState.translation().y();
+36   pose.position.z = newState.translation().z();
+37 
+38   Eigen::Quaterniond quat(newState.rotation());
+39   pose.orientation.w = quat.w();
+40   pose.orientation.x = quat.x();
+41   pose.orientation.y = quat.y();
+42   pose.orientation.z = quat.z();
+43 
+44   ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"translation"} << std::endl << newState.translation());
+45   ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"rotation"} << std::endl << newState.rotation());
+46 
+47   gazebo\_msgs::ModelState model\_state;
+48   \textcolor{comment}{// This string results from the spawn\_urdf call in the box.launch file argument: -model box}
+49   model\_state.model\_name = \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string}(\textcolor{stringliteral}{"box"});
+50   model\_state.pose = \hyperlink{namespaceinteractive__marker_a06e4691dc5f93e0da6dc9a6efa8d99b5}{pose};
+51   model\_state.reference\_frame = \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string}(\textcolor{stringliteral}{"world"});
+52 
+53   \hyperlink{box__publisher_8cpp_ad269f79cf96f9f0a4048f9b7524b2ee5}{gazebo\_model\_state\_pub}.publish(model\_state);
+54 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{box__publisher_8cpp_af1e41aacbcc6af0afd6606ed0563bb8d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box__publisher_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{box__publisher_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}!main@{main}}
+\index{main@{main}!box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 56 of file box\+\_\+publisher.\+cpp.
+
+
+
+References gazebo\+\_\+model\+\_\+state\+\_\+pub, joint\+States\+Callback(), kinematic\+\_\+model, and kinematic\+\_\+state.
+
+
+\begin{DoxyCode}
+57 \{
+58   ros::init(argc, argv, \textcolor{stringliteral}{"box\_publisher\_node"});
+59   ros::NodeHandle node\_handle;
+60 
+61   ros::Subscriber joint\_states\_sub = node\_handle.subscribe(\textcolor{stringliteral}{"/joint\_states"}, 1, 
+      \hyperlink{box__publisher_8cpp_af1e41aacbcc6af0afd6606ed0563bb8d}{jointStatesCallback});
+62 
+63   robot\_model\_loader::RobotModelLoader robot\_model\_loader(\textcolor{stringliteral}{"robot\_description"});
+64   \hyperlink{box__publisher_8cpp_ac3a47e3c43f0b9fa2991f6d4f0b93fa6}{kinematic\_model} = robot\_model\_loader.getModel();
+65   \hyperlink{box__publisher_8cpp_a778174597ac1069bec845914da0d0506}{kinematic\_state} = robot\_state::RobotStatePtr(\textcolor{keyword}{new} robot\_state::RobotState(
+      \hyperlink{box__publisher_8cpp_ac3a47e3c43f0b9fa2991f6d4f0b93fa6}{kinematic\_model}));
+66 
+67   \hyperlink{box__publisher_8cpp_ad269f79cf96f9f0a4048f9b7524b2ee5}{gazebo\_model\_state\_pub} = node\_handle.advertise<gazebo\_msgs::ModelState>(\textcolor{stringliteral}{"
+      /gazebo/set\_model\_state"}, 1);
+68 
+69   ros::spin();
+70   \textcolor{keywordflow}{return} 0;
+71 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{box__publisher_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{box__publisher_8cpp_ad269f79cf96f9f0a4048f9b7524b2ee5}\label{box__publisher_8cpp_ad269f79cf96f9f0a4048f9b7524b2ee5}} 
+\index{box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}!gazebo\+\_\+model\+\_\+state\+\_\+pub@{gazebo\+\_\+model\+\_\+state\+\_\+pub}}
+\index{gazebo\+\_\+model\+\_\+state\+\_\+pub@{gazebo\+\_\+model\+\_\+state\+\_\+pub}!box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}}
+\subsubsection{\texorpdfstring{gazebo\+\_\+model\+\_\+state\+\_\+pub}{gazebo\_model\_state\_pub}}
+{\footnotesize\ttfamily ros\+::\+Publisher gazebo\+\_\+model\+\_\+state\+\_\+pub}
+
+
+
+Definition at line 10 of file box\+\_\+publisher.\+cpp.
+
+
+
+Referenced by joint\+States\+Callback(), and main().
+
+\mbox{\Hypertarget{box__publisher_8cpp_ac3a47e3c43f0b9fa2991f6d4f0b93fa6}\label{box__publisher_8cpp_ac3a47e3c43f0b9fa2991f6d4f0b93fa6}} 
+\index{box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}!kinematic\+\_\+model@{kinematic\+\_\+model}}
+\index{kinematic\+\_\+model@{kinematic\+\_\+model}!box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}}
+\subsubsection{\texorpdfstring{kinematic\+\_\+model}{kinematic\_model}}
+{\footnotesize\ttfamily robot\+\_\+model\+::\+Robot\+Model\+Ptr kinematic\+\_\+model}
+
+
+
+Definition at line 11 of file box\+\_\+publisher.\+cpp.
+
+
+
+Referenced by joint\+States\+Callback(), and main().
+
+\mbox{\Hypertarget{box__publisher_8cpp_a778174597ac1069bec845914da0d0506}\label{box__publisher_8cpp_a778174597ac1069bec845914da0d0506}} 
+\index{box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}!kinematic\+\_\+state@{kinematic\+\_\+state}}
+\index{kinematic\+\_\+state@{kinematic\+\_\+state}!box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}}
+\subsubsection{\texorpdfstring{kinematic\+\_\+state}{kinematic\_state}}
+{\footnotesize\ttfamily robot\+\_\+state\+::\+Robot\+State\+Ptr kinematic\+\_\+state}
+
+
+
+Definition at line 12 of file box\+\_\+publisher.\+cpp.
+
+
+
+Referenced by joint\+States\+Callback(), and main().
+
+\mbox{\Hypertarget{box__publisher_8cpp_a75d9aca5c549b5ba838a89ab85967311}\label{box__publisher_8cpp_a75d9aca5c549b5ba838a89ab85967311}} 
+\index{box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}!P\+A\+N\+D\+A\+\_\+\+A\+R\+M\+\_\+\+T\+O\+\_\+\+H\+A\+N\+D\+\_\+\+O\+F\+F\+S\+ET@{P\+A\+N\+D\+A\+\_\+\+A\+R\+M\+\_\+\+T\+O\+\_\+\+H\+A\+N\+D\+\_\+\+O\+F\+F\+S\+ET}}
+\index{P\+A\+N\+D\+A\+\_\+\+A\+R\+M\+\_\+\+T\+O\+\_\+\+H\+A\+N\+D\+\_\+\+O\+F\+F\+S\+ET@{P\+A\+N\+D\+A\+\_\+\+A\+R\+M\+\_\+\+T\+O\+\_\+\+H\+A\+N\+D\+\_\+\+O\+F\+F\+S\+ET}!box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}}
+\subsubsection{\texorpdfstring{P\+A\+N\+D\+A\+\_\+\+A\+R\+M\+\_\+\+T\+O\+\_\+\+H\+A\+N\+D\+\_\+\+O\+F\+F\+S\+ET}{PANDA\_ARM\_TO\_HAND\_OFFSET}}
+{\footnotesize\ttfamily const double P\+A\+N\+D\+A\+\_\+\+A\+R\+M\+\_\+\+T\+O\+\_\+\+H\+A\+N\+D\+\_\+\+O\+F\+F\+S\+ET = 0.\+12\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 8 of file box\+\_\+publisher.\+cpp.
+
+
+
+Referenced by joint\+States\+Callback().
+
+\mbox{\Hypertarget{box__publisher_8cpp_a985e4f8df1931eee48a63114fb562147}\label{box__publisher_8cpp_a985e4f8df1931eee48a63114fb562147}} 
+\index{box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}!P\+A\+N\+D\+A\+\_\+\+H\+A\+N\+D\+\_\+\+T\+O\+\_\+\+F\+I\+N\+G\+E\+R\+\_\+\+O\+F\+F\+S\+ET@{P\+A\+N\+D\+A\+\_\+\+H\+A\+N\+D\+\_\+\+T\+O\+\_\+\+F\+I\+N\+G\+E\+R\+\_\+\+O\+F\+F\+S\+ET}}
+\index{P\+A\+N\+D\+A\+\_\+\+H\+A\+N\+D\+\_\+\+T\+O\+\_\+\+F\+I\+N\+G\+E\+R\+\_\+\+O\+F\+F\+S\+ET@{P\+A\+N\+D\+A\+\_\+\+H\+A\+N\+D\+\_\+\+T\+O\+\_\+\+F\+I\+N\+G\+E\+R\+\_\+\+O\+F\+F\+S\+ET}!box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}}
+\subsubsection{\texorpdfstring{P\+A\+N\+D\+A\+\_\+\+H\+A\+N\+D\+\_\+\+T\+O\+\_\+\+F\+I\+N\+G\+E\+R\+\_\+\+O\+F\+F\+S\+ET}{PANDA\_HAND\_TO\_FINGER\_OFFSET}}
+{\footnotesize\ttfamily const double P\+A\+N\+D\+A\+\_\+\+H\+A\+N\+D\+\_\+\+T\+O\+\_\+\+F\+I\+N\+G\+E\+R\+\_\+\+O\+F\+F\+S\+ET = 0.\+04\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 9 of file box\+\_\+publisher.\+cpp.
+
+
+
+Referenced by joint\+States\+Callback().
+
+\mbox{\Hypertarget{box__publisher_8cpp_a19cf8ea4075bbdc47c4caef4587cf045}\label{box__publisher_8cpp_a19cf8ea4075bbdc47c4caef4587cf045}} 
+\index{box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}!P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM@{P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM}}
+\index{P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM@{P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM}!box\+\_\+publisher.\+cpp@{box\+\_\+publisher.\+cpp}}
+\subsubsection{\texorpdfstring{P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM}{PLANNING\_GROUP\_ARM}}
+{\footnotesize\ttfamily const std\+::string P\+L\+A\+N\+N\+I\+N\+G\+\_\+\+G\+R\+O\+U\+P\+\_\+\+A\+RM = \char`\"{}panda\+\_\+arm\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 7 of file box\+\_\+publisher.\+cpp.
+

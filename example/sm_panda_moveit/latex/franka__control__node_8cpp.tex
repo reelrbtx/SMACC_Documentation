@@ -1,0 +1,250 @@
+\hypertarget{franka__control__node_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+control/src/franka\+\_\+control\+\_\+node.cpp File Reference}
+\label{franka__control__node_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+control/src/franka\+\_\+control\+\_\+node.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+control/src/franka\+\_\+control\+\_\+node.\+cpp}}
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$atomic$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$actionlib/server/simple\+\_\+action\+\_\+server.\+h$>$}\newline
+{\ttfamily \#include $<$controller\+\_\+manager/controller\+\_\+manager.\+h$>$}\newline
+{\ttfamily \#include $<$franka/exception.\+h$>$}\newline
+{\ttfamily \#include $<$franka/robot.\+h$>$}\newline
+{\ttfamily \#include $<$franka\+\_\+hw/franka\+\_\+hw.\+h$>$}\newline
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$franka\+\_\+control/\+Error\+Recovery\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$franka\+\_\+control/services.\+h$>$}\newline
+Include dependency graph for franka\+\_\+control\+\_\+node.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{franka__control__node_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classServiceContainer}{Service\+Container}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{franka__control__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{franka__control__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{franka__control__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{franka\+\_\+control\+\_\+node.\+cpp@{franka\+\_\+control\+\_\+node.\+cpp}!main@{main}}
+\index{main@{main}!franka\+\_\+control\+\_\+node.\+cpp@{franka\+\_\+control\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 32 of file franka\+\_\+control\+\_\+node.\+cpp.
+
+
+
+References Service\+Container\+::advertise\+Service(), franka\+::\+Robot\+::automatic\+Error\+Recovery(), franka\+\_\+hw\+::\+Franka\+H\+W\+::control(), franka\+\_\+hw\+::\+Franka\+H\+W\+::controller\+Active(), franka\+\_\+hw\+::\+Franka\+H\+W\+::enforce\+Limits(), franka\+::k\+Cartesian\+Impedance, franka\+::k\+Joint\+Impedance, franka\+::\+Robot\+::load\+Model(), franka\+::\+Robot\+::read\+Once(), franka\+\_\+hw\+::\+Franka\+H\+W\+::reset(), franka\+\_\+control\+::set\+Cartesian\+Impedance(), franka\+::\+Robot\+::set\+Collision\+Behavior(), franka\+\_\+control\+::set\+E\+E\+Frame(), franka\+\_\+control\+::set\+Force\+Torque\+Collision\+Behavior(), franka\+\_\+control\+::set\+Full\+Collision\+Behavior(), franka\+\_\+control\+::set\+Joint\+Impedance(), franka\+\_\+control\+::set\+K\+Frame(), franka\+\_\+control\+::set\+Load(), and franka\+\_\+hw\+::\+Franka\+H\+W\+::update().
+
+
+\begin{DoxyCode}
+32                                 \{
+33   ros::init(argc, argv, \textcolor{stringliteral}{"franka\_control\_node"});
+34   ros::NodeHandle public\_node\_handle;
+35   ros::NodeHandle node\_handle(\textcolor{stringliteral}{"~"});
+36 
+37   std::vector<std::string> joint\_names\_vector;
+38   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"joint\_names"}, joint\_names\_vector) || joint\_names\_vector.size() != 7) \{
+39     ROS\_ERROR(\textcolor{stringliteral}{"Invalid or no joint\_names parameters provided"});
+40     \textcolor{keywordflow}{return} 1;
+41   \}
+42 
+43   std::array<std::string, 7> joint\_names;
+44   std::copy(joint\_names\_vector.cbegin(), joint\_names\_vector.cend(), joint\_names.begin());
+45 
+46   \textcolor{keywordtype}{bool} rate\_limiting;
+47   \textcolor{keywordflow}{if} (!node\_handle.getParamCached(\textcolor{stringliteral}{"rate\_limiting"}, rate\_limiting)) \{
+48     ROS\_ERROR(\textcolor{stringliteral}{"Invalid or no rate\_limiting parameter provided"});
+49     \textcolor{keywordflow}{return} 1;
+50   \}
+51 
+52   \textcolor{keywordtype}{double} cutoff\_frequency;
+53   \textcolor{keywordflow}{if} (!node\_handle.getParamCached(\textcolor{stringliteral}{"cutoff\_frequency"}, cutoff\_frequency)) \{
+54     ROS\_ERROR(\textcolor{stringliteral}{"Invalid or no cutoff\_frequency parameter provided"});
+55     \textcolor{keywordflow}{return} 1;
+56   \}
+57 
+58   \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} internal\_controller;
+59   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"internal\_controller"}, internal\_controller)) \{
+60     ROS\_ERROR(\textcolor{stringliteral}{"No internal\_controller parameter provided"});
+61     \textcolor{keywordflow}{return} 1;
+62   \}
+63 
+64   urdf::Model urdf\_model;
+65   \textcolor{keywordflow}{if} (!urdf\_model.initParamWithNodeHandle(\textcolor{stringliteral}{"robot\_description"}, public\_node\_handle)) \{
+66     ROS\_ERROR(\textcolor{stringliteral}{"Could not initialize URDF model from robot\_description"});
+67     \textcolor{keywordflow}{return} 1;
+68   \}
+69 
+70   \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} robot\_ip;
+71   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"robot\_ip"}, robot\_ip)) \{
+72     ROS\_ERROR(\textcolor{stringliteral}{"Invalid or no robot\_ip parameter provided"});
+73     \textcolor{keywordflow}{return} 1;
+74   \}
+75 
+76   \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} arm\_id;
+77   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"arm\_id"}, arm\_id)) \{
+78     ROS\_ERROR(\textcolor{stringliteral}{"Invalid or no arm\_id parameter provided"});
+79     \textcolor{keywordflow}{return} 1;
+80   \}
+81   \hyperlink{classfranka_1_1Robot}{franka::Robot} robot(robot\_ip);
+82 
+83   \textcolor{comment}{// Set default collision behavior}
+84   robot.setCollisionBehavior(
+85       \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\}, \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\},
+86       \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\}, \{\{20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0\}\},
+87       \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\}, \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\},
+88       \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\}, \{\{20.0, 20.0, 20.0, 25.0, 25.0, 25.0\}\});
+89 
+90   std::atomic\_bool has\_error(\textcolor{keyword}{false});
+91 
+92   \hyperlink{classServiceContainer}{ServiceContainer} services;
+93   services
+94       .\hyperlink{classServiceContainer_a46e347a74b89b0001362544711b18862}{advertiseService}<franka\_control::SetJointImpedance>(
+95           node\_handle, \textcolor{stringliteral}{"set\_joint\_impedance"},
+96           [&robot](\textcolor{keyword}{auto}&& req, \textcolor{keyword}{auto}&& res) \{
+97             \textcolor{keywordflow}{return} \hyperlink{namespacefranka__control_a38bda5f02b38367b199e8599993994ca}{franka\_control::setJointImpedance}(robot, req, res);
+98           \})
+99       .advertiseService<franka\_control::SetCartesianImpedance>(
+100           node\_handle, \textcolor{stringliteral}{"set\_cartesian\_impedance"},
+101           [&robot](\textcolor{keyword}{auto}&& req, \textcolor{keyword}{auto}&& res) \{
+102             \textcolor{keywordflow}{return} \hyperlink{namespacefranka__control_a6c82cc16e5790da8663f879332670421}{franka\_control::setCartesianImpedance}(robot, req, 
+      res);
+103           \})
+104       .advertiseService<franka\_control::SetEEFrame>(
+105           node\_handle, \textcolor{stringliteral}{"set\_EE\_frame"},
+106           [&robot](\textcolor{keyword}{auto}&& req, \textcolor{keyword}{auto}&& res) \{ \textcolor{keywordflow}{return} \hyperlink{namespacefranka__control_aaab1e3e96b01a8589336c39998422dad}{franka\_control::setEEFrame}(
+      robot, req, res); \})
+107       .advertiseService<franka\_control::SetKFrame>(
+108           node\_handle, \textcolor{stringliteral}{"set\_K\_frame"},
+109           [&robot](\textcolor{keyword}{auto}&& req, \textcolor{keyword}{auto}&& res) \{ \textcolor{keywordflow}{return} \hyperlink{namespacefranka__control_a733bf6cd47763b70eaf44b7b5a237af9}{franka\_control::setKFrame}(
+      robot, req, res); \})
+110       .advertiseService<franka\_control::SetForceTorqueCollisionBehavior>(
+111           node\_handle, \textcolor{stringliteral}{"set\_force\_torque\_collision\_behavior"},
+112           [&robot](\textcolor{keyword}{auto}&& req, \textcolor{keyword}{auto}&& res) \{
+113             \textcolor{keywordflow}{return} \hyperlink{namespacefranka__control_a7ea982d94110cc6f522d42a140d608af}{franka\_control::setForceTorqueCollisionBehavior}
+      (robot, req, res);
+114           \})
+115       .advertiseService<franka\_control::SetFullCollisionBehavior>(
+116           node\_handle, \textcolor{stringliteral}{"set\_full\_collision\_behavior"},
+117           [&robot](\textcolor{keyword}{auto}&& req, \textcolor{keyword}{auto}&& res) \{
+118             \textcolor{keywordflow}{return} \hyperlink{namespacefranka__control_a13e02b7048c013bf57506f927ce6745d}{franka\_control::setFullCollisionBehavior}(robot, 
+      req, res);
+119           \})
+120       .advertiseService<franka\_control::SetLoad>(
+121           node\_handle, \textcolor{stringliteral}{"set\_load"},
+122           [&robot](\textcolor{keyword}{auto}&& req, \textcolor{keyword}{auto}&& res) \{ \textcolor{keywordflow}{return} \hyperlink{namespacefranka__control_a3fbd42b0a097186b01181eb159ef1785}{franka\_control::setLoad}(robot, 
+      req, res); \});
+123 
+124   actionlib::SimpleActionServer<franka\_control::ErrorRecoveryAction> recovery\_action\_server(
+125       node\_handle, \textcolor{stringliteral}{"error\_recovery"},
+126       [&](\textcolor{keyword}{const} franka\_control::ErrorRecoveryGoalConstPtr&) \{
+127         \textcolor{keywordflow}{try} \{
+128           robot.automaticErrorRecovery();
+129           has\_error = \textcolor{keyword}{false};
+130           recovery\_action\_server.setSucceeded();
+131           ROS\_INFO(\textcolor{stringliteral}{"Recovered from error"});
+132         \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1Exception}{franka::Exception}& ex) \{
+133           recovery\_action\_server.setAborted(franka\_control::ErrorRecoveryResult(), ex.what());
+134         \}
+135       \},
+136       \textcolor{keyword}{false});
+137 
+138   \hyperlink{classfranka_1_1Model}{franka::Model} model = robot.loadModel();
+139   \textcolor{keyword}{auto} get\_rate\_limiting = [&]() \{
+140     node\_handle.getParamCached(\textcolor{stringliteral}{"rate\_limiting"}, rate\_limiting);
+141     \textcolor{keywordflow}{return} rate\_limiting;
+142   \};
+143   \textcolor{keyword}{auto} get\_internal\_controller = [&]() \{
+144     node\_handle.getParamCached(\textcolor{stringliteral}{"internal\_controller"}, internal\_controller);
+145 
+146     \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816b}{franka::ControllerMode} controller\_mode;
+147     \textcolor{keywordflow}{if} (internal\_controller == \textcolor{stringliteral}{"joint\_impedance"}) \{
+148       controller\_mode = \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816baa7cd8fc7552b5b9c50684e57f032d724}{franka::ControllerMode::kJointImpedance};
+149     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (internal\_controller == \textcolor{stringliteral}{"cartesian\_impedance"}) \{
+150       controller\_mode = \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816bac2c3f2cf686f3debef77b3049958b488}{franka::ControllerMode::kCartesianImpedance}
+      ;
+151     \} \textcolor{keywordflow}{else} \{
+152       ROS\_WARN(\textcolor{stringliteral}{"Invalid internal\_controller parameter provided, falling back to joint impedance"});
+153       controller\_mode = \hyperlink{namespacefranka_a3e20bc77587e2c0c53598753e3f4816baa7cd8fc7552b5b9c50684e57f032d724}{franka::ControllerMode::kJointImpedance};
+154     \}
+155 
+156     \textcolor{keywordflow}{return} controller\_mode;
+157   \};
+158   \textcolor{keyword}{auto} get\_cutoff\_frequency = [&]() \{
+159     node\_handle.getParamCached(\textcolor{stringliteral}{"cutoff\_frequency"}, cutoff\_frequency);
+160     \textcolor{keywordflow}{return} cutoff\_frequency;
+161   \};
+162   \hyperlink{classfranka__hw_1_1FrankaHW}{franka\_hw::FrankaHW} \hyperlink{namespacefranka__control}{franka\_control}(joint\_names, arm\_id, urdf\_model, 
+      model, get\_rate\_limiting,
+163                                      get\_cutoff\_frequency, get\_internal\_controller);
+164 
+165   \textcolor{comment}{// Initialize robot state before loading any controller}
+166   \hyperlink{namespacefranka__control}{franka\_control}.update(robot.readOnce());
+167 
+168   controller\_manager::ControllerManager control\_manager(&\hyperlink{namespacefranka__control}{franka\_control}, public\_node\_handle);
+169 
+170   recovery\_action\_server.start();
+171 
+172   \textcolor{comment}{// Start background threads for message handling}
+173   ros::AsyncSpinner spinner(4);
+174   spinner.start();
+175 
+176   \textcolor{keywordflow}{while} (ros::ok()) \{
+177     ros::Time last\_time = ros::Time::now();
+178 
+179     \textcolor{comment}{// Wait until controller has been activated or error has been recovered}
+180     \textcolor{keywordflow}{while} (!\hyperlink{namespacefranka__control}{franka\_control}.controllerActive() || has\_error) \{
+181       \hyperlink{namespacefranka__control}{franka\_control}.update(robot.readOnce());
+182 
+183       ros::Time now = ros::Time::now();
+184       control\_manager.update(now, now - last\_time);
+185       last\_time = now;
+186 
+187       \textcolor{keywordflow}{if} (!ros::ok()) \{
+188         \textcolor{keywordflow}{return} 0;
+189       \}
+190     \}
+191 
+192     \textcolor{keywordflow}{try} \{
+193       \textcolor{comment}{// Run control loop. Will exit if the controller is switched.}
+194       \hyperlink{namespacefranka__control}{franka\_control}.control(robot, [&](\textcolor{keyword}{const} ros::Time& now, \textcolor{keyword}{const} ros::Duration& period) \{
+195         \textcolor{keywordflow}{if} (period.toSec() == 0.0) \{
+196           \textcolor{comment}{// Reset controllers before starting a motion}
+197           control\_manager.update(now, period, \textcolor{keyword}{true});
+198           \hyperlink{namespacefranka__control}{franka\_control}.reset();
+199         \} \textcolor{keywordflow}{else} \{
+200           control\_manager.update(now, period);
+201           \hyperlink{namespacefranka__control}{franka\_control}.enforceLimits(period);
+202         \}
+203         \textcolor{keywordflow}{return} ros::ok();
+204       \});
+205     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \hyperlink{structfranka_1_1ControlException}{franka::ControlException}& e) \{
+206       ROS\_ERROR(\textcolor{stringliteral}{"%s"}, e.what());
+207       has\_error = \textcolor{keyword}{true};
+208     \}
+209   \}
+210 
+211   \textcolor{keywordflow}{return} 0;
+212 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{franka__control__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}

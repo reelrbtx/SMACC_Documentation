@@ -1,0 +1,67 @@
+\hypertarget{pseudo__inversion_8h}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/src/pseudo\+\_\+inversion.h File Reference}
+\label{pseudo__inversion_8h}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/src/pseudo\+\_\+inversion.\+h@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/src/pseudo\+\_\+inversion.\+h}}
+{\ttfamily \#include $<$Eigen/\+Core$>$}\newline
+{\ttfamily \#include $<$Eigen/\+LU$>$}\newline
+{\ttfamily \#include $<$Eigen/\+S\+VD$>$}\newline
+Include dependency graph for pseudo\+\_\+inversion.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=311pt]{pseudo__inversion_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{pseudo__inversion_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{pseudo__inversion_8h_ad7a75f47179e0fb6ae677c06f1e56a89}{pseudo\+Inverse} (const Eigen\+::\+Matrix\+Xd \&M\+\_\+, Eigen\+::\+Matrix\+Xd \&M\+\_\+pinv\+\_\+, \hyperlink{classbool}{bool} damped=true)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{pseudo__inversion_8h_ad7a75f47179e0fb6ae677c06f1e56a89}\label{pseudo__inversion_8h_ad7a75f47179e0fb6ae677c06f1e56a89}} 
+\index{pseudo\+\_\+inversion.\+h@{pseudo\+\_\+inversion.\+h}!pseudo\+Inverse@{pseudo\+Inverse}}
+\index{pseudo\+Inverse@{pseudo\+Inverse}!pseudo\+\_\+inversion.\+h@{pseudo\+\_\+inversion.\+h}}
+\subsubsection{\texorpdfstring{pseudo\+Inverse()}{pseudoInverse()}}
+{\footnotesize\ttfamily void pseudo\+Inverse (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Matrix\+Xd \&}]{M\+\_\+,  }\item[{Eigen\+::\+Matrix\+Xd \&}]{M\+\_\+pinv\+\_\+,  }\item[{\hyperlink{classbool}{bool}}]{damped = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 14 of file pseudo\+\_\+inversion.\+h.
+
+
+
+Referenced by franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::update().
+
+
+\begin{DoxyCode}
+14                                                                                                \{
+15   \textcolor{keywordtype}{double} lambda\_ = damped ? 0.2 : 0.0;
+16 
+17   Eigen::JacobiSVD<Eigen::MatrixXd> svd(M\_, Eigen::ComputeFullU | Eigen::ComputeFullV);
+18   Eigen::JacobiSVD<Eigen::MatrixXd>::SingularValuesType sing\_vals\_ = svd.singularValues();
+19   Eigen::MatrixXd S\_ = M\_;  \textcolor{comment}{// copying the dimensions of M\_, its content is not needed.}
+20   S\_.setZero();
+21 
+22   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < sing\_vals\_.size(); i++)
+23     S\_(i, i) = (sing\_vals\_(i)) / (sing\_vals\_(i) * sing\_vals\_(i) + lambda\_ * lambda\_);
+24 
+25   M\_pinv\_ = Eigen::MatrixXd(svd.matrixV() * S\_.transpose() * svd.matrixU().transpose());
+26 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{pseudo__inversion_8h_ad7a75f47179e0fb6ae677c06f1e56a89_icgraph}
+\end{center}
+\end{figure}

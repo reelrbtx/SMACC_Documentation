@@ -1,0 +1,709 @@
+\hypertarget{classfranka_1_1Network}{}\section{franka\+:\+:Network Class Reference}
+\label{classfranka_1_1Network}\index{franka\+::\+Network@{franka\+::\+Network}}
+
+
+{\ttfamily \#include $<$network.\+h$>$}
+
+
+
+Collaboration diagram for franka\+:\+:Network\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Network__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfranka_1_1Network_ab4e183198d560b5093dcf2f048596001}{Network} (const std\+::string \&franka\+\_\+address, uint16\+\_\+t franka\+\_\+port, std\+::chrono\+::milliseconds tcp\+\_\+timeout=std\+::chrono\+::seconds(60), std\+::chrono\+::milliseconds udp\+\_\+timeout=std\+::chrono\+::seconds(1), std\+::tuple$<$ \hyperlink{classbool}{bool}, int, int, int $>$ tcp\+\_\+keepalive=std\+::make\+\_\+tuple(true, 1, 3, 1))
+\item 
+\hyperlink{classfranka_1_1Network_a3f3c01dc53b6016a0bb3070ae539667f}{$\sim$\+Network} ()
+\item 
+uint16\+\_\+t \hyperlink{classfranka_1_1Network_ac3d85a9e79ef349dda41a6dfb0f0d49e}{udp\+Port} () const noexcept
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \hyperlink{classfranka_1_1Network_aa6400391cf1485866dc321e6ba3063ad}{udp\+Blocking\+Receive} ()
+\item 
+{\footnotesize template$<$typename T $>$ }\\\hyperlink{classbool}{bool} \hyperlink{classfranka_1_1Network_a904bdd93b768d83d62c93c273cff7b32}{udp\+Receive} (T $\ast$data)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \hyperlink{classfranka_1_1Network_ac5a58083323e337012313b4a3580c2cc}{udp\+Send} (const T \&data)
+\item 
+void \hyperlink{classfranka_1_1Network_ab1422a98fe11284ec48e1b85ddd8303d}{tcp\+Throw\+If\+Connection\+Closed} ()
+\item 
+{\footnotesize template$<$typename T $>$ }\\T\+::\+Response \hyperlink{classfranka_1_1Network_ae946c4dc9673902bd3e40a1bef65862a}{tcp\+Blocking\+Receive\+Response} (uint32\+\_\+t command\+\_\+id, std\+::vector$<$ uint8\+\_\+t $>$ $\ast$vl\+\_\+buffer=nullptr)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\hyperlink{classbool}{bool} \hyperlink{classfranka_1_1Network_a7457dce9d5a6850c29ee9b66da04a749}{tcp\+Receive\+Response} (uint32\+\_\+t command\+\_\+id, std\+::function$<$ void(const typename T\+::\+Response \&)$>$ handler)
+\item 
+{\footnotesize template$<$typename T , typename... T\+Args$>$ }\\uint32\+\_\+t \hyperlink{classfranka_1_1Network_abcb70ba573d7a6767b205dc6a89183f8}{tcp\+Send\+Request} (T\+Args \&\&... args)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \hyperlink{classfranka_1_1Network_abe956fd11cd59309c93aebe15d433242}{udp\+Blocking\+Receive\+Unsafe} ()
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \hyperlink{classfranka_1_1Network_a99a8575b86f0b4ddc206b67483cd65aa}{tcp\+Read\+From\+Buffer} (std\+::chrono\+::microseconds timeout)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Poco\+::\+Net\+::\+Stream\+Socket \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\+\_\+socket\+\_\+}
+\item 
+Poco\+::\+Net\+::\+Datagram\+Socket \hyperlink{classfranka_1_1Network_ac09fea0946977e7c366ad4a3421ef621}{udp\+\_\+socket\+\_\+}
+\item 
+Poco\+::\+Net\+::\+Socket\+Address \hyperlink{classfranka_1_1Network_a5c87db65f0818d727b797e7da8d71334}{udp\+\_\+server\+\_\+address\+\_\+}
+\item 
+uint16\+\_\+t \hyperlink{classfranka_1_1Network_a8bbe2dd022044033dbb2818db1a0e76b}{udp\+\_\+port\+\_\+}
+\item 
+std\+::mutex \hyperlink{classfranka_1_1Network_a8649d1cc6577ba09f7444c298905a11d}{tcp\+\_\+mutex\+\_\+}
+\item 
+std\+::mutex \hyperlink{classfranka_1_1Network_ab22bfa46c27a565336d6231971b019be}{udp\+\_\+mutex\+\_\+}
+\item 
+uint32\+\_\+t \hyperlink{classfranka_1_1Network_a3c0593618dbdedb1edb9ef2ef9392f19}{command\+\_\+id\+\_\+} \{0\}
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ \hyperlink{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}{pending\+\_\+response\+\_\+} \{\}
+\item 
+size\+\_\+t \hyperlink{classfranka_1_1Network_a6b514fb4c63a98080b346ac85f717739}{pending\+\_\+response\+\_\+offset\+\_\+} = 0
+\item 
+uint32\+\_\+t \hyperlink{classfranka_1_1Network_a5164b5782401061ed04063da53c1e188}{pending\+\_\+command\+\_\+id\+\_\+} = 0
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, std\+::vector$<$ uint8\+\_\+t $>$ $>$ \hyperlink{classfranka_1_1Network_a99270a962346224117a68e309a01e054}{received\+\_\+responses\+\_\+} \{\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 23 of file network.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfranka_1_1Network_ab4e183198d560b5093dcf2f048596001}\label{classfranka_1_1Network_ab4e183198d560b5093dcf2f048596001}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!Network@{Network}}
+\index{Network@{Network}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{Network()}{Network()}}
+{\footnotesize\ttfamily franka\+::\+Network\+::\+Network (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{franka\+\_\+address,  }\item[{uint16\+\_\+t}]{franka\+\_\+port,  }\item[{std\+::chrono\+::milliseconds}]{tcp\+\_\+timeout = {\ttfamily std\+:\+:chrono\+:\+:seconds(60)},  }\item[{std\+::chrono\+::milliseconds}]{udp\+\_\+timeout = {\ttfamily std\+:\+:chrono\+:\+:seconds(1)},  }\item[{std\+::tuple$<$ \hyperlink{classbool}{bool}, int, int, int $>$}]{tcp\+\_\+keepalive = {\ttfamily std\+:\+:make\+\_\+tuple(true,~1,~3,~1)} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 12 of file network.\+cpp.
+
+
+
+References service\+\_\+node\+\_\+3\+::s.
+
+
+\begin{DoxyCode}
+16                                                               \{
+17   \textcolor{keywordflow}{try} \{
+18     Poco::Timespan poco\_timeout(1000l * tcp\_timeout.count());
+19     Poco::Net::SocketAddress address(franka\_address, franka\_port);
+20 
+21     \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.connect(address, poco\_timeout);
+22     \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.setBlocking(\textcolor{keyword}{true});
+23     \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.setSendTimeout(poco\_timeout);
+24     \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.setReceiveTimeout(poco\_timeout);
+25 
+26     \textcolor{keywordflow}{if} (std::get<0>(tcp\_keepalive)) \{
+27       \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.setKeepAlive(\textcolor{keyword}{true});
+28       \textcolor{keywordflow}{try} \{
+29         \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.setOption(IPPROTO\_TCP, TCP\_KEEPIDLE, std::get<1>(tcp\_keepalive));
+30         \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.setOption(IPPROTO\_TCP, TCP\_KEEPCNT, std::get<2>(tcp\_keepalive));
+31         \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.setOption(IPPROTO\_TCP, TCP\_KEEPINTVL, std::get<3>(tcp\_keepalive));
+32       \} \textcolor{keywordflow}{catch} (...) \{
+33       \}
+34     \}
+35 
+36     \hyperlink{classfranka_1_1Network_ac09fea0946977e7c366ad4a3421ef621}{udp\_socket\_}.bind(\{\textcolor{stringliteral}{"0.0.0.0"}, 0\});
+37     \hyperlink{classfranka_1_1Network_ac09fea0946977e7c366ad4a3421ef621}{udp\_socket\_}.setReceiveTimeout(Poco::Timespan\{1000l * udp\_timeout.count()\});
+38     \hyperlink{classfranka_1_1Network_a8bbe2dd022044033dbb2818db1a0e76b}{udp\_port\_} = \hyperlink{classfranka_1_1Network_ac09fea0946977e7c366ad4a3421ef621}{udp\_socket\_}.address().port();
+39   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::Net::NetException& e) \{
+40     \textcolor{keywordflow}{throw} NetworkException(\textcolor{stringliteral}{"libfranka: Connection error: "}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s} + e.what());
+41   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::TimeoutException& e) \{
+42     \textcolor{keywordflow}{throw} NetworkException(\textcolor{stringliteral}{"libfranka: Connection timeout"}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s});
+43   \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::Exception& e) \{
+44     \textcolor{keywordflow}{throw} NetworkException(\textcolor{stringliteral}{"libfranka: "}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s} + e.what());
+45   \}
+46 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Network_a3f3c01dc53b6016a0bb3070ae539667f}\label{classfranka_1_1Network_a3f3c01dc53b6016a0bb3070ae539667f}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!````~Network@{$\sim$\+Network}}
+\index{````~Network@{$\sim$\+Network}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{$\sim$\+Network()}{~Network()}}
+{\footnotesize\ttfamily franka\+::\+Network\+::$\sim$\+Network (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 48 of file network.\+cpp.
+
+
+\begin{DoxyCode}
+48                   \{
+49   \textcolor{keywordflow}{try} \{
+50     \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.shutdown();
+51   \} \textcolor{keywordflow}{catch} (...) \{
+52   \}
+53 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka_1_1Network_ae946c4dc9673902bd3e40a1bef65862a}\label{classfranka_1_1Network_ae946c4dc9673902bd3e40a1bef65862a}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!tcp\+Blocking\+Receive\+Response@{tcp\+Blocking\+Receive\+Response}}
+\index{tcp\+Blocking\+Receive\+Response@{tcp\+Blocking\+Receive\+Response}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{tcp\+Blocking\+Receive\+Response()}{tcpBlockingReceiveResponse()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T\+::\+Response franka\+::\+Network\+::tcp\+Blocking\+Receive\+Response (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{command\+\_\+id,  }\item[{std\+::vector$<$ uint8\+\_\+t $>$ $\ast$}]{vl\+\_\+buffer = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+Blocks until a T\+::\+Response message with the given command ID has been received.
+
+Additional variable-\/length data for the expected response (if any) is written into the given vl\+\_\+buffer. If vl\+\_\+buffer is not given, this data is discarded.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em command\+\_\+id} & Expected command ID of the T\+::\+Response. \\
+\hline
+\mbox{\tt out}  & {\em vl\+\_\+buffer} & If given, variable-\/length data for the expected T\+::\+Response message (if any has been received) is copied into it.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Received T\+::\+Response instance. 
+\end{DoxyReturn}
+
+
+Definition at line 227 of file network.\+h.
+
+
+
+References received\+\_\+responses\+\_\+, and tcp\+\_\+mutex\+\_\+.
+
+
+
+Referenced by franka\+::connect(), and franka\+::anonymous\+\_\+namespace\{gripper.\+cpp\}\+::execute\+Command().
+
+
+\begin{DoxyCode}
+228                                                                                         \{
+229   \textcolor{keyword}{using namespace }std::literals::chrono\_literals;  \textcolor{comment}{// NOLINT(google-build-using-namespace)}
+230   std::unique\_lock<std::mutex> lock(\hyperlink{classfranka_1_1Network_a8649d1cc6577ba09f7444c298905a11d}{tcp\_mutex\_}, std::defer\_lock);
+231   decltype(\hyperlink{classfranka_1_1Network_a99270a962346224117a68e309a01e054}{received\_responses\_})::const\_iterator it;
+232   \textcolor{keywordflow}{do} \{
+233     lock.lock();
+234     tcpReadFromBuffer<T>(10ms);
+235     it = \hyperlink{classfranka_1_1Network_a99270a962346224117a68e309a01e054}{received\_responses\_}.find(command\_id);
+236     lock.unlock();
+237     std::this\_thread::yield();
+238   \} \textcolor{keywordflow}{while} (it == \hyperlink{classfranka_1_1Network_a99270a962346224117a68e309a01e054}{received\_responses\_}.end());
+239 
+240   \textcolor{keyword}{auto} message = *\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }typename T::template Message<typename T::Response>*\textcolor{keyword}{>}(
+241       it->second.data());
+242   \textcolor{keywordflow}{if} (message.header.size < \textcolor{keyword}{sizeof}(message)) \{
+243     \textcolor{keywordflow}{throw} ProtocolException(\textcolor{stringliteral}{"libfranka: Incorrect TCP message size."});
+244   \}
+245 
+246   \textcolor{keywordflow}{if} (vl\_buffer != \textcolor{keyword}{nullptr} && message.header.size != \textcolor{keyword}{sizeof}(message)) \{
+247     \textcolor{keywordtype}{size\_t} data\_size = message.header.size - \textcolor{keyword}{sizeof}(message);
+248     std::vector<uint8\_t> data\_buffer(data\_size);
+249     std::memcpy(data\_buffer.data(), &it->second[\textcolor{keyword}{sizeof}(message)], data\_size);
+250     *vl\_buffer = data\_buffer;
+251   \}
+252 
+253   \hyperlink{classfranka_1_1Network_a99270a962346224117a68e309a01e054}{received\_responses\_}.erase(it);
+254   \textcolor{keywordflow}{return} message.getInstance();
+255 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Network_ae946c4dc9673902bd3e40a1bef65862a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Network_a99a8575b86f0b4ddc206b67483cd65aa}\label{classfranka_1_1Network_a99a8575b86f0b4ddc206b67483cd65aa}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!tcp\+Read\+From\+Buffer@{tcp\+Read\+From\+Buffer}}
+\index{tcp\+Read\+From\+Buffer@{tcp\+Read\+From\+Buffer}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{tcp\+Read\+From\+Buffer()}{tcpReadFromBuffer()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void franka\+::\+Network\+::tcp\+Read\+From\+Buffer (\begin{DoxyParamCaption}\item[{std\+::chrono\+::microseconds}]{timeout }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 150 of file network.\+h.
+
+
+
+References pending\+\_\+command\+\_\+id\+\_\+, pending\+\_\+response\+\_\+, pending\+\_\+response\+\_\+offset\+\_\+, received\+\_\+responses\+\_\+, service\+\_\+node\+\_\+3\+::s, and tcp\+\_\+socket\+\_\+.
+
+
+\begin{DoxyCode}
+150                                                                  \{
+151   \textcolor{keywordflow}{if} (!\hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.poll(timeout.count(), Poco::Net::Socket::SELECT\_READ)) \{
+152     \textcolor{keywordflow}{return};
+153   \}
+154 
+155   \textcolor{keywordtype}{int} available\_bytes = \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.available();
+156   \textcolor{keywordflow}{if} (\hyperlink{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}{pending\_response\_}.empty() &&
+157       available\_bytes >= \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(\textcolor{keyword}{typename} T::Header))) \{
+158     \textcolor{keyword}{typename} T::Header header;
+159     \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.receiveBytes(&header, \textcolor{keyword}{sizeof}(header));
+160     \textcolor{keywordflow}{if} (header.size < \textcolor{keyword}{sizeof}(header)) \{
+161       \textcolor{keywordflow}{throw} ProtocolException(\textcolor{stringliteral}{"libfranka: Incorrect TCP message size."});
+162     \}
+163     \hyperlink{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}{pending\_response\_}.resize(header.size);
+164     std::memcpy(\hyperlink{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}{pending\_response\_}.data(), &header, \textcolor{keyword}{sizeof}(header));
+165     \hyperlink{classfranka_1_1Network_a6b514fb4c63a98080b346ac85f717739}{pending\_response\_offset\_} = \textcolor{keyword}{sizeof}(header);
+166     \hyperlink{classfranka_1_1Network_a5164b5782401061ed04063da53c1e188}{pending\_command\_id\_} = header.command\_id;
+167   \}
+168   \textcolor{keywordflow}{if} (!\hyperlink{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}{pending\_response\_}.empty() && available\_bytes > 0) \{
+169     \hyperlink{classfranka_1_1Network_a6b514fb4c63a98080b346ac85f717739}{pending\_response\_offset\_} += \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.receiveBytes(
+170         &\hyperlink{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}{pending\_response\_}[\hyperlink{classfranka_1_1Network_a6b514fb4c63a98080b346ac85f717739}{pending\_response\_offset\_}],
+171         std::min(\hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.available(),
+172                  \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\hyperlink{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}{pending\_response\_}.size() - 
+      \hyperlink{classfranka_1_1Network_a6b514fb4c63a98080b346ac85f717739}{pending\_response\_offset\_})));
+173     \textcolor{keywordflow}{if} (pending\_response\_offset\_ == \hyperlink{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}{pending\_response\_}.size()) \{
+174       \hyperlink{classfranka_1_1Network_a99270a962346224117a68e309a01e054}{received\_responses\_}.emplace(\hyperlink{classfranka_1_1Network_a5164b5782401061ed04063da53c1e188}{pending\_command\_id\_}, 
+      \hyperlink{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}{pending\_response\_});
+175       \hyperlink{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}{pending\_response\_}.clear();
+176       pending\_response\_offset\_ = 0;
+177       \hyperlink{classfranka_1_1Network_a5164b5782401061ed04063da53c1e188}{pending\_command\_id\_} = 0;
+178     \}
+179   \}
+180 \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::Exception& e) \{
+181   \textcolor{keyword}{using namespace }\hyperlink{namespacestd_1_1string__literals}{std::string\_literals};  \textcolor{comment}{// NOLINT(google-build-using-namespace)}
+182   \textcolor{keywordflow}{throw} NetworkException(\textcolor{stringliteral}{"libfranka: TCP receive: "}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s} + e.what());
+183 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Network_a7457dce9d5a6850c29ee9b66da04a749}\label{classfranka_1_1Network_a7457dce9d5a6850c29ee9b66da04a749}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!tcp\+Receive\+Response@{tcp\+Receive\+Response}}
+\index{tcp\+Receive\+Response@{tcp\+Receive\+Response}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{tcp\+Receive\+Response()}{tcpReceiveResponse()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{classbool}{bool} franka\+::\+Network\+::tcp\+Receive\+Response (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{command\+\_\+id,  }\item[{std\+::function$<$ void(const typename T\+::\+Response \&)$>$}]{handler }\end{DoxyParamCaption})}
+
+Tries to receive a T\+::\+Response message with the given command ID (non-\/blocking).
+
+Additional variable-\/length data for the expected response (if any) is discarded.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em command\+\_\+id} & Expected command ID of the T\+::\+Response. \\
+\hline
+\mbox{\tt in}  & {\em handler} & Callback to be invoked if the expected response has been received.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if a T\+::\+Response message with the given command\+\_\+id has been received, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 203 of file network.\+h.
+
+
+
+References received\+\_\+responses\+\_\+, and tcp\+\_\+mutex\+\_\+.
+
+
+\begin{DoxyCode}
+204                                                                                        \{
+205   \textcolor{keyword}{using namespace }std::literals::chrono\_literals;  \textcolor{comment}{// NOLINT(google-build-using-namespace)}
+206   std::unique\_lock<std::mutex> lock(\hyperlink{classfranka_1_1Network_a8649d1cc6577ba09f7444c298905a11d}{tcp\_mutex\_}, std::try\_to\_lock);
+207   \textcolor{keywordflow}{if} (!lock.owns\_lock()) \{
+208     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+209   \}
+210 
+211   tcpReadFromBuffer<T>(0us);
+212   decltype(\hyperlink{classfranka_1_1Network_a99270a962346224117a68e309a01e054}{received\_responses\_})::const\_iterator it = 
+      \hyperlink{classfranka_1_1Network_a99270a962346224117a68e309a01e054}{received\_responses\_}.find(command\_id);
+213   \textcolor{keywordflow}{if} (it != \hyperlink{classfranka_1_1Network_a99270a962346224117a68e309a01e054}{received\_responses\_}.end()) \{
+214     \textcolor{keyword}{auto} message = \textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }typename T::template Message<typename T::Response>*\textcolor{keyword}{>}(
+215         it->second.data());
+216     \textcolor{keywordflow}{if} (message->header.size < \textcolor{keyword}{sizeof}(message)) \{
+217       \textcolor{keywordflow}{throw} ProtocolException(\textcolor{stringliteral}{"libfranka: Incorrect TCP message size."});
+218     \}
+219     handler(message->getInstance());
+220     \hyperlink{classfranka_1_1Network_a99270a962346224117a68e309a01e054}{received\_responses\_}.erase(it);
+221     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+222   \}
+223   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+224 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Network_abcb70ba573d7a6767b205dc6a89183f8}\label{classfranka_1_1Network_abcb70ba573d7a6767b205dc6a89183f8}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!tcp\+Send\+Request@{tcp\+Send\+Request}}
+\index{tcp\+Send\+Request@{tcp\+Send\+Request}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{tcp\+Send\+Request()}{tcpSendRequest()}}
+{\footnotesize\ttfamily template$<$typename T , typename... T\+Args$>$ \\
+uint32\+\_\+t franka\+::\+Network\+::tcp\+Send\+Request (\begin{DoxyParamCaption}\item[{T\+Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+
+
+Definition at line 186 of file network.\+h.
+
+
+
+References testing\+::\+\_\+, generate\+\_\+debs\+::args, command\+\_\+id\+\_\+, service\+\_\+node\+\_\+3\+::s, tcp\+\_\+mutex\+\_\+, and tcp\+\_\+socket\+\_\+.
+
+
+
+Referenced by franka\+::connect(), and franka\+::anonymous\+\_\+namespace\{gripper.\+cpp\}\+::execute\+Command().
+
+
+\begin{DoxyCode}
+186                                                     \{
+187   std::lock\_guard<std::mutex> \hyperlink{namespacetesting_a4ba77a3f5b67166ff1b59d96a32346a2}{\_}(\hyperlink{classfranka_1_1Network_a8649d1cc6577ba09f7444c298905a11d}{tcp\_mutex\_});
+188 
+189   \textcolor{keyword}{typename} T::template Message<typename T::Request> message(
+190       \textcolor{keyword}{typename} T::Header(T::kCommand, \hyperlink{classfranka_1_1Network_a3c0593618dbdedb1edb9ef2ef9392f19}{command\_id\_}++,
+191                          \textcolor{keyword}{sizeof}(\textcolor{keyword}{typename} T::template Message<typename T::Request>)),
+192       \textcolor{keyword}{typename} T::Request(std::forward<TArgs>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args})...));
+193 
+194   \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.sendBytes(&message, \textcolor{keyword}{sizeof}(message));
+195 
+196   \textcolor{keywordflow}{return} message.header.command\_id;
+197 \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::Exception& e) \{
+198   \textcolor{keyword}{using namespace }\hyperlink{namespacestd_1_1string__literals}{std::string\_literals};  \textcolor{comment}{// NOLINT(google-build-using-namespace)}
+199   \textcolor{keywordflow}{throw} NetworkException(\textcolor{stringliteral}{"libfranka: TCP send bytes: "}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s} + e.what());
+200 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Network_abcb70ba573d7a6767b205dc6a89183f8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Network_ab1422a98fe11284ec48e1b85ddd8303d}\label{classfranka_1_1Network_ab1422a98fe11284ec48e1b85ddd8303d}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!tcp\+Throw\+If\+Connection\+Closed@{tcp\+Throw\+If\+Connection\+Closed}}
+\index{tcp\+Throw\+If\+Connection\+Closed@{tcp\+Throw\+If\+Connection\+Closed}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{tcp\+Throw\+If\+Connection\+Closed()}{tcpThrowIfConnectionClosed()}}
+{\footnotesize\ttfamily void franka\+::\+Network\+::tcp\+Throw\+If\+Connection\+Closed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 59 of file network.\+cpp.
+
+
+
+References service\+\_\+node\+\_\+3\+::s.
+
+
+\begin{DoxyCode}
+59                                              \{
+60   std::unique\_lock<std::mutex> lock(\hyperlink{classfranka_1_1Network_a8649d1cc6577ba09f7444c298905a11d}{tcp\_mutex\_}, std::try\_to\_lock);
+61   \textcolor{keywordflow}{if} (!lock.owns\_lock()) \{
+62     \textcolor{keywordflow}{return};
+63   \}
+64   \textcolor{keywordflow}{if} (\hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.poll(0, Poco::Net::Socket::SELECT\_READ)) \{
+65     std::array<uint8\_t, 1> buffer;
+66     \textcolor{keywordtype}{int} rv = \hyperlink{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}{tcp\_socket\_}.receiveBytes(buffer.data(), \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(buffer.size()), MSG\_PEEK);
+67 
+68     \textcolor{keywordflow}{if} (rv == 0) \{
+69       \textcolor{keywordflow}{throw} NetworkException(\textcolor{stringliteral}{"libfranka: server closed connection"});
+70     \}
+71   \}
+72 \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::Exception& e) \{
+73   \textcolor{keywordflow}{throw} NetworkException(\textcolor{stringliteral}{"libfranka: "}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s} + e.what());
+74 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Network_aa6400391cf1485866dc321e6ba3063ad}\label{classfranka_1_1Network_aa6400391cf1485866dc321e6ba3063ad}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!udp\+Blocking\+Receive@{udp\+Blocking\+Receive}}
+\index{udp\+Blocking\+Receive@{udp\+Blocking\+Receive}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{udp\+Blocking\+Receive()}{udpBlockingReceive()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T franka\+::\+Network\+::udp\+Blocking\+Receive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 114 of file network.\+h.
+
+
+
+References testing\+::\+\_\+, and udp\+\_\+mutex\+\_\+.
+
+
+\begin{DoxyCode}
+114                               \{
+115   std::lock\_guard<std::mutex> \hyperlink{namespacetesting_a4ba77a3f5b67166ff1b59d96a32346a2}{\_}(\hyperlink{classfranka_1_1Network_ab22bfa46c27a565336d6231971b019be}{udp\_mutex\_});
+116   \textcolor{keywordflow}{return} udpBlockingReceiveUnsafe<T>();
+117 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Network_abe956fd11cd59309c93aebe15d433242}\label{classfranka_1_1Network_abe956fd11cd59309c93aebe15d433242}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!udp\+Blocking\+Receive\+Unsafe@{udp\+Blocking\+Receive\+Unsafe}}
+\index{udp\+Blocking\+Receive\+Unsafe@{udp\+Blocking\+Receive\+Unsafe}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{udp\+Blocking\+Receive\+Unsafe()}{udpBlockingReceiveUnsafe()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T franka\+::\+Network\+::udp\+Blocking\+Receive\+Unsafe (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 120 of file network.\+h.
+
+
+
+References service\+\_\+node\+\_\+3\+::s, udp\+\_\+server\+\_\+address\+\_\+, and udp\+\_\+socket\+\_\+.
+
+
+\begin{DoxyCode}
+120                                         \{
+121   std::array<uint8\_t, sizeof(T)> buffer;
+122 
+123   \textcolor{keywordtype}{int} bytes\_received =
+124       \hyperlink{classfranka_1_1Network_ac09fea0946977e7c366ad4a3421ef621}{udp\_socket\_}.receiveFrom(buffer.data(), \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(buffer.size()), 
+      \hyperlink{classfranka_1_1Network_a5c87db65f0818d727b797e7da8d71334}{udp\_server\_address\_});
+125 
+126   \textcolor{keywordflow}{if} (bytes\_received != buffer.size()) \{
+127     \textcolor{keywordflow}{throw} ProtocolException(\textcolor{stringliteral}{"libfranka: incorrect object size"});
+128   \}
+129 
+130   \textcolor{keywordflow}{return} *\textcolor{keyword}{reinterpret\_cast<}T*\textcolor{keyword}{>}(buffer.data());
+131 \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::Exception& e) \{
+132   \textcolor{keyword}{using namespace }\hyperlink{namespacestd_1_1string__literals}{std::string\_literals};  \textcolor{comment}{// NOLINT(google-build-using-namespace)}
+133   \textcolor{keywordflow}{throw} NetworkException(\textcolor{stringliteral}{"libfranka: UDP receive: "}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s} + e.what());
+134 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Network_ac3d85a9e79ef349dda41a6dfb0f0d49e}\label{classfranka_1_1Network_ac3d85a9e79ef349dda41a6dfb0f0d49e}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!udp\+Port@{udp\+Port}}
+\index{udp\+Port@{udp\+Port}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{udp\+Port()}{udpPort()}}
+{\footnotesize\ttfamily uint16\+\_\+t franka\+::\+Network\+::udp\+Port (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Definition at line 55 of file network.\+cpp.
+
+
+
+Referenced by franka\+::connect().
+
+
+\begin{DoxyCode}
+55                                          \{
+56   \textcolor{keywordflow}{return} \hyperlink{classfranka_1_1Network_a8bbe2dd022044033dbb2818db1a0e76b}{udp\_port\_};
+57 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Network_ac3d85a9e79ef349dda41a6dfb0f0d49e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Network_a904bdd93b768d83d62c93c273cff7b32}\label{classfranka_1_1Network_a904bdd93b768d83d62c93c273cff7b32}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!udp\+Receive@{udp\+Receive}}
+\index{udp\+Receive@{udp\+Receive}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{udp\+Receive()}{udpReceive()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{classbool}{bool} franka\+::\+Network\+::udp\+Receive (\begin{DoxyParamCaption}\item[{T $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 103 of file network.\+h.
+
+
+
+References testing\+::\+\_\+, udp\+\_\+mutex\+\_\+, and udp\+\_\+socket\+\_\+.
+
+
+\begin{DoxyCode}
+103                                 \{
+104   std::lock\_guard<std::mutex> \hyperlink{namespacetesting_a4ba77a3f5b67166ff1b59d96a32346a2}{\_}(\hyperlink{classfranka_1_1Network_ab22bfa46c27a565336d6231971b019be}{udp\_mutex\_});
+105 
+106   \textcolor{keywordflow}{if} (\hyperlink{classfranka_1_1Network_ac09fea0946977e7c366ad4a3421ef621}{udp\_socket\_}.available() >= \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(T))) \{
+107     *\hyperlink{namespacekeyboard__server__node_abfec01745fb17e2aa813913bea03d707}{data} = udpBlockingReceiveUnsafe<T>();
+108     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+109   \}
+110   \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+111 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Network_ac5a58083323e337012313b4a3580c2cc}\label{classfranka_1_1Network_ac5a58083323e337012313b4a3580c2cc}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!udp\+Send@{udp\+Send}}
+\index{udp\+Send@{udp\+Send}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{udp\+Send()}{udpSend()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void franka\+::\+Network\+::udp\+Send (\begin{DoxyParamCaption}\item[{const T \&}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 137 of file network.\+h.
+
+
+
+References testing\+::\+\_\+, service\+\_\+node\+\_\+3\+::s, udp\+\_\+mutex\+\_\+, udp\+\_\+server\+\_\+address\+\_\+, and udp\+\_\+socket\+\_\+.
+
+
+\begin{DoxyCode}
+137                                        \{
+138   std::lock\_guard<std::mutex> \hyperlink{namespacetesting_a4ba77a3f5b67166ff1b59d96a32346a2}{\_}(\hyperlink{classfranka_1_1Network_ab22bfa46c27a565336d6231971b019be}{udp\_mutex\_});
+139 
+140   \textcolor{keywordtype}{int} bytes\_sent = \hyperlink{classfranka_1_1Network_ac09fea0946977e7c366ad4a3421ef621}{udp\_socket\_}.sendTo(&\hyperlink{namespacekeyboard__server__node_abfec01745fb17e2aa813913bea03d707}{data}, \textcolor{keyword}{sizeof}(\hyperlink{namespacekeyboard__server__node_abfec01745fb17e2aa813913bea03d707}{data}), 
+      \hyperlink{classfranka_1_1Network_a5c87db65f0818d727b797e7da8d71334}{udp\_server\_address\_});
+141   \textcolor{keywordflow}{if} (bytes\_sent != \textcolor{keyword}{sizeof}(\hyperlink{namespacekeyboard__server__node_abfec01745fb17e2aa813913bea03d707}{data})) \{
+142     \textcolor{keywordflow}{throw} NetworkException(\textcolor{stringliteral}{"libfranka: could not send UDP data"});
+143   \}
+144 \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} Poco::Exception& e) \{
+145   \textcolor{keyword}{using namespace }\hyperlink{namespacestd_1_1string__literals}{std::string\_literals};  \textcolor{comment}{// NOLINT(google-build-using-namespace)}
+146   \textcolor{keywordflow}{throw} NetworkException(\textcolor{stringliteral}{"libfranka: UDP send: "}\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s} + e.what());
+147 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka_1_1Network_a3c0593618dbdedb1edb9ef2ef9392f19}\label{classfranka_1_1Network_a3c0593618dbdedb1edb9ef2ef9392f19}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!command\+\_\+id\+\_\+@{command\+\_\+id\+\_\+}}
+\index{command\+\_\+id\+\_\+@{command\+\_\+id\+\_\+}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{command\+\_\+id\+\_\+}{command\_id\_}}
+{\footnotesize\ttfamily uint32\+\_\+t franka\+::\+Network\+::command\+\_\+id\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 94 of file network.\+h.
+
+
+
+Referenced by tcp\+Send\+Request().
+
+\mbox{\Hypertarget{classfranka_1_1Network_a5164b5782401061ed04063da53c1e188}\label{classfranka_1_1Network_a5164b5782401061ed04063da53c1e188}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!pending\+\_\+command\+\_\+id\+\_\+@{pending\+\_\+command\+\_\+id\+\_\+}}
+\index{pending\+\_\+command\+\_\+id\+\_\+@{pending\+\_\+command\+\_\+id\+\_\+}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{pending\+\_\+command\+\_\+id\+\_\+}{pending\_command\_id\_}}
+{\footnotesize\ttfamily uint32\+\_\+t franka\+::\+Network\+::pending\+\_\+command\+\_\+id\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 98 of file network.\+h.
+
+
+
+Referenced by tcp\+Read\+From\+Buffer().
+
+\mbox{\Hypertarget{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}\label{classfranka_1_1Network_a745d141f621767ebd98662e1239ab039}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!pending\+\_\+response\+\_\+@{pending\+\_\+response\+\_\+}}
+\index{pending\+\_\+response\+\_\+@{pending\+\_\+response\+\_\+}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{pending\+\_\+response\+\_\+}{pending\_response\_}}
+{\footnotesize\ttfamily std\+::vector$<$uint8\+\_\+t$>$ franka\+::\+Network\+::pending\+\_\+response\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 96 of file network.\+h.
+
+
+
+Referenced by tcp\+Read\+From\+Buffer().
+
+\mbox{\Hypertarget{classfranka_1_1Network_a6b514fb4c63a98080b346ac85f717739}\label{classfranka_1_1Network_a6b514fb4c63a98080b346ac85f717739}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!pending\+\_\+response\+\_\+offset\+\_\+@{pending\+\_\+response\+\_\+offset\+\_\+}}
+\index{pending\+\_\+response\+\_\+offset\+\_\+@{pending\+\_\+response\+\_\+offset\+\_\+}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{pending\+\_\+response\+\_\+offset\+\_\+}{pending\_response\_offset\_}}
+{\footnotesize\ttfamily size\+\_\+t franka\+::\+Network\+::pending\+\_\+response\+\_\+offset\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 97 of file network.\+h.
+
+
+
+Referenced by tcp\+Read\+From\+Buffer().
+
+\mbox{\Hypertarget{classfranka_1_1Network_a99270a962346224117a68e309a01e054}\label{classfranka_1_1Network_a99270a962346224117a68e309a01e054}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!received\+\_\+responses\+\_\+@{received\+\_\+responses\+\_\+}}
+\index{received\+\_\+responses\+\_\+@{received\+\_\+responses\+\_\+}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{received\+\_\+responses\+\_\+}{received\_responses\_}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$uint32\+\_\+t, std\+::vector$<$uint8\+\_\+t$>$ $>$ franka\+::\+Network\+::received\+\_\+responses\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 99 of file network.\+h.
+
+
+
+Referenced by tcp\+Blocking\+Receive\+Response(), tcp\+Read\+From\+Buffer(), and tcp\+Receive\+Response().
+
+\mbox{\Hypertarget{classfranka_1_1Network_a8649d1cc6577ba09f7444c298905a11d}\label{classfranka_1_1Network_a8649d1cc6577ba09f7444c298905a11d}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!tcp\+\_\+mutex\+\_\+@{tcp\+\_\+mutex\+\_\+}}
+\index{tcp\+\_\+mutex\+\_\+@{tcp\+\_\+mutex\+\_\+}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{tcp\+\_\+mutex\+\_\+}{tcp\_mutex\_}}
+{\footnotesize\ttfamily std\+::mutex franka\+::\+Network\+::tcp\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 91 of file network.\+h.
+
+
+
+Referenced by tcp\+Blocking\+Receive\+Response(), tcp\+Receive\+Response(), and tcp\+Send\+Request().
+
+\mbox{\Hypertarget{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}\label{classfranka_1_1Network_a2c26c04f9ccb9792074799b101ee53e9}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!tcp\+\_\+socket\+\_\+@{tcp\+\_\+socket\+\_\+}}
+\index{tcp\+\_\+socket\+\_\+@{tcp\+\_\+socket\+\_\+}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{tcp\+\_\+socket\+\_\+}{tcp\_socket\_}}
+{\footnotesize\ttfamily Poco\+::\+Net\+::\+Stream\+Socket franka\+::\+Network\+::tcp\+\_\+socket\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 86 of file network.\+h.
+
+
+
+Referenced by tcp\+Read\+From\+Buffer(), and tcp\+Send\+Request().
+
+\mbox{\Hypertarget{classfranka_1_1Network_ab22bfa46c27a565336d6231971b019be}\label{classfranka_1_1Network_ab22bfa46c27a565336d6231971b019be}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!udp\+\_\+mutex\+\_\+@{udp\+\_\+mutex\+\_\+}}
+\index{udp\+\_\+mutex\+\_\+@{udp\+\_\+mutex\+\_\+}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{udp\+\_\+mutex\+\_\+}{udp\_mutex\_}}
+{\footnotesize\ttfamily std\+::mutex franka\+::\+Network\+::udp\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 92 of file network.\+h.
+
+
+
+Referenced by udp\+Blocking\+Receive(), udp\+Receive(), and udp\+Send().
+
+\mbox{\Hypertarget{classfranka_1_1Network_a8bbe2dd022044033dbb2818db1a0e76b}\label{classfranka_1_1Network_a8bbe2dd022044033dbb2818db1a0e76b}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!udp\+\_\+port\+\_\+@{udp\+\_\+port\+\_\+}}
+\index{udp\+\_\+port\+\_\+@{udp\+\_\+port\+\_\+}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{udp\+\_\+port\+\_\+}{udp\_port\_}}
+{\footnotesize\ttfamily uint16\+\_\+t franka\+::\+Network\+::udp\+\_\+port\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 89 of file network.\+h.
+
+\mbox{\Hypertarget{classfranka_1_1Network_a5c87db65f0818d727b797e7da8d71334}\label{classfranka_1_1Network_a5c87db65f0818d727b797e7da8d71334}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!udp\+\_\+server\+\_\+address\+\_\+@{udp\+\_\+server\+\_\+address\+\_\+}}
+\index{udp\+\_\+server\+\_\+address\+\_\+@{udp\+\_\+server\+\_\+address\+\_\+}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{udp\+\_\+server\+\_\+address\+\_\+}{udp\_server\_address\_}}
+{\footnotesize\ttfamily Poco\+::\+Net\+::\+Socket\+Address franka\+::\+Network\+::udp\+\_\+server\+\_\+address\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 88 of file network.\+h.
+
+
+
+Referenced by udp\+Blocking\+Receive\+Unsafe(), and udp\+Send().
+
+\mbox{\Hypertarget{classfranka_1_1Network_ac09fea0946977e7c366ad4a3421ef621}\label{classfranka_1_1Network_ac09fea0946977e7c366ad4a3421ef621}} 
+\index{franka\+::\+Network@{franka\+::\+Network}!udp\+\_\+socket\+\_\+@{udp\+\_\+socket\+\_\+}}
+\index{udp\+\_\+socket\+\_\+@{udp\+\_\+socket\+\_\+}!franka\+::\+Network@{franka\+::\+Network}}
+\subsubsection{\texorpdfstring{udp\+\_\+socket\+\_\+}{udp\_socket\_}}
+{\footnotesize\ttfamily Poco\+::\+Net\+::\+Datagram\+Socket franka\+::\+Network\+::udp\+\_\+socket\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 87 of file network.\+h.
+
+
+
+Referenced by udp\+Blocking\+Receive\+Unsafe(), udp\+Receive(), and udp\+Send().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/src/\hyperlink{network_8h}{network.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/src/\hyperlink{network_8cpp}{network.\+cpp}\end{DoxyCompactItemize}

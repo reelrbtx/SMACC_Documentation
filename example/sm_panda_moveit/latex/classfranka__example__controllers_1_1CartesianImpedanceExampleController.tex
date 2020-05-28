@@ -1,0 +1,764 @@
+\hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController}{}\section{franka\+\_\+example\+\_\+controllers\+:\+:Cartesian\+Impedance\+Example\+Controller Class Reference}
+\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController}\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+
+
+{\ttfamily \#include $<$cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h$>$}
+
+
+
+Inheritance diagram for franka\+\_\+example\+\_\+controllers\+:\+:Cartesian\+Impedance\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classfranka__example__controllers_1_1CartesianImpedanceExampleController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for franka\+\_\+example\+\_\+controllers\+:\+:Cartesian\+Impedance\+Example\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1CartesianImpedanceExampleController__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_aa61fee8f409bbfda931c202123dbd7f5}{init} (hardware\+\_\+interface\+::\+Robot\+HW $\ast$robot\+\_\+hw, ros\+::\+Node\+Handle \&node\+\_\+handle) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a9191e1f9d60551294d1f225af39f7926}{starting} (const ros\+::\+Time \&) override
+\item 
+void \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ab7e3690c65dbf1ff57a5d37cb651cd04}{update} (const ros\+::\+Time \&, const ros\+::\+Duration \&period) override
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a1a3dd73a99d2686af41ff8c5ff8f216c}{saturate\+Torque\+Rate} (const Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&tau\+\_\+d\+\_\+calculated, const Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&tau\+\_\+\+J\+\_\+d)
+\item 
+void \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a31f27ea8c8f60f073fb50c78cf48ab6c}{compliance\+Param\+Callback} (franka\+\_\+example\+\_\+controllers\+::compliance\+\_\+param\+Config \&config, uint32\+\_\+t level)
+\item 
+void \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a84a8c0fb5fbb0c273910d1af68fabe0b}{equilibrium\+Pose\+Callback} (const geometry\+\_\+msgs\+::\+Pose\+Stamped\+Const\+Ptr \&msg)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classfranka__hw_1_1FrankaStateHandle}{franka\+\_\+hw\+::\+Franka\+State\+Handle} $>$ \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_affdc57722887831ee0e3e02332eae345}{state\+\_\+handle\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classfranka__hw_1_1FrankaModelHandle}{franka\+\_\+hw\+::\+Franka\+Model\+Handle} $>$ \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a588de895d4aaef43c00bc11e6b789084}{model\+\_\+handle\+\_\+}
+\item 
+std\+::vector$<$ hardware\+\_\+interface\+::\+Joint\+Handle $>$ \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a288ac917280b160d8a531ab3554de5e4}{joint\+\_\+handles\+\_\+}
+\item 
+double \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\+\_\+params\+\_\+} \{0.\+005\}
+\item 
+double \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ac47b4db7d9f39e3d7eac34396b8ff32b}{nullspace\+\_\+stiffness\+\_\+} \{20.\+0\}
+\item 
+double \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3bfebd283e81cab2a5d303d75ba5a706}{nullspace\+\_\+stiffness\+\_\+target\+\_\+} \{20.\+0\}
+\item 
+const double \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3ff07c9bb2c49cc9ac622bb2bd2c8f96}{delta\+\_\+tau\+\_\+max\+\_\+} \{1.\+0\}
+\item 
+Eigen\+::\+Matrix$<$ double, 6, 6 $>$ \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a37535313bb87e462a6c187c7ddce520f}{cartesian\+\_\+stiffness\+\_\+}
+\item 
+Eigen\+::\+Matrix$<$ double, 6, 6 $>$ \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ab31e4b0d375e011ea3e3f745a6cfdded}{cartesian\+\_\+stiffness\+\_\+target\+\_\+}
+\item 
+Eigen\+::\+Matrix$<$ double, 6, 6 $>$ \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a95cb6cf998a392f5bf9fa1201f0c595d}{cartesian\+\_\+damping\+\_\+}
+\item 
+Eigen\+::\+Matrix$<$ double, 6, 6 $>$ \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_afcb20af974815ddd883d1039ab554cc1}{cartesian\+\_\+damping\+\_\+target\+\_\+}
+\item 
+Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a17864b23083e90764168ceb4ea843df8}{q\+\_\+d\+\_\+nullspace\+\_\+}
+\item 
+Eigen\+::\+Vector3d \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a7b1ed13a31a9561ced03a8a9221a303f}{position\+\_\+d\+\_\+}
+\item 
+Eigen\+::\+Quaterniond \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a8528ed0cf7de6439e65bb1d4c4017137}{orientation\+\_\+d\+\_\+}
+\item 
+Eigen\+::\+Vector3d \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a2d30d23bda9622c57d2e894cfd00cc37}{position\+\_\+d\+\_\+target\+\_\+}
+\item 
+Eigen\+::\+Quaterniond \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ae2c7eed26db0a1b708b91148451bb13e}{orientation\+\_\+d\+\_\+target\+\_\+}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{strikes__back_2servers_2led__action__server_2src_2led__action__server__node_8cpp_a2036ae39d23f8e14a2cc8ddcd46dea5a}{dynamic\+\_\+reconfigure\+::\+Server}$<$ franka\+\_\+example\+\_\+controllers\+::compliance\+\_\+param\+Config $>$ $>$ \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a43319973f57653a9d64bdafbeea2cf03}{dynamic\+\_\+server\+\_\+compliance\+\_\+param\+\_\+}
+\item 
+ros\+::\+Node\+Handle \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a5c360df35cb2e4e32b47746a40ed95b1}{dynamic\+\_\+reconfigure\+\_\+compliance\+\_\+param\+\_\+node\+\_\+}
+\item 
+ros\+::\+Subscriber \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a0daa6df50687aeeea370bbf13ed61774}{sub\+\_\+equilibrium\+\_\+pose\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 24 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a31f27ea8c8f60f073fb50c78cf48ab6c}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a31f27ea8c8f60f073fb50c78cf48ab6c}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!compliance\+Param\+Callback@{compliance\+Param\+Callback}}
+\index{compliance\+Param\+Callback@{compliance\+Param\+Callback}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{compliance\+Param\+Callback()}{complianceParamCallback()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::compliance\+Param\+Callback (\begin{DoxyParamCaption}\item[{franka\+\_\+example\+\_\+controllers\+::compliance\+\_\+param\+Config \&}]{config,  }\item[{uint32\+\_\+t}]{level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 221 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References cartesian\+\_\+damping\+\_\+target\+\_\+, cartesian\+\_\+stiffness\+\_\+target\+\_\+, and nullspace\+\_\+stiffness\+\_\+target\+\_\+.
+
+
+
+Referenced by init().
+
+
+\begin{DoxyCode}
+223                 \{
+224   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ab31e4b0d375e011ea3e3f745a6cfdded}{cartesian\_stiffness\_target\_}.setIdentity();
+225   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ab31e4b0d375e011ea3e3f745a6cfdded}{cartesian\_stiffness\_target\_}.topLeftCorner(3, 3)
+226       << config.translational\_stiffness * Eigen::Matrix3d::Identity();
+227   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ab31e4b0d375e011ea3e3f745a6cfdded}{cartesian\_stiffness\_target\_}.bottomRightCorner(3, 3)
+228       << config.rotational\_stiffness * Eigen::Matrix3d::Identity();
+229   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_afcb20af974815ddd883d1039ab554cc1}{cartesian\_damping\_target\_}.setIdentity();
+230   \textcolor{comment}{// Damping ratio = 1}
+231   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_afcb20af974815ddd883d1039ab554cc1}{cartesian\_damping\_target\_}.topLeftCorner(3, 3)
+232       << 2.0 * sqrt(config.translational\_stiffness) * Eigen::Matrix3d::Identity();
+233   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_afcb20af974815ddd883d1039ab554cc1}{cartesian\_damping\_target\_}.bottomRightCorner(3, 3)
+234       << 2.0 * sqrt(config.rotational\_stiffness) * Eigen::Matrix3d::Identity();
+235   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3bfebd283e81cab2a5d303d75ba5a706}{nullspace\_stiffness\_target\_} = config.nullspace\_stiffness;
+236 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a31f27ea8c8f60f073fb50c78cf48ab6c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a84a8c0fb5fbb0c273910d1af68fabe0b}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a84a8c0fb5fbb0c273910d1af68fabe0b}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!equilibrium\+Pose\+Callback@{equilibrium\+Pose\+Callback}}
+\index{equilibrium\+Pose\+Callback@{equilibrium\+Pose\+Callback}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{equilibrium\+Pose\+Callback()}{equilibriumPoseCallback()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::equilibrium\+Pose\+Callback (\begin{DoxyParamCaption}\item[{const geometry\+\_\+msgs\+::\+Pose\+Stamped\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 238 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References orientation\+\_\+d\+\_\+target\+\_\+, P\+L\+U\+G\+I\+N\+L\+I\+B\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+C\+L\+A\+S\+S(), and position\+\_\+d\+\_\+target\+\_\+.
+
+
+
+Referenced by init().
+
+
+\begin{DoxyCode}
+239                                                  \{
+240   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a2d30d23bda9622c57d2e894cfd00cc37}{position\_d\_target\_} << \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}->pose.position.x, \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}->pose.position.y, 
+      \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}->pose.position.z;
+241   Eigen::Quaterniond last\_orientation\_d\_target(\hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ae2c7eed26db0a1b708b91148451bb13e}{orientation\_d\_target\_});
+242   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ae2c7eed26db0a1b708b91148451bb13e}{orientation\_d\_target\_}.coeffs() << \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}->pose.orientation.x, 
+      \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}->pose.orientation.y,
+243       \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}->pose.orientation.z, \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}->pose.orientation.w;
+244   \textcolor{keywordflow}{if} (last\_orientation\_d\_target.coeffs().dot(\hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ae2c7eed26db0a1b708b91148451bb13e}{orientation\_d\_target\_}.coeffs()) < 0.0) \{
+245     \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ae2c7eed26db0a1b708b91148451bb13e}{orientation\_d\_target\_}.coeffs() << -
+      \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ae2c7eed26db0a1b708b91148451bb13e}{orientation\_d\_target\_}.coeffs();
+246   \}
+247 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a84a8c0fb5fbb0c273910d1af68fabe0b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a84a8c0fb5fbb0c273910d1af68fabe0b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_aa61fee8f409bbfda931c202123dbd7f5}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_aa61fee8f409bbfda931c202123dbd7f5}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!init@{init}}
+\index{init@{init}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::init (\begin{DoxyParamCaption}\item[{hardware\+\_\+interface\+::\+Robot\+HW $\ast$}]{robot\+\_\+hw,  }\item[{ros\+::\+Node\+Handle \&}]{node\+\_\+handle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 17 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References cartesian\+\_\+damping\+\_\+, cartesian\+\_\+stiffness\+\_\+, compliance\+Param\+Callback(), dynamic\+\_\+reconfigure\+\_\+compliance\+\_\+param\+\_\+node\+\_\+, dynamic\+\_\+server\+\_\+compliance\+\_\+param\+\_\+, equilibrium\+Pose\+Callback(), joint\+\_\+handles\+\_\+, model\+\_\+handle\+\_\+, orientation\+\_\+d\+\_\+, orientation\+\_\+d\+\_\+target\+\_\+, position\+\_\+d\+\_\+, position\+\_\+d\+\_\+target\+\_\+, state\+\_\+handle\+\_\+, and sub\+\_\+equilibrium\+\_\+pose\+\_\+.
+
+
+\begin{DoxyCode}
+18                                                                            \{
+19   std::vector<double> cartesian\_stiffness\_vector;
+20   std::vector<double> cartesian\_damping\_vector;
+21 
+22   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a0daa6df50687aeeea370bbf13ed61774}{sub\_equilibrium\_pose\_} = node\_handle.subscribe(
+23       \textcolor{stringliteral}{"/equilibrium\_pose"}, 20, &
+      \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a84a8c0fb5fbb0c273910d1af68fabe0b}{CartesianImpedanceExampleController::equilibriumPoseCallback}
+      , \textcolor{keyword}{this},
+24       ros::TransportHints().reliable().tcpNoDelay());
+25 
+26   \hyperlink{namespacetesting_1_1internal_a8e8ff5b11e64078831112677156cb111}{std::string} arm\_id;
+27   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"arm\_id"}, arm\_id)) \{
+28     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"CartesianImpedanceExampleController: Could not read parameter arm\_id"});
+29     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+30   \}
+31   std::vector<std::string> joint\_names;
+32   \textcolor{keywordflow}{if} (!node\_handle.getParam(\textcolor{stringliteral}{"joint\_names"}, joint\_names) || joint\_names.size() != 7) \{
+33     ROS\_ERROR(
+34         \textcolor{stringliteral}{"CartesianImpedanceExampleController: Invalid or no joint\_names parameters provided, "}
+35         \textcolor{stringliteral}{"aborting controller init!"});
+36     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+37   \}
+38 
+39   \textcolor{keyword}{auto}* model\_interface = robot\_hw->get<\hyperlink{classfranka__hw_1_1FrankaModelInterface}{franka\_hw::FrankaModelInterface}>();
+40   \textcolor{keywordflow}{if} (model\_interface == \textcolor{keyword}{nullptr}) \{
+41     ROS\_ERROR\_STREAM(
+42         \textcolor{stringliteral}{"CartesianImpedanceExampleController: Error getting model interface from hardware"});
+43     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+44   \}
+45   \textcolor{keywordflow}{try} \{
+46     \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a588de895d4aaef43c00bc11e6b789084}{model\_handle\_} = std::make\_unique<franka\_hw::FrankaModelHandle>(
+47         model\_interface->getHandle(arm\_id + \textcolor{stringliteral}{"\_model"}));
+48   \} \textcolor{keywordflow}{catch} (hardware\_interface::HardwareInterfaceException& ex) \{
+49     ROS\_ERROR\_STREAM(
+50         \textcolor{stringliteral}{"CartesianImpedanceExampleController: Exception getting model handle from interface: "}
+51         << ex.what());
+52     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+53   \}
+54 
+55   \textcolor{keyword}{auto}* state\_interface = robot\_hw->get<\hyperlink{classfranka__hw_1_1FrankaStateInterface}{franka\_hw::FrankaStateInterface}>();
+56   \textcolor{keywordflow}{if} (state\_interface == \textcolor{keyword}{nullptr}) \{
+57     ROS\_ERROR\_STREAM(
+58         \textcolor{stringliteral}{"CartesianImpedanceExampleController: Error getting state interface from hardware"});
+59     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+60   \}
+61   \textcolor{keywordflow}{try} \{
+62     \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_affdc57722887831ee0e3e02332eae345}{state\_handle\_} = std::make\_unique<franka\_hw::FrankaStateHandle>(
+63         state\_interface->getHandle(arm\_id + \textcolor{stringliteral}{"\_robot"}));
+64   \} \textcolor{keywordflow}{catch} (hardware\_interface::HardwareInterfaceException& ex) \{
+65     ROS\_ERROR\_STREAM(
+66         \textcolor{stringliteral}{"CartesianImpedanceExampleController: Exception getting state handle from interface: "}
+67         << ex.what());
+68     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+69   \}
+70 
+71   \textcolor{keyword}{auto}* effort\_joint\_interface = robot\_hw->get<hardware\_interface::EffortJointInterface>();
+72   \textcolor{keywordflow}{if} (effort\_joint\_interface == \textcolor{keyword}{nullptr}) \{
+73     ROS\_ERROR\_STREAM(
+74         \textcolor{stringliteral}{"CartesianImpedanceExampleController: Error getting effort joint interface from hardware"});
+75     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+76   \}
+77   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 7; ++i) \{
+78     \textcolor{keywordflow}{try} \{
+79       \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a288ac917280b160d8a531ab3554de5e4}{joint\_handles\_}.push\_back(effort\_joint\_interface->getHandle(joint\_names[i]));
+80     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} hardware\_interface::HardwareInterfaceException& ex) \{
+81       ROS\_ERROR\_STREAM(
+82           \textcolor{stringliteral}{"CartesianImpedanceExampleController: Exception getting joint handles: "} << ex.what());
+83       \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+84     \}
+85   \}
+86 
+87   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a5c360df35cb2e4e32b47746a40ed95b1}{dynamic\_reconfigure\_compliance\_param\_node\_} =
+88       ros::NodeHandle(\textcolor{stringliteral}{"dynamic\_reconfigure\_compliance\_param\_node"});
+89 
+90   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a43319973f57653a9d64bdafbeea2cf03}{dynamic\_server\_compliance\_param\_} = std::make\_unique<
+91       dynamic\_reconfigure::Server<franka\_example\_controllers::compliance\_paramConfig>>(
+92 
+93       \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a5c360df35cb2e4e32b47746a40ed95b1}{dynamic\_reconfigure\_compliance\_param\_node\_});
+94   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a43319973f57653a9d64bdafbeea2cf03}{dynamic\_server\_compliance\_param\_}->setCallback(
+95       boost::bind(&\hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a31f27ea8c8f60f073fb50c78cf48ab6c}{CartesianImpedanceExampleController::complianceParamCallback}
+      , \textcolor{keyword}{this}, \_1, \_2));
+96 
+97   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a7b1ed13a31a9561ced03a8a9221a303f}{position\_d\_}.setZero();
+98   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a8528ed0cf7de6439e65bb1d4c4017137}{orientation\_d\_}.coeffs() << 0.0, 0.0, 0.0, 1.0;
+99   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a2d30d23bda9622c57d2e894cfd00cc37}{position\_d\_target\_}.setZero();
+100   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ae2c7eed26db0a1b708b91148451bb13e}{orientation\_d\_target\_}.coeffs() << 0.0, 0.0, 0.0, 1.0;
+101 
+102   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a37535313bb87e462a6c187c7ddce520f}{cartesian\_stiffness\_}.setZero();
+103   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a95cb6cf998a392f5bf9fa1201f0c595d}{cartesian\_damping\_}.setZero();
+104 
+105   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+106 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1CartesianImpedanceExampleController_aa61fee8f409bbfda931c202123dbd7f5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a1a3dd73a99d2686af41ff8c5ff8f216c}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a1a3dd73a99d2686af41ff8c5ff8f216c}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!saturate\+Torque\+Rate@{saturate\+Torque\+Rate}}
+\index{saturate\+Torque\+Rate@{saturate\+Torque\+Rate}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{saturate\+Torque\+Rate()}{saturateTorqueRate()}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix$<$ double, 7, 1 $>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::saturate\+Torque\+Rate (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&}]{tau\+\_\+d\+\_\+calculated,  }\item[{const Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&}]{tau\+\_\+\+J\+\_\+d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 209 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References delta\+\_\+tau\+\_\+max\+\_\+.
+
+
+
+Referenced by update().
+
+
+\begin{DoxyCode}
+211                                               \{  \textcolor{comment}{// NOLINT (readability-identifier-naming)}
+212   Eigen::Matrix<double, 7, 1> tau\_d\_saturated\{\};
+213   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 7; i++) \{
+214     \textcolor{keywordtype}{double} difference = tau\_d\_calculated[i] - tau\_J\_d[i];
+215     tau\_d\_saturated[i] =
+216         tau\_J\_d[i] + std::max(std::min(difference, \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3ff07c9bb2c49cc9ac622bb2bd2c8f96}{delta\_tau\_max\_}), -
+      \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3ff07c9bb2c49cc9ac622bb2bd2c8f96}{delta\_tau\_max\_});
+217   \}
+218   \textcolor{keywordflow}{return} tau\_d\_saturated;
+219 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a1a3dd73a99d2686af41ff8c5ff8f216c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a9191e1f9d60551294d1f225af39f7926}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a9191e1f9d60551294d1f225af39f7926}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!starting@{starting}}
+\index{starting@{starting}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{starting()}{starting()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::starting (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 108 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References franka\+::\+Robot\+State\+::dq, franka\+::k\+End\+Effector, model\+\_\+handle\+\_\+, franka\+::\+Robot\+State\+::\+O\+\_\+\+T\+\_\+\+EE, orientation\+\_\+d\+\_\+, orientation\+\_\+d\+\_\+target\+\_\+, position\+\_\+d\+\_\+, position\+\_\+d\+\_\+target\+\_\+, franka\+::\+Robot\+State\+::q, q\+\_\+d\+\_\+nullspace\+\_\+, and state\+\_\+handle\+\_\+.
+
+
+\begin{DoxyCode}
+108                                                                    \{
+109   \textcolor{comment}{// compute initial velocity with jacobian and set x\_attractor and q\_d\_nullspace}
+110   \textcolor{comment}{// to initial configuration}
+111   \hyperlink{structfranka_1_1RobotState}{franka::RobotState} initial\_state = \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_affdc57722887831ee0e3e02332eae345}{state\_handle\_}->getRobotState();
+112   \textcolor{comment}{// get jacobian}
+113   std::array<double, 42> jacobian\_array =
+114       \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a588de895d4aaef43c00bc11e6b789084}{model\_handle\_}->getZeroJacobian(\hyperlink{namespacefranka_a00b729ddce916481d3f0d10febec4f5ba3617dcc7555dbca3c3e86e7535914fdf}{franka::Frame::kEndEffector});
+115   \textcolor{comment}{// convert to eigen}
+116   Eigen::Map<Eigen::Matrix<double, 6, 7>> jacobian(jacobian\_array.data());
+117   Eigen::Map<Eigen::Matrix<double, 7, 1>> dq\_initial(initial\_state.\hyperlink{structfranka_1_1RobotState_af372a0081d72bc7b4fe873f99c7b2d8c}{dq}.data());
+118   Eigen::Map<Eigen::Matrix<double, 7, 1>> q\_initial(initial\_state.\hyperlink{structfranka_1_1RobotState_ade3335d1ac2f6c44741a916d565f7091}{q}.data());
+119   Eigen::Affine3d initial\_transform(Eigen::Matrix4d::Map(initial\_state.\hyperlink{structfranka_1_1RobotState_a193781d47722b32925e0ea7ac415f442}{O\_T\_EE}.data()));
+120 
+121   \textcolor{comment}{// set equilibrium point to current state}
+122   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a7b1ed13a31a9561ced03a8a9221a303f}{position\_d\_} = initial\_transform.translation();
+123   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a8528ed0cf7de6439e65bb1d4c4017137}{orientation\_d\_} = Eigen::Quaterniond(initial\_transform.linear());
+124   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a2d30d23bda9622c57d2e894cfd00cc37}{position\_d\_target\_} = initial\_transform.translation();
+125   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ae2c7eed26db0a1b708b91148451bb13e}{orientation\_d\_target\_} = Eigen::Quaterniond(initial\_transform.linear());
+126 
+127   \textcolor{comment}{// set nullspace equilibrium configuration to initial q}
+128   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a17864b23083e90764168ceb4ea843df8}{q\_d\_nullspace\_} = q\_initial;
+129 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ab7e3690c65dbf1ff57a5d37cb651cd04}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ab7e3690c65dbf1ff57a5d37cb651cd04}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!update@{update}}
+\index{update@{update}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{,  }\item[{const ros\+::\+Duration \&}]{period }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 131 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+cpp.
+
+
+
+References cartesian\+\_\+damping\+\_\+, cartesian\+\_\+damping\+\_\+target\+\_\+, cartesian\+\_\+stiffness\+\_\+, cartesian\+\_\+stiffness\+\_\+target\+\_\+, franka\+::\+Robot\+State\+::dq, filter\+\_\+params\+\_\+, joint\+\_\+handles\+\_\+, franka\+::k\+End\+Effector, model\+\_\+handle\+\_\+, nullspace\+\_\+stiffness\+\_\+, nullspace\+\_\+stiffness\+\_\+target\+\_\+, franka\+::\+Robot\+State\+::\+O\+\_\+\+T\+\_\+\+EE, orientation\+\_\+d\+\_\+, orientation\+\_\+d\+\_\+target\+\_\+, position\+\_\+d\+\_\+, position\+\_\+d\+\_\+target\+\_\+, pseudo\+Inverse(), franka\+::\+Robot\+State\+::q, q\+\_\+d\+\_\+nullspace\+\_\+, saturate\+Torque\+Rate(), state\+\_\+handle\+\_\+, and franka\+::\+Robot\+State\+::tau\+\_\+\+J\+\_\+d.
+
+
+\begin{DoxyCode}
+132                                                                        \{
+133   \textcolor{comment}{// get state variables}
+134   \hyperlink{structfranka_1_1RobotState}{franka::RobotState} robot\_state = \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_affdc57722887831ee0e3e02332eae345}{state\_handle\_}->getRobotState();
+135   std::array<double, 7> coriolis\_array = \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a588de895d4aaef43c00bc11e6b789084}{model\_handle\_}->getCoriolis();
+136   std::array<double, 42> jacobian\_array =
+137       \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a588de895d4aaef43c00bc11e6b789084}{model\_handle\_}->getZeroJacobian(\hyperlink{namespacefranka_a00b729ddce916481d3f0d10febec4f5ba3617dcc7555dbca3c3e86e7535914fdf}{franka::Frame::kEndEffector});
+138 
+139   \textcolor{comment}{// convert to Eigen}
+140   Eigen::Map<Eigen::Matrix<double, 7, 1>> coriolis(coriolis\_array.data());
+141   Eigen::Map<Eigen::Matrix<double, 6, 7>> jacobian(jacobian\_array.data());
+142   Eigen::Map<Eigen::Matrix<double, 7, 1>> q(robot\_state.\hyperlink{structfranka_1_1RobotState_ade3335d1ac2f6c44741a916d565f7091}{q}.data());
+143   Eigen::Map<Eigen::Matrix<double, 7, 1>> dq(robot\_state.\hyperlink{structfranka_1_1RobotState_af372a0081d72bc7b4fe873f99c7b2d8c}{dq}.data());
+144   Eigen::Map<Eigen::Matrix<double, 7, 1>> tau\_J\_d(  \textcolor{comment}{// NOLINT (readability-identifier-naming)}
+145       robot\_state.\hyperlink{structfranka_1_1RobotState_a7086a89a2705810f93a3a95d43df2d9d}{tau\_J\_d}.data());
+146   Eigen::Affine3d transform(Eigen::Matrix4d::Map(robot\_state.\hyperlink{structfranka_1_1RobotState_a193781d47722b32925e0ea7ac415f442}{O\_T\_EE}.data()));
+147   Eigen::Vector3d position(transform.translation());
+148   Eigen::Quaterniond orientation(transform.linear());
+149 
+150   \textcolor{comment}{// compute error to desired pose}
+151   \textcolor{comment}{// position error}
+152   Eigen::Matrix<double, 6, 1> error;
+153   error.head(3) << position - \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a7b1ed13a31a9561ced03a8a9221a303f}{position\_d\_};
+154 
+155   \textcolor{comment}{// orientation error}
+156   \textcolor{keywordflow}{if} (\hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a8528ed0cf7de6439e65bb1d4c4017137}{orientation\_d\_}.coeffs().dot(orientation.coeffs()) < 0.0) \{
+157     orientation.coeffs() << -orientation.coeffs();
+158   \}
+159   \textcolor{comment}{// "difference" quaternion}
+160   Eigen::Quaterniond error\_quaternion(orientation * \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a8528ed0cf7de6439e65bb1d4c4017137}{orientation\_d\_}.inverse());
+161   \textcolor{comment}{// convert to axis angle}
+162   Eigen::AngleAxisd error\_quaternion\_angle\_axis(error\_quaternion);
+163   \textcolor{comment}{// compute "orientation error"}
+164   error.tail(3) << error\_quaternion\_angle\_axis.axis() * error\_quaternion\_angle\_axis.angle();
+165 
+166   \textcolor{comment}{// compute control}
+167   \textcolor{comment}{// allocate variables}
+168   Eigen::VectorXd tau\_task(7), tau\_nullspace(7), tau\_d(7);
+169 
+170   \textcolor{comment}{// pseudoinverse for nullspace handling}
+171   \textcolor{comment}{// kinematic pseuoinverse}
+172   Eigen::MatrixXd jacobian\_transpose\_pinv;
+173   \hyperlink{pseudo__inversion_8h_ad7a75f47179e0fb6ae677c06f1e56a89}{pseudoInverse}(jacobian.transpose(), jacobian\_transpose\_pinv);
+174 
+175   \textcolor{comment}{// Cartesian PD control with damping ratio = 1}
+176   tau\_task << jacobian.transpose() *
+177                   (-\hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a37535313bb87e462a6c187c7ddce520f}{cartesian\_stiffness\_} * error - 
+      \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a95cb6cf998a392f5bf9fa1201f0c595d}{cartesian\_damping\_} * (jacobian * dq));
+178   \textcolor{comment}{// nullspace PD control with damping ratio = 1}
+179   tau\_nullspace << (Eigen::MatrixXd::Identity(7, 7) -
+180                     jacobian.transpose() * jacobian\_transpose\_pinv) *
+181                        (\hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ac47b4db7d9f39e3d7eac34396b8ff32b}{nullspace\_stiffness\_} * (
+      \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a17864b23083e90764168ceb4ea843df8}{q\_d\_nullspace\_} - q) -
+182                         (2.0 * sqrt(\hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ac47b4db7d9f39e3d7eac34396b8ff32b}{nullspace\_stiffness\_})) * dq);
+183   \textcolor{comment}{// Desired torque}
+184   tau\_d << tau\_task + tau\_nullspace + coriolis;
+185   \textcolor{comment}{// Saturate torque rate to avoid discontinuities}
+186   tau\_d << \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a1a3dd73a99d2686af41ff8c5ff8f216c}{saturateTorqueRate}(tau\_d, tau\_J\_d);
+187   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < 7; ++i) \{
+188     \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a288ac917280b160d8a531ab3554de5e4}{joint\_handles\_}[i].setCommand(tau\_d(i));
+189   \}
+190 
+191   \textcolor{comment}{// update parameters changed online either through dynamic reconfigure or through the interactive}
+192   \textcolor{comment}{// target by filtering}
+193   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a37535313bb87e462a6c187c7ddce520f}{cartesian\_stiffness\_} =
+194       \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_} * \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ab31e4b0d375e011ea3e3f745a6cfdded}{cartesian\_stiffness\_target\_} + (1.0 - 
+      \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_}) * \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a37535313bb87e462a6c187c7ddce520f}{cartesian\_stiffness\_};
+195   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a95cb6cf998a392f5bf9fa1201f0c595d}{cartesian\_damping\_} =
+196       \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_} * \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_afcb20af974815ddd883d1039ab554cc1}{cartesian\_damping\_target\_} + (1.0 - 
+      \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_}) * cartesian\_damping\_;
+197   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ac47b4db7d9f39e3d7eac34396b8ff32b}{nullspace\_stiffness\_} =
+198       \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_} * \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3bfebd283e81cab2a5d303d75ba5a706}{nullspace\_stiffness\_target\_} + (1.0 - 
+      \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_}) * nullspace\_stiffness\_;
+199   position\_d\_ = \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_} * \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a2d30d23bda9622c57d2e894cfd00cc37}{position\_d\_target\_} + (1.0 - 
+      \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_}) * position\_d\_;
+200   Eigen::AngleAxisd aa\_orientation\_d(\hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a8528ed0cf7de6439e65bb1d4c4017137}{orientation\_d\_});
+201   Eigen::AngleAxisd aa\_orientation\_d\_target(\hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ae2c7eed26db0a1b708b91148451bb13e}{orientation\_d\_target\_});
+202   aa\_orientation\_d.axis() = \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_} * aa\_orientation\_d\_target.axis() +
+203                             (1.0 - \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_}) * aa\_orientation\_d.axis();
+204   aa\_orientation\_d.angle() = \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_} * aa\_orientation\_d\_target.angle() +
+205                              (1.0 - \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}{filter\_params\_}) * aa\_orientation\_d.angle();
+206   \hyperlink{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a8528ed0cf7de6439e65bb1d4c4017137}{orientation\_d\_} = Eigen::Quaterniond(aa\_orientation\_d);
+207 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ab7e3690c65dbf1ff57a5d37cb651cd04_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a95cb6cf998a392f5bf9fa1201f0c595d}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a95cb6cf998a392f5bf9fa1201f0c595d}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!cartesian\+\_\+damping\+\_\+@{cartesian\+\_\+damping\+\_\+}}
+\index{cartesian\+\_\+damping\+\_\+@{cartesian\+\_\+damping\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{cartesian\+\_\+damping\+\_\+}{cartesian\_damping\_}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix$<$double, 6, 6$>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::cartesian\+\_\+damping\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 49 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_afcb20af974815ddd883d1039ab554cc1}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_afcb20af974815ddd883d1039ab554cc1}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!cartesian\+\_\+damping\+\_\+target\+\_\+@{cartesian\+\_\+damping\+\_\+target\+\_\+}}
+\index{cartesian\+\_\+damping\+\_\+target\+\_\+@{cartesian\+\_\+damping\+\_\+target\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{cartesian\+\_\+damping\+\_\+target\+\_\+}{cartesian\_damping\_target\_}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix$<$double, 6, 6$>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::cartesian\+\_\+damping\+\_\+target\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 50 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by compliance\+Param\+Callback(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a37535313bb87e462a6c187c7ddce520f}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a37535313bb87e462a6c187c7ddce520f}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!cartesian\+\_\+stiffness\+\_\+@{cartesian\+\_\+stiffness\+\_\+}}
+\index{cartesian\+\_\+stiffness\+\_\+@{cartesian\+\_\+stiffness\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{cartesian\+\_\+stiffness\+\_\+}{cartesian\_stiffness\_}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix$<$double, 6, 6$>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::cartesian\+\_\+stiffness\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 47 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ab31e4b0d375e011ea3e3f745a6cfdded}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ab31e4b0d375e011ea3e3f745a6cfdded}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!cartesian\+\_\+stiffness\+\_\+target\+\_\+@{cartesian\+\_\+stiffness\+\_\+target\+\_\+}}
+\index{cartesian\+\_\+stiffness\+\_\+target\+\_\+@{cartesian\+\_\+stiffness\+\_\+target\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{cartesian\+\_\+stiffness\+\_\+target\+\_\+}{cartesian\_stiffness\_target\_}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix$<$double, 6, 6$>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::cartesian\+\_\+stiffness\+\_\+target\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 48 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by compliance\+Param\+Callback(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3ff07c9bb2c49cc9ac622bb2bd2c8f96}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3ff07c9bb2c49cc9ac622bb2bd2c8f96}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!delta\+\_\+tau\+\_\+max\+\_\+@{delta\+\_\+tau\+\_\+max\+\_\+}}
+\index{delta\+\_\+tau\+\_\+max\+\_\+@{delta\+\_\+tau\+\_\+max\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{delta\+\_\+tau\+\_\+max\+\_\+}{delta\_tau\_max\_}}
+{\footnotesize\ttfamily const double franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::delta\+\_\+tau\+\_\+max\+\_\+ \{1.\+0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 46 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by saturate\+Torque\+Rate().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a5c360df35cb2e4e32b47746a40ed95b1}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a5c360df35cb2e4e32b47746a40ed95b1}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!dynamic\+\_\+reconfigure\+\_\+compliance\+\_\+param\+\_\+node\+\_\+@{dynamic\+\_\+reconfigure\+\_\+compliance\+\_\+param\+\_\+node\+\_\+}}
+\index{dynamic\+\_\+reconfigure\+\_\+compliance\+\_\+param\+\_\+node\+\_\+@{dynamic\+\_\+reconfigure\+\_\+compliance\+\_\+param\+\_\+node\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{dynamic\+\_\+reconfigure\+\_\+compliance\+\_\+param\+\_\+node\+\_\+}{dynamic\_reconfigure\_compliance\_param\_node\_}}
+{\footnotesize\ttfamily ros\+::\+Node\+Handle franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::dynamic\+\_\+reconfigure\+\_\+compliance\+\_\+param\+\_\+node\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 60 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a43319973f57653a9d64bdafbeea2cf03}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a43319973f57653a9d64bdafbeea2cf03}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!dynamic\+\_\+server\+\_\+compliance\+\_\+param\+\_\+@{dynamic\+\_\+server\+\_\+compliance\+\_\+param\+\_\+}}
+\index{dynamic\+\_\+server\+\_\+compliance\+\_\+param\+\_\+@{dynamic\+\_\+server\+\_\+compliance\+\_\+param\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{dynamic\+\_\+server\+\_\+compliance\+\_\+param\+\_\+}{dynamic\_server\_compliance\_param\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{strikes__back_2servers_2led__action__server_2src_2led__action__server__node_8cpp_a2036ae39d23f8e14a2cc8ddcd46dea5a}{dynamic\+\_\+reconfigure\+::\+Server}$<$franka\+\_\+example\+\_\+controllers\+::compliance\+\_\+param\+Config$>$ $>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::dynamic\+\_\+server\+\_\+compliance\+\_\+param\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 59 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3684e222192042e190309d945c0f9589}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!filter\+\_\+params\+\_\+@{filter\+\_\+params\+\_\+}}
+\index{filter\+\_\+params\+\_\+@{filter\+\_\+params\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{filter\+\_\+params\+\_\+}{filter\_params\_}}
+{\footnotesize\ttfamily double franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::filter\+\_\+params\+\_\+ \{0.\+005\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 43 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a288ac917280b160d8a531ab3554de5e4}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a288ac917280b160d8a531ab3554de5e4}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!joint\+\_\+handles\+\_\+@{joint\+\_\+handles\+\_\+}}
+\index{joint\+\_\+handles\+\_\+@{joint\+\_\+handles\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{joint\+\_\+handles\+\_\+}{joint\_handles\_}}
+{\footnotesize\ttfamily std\+::vector$<$hardware\+\_\+interface\+::\+Joint\+Handle$>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::joint\+\_\+handles\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 41 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a588de895d4aaef43c00bc11e6b789084}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a588de895d4aaef43c00bc11e6b789084}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!model\+\_\+handle\+\_\+@{model\+\_\+handle\+\_\+}}
+\index{model\+\_\+handle\+\_\+@{model\+\_\+handle\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{model\+\_\+handle\+\_\+}{model\_handle\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classfranka__hw_1_1FrankaModelHandle}{franka\+\_\+hw\+::\+Franka\+Model\+Handle}$>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::model\+\_\+handle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 40 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ac47b4db7d9f39e3d7eac34396b8ff32b}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ac47b4db7d9f39e3d7eac34396b8ff32b}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!nullspace\+\_\+stiffness\+\_\+@{nullspace\+\_\+stiffness\+\_\+}}
+\index{nullspace\+\_\+stiffness\+\_\+@{nullspace\+\_\+stiffness\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{nullspace\+\_\+stiffness\+\_\+}{nullspace\_stiffness\_}}
+{\footnotesize\ttfamily double franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::nullspace\+\_\+stiffness\+\_\+ \{20.\+0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 44 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3bfebd283e81cab2a5d303d75ba5a706}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a3bfebd283e81cab2a5d303d75ba5a706}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!nullspace\+\_\+stiffness\+\_\+target\+\_\+@{nullspace\+\_\+stiffness\+\_\+target\+\_\+}}
+\index{nullspace\+\_\+stiffness\+\_\+target\+\_\+@{nullspace\+\_\+stiffness\+\_\+target\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{nullspace\+\_\+stiffness\+\_\+target\+\_\+}{nullspace\_stiffness\_target\_}}
+{\footnotesize\ttfamily double franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::nullspace\+\_\+stiffness\+\_\+target\+\_\+ \{20.\+0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 45 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by compliance\+Param\+Callback(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a8528ed0cf7de6439e65bb1d4c4017137}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a8528ed0cf7de6439e65bb1d4c4017137}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!orientation\+\_\+d\+\_\+@{orientation\+\_\+d\+\_\+}}
+\index{orientation\+\_\+d\+\_\+@{orientation\+\_\+d\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{orientation\+\_\+d\+\_\+}{orientation\_d\_}}
+{\footnotesize\ttfamily Eigen\+::\+Quaterniond franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::orientation\+\_\+d\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 53 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ae2c7eed26db0a1b708b91148451bb13e}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_ae2c7eed26db0a1b708b91148451bb13e}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!orientation\+\_\+d\+\_\+target\+\_\+@{orientation\+\_\+d\+\_\+target\+\_\+}}
+\index{orientation\+\_\+d\+\_\+target\+\_\+@{orientation\+\_\+d\+\_\+target\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{orientation\+\_\+d\+\_\+target\+\_\+}{orientation\_d\_target\_}}
+{\footnotesize\ttfamily Eigen\+::\+Quaterniond franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::orientation\+\_\+d\+\_\+target\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 55 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by equilibrium\+Pose\+Callback(), init(), starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a7b1ed13a31a9561ced03a8a9221a303f}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a7b1ed13a31a9561ced03a8a9221a303f}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!position\+\_\+d\+\_\+@{position\+\_\+d\+\_\+}}
+\index{position\+\_\+d\+\_\+@{position\+\_\+d\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{position\+\_\+d\+\_\+}{position\_d\_}}
+{\footnotesize\ttfamily Eigen\+::\+Vector3d franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::position\+\_\+d\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 52 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a2d30d23bda9622c57d2e894cfd00cc37}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a2d30d23bda9622c57d2e894cfd00cc37}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!position\+\_\+d\+\_\+target\+\_\+@{position\+\_\+d\+\_\+target\+\_\+}}
+\index{position\+\_\+d\+\_\+target\+\_\+@{position\+\_\+d\+\_\+target\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{position\+\_\+d\+\_\+target\+\_\+}{position\_d\_target\_}}
+{\footnotesize\ttfamily Eigen\+::\+Vector3d franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::position\+\_\+d\+\_\+target\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 54 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by equilibrium\+Pose\+Callback(), init(), starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a17864b23083e90764168ceb4ea843df8}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a17864b23083e90764168ceb4ea843df8}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!q\+\_\+d\+\_\+nullspace\+\_\+@{q\+\_\+d\+\_\+nullspace\+\_\+}}
+\index{q\+\_\+d\+\_\+nullspace\+\_\+@{q\+\_\+d\+\_\+nullspace\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{q\+\_\+d\+\_\+nullspace\+\_\+}{q\_d\_nullspace\_}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix$<$double, 7, 1$>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::q\+\_\+d\+\_\+nullspace\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 51 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_affdc57722887831ee0e3e02332eae345}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_affdc57722887831ee0e3e02332eae345}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!state\+\_\+handle\+\_\+@{state\+\_\+handle\+\_\+}}
+\index{state\+\_\+handle\+\_\+@{state\+\_\+handle\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{state\+\_\+handle\+\_\+}{state\_handle\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classfranka__hw_1_1FrankaStateHandle}{franka\+\_\+hw\+::\+Franka\+State\+Handle}$>$ franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::state\+\_\+handle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 39 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init(), starting(), and update().
+
+\mbox{\Hypertarget{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a0daa6df50687aeeea370bbf13ed61774}\label{classfranka__example__controllers_1_1CartesianImpedanceExampleController_a0daa6df50687aeeea370bbf13ed61774}} 
+\index{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}!sub\+\_\+equilibrium\+\_\+pose\+\_\+@{sub\+\_\+equilibrium\+\_\+pose\+\_\+}}
+\index{sub\+\_\+equilibrium\+\_\+pose\+\_\+@{sub\+\_\+equilibrium\+\_\+pose\+\_\+}!franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller@{franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller}}
+\subsubsection{\texorpdfstring{sub\+\_\+equilibrium\+\_\+pose\+\_\+}{sub\_equilibrium\_pose\_}}
+{\footnotesize\ttfamily ros\+::\+Subscriber franka\+\_\+example\+\_\+controllers\+::\+Cartesian\+Impedance\+Example\+Controller\+::sub\+\_\+equilibrium\+\_\+pose\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 65 of file cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h.
+
+
+
+Referenced by init().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/include/franka\+\_\+example\+\_\+controllers/\hyperlink{cartesian__impedance__example__controller_8h}{cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/franka\+\_\+ros/franka\+\_\+example\+\_\+controllers/src/\hyperlink{cartesian__impedance__example__controller_8cpp}{cartesian\+\_\+impedance\+\_\+example\+\_\+controller.\+cpp}\end{DoxyCompactItemize}

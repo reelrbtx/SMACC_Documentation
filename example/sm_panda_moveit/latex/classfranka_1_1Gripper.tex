@@ -1,0 +1,506 @@
+\hypertarget{classfranka_1_1Gripper}{}\section{franka\+:\+:Gripper Class Reference}
+\label{classfranka_1_1Gripper}\index{franka\+::\+Gripper@{franka\+::\+Gripper}}
+
+
+{\ttfamily \#include $<$gripper.\+h$>$}
+
+
+
+Collaboration diagram for franka\+:\+:Gripper\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{classfranka_1_1Gripper__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classfranka_1_1Gripper_a613bf52d9433b733685d0fb9ea71602e}{Server\+Version} = uint16\+\_\+t
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classfranka_1_1Gripper_a02b30632b08001592c62d3563561afc5}{Gripper} (const std\+::string \&franka\+\_\+address)
+\item 
+\hyperlink{classfranka_1_1Gripper_aa045ea81b36f22420f9bc6f2a256a4f0}{Gripper} (\hyperlink{classfranka_1_1Gripper}{Gripper} \&\&gripper) noexcept
+\item 
+\hyperlink{classfranka_1_1Gripper}{Gripper} \& \hyperlink{classfranka_1_1Gripper_abb64ceecedcb3b2e2bebc262c1589be0}{operator=} (\hyperlink{classfranka_1_1Gripper}{Gripper} \&\&gripper) noexcept
+\item 
+\hyperlink{classfranka_1_1Gripper_ade253b8a35312d52c636c6aafb7b2e1d}{$\sim$\+Gripper} () noexcept
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classfranka_1_1Gripper_aef356f93a4c3b9d6b2532c29126d478c}{homing} () const
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classfranka_1_1Gripper_abff6a03a6c75b9079bd4b9b5ca380254}{grasp} (double width, double speed, double force, double epsilon\+\_\+inner=0.\+005, double epsilon\+\_\+outer=0.\+005) const
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classfranka_1_1Gripper_a047bc39267d66d6fb26c4c70669d68c2}{move} (double width, double speed) const
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classfranka_1_1Gripper_add7397fb6c5631650c139d26a85c8e1d}{stop} () const
+\item 
+\hyperlink{structfranka_1_1GripperState}{Gripper\+State} \hyperlink{classfranka_1_1Gripper_ab0afc8a41c9c5fff808e76851dcf23ce}{read\+Once} () const
+\item 
+\hyperlink{classfranka_1_1Gripper_a613bf52d9433b733685d0fb9ea71602e}{Server\+Version} \hyperlink{classfranka_1_1Gripper_aa1b8386fd24408753362ee088d8f9a01}{server\+Version} () const noexcept
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \hyperlink{classfranka_1_1Network}{Network} $>$ \hyperlink{classfranka_1_1Gripper_a0d6702c45e61147da44b08dd757890df}{network\+\_\+}
+\item 
+uint16\+\_\+t \hyperlink{classfranka_1_1Gripper_ae3698ae18399317ca4a7fc4154be602f}{ri\+\_\+version\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Maintains a network connection to the gripper, provides the current gripper state, and allows the execution of commands.
+
+\begin{DoxyNote}{Note}
+The members of this class are threadsafe. 
+\end{DoxyNote}
+
+
+Definition at line 27 of file gripper.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classfranka_1_1Gripper_a613bf52d9433b733685d0fb9ea71602e}\label{classfranka_1_1Gripper_a613bf52d9433b733685d0fb9ea71602e}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!Server\+Version@{Server\+Version}}
+\index{Server\+Version@{Server\+Version}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{Server\+Version}{ServerVersion}}
+{\footnotesize\ttfamily using \hyperlink{classfranka_1_1Gripper_a613bf52d9433b733685d0fb9ea71602e}{franka\+::\+Gripper\+::\+Server\+Version} =  uint16\+\_\+t}
+
+Version of the gripper server. 
+
+Definition at line 32 of file gripper.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfranka_1_1Gripper_a02b30632b08001592c62d3563561afc5}\label{classfranka_1_1Gripper_a02b30632b08001592c62d3563561afc5}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!Gripper@{Gripper}}
+\index{Gripper@{Gripper}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{Gripper()}{Gripper()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily franka\+::\+Gripper\+::\+Gripper (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{franka\+\_\+address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+Establishes a connection with a gripper connected to a robot.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em franka\+\_\+address} & I\+P/hostname of the robot the gripper is connected to.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is unsuccessful. \\
+\hline
+{\em \hyperlink{structfranka_1_1IncompatibleVersionException}{Incompatible\+Version\+Exception}} & if this version of {\ttfamily libfranka} is not supported. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 48 of file gripper.\+cpp.
+
+
+
+References research\+\_\+interface\+::gripper\+::k\+Command\+Port, network\+\_\+, operator=(), ri\+\_\+version\+\_\+, and $\sim$\+Gripper().
+
+
+\begin{DoxyCode}
+49     : \hyperlink{classfranka_1_1Gripper_a0d6702c45e61147da44b08dd757890df}{network\_}\{
+50           std::make\_unique<Network>(franka\_address, 
+      \hyperlink{namespaceresearch__interface_1_1gripper_a15061abce0d0ad8fc0dc04afbfdc71c4}{research\_interface::gripper::kCommandPort})\} \{
+51   connect<research\_interface::gripper::Connect, research\_interface::gripper::kVersion>(
+52       *\hyperlink{classfranka_1_1Gripper_a0d6702c45e61147da44b08dd757890df}{network\_}, &\hyperlink{classfranka_1_1Gripper_ae3698ae18399317ca4a7fc4154be602f}{ri\_version\_});
+53 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Gripper_a02b30632b08001592c62d3563561afc5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Gripper_aa045ea81b36f22420f9bc6f2a256a4f0}\label{classfranka_1_1Gripper_aa045ea81b36f22420f9bc6f2a256a4f0}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!Gripper@{Gripper}}
+\index{Gripper@{Gripper}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{Gripper()}{Gripper()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily franka\+::\+Gripper\+::\+Gripper (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Gripper}{Gripper} \&\&}]{gripper }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+Move-\/constructs a new \hyperlink{classfranka_1_1Gripper}{Gripper} instance.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em gripper} & Other \hyperlink{classfranka_1_1Gripper}{Gripper} instance. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfranka_1_1Gripper_ade253b8a35312d52c636c6aafb7b2e1d}\label{classfranka_1_1Gripper_ade253b8a35312d52c636c6aafb7b2e1d}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!````~Gripper@{$\sim$\+Gripper}}
+\index{````~Gripper@{$\sim$\+Gripper}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{$\sim$\+Gripper()}{~Gripper()}}
+{\footnotesize\ttfamily franka\+::\+Gripper\+::$\sim$\+Gripper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+Closes the connection. 
+
+Referenced by Gripper().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Gripper_ade253b8a35312d52c636c6aafb7b2e1d_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfranka_1_1Gripper_abff6a03a6c75b9079bd4b9b5ca380254}\label{classfranka_1_1Gripper_abff6a03a6c75b9079bd4b9b5ca380254}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!grasp@{grasp}}
+\index{grasp@{grasp}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{grasp()}{grasp()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+::\+Gripper\+::grasp (\begin{DoxyParamCaption}\item[{double}]{width,  }\item[{double}]{speed,  }\item[{double}]{force,  }\item[{double}]{epsilon\+\_\+inner = {\ttfamily 0.005},  }\item[{double}]{epsilon\+\_\+outer = {\ttfamily 0.005} }\end{DoxyParamCaption}) const}
+
+Grasps an object.
+
+An object is considered grasped if the distance $d$ between the gripper fingers satisfies $(\text{width} - \text{epsilon_inner}) < d < (\text{width} + \text{epsilon_outer})$.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em width} & Size of the object to grasp. \mbox{[}m\mbox{]} \\
+\hline
+\mbox{\tt in}  & {\em speed} & Closing speed. \mbox{[}m/s\mbox{]} \\
+\hline
+\mbox{\tt in}  & {\em force} & Grasping force. \mbox{[}N\mbox{]} \\
+\hline
+\mbox{\tt in}  & {\em epsilon\+\_\+inner} & Maximum tolerated deviation when the actual grasped width is smaller than the commanded grasp width. \\
+\hline
+\mbox{\tt in}  & {\em epsilon\+\_\+outer} & Maximum tolerated deviation when the actual grasped width is larger than the commanded grasp width.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if an object has been grasped, false otherwise.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if an error occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 67 of file gripper.\+cpp.
+
+
+
+References network\+\_\+, and battery\+\_\+monitor\+\_\+node\+::speed.
+
+
+
+Referenced by franka\+\_\+gripper\+::grasp(), franka\+\_\+gripper\+::gripper\+Command\+Execute\+Callback(), and main().
+
+
+\begin{DoxyCode}
+71                                                 \{
+72   \hyperlink{structresearch__interface_1_1gripper_1_1Grasp_1_1GraspEpsilon}{research\_interface::gripper::Grasp::GraspEpsilon} epsilon(
+      epsilon\_inner, epsilon\_outer);
+73   \textcolor{keywordflow}{return} executeCommand<research\_interface::gripper::Grasp>(*\hyperlink{classfranka_1_1Gripper_a0d6702c45e61147da44b08dd757890df}{network\_}, width, epsilon, 
+      \hyperlink{namespacebattery__monitor__node_a78ba7243610b635b1712c5af728edc13}{speed},
+74                                                             force);
+75 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Gripper_abff6a03a6c75b9079bd4b9b5ca380254_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Gripper_aef356f93a4c3b9d6b2532c29126d478c}\label{classfranka_1_1Gripper_aef356f93a4c3b9d6b2532c29126d478c}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!homing@{homing}}
+\index{homing@{homing}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{homing()}{homing()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+::\+Gripper\+::homing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Performs homing of the gripper.
+
+After changing the gripper fingers, a homing needs to be done. This is needed to estimate the maximum grasping width.
+
+\begin{DoxyReturn}{Returns}
+True if command was successful, false otherwise.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if an error occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{structfranka_1_1GripperState}{Gripper\+State} for the maximum grasping width. 
+\end{DoxySeeAlso}
+
+
+Definition at line 63 of file gripper.\+cpp.
+
+
+
+Referenced by franka\+\_\+gripper\+::homing(), and main().
+
+
+\begin{DoxyCode}
+63                            \{
+64   \textcolor{keywordflow}{return} executeCommand<research\_interface::gripper::Homing>(*network\_);
+65 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Gripper_aef356f93a4c3b9d6b2532c29126d478c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Gripper_a047bc39267d66d6fb26c4c70669d68c2}\label{classfranka_1_1Gripper_a047bc39267d66d6fb26c4c70669d68c2}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!move@{move}}
+\index{move@{move}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+::\+Gripper\+::move (\begin{DoxyParamCaption}\item[{double}]{width,  }\item[{double}]{speed }\end{DoxyParamCaption}) const}
+
+Moves the gripper fingers to a specified width.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em width} & Intended opening width. \mbox{[}m\mbox{]} \\
+\hline
+\mbox{\tt in}  & {\em speed} & Closing speed. \mbox{[}m/s\mbox{]}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if command was successful, false otherwise.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if an error occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 77 of file gripper.\+cpp.
+
+
+
+References network\+\_\+, and battery\+\_\+monitor\+\_\+node\+::speed.
+
+
+
+Referenced by franka\+\_\+gripper\+::gripper\+Command\+Execute\+Callback(), and franka\+\_\+gripper\+::move().
+
+
+\begin{DoxyCode}
+77                                                    \{
+78   \textcolor{keywordflow}{return} executeCommand<research\_interface::gripper::Move>(*\hyperlink{classfranka_1_1Gripper_a0d6702c45e61147da44b08dd757890df}{network\_}, width, 
+      \hyperlink{namespacebattery__monitor__node_a78ba7243610b635b1712c5af728edc13}{speed});
+79 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Gripper_a047bc39267d66d6fb26c4c70669d68c2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Gripper_abb64ceecedcb3b2e2bebc262c1589be0}\label{classfranka_1_1Gripper_abb64ceecedcb3b2e2bebc262c1589be0}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!operator=@{operator=}}
+\index{operator=@{operator=}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{classfranka_1_1Gripper}{Gripper} \& franka\+::\+Gripper\+::operator= (\begin{DoxyParamCaption}\item[{\hyperlink{classfranka_1_1Gripper}{Gripper} \&\&}]{gripper }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+Move-\/assigns this \hyperlink{classfranka_1_1Gripper}{Gripper} from another \hyperlink{classfranka_1_1Gripper}{Gripper} instance.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em gripper} & Other \hyperlink{classfranka_1_1Gripper}{Gripper} instance.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classfranka_1_1Model}{Model} instance. 
+\end{DoxyReturn}
+
+
+Referenced by Gripper().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Gripper_abb64ceecedcb3b2e2bebc262c1589be0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Gripper_ab0afc8a41c9c5fff808e76851dcf23ce}\label{classfranka_1_1Gripper_ab0afc8a41c9c5fff808e76851dcf23ce}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!read\+Once@{read\+Once}}
+\index{read\+Once@{read\+Once}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{read\+Once()}{readOnce()}}
+{\footnotesize\ttfamily \hyperlink{structfranka_1_1GripperState}{Gripper\+State} franka\+::\+Gripper\+::read\+Once (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Waits for a gripper state update and returns it.
+
+\begin{DoxyReturn}{Returns}
+Current gripper state.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+{\em \hyperlink{structfranka_1_1InvalidOperationException}{Invalid\+Operation\+Exception}} & if another read\+Once is already running. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 85 of file gripper.\+cpp.
+
+
+
+References franka\+::anonymous\+\_\+namespace\{gripper.\+cpp\}\+::convert\+Gripper\+State(), and network\+\_\+.
+
+
+
+Referenced by franka\+\_\+gripper\+::gripper\+Command\+Execute\+Callback(), main(), and franka\+\_\+gripper\+::update\+Gripper\+State().
+
+
+\begin{DoxyCode}
+85                                      \{
+86   \hyperlink{structresearch__interface_1_1gripper_1_1GripperState}{research\_interface::gripper::GripperState} gripper\_state;
+87   \textcolor{comment}{// Delete old data from the UDP buffer.}
+88   \textcolor{keywordflow}{while} (\hyperlink{classfranka_1_1Gripper_a0d6702c45e61147da44b08dd757890df}{network\_}->udpReceive<decltype(gripper\_state)>(&gripper\_state)) \{
+89   \}
+90 
+91   gripper\_state = \hyperlink{classfranka_1_1Gripper_a0d6702c45e61147da44b08dd757890df}{network\_}->udpBlockingReceive<decltype(gripper\_state)>();
+92   \textcolor{keywordflow}{return} \hyperlink{namespacefranka_1_1anonymous__namespace_02gripper_8cpp_03_af656eaa1cbb4150840e47175fed828e8}{convertGripperState}(gripper\_state);
+93 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Gripper_ab0afc8a41c9c5fff808e76851dcf23ce_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Gripper_ab0afc8a41c9c5fff808e76851dcf23ce_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfranka_1_1Gripper_aa1b8386fd24408753362ee088d8f9a01}\label{classfranka_1_1Gripper_aa1b8386fd24408753362ee088d8f9a01}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!server\+Version@{server\+Version}}
+\index{server\+Version@{server\+Version}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{server\+Version()}{serverVersion()}}
+{\footnotesize\ttfamily \hyperlink{classfranka_1_1Gripper_a613bf52d9433b733685d0fb9ea71602e}{Gripper\+::\+Server\+Version} franka\+::\+Gripper\+::server\+Version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Returns the software version reported by the connected server.
+
+\begin{DoxyReturn}{Returns}
+Software version of the connected server. 
+\end{DoxyReturn}
+
+
+Definition at line 59 of file gripper.\+cpp.
+
+
+
+References ri\+\_\+version\+\_\+.
+
+
+\begin{DoxyCode}
+59                                                            \{
+60   \textcolor{keywordflow}{return} \hyperlink{classfranka_1_1Gripper_ae3698ae18399317ca4a7fc4154be602f}{ri\_version\_};
+61 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classfranka_1_1Gripper_add7397fb6c5631650c139d26a85c8e1d}\label{classfranka_1_1Gripper_add7397fb6c5631650c139d26a85c8e1d}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!stop@{stop}}
+\index{stop@{stop}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} franka\+::\+Gripper\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Stops a currently running gripper move or grasp.
+
+\begin{DoxyReturn}{Returns}
+True if command was successful, false otherwise.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \hyperlink{structfranka_1_1CommandException}{Command\+Exception}} & if an error occurred. \\
+\hline
+{\em \hyperlink{structfranka_1_1NetworkException}{Network\+Exception}} & if the connection is lost, e.\+g. after a timeout. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 81 of file gripper.\+cpp.
+
+
+
+Referenced by main(), and franka\+\_\+gripper\+::stop().
+
+
+\begin{DoxyCode}
+81                          \{
+82   \textcolor{keywordflow}{return} executeCommand<research\_interface::gripper::Stop>(*network\_);
+83 \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfranka_1_1Gripper_add7397fb6c5631650c139d26a85c8e1d_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfranka_1_1Gripper_a0d6702c45e61147da44b08dd757890df}\label{classfranka_1_1Gripper_a0d6702c45e61147da44b08dd757890df}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!network\+\_\+@{network\+\_\+}}
+\index{network\+\_\+@{network\+\_\+}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{network\+\_\+}{network\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\hyperlink{classfranka_1_1Network}{Network}$>$ franka\+::\+Gripper\+::network\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 151 of file gripper.\+h.
+
+
+
+Referenced by grasp(), Gripper(), move(), and read\+Once().
+
+\mbox{\Hypertarget{classfranka_1_1Gripper_ae3698ae18399317ca4a7fc4154be602f}\label{classfranka_1_1Gripper_ae3698ae18399317ca4a7fc4154be602f}} 
+\index{franka\+::\+Gripper@{franka\+::\+Gripper}!ri\+\_\+version\+\_\+@{ri\+\_\+version\+\_\+}}
+\index{ri\+\_\+version\+\_\+@{ri\+\_\+version\+\_\+}!franka\+::\+Gripper@{franka\+::\+Gripper}}
+\subsubsection{\texorpdfstring{ri\+\_\+version\+\_\+}{ri\_version\_}}
+{\footnotesize\ttfamily uint16\+\_\+t franka\+::\+Gripper\+::ri\+\_\+version\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 153 of file gripper.\+h.
+
+
+
+Referenced by Gripper(), and server\+Version().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/include/franka/\hyperlink{gripper_8h}{gripper.\+h}\item 
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+panda\+\_\+moveit/libfranka/src/\hyperlink{gripper_8cpp}{gripper.\+cpp}\end{DoxyCompactItemize}

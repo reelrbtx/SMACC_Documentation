@@ -1,0 +1,185 @@
+\subsection*{0.\+7.\+1 -\/ 2019-\/06-\/08}
+
+Requires Panda system version $>$= 3.\+0.\+0
+
+\subsubsection*{Changed}
+
+
+\begin{DoxyItemize}
+\item Fix compilation error on A\+RM.
+\end{DoxyItemize}
+
+\subsection*{0.\+7.\+0 -\/ 2019-\/06-\/05}
+
+Requires Panda system version $>$= 3.\+0.\+0
+
+\subsubsection*{Added}
+
+
+\begin{DoxyItemize}
+\item Add support for using {\ttfamily \hyperlink{classfranka_1_1Model}{franka\+::\+Model}} on Linux A\+RM and A\+R\+M64 (requires Panda system version $>$= 3.\+1.\+0).
+\item Add Cartesian low-\/pass filter in {\ttfamily \hyperlink{lowpass__filter_8h}{lowpass\+\_\+filter.\+h}}.
+\item Add {\ttfamily \hyperlink{control__tools_8h}{control\+\_\+tools.\+h}} with helper functions for writing control loops.
+\end{DoxyItemize}
+
+\subsubsection*{Changed}
+
+
+\begin{DoxyItemize}
+\item {\bfseries B\+R\+E\+A\+K\+I\+NG} Rename {\ttfamily franka\+::\+Cartesian\+Pose\+::has\+Valid\+Elbow()} to {\ttfamily \hyperlink{classfranka_1_1CartesianPose_a5fa9f47dbf73ab45f671d89e11f89ccf}{franka\+::\+Cartesian\+Pose\+::has\+Elbow()}}.
+\item {\bfseries B\+R\+E\+A\+K\+I\+NG} Throw {\ttfamily std\+::invalid\+\_\+argument} in {\ttfamily \hyperlink{classfranka_1_1Robot_a5b5ba0a4f2bfd20be963b05622e629e1}{franka\+::\+Robot\+::control}} if NaN or infinity values are returned from a control callback.
+\item {\bfseries B\+R\+E\+A\+K\+I\+NG} Throw {\ttfamily std\+::invalid\+\_\+argument} in low-\/pass filter and rate limiting functions if invalid values are given as function parameters.
+\item {\bfseries B\+R\+E\+A\+K\+I\+NG} Do not throw exceptions in constructors of control types anymore.
+\item Take arguments by value in {\ttfamily \hyperlink{namespacefranka_a20791f7142d78bbbe3c957cc66a23ade}{franka\+::\+Motion\+Finished}}.
+\item Bug fixes in {\ttfamily \hyperlink{communication__test_8cpp}{communication\+\_\+test.\+cpp}}.
+\item Export requirements for C++ features as C\+Make target compile features.
+\end{DoxyItemize}
+
+\subsection*{0.\+6.\+0 -\/ 2019-\/02-\/06}
+
+Requires Panda system version $>$= 3.\+0.\+0
+
+
+\begin{DoxyItemize}
+\item Added support for Ubuntu 18.\+04 (Bionic).
+\item {\bfseries E\+X\+P\+E\+R\+I\+M\+E\+N\+T\+AL} Added support for Windows.
+\item Added support for using {\ttfamily \hyperlink{classfranka_1_1Model}{franka\+::\+Model}} on Linux and Windows x86 and x64.
+\item Bugfix for aborting gripper commands with {\ttfamily \hyperlink{classfranka_1_1Gripper_add7397fb6c5631650c139d26a85c8e1d}{franka\+::\+Gripper\+::stop()}}.
+\item Improved documentation for {\ttfamily \hyperlink{classfranka_1_1Robot_a168e1214ac36d74ac64f894332b84534}{franka\+::\+Robot\+::set\+Collision\+Behavior}}.
+\end{DoxyItemize}
+
+\subsection*{0.\+5.\+0 -\/ 2018-\/08-\/08}
+
+\subsubsection*{Motion and control interfaces}
+
+
+\begin{DoxyItemize}
+\item {\bfseries B\+R\+E\+A\+K\+I\+NG} Added low-\/pass filter for all realtime interfaces with default cutoff frequency of 100 Hz
+\item {\bfseries D\+E\+P\+R\+E\+C\+A\+T\+ED} {\ttfamily \hyperlink{classfranka_1_1Robot_aebce1a0dbe3b139bb24001845b2afe07}{franka\+::\+Robot\+::set\+Filters}} in favor of {\ttfamily \hyperlink{namespacefranka_a94c21b0e87afce0147a9cd6025c239ca}{franka\+::lowpass\+Filter}}
+\item Fixed description of log record entries
+\end{DoxyItemize}
+
+\subsubsection*{Library}
+
+
+\begin{DoxyItemize}
+\item Added {\ttfamily \hyperlink{lowpass__filter_8h}{lowpass\+\_\+filter.\+h}} to public interface
+\end{DoxyItemize}
+
+\subsubsection*{Examples}
+
+
+\begin{DoxyItemize}
+\item Added {\ttfamily \hyperlink{communication__test_8cpp}{communication\+\_\+test.\+cpp}} to evaluate network performance.
+\end{DoxyItemize}
+
+\subsection*{0.\+4.\+0 -\/ 2018-\/06-\/21}
+
+Requires Panda system version $>$= 1.\+3.\+0
+
+\subsubsection*{Motion and control interfaces}
+
+
+\begin{DoxyItemize}
+\item {\bfseries B\+R\+E\+A\+K\+I\+NG} Added rate limiting of commanded values as an option in the control loop and as a helper function. Rate limiting is activated by default, this could change the behavior of existing programs. Only works when filters ({\ttfamily \hyperlink{classfranka_1_1Robot_aebce1a0dbe3b139bb24001845b2afe07}{franka\+::\+Robot\+::set\+Filters}}) are deactivated.
+\item Added {\ttfamily joint\+\_\+move\+\_\+in\+\_\+wrong\+\_\+direction} error to {\ttfamily \hyperlink{structfranka_1_1RobotState}{franka\+::\+Robot\+State}}
+\item Added first and second derivatives of last commanded signals to {\ttfamily \hyperlink{structfranka_1_1RobotState}{franka\+::\+Robot\+State}}
+\end{DoxyItemize}
+
+\subsubsection*{Library}
+
+
+\begin{DoxyItemize}
+\item Added {\ttfamily \hyperlink{rate__limiting_8h}{rate\+\_\+limiting.\+h}} to public interface
+\item Removed unnecessary C\+Make script from installation
+\end{DoxyItemize}
+
+\subsection*{0.\+3.\+0 -\/ 2018-\/02-\/22}
+
+Requires Panda system version $>$= 1.\+2.\+0
+
+\subsubsection*{Motion and control interfaces}
+
+
+\begin{DoxyItemize}
+\item Added optional {\ttfamily epsilon} parameters to {\ttfamily \hyperlink{classfranka_1_1Gripper_abff6a03a6c75b9079bd4b9b5ca380254}{franka\+::\+Gripper\+::grasp}}
+\end{DoxyItemize}
+
+\subsubsection*{Examples}
+
+
+\begin{DoxyItemize}
+\item Set default collision behavior, impedances, and filter frequencies
+\item Removed command line parameters to simplify usage
+\item Fixed locking bug in {\ttfamily joint\+\_\+impedance\+\_\+control}
+\end{DoxyItemize}
+
+\subsubsection*{Library}
+
+
+\begin{DoxyItemize}
+\item {\bfseries B\+R\+E\+A\+K\+I\+NG} Changed signatures and added overloads in {\ttfamily \hyperlink{classfranka_1_1Model}{franka\+::\+Model}}
+\item Added additional variables to installed C\+Make config
+\item Updated {\ttfamily S\+O\+V\+E\+R\+S\+I\+ON} to include minor version number
+\item Added conflict with {\ttfamily ros-\/kinetic-\/libfranka} to Debian packaging
+\item Minor fixes and improvements for A\+PI documentation
+\item Fixed build errors on Clang 5.\+0
+\item Fixed test errors for Poco $>$= 1.\+8.\+0
+\end{DoxyItemize}
+
+\subsection*{0.\+2.\+0 -\/ 2018-\/01-\/29}
+
+Requires Panda system version $>$= 1.\+1.\+0
+
+\subsubsection*{Motion and control interfaces}
+
+
+\begin{DoxyItemize}
+\item Improved external torque tracking behavior.
+\item Fixed discontinuities in commanding orientation changes via the cartesian pose interface.
+\item Added {\ttfamily joint\+\_\+p2p\+\_\+insufficient\+\_\+torque\+\_\+for\+\_\+planning}, {\ttfamily tau\+\_\+j\+\_\+range\+\_\+violation}, and {\ttfamily instability\+\_\+detected} errors to {\ttfamily \hyperlink{structfranka_1_1RobotState}{franka\+::\+Robot\+State}}
+\item Added {\ttfamily tau\+\_\+\+J\+\_\+d}, {\ttfamily m\+\_\+ee}, {\ttfamily F\+\_\+x\+\_\+\+Cee}, {\ttfamily I\+\_\+ee}, {\ttfamily m\+\_\+total}, {\ttfamily F\+\_\+x\+\_\+\+Ctotal}, {\ttfamily I\+\_\+total}, {\ttfamily theta} and {\ttfamily dtheta} to {\ttfamily \hyperlink{structfranka_1_1RobotState}{franka\+::\+Robot\+State}}
+\item Added {\ttfamily set\+Filter} command to {\ttfamily \hyperlink{classfranka_1_1Robot}{franka\+::\+Robot}}
+\item Added support for commanding elbow positions for Cartesian motions.
+\item Added stiffness frame {\ttfamily K} to {\ttfamily \hyperlink{classfranka_1_1Model}{franka\+::\+Model}}
+\item {\bfseries B\+R\+E\+A\+K\+I\+NG} Replaced {\ttfamily p\+\_\+min} and {\ttfamily p\+\_\+max} of {\ttfamily \hyperlink{structfranka_1_1VirtualWallCuboid}{franka\+::\+Virtual\+Wall\+Cuboid}} with {\ttfamily object\+\_\+world\+\_\+size}
+\end{DoxyItemize}
+
+\subsubsection*{Error handling}
+
+
+\begin{DoxyItemize}
+\item {\bfseries W\+A\+R\+N\+I\+NG} Not all robot errors can be recovered using the guiding button on the robot anymore. To manually recover from such errors, please use the the Franka D\+E\+SK web interface.
+\item Added logs to {\ttfamily Control\+Exception} and improved exception messages.
+\item Fail earlier (by throwing exception) if any of the commanded values are {\ttfamily NaN} or {\ttfamily infinity}.
+\end{DoxyItemize}
+
+\subsubsection*{Examples}
+
+
+\begin{DoxyItemize}
+\item Added saturation to joint velocity, joint position, and joint impedance examples.
+\item Changed examples to read initial states inside control loops (after controller switching).
+\item Examples first move to an initial joint position.
+\item Added new cartesian impedance and force control examples.
+\item Lowered grasping force in {\ttfamily grasp\+\_\+object} example
+\end{DoxyItemize}
+
+\subsubsection*{Library}
+
+
+\begin{DoxyItemize}
+\item {\bfseries B\+R\+E\+A\+K\+I\+NG} New build-\/time dependency on Eigen3.
+\item Changed thread priority to the maximum allowed value.
+\item Prepare for the removal of the socket-\/init in the default constructor in P\+O\+CO releases $>$= 1.\+8.\+0.
+\item Removed unnecessary public dependencies for libfranka.
+\item CI\+: Run linter on examples
+\item Docu\+: Use S\+VG instead of Math\+ML for math rendering in A\+PI documentation to support Chrome.
+\end{DoxyItemize}
+
+\subsection*{0.\+1.\+0 -\/ 2017-\/09-\/15}
+
+
+\begin{DoxyItemize}
+\item Initial release 
+\end{DoxyItemize}

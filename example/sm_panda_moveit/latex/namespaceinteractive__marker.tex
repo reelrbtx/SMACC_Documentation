@@ -1,0 +1,374 @@
+\hypertarget{namespaceinteractive__marker}{}\section{interactive\+\_\+marker Namespace Reference}
+\label{namespaceinteractive__marker}\index{interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceinteractive__marker_a151d11429957edda146dfd5184be9cc4}{publisher\+Callback} (msg, \hyperlink{namespaceinteractive__marker_ad4be871390c9720f44a629c719c96923}{link\+\_\+name})
+\item 
+def \hyperlink{namespaceinteractive__marker_a3ca26991be43b2dfab3662fab7d29557}{franka\+\_\+state\+\_\+callback} (msg)
+\item 
+def \hyperlink{namespaceinteractive__marker_a6d5c00570a7279d0c91ed3fe895d2eb3}{process\+Feedback} (feedback)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceinteractive__marker_ab05cd11b66bc37f2aee6ea4ee9d9899a}{marker\+\_\+pose} = Pose\+Stamped()
+\item 
+\hyperlink{classbool}{bool} \hyperlink{namespaceinteractive__marker_af538086dc1c352610f3169b49839a050}{initial\+\_\+pose\+\_\+found} = False
+\item 
+\hyperlink{namespaceinteractive__marker_a8e8c3785e42901a7610214ff727338ac}{pose\+\_\+pub} = None
+\item 
+list \hyperlink{namespaceinteractive__marker_aae45ba5b707ff3b4546ae4bbb9b49b39}{position\+\_\+limits} = \mbox{[}\mbox{[}-\/0.\+6, 0.\+6\mbox{]}, \mbox{[}-\/0.\+6, 0.\+6\mbox{]}, \mbox{[}0.\+05, 0.\+9\mbox{]}\mbox{]}
+\item 
+\hyperlink{namespaceinteractive__marker_a260de5ba27646b7e6840abc1819deea8}{state\+\_\+sub}
+\item 
+\hyperlink{namespaceinteractive__marker_a0e579ab555212bb5e2c9f8a675b7618a}{listener} = tf.\+Transform\+Listener()
+\item 
+\hyperlink{namespaceinteractive__marker_ad4be871390c9720f44a629c719c96923}{link\+\_\+name} = rospy.\+get\+\_\+param(\char`\"{}$\sim$link\+\_\+name\char`\"{})
+\item 
+\hyperlink{namespaceinteractive__marker_a0913a920340099e56f9b000d508380eb}{server} = Interactive\+Marker\+Server(\char`\"{}equilibrium\+\_\+pose\+\_\+marker\char`\"{})
+\item 
+\hyperlink{namespaceinteractive__marker_ae29f4fcac0d5d63e0fe4542ec4b3fc65}{int\+\_\+marker} = Interactive\+Marker()
+\item 
+\hyperlink{namespaceinteractive__marker_ac2bed062650fc4b024b550a1176d9913}{frame\+\_\+id}
+\item 
+\hyperlink{namespaceinteractive__marker_ae2c7b9865bba9817db3359dba96e4507}{scale}
+\item 
+\hyperlink{namespaceinteractive__marker_a447655961b3d3ca3c5a2a9d3d769436d}{name}
+\item 
+\hyperlink{namespaceinteractive__marker_a8d5149395ebebadc404797fba74b4fbf}{description}
+\item 
+\hyperlink{namespaceinteractive__marker_a06e4691dc5f93e0da6dc9a6efa8d99b5}{pose}
+\item 
+\hyperlink{namespaceinteractive__marker_a8fd433e78cfd74cc72adf0682a6138ee}{control} = Interactive\+Marker\+Control()
+\item 
+\hyperlink{namespaceinteractive__marker_a762d2be287d5bc9ccc79401f4c401bd3}{w}
+\item 
+\hyperlink{namespaceinteractive__marker_acda52804aef30b460a72fb21ee01d69d}{x}
+\item 
+\hyperlink{namespaceinteractive__marker_a5e45ec67a60dd2f10e5b53a9274e4730}{y}
+\item 
+\hyperlink{namespaceinteractive__marker_ae4fadbd064c862c7bd45695a76bb0af4}{z}
+\item 
+\hyperlink{namespaceinteractive__marker_ae2bafebdee41a12635569a296fa3bf6e}{interaction\+\_\+mode}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceinteractive__marker_a3ca26991be43b2dfab3662fab7d29557}\label{namespaceinteractive__marker_a3ca26991be43b2dfab3662fab7d29557}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!franka\+\_\+state\+\_\+callback@{franka\+\_\+state\+\_\+callback}}
+\index{franka\+\_\+state\+\_\+callback@{franka\+\_\+state\+\_\+callback}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{franka\+\_\+state\+\_\+callback()}{franka\_state\_callback()}}
+{\footnotesize\ttfamily def interactive\+\_\+marker.\+franka\+\_\+state\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+Definition at line 27 of file interactive\+\_\+marker.\+py.
+
+
+\begin{DoxyCode}
+27 \textcolor{keyword}{def }\hyperlink{namespaceinteractive__marker_a3ca26991be43b2dfab3662fab7d29557}{franka\_state\_callback}(msg):
+28     initial\_quaternion = \(\backslash\)
+29         tf.transformations.quaternion\_from\_matrix(
+30             np.transpose(np.reshape(msg.O\_T\_EE,
+31                                     (4, 4))))
+32     initial\_quaternion = initial\_quaternion / np.linalg.norm(initial\_quaternion)
+33     marker\_pose.pose.orientation.x = initial\_quaternion[0]
+34     marker\_pose.pose.orientation.y = initial\_quaternion[1]
+35     marker\_pose.pose.orientation.z = initial\_quaternion[2]
+36     marker\_pose.pose.orientation.w = initial\_quaternion[3]
+37     marker\_pose.pose.position.x = msg.O\_T\_EE[12]
+38     marker\_pose.pose.position.y = msg.O\_T\_EE[13]
+39     marker\_pose.pose.position.z = msg.O\_T\_EE[14]
+40     \textcolor{keyword}{global} initial\_pose\_found
+41     initial\_pose\_found = \textcolor{keyword}{True}
+42 
+43 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespaceinteractive__marker_a6d5c00570a7279d0c91ed3fe895d2eb3}\label{namespaceinteractive__marker_a6d5c00570a7279d0c91ed3fe895d2eb3}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!process\+Feedback@{process\+Feedback}}
+\index{process\+Feedback@{process\+Feedback}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{process\+Feedback()}{processFeedback()}}
+{\footnotesize\ttfamily def interactive\+\_\+marker.\+process\+Feedback (\begin{DoxyParamCaption}\item[{}]{feedback }\end{DoxyParamCaption})}
+
+
+
+Definition at line 44 of file interactive\+\_\+marker.\+py.
+
+
+\begin{DoxyCode}
+44 \textcolor{keyword}{def }\hyperlink{namespaceinteractive__marker_a6d5c00570a7279d0c91ed3fe895d2eb3}{processFeedback}(feedback):
+45     \textcolor{keywordflow}{if} feedback.event\_type == InteractiveMarkerFeedback.POSE\_UPDATE:
+46         marker\_pose.pose.position.x = max([min([feedback.pose.position.x,
+47                                           position\_limits[0][1]]),
+48                                           position\_limits[0][0]])
+49         marker\_pose.pose.position.y = max([min([feedback.pose.position.y,
+50                                           position\_limits[1][1]]),
+51                                           position\_limits[1][0]])
+52         marker\_pose.pose.position.z = max([min([feedback.pose.position.z,
+53                                           position\_limits[2][1]]),
+54                                           position\_limits[2][0]])
+55         marker\_pose.pose.orientation = feedback.pose.orientation
+56     server.applyChanges()
+57 
+58 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespaceinteractive__marker_a151d11429957edda146dfd5184be9cc4}\label{namespaceinteractive__marker_a151d11429957edda146dfd5184be9cc4}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!publisher\+Callback@{publisher\+Callback}}
+\index{publisher\+Callback@{publisher\+Callback}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{publisher\+Callback()}{publisherCallback()}}
+{\footnotesize\ttfamily def interactive\+\_\+marker.\+publisher\+Callback (\begin{DoxyParamCaption}\item[{}]{msg,  }\item[{}]{link\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Definition at line 21 of file interactive\+\_\+marker.\+py.
+
+
+\begin{DoxyCode}
+21 \textcolor{keyword}{def }\hyperlink{namespaceinteractive__marker_a151d11429957edda146dfd5184be9cc4}{publisherCallback}(msg, link\_name):
+22     marker\_pose.header.frame\_id = link\_name
+23     marker\_pose.header.stamp = rospy.Time(0)
+24     pose\_pub.publish(marker\_pose)
+25 
+26 
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceinteractive__marker_a8fd433e78cfd74cc72adf0682a6138ee}\label{namespaceinteractive__marker_a8fd433e78cfd74cc72adf0682a6138ee}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!control@{control}}
+\index{control@{control}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{control}{control}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+control = Interactive\+Marker\+Control()}
+
+
+
+Definition at line 88 of file interactive\+\_\+marker.\+py.
+
+\mbox{\Hypertarget{namespaceinteractive__marker_a8d5149395ebebadc404797fba74b4fbf}\label{namespaceinteractive__marker_a8d5149395ebebadc404797fba74b4fbf}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!description@{description}}
+\index{description@{description}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+description}
+
+
+
+Definition at line 78 of file interactive\+\_\+marker.\+py.
+
+
+
+Referenced by testing\+::\+Test.\+Has\+Same\+Fixture\+Class().
+
+\mbox{\Hypertarget{namespaceinteractive__marker_ac2bed062650fc4b024b550a1176d9913}\label{namespaceinteractive__marker_ac2bed062650fc4b024b550a1176d9913}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!frame\+\_\+id@{frame\+\_\+id}}
+\index{frame\+\_\+id@{frame\+\_\+id}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{frame\+\_\+id}{frame\_id}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+frame\+\_\+id}
+
+
+
+Definition at line 75 of file interactive\+\_\+marker.\+py.
+
+\mbox{\Hypertarget{namespaceinteractive__marker_af538086dc1c352610f3169b49839a050}\label{namespaceinteractive__marker_af538086dc1c352610f3169b49839a050}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!initial\+\_\+pose\+\_\+found@{initial\+\_\+pose\+\_\+found}}
+\index{initial\+\_\+pose\+\_\+found@{initial\+\_\+pose\+\_\+found}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{initial\+\_\+pose\+\_\+found}{initial\_pose\_found}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} interactive\+\_\+marker.\+initial\+\_\+pose\+\_\+found = False}
+
+
+
+Definition at line 15 of file interactive\+\_\+marker.\+py.
+
+\mbox{\Hypertarget{namespaceinteractive__marker_ae29f4fcac0d5d63e0fe4542ec4b3fc65}\label{namespaceinteractive__marker_ae29f4fcac0d5d63e0fe4542ec4b3fc65}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!int\+\_\+marker@{int\+\_\+marker}}
+\index{int\+\_\+marker@{int\+\_\+marker}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{int\+\_\+marker}{int\_marker}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+int\+\_\+marker = Interactive\+Marker()}
+
+
+
+Definition at line 74 of file interactive\+\_\+marker.\+py.
+
+\mbox{\Hypertarget{namespaceinteractive__marker_ae2bafebdee41a12635569a296fa3bf6e}\label{namespaceinteractive__marker_ae2bafebdee41a12635569a296fa3bf6e}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!interaction\+\_\+mode@{interaction\+\_\+mode}}
+\index{interaction\+\_\+mode@{interaction\+\_\+mode}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{interaction\+\_\+mode}{interaction\_mode}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+interaction\+\_\+mode}
+
+
+
+Definition at line 94 of file interactive\+\_\+marker.\+py.
+
+\mbox{\Hypertarget{namespaceinteractive__marker_ad4be871390c9720f44a629c719c96923}\label{namespaceinteractive__marker_ad4be871390c9720f44a629c719c96923}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!link\+\_\+name@{link\+\_\+name}}
+\index{link\+\_\+name@{link\+\_\+name}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{link\+\_\+name}{link\_name}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+link\+\_\+name = rospy.\+get\+\_\+param(\char`\"{}$\sim$link\+\_\+name\char`\"{})}
+
+
+
+Definition at line 64 of file interactive\+\_\+marker.\+py.
+
+\mbox{\Hypertarget{namespaceinteractive__marker_a0e579ab555212bb5e2c9f8a675b7618a}\label{namespaceinteractive__marker_a0e579ab555212bb5e2c9f8a675b7618a}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!listener@{listener}}
+\index{listener@{listener}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{listener}{listener}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+listener = tf.\+Transform\+Listener()}
+
+
+
+Definition at line 63 of file interactive\+\_\+marker.\+py.
+
+
+
+Referenced by testing\+::internal\+::\+Tuple\+Prefix$<$ N $>$.\+Explain\+Match\+Failures\+To(), testing\+::internal\+::\+Matcher\+Base$<$ const internal\+::string \&$>$.\+Explain\+Match\+Result\+To(), testing\+::internal\+::\+Typed\+Expectation$<$ F $>$.\+Explain\+Match\+Result\+To(), testing\+::internal\+::\+Pair\+Matcher\+Impl$<$ Pair\+Type $>$.\+Match\+And\+Explain(), testing\+::internal\+::\+Unordered\+Elements\+Are\+Matcher\+Impl$<$ Container $>$.\+Match\+And\+Explain(), testing\+::internal\+::\+Predicate\+Formatter\+From\+Matcher$<$ M $>$.\+operator()(), testing\+::internal\+::\+Test\+Event\+Repeater.\+Release(), testing\+::\+Test\+Event\+Listeners.\+Set\+Default\+Result\+Printer(), testing\+::\+Test\+Event\+Listeners.\+Set\+Default\+Xml\+Generator(), and testing\+::internal\+::\+Test\+Event\+Repeater.\+Test\+Event\+Repeater().
+
+\mbox{\Hypertarget{namespaceinteractive__marker_ab05cd11b66bc37f2aee6ea4ee9d9899a}\label{namespaceinteractive__marker_ab05cd11b66bc37f2aee6ea4ee9d9899a}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!marker\+\_\+pose@{marker\+\_\+pose}}
+\index{marker\+\_\+pose@{marker\+\_\+pose}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{marker\+\_\+pose}{marker\_pose}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+marker\+\_\+pose = Pose\+Stamped()}
+
+
+
+Definition at line 14 of file interactive\+\_\+marker.\+py.
+
+\mbox{\Hypertarget{namespaceinteractive__marker_a447655961b3d3ca3c5a2a9d3d769436d}\label{namespaceinteractive__marker_a447655961b3d3ca3c5a2a9d3d769436d}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!name@{name}}
+\index{name@{name}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+name}
+
+
+
+Definition at line 77 of file interactive\+\_\+marker.\+py.
+
+
+
+Referenced by franka\+\_\+control.\+advertise\+Service(), smacc\+::introspection.\+Call\+On\+Definition(), smacc\+::\+Smacc\+State$<$ Ss\+C\+M\+V\+Cycle, Ms\+Run, Sti\+P\+S\+Cycle\+Loop, sc\+::has\+\_\+full\+\_\+history $>$.\+configure\+\_\+orthogonal(), smacc\+::introspection\+::\+Smacc\+State\+Machine\+Info.\+contains\+State(), smacc\+::\+Client\+Handler$<$ T\+Orthogonal, T\+Client $>$.\+create\+Named\+Component(), smacc\+::introspection\+::\+Smacc\+State\+Machine\+Info.\+create\+State(), smacc\+::introspection.\+demangled\+Type\+Name(), smacc\+::introspection.\+demangle\+Symbol(), smacc\+::\+Smacc\+State$<$ Ss\+C\+M\+V\+Cycle, Ms\+Run, Sti\+P\+S\+Cycle\+Loop, sc\+::has\+\_\+full\+\_\+history $>$.\+exit(), extract\+Obstacle\+From\+Json(), testing\+::internal\+::posix.\+Get\+Env(), cl\+\_\+multirole\+\_\+sensor\+::\+Cb\+Default\+Multi\+Role\+Sensor\+Behavior$<$ sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::cl\+\_\+lidar\+::\+Cl\+Lidar\+Sensor $>$.\+get\+Event\+Label(), smacc\+::\+Smacc\+State$<$ Ss\+C\+M\+V\+Cycle, Ms\+Run, Sti\+P\+S\+Cycle\+Loop, sc\+::has\+\_\+full\+\_\+history $>$.\+get\+Full\+Name(), smacc\+::\+I\+Smacc\+State\+Machine.\+get\+Global\+S\+M\+Data(), smacc\+::\+I\+Smacc\+State.\+get\+R\+O\+S\+Node(), smacc\+::introspection\+::\+Smacc\+State\+Machine\+Info.\+get\+State(), smacc\+::\+Smacc\+State$<$ Ss\+C\+M\+V\+Cycle, Ms\+Run, Sti\+P\+S\+Cycle\+Loop, sc\+::has\+\_\+full\+\_\+history $>$.\+get\+State\+Info(), testing\+::internal.\+Get\+Type\+Name(), testing\+::internal\+::\+File\+Path.\+Is\+Absolute\+Path(), smacc\+::components\+::\+Cp\+Ros\+Control\+Interface.\+load\+Controller(), smacc\+::\+I\+Smacc\+State\+Machine.\+map\+Behavior(), testing\+::internal\+::\+Untyped\+Function\+Mocker\+Base.\+Name(), smacc\+::\+I\+Smacc\+State\+Machine.\+notify\+On\+State\+Entry\+Start(), testing\+::internal\+::\+Xml\+Unit\+Test\+Result\+Printer.\+Output\+Xml\+Attribute(), cl\+\_\+keyboard\+::\+Cb\+Default\+Keyboard\+Behavior.\+post\+Key\+Event(), cl\+\_\+keyboard\+::\+Cl\+Keyboard.\+post\+Key\+Event(), smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ sm\+\_\+dance\+\_\+bot\+::\+L\+E\+D\+Control\+Action $>$.\+post\+Result\+Event(), smacc\+::introspection.\+process\+Transition\+Aux(), sm\+\_\+panda\+\_\+moveit\+::\+Cl\+Perception\+System.\+propagate\+Link\+States\+To\+Tf(), smacc\+::\+I\+Smacc\+State\+Machine.\+requires\+Component(), smacc\+::\+I\+Smacc\+State\+Machine.\+set\+Global\+S\+M\+Data(), testing\+::internal\+::\+Untyped\+Function\+Mocker\+Base.\+Set\+Owner\+And\+Name(), and smacc\+::components\+::\+Cp\+Ros\+Control\+Interface.\+unload\+Controller().
+
+\mbox{\Hypertarget{namespaceinteractive__marker_a06e4691dc5f93e0da6dc9a6efa8d99b5}\label{namespaceinteractive__marker_a06e4691dc5f93e0da6dc9a6efa8d99b5}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!pose@{pose}}
+\index{pose@{pose}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{pose}{pose}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+pose}
+
+
+
+Definition at line 82 of file interactive\+\_\+marker.\+py.
+
+
+
+Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner.\+compute\+Current\+Euclidean\+And\+Angular\+Errors(), cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner.\+compute\+Velocity\+Commands(), sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table.\+configure\+Forward\+Behavior(), sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table.\+configure\+Global\+Navigation(), cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+global\+\_\+planner\+::\+Backward\+Global\+Planner.\+create\+Default\+Backward\+Path(), sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System.\+decide\+Place\+Pose(), sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System.\+get\+Current\+Table(), joint\+States\+Callback(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position.\+on\+Entry(), sm\+\_\+panda\+\_\+moveit\+::\+Cl\+Perception\+System.\+propagate\+Link\+States\+To\+Tf(), sm\+\_\+moveit\+::\+St\+Rotate180.\+runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::\+S\+S5\+::\+Ss\+S\+Pattern1.\+runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::\+S\+S4\+::\+Ss\+F\+Pattern1.\+runtime\+Configure(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Waypoint\+Navigator.\+send\+Next\+Goal(), cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker.\+set\+Start\+Point(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Waypoint\+Navigator.\+set\+Waypoints(), and franka\+\_\+example\+\_\+controllers\+::\+Model\+Example\+Controller.\+update().
+
+\mbox{\Hypertarget{namespaceinteractive__marker_a8e8c3785e42901a7610214ff727338ac}\label{namespaceinteractive__marker_a8e8c3785e42901a7610214ff727338ac}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!pose\+\_\+pub@{pose\+\_\+pub}}
+\index{pose\+\_\+pub@{pose\+\_\+pub}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{pose\+\_\+pub}{pose\_pub}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+pose\+\_\+pub = None}
+
+
+
+Definition at line 16 of file interactive\+\_\+marker.\+py.
+
+\mbox{\Hypertarget{namespaceinteractive__marker_aae45ba5b707ff3b4546ae4bbb9b49b39}\label{namespaceinteractive__marker_aae45ba5b707ff3b4546ae4bbb9b49b39}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!position\+\_\+limits@{position\+\_\+limits}}
+\index{position\+\_\+limits@{position\+\_\+limits}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{position\+\_\+limits}{position\_limits}}
+{\footnotesize\ttfamily list interactive\+\_\+marker.\+position\+\_\+limits = \mbox{[}\mbox{[}-\/0.\+6, 0.\+6\mbox{]}, \mbox{[}-\/0.\+6, 0.\+6\mbox{]}, \mbox{[}0.\+05, 0.\+9\mbox{]}\mbox{]}}
+
+
+
+Definition at line 18 of file interactive\+\_\+marker.\+py.
+
+\mbox{\Hypertarget{namespaceinteractive__marker_ae2c7b9865bba9817db3359dba96e4507}\label{namespaceinteractive__marker_ae2c7b9865bba9817db3359dba96e4507}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!scale@{scale}}
+\index{scale@{scale}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{scale}{scale}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+scale}
+
+
+
+Definition at line 76 of file interactive\+\_\+marker.\+py.
+
+
+
+Referenced by smacc\+\_\+rviz\+\_\+plugin\+::\+Imu\+Visual.\+set\+Message().
+
+\mbox{\Hypertarget{namespaceinteractive__marker_a0913a920340099e56f9b000d508380eb}\label{namespaceinteractive__marker_a0913a920340099e56f9b000d508380eb}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!server@{server}}
+\index{server@{server}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{server}{server}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+server = Interactive\+Marker\+Server(\char`\"{}equilibrium\+\_\+pose\+\_\+marker\char`\"{})}
+
+
+
+Definition at line 73 of file interactive\+\_\+marker.\+py.
+
+
+
+Referenced by Service\+Container.\+advertise\+Service().
+
+\mbox{\Hypertarget{namespaceinteractive__marker_a260de5ba27646b7e6840abc1819deea8}\label{namespaceinteractive__marker_a260de5ba27646b7e6840abc1819deea8}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!state\+\_\+sub@{state\+\_\+sub}}
+\index{state\+\_\+sub@{state\+\_\+sub}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{state\+\_\+sub}{state\_sub}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+state\+\_\+sub}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 =  rospy.Subscriber(\textcolor{stringliteral}{"franka\_state\_controller/franka\_states"},
+2                                  FrankaState, franka\_state\_callback)
+\end{DoxyCode}
+
+
+Definition at line 61 of file interactive\+\_\+marker.\+py.
+
+\mbox{\Hypertarget{namespaceinteractive__marker_a762d2be287d5bc9ccc79401f4c401bd3}\label{namespaceinteractive__marker_a762d2be287d5bc9ccc79401f4c401bd3}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!w@{w}}
+\index{w@{w}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{w}{w}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+w}
+
+
+
+Definition at line 89 of file interactive\+\_\+marker.\+py.
+
+\mbox{\Hypertarget{namespaceinteractive__marker_acda52804aef30b460a72fb21ee01d69d}\label{namespaceinteractive__marker_acda52804aef30b460a72fb21ee01d69d}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!x@{x}}
+\index{x@{x}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+x}
+
+
+
+Definition at line 90 of file interactive\+\_\+marker.\+py.
+
+
+
+Referenced by Motion\+Generator.\+calculate\+Desired\+Values(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position.\+Cb\+Navigate\+Global\+Position(), testing.\+Const(), testing\+::internal.\+Delete(), testing.\+Eq(), testing\+::internal\+::\+Floating\+Point$<$ Raw\+Type $>$.\+Floating\+Point(), testing.\+Ge(), testing.\+Gt(), testing\+::internal.\+Implicit\+Cast\+\_\+(), testing.\+Le(), testing.\+Lt(), testing\+::internal\+::\+Ref\+Matcher$<$ T $>$\+::\+Impl$<$ Super $>$.\+Match\+And\+Explain(), testing.\+Ne(), franka\+::\+Errors.\+operator bool(), testing\+::\+Match\+Result\+Listener.\+operator$<$$<$(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose2\+D.\+Pose2\+D(), cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner.\+publish\+Goal\+Marker(), cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner.\+publish\+Goal\+Marker(), testing.\+Ref(), testing.\+Return\+Ref(), testing.\+Return\+Ref\+Of\+Copy(), and testing\+::\+Default\+Value$<$ T \& $>$.\+Set().
+
+\mbox{\Hypertarget{namespaceinteractive__marker_a5e45ec67a60dd2f10e5b53a9274e4730}\label{namespaceinteractive__marker_a5e45ec67a60dd2f10e5b53a9274e4730}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!y@{y}}
+\index{y@{y}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+y}
+
+
+
+Definition at line 91 of file interactive\+\_\+marker.\+py.
+
+
+
+Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position.\+Cb\+Navigate\+Global\+Position(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose2\+D.\+Pose2\+D(), cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner.\+publish\+Goal\+Marker(), and cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner.\+publish\+Goal\+Marker().
+
+\mbox{\Hypertarget{namespaceinteractive__marker_ae4fadbd064c862c7bd45695a76bb0af4}\label{namespaceinteractive__marker_ae4fadbd064c862c7bd45695a76bb0af4}} 
+\index{interactive\+\_\+marker@{interactive\+\_\+marker}!z@{z}}
+\index{z@{z}!interactive\+\_\+marker@{interactive\+\_\+marker}}
+\subsubsection{\texorpdfstring{z}{z}}
+{\footnotesize\ttfamily interactive\+\_\+marker.\+z}
+
+
+
+Definition at line 92 of file interactive\+\_\+marker.\+py.
+
