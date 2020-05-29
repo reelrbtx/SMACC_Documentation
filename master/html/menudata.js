@@ -141,6 +141,7 @@ var menudata={children:[
 {text:"d",url:"functions_type_d.html#index_d"},
 {text:"g",url:"functions_type_g.html#index_g"},
 {text:"i",url:"functions_type_i.html#index_i"},
+{text:"l",url:"functions_type_l.html#index_l"},
 {text:"n",url:"functions_type_n.html#index_n"},
 {text:"o",url:"functions_type_o.html#index_o"},
 {text:"p",url:"functions_type_p.html#index_p"},
