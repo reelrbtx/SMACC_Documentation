@@ -669,7 +669,6 @@ var searchData=
   ['statemachinestatuspub_5f',['stateMachineStatusPub_',['../classsmacc_1_1ISmaccStateMachine.html#a55a7c7b26ad4dfea441c62c6326a5414',1,'smacc::ISmaccStateMachine']]],
   ['statemarkerpublisher_5f',['stateMarkerPublisher_',['../classLEDActionServer.html#a4168a1e4a17eb1d65aaa059ce0c52086',1,'LEDActionServer']]],
   ['statemsgs',['stateMsgs',['../classsmacc_1_1introspection_1_1SmaccStateMachineInfo.html#a48e3ff7bbe2673d23e6942234446ebee',1,'smacc::introspection::SmaccStateMachineInfo']]],
-  ['statename',['statename',['../classmoveit__z__client_1_1CbMoveKnownState.html#a53449b08ffa077adb2f1d4efbd37f8d0',1,'moveit_z_client::CbMoveKnownState']]],
   ['statereactor',['StateReactor',['../classsmacc_1_1StateReactor.html',1,'smacc::StateReactor'],['../classsmacc_1_1StateReactor.html#ae319e9f7b0a2a80b4c5ace6ec8c99fb2',1,'smacc::StateReactor::StateReactor()']]],
   ['statereactorhandler',['StateReactorHandler',['../classsmacc_1_1introspection_1_1StateReactorHandler.html',1,'smacc::introspection']]],
   ['statereactors_5f',['stateReactors_',['../classsmacc_1_1ISmaccState.html#a7410a353b515f7b7357e94ef619a6c45',1,'smacc::ISmaccState']]],

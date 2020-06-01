@@ -61,7 +61,6 @@ var searchData=
   ['statemachinestatuspub_5f',['stateMachineStatusPub_',['../classsmacc_1_1ISmaccStateMachine.html#a55a7c7b26ad4dfea441c62c6326a5414',1,'smacc::ISmaccStateMachine']]],
   ['statemarkerpublisher_5f',['stateMarkerPublisher_',['../classLEDActionServer.html#a4168a1e4a17eb1d65aaa059ce0c52086',1,'LEDActionServer']]],
   ['statemsgs',['stateMsgs',['../classsmacc_1_1introspection_1_1SmaccStateMachineInfo.html#a48e3ff7bbe2673d23e6942234446ebee',1,'smacc::introspection::SmaccStateMachineInfo']]],
-  ['statename',['statename',['../classmoveit__z__client_1_1CbMoveKnownState.html#a53449b08ffa077adb2f1d4efbd37f8d0',1,'moveit_z_client::CbMoveKnownState']]],
   ['statereactors_5f',['stateReactors_',['../classsmacc_1_1ISmaccState.html#a7410a353b515f7b7357e94ef619a6c45',1,'smacc::ISmaccState']]],
   ['statereactorsinfo',['stateReactorsInfo',['../classsmacc_1_1introspection_1_1SmaccStateInfo.html#abd1d6ca5060c87f6bd11fde3e5b2ac4d',1,'smacc::introspection::SmaccStateInfo']]],
   ['statereactortype',['stateReactorType',['../structsmacc_1_1introspection_1_1SmaccStateReactorInfo.html#a02de210fcdffd81424537d4d8a330609',1,'smacc::introspection::SmaccStateReactorInfo']]],
