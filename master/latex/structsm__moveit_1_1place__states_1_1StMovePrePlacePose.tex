@@ -73,7 +73,7 @@ Definition at line 16 of file st\+\_\+move\+\_\+preplace\+\_\+pose.\+h.
 
 
 
-Definition at line 47 of file st\+\_\+move\+\_\+preplace\+\_\+pose.\+h.
+Definition at line 48 of file st\+\_\+move\+\_\+preplace\+\_\+pose.\+h.
 
 
 
@@ -81,26 +81,26 @@ Referenced by runtime\+Configure().
 
 
 \begin{DoxyCode}
-48     \{
-49         \textcolor{comment}{// ------ cube grasping orientation -------}
-50         \textcolor{comment}{// grasp the object with the gripper using top-to-bottom direction}
-51         \textcolor{keyword}{auto} cubeYawOnTable = tf::getYaw(objectPose.pose.orientation);
-52 
-53         \textcolor{keyword}{const} \textcolor{keywordtype}{double} degrees90 = M\_PI / 2;
-54         \textcolor{keywordflow}{while} (cubeYawOnTable > degrees90)
-55         \{
-56             cubeYawOnTable -= degrees90;
-57         \}
-58 
-59         \textcolor{keywordflow}{while} (cubeYawOnTable < -degrees90)
-60         \{
-61             cubeYawOnTable += degrees90;
-62         \}
-63 
-64         ROS\_INFO(\textcolor{stringliteral}{"cube yaw: %lf"}, cubeYawOnTable);
-65         \textcolor{keyword}{auto} quat = tf::createQuaternionFromRPY(0, M\_PI / 2, cubeYawOnTable);
-66         tf::quaternionTFToMsg(quat, objectPose.pose.orientation);
-67     \}
+49     \{
+50         \textcolor{comment}{// ------ cube grasping orientation -------}
+51         \textcolor{comment}{// grasp the object with the gripper using top-to-bottom direction}
+52         \textcolor{keyword}{auto} cubeYawOnTable = tf::getYaw(objectPose.pose.orientation);
+53 
+54         \textcolor{keyword}{const} \textcolor{keywordtype}{double} degrees90 = M\_PI / 2;
+55         \textcolor{keywordflow}{while} (cubeYawOnTable > degrees90)
+56         \{
+57             cubeYawOnTable -= degrees90;
+58         \}
+59 
+60         \textcolor{keywordflow}{while} (cubeYawOnTable < -degrees90)
+61         \{
+62             cubeYawOnTable += degrees90;
+63         \}
+64 
+65         ROS\_INFO(\textcolor{stringliteral}{"cube yaw: %lf"}, cubeYawOnTable);
+66         \textcolor{keyword}{auto} quat = tf::createQuaternionFromRPY(0, M\_PI / 2, cubeYawOnTable);
+67         tf::quaternionTFToMsg(quat, objectPose.pose.orientation);
+68     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -142,7 +142,8 @@ References compute\+Cube\+Grasping\+Orientation(), and smacc\+::\+I\+Smacc\+Stat
 42 
 43         \hyperlink{structsm__moveit_1_1place__states_1_1StMovePrePlacePose_add6f85ba0aa1e3905645881ecd0ba4e1}{computeCubeGraspingOrientation}(placingPose);
 44         moveAbsolute->targetPose = placingPose;
-45     \}
+45         moveAbsolute->group\_=\textcolor{stringliteral}{"arm"};
+46     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
