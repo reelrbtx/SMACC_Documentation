@@ -347,6 +347,5 @@ var searchData=
   ['executeupdate',['executeUpdate',['../classsmacc_1_1ISmaccUpdatable.html#af6edbb3896745920ed82fd807358fa47',1,'smacc::ISmaccUpdatable']]],
   ['exemplary',['EXEMPLARY',['../LICENSE_8txt.html#a43c88664011ec4ec9fd41f9050dd8ffe',1,'LICENSE.txt']]],
   ['exists',['exists',['../classcl__move__base__z_1_1CostmapSwitch.html#ae9cfc1152e625763beb7997c5dbed70b',1,'cl_move_base_z::CostmapSwitch']]],
-  ['exit',['exit',['../classsmacc_1_1SmaccState.html#a34b22a3b1af1796f2bdc1383eeef3a74',1,'smacc::SmaccState']]],
-  ['extra_5fsmacc_5fviewer',['extra_smacc_viewer',['../namespacegenerate__debs.html#aae153eaf5f6cddad5899c36fef7e1b10',1,'generate_debs']]]
+  ['exit',['exit',['../classsmacc_1_1SmaccState.html#a34b22a3b1af1796f2bdc1383eeef3a74',1,'smacc::SmaccState']]]
 ];
