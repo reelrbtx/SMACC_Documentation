@@ -60,7 +60,7 @@ ros\+::\+Subscriber \hyperlink{2_2servers_2opencv__perception__node_2opencv__per
 
 
 
-Definition at line 102 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+Definition at line 104 of file opencv\+\_\+perception\+\_\+node.\+cpp.
 
 
 
@@ -68,35 +68,37 @@ References debug\+Image\+Pub, detection\+Pub, test\+Blue(), test\+Green(), and t
 
 
 \begin{DoxyCode}
-103 \{
-104   cv\_bridge::CvImagePtr cv\_image = cv\_bridge::toCvCopy(img, \textcolor{stringliteral}{"rgb8"});
-105   
-106   cv::Mat image = cv\_image->image;
-107   cv\_bridge::CvImage debugImageBridge;
-108   debugImageBridge.encoding = \textcolor{stringliteral}{"rgb8"};
-109   debugImageBridge.image = image.clone();
-110 
-111   \textcolor{keywordtype}{int} detectedColor = 0;
-112   \textcolor{keywordflow}{if} (\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9bf2df48cb6b85ffe7173b65640b69e3}{testRed}(image, debugImageBridge.image) > 0)
-113   \{
-114     detectedColor = 1;
-115   \}
-116   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a63b8f2427ed7ea7fd23e6db392dd4838}{testGreen}(image, debugImageBridge.image) > 0)
-117   \{
-118     detectedColor = 2;
-119   \}
-120   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a1fa01e06b7bc85d9a3f2f5c29829978d}{testBlue}(image, debugImageBridge.image) > 0)
-121   \{
-122     detectedColor = 3;
-123   \}
-124 
-125   std\_msgs::Int32 detectedColorMsg;
-126   detectedColorMsg.data = detectedColor;
-127   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9c3047923cbbebb0fbfd7f1ff9d13fe9}{detectionPub}.publish(detectedColorMsg);
+105 \{
+106   cv\_bridge::CvImagePtr cv\_image = cv\_bridge::toCvCopy(img, \textcolor{stringliteral}{"rgb8"});
+107   
+108   cv::Mat image = cv\_image->image;
+109   cv\_bridge::CvImage debugImageBridge;
+110   debugImageBridge.encoding = \textcolor{stringliteral}{"rgb8"};
+111   debugImageBridge.image = image.clone();
+112 
+113   \textcolor{keywordtype}{int} detectedColor = 0;
+114   \textcolor{keywordflow}{if} (\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9bf2df48cb6b85ffe7173b65640b69e3}{testRed}(image, debugImageBridge.image) > 0)
+115   \{
+116     detectedColor = 1;
+117   \}
+118   
+119   \textcolor{keywordflow}{if} (\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a63b8f2427ed7ea7fd23e6db392dd4838}{testGreen}(image, debugImageBridge.image) > 0)
+120   \{
+121     detectedColor = 2;
+122   \}
+123   
+124   \textcolor{keywordflow}{if} (\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a1fa01e06b7bc85d9a3f2f5c29829978d}{testBlue}(image, debugImageBridge.image) > 0)
+125   \{
+126     detectedColor = 3;
+127   \}
 128 
-129   debugImageBridge.header = img.header;
-130   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a521668875556ae8845c9246c2c0ac096}{debugImagePub}.publish(debugImageBridge.toImageMsg());
-131 \}
+129   std\_msgs::Int32 detectedColorMsg;
+130   detectedColorMsg.data = detectedColor;
+131   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9c3047923cbbebb0fbfd7f1ff9d13fe9}{detectionPub}.publish(detectedColorMsg);
+132 
+133   debugImageBridge.header = img.header;
+134   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a521668875556ae8845c9246c2c0ac096}{debugImagePub}.publish(debugImageBridge.toImageMsg());
+135 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -114,7 +116,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 133 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+Definition at line 137 of file opencv\+\_\+perception\+\_\+node.\+cpp.
 
 
 
@@ -122,40 +124,40 @@ References callback(), debug\+Image\+Pub, detection\+Pub, image\+Sub, fake\+\_\+
 
 
 \begin{DoxyCode}
-134 \{
-135   ros::init(argc, argv, \textcolor{stringliteral}{"blob\_detector\_node"});
-136   ros::NodeHandle nh;
-137 
-138   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9c3047923cbbebb0fbfd7f1ff9d13fe9}{detectionPub} = nh.advertise<std\_msgs::Int32>(\textcolor{stringliteral}{"detected\_color"}, 1);
-139   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ae403eef1a94a795b5eb6de44f6e36b06}{imageSub} = nh.subscribe(\textcolor{stringliteral}{"/image\_raw"}, 1, \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback});
-140   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a521668875556ae8845c9246c2c0ac096}{debugImagePub} = nh.advertise<sensor\_msgs::Image>(\textcolor{stringliteral}{"/opencv\_debug\_image"}, 1);
+138 \{
+139   ros::init(argc, argv, \textcolor{stringliteral}{"blob\_detector\_node"});
+140   ros::NodeHandle nh;
 141 
-142   ros::Rate \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}(10);
-143 
-144   \textcolor{keywordflow}{while} (ros::ok())
-145   \{
-146     \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ac5c54df7ed3b930268c8d7752c101725}{update}();
-147     ros::spinOnce();
-148     \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
-149   \}
-150 
-151   \textcolor{comment}{/*}
-152 \textcolor{comment}{  testRed("../../red1.png");}
-153 \textcolor{comment}{  testRed("../../green1.png");}
-154 \textcolor{comment}{  testRed("../../blue1.png");}
-155 \textcolor{comment}{  testRed("../../red2.png");}
-156 \textcolor{comment}{}
-157 \textcolor{comment}{  testGreen("../../red1.png");}
-158 \textcolor{comment}{  testGreen("../../green1.png");}
-159 \textcolor{comment}{  testGreen("../../blue1.png");}
-160 \textcolor{comment}{  testGreen("../../red2.png");}
-161 \textcolor{comment}{}
-162 \textcolor{comment}{  testBlue("../../red1.png");}
-163 \textcolor{comment}{  testBlue("../../green1.png");}
-164 \textcolor{comment}{  testBlue("../../blue1.png");}
-165 \textcolor{comment}{  testBlue("../../red2.png");}
-166 \textcolor{comment}{  */}
-167 \}
+142   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9c3047923cbbebb0fbfd7f1ff9d13fe9}{detectionPub} = nh.advertise<std\_msgs::Int32>(\textcolor{stringliteral}{"detected\_color"}, 1);
+143   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ae403eef1a94a795b5eb6de44f6e36b06}{imageSub} = nh.subscribe(\textcolor{stringliteral}{"/image\_raw"}, 1, \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback});
+144   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a521668875556ae8845c9246c2c0ac096}{debugImagePub} = nh.advertise<sensor\_msgs::Image>(\textcolor{stringliteral}{"/opencv\_debug\_image"}, 1);
+145 
+146   ros::Rate \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}(10);
+147 
+148   \textcolor{keywordflow}{while} (ros::ok())
+149   \{
+150     \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ac5c54df7ed3b930268c8d7752c101725}{update}();
+151     ros::spinOnce();
+152     \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
+153   \}
+154 
+155   \textcolor{comment}{/*}
+156 \textcolor{comment}{  testRed("../../red1.png");}
+157 \textcolor{comment}{  testRed("../../green1.png");}
+158 \textcolor{comment}{  testRed("../../blue1.png");}
+159 \textcolor{comment}{  testRed("../../red2.png");}
+160 \textcolor{comment}{}
+161 \textcolor{comment}{  testGreen("../../red1.png");}
+162 \textcolor{comment}{  testGreen("../../green1.png");}
+163 \textcolor{comment}{  testGreen("../../blue1.png");}
+164 \textcolor{comment}{  testGreen("../../red2.png");}
+165 \textcolor{comment}{}
+166 \textcolor{comment}{  testBlue("../../red1.png");}
+167 \textcolor{comment}{  testBlue("../../green1.png");}
+168 \textcolor{comment}{  testBlue("../../blue1.png");}
+169 \textcolor{comment}{  testBlue("../../red2.png");}
+170 \textcolor{comment}{  */}
+171 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -193,7 +195,7 @@ Definition at line 13 of file opencv\+\_\+perception\+\_\+node.\+cpp.
 
 
 
-Definition at line 70 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+Definition at line 72 of file opencv\+\_\+perception\+\_\+node.\+cpp.
 
 
 
@@ -201,9 +203,9 @@ References test\+Image().
 
 
 \begin{DoxyCode}
-71 \{
-72   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"blue"}, 10, 10);
-73 \}
+73 \{
+74   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"blue"}, 10, 10);
+75 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -221,7 +223,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 86 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+Definition at line 88 of file opencv\+\_\+perception\+\_\+node.\+cpp.
 
 
 
@@ -229,10 +231,10 @@ References test\+Image().
 
 
 \begin{DoxyCode}
-87 \{
-88   cv::Mat input = cv::imread(path);
-89   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"blue"}, 10, 10);
-90 \}
+89 \{
+90   cv::Mat input = cv::imread(path);
+91   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"blue"}, 10, 10);
+92 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -250,7 +252,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 75 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+Definition at line 77 of file opencv\+\_\+perception\+\_\+node.\+cpp.
 
 
 
@@ -258,9 +260,9 @@ References test\+Image().
 
 
 \begin{DoxyCode}
-76 \{
-77   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"green"}, 50, 10);
-78 \}
+78 \{
+79   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"green"}, 50, 10);
+80 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -278,7 +280,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 92 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+Definition at line 94 of file opencv\+\_\+perception\+\_\+node.\+cpp.
 
 
 
@@ -286,10 +288,10 @@ References test\+Image().
 
 
 \begin{DoxyCode}
-93 \{
-94   cv::Mat input = cv::imread(path);
-95   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"green"}, 50, 10);
-96 \}
+95 \{
+96   cv::Mat input = cv::imread(path);
+97   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"green"}, 50, 10);
+98 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -341,22 +343,24 @@ References fake\+\_\+cube\+\_\+perception\+\_\+node\+::r, and segment\+Color().
 45 
 46   \textcolor{keywordflow}{if}(!blobs.empty())
 47   \{ 
-48     \textcolor{keyword}{auto}& b = blobs.front();
-49     cv::Rect \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r};
-50     \textcolor{keywordtype}{float} diameter = b.size;
-51     \textcolor{keyword}{auto} radius = diameter*0.5;
-52     r.x = b.pt.x - radius;
-53     r.y = b.pt.y - radius;
-54     r.width = diameter;
-55     r.height = diameter;
-56     cv::rectangle(debugImage,r, cv::Scalar(255,0,0),1 );
-57   \}
-58 
-59   \textcolor{comment}{// cv::imshow(colorName + " filter - "+ path, segmented);}
-60   \textcolor{comment}{// cv::waitKey();}
-61 
-62   \textcolor{keywordflow}{return} blobs.size();
-63 \}
+48     \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}& b: blobs)
+49     \{
+50       cv::Rect \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r};
+51       \textcolor{keywordtype}{float} diameter = b.size;
+52       \textcolor{keyword}{auto} radius = diameter*0.5;
+53       r.x = b.pt.x - radius;
+54       r.y = b.pt.y - radius;
+55       r.width = diameter;
+56       r.height = diameter;
+57       cv::rectangle(debugImage,r, cv::Scalar(255,0,0),1 );
+58     \}
+59   \}
+60 
+61   \textcolor{comment}{// cv::imshow(colorName + " filter - "+ path, segmented);}
+62   \textcolor{comment}{// cv::waitKey();}
+63 
+64   \textcolor{keywordflow}{return} blobs.size();
+65 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -374,7 +378,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 65 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+Definition at line 67 of file opencv\+\_\+perception\+\_\+node.\+cpp.
 
 
 
@@ -382,9 +386,9 @@ References test\+Image().
 
 
 \begin{DoxyCode}
-66 \{
-67   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"red"}, 130, 20);
-68 \}
+68 \{
+69   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"red"}, 130, 20);
+70 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -402,7 +406,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 80 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+Definition at line 82 of file opencv\+\_\+perception\+\_\+node.\+cpp.
 
 
 
@@ -410,10 +414,10 @@ References test\+Image().
 
 
 \begin{DoxyCode}
-81 \{
-82   cv::Mat input = cv::imread(path);
-83   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"red"}, 130, 20);
-84 \}
+83 \{
+84   cv::Mat input = cv::imread(path);
+85   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"red"}, 130, 20);
+86 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -431,12 +435,12 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 98 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+Definition at line 100 of file opencv\+\_\+perception\+\_\+node.\+cpp.
 
 
 \begin{DoxyCode}
-99 \{
-100 \}
+101 \{
+102 \}
 \end{DoxyCode}
 
 
