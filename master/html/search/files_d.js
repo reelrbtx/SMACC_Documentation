@@ -131,6 +131,7 @@ var searchData=
   ['st_5fgrasp_5fretreat_2eh',['st_grasp_retreat.h',['../include_2sm__moveit_2states_2pick__states_2st__grasp__retreat_8h.html',1,'(Global Namespace)'],['../2_2include_2sm__moveit__2_2states_2pick__states_2st__grasp__retreat_8h.html',1,'(Global Namespace)'],['../3_2include_2sm__moveit__3_2states_2pick__states_2st__grasp__retreat_8h.html',1,'(Global Namespace)']]],
   ['st_5fheld_2eh',['st_held.h',['../st__held_8h.html',1,'']]],
   ['st_5fhigh_5fcenter_5fupper_5fcut_2eh',['st_high_center_upper_cut.h',['../st__high__center__upper__cut_8h.html',1,'']]],
+  ['st_5fhigh_5fcenter_5fupper_5fpalm_2eh',['st_high_center_upper_palm.h',['../st__high__center__upper__palm_8h.html',1,'']]],
   ['st_5fhigh_5fleft_5fupper_5fcut_2eh',['st_high_left_upper_cut.h',['../st__high__left__upper__cut_8h.html',1,'']]],
   ['st_5fhigh_5fover_5fpick_2eh',['st_high_over_pick.h',['../st__high__over__pick_8h.html',1,'']]],
   ['st_5fhigh_5ftuck_2eh',['st_high_tuck.h',['../st__high__tuck_8h.html',1,'']]],
