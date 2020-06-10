@@ -11,7 +11,7 @@ Inheritance diagram for moveit\+\_\+z\+\_\+client\+:\+:Cb\+Move\+End\+Effector\+
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=244pt]{classmoveit__z__client_1_1CbMoveEndEffector__inherit__graph}
+\includegraphics[width=350pt]{classmoveit__z__client_1_1CbMoveEndEffector__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -34,6 +34,8 @@ Collaboration diagram for moveit\+\_\+z\+\_\+client\+:\+:Cb\+Move\+End\+Effector
 virtual void \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_a5306018b432c9d8f8a31823f6b317d84}{on\+Entry} () override
 \item 
 virtual void \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af3fdc6c596da7792cfc9bbef13cb02fc}{on\+Exit} () override
+\item 
+virtual void \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_a09d13b5736a13a811f474b48c6ad43cf}{update} () override
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -54,6 +56,7 @@ boost\+::optional$<$ std\+::string $>$ \hyperlink{classmoveit__z__client_1_1CbMo
 \item 
 \hyperlink{classmoveit__z__client_1_1ClMoveGroup}{Cl\+Move\+Group} $\ast$ \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroup\+Client\+\_\+}
 \end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
 
 
 \subsection{Detailed Description}
@@ -111,7 +114,7 @@ References tip\+\_\+link\+\_\+.
 
 
 
-Definition at line 47 of file cb\+\_\+move\+\_\+end\+\_\+effector.\+cpp.
+Definition at line 52 of file cb\+\_\+move\+\_\+end\+\_\+effector.\+cpp.
 
 
 
@@ -123,46 +126,46 @@ Referenced by on\+Entry().
 
 
 \begin{DoxyCode}
-50 \{
-51     moveGroupInterface.setPlanningTime(1.0);
-52 
-53     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveEndEffector] Target End efector Pose: "} << targetObjectPose);
-54 
-55     moveGroupInterface.setPoseTarget(targetObjectPose, \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_abd92e9d3d67bdde11f9e38e0b44a2b8b}{tip\_link\_});
-56     moveGroupInterface.setPoseReferenceFrame(targetObjectPose.header.frame\_id);
+55 \{
+56     moveGroupInterface.setPlanningTime(1.0);
 57 
-58     moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
-59     \textcolor{keywordtype}{bool} success = (moveGroupInterface.plan(computedMotionPlan) == 
+58     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveEndEffector] Target End efector Pose: "} << targetObjectPose);
+59 
+60     moveGroupInterface.setPoseTarget(targetObjectPose, \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_abd92e9d3d67bdde11f9e38e0b44a2b8b}{tip\_link\_});
+61     moveGroupInterface.setPoseReferenceFrame(targetObjectPose.header.frame\_id);
+62 
+63     moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
+64     \textcolor{keywordtype}{bool} success = (moveGroupInterface.plan(computedMotionPlan) == 
       moveit::planning\_interface::MoveItErrorCode::SUCCESS);
-60     ROS\_INFO\_NAMED(\textcolor{stringliteral}{"CbMoveEndEffector"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} : \textcolor{stringliteral}{"FAILED
+65     ROS\_INFO\_NAMED(\textcolor{stringliteral}{"CbMoveEndEffector"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} : \textcolor{stringliteral}{"FAILED
       "});
-61 
-62     
-63     \textcolor{keywordflow}{if} (success)
-64     \{
-65         \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
 66 
-67         \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
-68         \{
-69             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution succedded"});
-70             \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_ad6b8f0acbe3d11b5c39a83911a3d95b8}{postEventMotionExecutionSucceded}
-      ();
-71         \}
-72         \textcolor{keywordflow}{else}
+67     
+68     \textcolor{keywordflow}{if} (success)
+69     \{
+70         \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
+71 
+72         \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
 73         \{
-74             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution failed"});
-75             \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}(
-      );
+74             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution succedded"});
+75             \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_ad6b8f0acbe3d11b5c39a83911a3d95b8}{postEventMotionExecutionSucceded}
+      ();
 76         \}
-77     \}
-78     \textcolor{keywordflow}{else}
-79     \{
-80         ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution failed"});
-81         \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}();
+77         \textcolor{keywordflow}{else}
+78         \{
+79             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution failed"});
+80             \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}(
+      );
+81         \}
 82     \}
-83 
-84     \textcolor{keywordflow}{return} success;
-85 \}
+83     \textcolor{keywordflow}{else}
+84     \{
+85         ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution failed"});
+86         \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}();
+87     \}
+88 
+89     \textcolor{keywordflow}{return} success;
+90 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -201,26 +204,27 @@ References group\+\_\+, movegroup\+Client\+\_\+, moveit\+\_\+z\+\_\+client\+::\+
 
 \begin{DoxyCode}
 24 \{
-25     ROS\_DEBUG(\textcolor{stringliteral}{"Synchronous sleep of 4 seconds"});
-26     ros::WallDuration(4).sleep();
+25     ROS\_DEBUG(\textcolor{stringliteral}{"[CbMoveEndEffector] Synchronous sleep of 1 seconds"});
+26     ros::WallDuration(1).sleep();
 27 
-28     \textcolor{keywordflow}{if} (this->\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_ab2d23ae054dbc0c2a5f3e6bbc84e07dd}{group\_})
-29     \{
-30         moveit::planning\_interface::MoveGroupInterface move\_group(*(this->\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_ab2d23ae054dbc0c2a5f3e6bbc84e07dd}{group\_}));
-31         this->\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_a4b77954562c23ba6d0aa0f9c805dfd8d}{moveToAbsolutePose}(move\_group, \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_}->
+28     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_});
+29 
+30     \textcolor{keywordflow}{if} (this->\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_ab2d23ae054dbc0c2a5f3e6bbc84e07dd}{group\_})
+31     \{
+32         moveit::planning\_interface::MoveGroupInterface move\_group(*(this->\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_ab2d23ae054dbc0c2a5f3e6bbc84e07dd}{group\_}));
+33         this->\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_a4b77954562c23ba6d0aa0f9c805dfd8d}{moveToAbsolutePose}(move\_group, \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_}->
       \hyperlink{classmoveit__z__client_1_1ClMoveGroup_a21c879b2683286aa21ce68f40195b4b5}{planningSceneInterface}, \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_abea9c6077733077baced34c6098c6140}{targetPose});
-32     \}
-33     \textcolor{keywordflow}{else}
-34     \{
-35         this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_});
-36         this->\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_a4b77954562c23ba6d0aa0f9c805dfd8d}{moveToAbsolutePose}(\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_}->
+34     \}
+35     \textcolor{keywordflow}{else}
+36     \{
+37         this->\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_a4b77954562c23ba6d0aa0f9c805dfd8d}{moveToAbsolutePose}(\hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_}->
       \hyperlink{classmoveit__z__client_1_1ClMoveGroup_af86e046b837be0ef4afa9893d8808f20}{moveGroupClientInterface}, \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_af62a434c16849885a085e30b8ae70e00}{movegroupClient\_}->
       \hyperlink{classmoveit__z__client_1_1ClMoveGroup_a21c879b2683286aa21ce68f40195b4b5}{planningSceneInterface}, \hyperlink{classmoveit__z__client_1_1CbMoveEndEffector_abea9c6077733077baced34c6098c6140}{targetPose});
-37     \}
-38     
-39     ROS\_DEBUG(\textcolor{stringliteral}{"Synchronous sleep of 3 seconds"});
-40     ros::WallDuration(3).sleep();
-41 \}
+38     \}
+39     
+40     ROS\_DEBUG(\textcolor{stringliteral}{"[CbMoveEndEffector] Synchronous sleep of 1 seconds"});
+41     ros::WallDuration(1).sleep();
+42 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -242,12 +246,31 @@ Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ac0cd72d42bd0042
 
 
 
-Definition at line 43 of file cb\+\_\+move\+\_\+end\+\_\+effector.\+cpp.
+Definition at line 44 of file cb\+\_\+move\+\_\+end\+\_\+effector.\+cpp.
 
 
 \begin{DoxyCode}
-44 \{
-45 \}
+45 \{
+46 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classmoveit__z__client_1_1CbMoveEndEffector_a09d13b5736a13a811f474b48c6ad43cf}\label{classmoveit__z__client_1_1CbMoveEndEffector_a09d13b5736a13a811f474b48c6ad43cf}} 
+\index{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+End\+Effector@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+End\+Effector}!update@{update}}
+\index{update@{update}!moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+End\+Effector@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+End\+Effector}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+End\+Effector\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{classsmacc_1_1ISmaccUpdatable_a84ee0520cbefdb1d412bed54650b028e}{smacc\+::\+I\+Smacc\+Updatable}.
+
+
+
+Definition at line 48 of file cb\+\_\+move\+\_\+end\+\_\+effector.\+cpp.
+
+
+\begin{DoxyCode}
+49 \{
+50 \}
 \end{DoxyCode}
 
 
