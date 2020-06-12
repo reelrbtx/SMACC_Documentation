@@ -41,6 +41,13 @@ virtual void \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a104abb9c8f8ebb04
 boost\+::optional$<$ double $>$ \hyperlink{classmoveit__z__client_1_1CbMoveJoints_aadb5410711e277fab3a637cb4835fb3b}{scaling\+Factor\+\_\+}
 \item 
 std\+::map$<$ std\+::string, double $>$ \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a0f52577dd2fccf25f36c4c93e733c0f4}{joint\+Value\+Target\+\_\+}
+\item 
+boost\+::optional$<$ std\+::string $>$ \hyperlink{classmoveit__z__client_1_1CbMoveJoints_ac75cb07d2292b2080266c36e4d18fc41}{group\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a4dcc7bcf0ed857d9d580d4700cdeb5db}{move\+Joints} (moveit\+::planning\+\_\+interface\+::\+Move\+Group\+Interface \&move\+Group\+Interface)
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -65,12 +72,12 @@ Definition at line 16 of file cb\+\_\+move\+\_\+joints.\+h.
 
 
 
-Definition at line 17 of file cb\+\_\+move\+\_\+joints.\+cpp.
+Definition at line 16 of file cb\+\_\+move\+\_\+joints.\+cpp.
 
 
 \begin{DoxyCode}
-18 \{
-19 \}
+17 \{
+18 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmoveit__z__client_1_1CbMoveJoints_ae0f43ac05e5263161541eb6bc15fa457}\label{classmoveit__z__client_1_1CbMoveJoints_ae0f43ac05e5263161541eb6bc15fa457}} 
 \index{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints}!Cb\+Move\+Joints@{Cb\+Move\+Joints}}
@@ -84,13 +91,84 @@ Definition at line 12 of file cb\+\_\+move\+\_\+joints.\+cpp.
 
 
 \begin{DoxyCode}
-13     : \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a0f52577dd2fccf25f36c4c93e733c0f4}{jointValueTarget\_}(jointValueTarget)
-14 \{
-15 \}
+12                                                                             : 
+      \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a0f52577dd2fccf25f36c4c93e733c0f4}{jointValueTarget\_}(jointValueTarget)
+13 \{
+14 \}
 \end{DoxyCode}
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmoveit__z__client_1_1CbMoveJoints_a4dcc7bcf0ed857d9d580d4700cdeb5db}\label{classmoveit__z__client_1_1CbMoveJoints_a4dcc7bcf0ed857d9d580d4700cdeb5db}} 
+\index{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints}!move\+Joints@{move\+Joints}}
+\index{move\+Joints@{move\+Joints}!moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints}}
+\subsubsection{\texorpdfstring{move\+Joints()}{moveJoints()}}
+{\footnotesize\ttfamily void moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints\+::move\+Joints (\begin{DoxyParamCaption}\item[{moveit\+::planning\+\_\+interface\+::\+Move\+Group\+Interface \&}]{move\+Group\+Interface }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 38 of file cb\+\_\+move\+\_\+joints.\+cpp.
+
+
+
+References joint\+Value\+Target\+\_\+, movegroup\+Client\+\_\+, moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), and scaling\+Factor\+\_\+.
+
+
+
+Referenced by on\+Entry().
+
+
+\begin{DoxyCode}
+39 \{
+40   \textcolor{keywordflow}{if} (\hyperlink{classmoveit__z__client_1_1CbMoveJoints_aadb5410711e277fab3a637cb4835fb3b}{scalingFactor\_})
+41     moveGroupInterface.setMaxVelocityScalingFactor(*\hyperlink{classmoveit__z__client_1_1CbMoveJoints_aadb5410711e277fab3a637cb4835fb3b}{scalingFactor\_});
+42 
+43   moveGroupInterface.setJointValueTarget(\hyperlink{classmoveit__z__client_1_1CbMoveJoints_a0f52577dd2fccf25f36c4c93e733c0f4}{jointValueTarget\_});
+44 
+45   moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
+46 
+47   \textcolor{keywordtype}{bool} success = (moveGroupInterface.plan(computedMotionPlan) == 
+      moveit::planning\_interface::MoveItErrorCode::SUCCESS);
+48   ROS\_INFO\_NAMED(\textcolor{stringliteral}{"CbMoveJoints"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} : \textcolor{stringliteral}{"FAILED"});
+49 
+50   \textcolor{keywordflow}{if} (success)
+51   \{
+52     \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
+53 
+54     \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
+55     \{
+56       ROS\_INFO(\textcolor{stringliteral}{"[CbMoveJoints] motion execution succedded"});
+57       \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_ad6b8f0acbe3d11b5c39a83911a3d95b8}{postEventMotionExecutionSucceded}();
+58     \}
+59     \textcolor{keywordflow}{else}
+60     \{
+61       ROS\_INFO(\textcolor{stringliteral}{"[CbMoveJoints] motion execution failed"});
+62       \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}();
+63     \}
+64   \}
+65   \textcolor{keywordflow}{else}
+66   \{
+67     ROS\_INFO(\textcolor{stringliteral}{"[CbMoveJoints] motion execution failed"});
+68     \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}();
+69   \}
+70 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmoveit__z__client_1_1CbMoveJoints_a4dcc7bcf0ed857d9d580d4700cdeb5db_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmoveit__z__client_1_1CbMoveJoints_a4dcc7bcf0ed857d9d580d4700cdeb5db_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classmoveit__z__client_1_1CbMoveJoints_a512e97e94ab05ee12837433e5d921095}\label{classmoveit__z__client_1_1CbMoveJoints_a512e97e94ab05ee12837433e5d921095}} 
 \index{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints}!on\+Entry@{on\+Entry}}
 \index{on\+Entry@{on\+Entry}!moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints}}
@@ -103,53 +181,31 @@ Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_a7962382f93987c7
 
 
 
-Definition at line 21 of file cb\+\_\+move\+\_\+joints.\+cpp.
+Definition at line 20 of file cb\+\_\+move\+\_\+joints.\+cpp.
 
 
 
-References joint\+Value\+Target\+\_\+, movegroup\+Client\+\_\+, moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Client(), and scaling\+Factor\+\_\+.
+References group\+\_\+, movegroup\+Client\+\_\+, moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, move\+Joints(), and smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Client().
 
 
 \begin{DoxyCode}
-22 \{
-23     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}{movegroupClient\_});
-24     \textcolor{keyword}{auto} &moveGroupInterface = \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}{movegroupClient\_}->
-      \hyperlink{classmoveit__z__client_1_1ClMoveGroup_af86e046b837be0ef4afa9893d8808f20}{moveGroupClientInterface};
-25 
-26     \textcolor{keywordflow}{if}(\hyperlink{classmoveit__z__client_1_1CbMoveJoints_aadb5410711e277fab3a637cb4835fb3b}{scalingFactor\_})
-27         moveGroupInterface.setMaxVelocityScalingFactor(*\hyperlink{classmoveit__z__client_1_1CbMoveJoints_aadb5410711e277fab3a637cb4835fb3b}{scalingFactor\_});
-28         
-29     moveGroupInterface.setJointValueTarget(\hyperlink{classmoveit__z__client_1_1CbMoveJoints_a0f52577dd2fccf25f36c4c93e733c0f4}{jointValueTarget\_});
-30 
-31     moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
-32 
-33     \textcolor{keywordtype}{bool} success = (moveGroupInterface.plan(computedMotionPlan) == 
-      moveit::planning\_interface::MoveItErrorCode::SUCCESS);
-34     ROS\_INFO\_NAMED(\textcolor{stringliteral}{"CbMoveJoints"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} : \textcolor{stringliteral}{"FAILED"});
-35 
-36     \textcolor{keywordflow}{if} (success)
-37     \{
-38         \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
-39 
-40         \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
-41         \{
-42             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveJoints] motion execution succedded"});
-43             \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_ad6b8f0acbe3d11b5c39a83911a3d95b8}{postEventMotionExecutionSucceded}
-      ();
-44         \}
-45         \textcolor{keywordflow}{else}
-46         \{
-47             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveJoints] motion execution failed"});
-48             \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}(
-      );
-49         \}
-50     \}
-51     \textcolor{keywordflow}{else}
-52     \{
-53         ROS\_INFO(\textcolor{stringliteral}{"[CbMoveJoints] motion execution failed"});
-54         \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}();
-55     \}
-56 \}
+21 \{
+22   this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}{movegroupClient\_});
+23 
+24   \textcolor{keywordflow}{if} (this->\hyperlink{classmoveit__z__client_1_1CbMoveJoints_ac75cb07d2292b2080266c36e4d18fc41}{group\_})
+25   \{
+26     \textcolor{keyword}{auto} res = std::async(std::launch::async, [=] \{
+27       moveit::planning\_interface::MoveGroupInterface move\_group(*(this->\hyperlink{classmoveit__z__client_1_1CbMoveJoints_ac75cb07d2292b2080266c36e4d18fc41}{group\_}));
+28       this->\hyperlink{classmoveit__z__client_1_1CbMoveJoints_a4dcc7bcf0ed857d9d580d4700cdeb5db}{moveJoints}(move\_group);
+29     \});
+30   \}
+31   \textcolor{keywordflow}{else}
+32   \{
+33     \textcolor{keyword}{auto} res =
+34         std::async(std::launch::async, [=] \{ this->\hyperlink{classmoveit__z__client_1_1CbMoveJoints_a4dcc7bcf0ed857d9d580d4700cdeb5db}{moveJoints}(
+      \hyperlink{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_af86e046b837be0ef4afa9893d8808f20}{moveGroupClientInterface}); \});
+35   \}
+36 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -171,16 +227,30 @@ Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ac0cd72d42bd0042
 
 
 
-Definition at line 58 of file cb\+\_\+move\+\_\+joints.\+cpp.
+Definition at line 72 of file cb\+\_\+move\+\_\+joints.\+cpp.
 
 
 \begin{DoxyCode}
-59 \{
-60 \}
+73 \{
+74 \}
 \end{DoxyCode}
 
 
 \subsection{Member Data Documentation}
+\mbox{\Hypertarget{classmoveit__z__client_1_1CbMoveJoints_ac75cb07d2292b2080266c36e4d18fc41}\label{classmoveit__z__client_1_1CbMoveJoints_ac75cb07d2292b2080266c36e4d18fc41}} 
+\index{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints}!group\+\_\+@{group\+\_\+}}
+\index{group\+\_\+@{group\+\_\+}!moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints}}
+\subsubsection{\texorpdfstring{group\+\_\+}{group\_}}
+{\footnotesize\ttfamily boost\+::optional$<$std\+::string$>$ moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints\+::group\+\_\+}
+
+
+
+Definition at line 21 of file cb\+\_\+move\+\_\+joints.\+h.
+
+
+
+Referenced by on\+Entry().
+
 \mbox{\Hypertarget{classmoveit__z__client_1_1CbMoveJoints_a0f52577dd2fccf25f36c4c93e733c0f4}\label{classmoveit__z__client_1_1CbMoveJoints_a0f52577dd2fccf25f36c4c93e733c0f4}} 
 \index{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints}!joint\+Value\+Target\+\_\+@{joint\+Value\+Target\+\_\+}}
 \index{joint\+Value\+Target\+\_\+@{joint\+Value\+Target\+\_\+}!moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints}}
@@ -189,11 +259,11 @@ Definition at line 58 of file cb\+\_\+move\+\_\+joints.\+cpp.
 
 
 
-Definition at line 23 of file cb\+\_\+move\+\_\+joints.\+h.
+Definition at line 20 of file cb\+\_\+move\+\_\+joints.\+h.
 
 
 
-Referenced by on\+Entry().
+Referenced by move\+Joints().
 
 \mbox{\Hypertarget{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}\label{classmoveit__z__client_1_1CbMoveJoints_a2ce2e613b676025766dcd2f01ae50810}} 
 \index{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints}!movegroup\+Client\+\_\+@{movegroup\+Client\+\_\+}}
@@ -203,11 +273,11 @@ Referenced by on\+Entry().
 
 
 
-Definition at line 19 of file cb\+\_\+move\+\_\+joints.\+h.
+Definition at line 30 of file cb\+\_\+move\+\_\+joints.\+h.
 
 
 
-Referenced by on\+Entry().
+Referenced by move\+Joints(), and on\+Entry().
 
 \mbox{\Hypertarget{classmoveit__z__client_1_1CbMoveJoints_aadb5410711e277fab3a637cb4835fb3b}\label{classmoveit__z__client_1_1CbMoveJoints_aadb5410711e277fab3a637cb4835fb3b}} 
 \index{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Move\+Joints}!scaling\+Factor\+\_\+@{scaling\+Factor\+\_\+}}
@@ -217,11 +287,11 @@ Referenced by on\+Entry().
 
 
 
-Definition at line 22 of file cb\+\_\+move\+\_\+joints.\+h.
+Definition at line 19 of file cb\+\_\+move\+\_\+joints.\+h.
 
 
 
-Referenced by on\+Entry().
+Referenced by move\+Joints().
 
 
 
