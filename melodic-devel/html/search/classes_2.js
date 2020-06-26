@@ -20,6 +20,7 @@ var searchData=
   ['cbmoveendeffectorrelative',['CbMoveEndEffectorRelative',['../classmoveit__z__client_1_1CbMoveEndEffectorRelative.html',1,'moveit_z_client']]],
   ['cbmovejoints',['CbMoveJoints',['../classmoveit__z__client_1_1CbMoveJoints.html',1,'moveit_z_client']]],
   ['cbmoveknownstate',['CbMoveKnownState',['../classmoveit__z__client_1_1CbMoveKnownState.html',1,'moveit_z_client']]],
+  ['cbmovenamedtarget',['CbMoveNamedTarget',['../classmoveit__z__client_1_1CbMoveNamedTarget.html',1,'moveit_z_client']]],
   ['cbmutedbehavior',['CbMutedBehavior',['../classcl__ros__publisher_1_1CbMutedBehavior.html',1,'cl_ros_publisher']]],
   ['cbnavigatebackwards',['CbNavigateBackwards',['../classcl__move__base__z_1_1CbNavigateBackwards.html',1,'cl_move_base_z']]],
   ['cbnavigateforward',['CbNavigateForward',['../classcl__move__base__z_1_1CbNavigateForward.html',1,'cl_move_base_z']]],
