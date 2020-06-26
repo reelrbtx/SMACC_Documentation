@@ -11,6 +11,7 @@ var searchData=
   ['readme',['README',['../md_smacc_sm_reference_library_sm_atomic_cb_README.html',1,'']]],
   ['readme',['README',['../md_smacc_sm_reference_library_sm_atomic_README.html',1,'']]],
   ['readme',['README',['../md_smacc_sm_reference_library_sm_calendar_week_README.html',1,'']]],
+  ['readme',['README',['../md_smacc_sm_reference_library_sm_dance_bot_2_README.html',1,'']]],
   ['readme',['README',['../md_smacc_sm_reference_library_sm_dance_bot_README.html',1,'']]],
   ['readme',['README',['../md_smacc_sm_reference_library_sm_dance_bot_strikes_back_README.html',1,'']]],
   ['readme',['README',['../md_smacc_sm_reference_library_sm_moveit_2_README.html',1,'']]],
