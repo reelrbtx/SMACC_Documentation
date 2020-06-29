@@ -22,7 +22,6 @@ var searchData=
   ['readme',['README',['../md_smacc_sm_reference_library_sm_opencv_3_README.html',1,'']]],
   ['readme',['README',['../md_smacc_sm_reference_library_sm_opencv_README.html',1,'']]],
   ['readme',['README',['../md_smacc_sm_reference_library_sm_packml_README.html',1,'']]],
-  ['readme',['README',['../md_smacc_sm_reference_library_sm_pr2_plugs_README.html',1,'']]],
   ['readme',['README',['../md_smacc_sm_reference_library_sm_respira_1_README.html',1,'']]],
   ['readme',['README',['../md_smacc_sm_reference_library_sm_starcraft_ai_README.html',1,'']]],
   ['readme',['README',['../md_smacc_sm_reference_library_sm_three_some_README.html',1,'']]],

@@ -138,29 +138,29 @@ std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1introspection_1_1SmaccStateIn
 
 
 
-Definition at line 445 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
+Definition at line 441 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
 
 
 \begin{DoxyCode}
-446 \{
-447     \textcolor{keyword}{auto} realparentState = this->\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a74685e4540842ee292a80a1db44818bb}{stateMachine\_}->getState<\textcolor{keyword}{typename} StateType::TContext>();
+442 \{
+443     \textcolor{keyword}{auto} realparentState = this->\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a74685e4540842ee292a80a1db44818bb}{stateMachine\_}->getState<\textcolor{keyword}{typename} StateType::TContext>();
+444 
+445     \textcolor{keyword}{auto} childState = this->\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a74685e4540842ee292a80a1db44818bb}{stateMachine\_}->createState<StateType>(realparentState);
+446 
+447     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"Real parent state> "} << demangleSymbol<typename StateType::TContext>());
 448 
-449     \textcolor{keyword}{auto} childState = this->\hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_a74685e4540842ee292a80a1db44818bb}{stateMachine\_}->createState<StateType>(realparentState);
-450 
-451     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"Real parent state> "} << demangleSymbol<typename StateType::TContext>());
+449     \textcolor{comment}{/*auto contextInfo = TypeInfo::getTypeInfoFromType<InitialStateType>();}
+450 \textcolor{comment}{    auto parentState2= getState<InitialStateType::TContext>();}
+451 \textcolor{comment}{    parentState2->createChildState<InitialStateType>();*/}
 452 
-453     \textcolor{comment}{/*auto contextInfo = TypeInfo::getTypeInfoFromType<InitialStateType>();}
-454 \textcolor{comment}{    auto parentState2= getState<InitialStateType::TContext>();}
-455 \textcolor{comment}{    parentState2->createChildState<InitialStateType>();*/}
-456 
-457     \textcolor{comment}{//this->stateMachine\_->addState(childState);}
-458     \textcolor{comment}{//stateMachineInfo.addState(stateMachineInfo)}
-459     \textcolor{comment}{//stateNames.push\_back(currentname);}
-460     \textcolor{comment}{//ROS\_INFO("------------");}
-461     \textcolor{comment}{//ROS\_INFO\_STREAM("** STATE state: "<< this->demangledStateName);}
-462 
-463     \textcolor{keywordflow}{return} childState;
-464 \}
+453     \textcolor{comment}{//this->stateMachine\_->addState(childState);}
+454     \textcolor{comment}{//stateMachineInfo.addState(stateMachineInfo)}
+455     \textcolor{comment}{//stateNames.push\_back(currentname);}
+456     \textcolor{comment}{//ROS\_INFO("------------");}
+457     \textcolor{comment}{//ROS\_INFO\_STREAM("** STATE state: "<< this->demangledStateName);}
+458 
+459     \textcolor{keywordflow}{return} childState;
+460 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_ac0b32e5504ccbed161ad50f0b77c2004}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_ac0b32e5504ccbed161ad50f0b77c2004}} 
 \index{smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}!declare\+Transition@{declare\+Transition}}
@@ -171,7 +171,7 @@ void smacc\+::introspection\+::\+Smacc\+State\+Info\+::declare\+Transition (\beg
 
 
 
-Definition at line 201 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
+Definition at line 197 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
 
 
 
@@ -179,31 +179,31 @@ References smacc\+::introspection\+::\+Smacc\+Transition\+Info\+::index.
 
 
 \begin{DoxyCode}
-202 \{
-203     \textcolor{keyword}{auto} evtype = demangledTypeName<EvType>();
-204 
-205     SmaccTransitionInfo transitionInfo;
-206     transitionInfo.index = \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_ae8b5d8e409e377ef9a88d92fb31a8446}{transitions\_}.size();
-207     transitionInfo.sourceState = shared\_from\_this();
-208     transitionInfo.destinyState = dstState;
-209     transitionInfo.transitionTypeInfo = transitionTypeInfo;
-210 
-211     \textcolor{keywordflow}{if} (transitionTag != \textcolor{stringliteral}{""})
-212         transitionInfo.transitionTag = transitionTag;
-213     \textcolor{keywordflow}{else}
-214         transitionInfo.transitionTag = \textcolor{stringliteral}{"Transition\_"} + std::to\_string(transitionInfo.index);
-215 
-216     transitionInfo.transitionType = transitionType;
-217     transitionInfo.historyNode = history;
-218 
-219     transitionInfo.eventInfo = std::make\_shared<SmaccEventInfo>(transitionTypeInfo->templateParameters.
+198 \{
+199     \textcolor{keyword}{auto} evtype = demangledTypeName<EvType>();
+200 
+201     SmaccTransitionInfo transitionInfo;
+202     transitionInfo.index = \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_ae8b5d8e409e377ef9a88d92fb31a8446}{transitions\_}.size();
+203     transitionInfo.sourceState = shared\_from\_this();
+204     transitionInfo.destinyState = dstState;
+205     transitionInfo.transitionTypeInfo = transitionTypeInfo;
+206 
+207     \textcolor{keywordflow}{if} (transitionTag != \textcolor{stringliteral}{""})
+208         transitionInfo.transitionTag = transitionTag;
+209     \textcolor{keywordflow}{else}
+210         transitionInfo.transitionTag = \textcolor{stringliteral}{"Transition\_"} + std::to\_string(transitionInfo.index);
+211 
+212     transitionInfo.transitionType = transitionType;
+213     transitionInfo.historyNode = history;
+214 
+215     transitionInfo.eventInfo = std::make\_shared<SmaccEventInfo>(transitionTypeInfo->templateParameters.
       front());
-220 
-221     EventLabel<EvType>(transitionInfo.eventInfo->label);
-222     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"LABEL: "} << transitionInfo.eventInfo->label);
-223 
-224     \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_ae8b5d8e409e377ef9a88d92fb31a8446}{transitions\_}.push\_back(transitionInfo);
-225 \}
+216 
+217     EventLabel<EvType>(transitionInfo.eventInfo->label);
+218     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"LABEL: "} << transitionInfo.eventInfo->label);
+219 
+220     \hyperlink{classsmacc_1_1introspection_1_1SmaccStateInfo_ae8b5d8e409e377ef9a88d92fb31a8446}{transitions\_}.push\_back(transitionInfo);
+221 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1introspection_1_1SmaccStateInfo_a961aa6a03d8e2f60b57ec3eab08bc6ba}\label{classsmacc_1_1introspection_1_1SmaccStateInfo_a961aa6a03d8e2f60b57ec3eab08bc6ba}} 
 \index{smacc\+::introspection\+::\+Smacc\+State\+Info@{smacc\+::introspection\+::\+Smacc\+State\+Info}!depth@{depth}}

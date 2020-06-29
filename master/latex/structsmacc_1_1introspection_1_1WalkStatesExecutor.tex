@@ -27,7 +27,7 @@ struct smacc\+::introspection\+::\+Walk\+States\+Executor$<$ Initial\+State\+Typ
 
 
 
-Definition at line 99 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
+Definition at line 95 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
 
 
 
@@ -41,7 +41,7 @@ void \hyperlink{structsmacc_1_1introspection_1_1WalkStatesExecutor}{smacc\+::int
 
 
 
-Definition at line 371 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
+Definition at line 367 of file smacc\+\_\+state\+\_\+machine\+\_\+info.\+h.
 
 
 
@@ -53,40 +53,40 @@ Referenced by smacc\+::introspection\+::\+Smacc\+State\+Machine\+Info\+::build\+
 
 
 \begin{DoxyCode}
-372 \{
-373     \textcolor{comment}{//ros::Duration(1).sleep();}
-374     \textcolor{keyword}{auto} currentname = demangledTypeName<InitialStateType>();
-375 
-376     std::shared\_ptr<SmaccStateInfo> targetState;
-377 
-378     \textcolor{keywordflow}{if} (!rootInitialNode)
-379     \{
-380         \textcolor{keywordflow}{if} (parentState->stateMachine\_->containsState<InitialStateType>())
-381         \{
-382             \textcolor{comment}{// it already exist: break;}
-383             \textcolor{keywordflow}{return};
-384         \}
-385 
-386         targetState = parentState->createChildState<InitialStateType>();
+368 \{
+369     \textcolor{comment}{//ros::Duration(1).sleep();}
+370     \textcolor{keyword}{auto} currentname = demangledTypeName<InitialStateType>();
+371 
+372     std::shared\_ptr<SmaccStateInfo> targetState;
+373 
+374     \textcolor{keywordflow}{if} (!rootInitialNode)
+375     \{
+376         \textcolor{keywordflow}{if} (parentState->stateMachine\_->containsState<InitialStateType>())
+377         \{
+378             \textcolor{comment}{// it already exist: break;}
+379             \textcolor{keywordflow}{return};
+380         \}
+381 
+382         targetState = parentState->createChildState<InitialStateType>();
+383     \}
+384     \textcolor{keywordflow}{else}
+385     \{
+386         targetState = parentState;
 387     \}
-388     \textcolor{keywordflow}{else}
-389     \{
-390         targetState = parentState;
-391     \}
-392 
-393     CallOnDefinition<InitialStateType>();
-394 
-395     \textcolor{keyword}{typedef} \textcolor{keyword}{typename} 
+388 
+389     CallOnDefinition<InitialStateType>();
+390 
+391     \textcolor{keyword}{typedef} \textcolor{keyword}{typename} 
       \hyperlink{namespacegenerate__debs_a50bc9a7ecac9584553e089a448bcde58}{std::remove\_pointer<decltype(InitialStateType::smacc\_inner\_type)>::type}
        InnerType;
-396     processSubState<InnerType>(targetState);
+392     processSubState<InnerType>(targetState);
+393 
+394     \textcolor{comment}{// -------------------- REACTIONS --------------------}
+395     \textcolor{keyword}{typedef} \textcolor{keyword}{typename} InitialStateType::reactions reactions;
+396     \textcolor{comment}{//ROS\_INFO\_STREAM("state machine initial state reactions: "<< demangledTypeName<reactions>());}
 397 
-398     \textcolor{comment}{// -------------------- REACTIONS --------------------}
-399     \textcolor{keyword}{typedef} \textcolor{keyword}{typename} InitialStateType::reactions reactions;
-400     \textcolor{comment}{//ROS\_INFO\_STREAM("state machine initial state reactions: "<< demangledTypeName<reactions>());}
-401 
-402     processTransitions<reactions>(targetState);
-403 \}
+398     processTransitions<reactions>(targetState);
+399 \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
