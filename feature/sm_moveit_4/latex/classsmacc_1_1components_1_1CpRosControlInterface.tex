@@ -31,7 +31,7 @@ Collaboration diagram for smacc\+:\+:components\+:\+:Cp\+Ros\+Control\+Interface
 \item 
 virtual \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a85ab7c698b5a1c0b0064775b2779daa8}{$\sim$\+Cp\+Ros\+Control\+Interface} ()
 \item 
-virtual void \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_adc7596526206c620bb67b58cab34fb90}{initialize} (\hyperlink{classsmacc_1_1ISmaccClient}{I\+Smacc\+Client} $\ast$owner) override
+virtual void \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a469bdb5723a9ab66d6b0a7908d5891bf}{on\+Initialize} () override
 \item 
 std\+::vector$<$ \hyperlink{structsmacc_1_1components_1_1ControllerTypeInfo}{Controller\+Type\+Info} $>$ \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_ae900aa88dff13169cdb22c68a7e5d539}{list\+Controller\+Types} ()
 \item 
@@ -111,34 +111,6 @@ Definition at line 20 of file cp\+\_\+ros\+\_\+control\+\_\+interface.\+cpp.
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classsmacc_1_1components_1_1CpRosControlInterface_adc7596526206c620bb67b58cab34fb90}\label{classsmacc_1_1components_1_1CpRosControlInterface_adc7596526206c620bb67b58cab34fb90}} 
-\index{smacc\+::components\+::\+Cp\+Ros\+Control\+Interface@{smacc\+::components\+::\+Cp\+Ros\+Control\+Interface}!initialize@{initialize}}
-\index{initialize@{initialize}!smacc\+::components\+::\+Cp\+Ros\+Control\+Interface@{smacc\+::components\+::\+Cp\+Ros\+Control\+Interface}}
-\subsubsection{\texorpdfstring{initialize()}{initialize()}}
-{\footnotesize\ttfamily void smacc\+::components\+::\+Cp\+Ros\+Control\+Interface\+::initialize (\begin{DoxyParamCaption}\item[{\hyperlink{classsmacc_1_1ISmaccClient}{I\+Smacc\+Client} $\ast$}]{owner }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Reimplemented from \hyperlink{classsmacc_1_1ISmaccComponent_a3378552cb1a86aa26a07c0edc057448b}{smacc\+::\+I\+Smacc\+Component}.
-
-
-
-Definition at line 24 of file cp\+\_\+ros\+\_\+control\+\_\+interface.\+cpp.
-
-
-\begin{DoxyCode}
-25 \{
-26     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_aec2d2eb63ad4f04741493329e6c33696}{srvListControllers} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<ListControllers>(*serviceName\_);
-27     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a5a4983fca48da646b5fc94ce1f0e4114}{srvListControllersTypes} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<ListControllerTypes>
-      (*serviceName\_);
-28 
-29     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_aa6c1440534d6a825644f0c3620461b72}{srvLoadController} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<LoadController>(*serviceName\_);
-30     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a0515a2a86bfcd0fdec08fabd3070723c}{srvUnloadController} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<UnloadController>(*serviceName\_);
-31     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_afdfece75d6aa438fae728e72add50e16}{srvReloadControllerLibraries} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<
-      ReloadControllerLibraries>(*serviceName\_);
-32     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a78e45e68567c23ca5c19df0de257c20f}{srvSwitchControllers} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<SwitchController>(*serviceName\_);
-33 \}
-\end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1components_1_1CpRosControlInterface_ab5666d2b888f63fd6aeb1056ffec10cb}\label{classsmacc_1_1components_1_1CpRosControlInterface_ab5666d2b888f63fd6aeb1056ffec10cb}} 
 \index{smacc\+::components\+::\+Cp\+Ros\+Control\+Interface@{smacc\+::components\+::\+Cp\+Ros\+Control\+Interface}!list\+Controllers@{list\+Controllers}}
 \index{list\+Controllers@{list\+Controllers}!smacc\+::components\+::\+Cp\+Ros\+Control\+Interface@{smacc\+::components\+::\+Cp\+Ros\+Control\+Interface}}
@@ -213,6 +185,34 @@ Definition at line 63 of file cp\+\_\+ros\+\_\+control\+\_\+interface.\+cpp.
 69     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_aa6c1440534d6a825644f0c3620461b72}{srvLoadController}.call(req, res);
 70     \textcolor{keywordflow}{return} res.ok;
 71 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classsmacc_1_1components_1_1CpRosControlInterface_a469bdb5723a9ab66d6b0a7908d5891bf}\label{classsmacc_1_1components_1_1CpRosControlInterface_a469bdb5723a9ab66d6b0a7908d5891bf}} 
+\index{smacc\+::components\+::\+Cp\+Ros\+Control\+Interface@{smacc\+::components\+::\+Cp\+Ros\+Control\+Interface}!on\+Initialize@{on\+Initialize}}
+\index{on\+Initialize@{on\+Initialize}!smacc\+::components\+::\+Cp\+Ros\+Control\+Interface@{smacc\+::components\+::\+Cp\+Ros\+Control\+Interface}}
+\subsubsection{\texorpdfstring{on\+Initialize()}{onInitialize()}}
+{\footnotesize\ttfamily void smacc\+::components\+::\+Cp\+Ros\+Control\+Interface\+::on\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \hyperlink{classsmacc_1_1ISmaccComponent_ae6f71d008db12553912e9436184b9e65}{smacc\+::\+I\+Smacc\+Component}.
+
+
+
+Definition at line 24 of file cp\+\_\+ros\+\_\+control\+\_\+interface.\+cpp.
+
+
+\begin{DoxyCode}
+25 \{
+26     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_aec2d2eb63ad4f04741493329e6c33696}{srvListControllers} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<ListControllers>(*serviceName\_);
+27     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a5a4983fca48da646b5fc94ce1f0e4114}{srvListControllersTypes} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<ListControllerTypes>
+      (*serviceName\_);
+28 
+29     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_aa6c1440534d6a825644f0c3620461b72}{srvLoadController} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<LoadController>(*serviceName\_);
+30     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a0515a2a86bfcd0fdec08fabd3070723c}{srvUnloadController} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<UnloadController>(*serviceName\_);
+31     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_afdfece75d6aa438fae728e72add50e16}{srvReloadControllerLibraries} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<
+      ReloadControllerLibraries>(*serviceName\_);
+32     \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a78e45e68567c23ca5c19df0de257c20f}{srvSwitchControllers} = \hyperlink{classsmacc_1_1components_1_1CpRosControlInterface_a58b15bd11d13cb02813232c6e50adbd2}{nh\_}.serviceClient<SwitchController>(*serviceName\_);
+33 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1components_1_1CpRosControlInterface_acd3534897ecf6b28ee3804dcbefedae9}\label{classsmacc_1_1components_1_1CpRosControlInterface_acd3534897ecf6b28ee3804dcbefedae9}} 
 \index{smacc\+::components\+::\+Cp\+Ros\+Control\+Interface@{smacc\+::components\+::\+Cp\+Ros\+Control\+Interface}!reload\+Controller\+Libraries@{reload\+Controller\+Libraries}}

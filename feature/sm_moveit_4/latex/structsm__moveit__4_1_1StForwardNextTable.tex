@@ -135,27 +135,27 @@ Referenced by runtime\+Configure().
 34     \textcolor{keyword}{auto} pose = moveBaseClient\_->getComponent<Pose>();
 35     \textcolor{keyword}{auto} currentPose = pose->toPoseMsg();
 36 
-37     geometry\_msgs::Point goalPoint;
-38     goalPoint.z = 0;
-39     goalPoint.y = 0;
+37     geometry\_msgs::Point goalPosition;
+38     goalPosition.z = 0;
+39     goalPosition.y = 0;
 40     \textcolor{keywordtype}{double} yaw = 0;
 41     \textcolor{keywordtype}{double} forwardOffset = 1.2;
 42     \textcolor{keywordflow}{if} (currentPose.position.x < -0.2)  \textcolor{comment}{// robot is at negative x-axis side}
 43     \{
 44       \textcolor{comment}{// target is at positive side, at point x=0}
-45       goalPoint.x = forwardOffset;
+45       goalPosition.x = forwardOffset;
 46       yaw = 0;
 47     \}
 48     \textcolor{keywordflow}{else}  \textcolor{comment}{// the robot in at positive x-axis side}
 49     \{
 50       \textcolor{comment}{// target is at negative x-axis side at point x = -1}
-51       goalPoint.x = -forwardOffset;
+51       goalPosition.x = -forwardOffset;
 52       yaw = -M\_PI;
 53     \}
 54 
 55     \textcolor{keyword}{auto} globalNavigationBh = this->getOrthogonal<OrNavigation>()->
       getClientBehavior<CbNavigateGlobalPosition>();
-56     globalNavigationBh->goalPoint = goalPoint;
+56     globalNavigationBh->goalPosition = goalPosition;
 57     globalNavigationBh->goalYaw = yaw;
 58   \}
 \end{DoxyCode}

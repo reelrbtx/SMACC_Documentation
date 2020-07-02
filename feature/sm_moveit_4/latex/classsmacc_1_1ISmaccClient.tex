@@ -31,6 +31,8 @@ Collaboration diagram for smacc\+:\+:I\+Smacc\+Client\+:
 \item 
 virtual \hyperlink{classsmacc_1_1ISmaccClient_a030e17771bf2e404a6fad97273c4d7f4}{$\sim$\+I\+Smacc\+Client} ()
 \item 
+{\footnotesize template$<$typename T\+Object\+Tag , typename T\+Derived $>$ }\\void \hyperlink{classsmacc_1_1ISmaccClient_a643285b93f2bd33987e0d0d1a12caf10}{configure\+Event\+Source\+Types} ()
+\item 
 virtual void \hyperlink{classsmacc_1_1ISmaccClient_a974ebb6ad6cf812e7b9de6b78b3d901f}{initialize} ()
 \item 
 virtual std\+::string \hyperlink{classsmacc_1_1ISmaccClient_a8c3ce19f182e71909c5dc6263d25be69}{get\+Name} () const
@@ -42,8 +44,6 @@ virtual std\+::string \hyperlink{classsmacc_1_1ISmaccClient_a8c3ce19f182e71909c5
 {\footnotesize template$<$typename T\+Component $>$ }\\T\+Component $\ast$ \hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{get\+Component} ()
 \item 
 {\footnotesize template$<$typename T\+Component $>$ }\\T\+Component $\ast$ \hyperlink{classsmacc_1_1ISmaccClient_ad72cba3ce7c5b3bd3977747dc6d5fb69}{get\+Component} (std\+::string name)
-\item 
-{\footnotesize template$<$typename T\+Object\+Tag , typename T\+Derived $>$ }\\void \hyperlink{classsmacc_1_1ISmaccClient_a643285b93f2bd33987e0d0d1a12caf10}{configure\+Event\+Source\+Types} ()
 \item 
 virtual \hyperlink{classsmacc_1_1introspection_1_1TypeInfo_aa6ffd9c39811d59f7c771941b7fad860}{smacc\+::introspection\+::\+Type\+Info\+::\+Ptr} \hyperlink{classsmacc_1_1ISmaccClient_ae7faf4e40510c73810e6b0ef9fec8f33}{get\+Type} ()
 \item 
@@ -135,15 +135,15 @@ void smacc\+::\+I\+Smacc\+Client\+::configure\+Event\+Source\+Types (\begin{Doxy
 
 
 
-Definition at line 60 of file smacc\+\_\+client.\+h.
+Definition at line 44 of file smacc\+\_\+client.\+h.
 
 
 
-References callback().
+References callback(), and smacc\+::\+Component\+Key\+::name.
 
 
 \begin{DoxyCode}
-60 \{\}
+44 \{\}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -162,7 +162,7 @@ void smacc\+::\+I\+Smacc\+Client\+::connect\+Signal (\begin{DoxyParamCaption}\it
 
 
 
-Definition at line 95 of file smacc\+\_\+client\+\_\+impl.\+h.
+Definition at line 96 of file smacc\+\_\+client\+\_\+impl.\+h.
 
 
 
@@ -170,10 +170,10 @@ References smacc\+::\+I\+Smacc\+State\+Machine\+::create\+Signal\+Connection(), 
 
 
 \begin{DoxyCode}
-96 \{
-97     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}{getStateMachine}()->\hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{createSignalConnection}(signal, 
-      \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}, \textcolor{keywordtype}{object});
-98 \}
+97     \{
+98         \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}{getStateMachine}()->\hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{createSignalConnection}(signal,
+       \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}, \textcolor{keywordtype}{object});
+99     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -192,7 +192,7 @@ Smacc\+Component\+Type $\ast$ smacc\+::\+I\+Smacc\+Client\+::create\+Component (
 
 
 
-Definition at line 89 of file smacc\+\_\+client\+\_\+impl.\+h.
+Definition at line 90 of file smacc\+\_\+client\+\_\+impl.\+h.
 
 
 
@@ -200,9 +200,10 @@ Referenced by smacc\+::\+Client\+Handler$<$ T\+Orthogonal, T\+Client $>$\+::crea
 
 
 \begin{DoxyCode}
-90 \{
-91     \textcolor{keywordflow}{return} this->createNamedComponent<SmaccComponentType, TOrthogonal, TClient>(std::string(), targs...);
-92 \}
+91     \{
+92         \textcolor{keywordflow}{return} this->createNamedComponent<SmaccComponentType, TOrthogonal, TClient>(std::string(), targs...
+      );
+93     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -233,37 +234,38 @@ Referenced by smacc\+::\+Client\+Handler$<$ T\+Orthogonal, T\+Client $>$\+::crea
 
 
 \begin{DoxyCode}
-58 \{
-59     ComponentKey componentkey(&\textcolor{keyword}{typeid}(SmaccComponentType), name);
+58     \{
+59         ComponentKey componentkey(&\textcolor{keyword}{typeid}(SmaccComponentType), name);
 60 
-61     std::shared\_ptr<SmaccComponentType> ret;
+61         std::shared\_ptr<SmaccComponentType> ret;
 62 
-63     \textcolor{keyword}{auto} it = this->\hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_}.find(componentkey);
+63         \textcolor{keyword}{auto} it = this->\hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_}.find(componentkey);
 64 
-65     \textcolor{keywordflow}{if} (it == this->\hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_}.end())
-66     \{
-67         \textcolor{keyword}{auto} tname = demangledTypeName<SmaccComponentType>();
-68         ROS\_DEBUG(\textcolor{stringliteral}{"%s smacc component is required. Creating a new instance."}, tname.c\_str());
+65         \textcolor{keywordflow}{if} (it == this->\hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_}.end())
+66         \{
+67             \textcolor{keyword}{auto} tname = demangledTypeName<SmaccComponentType>();
+68             ROS\_DEBUG(\textcolor{stringliteral}{"%s smacc component is required. Creating a new instance."}, tname.c\_str());
 69 
-70         ret = std::shared\_ptr<SmaccComponentType>(\textcolor{keyword}{new} SmaccComponentType(targs...));
-71         ret->setStateMachine(this->\hyperlink{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}{getStateMachine}());
-72         ret->initialize(\textcolor{keyword}{this});
-73 
-74         this->\hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_}[componentkey] = ret; \textcolor{comment}{//
+70             ret = std::shared\_ptr<SmaccComponentType>(\textcolor{keyword}{new} SmaccComponentType(targs...));
+71             ret->setStateMachine(this->\hyperlink{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}{getStateMachine}());
+72             ret->owner\_ = \textcolor{keyword}{this};
+73             ret->initialize(\textcolor{keyword}{this});
+74 
+75             this->\hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_}[componentkey] = ret; \textcolor{comment}{//
       std::dynamic\_pointer\_cast<smacc::ISmaccComponent>(ret);}
-75         ROS\_DEBUG(\textcolor{stringliteral}{"%s resource is required. Done."}, tname.c\_str());
-76     \}
-77     \textcolor{keywordflow}{else}
-78     \{
-79         ROS\_DEBUG(\textcolor{stringliteral}{"%s resource is required. Found resource in cache."}, 
+76             ROS\_DEBUG(\textcolor{stringliteral}{"%s resource is required. Done."}, tname.c\_str());
+77         \}
+78         \textcolor{keywordflow}{else}
+79         \{
+80             ROS\_DEBUG(\textcolor{stringliteral}{"%s resource is required. Found resource in cache."}, 
       demangledTypeName<SmaccComponentType>().c\_str());
-80         ret = dynamic\_pointer\_cast<SmaccComponentType>(it->second);
-81     \}
-82 
-83     ret->template configureEventSourceTypes<TOrthogonal, TClient>();
-84 
-85     \textcolor{keywordflow}{return} ret.get();
-86 \}
+81             ret = dynamic\_pointer\_cast<SmaccComponentType>(it->second);
+82         \}
+83 
+84         ret->template configureEventSourceTypes<TOrthogonal, TClient>();
+85 
+86         \textcolor{keywordflow}{return} ret.get();
+87     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -294,13 +296,13 @@ Definition at line 27 of file smacc\+\_\+client\+\_\+impl.\+h.
 
 
 
-Referenced by sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table\+::configure\+Forward\+Behavior(), sm\+\_\+moveit\+\_\+4\+::\+St\+Forward\+Next\+Table\+::configure\+Forward\+Behavior(), sm\+\_\+moveit\+\_\+2\+::\+St\+Forward\+Next\+Table\+::configure\+Forward\+Behavior(), sm\+\_\+moveit\+\_\+3\+::\+St\+Forward\+Next\+Table\+::configure\+Forward\+Behavior(), sm\+\_\+moveit\+\_\+4\+::\+St\+Forward\+Next\+Table\+::configure\+Global\+Navigation(), sm\+\_\+moveit\+\_\+2\+::\+St\+Forward\+Next\+Table\+::configure\+Global\+Navigation(), sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table\+::configure\+Global\+Navigation(), sm\+\_\+moveit\+\_\+3\+::\+St\+Forward\+Next\+Table\+::configure\+Global\+Navigation(), sm\+\_\+moveit\+\_\+2\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::decide\+Place\+Pose(), sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::decide\+Place\+Pose(), sm\+\_\+moveit\+\_\+3\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::decide\+Place\+Pose(), sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::decide\+Place\+Pose(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position\+::execute(), sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::get\+Current\+Table(), sm\+\_\+moveit\+\_\+2\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::get\+Current\+Table(), sm\+\_\+moveit\+\_\+3\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::get\+Current\+Table(), sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::get\+Current\+Table(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::f\+\_\+pattern\+\_\+states\+::\+Sti\+F\+Pattern\+Start\+Loop$<$ Ss\+F\+Pattern1 $>$\+::loop\+Condition(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Next\+Waypoint\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Rotate\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Backwards\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Forward\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::on\+Exit(), sm\+\_\+moveit\+\_\+4\+::\+St\+Rotate180\+::runtime\+Configure(), sm\+\_\+moveit\+\_\+2\+::\+St\+Rotate180\+::runtime\+Configure(), sm\+\_\+moveit\+::\+St\+Rotate180\+::runtime\+Configure(), sm\+\_\+moveit\+\_\+3\+::\+St\+Rotate180\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::radial\+\_\+motion\+\_\+states\+::\+Sti\+Radial\+End\+Point\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Forward2\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Forward4\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::f\+\_\+pattern\+\_\+states\+::\+Sti\+F\+Pattern\+Forward1$<$ S\+S $>$\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::\+S\+S5\+::\+Ss\+S\+Pattern1\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::\+S\+S4\+::\+Ss\+F\+Pattern1\+::runtime\+Configure(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Waypoint\+Navigator\+::send\+Next\+Goal().
+Referenced by sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table\+::configure\+Forward\+Behavior(), sm\+\_\+moveit\+\_\+3\+::\+St\+Forward\+Next\+Table\+::configure\+Forward\+Behavior(), sm\+\_\+moveit\+\_\+4\+::\+St\+Forward\+Next\+Table\+::configure\+Forward\+Behavior(), sm\+\_\+moveit\+\_\+2\+::\+St\+Forward\+Next\+Table\+::configure\+Forward\+Behavior(), sm\+\_\+moveit\+\_\+4\+::\+St\+Forward\+Next\+Table\+::configure\+Global\+Navigation(), sm\+\_\+moveit\+::\+St\+Forward\+Next\+Table\+::configure\+Global\+Navigation(), sm\+\_\+moveit\+\_\+2\+::\+St\+Forward\+Next\+Table\+::configure\+Global\+Navigation(), sm\+\_\+moveit\+\_\+3\+::\+St\+Forward\+Next\+Table\+::configure\+Global\+Navigation(), sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::decide\+Place\+Pose(), sm\+\_\+moveit\+\_\+2\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::decide\+Place\+Pose(), sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::decide\+Place\+Pose(), sm\+\_\+moveit\+\_\+3\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::decide\+Place\+Pose(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position\+::execute(), sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::get\+Current\+Table(), sm\+\_\+moveit\+\_\+2\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::get\+Current\+Table(), sm\+\_\+moveit\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::get\+Current\+Table(), sm\+\_\+moveit\+\_\+3\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::get\+Current\+Table(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::f\+\_\+pattern\+\_\+states\+::\+Sti\+F\+Pattern\+Start\+Loop$<$ Ss\+F\+Pattern1 $>$\+::loop\+Condition(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Next\+Waypoint\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Rotate\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Backwards\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Forward\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::on\+Exit(), smacc\+::\+I\+Smacc\+Component\+::requires\+Component(), sm\+\_\+moveit\+::\+St\+Rotate180\+::runtime\+Configure(), sm\+\_\+moveit\+\_\+2\+::\+St\+Rotate180\+::runtime\+Configure(), sm\+\_\+moveit\+\_\+4\+::\+St\+Rotate180\+::runtime\+Configure(), sm\+\_\+moveit\+\_\+3\+::\+St\+Rotate180\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::radial\+\_\+motion\+\_\+states\+::\+Sti\+Radial\+End\+Point\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Forward4\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::s\+\_\+pattern\+\_\+states\+::\+Sti\+S\+Pattern\+Forward2\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::f\+\_\+pattern\+\_\+states\+::\+Sti\+F\+Pattern\+Forward1$<$ S\+S $>$\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::\+S\+S5\+::\+Ss\+S\+Pattern1\+::runtime\+Configure(), sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::\+S\+S4\+::\+Ss\+F\+Pattern1\+::runtime\+Configure(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Waypoint\+Navigator\+::send\+Next\+Goal().
 
 
 \begin{DoxyCode}
-28 \{
-29     \textcolor{keywordflow}{return} this->getComponent<TComponent>(std::string());
-30 \}
+28     \{
+29         \textcolor{keywordflow}{return} this->getComponent<TComponent>(std::string());
+30     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -327,40 +329,44 @@ References components\+\_\+.
 
 
 \begin{DoxyCode}
-34 \{
-35     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &component : \hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_})
-36     \{
-37         \textcolor{keywordflow}{if} (component.first.name != name)
-38             \textcolor{keywordflow}{continue};
+34     \{
+35         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &component : \hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_})
+36         \{
+37             \textcolor{keywordflow}{if} (component.first.name != name)
+38                 \textcolor{keywordflow}{continue};
 39 
-40         \textcolor{keyword}{auto} *tcomponent = \textcolor{keyword}{dynamic\_cast<}TComponent *\textcolor{keyword}{>}(component.second.get());
-41         \textcolor{keywordflow}{if} (tcomponent != \textcolor{keyword}{nullptr})
-42         \{
-43             \textcolor{keywordflow}{return} tcomponent;
-44         \}
-45     \}
+40             \textcolor{keyword}{auto} *tcomponent = \textcolor{keyword}{dynamic\_cast<}TComponent *\textcolor{keyword}{>}(component.second.get());
+41             \textcolor{keywordflow}{if} (tcomponent != \textcolor{keyword}{nullptr})
+42             \{
+43                 \textcolor{keywordflow}{return} tcomponent;
+44             \}
+45         \}
 46 
-47     \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
-48 \}
+47         \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+48     \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1ISmaccClient_ac6db21c1ec7072178e9f7c721908e07d}\label{classsmacc_1_1ISmaccClient_ac6db21c1ec7072178e9f7c721908e07d}} 
 \index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!get\+Components@{get\+Components}}
 \index{get\+Components@{get\+Components}!smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}}
 \subsubsection{\texorpdfstring{get\+Components()}{getComponents()}}
-{\footnotesize\ttfamily void smacc\+::\+I\+Smacc\+Client\+::get\+Components (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1ISmaccComponent}{I\+Smacc\+Component} $>$$>$ \&}]{components }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void smacc\+::\+I\+Smacc\+Client\+::get\+Components (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1ISmaccComponent}{I\+Smacc\+Component} $>$$>$ \&}]{components }\end{DoxyParamCaption})}
 
 
 
-Definition at line 72 of file smacc\+\_\+client.\+h.
+Definition at line 26 of file client.\+cpp.
+
+
+
+References components\+\_\+.
 
 
 \begin{DoxyCode}
-73     \{
-74         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &ce : \hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_})
-75         \{
-76             components.push\_back(ce.second);
-77         \}
-78     \}
+27 \{
+28     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &ce : \hyperlink{classsmacc_1_1ISmaccClient_a9e670e9071bb549dbeb08985d0114afe}{components\_})
+29     \{
+30         components.push\_back(ce.second);
+31     \}
+32 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1ISmaccClient_a8c3ce19f182e71909c5dc6263d25be69}\label{classsmacc_1_1ISmaccClient_a8c3ce19f182e71909c5dc6263d25be69}} 
 \index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!get\+Name@{get\+Name}}
@@ -374,7 +380,7 @@ Reimplemented in \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ_a3c511340ea5df
 
 
 
-Definition at line 25 of file client.\+cpp.
+Definition at line 34 of file client.\+cpp.
 
 
 
@@ -386,10 +392,10 @@ Referenced by smacc\+::client\+\_\+bases\+::\+Smacc\+Publisher\+Client\+::config
 
 
 \begin{DoxyCode}
-26 \{
-27     std::string keyname = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(*this).name());
-28     \textcolor{keywordflow}{return} keyname;
-29 \}
+35 \{
+36     std::string keyname = \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(*this).name());
+37     \textcolor{keywordflow}{return} keyname;
+38 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -427,9 +433,9 @@ Referenced by connect\+Signal(), and create\+Named\+Component().
 
 
 \begin{DoxyCode}
-52 \{
-53     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}{stateMachine\_};
-54 \}
+52     \{
+53         \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}{stateMachine\_};
+54     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -447,7 +453,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 41 of file client.\+cpp.
+Definition at line 50 of file client.\+cpp.
 
 
 
@@ -455,10 +461,10 @@ References smacc\+::introspection\+::\+Type\+Info\+::get\+From\+Std\+Type\+Info(
 
 
 \begin{DoxyCode}
-42 \{
-43     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1introspection_1_1TypeInfo_ada1e604cd8bf968a5f816fbace4af881}{smacc::introspection::TypeInfo::getFromStdTypeInfo}
+51 \{
+52     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1introspection_1_1TypeInfo_ada1e604cd8bf968a5f816fbace4af881}{smacc::introspection::TypeInfo::getFromStdTypeInfo}
       (\textcolor{keyword}{typeid}(*\textcolor{keyword}{this}));
-44 \}
+53 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -476,7 +482,7 @@ Here is the call graph for this function\+:
 
 
 
-Reimplemented in \hyperlink{classcl__keyboard_1_1ClKeyboard_af7f7fd9871ef5fcca400cd59d7b60775}{cl\+\_\+keyboard\+::\+Cl\+Keyboard}, \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a26ae80fff022baeccb4ca81537cefd53}{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ Message\+Type $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ sensor\+\_\+msgs\+::\+Laser\+Scan $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ std\+\_\+msgs\+::\+U\+Int16 $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ sensor\+\_\+msgs\+::\+Battery\+State $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ std\+\_\+msgs\+::\+Int32 $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ sensor\+\_\+msgs\+::\+Temperature $>$}, \hyperlink{classsm__moveit__3_1_1cl__perception__system_1_1ClPerceptionSystem_a852bf07fda7da87e7bb4ad9336e25042}{sm\+\_\+moveit\+\_\+3\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}, \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a3847e19f925f65dd034964eb2d0b3594}{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor$<$ Message\+Type $>$}, \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a3847e19f925f65dd034964eb2d0b3594}{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor$<$ sensor\+\_\+msgs\+::\+Laser\+Scan $>$}, \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a3847e19f925f65dd034964eb2d0b3594}{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor$<$ sensor\+\_\+msgs\+::\+Temperature $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ Action\+Type $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::\+L\+E\+D\+Control\+Action $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ control\+\_\+msgs\+::\+Gripper\+Command\+Action $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ move\+\_\+base\+\_\+msgs\+::\+Move\+Base\+Action $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ sm\+\_\+dance\+\_\+bot\+\_\+2\+::\+L\+E\+D\+Control\+Action $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ sm\+\_\+dance\+\_\+bot\+::\+L\+E\+D\+Control\+Action $>$}, \hyperlink{classcl__microstrain__mips_1_1ClMicrostainMips_ab52b739d8230f932ad3042fcd1b697f4}{cl\+\_\+microstrain\+\_\+mips\+::\+Cl\+Microstain\+Mips}, \hyperlink{classcl__ros__timer_1_1ClRosTimer_a874e97a9e3e974966ac4999e0a293e73}{cl\+\_\+ros\+\_\+timer\+::\+Cl\+Ros\+Timer}, \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ_a7572804edd84a956967b9f8cf2d4081e}{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cl\+Move\+BaseZ}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccServiceClient_aa51b80828e4ab19627210440ae15b6f3}{smacc\+::client\+\_\+bases\+::\+Smacc\+Service\+Client$<$ Service\+Type $>$}, and \hyperlink{classsmacc_1_1client__bases_1_1SmaccServiceClient_aa51b80828e4ab19627210440ae15b6f3}{smacc\+::client\+\_\+bases\+::\+Smacc\+Service\+Client$<$ std\+\_\+srvs\+::\+Set\+Bool $>$}.
+Reimplemented in \hyperlink{classcl__keyboard_1_1ClKeyboard_af7f7fd9871ef5fcca400cd59d7b60775}{cl\+\_\+keyboard\+::\+Cl\+Keyboard}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ Message\+Type $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ sensor\+\_\+msgs\+::\+Laser\+Scan $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ std\+\_\+msgs\+::\+U\+Int16 $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ sensor\+\_\+msgs\+::\+Battery\+State $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ std\+\_\+msgs\+::\+Int32 $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient_af188f0f5e89de26a07e1f964cdd23a70}{smacc\+::client\+\_\+bases\+::\+Smacc\+Subscriber\+Client$<$ sensor\+\_\+msgs\+::\+Temperature $>$}, \hyperlink{classsm__moveit__3_1_1cl__perception__system_1_1ClPerceptionSystem_a852bf07fda7da87e7bb4ad9336e25042}{sm\+\_\+moveit\+\_\+3\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}, \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a3847e19f925f65dd034964eb2d0b3594}{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor$<$ Message\+Type $>$}, \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a3847e19f925f65dd034964eb2d0b3594}{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor$<$ sensor\+\_\+msgs\+::\+Laser\+Scan $>$}, \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a3847e19f925f65dd034964eb2d0b3594}{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor$<$ sensor\+\_\+msgs\+::\+Temperature $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ Action\+Type $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back\+::\+L\+E\+D\+Control\+Action $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ control\+\_\+msgs\+::\+Gripper\+Command\+Action $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ move\+\_\+base\+\_\+msgs\+::\+Move\+Base\+Action $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ sm\+\_\+dance\+\_\+bot\+\_\+2\+::\+L\+E\+D\+Control\+Action $>$}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a72967f255f85e35718a1e1b0b48c38ff}{smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ sm\+\_\+dance\+\_\+bot\+::\+L\+E\+D\+Control\+Action $>$}, \hyperlink{classcl__microstrain__mips_1_1ClMicrostainMips_ab52b739d8230f932ad3042fcd1b697f4}{cl\+\_\+microstrain\+\_\+mips\+::\+Cl\+Microstain\+Mips}, \hyperlink{classcl__ros__timer_1_1ClRosTimer_a874e97a9e3e974966ac4999e0a293e73}{cl\+\_\+ros\+\_\+timer\+::\+Cl\+Ros\+Timer}, \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ_a7572804edd84a956967b9f8cf2d4081e}{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cl\+Move\+BaseZ}, \hyperlink{classsmacc_1_1client__bases_1_1SmaccServiceClient_aa51b80828e4ab19627210440ae15b6f3}{smacc\+::client\+\_\+bases\+::\+Smacc\+Service\+Client$<$ Service\+Type $>$}, and \hyperlink{classsmacc_1_1client__bases_1_1SmaccServiceClient_aa51b80828e4ab19627210440ae15b6f3}{smacc\+::client\+\_\+bases\+::\+Smacc\+Service\+Client$<$ std\+\_\+srvs\+::\+Set\+Bool $>$}.
 
 
 
@@ -485,7 +491,8 @@ Definition at line 21 of file client.\+cpp.
 
 \begin{DoxyCode}
 22 \{
-23 \}
+23 
+24 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1ISmaccClient_a46cbc0d695214efe40d29247323bfc80}\label{classsmacc_1_1ISmaccClient_a46cbc0d695214efe40d29247323bfc80}} 
 \index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!post\+Event@{post\+Event}}
@@ -504,9 +511,9 @@ References smacc\+::\+I\+Smacc\+State\+Machine\+::post\+Event(), and state\+Mach
 
 
 \begin{DoxyCode}
-16 \{
-17     \hyperlink{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}{stateMachine\_}->\hyperlink{classsmacc_1_1ISmaccStateMachine_ad80cdd7bbc9a9f3b221c625754fed1ed}{postEvent}(ev);
-18 \}
+16     \{
+17         \hyperlink{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}{stateMachine\_}->\hyperlink{classsmacc_1_1ISmaccStateMachine_ad80cdd7bbc9a9f3b221c625754fed1ed}{postEvent}(ev);
+18     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -533,9 +540,9 @@ References smacc\+::\+I\+Smacc\+State\+Machine\+::post\+Event(), and state\+Mach
 
 
 \begin{DoxyCode}
-22 \{
-23     \hyperlink{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}{stateMachine\_}->\hyperlink{classsmacc_1_1ISmaccStateMachine_ad80cdd7bbc9a9f3b221c625754fed1ed}{postEvent}<EventType>();
-24 \}
+22     \{
+23         \hyperlink{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}{stateMachine\_}->\hyperlink{classsmacc_1_1ISmaccStateMachine_ad80cdd7bbc9a9f3b221c625754fed1ed}{postEvent}<EventType>();
+24     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -554,17 +561,21 @@ void smacc\+::\+I\+Smacc\+Client\+::requires\+Client (\begin{DoxyParamCaption}\i
 
 
 
-Definition at line 101 of file smacc\+\_\+client\+\_\+impl.\+h.
+Definition at line 102 of file smacc\+\_\+client\+\_\+impl.\+h.
 
 
 
 References orthogonal\+\_\+, and smacc\+::\+I\+Smacc\+Orthogonal\+::requires\+Client().
 
 
+
+Referenced by smacc\+::\+I\+Smacc\+Component\+::requires\+Client().
+
+
 \begin{DoxyCode}
-102 \{
-103     this->\hyperlink{classsmacc_1_1ISmaccClient_a571c7f672d9c90128b5498aefc27c136}{orthogonal\_}->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a602e16b09f8a1b3de889f2f3d90a3211}{requiresClient}(storage);
-104 \}
+103     \{
+104         this->\hyperlink{classsmacc_1_1ISmaccClient_a571c7f672d9c90128b5498aefc27c136}{orthogonal\_}->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a602e16b09f8a1b3de889f2f3d90a3211}{requiresClient}(storage);
+105     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -572,6 +583,14 @@ Here is the call graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{classsmacc_1_1ISmaccClient_a40330788a976dc08e2f726d210564ec4}\label{classsmacc_1_1ISmaccClient_a40330788a976dc08e2f726d210564ec4}} 
@@ -582,7 +601,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 36 of file client.\+cpp.
+Definition at line 45 of file client.\+cpp.
 
 
 
@@ -594,9 +613,9 @@ Referenced by smacc\+::\+I\+Smacc\+Orthogonal\+::assign\+Client\+To\+Orthogonal(
 
 
 \begin{DoxyCode}
-37 \{
-38     \hyperlink{classsmacc_1_1ISmaccClient_a571c7f672d9c90128b5498aefc27c136}{orthogonal\_} = orthogonal;
-39 \}
+46 \{
+47     \hyperlink{classsmacc_1_1ISmaccClient_a571c7f672d9c90128b5498aefc27c136}{orthogonal\_} = orthogonal;
+48 \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -614,7 +633,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 31 of file client.\+cpp.
+Definition at line 40 of file client.\+cpp.
 
 
 
@@ -626,9 +645,9 @@ Referenced by smacc\+::\+I\+Smacc\+Orthogonal\+::assign\+Client\+To\+Orthogonal(
 
 
 \begin{DoxyCode}
-32 \{
-33     \hyperlink{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}{stateMachine\_} = stateMachine;
-34 \}
+41 \{
+42     \hyperlink{classsmacc_1_1ISmaccClient_a926e4f2ae796def63d48dca389a48c47}{stateMachine\_} = stateMachine;
+43 \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -649,7 +668,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 100 of file smacc\+\_\+client.\+h.
+Definition at line 95 of file smacc\+\_\+client.\+h.
 
 
 
@@ -662,11 +681,11 @@ Definition at line 100 of file smacc\+\_\+client.\+h.
 
 
 
-Definition at line 82 of file smacc\+\_\+client.\+h.
+Definition at line 77 of file smacc\+\_\+client.\+h.
 
 
 
-Referenced by create\+Named\+Component(), and get\+Component().
+Referenced by create\+Named\+Component(), get\+Component(), and get\+Components().
 
 \mbox{\Hypertarget{classsmacc_1_1ISmaccClient_a571c7f672d9c90128b5498aefc27c136}\label{classsmacc_1_1ISmaccClient_a571c7f672d9c90128b5498aefc27c136}} 
 \index{smacc\+::\+I\+Smacc\+Client@{smacc\+::\+I\+Smacc\+Client}!orthogonal\+\_\+@{orthogonal\+\_\+}}
@@ -676,7 +695,7 @@ Referenced by create\+Named\+Component(), and get\+Component().
 
 
 
-Definition at line 98 of file smacc\+\_\+client.\+h.
+Definition at line 93 of file smacc\+\_\+client.\+h.
 
 
 
@@ -690,7 +709,7 @@ Referenced by requires\+Client(), and set\+Orthogonal().
 
 
 
-Definition at line 97 of file smacc\+\_\+client.\+h.
+Definition at line 92 of file smacc\+\_\+client.\+h.
 
 
 
