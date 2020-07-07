@@ -37,7 +37,9 @@ geometry\+\_\+msgs\+::\+Pose\+Stamped \hyperlink{classsm__moveit__4_1_1cl__perce
 \item 
 geometry\+\_\+msgs\+::\+Pose\+Stamped \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a84da4b68fddd1b2c81d69d5f7aafeb94}{get\+Target\+Table\+Pose} ()
 \item 
-void \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_adb892199c1e7eb48d41e501a2b0ec5e8}{next\+Cube} ()
+void \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a70ec0058531af470ab52268bd6540ddd}{print\+Cubes\+State} ()
+\item 
+\hyperlink{structsm__moveit__4_1_1cl__perception__system_1_1CubeInfo}{Cube\+Info} $\ast$ \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ab9ee8563cf55a88b34e81a2281da996f}{next\+Cube} ()
 \item 
 virtual void \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a91de8cf71c93738f8bcbea388c84a5dd}{update} () override
 \item 
@@ -121,30 +123,30 @@ Definition at line 34 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
-Definition at line 189 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 214 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 \begin{DoxyCode}
-190             \{
-191                 \textcolor{comment}{// ------ cube grasping orientation -------}
-192                 \textcolor{comment}{// grasp the object with the gripper using top-to-bottom direction}
-193                 \textcolor{keyword}{auto} cubeYawOnTable = tf::getYaw(objectPose.pose.orientation);
-194 
-195                 \textcolor{keyword}{const} \textcolor{keywordtype}{double} degrees90 = M\_PI / 2;
-196                 \textcolor{keywordflow}{while} (cubeYawOnTable > degrees90)
-197                 \{
-198                     cubeYawOnTable -= degrees90;
-199                 \}
-200 
-201                 \textcolor{keywordflow}{while} (cubeYawOnTable < -degrees90)
-202                 \{
-203                     cubeYawOnTable += degrees90;
-204                 \}
-205 
-206                 ROS\_INFO(\textcolor{stringliteral}{"[ClPerceptionSystem] cube yaw: %lf"}, cubeYawOnTable);
-207                 \textcolor{keyword}{auto} quat = tf::createQuaternionFromRPY(0, M\_PI / 2, cubeYawOnTable);
-208                 tf::quaternionTFToMsg(quat, objectPose.pose.orientation);
-209             \}
+215             \{
+216                 \textcolor{comment}{// ------ cube grasping orientation -------}
+217                 \textcolor{comment}{// grasp the object with the gripper using top-to-bottom direction}
+218                 \textcolor{keyword}{auto} cubeYawOnTable = tf::getYaw(objectPose.pose.orientation);
+219 
+220                 \textcolor{keyword}{const} \textcolor{keywordtype}{double} degrees90 = M\_PI / 2;
+221                 \textcolor{keywordflow}{while} (cubeYawOnTable > degrees90)
+222                 \{
+223                     cubeYawOnTable -= degrees90;
+224                 \}
+225 
+226                 \textcolor{keywordflow}{while} (cubeYawOnTable < -degrees90)
+227                 \{
+228                     cubeYawOnTable += degrees90;
+229                 \}
+230 
+231                 ROS\_INFO(\textcolor{stringliteral}{"[ClPerceptionSystem] cube yaw: %lf"}, cubeYawOnTable);
+232                 \textcolor{keyword}{auto} quat = tf::createQuaternionFromRPY(0, M\_PI / 2, cubeYawOnTable);
+233                 tf::quaternionTFToMsg(quat, objectPose.pose.orientation);
+234             \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a57222e7497e1296974c0c16b55810cef}\label{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a57222e7497e1296974c0c16b55810cef}} 
 \index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!compute\+Pregrasp\+Pose\+From\+Cube\+Pose@{compute\+Pregrasp\+Pose\+From\+Cube\+Pose}}
@@ -154,33 +156,33 @@ Definition at line 189 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
-Definition at line 149 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 174 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 \begin{DoxyCode}
-150             \{
-151                 objectPose.pose.position.x -= 0;
-152                 objectPose.pose.position.z += 0.3;
-153 
-154                 \textcolor{comment}{// ------ cube grasping orientation -------}
-155                 \textcolor{comment}{// grasp the object with the gripper using top-to-bottom direction}
-156                 \textcolor{keyword}{auto} cubeYawOnTable = tf::getYaw(objectPose.pose.orientation);
-157 
-158                 \textcolor{keyword}{const} \textcolor{keywordtype}{double} degrees90 = M\_PI / 2;
-159                 \textcolor{keywordflow}{while} (cubeYawOnTable > degrees90)
-160                 \{
-161                     cubeYawOnTable -= degrees90;
-162                 \}
-163 
-164                 \textcolor{keywordflow}{while} (cubeYawOnTable < -degrees90)
-165                 \{
-166                     cubeYawOnTable += degrees90;
-167                 \}
-168 
-169                 ROS\_INFO(\textcolor{stringliteral}{"cube yaw: %lf"}, cubeYawOnTable);
-170                 \textcolor{keyword}{auto} quat = tf::createQuaternionFromRPY(0, M\_PI / 2, cubeYawOnTable);
-171                 tf::quaternionTFToMsg(quat, objectPose.pose.orientation);
-172             \}
+175             \{
+176                 objectPose.pose.position.x -= 0;
+177                 objectPose.pose.position.z += 0.3;
+178 
+179                 \textcolor{comment}{// ------ cube grasping orientation -------}
+180                 \textcolor{comment}{// grasp the object with the gripper using top-to-bottom direction}
+181                 \textcolor{keyword}{auto} cubeYawOnTable = tf::getYaw(objectPose.pose.orientation);
+182 
+183                 \textcolor{keyword}{const} \textcolor{keywordtype}{double} degrees90 = M\_PI / 2;
+184                 \textcolor{keywordflow}{while} (cubeYawOnTable > degrees90)
+185                 \{
+186                     cubeYawOnTable -= degrees90;
+187                 \}
+188 
+189                 \textcolor{keywordflow}{while} (cubeYawOnTable < -degrees90)
+190                 \{
+191                     cubeYawOnTable += degrees90;
+192                 \}
+193 
+194                 ROS\_INFO(\textcolor{stringliteral}{"cube yaw: %lf"}, cubeYawOnTable);
+195                 \textcolor{keyword}{auto} quat = tf::createQuaternionFromRPY(0, M\_PI / 2, cubeYawOnTable);
+196                 tf::quaternionTFToMsg(quat, objectPose.pose.orientation);
+197             \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a693927b659a3f739f2bc2ac403df0f1a}\label{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a693927b659a3f739f2bc2ac403df0f1a}} 
 \index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!configure\+Event\+Source\+Types@{configure\+Event\+Source\+Types}}
@@ -214,26 +216,26 @@ Definition at line 39 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
-Definition at line 84 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 109 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 \begin{DoxyCode}
-85             \{
-86                 \textcolor{comment}{// we select here the first cube in the list that is located in the}
-87                 \textcolor{comment}{// origin table}
-88 
-89                 \textcolor{keyword}{auto} *c = this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ac4b944cebb2055a85a33129665df5dcf}{getTargetCurrentCubeInfo}();
-90 
-91                 \textcolor{keywordflow}{if} (c != \textcolor{keyword}{nullptr})
-92                 \{
-93                     out = c->pose\_->toPoseStampedMsg();
-94                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-95                 \}
-96                 \textcolor{keywordflow}{else}
-97                 \{
-98                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-99                 \}
-100             \}
+110             \{
+111                 \textcolor{comment}{// we select here the first cube in the list that is located in the}
+112                 \textcolor{comment}{// origin table}
+113 
+114                 \textcolor{keyword}{auto} *c = this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ac4b944cebb2055a85a33129665df5dcf}{getTargetCurrentCubeInfo}();
+115 
+116                 \textcolor{keywordflow}{if} (c != \textcolor{keyword}{nullptr})
+117                 \{
+118                     out = c->pose\_->toPoseStampedMsg();
+119                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+120                 \}
+121                 \textcolor{keywordflow}{else}
+122                 \{
+123                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+124                 \}
+125             \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_af6ff9a225d451bdee312573296ed02a8}\label{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_af6ff9a225d451bdee312573296ed02a8}} 
 \index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!decide\+Place\+Pose@{decide\+Place\+Pose}}
@@ -243,7 +245,7 @@ Definition at line 84 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
-Definition at line 112 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 137 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
@@ -251,42 +253,42 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component().
 
 
 \begin{DoxyCode}
-113             \{
-114                 \textcolor{keyword}{auto} *c = this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ac4b944cebb2055a85a33129665df5dcf}{getTargetCurrentCubeInfo}();
-115                 \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{ClMoveBaseZ} *moveBaseClient;
-116                 this->\hyperlink{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520}{requiresClient}(moveBaseClient);
-117 
-118                 \textcolor{keywordflow}{if} (c != \textcolor{keyword}{nullptr} && moveBaseClient != \textcolor{keyword}{nullptr})
-119                 \{
-120                     \textcolor{keyword}{auto} basepose = moveBaseClient->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
-      \hyperlink{classcl__move__base__z_1_1Pose}{Pose}>()->toPoseMsg();
-121 
-122                     \textcolor{keyword}{auto} dstTablePose = c->dstTableInfo\_->pose\_->toPoseStampedMsg();
-123 
-124                     placePose.pose.position.z = 0.7;
-125 
-126                     \textcolor{keywordflow}{if} (basepose.position.x < dstTablePose.pose.position.x)
-127                     \{
-128                         placePose.pose.position.x = dstTablePose.pose.position.x - 0.25;
-129                         placePose.pose.position.y =dstTablePose.pose.position.y +  0.1 ;
-130                     \}
-131                     \textcolor{keywordflow}{else}
-132                     \{
-133                         placePose.pose.position.x = dstTablePose.pose.position.x + 0.25;
-134                         placePose.pose.position.y = dstTablePose.pose.position.y +- 0.1 ;
-135                     \}
-136 
-137                     placePose.pose.position.y += - c->dstTableInfo\_->cubesCounter\_ * 0.1;
-138                     placePose.pose.orientation.w = 1;
-139 
-140                     placePose.header.frame\_id = dstTablePose.header.frame\_id;
-141                     placePose.header.stamp = dstTablePose.header.stamp;
+138             \{
+139                 \textcolor{keyword}{auto} *c = this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ac4b944cebb2055a85a33129665df5dcf}{getTargetCurrentCubeInfo}();
+140                 \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{ClMoveBaseZ} *moveBaseClient;
+141                 this->\hyperlink{classsmacc_1_1ISmaccClient_a7a9990a2f3e35d547671188d69fee520}{requiresClient}(moveBaseClient);
 142 
-143                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-144                 \}
-145 
-146                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-147             \}
+143                 \textcolor{keywordflow}{if} (c != \textcolor{keyword}{nullptr} && moveBaseClient != \textcolor{keyword}{nullptr})
+144                 \{
+145                     \textcolor{keyword}{auto} basepose = moveBaseClient->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
+      \hyperlink{classcl__move__base__z_1_1Pose}{Pose}>()->toPoseMsg();
+146 
+147                     \textcolor{keyword}{auto} dstTablePose = c->dstTableInfo\_->pose\_->toPoseStampedMsg();
+148 
+149                     placePose.pose.position.z = 0.7;
+150 
+151                     \textcolor{keywordflow}{if} (basepose.position.x < dstTablePose.pose.position.x)
+152                     \{
+153                         placePose.pose.position.x = dstTablePose.pose.position.x - 0.25;
+154                         placePose.pose.position.y = dstTablePose.pose.position.y + 0.1;
+155                     \}
+156                     \textcolor{keywordflow}{else}
+157                     \{
+158                         placePose.pose.position.x = dstTablePose.pose.position.x + 0.25;
+159                         placePose.pose.position.y = dstTablePose.pose.position.y + -0.1;
+160                     \}
+161 
+162                     placePose.pose.position.y += -c->dstTableInfo\_->cubesCounter\_ * 0.1;
+163                     placePose.pose.orientation.w = 1;
+164 
+165                     placePose.header.frame\_id = dstTablePose.header.frame\_id;
+166                     placePose.header.stamp = dstTablePose.header.stamp;
+167 
+168                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+169                 \}
+170 
+171                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+172             \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -304,24 +306,24 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 174 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 199 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 \begin{DoxyCode}
-175             \{
-176                 \textcolor{keywordflow}{if} (this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_af6ff9a225d451bdee312573296ed02a8}{decidePlacePose}(preplacePose))
-177                 \{
-178                     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[ClPerceptionSystem] Decided pre place pose for cube: "} << 
+200             \{
+201                 \textcolor{keywordflow}{if} (this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_af6ff9a225d451bdee312573296ed02a8}{decidePlacePose}(preplacePose))
+202                 \{
+203                     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[ClPerceptionSystem] Decided pre place pose for cube: "} << 
       preplacePose);
-179 
-180                     preplacePose.pose.position.x -= 0;
-181                     preplacePose.pose.position.z += 0.3;
-182                     \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_afda35b6252c0a5c0692e3ff956609c23}{computePlaceCubeGraspingOrientation}(preplacePose);
-183                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-184                 \}
-185 
-186                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-187             \}
+204 
+205                     preplacePose.pose.position.x -= 0;
+206                     preplacePose.pose.position.z += 0.3;
+207                     \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_afda35b6252c0a5c0692e3ff956609c23}{computePlaceCubeGraspingOrientation}(preplacePose);
+208                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+209                 \}
+210 
+211                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+212             \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a234d70a76bb5bf73f23d420c2b541632}\label{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a234d70a76bb5bf73f23d420c2b541632}} 
 \index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!get\+Main\+Table\+Pose@{get\+Main\+Table\+Pose}}
@@ -340,8 +342,17 @@ References sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Scen
 
 \begin{DoxyCode}
 50             \{
-51                 \textcolor{keywordflow}{return} this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a82ea8feeb2fa43349f91ed59137b3890}{sceneState\_}->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSceneState_a95f74dd16566d97e017650ccdf4b8a46}{tablesInfo\_}[3].pose\_->toPoseStampedMsg();
-52             \}
+51                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &table : this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a82ea8feeb2fa43349f91ed59137b3890}{sceneState\_}->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSceneState_a95f74dd16566d97e017650ccdf4b8a46}{tablesInfo\_})
+52                 \{
+53                     \textcolor{keywordflow}{if} (table.associatedCubeColor\_ == \textcolor{stringliteral}{"none"})
+54                     \{
+55                         \textcolor{keywordflow}{return} table.pose\_->toPoseStampedMsg();
+56                     \}
+57                 \}
+58 
+59                 geometry\_msgs::PoseStamped empty;
+60                 \textcolor{keywordflow}{return} empty;
+61             \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ac4b944cebb2055a85a33129665df5dcf}\label{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ac4b944cebb2055a85a33129665df5dcf}} 
 \index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!get\+Target\+Current\+Cube\+Info@{get\+Target\+Current\+Cube\+Info}}
@@ -351,7 +362,7 @@ References sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Scen
 
 
 
-Definition at line 71 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 96 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
@@ -359,17 +370,17 @@ References sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Scen
 
 
 \begin{DoxyCode}
-72             \{
-73                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &c : this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a82ea8feeb2fa43349f91ed59137b3890}{sceneState\_}->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSceneState_a734a45934cccf19ac5c886cd94bc8cda}{cubeInfos\_})
-74                 \{
-75                     \textcolor{keywordflow}{if} (c.location\_ == \hyperlink{namespacesm__moveit__4_1_1cl__perception__system_a0d1b8834532a7cf9d19670791eece6d1ae5ee34c3ef8ec4a46a00a218416c7b1d}{CubeLocation::ORIGIN\_TABLE})
-76                     \{
-77                         \textcolor{keywordflow}{return} &c;
-78                     \}
-79                 \}
-80 
-81                 \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
-82             \}
+97             \{
+98                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &c : this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a82ea8feeb2fa43349f91ed59137b3890}{sceneState\_}->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSceneState_a734a45934cccf19ac5c886cd94bc8cda}{cubeInfos\_})
+99                 \{
+100                     \textcolor{keywordflow}{if} (c.location\_ == \hyperlink{namespacesm__moveit__4_1_1cl__perception__system_a0d1b8834532a7cf9d19670791eece6d1ae5ee34c3ef8ec4a46a00a218416c7b1d}{CubeLocation::ORIGIN\_TABLE})
+101                     \{
+102                         \textcolor{keywordflow}{return} &c;
+103                     \}
+104                 \}
+105 
+106                 \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+107             \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a84da4b68fddd1b2c81d69d5f7aafeb94}\label{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a84da4b68fddd1b2c81d69d5f7aafeb94}} 
 \index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!get\+Target\+Table\+Pose@{get\+Target\+Table\+Pose}}
@@ -379,32 +390,65 @@ References sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Scen
 
 
 
-Definition at line 54 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 63 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 \begin{DoxyCode}
-55             \{
-56                 \textcolor{keyword}{auto} \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ae2a80b803814af8b3c87f810f2728af0}{currentCube} = \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ac4b944cebb2055a85a33129665df5dcf}{getTargetCurrentCubeInfo}();
-57                 \textcolor{keywordflow}{return} \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ae2a80b803814af8b3c87f810f2728af0}{currentCube}->dstTableInfo\_->pose\_->toPoseStampedMsg();
-58             \}
+64             \{
+65                 \textcolor{keyword}{auto} \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ae2a80b803814af8b3c87f810f2728af0}{currentCube} = \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ac4b944cebb2055a85a33129665df5dcf}{getTargetCurrentCubeInfo}();
+66                 \textcolor{keywordflow}{return} \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ae2a80b803814af8b3c87f810f2728af0}{currentCube}->dstTableInfo\_->pose\_->toPoseStampedMsg();
+67             \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_adb892199c1e7eb48d41e501a2b0ec5e8}\label{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_adb892199c1e7eb48d41e501a2b0ec5e8}} 
+\mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ab9ee8563cf55a88b34e81a2281da996f}\label{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ab9ee8563cf55a88b34e81a2281da996f}} 
 \index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!next\+Cube@{next\+Cube}}
 \index{next\+Cube@{next\+Cube}!sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
 \subsubsection{\texorpdfstring{next\+Cube()}{nextCube()}}
-{\footnotesize\ttfamily void sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::next\+Cube (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \hyperlink{structsm__moveit__4_1_1cl__perception__system_1_1CubeInfo}{Cube\+Info}$\ast$ sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::next\+Cube (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 60 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 82 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 \begin{DoxyCode}
-61             \{
-62                 \textcolor{keyword}{auto} \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ae2a80b803814af8b3c87f810f2728af0}{currentCube} = \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ac4b944cebb2055a85a33129665df5dcf}{getTargetCurrentCubeInfo}();
-63                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ae2a80b803814af8b3c87f810f2728af0}{currentCube}->location\_ = \hyperlink{namespacesm__moveit__4_1_1cl__perception__system_a0d1b8834532a7cf9d19670791eece6d1acdc3fdda18904b4a1ac0be036c86f973}{CubeLocation::DESTINY\_TABLE};
-64                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ae2a80b803814af8b3c87f810f2728af0}{currentCube}->dstTableInfo\_->cubesCounter\_++;
-65             \}
+83             \{
+84                 \textcolor{keyword}{auto} \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ae2a80b803814af8b3c87f810f2728af0}{currentCube} = \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ac4b944cebb2055a85a33129665df5dcf}{getTargetCurrentCubeInfo}();
+85                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ae2a80b803814af8b3c87f810f2728af0}{currentCube}->location\_ = \hyperlink{namespacesm__moveit__4_1_1cl__perception__system_a0d1b8834532a7cf9d19670791eece6d1acdc3fdda18904b4a1ac0be036c86f973}{CubeLocation::DESTINY\_TABLE};
+86                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ae2a80b803814af8b3c87f810f2728af0}{currentCube}->dstTableInfo\_->cubesCounter\_++;
+87                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a70ec0058531af470ab52268bd6540ddd}{printCubesState}();
+88 
+89                 \textcolor{keywordflow}{return} \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_ac4b944cebb2055a85a33129665df5dcf}{getTargetCurrentCubeInfo}();
+90             \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a70ec0058531af470ab52268bd6540ddd}\label{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a70ec0058531af470ab52268bd6540ddd}} 
+\index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!print\+Cubes\+State@{print\+Cubes\+State}}
+\index{print\+Cubes\+State@{print\+Cubes\+State}!sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}}
+\subsubsection{\texorpdfstring{print\+Cubes\+State()}{printCubesState()}}
+{\footnotesize\ttfamily void sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::print\+Cubes\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 69 of file cl\+\_\+perception\+\_\+system.\+h.
+
+
+
+References sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Scene\+State\+::cube\+Infos\+\_\+.
+
+
+\begin{DoxyCode}
+70             \{
+71                 std::stringstream ss;
+72                 \textcolor{keywordtype}{int} i = 0;
+73                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &c : this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a82ea8feeb2fa43349f91ed59137b3890}{sceneState\_}->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSceneState_a734a45934cccf19ac5c886cd94bc8cda}{cubeInfos\_})
+74                 \{
+75 
+76                     ss << \textcolor{stringliteral}{"- Cube "} << i << \textcolor{stringliteral}{" frame: "} << c.pose\_->toPoseStampedMsg().header.frame\_id << \textcolor{stringliteral}{"
+       location: "} << (c.location\_ == \hyperlink{namespacesm__moveit__4_1_1cl__perception__system_a0d1b8834532a7cf9d19670791eece6d1ae5ee34c3ef8ec4a46a00a218416c7b1d}{CubeLocation::ORIGIN\_TABLE} ? \textcolor{stringliteral}{" origin table"} : \textcolor{stringliteral}{"
+       destination table"} )<< std::endl;
+77                 \}
+78 
+79                 ROS\_INFO\_STREAM(ss.str());
+80             \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a5304dc8734488564093525dfe4f4bcd1}\label{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a5304dc8734488564093525dfe4f4bcd1}} 
 \index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System}!set\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions@{set\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions}}
@@ -414,7 +458,7 @@ Definition at line 60 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
-Definition at line 102 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 127 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
@@ -422,10 +466,10 @@ References sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simu
 
 
 \begin{DoxyCode}
-103             \{
-104                 this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a027c07df3f1a2cc0c30be111b27dbe5c}{gazeboPerceptionSimulation\_}->
+128             \{
+129                 this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a027c07df3f1a2cc0c30be111b27dbe5c}{gazeboPerceptionSimulation\_}->
       \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_af42b5a4e239fcac98a222c34115c9bc0}{setSafeArmMotionToAvoidCubeCollisions}();
-105             \}
+130             \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -443,7 +487,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 107 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 132 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 
@@ -451,10 +495,10 @@ References sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simu
 
 
 \begin{DoxyCode}
-108             \{
-109                 this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a027c07df3f1a2cc0c30be111b27dbe5c}{gazeboPerceptionSimulation\_}->
+133             \{
+134                 this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1ClPerceptionSystem_a027c07df3f1a2cc0c30be111b27dbe5c}{gazeboPerceptionSimulation\_}->
       \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a7f5d68f2ff7dd0ade9756058e790efa1}{unsetSafeArmMotionToAvoidCubeCollisions}();
-110             \}
+135             \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -476,12 +520,12 @@ Implements \hyperlink{classsmacc_1_1ISmaccUpdatable_a84ee0520cbefdb1d412bed54650
 
 
 
-Definition at line 67 of file cl\+\_\+perception\+\_\+system.\+h.
+Definition at line 92 of file cl\+\_\+perception\+\_\+system.\+h.
 
 
 \begin{DoxyCode}
-68             \{
-69             \}
+93             \{
+94             \}
 \end{DoxyCode}
 
 

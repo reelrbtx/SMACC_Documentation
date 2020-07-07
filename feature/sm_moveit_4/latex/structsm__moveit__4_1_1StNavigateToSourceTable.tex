@@ -73,13 +73,13 @@ Definition at line 15 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+
 
 
 
-Definition at line 46 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
+Definition at line 51 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
 
 
 \begin{DoxyCode}
-47         \{
-48             ROS\_INFO(\textcolor{stringliteral}{"state on entry"});
-49         \}
+52         \{
+53             ROS\_INFO(\textcolor{stringliteral}{"state on entry"});
+54         \}
 \end{DoxyCode}
 \mbox{\Hypertarget{structsm__moveit__4_1_1StNavigateToSourceTable_a532b64eb7ea6938d22c712e29ecf0ac9}\label{structsm__moveit__4_1_1StNavigateToSourceTable_a532b64eb7ea6938d22c712e29ecf0ac9}} 
 \index{sm\+\_\+moveit\+\_\+4\+::\+St\+Navigate\+To\+Source\+Table@{sm\+\_\+moveit\+\_\+4\+::\+St\+Navigate\+To\+Source\+Table}!runtime\+Configure@{runtime\+Configure}}
@@ -89,13 +89,13 @@ Definition at line 46 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+
 
 
 
-Definition at line 41 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
+Definition at line 46 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
 
 
 \begin{DoxyCode}
-42         \{
-43             ROS\_INFO(\textcolor{stringliteral}{"runtime"});
-44         \}
+47         \{
+48             ROS\_INFO(\textcolor{stringliteral}{"runtime"});
+49         \}
 \end{DoxyCode}
 \mbox{\Hypertarget{structsm__moveit__4_1_1StNavigateToSourceTable_a10d9b17cf7d5450760c13552eb9de0b5}\label{structsm__moveit__4_1_1StNavigateToSourceTable_a10d9b17cf7d5450760c13552eb9de0b5}} 
 \index{sm\+\_\+moveit\+\_\+4\+::\+St\+Navigate\+To\+Source\+Table@{sm\+\_\+moveit\+\_\+4\+::\+St\+Navigate\+To\+Source\+Table}!static\+Configure@{static\+Configure}}
@@ -110,7 +110,7 @@ Definition at line 18 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+
 
 \begin{DoxyCode}
 19         \{
-20             configure\_orthogonal\_fn<OrNavigation, CbNavigateGlobalPosition>
+20             configure\_orthogonal\_runtime\_callback<OrNavigation, CbNavigateGlobalPosition>
 21                                                             (
 22                                                                 [](\textcolor{keyword}{auto}& navigateGlobalPosition)
 23                                                                 \{
@@ -124,18 +124,25 @@ Definition at line 18 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+
 29 
 30                                                                     geometry\_msgs::PoseStamped nextCubePose
       ;
-31                                                                     perceptionSystem->decidePickCubePose(
-      nextCubePose);
-32 
-33                                                                     \textcolor{comment}{// align with the cube in the y axis}
-34                                                                     mainTablePose.position.y = nextCubePose
-      .pose.position.y;
+31                                                                     \textcolor{keywordflow}{if}(perceptionSystem->decidePickCubePose
+      (nextCubePose))
+32                                                                     \{
+33                                                                         \textcolor{comment}{// align with the cube in the y
+       axis}
+34                                                                         mainTablePose.position.y = 
+      nextCubePose.pose.position.y;
 35 
-36                                                                     navigateGlobalPosition.setGoal(
+36                                                                         navigateGlobalPosition.setGoal(
       mainTablePose);
-37                                                                 \}
-38                                                             );
-39         \}
+37                                                                     \}
+38                                                                     \textcolor{keywordflow}{else}
+39                                                                     \{
+40                                                                         ROS\_WARN(\textcolor{stringliteral}{"[DEMO COMPLETED! All
+       cubes are on their tables!]"});
+41                                                                     \}
+42                                                                 \}
+43                                                             );
+44         \}
 \end{DoxyCode}
 
 

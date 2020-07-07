@@ -194,15 +194,15 @@ Definition at line 178 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h
 192                 \}
 193 
 194                 i = 0;
-195                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &cubepose : filteredLinkPoses)
+195                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &linkpose : filteredLinkPoses)
 196                 \{
 197                     tf::Pose tfpose;
-198                     tf::poseMsgToTF(cubepose, tfpose);
+198                     tf::poseMsgToTF(linkpose, tfpose);
 199                     tf::StampedTransform transform;
 200                     transform.setOrigin(tfpose.getOrigin());
 201                     transform.setRotation(tfpose.getRotation());
 202                     transform.frame\_id\_ = globalFrame;
-203                     transform.child\_frame\_id\_ = objectPrefix + std::to\_string(i);
+203                     transform.child\_frame\_id\_ = objectPrefix + std::to\_string(i + 1);
 204                     transform.stamp\_ = ros::Time::now();
 205 
 206                     \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a413594aa743f273c844795ff9f2f724b}{tfBroadcaster\_}.sendTransform(transform);
@@ -295,7 +295,7 @@ Referenced by on\+Initialize().
 106                         \{
 107                             \textcolor{keyword}{auto} &tableTransf = tableTransforms[i];
 108                             \textcolor{keyword}{auto} &pos = tableTransf.getOrigin();
-109                             std::string tablename = \textcolor{stringliteral}{"table\_"} + std::to\_string(i);
+109                             std::string tablename = \textcolor{stringliteral}{"table\_"} + std::to\_string(i + 1);
 110                             removeCollisionObjectNames[i] = tablename;
 111                             moveit\_msgs::CollisionObject &collision = collisionObjects[i];
 112                             collision.operation = moveit\_msgs::CollisionObject::ADD;
