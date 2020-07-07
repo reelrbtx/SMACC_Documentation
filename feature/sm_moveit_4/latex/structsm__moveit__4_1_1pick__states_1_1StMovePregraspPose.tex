@@ -34,7 +34,7 @@ typedef mpl\+::list$<$ Transition$<$ \hyperlink{structmoveit__z__client_1_1MoveG
 \item 
 void \hyperlink{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_ae9ffdf77d89169b5f4fb2cb2fadd56fc}{runtime\+Configure} ()
 \item 
-void \hyperlink{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_a30f404d06b8bcf9b5866d713a297012b}{compute\+Cube\+Grasping\+Orientation} (geometry\+\_\+msgs\+::\+Pose\+Stamped \&object\+Pose)
+void \hyperlink{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_ae2f50199e1766c1bcdb8fcd25e9a0e16}{on\+Exit} ()
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -65,52 +65,35 @@ Definition at line 17 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_a30f404d06b8bcf9b5866d713a297012b}\label{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_a30f404d06b8bcf9b5866d713a297012b}} 
-\index{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose}!compute\+Cube\+Grasping\+Orientation@{compute\+Cube\+Grasping\+Orientation}}
-\index{compute\+Cube\+Grasping\+Orientation@{compute\+Cube\+Grasping\+Orientation}!sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose}}
-\subsubsection{\texorpdfstring{compute\+Cube\+Grasping\+Orientation()}{computeCubeGraspingOrientation()}}
-{\footnotesize\ttfamily void sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose\+::compute\+Cube\+Grasping\+Orientation (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Pose\+Stamped \&}]{object\+Pose }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_ae2f50199e1766c1bcdb8fcd25e9a0e16}\label{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_ae2f50199e1766c1bcdb8fcd25e9a0e16}} 
+\index{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose}!on\+Exit@{on\+Exit}}
+\index{on\+Exit@{on\+Exit}!sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose}}
+\subsubsection{\texorpdfstring{on\+Exit()}{onExit()}}
+{\footnotesize\ttfamily void sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose\+::on\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 47 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
+Definition at line 48 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
 
 
 
-Referenced by runtime\+Configure().
+References smacc\+::\+I\+Smacc\+State\+::requires\+Client().
 
 
 \begin{DoxyCode}
-48     \{
-49         objectPose.pose.position.x -= 0;
-50         objectPose.pose.position.z += 0.3;
-51 
-52         \textcolor{comment}{// ------ cube grasping orientation -------}
-53         \textcolor{comment}{// grasp the object with the gripper using top-to-bottom direction}
-54         \textcolor{keyword}{auto} cubeYawOnTable = tf::getYaw(objectPose.pose.orientation);
-55 
-56         \textcolor{keyword}{const} \textcolor{keywordtype}{double} degrees90 = M\_PI / 2;
-57         \textcolor{keywordflow}{while} (cubeYawOnTable > degrees90)
-58         \{
-59             cubeYawOnTable -= degrees90;
-60         \}
-61 
-62         \textcolor{keywordflow}{while} (cubeYawOnTable < -degrees90)
-63         \{
-64             cubeYawOnTable += degrees90;
-65         \}
-66 
-67         ROS\_INFO(\textcolor{stringliteral}{"cube yaw: %lf"}, cubeYawOnTable);
-68         \textcolor{keyword}{auto} quat = tf::createQuaternionFromRPY(0, M\_PI / 2, cubeYawOnTable);
-69         tf::quaternionTFToMsg(quat, objectPose.pose.orientation);
-70     \}
+49             \{
+50                 ClPerceptionSystem *perceptionSystem;
+51                 this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(perceptionSystem);
+52 
+53                 perceptionSystem->unsetSafeArmMotionToAvoidCubeCollisions();
+54             \}
 \end{DoxyCode}
-Here is the caller graph for this function\+:
+Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_a30f404d06b8bcf9b5866d713a297012b_icgraph}
+\includegraphics[width=350pt]{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_ae2f50199e1766c1bcdb8fcd25e9a0e16_cgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_ae9ffdf77d89169b5f4fb2cb2fadd56fc}\label{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_ae9ffdf77d89169b5f4fb2cb2fadd56fc}} 
@@ -121,39 +104,13 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 29 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
-
-
-
-References compute\+Cube\+Grasping\+Orientation(), and smacc\+::\+I\+Smacc\+State\+::requires\+Client().
+Definition at line 44 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
 
 
 \begin{DoxyCode}
-30     \{
-31         ROS\_INFO(\textcolor{stringliteral}{"Pre grasp pose initialization."});
-32         ros::WallDuration(5).sleep();
-33 
-34         ClPerceptionSystem *perceptionSystem;
-35         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(perceptionSystem);
-36         
-37         \textcolor{keyword}{auto} pregraspPose = perceptionSystem->decidePickCubePose();
-38 
-39         this->\hyperlink{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_a30f404d06b8bcf9b5866d713a297012b}{computeCubeGraspingOrientation}(pregraspPose);
-40 
-41         \textcolor{keyword}{auto} moveAbsolute = this->getOrthogonal<OrArm>()
-42                                 ->getClientBehavior<CbMoveEndEffector>();
-43 
-44         moveAbsolute->targetPose = pregraspPose;
-45     \}
+45             \{
+46             \}
 \end{DoxyCode}
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_ae9ffdf77d89169b5f4fb2cb2fadd56fc_cgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_afb6abd382c1c9f35dd5f74967301cc48}\label{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_afb6abd382c1c9f35dd5f74967301cc48}} 
 \index{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose}!static\+Configure@{static\+Configure}}
 \index{static\+Configure@{static\+Configure}!sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose}}
@@ -166,13 +123,28 @@ Definition at line 20 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
 
 
 \begin{DoxyCode}
-21     \{
-22         configure\_orthogonal<OrArm, CbMoveEndEffector>();
-23 
-24         \textcolor{comment}{//   configure\_orthogonal<OrNavigation, CbNavigateBackwards>(2);}
-25         \textcolor{comment}{//   configure\_orthogonal<OrLED, CbLEDOff>();}
-26         \textcolor{comment}{//   configure\_orthogonal<OrObstaclePerception, CbLidarSensor>();}
-27     \}
+21             \{
+22                 configure\_orthogonal\_fn<OrArm, CbMoveEndEffector>(
+23                     [](\textcolor{keyword}{auto} &cbMoveEndEffector) \{
+24                         ROS\_INFO(\textcolor{stringliteral}{"Pre grasp pose initialization."});
+25                         ros::WallDuration(1).sleep();
+26 
+27                         ClPerceptionSystem *perceptionSystem;
+28                         cbMoveEndEffector.requiresClient(perceptionSystem);
+29 
+30                         geometry\_msgs::PoseStamped targetCubePose;
+31 
+32                         perceptionSystem->setSafeArmMotionToAvoidCubeCollisions();
+33 
+34                         \textcolor{keywordflow}{if} (perceptionSystem->decidePickCubePose(targetCubePose))
+35                         \{
+36                             geometry\_msgs::PoseStamped pregraspPose = targetCubePose;
+37                             perceptionSystem->computePregraspPoseFromCubePose(pregraspPose);
+38 
+39                             cbMoveEndEffector.targetPose = pregraspPose;
+40                         \}
+41                     \});
+42             \}
 \end{DoxyCode}
 
 

@@ -11,7 +11,7 @@ Inheritance diagram for sm\+\_\+moveit\+\_\+4\+:\+:cl\+\_\+perception\+\_\+syste
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=295pt]{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception__inherit__graph}
+\includegraphics[height=550pt]{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -27,6 +27,10 @@ Collaboration diagram for sm\+\_\+moveit\+\_\+4\+:\+:cl\+\_\+perception\+\_\+sys
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_af42b5a4e239fcac98a222c34115c9bc0}{set\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions} ()
+\item 
+void \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a7f5d68f2ff7dd0ade9756058e790efa1}{unset\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions} ()
+\item 
 virtual void \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_adebc30f6b1fc905f783de3f7bdf4a711}{on\+Initialize} () override
 \item 
 void \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a7914ffd20518c866a8a1e11254589d12}{simulated\+Link\+State\+Callback} (const gazebo\+\_\+msgs\+::\+Link\+States \&linksmsg)
@@ -34,6 +38,11 @@ void \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeb
 void \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_aac02fd742b0074f62d8909ce00a02d3b}{identify\+Cube\+Colors\+By\+Names} (const std\+::vector$<$ std\+::string $>$ \&linknames)
 \item 
 void \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a643fa78620216085ca385b74832a0abc}{propagate\+Link\+States\+To\+Tf} (const gazebo\+\_\+msgs\+::\+Link\+States \&linksmsg, std\+::string link\+Name\+Filter, std\+::string object\+Prefix, std\+::string global\+Frame, std\+::vector$<$ tf\+::\+Stamped\+Transform $>$ \&transforms)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a6b6bafbddde1f72c81bf54aa75872151}{safe\+Table\+Height\+Offset\+For\+Cube\+Collisions} = 0
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -79,7 +88,7 @@ Definition at line 25 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
 
 
 
-Definition at line 138 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
+Definition at line 152 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
 
 
 
@@ -87,32 +96,32 @@ References sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cube\+In
 
 
 \begin{DoxyCode}
-139             \{
-140                 CpSceneState *scene;
-141                 this->\hyperlink{classsmacc_1_1ISmaccComponent_aa06d58b1dcec3c513ca2edddfd3847ec}{requiresComponent}(scene);
-142 
-143                 \textcolor{keywordflow}{if} (scene->cubeInfos\_.size() == 0)
-144                 \{
-145                     std::vector<std::string> strs;
-146                     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &linkname : linknames)
-147                     \{
-148                         \textcolor{keywordflow}{if} (linkname.find(\textcolor{stringliteral}{"cube"}) != std::string::npos)
-149                         \{
-150                             strs.clear();
-151                             boost::split(strs, linkname, boost::is\_any\_of(\textcolor{stringliteral}{"\_:"})); \textcolor{comment}{// demo\_cube\_green::link}
-152                             CubeInfo cubeinfo;
-153 
-154                             cubeinfo.color = strs[2];
-155 
-156                             cubeinfo.dstTableInfo\_ = &(*(std::find\_if(scene->tablesInfo\_.begin(), scene->
+153             \{
+154                 CpSceneState *scene;
+155                 this->\hyperlink{classsmacc_1_1ISmaccComponent_aa06d58b1dcec3c513ca2edddfd3847ec}{requiresComponent}(scene);
+156 
+157                 \textcolor{keywordflow}{if} (scene->cubeInfos\_.front().color == \textcolor{stringliteral}{""})
+158                 \{
+159                     std::vector<std::string> strs;
+160                     \textcolor{keywordtype}{int} i=0;
+161                     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &linkname : linknames)
+162                     \{
+163                         \textcolor{keywordflow}{if} (linkname.find(\textcolor{stringliteral}{"cube"}) != std::string::npos)
+164                         \{
+165                             strs.clear();
+166                             boost::split(strs, linkname, boost::is\_any\_of(\textcolor{stringliteral}{"\_:"})); \textcolor{comment}{// demo\_cube\_green::link}
+167                             CubeInfo& cubeinfo = scene->cubeInfos\_[i++];
+168 
+169                             cubeinfo.color = strs[2];
+170 
+171                             cubeinfo.dstTableInfo\_ = &(*(std::find\_if(scene->tablesInfo\_.begin(), scene->
       tablesInfo\_.end(),
-157                                                                       [&](\textcolor{keyword}{auto} &ti) \{ \textcolor{keywordflow}{return} ti.
-      targetColor\_ == cubeinfo.color; \})));
-158                             scene->cubeInfos\_.push\_back(cubeinfo);
-159                         \}
-160                     \}
-161                 \}
-162             \}
+172                                                                       [&](\textcolor{keyword}{auto} &ti) \{ \textcolor{keywordflow}{return} ti.
+      associatedCubeColor\_ == cubeinfo.color; \})));
+173                         \}
+174                     \}
+175                 \}
+176             \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_adebc30f6b1fc905f783de3f7bdf4a711}\label{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_adebc30f6b1fc905f783de3f7bdf4a711}} 
 \index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception}!on\+Initialize@{on\+Initialize}}
@@ -126,7 +135,7 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccComponent_ae6f71d008db12553912
 
 
 
-Definition at line 44 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
+Definition at line 57 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
 
 
 
@@ -134,22 +143,22 @@ References moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::planning\+Scene\+In
 
 
 \begin{DoxyCode}
-45             \{
-46                 this->\hyperlink{classsmacc_1_1ISmaccComponent_a36c085d906fbae0fcaee817aaeafebf4}{requiresClient}(\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a3c361c94d4a8077d9bfac016a2614056}{movegroupclient\_});
-47                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a34bbc7a8b23a1b1c2d3d4d30bd2fe767}{planningSceneInterface\_} = &
+58             \{
+59                 this->\hyperlink{classsmacc_1_1ISmaccComponent_a36c085d906fbae0fcaee817aaeafebf4}{requiresClient}(\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a3c361c94d4a8077d9bfac016a2614056}{movegroupclient\_});
+60                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a34bbc7a8b23a1b1c2d3d4d30bd2fe767}{planningSceneInterface\_} = &
       \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a3c361c94d4a8077d9bfac016a2614056}{movegroupclient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a21c879b2683286aa21ce68f40195b4b5}{planningSceneInterface};
-48 
-49                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a64beecc85d97c62bc4f884f4601d9c6a}{tableCollision\_} = \textcolor{keyword}{true};
-50                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a185c4065558b0c320d73f366bb6b8277}{updatePeriod\_} = ros::Duration(0.25);
-51                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_af27dcb3530d5f2e8919f5e617b46275c}{startTime} = ros::Time::now();
-52                 
-53                 \textcolor{comment}{// order is important, to avoid "preemption" of the callback before it is initialized}
-54                 ros::NodeHandle nh;
-55                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a0808beb5b57079d863a56258279e202f}{gazeboStateSubscriber\_} =
-56                     nh.subscribe(\textcolor{stringliteral}{"/gazebo/link\_states"}, 1, &
+61 
+62                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a64beecc85d97c62bc4f884f4601d9c6a}{tableCollision\_} = \textcolor{keyword}{true};
+63                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a185c4065558b0c320d73f366bb6b8277}{updatePeriod\_} = ros::Duration(0.25);
+64                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_af27dcb3530d5f2e8919f5e617b46275c}{startTime} = ros::Time::now();
+65                 
+66                 \textcolor{comment}{// order is important, to avoid "preemption" of the callback before it is initialized}
+67                 ros::NodeHandle nh;
+68                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a0808beb5b57079d863a56258279e202f}{gazeboStateSubscriber\_} =
+69                     nh.subscribe(\textcolor{stringliteral}{"/gazebo/link\_states"}, 1, &
       \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a7914ffd20518c866a8a1e11254589d12}{CpSimulatedGazeboPerception::simulatedLinkStateCallback}
       , \textcolor{keyword}{this});
-57             \}
+70             \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -167,42 +176,70 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 164 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
+Definition at line 178 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
 
 
 \begin{DoxyCode}
-167             \{
-168                 transforms.clear();
-169                 \textcolor{keywordtype}{int} i = 0;
-170                 std::vector<geometry\_msgs::Pose> filteredLinkPoses;
-171                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &b : linksmsg.pose)
-172                 \{
-173                     \textcolor{keyword}{auto} linkname = linksmsg.name[i];
-174                     \textcolor{keywordflow}{if} (linkname.find(linkNameFilter) != std::string::npos)
-175                         filteredLinkPoses.push\_back(b);
-176 
-177                     i++;
-178                 \}
-179 
-180                 i = 0;
-181                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &cubepose : filteredLinkPoses)
-182                 \{
-183                     tf::Pose tfpose;
-184                     tf::poseMsgToTF(cubepose, tfpose);
-185                     tf::StampedTransform transform;
-186                     transform.setOrigin(tfpose.getOrigin());
-187                     transform.setRotation(tfpose.getRotation());
-188                     transform.frame\_id\_ = globalFrame;
-189                     transform.child\_frame\_id\_ = objectPrefix + std::to\_string(i);
-190                     transform.stamp\_ = ros::Time::now();
-191 
-192                     \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a413594aa743f273c844795ff9f2f724b}{tfBroadcaster\_}.sendTransform(transform);
+181             \{
+182                 transforms.clear();
+183                 \textcolor{keywordtype}{int} i = 0;
+184                 std::vector<geometry\_msgs::Pose> filteredLinkPoses;
+185                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &b : linksmsg.pose)
+186                 \{
+187                     \textcolor{keyword}{auto} linkname = linksmsg.name[i];
+188                     \textcolor{keywordflow}{if} (linkname.find(linkNameFilter) != std::string::npos)
+189                         filteredLinkPoses.push\_back(b);
+190 
+191                     i++;
+192                 \}
 193 
-194                     i++;
-195                     transforms.push\_back(transform);
-196                 \}
-197             \}
+194                 i = 0;
+195                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &cubepose : filteredLinkPoses)
+196                 \{
+197                     tf::Pose tfpose;
+198                     tf::poseMsgToTF(cubepose, tfpose);
+199                     tf::StampedTransform transform;
+200                     transform.setOrigin(tfpose.getOrigin());
+201                     transform.setRotation(tfpose.getRotation());
+202                     transform.frame\_id\_ = globalFrame;
+203                     transform.child\_frame\_id\_ = objectPrefix + std::to\_string(i);
+204                     transform.stamp\_ = ros::Time::now();
+205 
+206                     \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a413594aa743f273c844795ff9f2f724b}{tfBroadcaster\_}.sendTransform(transform);
+207 
+208                     i++;
+209                     transforms.push\_back(transform);
+210                 \}
+211             \}
 \end{DoxyCode}
+\mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_af42b5a4e239fcac98a222c34115c9bc0}\label{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_af42b5a4e239fcac98a222c34115c9bc0}} 
+\index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception}!set\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions@{set\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions}}
+\index{set\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions@{set\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions}!sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception}}
+\subsubsection{\texorpdfstring{set\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions()}{setSafeArmMotionToAvoidCubeCollisions()}}
+{\footnotesize\ttfamily void sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception\+::set\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 47 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
+
+
+
+Referenced by sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::set\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions().
+
+
+\begin{DoxyCode}
+48             \{
+49                  \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a6b6bafbddde1f72c81bf54aa75872151}{safeTableHeightOffsetForCubeCollisions} = 0.16;
+50             \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_af42b5a4e239fcac98a222c34115c9bc0_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a7914ffd20518c866a8a1e11254589d12}\label{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a7914ffd20518c866a8a1e11254589d12}} 
 \index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception}!simulated\+Link\+State\+Callback@{simulated\+Link\+State\+Callback}}
 \index{simulated\+Link\+State\+Callback@{simulated\+Link\+State\+Callback}!sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception}}
@@ -211,7 +248,7 @@ Definition at line 164 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h
 
 
 
-Definition at line 59 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
+Definition at line 72 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
 
 
 
@@ -219,85 +256,87 @@ Referenced by on\+Initialize().
 
 
 \begin{DoxyCode}
-60             \{
-61                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_aac02fd742b0074f62d8909ce00a02d3b}{identifyCubeColorsByNames}(linksmsg.name);
-62 
-63                 std::vector<tf::StampedTransform> cubeTransforms;
-64                 this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a643fa78620216085ca385b74832a0abc}{propagateLinkStatesToTf}(linksmsg, \textcolor{stringliteral}{"cube"}, \textcolor{stringliteral}{"cube\_"}, \textcolor{stringliteral}{"map"}, 
-      cubeTransforms);
-65 
-66                 std::vector<tf::StampedTransform> tableTransforms;
-67                 this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a643fa78620216085ca385b74832a0abc}{propagateLinkStatesToTf}(linksmsg, \textcolor{stringliteral}{"table"}, \textcolor{stringliteral}{"table\_"}, \textcolor{stringliteral}{"map"}, 
-      tableTransforms);
-68 
-69                 \textcolor{keyword}{auto} ellapsed = ros::Time::now() - this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_afa9d8a4f636cf06bd7dbe49ce2ca5fa8}{lastUpdateStamp\_};
-70 
-71                 \textcolor{keywordflow}{if} (ellapsed > \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a185c4065558b0c320d73f366bb6b8277}{updatePeriod\_})
-72                 \{
-73                     ROS\_DEBUG(\textcolor{stringliteral}{"Updating planning scene perception"});
-74                     \textcolor{keyword}{auto} attachedObjects = \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a34bbc7a8b23a1b1c2d3d4d30bd2fe767}{planningSceneInterface\_}->
-      getAttachedObjects();
+73             \{
+74                 \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_aac02fd742b0074f62d8909ce00a02d3b}{identifyCubeColorsByNames}(linksmsg.name);
 75 
-76                     \textcolor{keywordtype}{bool} hasCubeAttached = \textcolor{keyword}{false};
-77                     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &k : attachedObjects)
-78                     \{
-79                         \textcolor{keywordflow}{if} (k.first.find(\textcolor{stringliteral}{"cube"}) != std::string::npos)
-80                         \{
-81                             hasCubeAttached = \textcolor{keyword}{true};
-82                             \textcolor{keywordflow}{break};
-83                         \}
-84                     \}
-85 
-86                     \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a64beecc85d97c62bc4f884f4601d9c6a}{tableCollision\_} && !hasCubeAttached)
-87                     \{
-88                         std::vector<moveit\_msgs::CollisionObject> collisionObjects(tableTransforms.size());
-89                         std::vector<std::string> removeCollisionObjectNames(tableTransforms.size());
-90 
-91                         \textcolor{keyword}{auto} thickness = 0.12;
-92                         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < tableTransforms.size(); i++)
+76                 std::vector<tf::StampedTransform> cubeTransforms;
+77                 this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a643fa78620216085ca385b74832a0abc}{propagateLinkStatesToTf}(linksmsg, \textcolor{stringliteral}{"cube"}, \textcolor{stringliteral}{"cube\_"}, \textcolor{stringliteral}{"map"}, 
+      cubeTransforms);
+78 
+79                 std::vector<tf::StampedTransform> tableTransforms;
+80                 this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a643fa78620216085ca385b74832a0abc}{propagateLinkStatesToTf}(linksmsg, \textcolor{stringliteral}{"table"}, \textcolor{stringliteral}{"table\_"}, \textcolor{stringliteral}{"map"}, 
+      tableTransforms);
+81 
+82                 \textcolor{keyword}{auto} ellapsed = ros::Time::now() - this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_afa9d8a4f636cf06bd7dbe49ce2ca5fa8}{lastUpdateStamp\_};
+83 
+84                 \textcolor{keywordflow}{if} (ellapsed > \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a185c4065558b0c320d73f366bb6b8277}{updatePeriod\_})
+85                 \{
+86                     ROS\_DEBUG(\textcolor{stringliteral}{"Updating planning scene perception"});
+87                     \textcolor{keyword}{auto} attachedObjects = \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a34bbc7a8b23a1b1c2d3d4d30bd2fe767}{planningSceneInterface\_}->
+      getAttachedObjects();
+88 
+89                     \textcolor{keywordtype}{bool} hasCubeAttached = \textcolor{keyword}{false};
+90                     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &k : attachedObjects)
+91                     \{
+92                         \textcolor{keywordflow}{if} (k.first.find(\textcolor{stringliteral}{"cube"}) != std::string::npos)
 93                         \{
-94                             \textcolor{keyword}{auto} &tableTransf = tableTransforms[i];
-95                             \textcolor{keyword}{auto} &pos = tableTransf.getOrigin();
-96                             std::string tablename = \textcolor{stringliteral}{"table\_"} + std::to\_string(i);
-97                             removeCollisionObjectNames[i] = tablename;
-98                             moveit\_msgs::CollisionObject &collision = collisionObjects[i];
-99                             collision.operation = moveit\_msgs::CollisionObject::ADD;
-100                             collision.id = tablename;
-101                             collision.primitives.resize(1);
-102                             collision.primitives[0].type = collision.primitives[0].BOX;
-103                             collision.primitives[0].dimensions.resize(3);
-104                             collision.primitives[0].dimensions[0] = 1.2;
-105                             collision.primitives[0].dimensions[1] = 1.3;
-106                             collision.primitives[0].dimensions[2] = 0.001 + thickness;
-107 
-108                             \textcolor{comment}{/* Define the pose of the table. */}
-109                             collision.primitive\_poses.resize(1);
-110                             collision.primitive\_poses[0].position.x = pos[0];
-111                             collision.primitive\_poses[0].position.y = pos[1];
-112                             collision.primitive\_poses[0].position.z = 0.7 - thickness * 0.5;
-113                             collision.primitive\_poses[0].orientation.w = 1.0;
-114 
-115                             collision.header.frame\_id = tableTransf.frame\_id\_;
-116                             collision.header.stamp = tableTransf.stamp\_;
-117                         \}
-118 
-119                         \textcolor{comment}{//
+94                             hasCubeAttached = \textcolor{keyword}{true};
+95                             \textcolor{keywordflow}{break};
+96                         \}
+97                     \}
+98 
+99                     \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a64beecc85d97c62bc4f884f4601d9c6a}{tableCollision\_} && !hasCubeAttached)
+100                     \{
+101                         std::vector<moveit\_msgs::CollisionObject> collisionObjects(tableTransforms.size());
+102                         std::vector<std::string> removeCollisionObjectNames(tableTransforms.size());
+103 
+104                         \textcolor{keyword}{auto} thickness = 0.12;
+105                         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < tableTransforms.size(); i++)
+106                         \{
+107                             \textcolor{keyword}{auto} &tableTransf = tableTransforms[i];
+108                             \textcolor{keyword}{auto} &pos = tableTransf.getOrigin();
+109                             std::string tablename = \textcolor{stringliteral}{"table\_"} + std::to\_string(i);
+110                             removeCollisionObjectNames[i] = tablename;
+111                             moveit\_msgs::CollisionObject &collision = collisionObjects[i];
+112                             collision.operation = moveit\_msgs::CollisionObject::ADD;
+113                             collision.id = tablename;
+114                             collision.primitives.resize(1);
+115                             collision.primitives[0].type = collision.primitives[0].BOX;
+116                             collision.primitives[0].dimensions.resize(3);
+117                             collision.primitives[0].dimensions[0] = 1.05;
+118                             collision.primitives[0].dimensions[1] = 1.3;
+119                             collision.primitives[0].dimensions[2] = 0.001 + thickness + 
+      \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a6b6bafbddde1f72c81bf54aa75872151}{safeTableHeightOffsetForCubeCollisions};
+120 
+121                             \textcolor{comment}{/* Define the pose of the table. */}
+122                             collision.primitive\_poses.resize(1);
+123                             collision.primitive\_poses[0].position.x = pos[0];
+124                             collision.primitive\_poses[0].position.y = pos[1];
+125                             collision.primitive\_poses[0].position.z = 0.7 - thickness * 0.5;
+126                             collision.primitive\_poses[0].orientation.w = 1.0;
+127 
+128                             collision.header.frame\_id = tableTransf.frame\_id\_;
+129                             collision.header.stamp = tableTransf.stamp\_;
+130                         \}
+131 
+132                         \textcolor{comment}{//
       this->planningSceneInterface\_->removeCollisionObjects(removeCollisionObjectNames);}
-120                         this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a34bbc7a8b23a1b1c2d3d4d30bd2fe767}{planningSceneInterface\_}->addCollisionObjects(
+133                         \textcolor{comment}{//this->planningSceneInterface\_->addCollisionObjects(collisionObjects);}
+134                         this->\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a34bbc7a8b23a1b1c2d3d4d30bd2fe767}{planningSceneInterface\_}->applyCollisionObjects(
       collisionObjects);
-121                     \}
-122 
-123                     \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a5f043c05aa335a438459a55b51e6ace6}{cubeCollision\_} && !hasCubeAttached)
-124                     \{
-125                         \textcolor{comment}{//         for i, cube\_transf in enumerate(cube\_transforms):}
-126                         \textcolor{comment}{//             #self.planning\_scene.removeCollisionObject("cube\_" + str(i))}
-127                         \textcolor{comment}{//             pos = cube\_transf[0]}
-128                         \textcolor{comment}{//             self.planning\_scene.addCube(}
-129                         \textcolor{comment}{//                 "cube\_" + str(i), 0.06, pos[0],  pos[1],  pos[2])}
-130                         \textcolor{comment}{//             #self.cube\_collision = False}
-131                     \}
-132                 \}
-133             \}
+135                     \}
+136 
+137                     \textcolor{keywordflow}{if} (\hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a5f043c05aa335a438459a55b51e6ace6}{cubeCollision\_} && !hasCubeAttached)
+138                     \{
+139                         \textcolor{comment}{//         for i, cube\_transf in enumerate(cube\_transforms):}
+140                         \textcolor{comment}{//             #self.planning\_scene.removeCollisionObject("cube\_" + str(i))}
+141                         \textcolor{comment}{//             pos = cube\_transf[0]}
+142                         \textcolor{comment}{//             self.planning\_scene.addCube(}
+143                         \textcolor{comment}{//                 "cube\_" + str(i), 0.06, pos[0],  pos[1],  pos[2])}
+144                         \textcolor{comment}{//             #self.cube\_collision = False}
+145                     \}
+146                 \}
+147             \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -305,6 +344,34 @@ Here is the caller graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a7914ffd20518c866a8a1e11254589d12_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a7f5d68f2ff7dd0ade9756058e790efa1}\label{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a7f5d68f2ff7dd0ade9756058e790efa1}} 
+\index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception}!unset\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions@{unset\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions}}
+\index{unset\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions@{unset\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions}!sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception}}
+\subsubsection{\texorpdfstring{unset\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions()}{unsetSafeArmMotionToAvoidCubeCollisions()}}
+{\footnotesize\ttfamily void sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception\+::unset\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 52 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
+
+
+
+Referenced by sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::unset\+Safe\+Arm\+Motion\+To\+Avoid\+Cube\+Collisions().
+
+
+\begin{DoxyCode}
+53             \{
+54                  \hyperlink{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a6b6bafbddde1f72c81bf54aa75872151}{safeTableHeightOffsetForCubeCollisions} = 0;
+55             \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a7f5d68f2ff7dd0ade9756058e790efa1_icgraph}
 \end{center}
 \end{figure}
 
@@ -369,6 +436,16 @@ Definition at line 35 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
 
 
 Definition at line 28 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
+
+\mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a6b6bafbddde1f72c81bf54aa75872151}\label{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_a6b6bafbddde1f72c81bf54aa75872151}} 
+\index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception}!safe\+Table\+Height\+Offset\+For\+Cube\+Collisions@{safe\+Table\+Height\+Offset\+For\+Cube\+Collisions}}
+\index{safe\+Table\+Height\+Offset\+For\+Cube\+Collisions@{safe\+Table\+Height\+Offset\+For\+Cube\+Collisions}!sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception}}
+\subsubsection{\texorpdfstring{safe\+Table\+Height\+Offset\+For\+Cube\+Collisions}{safeTableHeightOffsetForCubeCollisions}}
+{\footnotesize\ttfamily double sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception\+::safe\+Table\+Height\+Offset\+For\+Cube\+Collisions = 0}
+
+
+
+Definition at line 44 of file cp\+\_\+simulated\+\_\+gazebo\+\_\+perception.\+h.
 
 \mbox{\Hypertarget{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_af27dcb3530d5f2e8919f5e617b46275c}\label{classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception_af27dcb3530d5f2e8919f5e617b46275c}} 
 \index{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception@{sm\+\_\+moveit\+\_\+4\+::cl\+\_\+perception\+\_\+system\+::\+Cp\+Simulated\+Gazebo\+Perception}!start\+Time@{start\+Time}}

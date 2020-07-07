@@ -38,7 +38,7 @@ class smacc\+::\+Orthogonal$<$ T\+Orthogonal $>$}
 
 
 
-Definition at line 129 of file smacc\+\_\+orthogonal\+\_\+impl.\+h.
+Definition at line 139 of file smacc\+\_\+orthogonal\+\_\+impl.\+h.
 
 
 
@@ -53,35 +53,35 @@ std\+::shared\+\_\+ptr$<$\hyperlink{classsmacc_1_1ClientHandler}{Client\+Handler
 
 
 
-Definition at line 133 of file smacc\+\_\+orthogonal\+\_\+impl.\+h.
+Definition at line 143 of file smacc\+\_\+orthogonal\+\_\+impl.\+h.
 
 
 \begin{DoxyCode}
-134     \{
-135         \textcolor{comment}{//static\_assert(std::is\_base\_of<ISmaccOrthogonal, TObjectTag>::value, "The object Tag must be the
+144     \{
+145         \textcolor{comment}{//static\_assert(std::is\_base\_of<ISmaccOrthogonal, TObjectTag>::value, "The object Tag must be the
        orthogonal type where the client was created");}
-136         \textcolor{comment}{// if (typeid(*this) != typeid(TObjectTag))}
-137         \textcolor{comment}{// \{}
-138         \textcolor{comment}{//     ROS\_ERROR\_STREAM("Error creating client. The object Tag must be the type of the orthogonal
+146         \textcolor{comment}{// if (typeid(*this) != typeid(TObjectTag))}
+147         \textcolor{comment}{// \{}
+148         \textcolor{comment}{//     ROS\_ERROR\_STREAM("Error creating client. The object Tag must be the type of the orthogonal
        where the client was created:" << demangleType(typeid(*this)) << ". The object creation was skipped and a
        nullptr was returned");}
-139         \textcolor{comment}{//     return nullptr;}
-140         \textcolor{comment}{// \}}
-141 
-142         ROS\_INFO(\textcolor{stringliteral}{"[%s] creates a client of type '%s' and object tag '%s'"},
-143                  \hyperlink{namespacesmacc_1_1introspection_a670e39ccea29952859df4e2d0e45077b}{demangleType}(\textcolor{keyword}{typeid}(*\textcolor{keyword}{this})).c\_str(),
-144                  demangledTypeName<TClient>().c\_str(),
-145                  demangledTypeName<TOrthogonal>().c\_str());
-146 
-147         \textcolor{keyword}{auto} client = std::make\_shared<ClientHandler<TOrthogonal, TClient>>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
-148         this->\hyperlink{classsmacc_1_1ISmaccOrthogonal_a586a3b5cabae55f2bf1434cd90c1bdfa}{assignClientToOrthogonal}(client.get());
-149 
-150         client->template configureEventSourceTypes<TOrthogonal, TClient>();
+149         \textcolor{comment}{//     return nullptr;}
+150         \textcolor{comment}{// \}}
 151 
-152         \textcolor{comment}{// it is stored the client (not the client handler)}
-153         \hyperlink{classsmacc_1_1ISmaccOrthogonal_a0f270e9c8c126198f6bce542ab4e04ba}{clients\_}.push\_back(client);
-154         \textcolor{keywordflow}{return} client;
-155     \}
+152         ROS\_INFO(\textcolor{stringliteral}{"[%s] creates a client of type '%s' and object tag '%s'"},
+153                     \hyperlink{namespacesmacc_1_1introspection_a670e39ccea29952859df4e2d0e45077b}{demangleType}(\textcolor{keyword}{typeid}(*\textcolor{keyword}{this})).c\_str(),
+154                     demangledTypeName<TClient>().c\_str(),
+155                     demangledTypeName<TOrthogonal>().c\_str()
+156                 );
+157 
+158         \textcolor{keyword}{auto} client = std::make\_shared<ClientHandler<TOrthogonal, TClient>>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
+159         this->\textcolor{keyword}{template} assignClientToOrthogonal<TOrthogonal, TClient>(client.get());
+160 
+161         \textcolor{comment}{// it is stored the client (not the client handler)}
+162         \hyperlink{classsmacc_1_1ISmaccOrthogonal_a0f270e9c8c126198f6bce542ab4e04ba}{clients\_}.push\_back(client);
+163 
+164         \textcolor{keywordflow}{return} client;
+165     \}
 \end{DoxyCode}
 
 

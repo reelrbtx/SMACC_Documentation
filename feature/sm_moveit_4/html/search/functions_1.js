@@ -7,7 +7,7 @@ var searchData=
   ['addsubstate',['AddSubState',['../structsmacc_1_1introspection_1_1AddSubState.html#a9556919fdfce601d7746c8f3efcf298b',1,'smacc::introspection::AddSubState']]],
   ['addtransition',['AddTransition',['../structsmacc_1_1introspection_1_1AddTransition.html#a7bec012404747e4ab3eb6ca32cf06ba7',1,'smacc::introspection::AddTransition']]],
   ['assemblesmstructuremessage',['assembleSMStructureMessage',['../classsmacc_1_1introspection_1_1SmaccStateMachineInfo.html#a6758065a8d1faaa7c3688cf0dffe9334',1,'smacc::introspection::SmaccStateMachineInfo']]],
-  ['assignclienttoorthogonal',['assignClientToOrthogonal',['../classsmacc_1_1ISmaccOrthogonal.html#a586a3b5cabae55f2bf1434cd90c1bdfa',1,'smacc::ISmaccOrthogonal']]],
+  ['assignclienttoorthogonal',['assignClientToOrthogonal',['../classsmacc_1_1ISmaccOrthogonal.html#ac72e57d14c4a5b9fa978f0b9b8c143be',1,'smacc::ISmaccOrthogonal']]],
   ['automatictransitiontag',['automaticTransitionTag',['../namespacesmacc_1_1introspection.html#ae031f62082f4e291e4933ee6f876b571',1,'smacc::introspection::automaticTransitionTag(std::string &amp;transition_name)'],['../namespacesmacc_1_1introspection.html#a0d72ea881eae4f1e0f71fe40b92f1f3e',1,'smacc::introspection::automaticTransitionTag(std::string &amp;transition_name)']]],
   ['automatictransitiontype',['automaticTransitionType',['../namespacesmacc_1_1introspection.html#a2afacf459b5e29bb9fe8880a2a2d2b72',1,'smacc::introspection::automaticTransitionType(std::string &amp;transition_type)'],['../namespacesmacc_1_1introspection.html#ad45bab559ffade7f9d81c6d90ab6d88c',1,'smacc::introspection::automaticTransitionType(std::string &amp;transition_type)']]]
 ];

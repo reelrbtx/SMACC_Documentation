@@ -80,43 +80,13 @@ References moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::on\+Motion\+Executi
 
 \begin{DoxyCode}
 25     \{
-26         ClMoveGroup *moveGroupClient;
-27         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveGroupClient);
-28         moveGroupClient->onMotionExecutionSuccedded(&
+26         ros::WallDuration(1).sleep();
+27         ClMoveGroup *moveGroupClient;
+28         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveGroupClient);
+29         moveGroupClient->onMotionExecutionSuccedded(&
       \hyperlink{classsmacc_1_1SmaccState_a49dcfc25824f7e083dd4b999c49ab2b6}{StNavigationPosture::throwSequenceFinishedEvent}, \textcolor{keyword}{this});
-29         this->getOrthogonal<OrNavigation>()->getClientBehavior<CbMoveJoints>()->scalingFactor\_ = 1;
-30 
-31         \textcolor{comment}{/*}
-32 \textcolor{comment}{        ros::WallDuration(3).sleep();}
-33 \textcolor{comment}{}
-34 \textcolor{comment}{        ClPerceptionSystem *perceptionSystem;}
-35 \textcolor{comment}{        this->requiresClient(perceptionSystem);}
-36 \textcolor{comment}{}
-37 \textcolor{comment}{        auto moveCartesianRelative = this->getOrthogonal<OrArm>()}
-38 \textcolor{comment}{                                         ->getClientBehavior<CbMoveCartesianRelative>();}
-39 \textcolor{comment}{}
-40 \textcolor{comment}{        std::vector<std::string> namesposes = moveGroupClient->moveGroupClientInterface.getNamedTargets();}
-41 \textcolor{comment}{}
-42 \textcolor{comment}{        ROS\_INFO("--- named poses: ");}
-43 \textcolor{comment}{        for (auto &posename : namesposes)}
-44 \textcolor{comment}{        \{}
-45 \textcolor{comment}{            ROS\_INFO\_STREAM(" - named pose: " << posename);}
-46 \textcolor{comment}{        \}}
-47 \textcolor{comment}{        ROS\_INFO("--- named poses");}
-48 \textcolor{comment}{}
-49 \textcolor{comment}{        moveCartesianRelative->offset\_.z = -0.35;}
-50 \textcolor{comment}{        auto currentTable = perceptionSystem->getCurrentTable();}
-51 \textcolor{comment}{}
-52 \textcolor{comment}{        if (currentTable == RobotProcessStatus::TABLE0)}
-53 \textcolor{comment}{        \{}
-54 \textcolor{comment}{            moveCartesianRelative->offset\_.x = -0.25;}
-55 \textcolor{comment}{        \}}
-56 \textcolor{comment}{        else if (currentTable == RobotProcessStatus::TABLE1)}
-57 \textcolor{comment}{        \{}
-58 \textcolor{comment}{            moveCartesianRelative->offset\_.x = 0.25;}
-59 \textcolor{comment}{        \}}
-60 \textcolor{comment}{    */}
-61     \}
+30         this->getOrthogonal<OrArm>()->getClientBehavior<CbMoveJoints>()->scalingFactor\_ = 1;
+31     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -139,7 +109,7 @@ Definition at line 19 of file st\+\_\+navigation\+\_\+posture.\+h.
 
 \begin{DoxyCode}
 20     \{
-21         configure\_orthogonal<OrNavigation, CbMoveKnownState>(\textcolor{stringliteral}{"sm\_moveit\_4"}, \textcolor{stringliteral}{"
+21         configure\_orthogonal<OrArm, CbMoveKnownState>(\textcolor{stringliteral}{"sm\_moveit\_4"}, \textcolor{stringliteral}{"
       config/manipulation/known\_states/nav\_posture.yaml"});
 22     \}
 \end{DoxyCode}
