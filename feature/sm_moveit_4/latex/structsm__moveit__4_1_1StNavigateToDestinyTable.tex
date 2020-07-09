@@ -71,12 +71,33 @@ Definition at line 16 of file st\+\_\+navigate\+\_\+to\+\_\+destiny\+\_\+table.\
 
 
 
-Definition at line 49 of file st\+\_\+navigate\+\_\+to\+\_\+destiny\+\_\+table.\+h.
+Definition at line 24 of file st\+\_\+navigate\+\_\+to\+\_\+destiny\+\_\+table.\+h.
 
 
 \begin{DoxyCode}
-50         \{
-51         \}
+25         \{
+26             \textcolor{keyword}{auto} navigateGlobalPosition = this->getOrthogonal<OrNavigation>()->
+      getClientBehavior<CbNavigateGlobalPosition>();
+27             ClPerceptionSystem *perceptionSystem;
+28             navigateGlobalPosition->requiresClient(perceptionSystem);
+29 
+30             geometry\_msgs::PoseStamped nextCubePose;
+31             perceptionSystem->decidePickCubePose(nextCubePose);
+32             \textcolor{keyword}{auto} targetTablePose = perceptionSystem->getTargetTablePose().pose;
+33 
+34             \textcolor{keywordflow}{if} (targetTablePose.position.x > 0)
+35             \{
+36                 targetTablePose.position.x -= 0.85;   
+37             \}
+38             \textcolor{keywordflow}{else}
+39             \{
+40                 targetTablePose.position.x += 0.85;
+41                 \textcolor{keyword}{auto} quat = tf::createQuaternionFromYaw(M\_PI);
+42                 tf::quaternionTFToMsg(quat, targetTablePose.orientation);
+43             \}
+44 
+45             navigateGlobalPosition->setGoal(targetTablePose);
+46         \}
 \end{DoxyCode}
 \mbox{\Hypertarget{structsm__moveit__4_1_1StNavigateToDestinyTable_a2a53aaa5ef99206441170e41e59462e9}\label{structsm__moveit__4_1_1StNavigateToDestinyTable_a2a53aaa5ef99206441170e41e59462e9}} 
 \index{sm\+\_\+moveit\+\_\+4\+::\+St\+Navigate\+To\+Destiny\+Table@{sm\+\_\+moveit\+\_\+4\+::\+St\+Navigate\+To\+Destiny\+Table}!static\+Configure@{static\+Configure}}
@@ -91,33 +112,8 @@ Definition at line 19 of file st\+\_\+navigate\+\_\+to\+\_\+destiny\+\_\+table.\
 
 \begin{DoxyCode}
 20         \{
-21             configure\_orthogonal\_runtime\_callback<OrNavigation, CbNavigateGlobalPosition>(
-22                 [](\textcolor{keyword}{auto} &navigateGlobalPosition) \{
-23                     ClPerceptionSystem *perceptionSystem;
-24                     navigateGlobalPosition.requiresClient(perceptionSystem);
-25 
-26                     geometry\_msgs::PoseStamped nextCubePose;
-27                     perceptionSystem->decidePickCubePose(nextCubePose);
-28                     \textcolor{keyword}{auto} targetTablePose = perceptionSystem->getTargetTablePose().pose;
-29 
-30                     \textcolor{keywordflow}{if} (targetTablePose.position.x > 0)
-31                     \{
-32                         targetTablePose.position.x -= 0.85;
-33                         
-34                     \}
-35                     \textcolor{keywordflow}{else}
-36                     \{
-37                         targetTablePose.position.x += 0.85;
-38                         \textcolor{keyword}{auto} quat = tf::createQuaternionFromYaw(M\_PI);
-39                         tf::quaternionTFToMsg(quat, targetTablePose.orientation);
-40                     \}
-41 
-42                     \textcolor{comment}{// align with the cube in the y axis}
-43                     \textcolor{comment}{// targetTablePose.position.y = nextCubePose.pose.position.y;}
-44 
-45                     navigateGlobalPosition.setGoal(targetTablePose);
-46                 \});
-47         \}
+21             configure\_orthogonal<OrNavigation, CbNavigateGlobalPosition>();
+22         \}
 \end{DoxyCode}
 
 

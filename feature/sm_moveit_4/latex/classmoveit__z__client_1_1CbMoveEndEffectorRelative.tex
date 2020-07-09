@@ -11,7 +11,7 @@ Inheritance diagram for moveit\+\_\+z\+\_\+client\+:\+:Cb\+Move\+End\+Effector\+
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=250pt]{classmoveit__z__client_1_1CbMoveEndEffectorRelative__inherit__graph}
+\includegraphics[height=550pt]{classmoveit__z__client_1_1CbMoveEndEffectorRelative__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -162,17 +162,20 @@ Referenced by on\+Entry().
 87         \}
 88         \textcolor{keywordflow}{else}
 89         \{
-90             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
-91             \hyperlink{classmoveit__z__client_1_1CbMoveEndEffectorRelative_a5f009b3baaaa47ad3be09d43bab33c07}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}(
+90             moveGroupInterface.setPoseTarget(referenceStartPose); \textcolor{comment}{// undo to avoid abort-repeat state
+       issues with this relative motion}
+91             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
+92             \hyperlink{classmoveit__z__client_1_1CbMoveEndEffectorRelative_a5f009b3baaaa47ad3be09d43bab33c07}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}(
       );
-92         \}
-93     \}
-94     \textcolor{keywordflow}{else}
-95     \{
-96         ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
-97         \hyperlink{classmoveit__z__client_1_1CbMoveEndEffectorRelative_a5f009b3baaaa47ad3be09d43bab33c07}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}();
-98     \}
-99 \}
+93         \}
+94     \}
+95     \textcolor{keywordflow}{else}
+96     \{
+97         moveGroupInterface.setPoseTarget(referenceStartPose); \textcolor{comment}{//undo since we did not executed the motion}
+98         ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
+99         \hyperlink{classmoveit__z__client_1_1CbMoveEndEffectorRelative_a5f009b3baaaa47ad3be09d43bab33c07}{movegroupClient\_}->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a42bede73264ae2d5dfe0117315042acb}{postEventMotionExecutionFailed}();
+100     \}
+101 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
