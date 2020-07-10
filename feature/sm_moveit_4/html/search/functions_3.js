@@ -76,6 +76,7 @@ var searchData=
   ['createcarrotgoal',['createCarrotGoal',['../classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner.html#a786337a838e58b38b724bc342cf76e10',1,'cl_move_base_z::backward_local_planner::BackwardLocalPlanner']]],
   ['createchildstate',['createChildState',['../classsmacc_1_1introspection_1_1SmaccStateInfo.html#a287664f0ac1c0380bad11ef6973cde8d',1,'smacc::introspection::SmaccStateInfo']]],
   ['createclient',['createClient',['../classsmacc_1_1Orthogonal.html#aea19bfe584fe9c9580784a24b4690eab',1,'smacc::Orthogonal']]],
+  ['createcollisionbox',['createCollisionBox',['../classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception.html#aae9d3b564d1442453dac71a2d9fe89fe',1,'sm_moveit_4::cl_perception_system::CpSimulatedGazeboPerception']]],
   ['createcomponent',['createComponent',['../classsmacc_1_1ClientHandler.html#a4a9adad4c37104586c9b595d9030bb3c',1,'smacc::ClientHandler::createComponent()'],['../classsmacc_1_1ISmaccClient.html#a5c1c8eb5e91a3b399662a52cb0ca86aa',1,'smacc::ISmaccClient::createComponent()']]],
   ['createdefaultbackwardpath',['createDefaultBackwardPath',['../classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner.html#a1b4d2eb717f9f63f2309def37c6ce297',1,'cl_move_base_z::backward_global_planner::BackwardGlobalPlanner']]],
   ['createeventcallback',['createEventCallback',['../classsmacc_1_1StateReactor.html#a68482e08f6449694a0bcda843b14b376',1,'smacc::StateReactor::createEventCallback(void(TClass::*callback)(T *), TClass *object)'],['../classsmacc_1_1StateReactor.html#ac6b3a604009e5a68123aed27e70cf2be',1,'smacc::StateReactor::createEventCallback(std::function&lt; void(T *)&gt; callback)']]],
@@ -87,5 +88,6 @@ var searchData=
   ['createsignalconnection',['createSignalConnection',['../classsmacc_1_1ISmaccStateMachine.html#adf0f42ade0c65cc471960fe2a7c42da2',1,'smacc::ISmaccStateMachine']]],
   ['createstate',['createState',['../classsmacc_1_1introspection_1_1SmaccStateMachineInfo.html#ad3eacdb32594e603fb36a8ab478d0ce7',1,'smacc::introspection::SmaccStateMachineInfo']]],
   ['createstatereactor',['createStateReactor',['../classsmacc_1_1ISmaccState.html#a5b071f3034e2a0416d87ff26332f598f',1,'smacc::ISmaccState::createStateReactor(TEvArgs... args)'],['../classsmacc_1_1ISmaccState.html#a92bba7b456f026467f23c3cd6ceb5985',1,'smacc::ISmaccState::createStateReactor(TEvArgs... args)']]],
+  ['createvirtualcollisionwalls',['createVirtualCollisionWalls',['../classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception.html#a07c208d7fdcd61338f941bf5620a09ec',1,'sm_moveit_4::cl_perception_system::CpSimulatedGazeboPerception']]],
   ['createvirtualfloorcollisionbox',['createVirtualFloorCollisionBox',['../classsm__moveit__4_1_1cl__perception__system_1_1CpSimulatedGazeboPerception.html#a668b93281f2ab325c790e20f452f3f8f',1,'sm_moveit_4::cl_perception_system::CpSimulatedGazeboPerception']]]
 ];
