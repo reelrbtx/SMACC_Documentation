@@ -41,6 +41,11 @@ void \hyperlink{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_ae2f50
 \item 
 static void \hyperlink{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_afb6abd382c1c9f35dd5f74967301cc48}{static\+Configure} ()
 \end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmoveit__z__client_1_1ClMoveGroup}{Cl\+Move\+Group} $\ast$ \hyperlink{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_a7ac8229ab37dba1b2eb43668e4adceea}{move\+Group\+\_\+}
+\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
@@ -73,20 +78,18 @@ Definition at line 17 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
 
 
 
-Definition at line 48 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
+Definition at line 53 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
 
 
 
-References smacc\+::\+I\+Smacc\+State\+::requires\+Client().
+References smacc\+::\+I\+Smacc\+Client\+::get\+Component().
 
 
 \begin{DoxyCode}
-49             \{
-50                 ClPerceptionSystem *perceptionSystem;
-51                 this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(perceptionSystem);
-52 
-53                 perceptionSystem->unsetSafeArmMotionToAvoidCubeCollisions();
-54             \}
+54             \{
+55                 \hyperlink{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_a7ac8229ab37dba1b2eb43668e4adceea}{moveGroup\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<CpConstraintTableWorkspaces>()->
+      unsetSafeArmMotionToAvoidCubeCollisions();
+56             \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -104,13 +107,48 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 44 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
+Definition at line 28 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
+
+
+
+References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), and smacc\+::\+I\+Smacc\+State\+::requires\+Client().
 
 
 \begin{DoxyCode}
-45             \{
-46             \}
+29             \{
+30                 ROS\_INFO(\textcolor{stringliteral}{"Pre grasp pose initialization."});
+31                 ros::WallDuration(1).sleep();
+32 
+33                 \textcolor{comment}{// --------------------------------------}
+34                 this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(\hyperlink{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_a7ac8229ab37dba1b2eb43668e4adceea}{moveGroup\_});
+35                 
+36                 ClPerceptionSystem *perceptionSystem;
+37                 this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(perceptionSystem);
+38 
+39                 \textcolor{keyword}{auto} cbMoveEndEffector = this->getOrthogonal<OrArm>()->getClientBehavior<CbMoveEndEffector>
+      ();
+40                 \textcolor{comment}{// --------------------------------------}
+41                 \hyperlink{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_a7ac8229ab37dba1b2eb43668e4adceea}{moveGroup\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<CpConstraintTableWorkspaces>()->
+      setSafeArmMotionToAvoidCubeCollisions();
+42 
+43                 geometry\_msgs::PoseStamped targetCubePose;
+44                 \textcolor{keywordflow}{if} (perceptionSystem->decidePickCubePose(targetCubePose))
+45                 \{
+46                     geometry\_msgs::PoseStamped pregraspPose = targetCubePose;
+47                     perceptionSystem->computePregraspPoseFromCubePose(pregraspPose);
+48 
+49                     cbMoveEndEffector->targetPose = pregraspPose;
+50                 \}
+51             \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_ae9ffdf77d89169b5f4fb2cb2fadd56fc_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_afb6abd382c1c9f35dd5f74967301cc48}\label{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_afb6abd382c1c9f35dd5f74967301cc48}} 
 \index{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose}!static\+Configure@{static\+Configure}}
 \index{static\+Configure@{static\+Configure}!sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose}}
@@ -119,33 +157,27 @@ Definition at line 44 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
 
 
 
-Definition at line 20 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
+Definition at line 23 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
 
 
 \begin{DoxyCode}
-21             \{
-22                 configure\_orthogonal\_runtime<OrArm, CbMoveEndEffector>(
-23                     [](\textcolor{keyword}{auto} &cbMoveEndEffector) \{
-24                         ROS\_INFO(\textcolor{stringliteral}{"Pre grasp pose initialization."});
-25                         ros::WallDuration(1).sleep();
-26 
-27                         ClPerceptionSystem *perceptionSystem;
-28                         cbMoveEndEffector.requiresClient(perceptionSystem);
-29 
-30                         geometry\_msgs::PoseStamped targetCubePose;
-31 
-32                         perceptionSystem->setSafeArmMotionToAvoidCubeCollisions();
-33 
-34                         \textcolor{keywordflow}{if} (perceptionSystem->decidePickCubePose(targetCubePose))
-35                         \{
-36                             geometry\_msgs::PoseStamped pregraspPose = targetCubePose;
-37                             perceptionSystem->computePregraspPoseFromCubePose(pregraspPose);
-38 
-39                             cbMoveEndEffector.targetPose = pregraspPose;
-40                         \}
-41                     \});
-42             \}
+24             \{
+25                 configure\_orthogonal<OrArm, CbMoveEndEffector>();
+26             \}
 \end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_a7ac8229ab37dba1b2eb43668e4adceea}\label{structsm__moveit__4_1_1pick__states_1_1StMovePregraspPose_a7ac8229ab37dba1b2eb43668e4adceea}} 
+\index{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose}!move\+Group\+\_\+@{move\+Group\+\_\+}}
+\index{move\+Group\+\_\+@{move\+Group\+\_\+}!sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose}}
+\subsubsection{\texorpdfstring{move\+Group\+\_\+}{moveGroup\_}}
+{\footnotesize\ttfamily \hyperlink{classmoveit__z__client_1_1ClMoveGroup}{Cl\+Move\+Group}$\ast$ sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Move\+Pregrasp\+Pose\+::move\+Group\+\_\+}
+
+
+
+Definition at line 20 of file st\+\_\+move\+\_\+pregrasp\+\_\+pose.\+h.
+
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

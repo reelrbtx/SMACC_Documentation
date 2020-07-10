@@ -46,7 +46,7 @@ var searchData=
   ['record_5fpath',['RECORD_PATH',['../namespacecl__move__base__z_1_1odom__tracker.html#ac46b05813b2791604f6cd0a39ace3ef8a023bc3adf68871ef7a0c616765ac80a7',1,'cl_move_base_z::odom_tracker']]],
   ['recordangulardistancethreshold_5f',['recordAngularDistanceThreshold_',['../classcl__move__base__z_1_1odom__tracker_1_1OdomTracker.html#a1274fe5334c109cd9c2339beb9411441',1,'cl_move_base_z::odom_tracker::OdomTracker']]],
   ['recordpointdistancethreshold_5f',['recordPointDistanceThreshold_',['../classcl__move__base__z_1_1odom__tracker_1_1OdomTracker.html#a3a1173716d527bd182d04656491e01dd',1,'cl_move_base_z::odom_tracker::OdomTracker']]],
-  ['referenceframe_5f',['referenceFrame_',['../classcl__move__base__z_1_1Pose.html#a6a7a593232b6edaf99103d48ad8da9d3',1,'cl_move_base_z::Pose']]],
+  ['referenceframe_5f',['referenceFrame_',['../classcl__move__base__z_1_1Pose.html#a6a7a593232b6edaf99103d48ad8da9d3',1,'cl_move_base_z::Pose::referenceFrame_()'],['../classsm__moveit__4_1_1cl__moveit__z__client_1_1CpConstraintLateralWorkspace.html#a69be978ebfd12ba0ada5d4ccf4333a06',1,'sm_moveit_4::cl_moveit_z_client::CpConstraintLateralWorkspace::referenceFrame_()']]],
   ['reflection_2ecpp',['reflection.cpp',['../reflection_8cpp.html',1,'']]],
   ['registerproxyfromdynamicreconfigureserver',['registerProxyFromDynamicReconfigureServer',['../classcl__move__base__z_1_1CostmapSwitch.html#a0d04ca7b655f850ba3107393f1c437cb',1,'cl_move_base_z::CostmapSwitch']]],
   ['reject',['REJECT',['../structsmacc_1_1default__transition__tags_1_1REJECT.html',1,'smacc::default_transition_tags']]],
