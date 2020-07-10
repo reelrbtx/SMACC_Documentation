@@ -81,75 +81,85 @@ References keyboard\+\_\+server\+\_\+node\+::key, and generate\+\_\+debs\+::pars
 
 \begin{DoxyCode}
 22 \{
-23   filepath = ros::package::getPath(pkg) +\textcolor{stringliteral}{"/"} + filepath;
+23   \textcolor{keyword}{auto} pkgpath = ros::package::getPath(pkg);
 24   std::map<std::string, double> jointStates;
 25 
-26   ROS\_INFO(\textcolor{stringliteral}{"Opening file with joint known state: %s"},  filepath.c\_str());
-27 
-28 
-29   \textcolor{keywordflow}{if}(std::experimental::filesystem::exists(filepath))
-30   \{
-31     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"known state file exists: "} << filepath);
-32   \}
-33   \textcolor{keywordflow}{else}
-34   \{
-35     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"known state file does not exists: "} << filepath);
-36   \}
+26   \textcolor{keywordflow}{if}(pkgpath == \textcolor{stringliteral}{""})
+27   \{
+28     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"[CbMoveKnownState] package not found for the known poses file: "} << pkg << std::endl 
+      << \textcolor{stringliteral}{" [IGNORING BEHAVIOR]"});
+29     \textcolor{keywordflow}{return} jointStates;
+30   \}
+31 
+32   filepath =  pkgpath +\textcolor{stringliteral}{"/"} + filepath;
+33   
+34 
+35   ROS\_INFO(\textcolor{stringliteral}{"[CbMoveKnownState] Opening file with joint known state: %s"},  filepath.c\_str());
+36 
 37 
-38   std::ifstream ifs(filepath.c\_str(), std::ifstream::in);
-39   \textcolor{keywordflow}{if} (ifs.good() == \textcolor{keyword}{false})
-40   \{
-41     ROS\_ERROR(\textcolor{stringliteral}{"Error opening file with joint known states: %s"},  filepath.c\_str());
-42     \textcolor{keywordflow}{throw} std::string(\textcolor{stringliteral}{"joint state files not found"});
-43   \}
-44 
-45   \textcolor{keywordflow}{try}
-46   \{
-47 \textcolor{preprocessor}{#ifdef HAVE\_NEW\_YAMLCPP}
-48     YAML::Node node = YAML::Load(ifs);
-49 \textcolor{preprocessor}{#else}
-50     YAML::Parser \hyperlink{namespacegenerate__debs_a4a9ae4bb85fc62d7973ea3d09ced6c26}{parser}(ifs);
-51     \hyperlink{namespacegenerate__debs_a4a9ae4bb85fc62d7973ea3d09ced6c26}{parser}.GetNextDocument(node);
-52 \textcolor{preprocessor}{#endif}
+38   \textcolor{keywordflow}{if}(std::experimental::filesystem::exists(filepath))
+39   \{
+40     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveKnownState] known state file exists: "} << filepath);
+41   \}
+42   \textcolor{keywordflow}{else}
+43   \{
+44     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"[CbMoveKnownState] known state file does not exists: "} << filepath);
+45   \}
+46 
+47   std::ifstream ifs(filepath.c\_str(), std::ifstream::in);
+48   \textcolor{keywordflow}{if} (ifs.good() == \textcolor{keyword}{false})
+49   \{
+50     ROS\_ERROR(\textcolor{stringliteral}{"[CbMoveKnownState] Error opening file with joint known states: %s"},  filepath.c\_str());
+51     \textcolor{keywordflow}{throw} std::string(\textcolor{stringliteral}{"joint state files not found"});
+52   \}
 53 
-54 \textcolor{preprocessor}{#ifdef HAVE\_NEW\_YAMLCPP}
-55     \textcolor{keyword}{const} YAML::Node &wp\_node\_tmp = node[\textcolor{stringliteral}{"joint\_states"}];
-56     \textcolor{keyword}{const} YAML::Node *wp\_node = wp\_node\_tmp ? &wp\_node\_tmp : NULL;
-57 \textcolor{preprocessor}{#else}
-58     \textcolor{keyword}{const} YAML::Node *wp\_node = node.FindValue(\textcolor{stringliteral}{"waypoints"});
-59 \textcolor{preprocessor}{#endif}
-60 
-61     \textcolor{keywordflow}{if} (wp\_node != NULL)
-62     \{
-63       \textcolor{keywordflow}{try}
-64       \{
-65         \textcolor{keywordflow}{for}(YAML::const\_iterator it=wp\_node->begin();it != wp\_node->end();++it) 
-66         \{
-67           std::string \hyperlink{namespacekeyboard__server__node_af0ebd8a9e1564ddc13a227c727602466}{key} = it->first.as<std::string>(); 
-68           \textcolor{keywordtype}{double} value = it->second.as<\textcolor{keywordtype}{double}>(); 
-69           ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{" joint - "} << key << \textcolor{stringliteral}{": "} << value);
-70           jointStates[\hyperlink{namespacekeyboard__server__node_af0ebd8a9e1564ddc13a227c727602466}{key}] = value;
-71         \}
-72 
-73         \textcolor{keywordflow}{return} jointStates;
-74       \}
-75       \textcolor{keywordflow}{catch}(std::exception& ex)
-76       \{
-77         ROS\_ERROR(\textcolor{stringliteral}{"trying to convert to map, failed, errormsg: %s"}, ex.what());
-78       \}
-79 
-80       ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Parsed "} << jointStates.size() << \textcolor{stringliteral}{" joint entries."});
-81     \}
-82     \textcolor{keywordflow}{else}
-83     \{
-84       ROS\_WARN\_STREAM(\textcolor{stringliteral}{"Couldn't find any jointStates in the provided yaml file."});
-85     \}
-86   \}
-87   \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} YAML::ParserException &ex)
-88   \{
-89     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Error loading the Waypoints YAML file. Incorrect syntax: "} << ex.what());
-90   \}
-91 \}
+54   \textcolor{keywordflow}{try}
+55   \{
+56 \textcolor{preprocessor}{#ifdef HAVE\_NEW\_YAMLCPP}
+57     YAML::Node node = YAML::Load(ifs);
+58 \textcolor{preprocessor}{#else}
+59     YAML::Parser \hyperlink{namespacegenerate__debs_a4a9ae4bb85fc62d7973ea3d09ced6c26}{parser}(ifs);
+60     \hyperlink{namespacegenerate__debs_a4a9ae4bb85fc62d7973ea3d09ced6c26}{parser}.GetNextDocument(node);
+61 \textcolor{preprocessor}{#endif}
+62 
+63 \textcolor{preprocessor}{#ifdef HAVE\_NEW\_YAMLCPP}
+64     \textcolor{keyword}{const} YAML::Node &wp\_node\_tmp = node[\textcolor{stringliteral}{"joint\_states"}];
+65     \textcolor{keyword}{const} YAML::Node *wp\_node = wp\_node\_tmp ? &wp\_node\_tmp : NULL;
+66 \textcolor{preprocessor}{#else}
+67     \textcolor{keyword}{const} YAML::Node *wp\_node = node.FindValue(\textcolor{stringliteral}{"waypoints"});
+68 \textcolor{preprocessor}{#endif}
+69 
+70     \textcolor{keywordflow}{if} (wp\_node != NULL)
+71     \{
+72       \textcolor{keywordflow}{try}
+73       \{
+74         \textcolor{keywordflow}{for}(YAML::const\_iterator it=wp\_node->begin();it != wp\_node->end();++it) 
+75         \{
+76           std::string \hyperlink{namespacekeyboard__server__node_af0ebd8a9e1564ddc13a227c727602466}{key} = it->first.as<std::string>(); 
+77           \textcolor{keywordtype}{double} value = it->second.as<\textcolor{keywordtype}{double}>(); 
+78           ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{" joint - "} << key << \textcolor{stringliteral}{": "} << value);
+79           jointStates[\hyperlink{namespacekeyboard__server__node_af0ebd8a9e1564ddc13a227c727602466}{key}] = value;
+80         \}
+81 
+82         \textcolor{keywordflow}{return} jointStates;
+83       \}
+84       \textcolor{keywordflow}{catch}(std::exception& ex)
+85       \{
+86         ROS\_ERROR(\textcolor{stringliteral}{"trying to convert to map, failed, errormsg: %s"}, ex.what());
+87       \}
+88 
+89       ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Parsed "} << jointStates.size() << \textcolor{stringliteral}{" joint entries."});
+90     \}
+91     \textcolor{keywordflow}{else}
+92     \{
+93       ROS\_WARN\_STREAM(\textcolor{stringliteral}{"Couldn't find any jointStates in the provided yaml file."});
+94     \}
+95   \}
+96   \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} YAML::ParserException &ex)
+97   \{
+98     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Error loading the Waypoints YAML file. Incorrect syntax: "} << ex.what());
+99   \}
+100 \}
 \end{DoxyCode}
 
 

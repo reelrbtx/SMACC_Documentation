@@ -33,6 +33,8 @@ typedef mpl\+::list$<$ Transition$<$ \hyperlink{structmoveit__z__client_1_1MoveG
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{structsm__moveit__4_1_1pick__states_1_1StGraspRetreat_a2d386f511e377a4b0eb8193cd24ddb84}{runtime\+Configure} ()
+\item 
+void \hyperlink{structsm__moveit__4_1_1pick__states_1_1StGraspRetreat_aba04f694c6c7c664a0c6a6e10c8ce0f1}{on\+Exit} ()
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -63,6 +65,37 @@ Definition at line 17 of file st\+\_\+grasp\+\_\+retreat.\+h.
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{structsm__moveit__4_1_1pick__states_1_1StGraspRetreat_aba04f694c6c7c664a0c6a6e10c8ce0f1}\label{structsm__moveit__4_1_1pick__states_1_1StGraspRetreat_aba04f694c6c7c664a0c6a6e10c8ce0f1}} 
+\index{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat}!on\+Exit@{on\+Exit}}
+\index{on\+Exit@{on\+Exit}!sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat}}
+\subsubsection{\texorpdfstring{on\+Exit()}{onExit()}}
+{\footnotesize\ttfamily void sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat\+::on\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 33 of file st\+\_\+grasp\+\_\+retreat.\+h.
+
+
+
+References smacc\+::\+I\+Smacc\+State\+::requires\+Client().
+
+
+\begin{DoxyCode}
+34     \{
+35         ClPerceptionSystem *perceptionSystem;
+36         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(perceptionSystem);
+37         
+38         perceptionSystem->setSafeArmMotionToAvoidCubeCollisions();
+39     \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__moveit__4_1_1pick__states_1_1StGraspRetreat_aba04f694c6c7c664a0c6a6e10c8ce0f1_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{structsm__moveit__4_1_1pick__states_1_1StGraspRetreat_a2d386f511e377a4b0eb8193cd24ddb84}\label{structsm__moveit__4_1_1pick__states_1_1StGraspRetreat_a2d386f511e377a4b0eb8193cd24ddb84}} 
 \index{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat}!runtime\+Configure@{runtime\+Configure}}
 \index{runtime\+Configure@{runtime\+Configure}!sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat}}
@@ -74,38 +107,14 @@ Definition at line 17 of file st\+\_\+grasp\+\_\+retreat.\+h.
 Definition at line 25 of file st\+\_\+grasp\+\_\+retreat.\+h.
 
 
-
-References smacc\+::\+I\+Smacc\+State\+::requires\+Client().
-
-
 \begin{DoxyCode}
 26     \{
-27         ClPerceptionSystem *perceptionSystem;
-28         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(perceptionSystem);
-29         \textcolor{keyword}{auto} currentTable = perceptionSystem->getCurrentTable();
-30 
-31         \textcolor{keyword}{auto} moveCartesianRelative = this->getOrthogonal<OrArm>()
-32                                          ->getClientBehavior<CbMoveCartesianRelative>();
-33 
-34         moveCartesianRelative->offset\_.z = 0.1;
-35         \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE0)
-36         \{
-37             moveCartesianRelative->offset\_.x = -0.1;
-38         \}
-39         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentTable == RobotProcessStatus::TABLE1)
-40         \{
-41             moveCartesianRelative->offset\_.x = 0.1;
-42         \}
-43     \}
+27         \textcolor{keyword}{auto} moveCartesianRelative = this->getOrthogonal<OrArm>()
+28                                          ->getClientBehavior<CbMoveCartesianRelative>();
+29 
+30         moveCartesianRelative->offset\_.z = 0.15;
+31     \}
 \end{DoxyCode}
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{structsm__moveit__4_1_1pick__states_1_1StGraspRetreat_a2d386f511e377a4b0eb8193cd24ddb84_cgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{structsm__moveit__4_1_1pick__states_1_1StGraspRetreat_a678250d9b3296956f285a2bc27af6641}\label{structsm__moveit__4_1_1pick__states_1_1StGraspRetreat_a678250d9b3296956f285a2bc27af6641}} 
 \index{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat}!static\+Configure@{static\+Configure}}
 \index{static\+Configure@{static\+Configure}!sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat@{sm\+\_\+moveit\+\_\+4\+::pick\+\_\+states\+::\+St\+Grasp\+Retreat}}
