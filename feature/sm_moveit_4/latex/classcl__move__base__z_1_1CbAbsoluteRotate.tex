@@ -221,24 +221,21 @@ References absolute\+Goal\+Angle\+Degree, smacc\+::\+I\+Smacc\+Client\+::get\+Co
 105     goal.target\_pose.pose.position = currentPoseMsg.position;
 106     goal.target\_pose.pose.orientation = tf::createQuaternionMsgFromYaw(targetAngle);
 107 
-108     geometry\_msgs::PoseStamped stampedCurrentPoseMsg;
-109     stampedCurrentPoseMsg.header.frame\_id = referenceFrame;
-110     stampedCurrentPoseMsg.header.stamp = ros::Time::now();
-111     stampedCurrentPoseMsg.pose = currentPoseMsg;
-112 
-113     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_});
-114     \textcolor{keyword}{auto} odomTracker\_ = \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<odom\_tracker::OdomTracker>
+108     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_});
+109     \textcolor{keyword}{auto} odomTracker\_ = \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<odom\_tracker::OdomTracker>
       ();
-115     odomTracker\_->pushPath();
-116 
-117     odomTracker\_->setStartPoint(stampedCurrentPoseMsg);
-118     odomTracker\_->setWorkingMode(\hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a023bc3adf68871ef7a0c616765ac80a7}{odom\_tracker::WorkingMode::RECORD\_PATH}
+110     \textcolor{keywordflow}{if} (odomTracker\_!=\textcolor{keyword}{nullptr})
+111     \{
+112         odomTracker\_->pushPath();
+113         odomTracker\_->setStartPoint(p->toPoseStampedMsg());
+114         odomTracker\_->setWorkingMode(\hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a023bc3adf68871ef7a0c616765ac80a7}{odom\_tracker::WorkingMode::RECORD\_PATH}
       );
-119 
-120     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbAbsoluteRotate] current pose: "} << currentPoseMsg);
-121     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbAbsoluteRotate] goal pose: "} << goal.target\_pose.pose);
-122     \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
-123 \}
+115     \}
+116 
+117     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbAbsoluteRotate] current pose: "} << currentPoseMsg);
+118     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbAbsoluteRotate] goal pose: "} << goal.target\_pose.pose);
+119     \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
+120 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak

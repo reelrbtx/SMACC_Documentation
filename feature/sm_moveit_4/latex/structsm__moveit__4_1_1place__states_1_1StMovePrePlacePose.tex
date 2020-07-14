@@ -73,20 +73,21 @@ Definition at line 16 of file st\+\_\+move\+\_\+preplace\+\_\+pose.\+h.
 
 
 
-Definition at line 42 of file st\+\_\+move\+\_\+preplace\+\_\+pose.\+h.
+Definition at line 45 of file st\+\_\+move\+\_\+preplace\+\_\+pose.\+h.
 
 
 
-References smacc\+::\+I\+Smacc\+State\+::requires\+Client().
+References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), and smacc\+::\+I\+Smacc\+State\+::requires\+Client().
 
 
 \begin{DoxyCode}
-43             \{
-44                 ClPerceptionSystem *perceptionSystem;
-45                 this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(perceptionSystem);
-46 
-47                 perceptionSystem->unsetSafeArmMotionToAvoidCubeCollisions();
-48             \}
+46             \{
+47                 ClMoveGroup *moveGroup;
+48                 this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveGroup);
+49 
+50                 moveGroup->getComponent<CpConstraintTableWorkspaces>()->
+      unsetSafeArmMotionToAvoidCubeCollisions();
+51             \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -108,26 +109,30 @@ Definition at line 24 of file st\+\_\+move\+\_\+preplace\+\_\+pose.\+h.
 
 
 
-References smacc\+::\+I\+Smacc\+State\+::requires\+Client().
+References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), and smacc\+::\+I\+Smacc\+State\+::requires\+Client().
 
 
 \begin{DoxyCode}
 25             \{
 26                 ClPerceptionSystem *perceptionSystem;
 27                 this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(perceptionSystem);
-28 
-29                 perceptionSystem->setSafeArmMotionToAvoidCubeCollisions();
-30 
-31                 geometry\_msgs::PoseStamped placingPose;
-32 
-33                 \textcolor{keywordflow}{if} (perceptionSystem->decidePrePlacePose(placingPose))
-34                 \{
-35                     \textcolor{keyword}{auto} moveAbsolute = this->getOrthogonal<OrArm>()
-36                                             ->getClientBehavior<CbMoveEndEffector>();
-37 
-38                     moveAbsolute->targetPose = placingPose;
-39                 \}
-40             \}
+28                 
+29 
+30                 ClMoveGroup* moveGroup;
+31                 this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveGroup);
+32                 moveGroup->getComponent<CpConstraintTableWorkspaces>()->
+      setSafeArmMotionToAvoidCubeCollisions();
+33 
+34                 geometry\_msgs::PoseStamped placingPose;
+35 
+36                 \textcolor{keywordflow}{if} (perceptionSystem->decidePrePlacePose(placingPose))
+37                 \{
+38                     \textcolor{keyword}{auto} moveAbsolute = this->getOrthogonal<OrArm>()
+39                                             ->getClientBehavior<CbMoveEndEffector>();
+40 
+41                     moveAbsolute->targetPose = placingPose;
+42                 \}
+43             \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
