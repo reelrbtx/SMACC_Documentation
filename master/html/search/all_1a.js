@@ -28,5 +28,6 @@ var searchData=
   ['_7esmaccstate',['~SmaccState',['../classsmacc_1_1SmaccState.html#a41b2515faf76648c6d69fe09108d2691',1,'smacc::SmaccState']]],
   ['_7esmaccstatemachinebase',['~SmaccStateMachineBase',['../structsmacc_1_1SmaccStateMachineBase.html#af08edc30fb749631b5459eb7438129ec',1,'smacc::SmaccStateMachineBase']]],
   ['_7esmaccsubscriberclient',['~SmaccSubscriberClient',['../classsmacc_1_1client__bases_1_1SmaccSubscriberClient.html#a91b9206c97b4acc76d4202639d24a53b',1,'smacc::client_bases::SmaccSubscriberClient']]],
-  ['_7esrsr_5fconditional',['~Srsr_conditional',['../classsmacc_1_1state__reactors_1_1Srsr__conditional.html#a711473830935c7c4fb1d0939e41fb2cb',1,'smacc::state_reactors::Srsr_conditional']]]
+  ['_7esrsr_5fconditional',['~Srsr_conditional',['../classsmacc_1_1state__reactors_1_1Srsr__conditional.html#a711473830935c7c4fb1d0939e41fb2cb',1,'smacc::state_reactors::Srsr_conditional']]],
+  ['_7eundopathglobalplanner',['~UndoPathGlobalPlanner',['../classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner.html#aae5dcc1ca67cffca6b96fc3d267ba448',1,'cl_move_base_z::undo_path_global_planner::UndoPathGlobalPlanner']]]
 ];

@@ -145,35 +145,32 @@ References backward\+Distance, cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracke
 45 
 46         tf::Transform currentPose;
 47         tf::poseMsgToTF(currentPoseMsg, currentPose);
-48 
-49         tf::Transform forwardDeltaTransform;
-50         forwardDeltaTransform.setIdentity();
-51         forwardDeltaTransform.setOrigin(tf::Vector3(-dist, 0, 0));
-52 
-53         tf::Transform targetPose = currentPose * forwardDeltaTransform;
-54 
-55         ClMoveBaseZ::Goal goal;
-56         goal.target\_pose.header.frame\_id = referenceFrame;
-57         goal.target\_pose.header.stamp = ros::Time::now();
-58         tf::poseTFToMsg(targetPose, goal.target\_pose.pose);
-59 
-60         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbNavigateBackwards] TARGET POSE BACKWARDS: "} << goal.target\_pose);
-61         ros::Duration(5).sleep();
-62 
-63         \hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_} = \hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a943c1a790eac9266adf11fbdc078f03a}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
-64 
-65         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_})
-66         \{
-67             this->\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a93a14e15e3e623f530e056f403bf7644}{clearPath}();
-68             this->\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a9f4989c6353022c2ec3b0546c09bf3bc}{setStartPoint}(currentPoseMsg);
-69             this->\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::RECORD\_PATH);
-70         \}
-71 
-72         \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a943c1a790eac9266adf11fbdc078f03a}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
-73         plannerSwitcher->setBackwardPlanner();
-74 
-75         \hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a943c1a790eac9266adf11fbdc078f03a}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
-76     \}
+48         tf::Transform forwardDeltaTransform;
+49         forwardDeltaTransform.setIdentity();
+50         forwardDeltaTransform.setOrigin(tf::Vector3(-dist, 0, 0));
+51         tf::Transform targetPose = currentPose * forwardDeltaTransform;
+52         ClMoveBaseZ::Goal goal;
+53         goal.target\_pose.header.frame\_id = referenceFrame;
+54         goal.target\_pose.header.stamp = ros::Time::now();
+55         tf::poseTFToMsg(targetPose, goal.target\_pose.pose);
+56         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbNavigateBackwards] TARGET POSE BACKWARDS: "} << goal.target\_pose);
+57 
+58         \hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_} = \hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a943c1a790eac9266adf11fbdc078f03a}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
+59         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_}!=\textcolor{keyword}{nullptr})
+60         \{
+61             this->\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a93a14e15e3e623f530e056f403bf7644}{clearPath}();
+62             this->\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a9f4989c6353022c2ec3b0546c09bf3bc}{setStartPoint}(currentPoseMsg);
+63             this->\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::RECORD\_PATH);
+64         \}
+65 
+66         \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a943c1a790eac9266adf11fbdc078f03a}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
+67         plannerSwitcher->setBackwardPlanner();
+68         \textcolor{comment}{// this wait might be needed to let the backward planner receive the last forward message from the
+       odom tracker}
+69         ros::Duration(0.5).sleep();
+70 
+71         \hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a943c1a790eac9266adf11fbdc078f03a}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
+72     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -195,7 +192,7 @@ Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ac0cd72d42bd0042
 
 
 
-Definition at line 78 of file cb\+\_\+navigate\+\_\+backward.\+cpp.
+Definition at line 74 of file cb\+\_\+navigate\+\_\+backward.\+cpp.
 
 
 
@@ -203,12 +200,12 @@ References odom\+Tracker\+\_\+, and cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+t
 
 
 \begin{DoxyCode}
-79     \{
-80         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_})
-81         \{
-82             this->\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::IDLE);
-83         \}
-84     \}
+75     \{
+76         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_})
+77         \{
+78             this->\hyperlink{classcl__move__base__z_1_1CbNavigateBackwards_a75a8ae7aef6c72e96f4037c4941b0341}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::IDLE);
+79         \}
+80     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak

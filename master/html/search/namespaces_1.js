@@ -12,5 +12,6 @@ var searchData=
   ['forward_5fglobal_5fplanner',['forward_global_planner',['../namespacecl__move__base__z_1_1forward__global__planner.html',1,'cl_move_base_z']]],
   ['forward_5flocal_5fplanner',['forward_local_planner',['../namespacecl__move__base__z_1_1forward__local__planner.html',1,'cl_move_base_z']]],
   ['odom_5ftracker',['odom_tracker',['../namespacecl__move__base__z_1_1odom__tracker.html',1,'cl_move_base_z']]],
-  ['pure_5fspinning_5flocal_5fplanner',['pure_spinning_local_planner',['../namespacecl__move__base__z_1_1pure__spinning__local__planner.html',1,'cl_move_base_z']]]
+  ['pure_5fspinning_5flocal_5fplanner',['pure_spinning_local_planner',['../namespacecl__move__base__z_1_1pure__spinning__local__planner.html',1,'cl_move_base_z']]],
+  ['undo_5fpath_5fglobal_5fplanner',['undo_path_global_planner',['../namespacecl__move__base__z_1_1undo__path__global__planner.html',1,'cl_move_base_z']]]
 ];
