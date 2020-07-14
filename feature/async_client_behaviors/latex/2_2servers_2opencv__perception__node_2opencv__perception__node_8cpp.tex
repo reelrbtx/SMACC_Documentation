@@ -1,0 +1,477 @@
+\hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+opencv\+\_\+2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.cpp File Reference}
+\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+opencv\+\_\+2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+opencv\+\_\+2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+{\ttfamily \#include $<$cv\+\_\+bridge/cv\+\_\+bridge.\+h$>$}\newline
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$sensor\+\_\+msgs/\+Image.\+h$>$}\newline
+{\ttfamily \#include $<$std\+\_\+msgs/\+Int32.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$opencv/cv.\+hpp$>$}\newline
+{\ttfamily \#include $<$opencv2/features2d.\+hpp$>$}\newline
+Include dependency graph for opencv\+\_\+perception\+\_\+node.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_aa483d0ec97a846bd4bfa13d793f5c1e1}{segment\+Color} (const cv\+::\+Mat \&input\+R\+GB, int hue\+Mean, int hue\+Window, cv\+::\+Mat \&out)
+\item 
+int \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{test\+Image} (cv\+::\+Mat \&input, cv\+::\+Mat \&debug\+Image, std\+::string color\+Name, int hue\+Mean, int hue\+Window)
+\item 
+int \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9bf2df48cb6b85ffe7173b65640b69e3}{test\+Red} (cv\+::\+Mat \&input, cv\+::\+Mat \&debug\+Image)
+\item 
+int \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a1fa01e06b7bc85d9a3f2f5c29829978d}{test\+Blue} (cv\+::\+Mat \&input, cv\+::\+Mat \&debug\+Image)
+\item 
+int \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a63b8f2427ed7ea7fd23e6db392dd4838}{test\+Green} (cv\+::\+Mat \&input, cv\+::\+Mat \&debug\+Image)
+\item 
+int \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a14524e094ba2e4413fffc9d44b507332}{test\+Red} (std\+::string path, cv\+::\+Mat \&debug\+Image)
+\item 
+int \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_aaa7922f0a8fa1080e4df5cbc44df343c}{test\+Blue} (std\+::string path, cv\+::\+Mat \&debug\+Image)
+\item 
+int \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a3c639b5feb1e6d3fc83e493573bc0e77}{test\+Green} (std\+::string path, cv\+::\+Mat \&debug\+Image)
+\item 
+void \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_ac5c54df7ed3b930268c8d7752c101725}{update} ()
+\item 
+void \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback} (const sensor\+\_\+msgs\+::\+Image \&img)
+\item 
+int \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+ros\+::\+Publisher \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9c3047923cbbebb0fbfd7f1ff9d13fe9}{detection\+Pub}
+\item 
+ros\+::\+Publisher \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a521668875556ae8845c9246c2c0ac096}{debug\+Image\+Pub}
+\item 
+ros\+::\+Subscriber \hyperlink{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_ae403eef1a94a795b5eb6de44f6e36b06}{image\+Sub}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!callback@{callback}}
+\index{callback@{callback}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily void callback (\begin{DoxyParamCaption}\item[{const sensor\+\_\+msgs\+::\+Image \&}]{img }\end{DoxyParamCaption})}
+
+
+
+Definition at line 104 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+
+
+References debug\+Image\+Pub, detection\+Pub, test\+Blue(), test\+Green(), and test\+Red().
+
+
+\begin{DoxyCode}
+105 \{
+106   cv\_bridge::CvImagePtr cv\_image = cv\_bridge::toCvCopy(img, \textcolor{stringliteral}{"rgb8"});
+107   
+108   cv::Mat image = cv\_image->image;
+109   cv\_bridge::CvImage debugImageBridge;
+110   debugImageBridge.encoding = \textcolor{stringliteral}{"rgb8"};
+111   debugImageBridge.image = image.clone();
+112 
+113   \textcolor{keywordtype}{int} detectedColor = 0;
+114   \textcolor{keywordflow}{if} (\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9bf2df48cb6b85ffe7173b65640b69e3}{testRed}(image, debugImageBridge.image) > 0)
+115   \{
+116     detectedColor = 1;
+117   \}
+118   
+119   \textcolor{keywordflow}{if} (\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a63b8f2427ed7ea7fd23e6db392dd4838}{testGreen}(image, debugImageBridge.image) > 0)
+120   \{
+121     detectedColor = 2;
+122   \}
+123   
+124   \textcolor{keywordflow}{if} (\hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a1fa01e06b7bc85d9a3f2f5c29829978d}{testBlue}(image, debugImageBridge.image) > 0)
+125   \{
+126     detectedColor = 3;
+127   \}
+128 
+129   std\_msgs::Int32 detectedColorMsg;
+130   detectedColorMsg.data = detectedColor;
+131   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9c3047923cbbebb0fbfd7f1ff9d13fe9}{detectionPub}.publish(detectedColorMsg);
+132 
+133   debugImageBridge.header = img.header;
+134   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a521668875556ae8845c9246c2c0ac096}{debugImagePub}.publish(debugImageBridge.toImageMsg());
+135 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!main@{main}}
+\index{main@{main}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 137 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+
+
+References callback(), debug\+Image\+Pub, detection\+Pub, image\+Sub, fake\+\_\+cube\+\_\+perception\+\_\+node\+::r, and update().
+
+
+\begin{DoxyCode}
+138 \{
+139   ros::init(argc, argv, \textcolor{stringliteral}{"blob\_detector\_node"});
+140   ros::NodeHandle nh;
+141 
+142   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9c3047923cbbebb0fbfd7f1ff9d13fe9}{detectionPub} = nh.advertise<std\_msgs::Int32>(\textcolor{stringliteral}{"detected\_color"}, 1);
+143   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ae403eef1a94a795b5eb6de44f6e36b06}{imageSub} = nh.subscribe(\textcolor{stringliteral}{"/image\_raw"}, 1, \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback});
+144   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_a521668875556ae8845c9246c2c0ac096}{debugImagePub} = nh.advertise<sensor\_msgs::Image>(\textcolor{stringliteral}{"/opencv\_debug\_image"}, 1);
+145 
+146   ros::Rate \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}(10);
+147 
+148   \textcolor{keywordflow}{while} (ros::ok())
+149   \{
+150     \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ac5c54df7ed3b930268c8d7752c101725}{update}();
+151     ros::spinOnce();
+152     \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
+153   \}
+154 
+155   \textcolor{comment}{/*}
+156 \textcolor{comment}{  testRed("../../red1.png");}
+157 \textcolor{comment}{  testRed("../../green1.png");}
+158 \textcolor{comment}{  testRed("../../blue1.png");}
+159 \textcolor{comment}{  testRed("../../red2.png");}
+160 \textcolor{comment}{}
+161 \textcolor{comment}{  testGreen("../../red1.png");}
+162 \textcolor{comment}{  testGreen("../../green1.png");}
+163 \textcolor{comment}{  testGreen("../../blue1.png");}
+164 \textcolor{comment}{  testGreen("../../red2.png");}
+165 \textcolor{comment}{}
+166 \textcolor{comment}{  testBlue("../../red1.png");}
+167 \textcolor{comment}{  testBlue("../../green1.png");}
+168 \textcolor{comment}{  testBlue("../../blue1.png");}
+169 \textcolor{comment}{  testBlue("../../red2.png");}
+170 \textcolor{comment}{  */}
+171 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_aa483d0ec97a846bd4bfa13d793f5c1e1}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_aa483d0ec97a846bd4bfa13d793f5c1e1}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!segment\+Color@{segment\+Color}}
+\index{segment\+Color@{segment\+Color}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{segment\+Color()}{segmentColor()}}
+{\footnotesize\ttfamily void segment\+Color (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{input\+R\+GB,  }\item[{int}]{hue\+Mean,  }\item[{int}]{hue\+Window,  }\item[{cv\+::\+Mat \&}]{out }\end{DoxyParamCaption})}
+
+
+
+Definition at line 13 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+
+\begin{DoxyCode}
+14 \{
+15   cv::Mat hsvInput;
+16   cv::cvtColor(inputRGB, hsvInput, cv::COLOR\_BGR2HSV);
+17   cv::inRange(hsvInput, cv::Scalar(hueMean - hueWindow, 20, 20), cv::Scalar(hueMean + hueWindow, 255, 255),
+       out);
+18   cv::threshold(out, out, 100, 255, cv::THRESH\_BINARY);
+19 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a1fa01e06b7bc85d9a3f2f5c29829978d}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a1fa01e06b7bc85d9a3f2f5c29829978d}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!test\+Blue@{test\+Blue}}
+\index{test\+Blue@{test\+Blue}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{test\+Blue()}{testBlue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int test\+Blue (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{input,  }\item[{cv\+::\+Mat \&}]{debug\+Image }\end{DoxyParamCaption})}
+
+
+
+Definition at line 72 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+
+
+References test\+Image().
+
+
+\begin{DoxyCode}
+73 \{
+74   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"blue"}, 10, 10);
+75 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a1fa01e06b7bc85d9a3f2f5c29829978d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_aaa7922f0a8fa1080e4df5cbc44df343c}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_aaa7922f0a8fa1080e4df5cbc44df343c}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!test\+Blue@{test\+Blue}}
+\index{test\+Blue@{test\+Blue}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{test\+Blue()}{testBlue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int test\+Blue (\begin{DoxyParamCaption}\item[{std\+::string}]{path,  }\item[{cv\+::\+Mat \&}]{debug\+Image }\end{DoxyParamCaption})}
+
+
+
+Definition at line 88 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+
+
+References test\+Image().
+
+
+\begin{DoxyCode}
+89 \{
+90   cv::Mat input = cv::imread(path);
+91   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"blue"}, 10, 10);
+92 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_aaa7922f0a8fa1080e4df5cbc44df343c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a63b8f2427ed7ea7fd23e6db392dd4838}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a63b8f2427ed7ea7fd23e6db392dd4838}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!test\+Green@{test\+Green}}
+\index{test\+Green@{test\+Green}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{test\+Green()}{testGreen()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int test\+Green (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{input,  }\item[{cv\+::\+Mat \&}]{debug\+Image }\end{DoxyParamCaption})}
+
+
+
+Definition at line 77 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+
+
+References test\+Image().
+
+
+\begin{DoxyCode}
+78 \{
+79   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"green"}, 50, 10);
+80 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a63b8f2427ed7ea7fd23e6db392dd4838_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a3c639b5feb1e6d3fc83e493573bc0e77}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a3c639b5feb1e6d3fc83e493573bc0e77}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!test\+Green@{test\+Green}}
+\index{test\+Green@{test\+Green}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{test\+Green()}{testGreen()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int test\+Green (\begin{DoxyParamCaption}\item[{std\+::string}]{path,  }\item[{cv\+::\+Mat \&}]{debug\+Image }\end{DoxyParamCaption})}
+
+
+
+Definition at line 94 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+
+
+References test\+Image().
+
+
+\begin{DoxyCode}
+95 \{
+96   cv::Mat input = cv::imread(path);
+97   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"green"}, 50, 10);
+98 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a3c639b5feb1e6d3fc83e493573bc0e77_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!test\+Image@{test\+Image}}
+\index{test\+Image@{test\+Image}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{test\+Image()}{testImage()}}
+{\footnotesize\ttfamily int test\+Image (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{input,  }\item[{cv\+::\+Mat \&}]{debug\+Image,  }\item[{std\+::string}]{color\+Name,  }\item[{int}]{hue\+Mean,  }\item[{int}]{hue\+Window }\end{DoxyParamCaption})}
+
+
+
+Definition at line 21 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+
+
+References fake\+\_\+cube\+\_\+perception\+\_\+node\+::r, and segment\+Color().
+
+
+\begin{DoxyCode}
+22 \{
+23   cv::Mat segmented;
+24 
+25   \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_aa483d0ec97a846bd4bfa13d793f5c1e1}{segmentColor}(input, hueMean, hueWindow, segmented);
+26 
+27   cv::SimpleBlobDetector::Params params;
+28   \textcolor{comment}{// params.filterByArea= true;}
+29   \textcolor{comment}{// params.minArea = 10;}
+30   params.filterByArea = \textcolor{keyword}{true};
+31   params.minArea = 100;
+32   params.maxArea = 100000;
+33   params.filterByColor = \textcolor{keyword}{true};
+34   params.blobColor = 255;
+35 
+36   \textcolor{keyword}{auto} blobDetector = cv::SimpleBlobDetector::create(params);
+37   std::vector<cv::KeyPoint> blobs;
+38   blobDetector->detect(segmented, blobs);
+39 
+40   std::cout << \textcolor{stringliteral}{"-------"} << std::endl;
+41   \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}& b : blobs)
+42   \{
+43     std::cout << \textcolor{stringliteral}{"blob "} << colorName << \textcolor{stringliteral}{" detected: "} << b.size << std::endl;
+44   \}
+45 
+46   \textcolor{keywordflow}{if}(!blobs.empty())
+47   \{ 
+48     \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}& b: blobs)
+49     \{
+50       cv::Rect \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r};
+51       \textcolor{keywordtype}{float} diameter = b.size;
+52       \textcolor{keyword}{auto} radius = diameter*0.5;
+53       r.x = b.pt.x - radius;
+54       r.y = b.pt.y - radius;
+55       r.width = diameter;
+56       r.height = diameter;
+57       cv::rectangle(debugImage,r, cv::Scalar(255,0,0),1 );
+58     \}
+59   \}
+60 
+61   \textcolor{comment}{// cv::imshow(colorName + " filter - "+ path, segmented);}
+62   \textcolor{comment}{// cv::waitKey();}
+63 
+64   \textcolor{keywordflow}{return} blobs.size();
+65 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9bf2df48cb6b85ffe7173b65640b69e3}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9bf2df48cb6b85ffe7173b65640b69e3}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!test\+Red@{test\+Red}}
+\index{test\+Red@{test\+Red}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{test\+Red()}{testRed()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int test\+Red (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{input,  }\item[{cv\+::\+Mat \&}]{debug\+Image }\end{DoxyParamCaption})}
+
+
+
+Definition at line 67 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+
+
+References test\+Image().
+
+
+\begin{DoxyCode}
+68 \{
+69   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"red"}, 130, 20);
+70 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9bf2df48cb6b85ffe7173b65640b69e3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a14524e094ba2e4413fffc9d44b507332}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a14524e094ba2e4413fffc9d44b507332}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!test\+Red@{test\+Red}}
+\index{test\+Red@{test\+Red}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{test\+Red()}{testRed()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int test\+Red (\begin{DoxyParamCaption}\item[{std\+::string}]{path,  }\item[{cv\+::\+Mat \&}]{debug\+Image }\end{DoxyParamCaption})}
+
+
+
+Definition at line 82 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+
+
+References test\+Image().
+
+
+\begin{DoxyCode}
+83 \{
+84   cv::Mat input = cv::imread(path);
+85   \textcolor{keywordflow}{return} \hyperlink{servers_2opencv__perception__node_2opencv__perception__node_8cpp_ad246f945adbcf477432e6857f1062e52}{testImage}(input, debugImage, \textcolor{stringliteral}{"red"}, 130, 20);
+86 \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a14524e094ba2e4413fffc9d44b507332_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_ac5c54df7ed3b930268c8d7752c101725}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_ac5c54df7ed3b930268c8d7752c101725}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!update@{update}}
+\index{update@{update}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 100 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+
+\begin{DoxyCode}
+101 \{
+102 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a521668875556ae8845c9246c2c0ac096}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a521668875556ae8845c9246c2c0ac096}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!debug\+Image\+Pub@{debug\+Image\+Pub}}
+\index{debug\+Image\+Pub@{debug\+Image\+Pub}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{debug\+Image\+Pub}{debugImagePub}}
+{\footnotesize\ttfamily ros\+::\+Publisher debug\+Image\+Pub}
+
+
+
+Definition at line 10 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9c3047923cbbebb0fbfd7f1ff9d13fe9}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a9c3047923cbbebb0fbfd7f1ff9d13fe9}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!detection\+Pub@{detection\+Pub}}
+\index{detection\+Pub@{detection\+Pub}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{detection\+Pub}{detectionPub}}
+{\footnotesize\ttfamily ros\+::\+Publisher detection\+Pub}
+
+
+
+Definition at line 9 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
+\mbox{\Hypertarget{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_ae403eef1a94a795b5eb6de44f6e36b06}\label{2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_ae403eef1a94a795b5eb6de44f6e36b06}} 
+\index{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}!image\+Sub@{image\+Sub}}
+\index{image\+Sub@{image\+Sub}!2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp@{2/servers/opencv\+\_\+perception\+\_\+node/opencv\+\_\+perception\+\_\+node.\+cpp}}
+\subsubsection{\texorpdfstring{image\+Sub}{imageSub}}
+{\footnotesize\ttfamily ros\+::\+Subscriber image\+Sub}
+
+
+
+Definition at line 11 of file opencv\+\_\+perception\+\_\+node.\+cpp.
+
