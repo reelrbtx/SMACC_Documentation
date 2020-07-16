@@ -92,11 +92,31 @@ Definition at line 22 of file st\+\_\+open\+\_\+gripper.\+h.
 Definition at line 27 of file st\+\_\+open\+\_\+gripper.\+h.
 
 
+
+References moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::planning\+Scene\+Interface, and smacc\+::\+I\+Smacc\+State\+::requires\+Client().
+
+
 \begin{DoxyCode}
 28             \{
-29                 ros::WallDuration(2).sleep();
-30             \}
+29                 ClMoveGroup *moveGroupClient;
+30                 this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveGroupClient);
+31 
+32                 \textcolor{keyword}{auto} &planningSceneInterface = moveGroupClient->planningSceneInterface;
+33 
+34                 moveGroupClient->moveGroupClientInterface.detachObject(\textcolor{stringliteral}{"collisioncube"});
+35                 planningSceneInterface.removeCollisionObjects(\{\textcolor{stringliteral}{"collisioncube"}\});
+36 
+37                 ros::WallDuration(2).sleep();
+38             \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__moveit__4_1_1place__states_1_1StOpenGripper_abb7f1ffb0505097dd7d1495c0cc8081a_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{structsm__moveit__4_1_1place__states_1_1StOpenGripper_a83a52c51baf50a5519763fcf7a5f5a22}\label{structsm__moveit__4_1_1place__states_1_1StOpenGripper_a83a52c51baf50a5519763fcf7a5f5a22}} 
 \index{sm\+\_\+moveit\+\_\+4\+::place\+\_\+states\+::\+St\+Open\+Gripper@{sm\+\_\+moveit\+\_\+4\+::place\+\_\+states\+::\+St\+Open\+Gripper}!static\+Configure@{static\+Configure}}
 \index{static\+Configure@{static\+Configure}!sm\+\_\+moveit\+\_\+4\+::place\+\_\+states\+::\+St\+Open\+Gripper@{sm\+\_\+moveit\+\_\+4\+::place\+\_\+states\+::\+St\+Open\+Gripper}}

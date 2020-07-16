@@ -47,7 +47,7 @@ static void \hyperlink{structsm__moveit__4_1_1StNavigateToSourceTable_a10d9b17cf
 \subsection{Detailed Description}
 
 
-Definition at line 5 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
+Definition at line 7 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
 
 
 
@@ -60,7 +60,7 @@ Definition at line 5 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h
 
 
 
-Definition at line 15 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
+Definition at line 17 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
 
 
 
@@ -73,13 +73,13 @@ Definition at line 15 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+
 
 
 
-Definition at line 54 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
+Definition at line 50 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
 
 
 \begin{DoxyCode}
-55         \{
-56             ROS\_INFO(\textcolor{stringliteral}{"state on entry"});
-57         \}
+51         \{
+52             ROS\_INFO(\textcolor{stringliteral}{"state on entry"});
+53         \}
 \end{DoxyCode}
 \mbox{\Hypertarget{structsm__moveit__4_1_1StNavigateToSourceTable_a532b64eb7ea6938d22c712e29ecf0ac9}\label{structsm__moveit__4_1_1StNavigateToSourceTable_a532b64eb7ea6938d22c712e29ecf0ac9}} 
 \index{sm\+\_\+moveit\+\_\+4\+::\+St\+Navigate\+To\+Source\+Table@{sm\+\_\+moveit\+\_\+4\+::\+St\+Navigate\+To\+Source\+Table}!runtime\+Configure@{runtime\+Configure}}
@@ -89,13 +89,34 @@ Definition at line 54 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+
 
 
 
-Definition at line 49 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
+Definition at line 25 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
 
 
 \begin{DoxyCode}
-50         \{
-51             ROS\_INFO(\textcolor{stringliteral}{"runtime"});
-52         \}
+26         \{
+27             \textcolor{keyword}{auto}* navigateGlobalPosition = this->getOrthogonal<OrNavigation>()->
+      getClientBehavior<CbNavigateGlobalPosition>();
+28             
+29             ClPerceptionSystem *perceptionSystem;
+30             navigateGlobalPosition->requiresClient(perceptionSystem);
+31 
+32             \textcolor{keyword}{auto} mainTablePose = perceptionSystem->getMainTablePose().pose;
+33             mainTablePose.position.x -= 0.85;
+34 
+35             geometry\_msgs::PoseStamped nextCubePose;
+36             \textcolor{keywordflow}{if} (perceptionSystem->decidePickCubePose(nextCubePose))
+37             \{
+38                 \textcolor{comment}{// align with the cube in the y axis}
+39                 mainTablePose.position.y = nextCubePose.pose.position.y;
+40 
+41                 navigateGlobalPosition->setGoal(mainTablePose);
+42             \}
+43             \textcolor{keywordflow}{else}
+44             \{
+45                 ROS\_WARN(\textcolor{stringliteral}{"[DEMO COMPLETED! All cubes are on their tables!]"});
+46                 ros::spin();
+47             \}
+48         \}
 \end{DoxyCode}
 \mbox{\Hypertarget{structsm__moveit__4_1_1StNavigateToSourceTable_a10d9b17cf7d5450760c13552eb9de0b5}\label{structsm__moveit__4_1_1StNavigateToSourceTable_a10d9b17cf7d5450760c13552eb9de0b5}} 
 \index{sm\+\_\+moveit\+\_\+4\+::\+St\+Navigate\+To\+Source\+Table@{sm\+\_\+moveit\+\_\+4\+::\+St\+Navigate\+To\+Source\+Table}!static\+Configure@{static\+Configure}}
@@ -105,47 +126,13 @@ Definition at line 49 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+
 
 
 
-Definition at line 18 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
+Definition at line 20 of file st\+\_\+navigate\+\_\+to\+\_\+source\+\_\+table.\+h.
 
 
 \begin{DoxyCode}
-19         \{
-20             configure\_orthogonal\_runtime<OrNavigation, CbNavigateGlobalPosition>
-21                                                             (
-22                                                                 [](\textcolor{keyword}{auto}& navigateGlobalPosition)
-23                                                                 \{
-24                                                                     ClPerceptionSystem* perceptionSystem;
-25                                                                     navigateGlobalPosition.requiresClient(
-      perceptionSystem);
-26                                                                     
-27                                                                     \textcolor{keyword}{auto} mainTablePose = perceptionSystem->
-      getMainTablePose().pose;
-28                                                                     mainTablePose.position.x -= 0.85;
-29 
-30                                                                     geometry\_msgs::PoseStamped nextCubePose
-      ;
-31                                                                     \textcolor{keywordflow}{if}(perceptionSystem->decidePickCubePose
-      (nextCubePose))
-32                                                                     \{
-33                                                                         \textcolor{comment}{// align with the cube in the y
-       axis}
-34                                                                         mainTablePose.position.y = 
-      nextCubePose.pose.position.y;
-35 
-36 
-37 
-38                                                                         navigateGlobalPosition.setGoal(
-      mainTablePose);
-39                                                                     \}
-40                                                                     \textcolor{keywordflow}{else}
-41                                                                     \{
-42                                                                         ROS\_WARN(\textcolor{stringliteral}{"[DEMO COMPLETED! All
-       cubes are on their tables!]"});
-43                                                                         ros::spin();
-44                                                                     \}
-45                                                                 \}
-46                                                             );
-47         \}
+21         \{
+22             configure\_orthogonal<OrNavigation, CbNavigateGlobalPosition>();
+23         \}
 \end{DoxyCode}
 
 
