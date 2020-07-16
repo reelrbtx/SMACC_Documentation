@@ -73,7 +73,7 @@ Definition at line 17 of file st\+\_\+place\+\_\+retreat.\+h.
 
 
 
-Definition at line 33 of file st\+\_\+place\+\_\+retreat.\+h.
+Definition at line 39 of file st\+\_\+place\+\_\+retreat.\+h.
 
 
 
@@ -81,12 +81,12 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), and smacc\+::\+I\+Sm
 
 
 \begin{DoxyCode}
-34     \{
-35         ClMoveGroup *moveGroup;
-36         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveGroup);
-37 
-38         moveGroup->getComponent<CpConstraintTableWorkspaces>()->setSafeArmMotionToAvoidCubeCollisions();
-39     \}
+40     \{
+41         ClMoveGroup *moveGroup;
+42         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveGroup);
+43 
+44         moveGroup->getComponent<CpConstraintTableWorkspaces>()->setBigTableCollisionVolume();
+45     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -107,14 +107,32 @@ Here is the call graph for this function\+:
 Definition at line 25 of file st\+\_\+place\+\_\+retreat.\+h.
 
 
+
+References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), and smacc\+::\+I\+Smacc\+State\+::requires\+Client().
+
+
 \begin{DoxyCode}
 26     \{
-27         \textcolor{keyword}{auto} moveCartesianRelative = this->getOrthogonal<OrArm>()
-28                                          ->getClientBehavior<CbMoveCartesianRelative>();
-29 
-30         moveCartesianRelative->offset\_.z = 0.15;
-31     \}
+27         \textcolor{comment}{/*for the case of abor/retry cartesian retreat --*/}
+28         ClMoveGroup *moveGroup;
+29         this->\hyperlink{classsmacc_1_1ISmaccState_a7f95c9f0a6ea2d6f18d1aec0519de4ac}{requiresClient}(moveGroup);
+30         moveGroup->getComponent<CpConstraintTableWorkspaces>()->disableTableCollisionVolume();
+31         ros::Duration(1).sleep();
+32         
+33         \textcolor{keyword}{auto} moveCartesianRelative = this->getOrthogonal<OrArm>()
+34                                          ->getClientBehavior<CbMoveCartesianRelative>();
+35 
+36         moveCartesianRelative->offset\_.z = 0.15;
+37     \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__moveit__4_1_1place__states_1_1StPlaceRetreat_a592a95bb086fd10381dee175af55e71e_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{structsm__moveit__4_1_1place__states_1_1StPlaceRetreat_aa3f44a56c5471fb113afb7b3cfd7d44e}\label{structsm__moveit__4_1_1place__states_1_1StPlaceRetreat_aa3f44a56c5471fb113afb7b3cfd7d44e}} 
 \index{sm\+\_\+moveit\+\_\+4\+::place\+\_\+states\+::\+St\+Place\+Retreat@{sm\+\_\+moveit\+\_\+4\+::place\+\_\+states\+::\+St\+Place\+Retreat}!static\+Configure@{static\+Configure}}
 \index{static\+Configure@{static\+Configure}!sm\+\_\+moveit\+\_\+4\+::place\+\_\+states\+::\+St\+Place\+Retreat@{sm\+\_\+moveit\+\_\+4\+::place\+\_\+states\+::\+St\+Place\+Retreat}}

@@ -1,9 +1,9 @@
 var searchData=
 [
   ['emptyobjecttag',['EmptyObjectTag',['../structsmacc_1_1state__reactors_1_1EmptyObjectTag.html',1,'smacc::state_reactors']]],
-  ['enable',['enable',['../classcl__move__base__z_1_1CostmapSwitch.html#ad2366ec89f6cb922b6d4a6c8d2627e97',1,'cl_move_base_z::CostmapSwitch::enable(std::string layerName)'],['../classcl__move__base__z_1_1CostmapSwitch.html#ac30d812503a62ea594587d8ab552d7c3',1,'cl_move_base_z::CostmapSwitch::enable(StandardLayers layerType)'],['../classsm__moveit__4_1_1cl__moveit__z__client_1_1CpConstraintLateralWorkspace.html#afa4487214f0213724159264de374267b',1,'sm_moveit_4::cl_moveit_z_client::CpConstraintLateralWorkspace::enable()']]],
+  ['enable',['enable',['../classcl__move__base__z_1_1CostmapSwitch.html#ad2366ec89f6cb922b6d4a6c8d2627e97',1,'cl_move_base_z::CostmapSwitch::enable(std::string layerName)'],['../classcl__move__base__z_1_1CostmapSwitch.html#ac30d812503a62ea594587d8ab552d7c3',1,'cl_move_base_z::CostmapSwitch::enable(StandardLayers layerType)'],['../classsm__moveit__4_1_1cl__moveit__z__client_1_1CpConstraintLateralWorkspace.html#afa4487214f0213724159264de374267b',1,'sm_moveit_4::cl_moveit_z_client::CpConstraintLateralWorkspace::enable()'],['../classsm__moveit__4_1_1cl__moveit__z__client_1_1CpConstraintVirtualSideWall.html#a0627edab82bc6c2831ebd781401c24db',1,'sm_moveit_4::cl_moveit_z_client::CpConstraintVirtualSideWall::enable()']]],
   ['enable_5fobstacle_5fchecking_5f',['enable_obstacle_checking_',['../classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner.html#a154043366660cc02ec758dda32817511',1,'cl_move_base_z::backward_local_planner::BackwardLocalPlanner']]],
-  ['enabled_5f',['enabled_',['../classsm__moveit__4_1_1cl__moveit__z__client_1_1CpConstraintLateralWorkspace.html#a869220e440aadc79cf5213b6d27c1217',1,'sm_moveit_4::cl_moveit_z_client::CpConstraintLateralWorkspace']]],
+  ['enabled_5f',['enabled_',['../classsm__moveit__4_1_1cl__moveit__z__client_1_1CpConstraintLateralWorkspace.html#a869220e440aadc79cf5213b6d27c1217',1,'sm_moveit_4::cl_moveit_z_client::CpConstraintLateralWorkspace::enabled_()'],['../classsm__moveit__4_1_1cl__moveit__z__client_1_1CpConstraintVirtualSideWall.html#a4456f8bf8328d103c2f9d3a04182babd',1,'sm_moveit_4::cl_moveit_z_client::CpConstraintVirtualSideWall::enabled_()']]],
   ['enablereq',['enableReq',['../classcl__move__base__z_1_1CostmapProxy.html#aff2defa5d265d3e8efda4849eedd3500',1,'cl_move_base_z::CostmapProxy']]],
   ['encodedkey',['encodedKey',['../structsmacc_1_1ComponentKey.html#a4f588034d085ba425808d98c36f8a095',1,'smacc::ComponentKey']]],
   ['end_5f',['end_',['../classsmacc_1_1SignalDetector.html#aaee266393c01693528a2d74b1f2354a2',1,'smacc::SignalDetector']]],
@@ -39,6 +39,7 @@ var searchData=
   ['eventtypes',['eventTypes',['../classsmacc_1_1StateReactor.html#a65c8ddfce40e7859e5c73fff1cf6c04b',1,'smacc::StateReactor']]],
   ['evestop',['EvEStop',['../structsm__packml_1_1EvEStop.html',1,'sm_packml']]],
   ['evfail',['EvFail',['../structsm__packml_1_1EvFail.html',1,'sm_packml::EvFail'],['../structsm__respira__1_1_1EvFail.html',1,'sm_respira_1::EvFail'],['../structsm__starcraft__ai_1_1EvFail.html',1,'sm_starcraft_ai::EvFail'],['../structsm__three__some_1_1EvFail.html',1,'sm_three_some::EvFail'],['../structsm__viewer__sim_1_1EvFail.html',1,'sm_viewer_sim::EvFail']]],
+  ['evfinishdemo',['EvFinishDemo',['../structsm__moveit__4_1_1EvFinishDemo.html',1,'sm_moveit_4']]],
   ['evglobalerror',['EvGlobalError',['../structsm__dance__bot__2_1_1EvGlobalError.html',1,'sm_dance_bot_2::EvGlobalError'],['../structsm__dance__bot__strikes__back_1_1EvGlobalError.html',1,'sm_dance_bot_strikes_back::EvGlobalError'],['../structsm__dance__bot_1_1EvGlobalError.html',1,'sm_dance_bot::EvGlobalError']]],
   ['evkeypressa',['EvKeyPressA',['../structcl__keyboard_1_1EvKeyPressA.html',1,'cl_keyboard']]],
   ['evkeypressb',['EvKeyPressB',['../structcl__keyboard_1_1EvKeyPressB.html',1,'cl_keyboard']]],

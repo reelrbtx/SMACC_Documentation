@@ -35,7 +35,7 @@ virtual void \hyperlink{classsm__moveit__4_1_1OrArm_a9269c0a4712d81a1ee18640c66f
 \subsection{Detailed Description}
 
 
-Definition at line 12 of file or\+\_\+arm.\+h.
+Definition at line 13 of file or\+\_\+arm.\+h.
 
 
 
@@ -52,34 +52,55 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccOrthogonal_a6bb31c620cb64dd7b8
 
 
 
-Definition at line 15 of file or\+\_\+arm.\+h.
+Definition at line 16 of file or\+\_\+arm.\+h.
 
 
 \begin{DoxyCode}
-16         \{
-17             \textcolor{keyword}{auto} moveGroupClient = this->createClient<ClMoveGroup>(\textcolor{stringliteral}{"arm\_with\_torso"});
-18             moveGroupClient->initialize();
-19 
-20             \textcolor{comment}{// (Constraint workspace) create obstacles around table surfaces (optionally covering the cubes
+17         \{
+18             \textcolor{keyword}{auto} moveGroupClient = this->createClient<ClMoveGroup>(\textcolor{stringliteral}{"arm\_with\_torso"});
+19             moveGroupClient->initialize();
+20 
+21             \textcolor{comment}{// (Constraint workspace) create obstacles around table surfaces (optionally covering the cubes
        volume)}
-21             moveGroupClient->createComponent<cl\_moveit\_z\_client::CpConstraintTableWorkspaces>();
-22 
-23             \textcolor{comment}{// (Constraint workspace) create two simetrics virtual-collision side walls from the robot base
+22             moveGroupClient->createComponent<cl\_moveit\_z\_client::CpConstraintTableWorkspaces>();
+23 
+24             \textcolor{comment}{// (Constraint workspace) create two simetrics virtual-collision side walls from the robot base
        reference frame}
-24             std::string referenceFrame = \textcolor{stringliteral}{"base\_link"};
-25             \textcolor{keywordtype}{double} lateralDistance = 0.28;
-26 
-27             geometry\_msgs::Vector3 size;
-28             size.x = 1.0;
-29             size.y = 0.01;
-30             size.z = 0.6;
-31 
-32             geometry\_msgs::Vector3 offset;
-33             offset.z = 0.3;
-34                         
-35             moveGroupClient->createComponent<cl\_moveit\_z\_client::CpConstraintLateralWorkspace>(
-      referenceFrame, lateralDistance, size, offset );
-36         \}
+25             \{
+26                 std::string referenceFrame = \textcolor{stringliteral}{"base\_link"};
+27                 \textcolor{keywordtype}{double} lateralDistance = 0.38;
+28 
+29                 geometry\_msgs::Vector3 size;
+30                 size.x = 1.0;
+31                 size.y = 0.2;
+32                 size.z = 0.6;
+33 
+34                 geometry\_msgs::Vector3 offset;
+35                 offset.z = 0.3;
+36 
+37                 moveGroupClient->createComponent<cl\_moveit\_z\_client::CpConstraintLateralWorkspace>(
+      referenceFrame, lateralDistance, size, offset);
+38             \}
+39 
+40             \textcolor{comment}{// (Constraint workspace) create one tall virtual-wall-collision at the left side (from the
+       robot base reference frame)}
+41             \{
+42                 std::string referenceFrame = \textcolor{stringliteral}{"base\_link"};
+43 
+44                 geometry\_msgs::Vector3 size;
+45                 size.x = 0.5;
+46                 size.y = 0.1;
+47                 size.z = 1.2;
+48 
+49                 geometry\_msgs::Vector3 offset;
+50                 offset.x = -0.1;
+51                 offset.y = 0.48;
+52                 offset.z = 0.6;
+53 
+54                 moveGroupClient->createComponent<cl\_moveit\_z\_client::CpConstraintVirtualSideWall>(
+      referenceFrame, size, offset);
+55             \}
+56         \}
 \end{DoxyCode}
 
 

@@ -133,20 +133,23 @@ Definition at line 50 of file smacc\+\_\+state\+\_\+machine\+\_\+base.\+h.
 
 \begin{DoxyCode}
 51     \{
-52         ROS\_INFO(\textcolor{stringliteral}{"Introspecting state machine via typeWalker"});
-53         this->buildStateMachineInfo<InitialStateType>();
+52         \textcolor{comment}{// this is before because this creates orthogonals}
+53         this->\hyperlink{classsmacc_1_1ISmaccStateMachine_ac2982c6c8283663e5e1e8a7c82f511ec}{onInitialize}();
 54 
-55         ROS\_INFO(\textcolor{stringliteral}{"initiate\_impl"});
-56         \textcolor{keyword}{auto} shortname = \hyperlink{namespacesmacc_1_1utils_aacd1975bb7cd9bec4b50e111a2ae7edb}{smacc::utils::cleanShortTypeName}(\textcolor{keyword}{typeid}(
+55         ROS\_INFO(\textcolor{stringliteral}{"[SmaccStateMachine] Introspecting state machine via typeWalker"});
+56         this->buildStateMachineInfo<InitialStateType>();
+57 
+58         ROS\_INFO(\textcolor{stringliteral}{"[SmaccStateMachine] initiate\_impl"});
+59         \textcolor{keyword}{auto} shortname = \hyperlink{namespacesmacc_1_1utils_aacd1975bb7cd9bec4b50e111a2ae7edb}{smacc::utils::cleanShortTypeName}(\textcolor{keyword}{typeid}(
       DerivedStateMachine));
-57         this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a1136dd5d81e846ac86de48bc71912cbf}{initializeROS}(shortname);        
-58 
-59         ROS\_INFO(\textcolor{stringliteral}{"Initializing ROS communication mechanisms"});
-60         this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a95e7f71d0d88fffd0afebb1f9ccdade5}{onInitialized}();
+60         this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a1136dd5d81e846ac86de48bc71912cbf}{initializeROS}(shortname);        
 61 
-62         ROS\_INFO(\textcolor{stringliteral}{"Initializing state machine"});
-63         sc::state\_machine<DerivedStateMachine, InitialStateType, SmaccAllocator>::initiate();
-64     \}
+62         ROS\_INFO(\textcolor{stringliteral}{"[SmaccStateMachine] Initializing ROS communication mechanisms"});
+63         this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a95e7f71d0d88fffd0afebb1f9ccdade5}{onInitialized}();
+64 
+65         ROS\_INFO(\textcolor{stringliteral}{"[SmaccStateMachine] Initializing state machine"});
+66         sc::state\_machine<DerivedStateMachine, InitialStateType, SmaccAllocator>::initiate();
+67     \}
 \end{DoxyCode}
 \mbox{\Hypertarget{structsmacc_1_1SmaccStateMachineBase_af34aec9fa012f0e3858131c84abfd5ed}\label{structsmacc_1_1SmaccStateMachineBase_af34aec9fa012f0e3858131c84abfd5ed}} 
 \index{smacc\+::\+Smacc\+State\+Machine\+Base@{smacc\+::\+Smacc\+State\+Machine\+Base}!reset@{reset}}

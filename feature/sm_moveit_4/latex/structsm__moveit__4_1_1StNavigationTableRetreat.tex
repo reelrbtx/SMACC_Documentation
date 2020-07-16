@@ -40,7 +40,7 @@ static void \hyperlink{structsm__moveit__4_1_1StNavigationTableRetreat_a499aca1e
 \subsection{Detailed Description}
 
 
-Definition at line 5 of file st\+\_\+navigation\+\_\+table\+\_\+retreat.\+h.
+Definition at line 8 of file st\+\_\+navigation\+\_\+table\+\_\+retreat.\+h.
 
 
 
@@ -53,7 +53,7 @@ Definition at line 5 of file st\+\_\+navigation\+\_\+table\+\_\+retreat.\+h.
 
 
 
-Definition at line 13 of file st\+\_\+navigation\+\_\+table\+\_\+retreat.\+h.
+Definition at line 16 of file st\+\_\+navigation\+\_\+table\+\_\+retreat.\+h.
 
 
 
@@ -66,7 +66,7 @@ Definition at line 13 of file st\+\_\+navigation\+\_\+table\+\_\+retreat.\+h.
 
 
 
-Definition at line 16 of file st\+\_\+navigation\+\_\+table\+\_\+retreat.\+h.
+Definition at line 19 of file st\+\_\+navigation\+\_\+table\+\_\+retreat.\+h.
 
 
 
@@ -74,40 +74,40 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), and smacc\+::\+I\+Sm
 
 
 \begin{DoxyCode}
-17         \{
-18             configure\_orthogonal\_runtime<OrNavigation, CbNavigateGlobalPosition>(
-19                                                                 [](\textcolor{keyword}{auto}& navigateGlobalPosition)
-20                                                                 \{
-21                                                                     ClMoveBaseZ* moveBase;
-22                                                                     navigateGlobalPosition.requiresClient(
+20         \{
+21             configure\_orthogonal\_runtime<OrNavigation, CbNavigateGlobalPosition>(
+22                                                                 [](\textcolor{keyword}{auto}& navigateGlobalPosition)
+23                                                                 \{
+24                                                                     ClMoveBaseZ* moveBase;
+25                                                                     navigateGlobalPosition.requiresClient(
       moveBase);
-23 
-24                                                                     \textcolor{keyword}{auto} currentPose = moveBase->
-      getComponent<\hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose}>()->toPoseMsg();
-25                                                                     geometry\_msgs::Pose targetPose = 
-      currentPose;
 26 
-27                                                                     \textcolor{keywordflow}{if}(currentPose.position.x < 0)
-28                                                                     \{
-29                                                                         targetPose.position.x += 0.6;
-30                                                                         \textcolor{keyword}{auto} quat = 
+27                                                                     \textcolor{keyword}{auto} currentPose = moveBase->
+      getComponent<\hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose}>()->toPoseMsg();
+28                                                                     geometry\_msgs::Pose targetPose = 
+      currentPose;
+29 
+30                                                                     \textcolor{keywordflow}{if}(currentPose.position.x < 0)
+31                                                                     \{
+32                                                                         targetPose.position.x += 0.6;
+33                                                                         \textcolor{keyword}{auto} quat = 
       tf::createQuaternionFromYaw(0);
-31                                                                         tf::quaternionTFToMsg(quat, 
+34                                                                         tf::quaternionTFToMsg(quat, 
       targetPose.orientation);
-32                                                                     \}
-33                                                                     \textcolor{keywordflow}{else}
-34                                                                     \{
-35                                                                         targetPose.position.x -= 0.6;
-36                                                                         \textcolor{keyword}{auto} quat = 
+35                                                                     \}
+36                                                                     \textcolor{keywordflow}{else}
+37                                                                     \{
+38                                                                         targetPose.position.x -= 0.6;
+39                                                                         \textcolor{keyword}{auto} quat = 
       tf::createQuaternionFromYaw(M\_PI);
-37                                                                         tf::quaternionTFToMsg(quat, 
+40                                                                         tf::quaternionTFToMsg(quat, 
       targetPose.orientation);
-38                                                                     \}
-39 
-40                                                                     navigateGlobalPosition.setGoal(
+41                                                                     \}
+42 
+43                                                                     navigateGlobalPosition.setGoal(
       targetPose);
-41                                                                 \});
-42         \}
+44                                                                 \});
+45         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
