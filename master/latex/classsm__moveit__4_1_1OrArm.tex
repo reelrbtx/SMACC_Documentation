@@ -55,10 +55,6 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccOrthogonal_a6bb31c620cb64dd7b8
 Definition at line 20 of file or\+\_\+arm.\+h.
 
 
-
-References moveit\+\_\+z\+\_\+client\+::\+Grasping\+Component\+::finger\+Tip\+Names.
-
-
 \begin{DoxyCode}
 21         \{
 22             \textcolor{keyword}{auto} moveGroupClient = this->createClient<ClMoveGroup>(\textcolor{stringliteral}{"arm\_with\_torso"});
@@ -66,7 +62,7 @@ References moveit\+\_\+z\+\_\+client\+::\+Grasping\+Component\+::finger\+Tip\+Na
 24 
 25             \textcolor{comment}{// (Constraint workspace) create obstacles around table surfaces (optionally covering the cubes
        volume)}
-26             moveGroupClient->createComponent<cl\_moveit\_z\_client::CpConstraintTableWorkspaces>();
+26             moveGroupClient->createComponent<move\_group\_interface\_client::CpConstraintTableWorkspaces>();
 27 
 28             \textcolor{comment}{// (Constraint workspace) create two simetrics virtual-collision side walls from the robot base
        reference frame}
@@ -82,8 +78,8 @@ References moveit\+\_\+z\+\_\+client\+::\+Grasping\+Component\+::finger\+Tip\+Na
 38                 geometry\_msgs::Vector3 offset;
 39                 offset.z = 0.3;
 40 
-41                 moveGroupClient->createComponent<cl\_moveit\_z\_client::CpConstraintLateralWorkspace>(
-      referenceFrame, lateralDistance, size, offset);
+41                 moveGroupClient->createComponent<move\_group\_interface\_client::CpConstraintLateralWorkspace>
+      (referenceFrame, lateralDistance, size, offset);
 42             \}
 43 
 44             \textcolor{comment}{// (Constraint workspace) create one tall virtual-wall-collision at the left side (from the
@@ -101,16 +97,14 @@ References moveit\+\_\+z\+\_\+client\+::\+Grasping\+Component\+::finger\+Tip\+Na
 55                 offset.y = 0.48;
 56                 offset.z = 0.6;
 57 
-58                 moveGroupClient->createComponent<cl\_moveit\_z\_client::CpConstraintVirtualSideWall>(
+58                 moveGroupClient->createComponent<move\_group\_interface\_client::CpConstraintVirtualSideWall>(
       referenceFrame, size, offset);
 59             \}
 60 
 61             \textcolor{comment}{//-----------------------------------------------}
 62             \{
-63                 \textcolor{keyword}{auto} *graspingComponent = moveGroupClient->createComponent<
-      \hyperlink{classmoveit__z__client_1_1GraspingComponent}{sm\_moveit\_4::cl\_moveit\_z\_client::GraspingComponent}>();
-64                 graspingComponent->\hyperlink{classmoveit__z__client_1_1GraspingComponent_a1a3da6af2dcf6e815042c5d892875412}{fingerTipNames} = \{\textcolor{stringliteral}{"l\_gripper\_finger\_link"}, \textcolor{stringliteral}{"
-      r\_gripper\_finger\_link"}\};
+63                 \textcolor{keyword}{auto} *graspingComponent = moveGroupClient->createComponent<GraspingComponent>();
+64                 graspingComponent->fingerTipNames = \{\textcolor{stringliteral}{"l\_gripper\_finger\_link"}, \textcolor{stringliteral}{"r\_gripper\_finger\_link"}\};
 65 
 66                 \textcolor{comment}{// create 10 graspable cubes located exactly in the tf frames with the same name }
 67                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10; i++)

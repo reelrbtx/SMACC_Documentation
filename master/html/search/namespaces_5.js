@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['moveit_5fz_5fclient',['moveit_z_client',['../namespacemoveit__z__client.html',1,'']]]
+  ['move_5fgroup_5finterface_5fclient',['move_group_interface_client',['../namespacemove__group__interface__client.html',1,'']]]
 ];

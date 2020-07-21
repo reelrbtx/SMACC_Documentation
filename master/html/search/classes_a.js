@@ -1,8 +1,8 @@
 var searchData=
 [
   ['move',['MOVE',['../structsm__starcraft__ai_1_1StObserve_1_1MOVE.html',1,'sm_starcraft_ai::StObserve']]],
-  ['movegroupmotionexecutionfailed',['MoveGroupMotionExecutionFailed',['../structmoveit__z__client_1_1MoveGroupMotionExecutionFailed.html',1,'moveit_z_client']]],
-  ['movegroupmotionexecutionsucceded',['MoveGroupMotionExecutionSucceded',['../structmoveit__z__client_1_1MoveGroupMotionExecutionSucceded.html',1,'moveit_z_client']]],
+  ['movegroupmotionexecutionfailed',['MoveGroupMotionExecutionFailed',['../structmove__group__interface__client_1_1MoveGroupMotionExecutionFailed.html',1,'move_group_interface_client']]],
+  ['movegroupmotionexecutionsucceded',['MoveGroupMotionExecutionSucceded',['../structmove__group__interface__client_1_1MoveGroupMotionExecutionSucceded.html',1,'move_group_interface_client']]],
   ['mscalibration',['MsCalibration',['../classsm__respira__1_1_1MsCalibration.html',1,'sm_respira_1']]],
   ['msdancebotrecoverymode',['MsDanceBotRecoveryMode',['../classsm__dance__bot__2_1_1MsDanceBotRecoveryMode.html',1,'sm_dance_bot_2::MsDanceBotRecoveryMode'],['../classsm__dance__bot__strikes__back_1_1MsDanceBotRecoveryMode.html',1,'sm_dance_bot_strikes_back::MsDanceBotRecoveryMode'],['../classsm__dance__bot_1_1MsDanceBotRecoveryMode.html',1,'sm_dance_bot::MsDanceBotRecoveryMode']]],
   ['msdancebotrunmode',['MsDanceBotRunMode',['../classsm__dance__bot__2_1_1MsDanceBotRunMode.html',1,'sm_dance_bot_2::MsDanceBotRunMode'],['../classsm__dance__bot__strikes__back_1_1MsDanceBotRunMode.html',1,'sm_dance_bot_strikes_back::MsDanceBotRunMode'],['../classsm__dance__bot_1_1MsDanceBotRunMode.html',1,'sm_dance_bot::MsDanceBotRunMode']]],
