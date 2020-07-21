@@ -1,0 +1,111 @@
+\hypertarget{classmoveit__z__client_1_1CbDetachObject}{}\section{moveit\+\_\+z\+\_\+client\+:\+:Cb\+Detach\+Object Class Reference}
+\label{classmoveit__z__client_1_1CbDetachObject}\index{moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object}}
+
+
+{\ttfamily \#include $<$cb\+\_\+detach\+\_\+object.\+h$>$}
+
+
+
+Inheritance diagram for moveit\+\_\+z\+\_\+client\+:\+:Cb\+Detach\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classmoveit__z__client_1_1CbDetachObject__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for moveit\+\_\+z\+\_\+client\+:\+:Cb\+Detach\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmoveit__z__client_1_1CbDetachObject__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classmoveit__z__client_1_1CbDetachObject_a2c071ca5d2e82ef8c57d3cf2082897a2}{on\+Entry} () override
+\item 
+virtual void \hyperlink{classmoveit__z__client_1_1CbDetachObject_aab785402cb3bd315521ef47f75fa0e14}{on\+Exit} () override
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 9 of file cb\+\_\+detach\+\_\+object.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmoveit__z__client_1_1CbDetachObject_a2c071ca5d2e82ef8c57d3cf2082897a2}\label{classmoveit__z__client_1_1CbDetachObject_a2c071ca5d2e82ef8c57d3cf2082897a2}} 
+\index{moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object}!on\+Entry@{on\+Entry}}
+\index{on\+Entry@{on\+Entry}!moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object}}
+\subsubsection{\texorpdfstring{on\+Entry()}{onEntry()}}
+{\footnotesize\ttfamily void moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object\+::on\+Entry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_a7962382f93987c720ad432fef55b123f}{smacc\+::\+Smacc\+Client\+Behavior}.
+
+
+
+Definition at line 6 of file cb\+\_\+detach\+\_\+object.\+cpp.
+
+
+
+References moveit\+\_\+z\+\_\+client\+::\+Grasping\+Component\+::current\+Attached\+Object\+Name, moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, moveit\+\_\+z\+\_\+client\+::\+Cl\+Move\+Group\+::planning\+Scene\+Interface, smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Client(), and smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Component().
+
+
+\begin{DoxyCode}
+7     \{
+8         \hyperlink{classmoveit__z__client_1_1GraspingComponent}{moveit\_z\_client::GraspingComponent} *graspingComponent;
+9         this->\hyperlink{classsmacc_1_1SmaccClientBehavior_adee6abe3a28aa6b47d3dd5267e264b4d}{requiresComponent}(graspingComponent);
+10 
+11         \hyperlink{classmoveit__z__client_1_1ClMoveGroup}{moveit\_z\_client::ClMoveGroup} *moveGroupClient;
+12         this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(moveGroupClient);
+13 
+14         \textcolor{keyword}{auto} &planningSceneInterface = moveGroupClient->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_a21c879b2683286aa21ce68f40195b4b5}{planningSceneInterface};
+15 
+16         moveGroupClient->\hyperlink{classmoveit__z__client_1_1ClMoveGroup_af86e046b837be0ef4afa9893d8808f20}{moveGroupClientInterface}.detachObject(*(graspingComponent
+      ->\hyperlink{classmoveit__z__client_1_1GraspingComponent_a963ed612bc569ee45401e38133b802eb}{currentAttachedObjectName}));
+17         planningSceneInterface.removeCollisionObjects(\{*(graspingComponent->
+      \hyperlink{classmoveit__z__client_1_1GraspingComponent_a963ed612bc569ee45401e38133b802eb}{currentAttachedObjectName})\});
+18     \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmoveit__z__client_1_1CbDetachObject_a2c071ca5d2e82ef8c57d3cf2082897a2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmoveit__z__client_1_1CbDetachObject_aab785402cb3bd315521ef47f75fa0e14}\label{classmoveit__z__client_1_1CbDetachObject_aab785402cb3bd315521ef47f75fa0e14}} 
+\index{moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object}!on\+Exit@{on\+Exit}}
+\index{on\+Exit@{on\+Exit}!moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object@{moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object}}
+\subsubsection{\texorpdfstring{on\+Exit()}{onExit()}}
+{\footnotesize\ttfamily void moveit\+\_\+z\+\_\+client\+::\+Cb\+Detach\+Object\+::on\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ac0cd72d42bd00425362a97c9803ecce5}{smacc\+::\+Smacc\+Client\+Behavior}.
+
+
+
+Definition at line 20 of file cb\+\_\+detach\+\_\+object.\+cpp.
+
+
+\begin{DoxyCode}
+21     \{
+22     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+client\+\_\+library/moveit\+\_\+z\+\_\+client/include/moveit\+\_\+z\+\_\+client/client\+\_\+behaviors/\hyperlink{cb__detach__object_8h}{cb\+\_\+detach\+\_\+object.\+h}\item 
+smacc\+\_\+client\+\_\+library/moveit\+\_\+z\+\_\+client/src/moveit\+\_\+z\+\_\+client/client\+\_\+behaviors/\hyperlink{cb__detach__object_8cpp}{cb\+\_\+detach\+\_\+object.\+cpp}\end{DoxyCompactItemize}
