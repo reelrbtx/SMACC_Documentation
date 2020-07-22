@@ -407,7 +407,7 @@ Referenced by smacc\+::\+I\+Smacc\+Client\+::connect\+Signal(), cl\+\_\+ros\+\_\
 291 \{
 292   static\_assert(std::is\_base\_of<ISmaccState, TSmaccObjectType>::value ||
 293                     std::is\_base\_of<ISmaccClient, TSmaccObjectType>::value ||
-294                     std::is\_base\_of<SmaccClientBehavior, TSmaccObjectType>::value ||
+294                     std::is\_base\_of<ISmaccClientBehavior, TSmaccObjectType>::value ||
 295                     std::is\_base\_of<StateReactor, TSmaccObjectType>::value ||
 296                     std::is\_base\_of<ISmaccComponent, TSmaccObjectType>::value,
 297                 \textcolor{stringliteral}{"Only are accepted smacc types as subscribers for smacc signals"});
@@ -427,7 +427,7 @@ Referenced by smacc\+::\+I\+Smacc\+Client\+::connect\+Signal(), cl\+\_\+ros\+\_\
 309   \}
 310   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (std::is\_base\_of<ISmaccState, TSmaccObjectType>::value ||
 311            std::is\_base\_of<StateReactor, TSmaccObjectType>::value ||
-312            std::is\_base\_of<SmaccClientBehavior, TSmaccObjectType>::value)
+312            std::is\_base\_of<ISmaccClientBehavior, TSmaccObjectType>::value)
 313   \{
 314     ROS\_INFO(\textcolor{stringliteral}{"[StateMachine] life-time constrained smacc signal subscription created. Subscriber is %s"},
 315              demangledTypeName<TSmaccObjectType>().c\_str());
@@ -921,7 +921,7 @@ References smacc\+::introspection\+::demangle\+Symbol().
 226     \textcolor{comment}{// of this component}
 227     BehaviorType *behavior;
 228     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_aa6b25e28f3bce24c4b356dc865a9eb7b}{requiresComponent}(behavior);
-229     globalreference = \textcolor{keyword}{dynamic\_cast<}SmaccClientBehavior *\textcolor{keyword}{>}(behavior);
+229     globalreference = \textcolor{keyword}{dynamic\_cast<}ISmaccClientBehavior *\textcolor{keyword}{>}(behavior);
 230 
 231     this->\hyperlink{classsmacc_1_1ISmaccStateMachine_a8588f9e580fbb95b53e2bd2ca3ff1f98}{setGlobalSMData}(stateFieldName, globalreference);
 232   \}
@@ -1231,7 +1231,7 @@ Definition at line 137 of file smacc\+\_\+state\+\_\+machine\+\_\+impl.\+h.
 
 
 
-Referenced by smacc\+::\+Smacc\+Client\+Behavior\+::post\+Event(), smacc\+::\+I\+Smacc\+Component\+::post\+Event(), smacc\+::\+I\+Smacc\+Client\+::post\+Event(), and smacc\+::\+State\+Reactor\+::set\+Output\+Event().
+Referenced by smacc\+::\+I\+Smacc\+Component\+::post\+Event(), smacc\+::\+I\+Smacc\+Client\+Behavior\+::post\+Event(), smacc\+::\+I\+Smacc\+Client\+::post\+Event(), and smacc\+::\+State\+Reactor\+::set\+Output\+Event().
 
 
 \begin{DoxyCode}
@@ -1380,7 +1380,7 @@ References smacc\+::introspection\+::demangle\+Symbol().
 
 
 
-Referenced by smacc\+::\+I\+Smacc\+Orthogonal\+::requires\+Component(), and smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Component().
+Referenced by smacc\+::\+I\+Smacc\+Client\+Behavior\+::requires\+Component(), and smacc\+::\+I\+Smacc\+Orthogonal\+::requires\+Component().
 
 
 \begin{DoxyCode}

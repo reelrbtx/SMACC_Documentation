@@ -78,9 +78,9 @@ References transform\+\_\+.
 
 
 \begin{DoxyCode}
-15 \{
-16     \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a180b4e40316bc8d8d578c98b2fac068f}{transform\_}.rotation.w = 1;
-17 \}
+15     \{
+16         \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a180b4e40316bc8d8d578c98b2fac068f}{transform\_}.rotation.w = 1;
+17     \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_acd4b8a675f6f1d93dd342ed8a6570da8}\label{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_acd4b8a675f6f1d93dd342ed8a6570da8}} 
 \index{move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cb\+Move\+End\+Effector\+Relative@{move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cb\+Move\+End\+Effector\+Relative}!Cb\+Move\+End\+Effector\+Relative@{Cb\+Move\+End\+Effector\+Relative}}
@@ -94,8 +94,8 @@ Definition at line 19 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+relative.
 
 
 \begin{DoxyCode}
-20 \{
-21 \}
+20     \{
+21     \}
 \end{DoxyCode}
 
 
@@ -108,7 +108,7 @@ Definition at line 19 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+relative.
 
 
 
-Definition at line 50 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+relative.\+cpp.
+Definition at line 44 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+relative.\+cpp.
 
 
 
@@ -120,62 +120,64 @@ Referenced by on\+Entry().
 
 
 \begin{DoxyCode}
-51 \{
-52     \textcolor{keyword}{auto} referenceStartPose = moveGroupInterface.getCurrentPose();
-53     tf::Quaternion currentOrientation;
-54     tf::quaternionMsgToTF(referenceStartPose.pose.orientation, currentOrientation);
-55     tf::Quaternion desiredRelativeRotation;
+45     \{
+46         \textcolor{keyword}{auto} referenceStartPose = moveGroupInterface.getCurrentPose();
+47         tf::Quaternion currentOrientation;
+48         tf::quaternionMsgToTF(referenceStartPose.pose.orientation, currentOrientation);
+49         tf::Quaternion desiredRelativeRotation;
+50 
+51         tf::quaternionMsgToTF(transformOffset.rotation, desiredRelativeRotation);
+52 
+53         \textcolor{keyword}{auto} targetOrientation = desiredRelativeRotation * currentOrientation;
+54 
+55         geometry\_msgs::PoseStamped targetObjectPose = referenceStartPose;
 56 
-57     tf::quaternionMsgToTF(transformOffset.rotation, desiredRelativeRotation);
-58 
-59     \textcolor{keyword}{auto} targetOrientation = desiredRelativeRotation * currentOrientation;
-60 
-61     geometry\_msgs::PoseStamped targetObjectPose = referenceStartPose;
-62 
-63     tf::quaternionTFToMsg(targetOrientation, targetObjectPose.pose.orientation);
-64     targetObjectPose.pose.position.x += transformOffset.translation.x;
-65     targetObjectPose.pose.position.y += transformOffset.translation.y;
-66     targetObjectPose.pose.position.z += transformOffset.translation.z;
-67 
-68     moveGroupInterface.setPlanningTime(1.0);
-69 
-70     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] Target End efector Pose: "} << targetObjectPose);
-71 
-72     moveGroupInterface.setPoseTarget(targetObjectPose);
-73     moveGroupInterface.setPoseReferenceFrame(\textcolor{stringliteral}{"map"});
-74 
-75     moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
-76     \textcolor{keywordtype}{bool} success = (moveGroupInterface.plan(computedMotionPlan) == 
+57         tf::quaternionTFToMsg(targetOrientation, targetObjectPose.pose.orientation);
+58         targetObjectPose.pose.position.x += transformOffset.translation.x;
+59         targetObjectPose.pose.position.y += transformOffset.translation.y;
+60         targetObjectPose.pose.position.z += transformOffset.translation.z;
+61 
+62         moveGroupInterface.setPlanningTime(1.0);
+63 
+64         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] Target End efector Pose: "} << targetObjectPose);
+65 
+66         moveGroupInterface.setPoseTarget(targetObjectPose);
+67         moveGroupInterface.setPoseReferenceFrame(\textcolor{stringliteral}{"map"});
+68 
+69         moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
+70         \textcolor{keywordtype}{bool} success = (moveGroupInterface.plan(computedMotionPlan) == 
       moveit::planning\_interface::MoveItErrorCode::SUCCESS);
-77     ROS\_INFO\_NAMED(\textcolor{stringliteral}{"CbMoveEndEffectorRelative"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} :
-       \textcolor{stringliteral}{"FAILED"});
-78 
-79     \textcolor{keywordflow}{if} (success)
-80     \{
-81         \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
-82 
-83         \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
-84         \{
-85             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution succedded"});
-86             \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a1b617e0018790b8ebf23aea75eb7acba}{postEventMotionExecutionSucceded}
-      ();
-87         \}
-88         \textcolor{keywordflow}{else}
-89         \{
-90             moveGroupInterface.setPoseTarget(referenceStartPose); \textcolor{comment}{// undo to avoid abort-repeat state
+71         ROS\_INFO\_NAMED(\textcolor{stringliteral}{"CbMoveEndEffectorRelative"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{
+      ""} : \textcolor{stringliteral}{"FAILED"});
+72 
+73         \textcolor{keywordflow}{if} (success)
+74         \{
+75             \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
+76 
+77             \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
+78             \{
+79                 ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution succedded"});
+80                 \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->
+      \hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a1b617e0018790b8ebf23aea75eb7acba}{postEventMotionExecutionSucceded}();
+81             \}
+82             \textcolor{keywordflow}{else}
+83             \{
+84                 moveGroupInterface.setPoseTarget(referenceStartPose); \textcolor{comment}{// undo to avoid abort-repeat state
        issues with this relative motion}
-91             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
-92             \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}(
+85                 ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
+86                 \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}
+      ();
+87             \}
+88         \}
+89         \textcolor{keywordflow}{else}
+90         \{
+91             moveGroupInterface.setPoseTarget(referenceStartPose); \textcolor{comment}{//undo since we did not executed the
+       motion}
+92             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
+93             \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}(
       );
-93         \}
-94     \}
-95     \textcolor{keywordflow}{else}
-96     \{
-97         moveGroupInterface.setPoseTarget(referenceStartPose); \textcolor{comment}{//undo since we did not executed the motion}
-98         ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
-99         \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}();
-100     \}
-101 \}
+94         \}
+95     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -201,7 +203,7 @@ Here is the caller graph for this function\+:
 
 
 
-Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_a7962382f93987c720ad432fef55b123f}{smacc\+::\+Smacc\+Client\+Behavior}.
+Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a3ec24a839087c550e1d62a81e48cf530}{smacc\+::\+I\+Smacc\+Client\+Behavior}.
 
 
 
@@ -209,34 +211,28 @@ Definition at line 23 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+relative.
 
 
 
-References group\+\_\+, movegroup\+Client\+\_\+, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, move\+Relative(), smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Client(), and transform\+\_\+.
+References group\+\_\+, movegroup\+Client\+\_\+, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, move\+Relative(), smacc\+::\+I\+Smacc\+Client\+Behavior\+::requires\+Client(), and transform\+\_\+.
 
 
 \begin{DoxyCode}
-24 \{
-25     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] Transform end effector pose relative: "} << 
+24     \{
+25         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] Transform end effector pose relative: "} << 
       \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a180b4e40316bc8d8d578c98b2fac068f}{transform\_});
 26 
-27     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_});
+27         this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_});
 28 
-29     \textcolor{keywordflow}{if} (this->\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a3165754a85fd7046e470a399f24d9fb6}{group\_})
-30     \{
-31         \textcolor{keyword}{auto} res = std::async(std::launch::async, [=] 
-32         \{
-33                 moveit::planning\_interface::MoveGroupInterface move\_group(*(this->
+29         \textcolor{keywordflow}{if} (this->\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a3165754a85fd7046e470a399f24d9fb6}{group\_})
+30         \{
+31             moveit::planning\_interface::MoveGroupInterface move\_group(*(this->
       \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a3165754a85fd7046e470a399f24d9fb6}{group\_}));
-34                 this->\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a8f64d14c4a398b455b1953ae61cc58bc}{moveRelative}(move\_group, this->\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a180b4e40316bc8d8d578c98b2fac068f}{transform\_});
-35         \});
-36     \}
-37     \textcolor{keywordflow}{else}
-38     \{
-39         \textcolor{keyword}{auto} res = std::async(std::launch::async, [=] 
-40         \{
-41             this->\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a8f64d14c4a398b455b1953ae61cc58bc}{moveRelative}(\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->
+32             this->\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a8f64d14c4a398b455b1953ae61cc58bc}{moveRelative}(move\_group, this->\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a180b4e40316bc8d8d578c98b2fac068f}{transform\_});
+33         \}
+34         \textcolor{keywordflow}{else}
+35         \{
+36             this->\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a8f64d14c4a398b455b1953ae61cc58bc}{moveRelative}(\hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->
       \hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a5f0ea9b52695661b17605691168d1f31}{moveGroupClientInterface}, this->transform\_);
-42         \});
-43     \}
-44 \}
+37         \}
+38     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -254,16 +250,16 @@ Here is the call graph for this function\+:
 
 
 
-Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ac0cd72d42bd00425362a97c9803ecce5}{smacc\+::\+Smacc\+Client\+Behavior}.
+Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf750909a15e4215a9b3}{smacc\+::\+I\+Smacc\+Client\+Behavior}.
 
 
 
-Definition at line 46 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+relative.\+cpp.
+Definition at line 40 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+relative.\+cpp.
 
 
 \begin{DoxyCode}
-47 \{
-48 \}
+41     \{
+42     \}
 \end{DoxyCode}
 
 
