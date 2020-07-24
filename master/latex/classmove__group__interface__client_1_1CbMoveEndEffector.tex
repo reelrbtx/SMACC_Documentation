@@ -33,8 +33,6 @@ Collaboration diagram for move\+\_\+group\+\_\+interface\+\_\+client\+:\+:Cb\+Mo
 \item 
 virtual void \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_acd7f50c949fcf6e7c56b285439b0b1de}{on\+Entry} () override
 \item 
-virtual void \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_a5dae0057f6f89fd99288e802cc37b07d}{on\+Exit} () override
-\item 
 std\+::future$<$ moveit\+::planning\+\_\+interface\+::\+Move\+It\+Error\+Code $>$ \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_a1d01b53676a8066f726c59a96a9fe107}{plan\+And\+Execute\+Async} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
@@ -113,11 +111,11 @@ References tip\+\_\+link\+\_\+.
 
 
 
-Definition at line 47 of file cb\+\_\+move\+\_\+end\+\_\+effector.\+cpp.
+Definition at line 43 of file cb\+\_\+move\+\_\+end\+\_\+effector.\+cpp.
 
 
 
-References movegroup\+Client\+\_\+, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::planning\+Scene\+Interface, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), and tip\+\_\+link\+\_\+.
+References movegroup\+Client\+\_\+, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::planning\+Scene\+Interface, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Failure\+Event(), smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Success\+Event(), and tip\+\_\+link\+\_\+.
 
 
 
@@ -125,44 +123,48 @@ Referenced by on\+Entry().
 
 
 \begin{DoxyCode}
-49 \{
-50   \textcolor{keyword}{auto}& planningSceneInterface = \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_aec44abef326949b57872d68e7b495194}{movegroupClient\_}->
+45 \{
+46   \textcolor{keyword}{auto}& planningSceneInterface = \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_aec44abef326949b57872d68e7b495194}{movegroupClient\_}->
       \hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a401213ca52233581d2a659dbb772720c}{planningSceneInterface};
-51   ROS\_DEBUG(\textcolor{stringliteral}{"[CbMoveEndEffector] Synchronous sleep of 1 seconds"});
-52   ros::Duration(0.5).sleep();
+47   ROS\_DEBUG(\textcolor{stringliteral}{"[CbMoveEndEffector] Synchronous sleep of 1 seconds"});
+48   ros::Duration(0.5).sleep();
+49 
+50   moveGroupInterface.setPlanningTime(1.0);
+51 
+52   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveEndEffector] Target End efector Pose: "} << targetObjectPose);
 53 
-54   moveGroupInterface.setPlanningTime(1.0);
-55 
-56   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveEndEffector] Target End efector Pose: "} << targetObjectPose);
-57 
-58   moveGroupInterface.setPoseTarget(targetObjectPose, \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_a26d35b0beeb0476a62a46b9b9d659251}{tip\_link\_});
-59   moveGroupInterface.setPoseReferenceFrame(targetObjectPose.header.frame\_id);
-60 
-61   moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
-62   \textcolor{keywordtype}{bool} success = (moveGroupInterface.plan(computedMotionPlan) == 
+54   moveGroupInterface.setPoseTarget(targetObjectPose, \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_a26d35b0beeb0476a62a46b9b9d659251}{tip\_link\_});
+55   moveGroupInterface.setPoseReferenceFrame(targetObjectPose.header.frame\_id);
+56 
+57   moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
+58   \textcolor{keywordtype}{bool} success = (moveGroupInterface.plan(computedMotionPlan) == 
       moveit::planning\_interface::MoveItErrorCode::SUCCESS);
-63   ROS\_INFO\_NAMED(\textcolor{stringliteral}{"CbMoveEndEffector"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} : \textcolor{stringliteral}{"FAILED"})
+59   ROS\_INFO\_NAMED(\textcolor{stringliteral}{"CbMoveEndEffector"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} : \textcolor{stringliteral}{"FAILED"})
       ;
+60 
+61   \textcolor{keywordflow}{if} (success)
+62   \{
+63     \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
 64 
-65   \textcolor{keywordflow}{if} (success)
-66   \{
-67     \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
-68 
-69     \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
-70     \{
-71       ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution succedded"});
-72       \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_aec44abef326949b57872d68e7b495194}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a1b617e0018790b8ebf23aea75eb7acba}{postEventMotionExecutionSucceded}();
-73     \}
-74     \textcolor{keywordflow}{else}
-75     \{
-76       ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution failed"});
-77       \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_aec44abef326949b57872d68e7b495194}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}();
-78     \}
-79   \}
-80   \textcolor{keywordflow}{else}
-81   \{
-82     ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution failed"});
-83     \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_aec44abef326949b57872d68e7b495194}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}();
+65     \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
+66     \{
+67       ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution succedded"});
+68       \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_aec44abef326949b57872d68e7b495194}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a1b617e0018790b8ebf23aea75eb7acba}{postEventMotionExecutionSucceded}();
+69       this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_adf18efe1f0e4eacc1277b8865a8a94b1}{postSuccessEvent}();
+70 
+71     \}
+72     \textcolor{keywordflow}{else}
+73     \{
+74       ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution failed"});
+75       \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_aec44abef326949b57872d68e7b495194}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}();
+76       this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+77     \}
+78   \}
+79   \textcolor{keywordflow}{else}
+80   \{
+81     ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffector] motion execution failed"});
+82     \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffector_aec44abef326949b57872d68e7b495194}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}();
+83     this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
 84   \}
 85 
 86   ROS\_DEBUG(\textcolor{stringliteral}{"[CbMoveEndEffector] Synchronous sleep of 1 seconds"});
@@ -234,25 +236,6 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{classmove__group__interface__client_1_1CbMoveEndEffector_acd7f50c949fcf6e7c56b285439b0b1de_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classmove__group__interface__client_1_1CbMoveEndEffector_a5dae0057f6f89fd99288e802cc37b07d}\label{classmove__group__interface__client_1_1CbMoveEndEffector_a5dae0057f6f89fd99288e802cc37b07d}} 
-\index{move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cb\+Move\+End\+Effector@{move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cb\+Move\+End\+Effector}!on\+Exit@{on\+Exit}}
-\index{on\+Exit@{on\+Exit}!move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cb\+Move\+End\+Effector@{move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cb\+Move\+End\+Effector}}
-\subsubsection{\texorpdfstring{on\+Exit()}{onExit()}}
-{\footnotesize\ttfamily void move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cb\+Move\+End\+Effector\+::on\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf750909a15e4215a9b3}{smacc\+::\+I\+Smacc\+Client\+Behavior}.
-
-
-
-Definition at line 43 of file cb\+\_\+move\+\_\+end\+\_\+effector.\+cpp.
-
-
-\begin{DoxyCode}
-44 \{
-45 \}
-\end{DoxyCode}
 \mbox{\Hypertarget{classmove__group__interface__client_1_1CbMoveEndEffector_a1d01b53676a8066f726c59a96a9fe107}\label{classmove__group__interface__client_1_1CbMoveEndEffector_a1d01b53676a8066f726c59a96a9fe107}} 
 \index{move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cb\+Move\+End\+Effector@{move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cb\+Move\+End\+Effector}!plan\+And\+Execute\+Async@{plan\+And\+Execute\+Async}}
 \index{plan\+And\+Execute\+Async@{plan\+And\+Execute\+Async}!move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cb\+Move\+End\+Effector@{move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cb\+Move\+End\+Effector}}

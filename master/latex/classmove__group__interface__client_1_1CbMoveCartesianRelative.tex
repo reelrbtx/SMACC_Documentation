@@ -106,7 +106,7 @@ Definition at line 40 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
 
 
 
-References move\+Group\+Smacc\+Client\+\_\+, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), and scaling\+Factor\+\_\+.
+References move\+Group\+Smacc\+Client\+\_\+, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Failure\+Event(), smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Success\+Event(), and scaling\+Factor\+\_\+.
 
 
 
@@ -178,16 +178,18 @@ Referenced by on\+Entry().
 101     ROS\_INFO(\textcolor{stringliteral}{"[CbMoveCartesianRelative] relative motion execution succedded: fraction %lf."}, fraction);
 102     \hyperlink{classmove__group__interface__client_1_1CbMoveCartesianRelative_aaa8b86680f04a6cfd7ac6b42268bf04d}{moveGroupSmaccClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a1b617e0018790b8ebf23aea75eb7acba}{postEventMotionExecutionSucceded}
       ();
-103   \}
-104   \textcolor{keywordflow}{else}
-105   \{
-106     movegroupClient->setPoseTarget(referenceStartPose); \textcolor{comment}{// undo changes since we did not executed the
+103     this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_adf18efe1f0e4eacc1277b8865a8a94b1}{postSuccessEvent}();
+104   \}
+105   \textcolor{keywordflow}{else}
+106   \{
+107     movegroupClient->setPoseTarget(referenceStartPose); \textcolor{comment}{// undo changes since we did not executed the
        motion}
-107     ROS\_INFO(\textcolor{stringliteral}{"[CbMoveCartesianRelative] relative motion execution failed: fraction %lf."}, fraction);
-108     \hyperlink{classmove__group__interface__client_1_1CbMoveCartesianRelative_aaa8b86680f04a6cfd7ac6b42268bf04d}{moveGroupSmaccClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}
+108     ROS\_INFO(\textcolor{stringliteral}{"[CbMoveCartesianRelative] relative motion execution failed: fraction %lf."}, fraction);
+109     \hyperlink{classmove__group__interface__client_1_1CbMoveCartesianRelative_aaa8b86680f04a6cfd7ac6b42268bf04d}{moveGroupSmaccClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}
       ();
-109   \}  
-110 \}
+110     this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+111   \}  
+112 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak

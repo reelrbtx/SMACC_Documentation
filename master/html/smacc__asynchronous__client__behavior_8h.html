@@ -71,39 +71,14 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;smacc/smacc_client_behavior_base.h&gt;</code><br />
 <code>#include &lt;thread&gt;</code><br />
-<code>#include &lt;<a class="el" href="smacc__client__behavior__impl_8h_source.html">smacc/impl/smacc_client_behavior_impl.h</a>&gt;</code><br />
+<code>#include &lt;condition_variable&gt;</code><br />
+<code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;future&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for smacc_asynchronous_client_behavior.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="smacc__asynchronous__client__behavior_8h__incl.png" border="0" usemap="#smacc_2include_2smacc_2smacc__asynchronous__client__behavior_8h" alt=""/></div>
 <map name="smacc_2include_2smacc_2smacc__asynchronous__client__behavior_8h" id="smacc_2include_2smacc_2smacc__asynchronous__client__behavior_8h">
-<area shape="rect" id="node4" href="smacc__client__behavior__impl_8h.html" title="smacc/impl/smacc_client\l_behavior_impl.h" alt="" coords="5,109,192,151"/>
-<area shape="rect" id="node5" href="smacc__client__behavior_8h.html" title="smacc/smacc_client\l_behavior.h" alt="" coords="34,452,187,493"/>
-<area shape="rect" id="node6" href="smacc__state__machine_8h.html" title="smacc/smacc_state_machine.h" alt="" coords="1874,199,2099,225"/>
-<area shape="rect" id="node10" href="common_8h.html" title="smacc/common.h" alt="" coords="2099,638,2237,665"/>
-<area shape="rect" id="node30" href="introspection_8h.html" title="smacc/introspection\l/introspection.h" alt="" coords="1201,809,1354,851"/>
-<area shape="rect" id="node41" href="smacc__state__machine__info_8h.html" title="smacc/introspection\l/smacc_state_machine\l_info.h" alt="" coords="3684,899,3855,955"/>
-<area shape="rect" id="node49" href="smacc__updatable_8h.html" title="smacc/smacc_updatable.h" alt="" coords="3324,281,3519,307"/>
-<area shape="rect" id="node54" href="smacc__signal_8h.html" title="smacc/smacc_signal.h" alt="" coords="3085,281,3253,307"/>
-<area shape="rect" id="node60" href="smacc__state_8h.html" title="smacc/smacc_state.h" alt="" coords="948,459,1111,486"/>
-<area shape="rect" id="node61" href="smacc__state__reactor_8h.html" title="smacc/smacc_state_reactor.h" alt="" coords="494,727,709,754"/>
-<area shape="rect" id="node63" href="smacc__state__impl_8h.html" title="smacc/impl/smacc_state\l_impl.h" alt="" coords="665,363,847,404"/>
-<area shape="rect" id="node65" href="smacc__client__impl_8h.html" title="smacc/impl/smacc_client\l_impl.h" alt="" coords="1664,273,1851,315"/>
-<area shape="rect" id="node76" href="smacc__component__impl_8h.html" title="smacc/impl/smacc_component\l_impl.h" alt="" coords="1875,273,2098,315"/>
-<area shape="rect" id="node77" href="smacc__orthogonal__impl_8h.html" title="smacc/impl/smacc_orthogonal\l_impl.h" alt="" coords="2697,363,2917,404"/>
-<area shape="rect" id="node24" href="smacc__fifo__scheduler_8h.html" title="smacc/smacc_fifo_scheduler.h" alt="" coords="2307,727,2525,754"/>
-<area shape="rect" id="node28" href="smacc__types_8h.html" title="smacc/smacc_types.h" alt="" coords="841,1003,1007,1029"/>
-<area shape="rect" id="node47" href="smacc__default__events_8h.html" title="smacc/smacc_default\l_events.h" alt="" coords="1867,809,2029,851"/>
-<area shape="rect" id="node48" href="smacc__transition_8h.html" title="smacc/smacc_transition.h" alt="" coords="1787,727,1978,754"/>
-<area shape="rect" id="node26" href="smacc__fifo__worker_8h.html" title="smacc/smacc_fifo_worker.h" alt="" coords="2501,817,2702,843"/>
-<area shape="rect" id="node34" href="string__type__walker_8h.html" title="smacc/introspection\l/string_type_walker.h" alt="" coords="369,906,530,947"/>
-<area shape="rect" id="node38" href="smacc__state__info_8h.html" title="smacc/introspection\l/smacc_state_info.h" alt="" coords="707,906,861,947"/>
-<area shape="rect" id="node42" href="smacc__orthogonal_8h.html" title="smacc/smacc_orthogonal.h" alt="" coords="3377,1003,3575,1029"/>
-<area shape="rect" id="node64" href="smacc__state__reactor__impl_8h.html" title="smacc/impl/smacc_state\l_reactor_impl.h" alt="" coords="639,631,822,672"/>
-<area shape="rect" id="node66" href="smacc__client_8h.html" title="smacc/smacc_client.h" alt="" coords="2456,459,2621,486"/>
-<area shape="rect" id="node68" href="smacc__state__machine__impl_8h.html" title="smacc/impl/smacc_state\l_machine_impl.h" alt="" coords="1646,363,1829,404"/>
-<area shape="rect" id="node67" href="component_8h.html" title="smacc/component.h" alt="" coords="2579,549,2733,575"/>
-<area shape="rect" id="node69" href="smacc__signal__detector_8h.html" title="smacc/smacc_signal\l_detector.h" alt="" coords="1287,452,1443,493"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -111,15 +86,16 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="smacc__asynchronous__client__behavior_8h__dep__incl.png" border="0" usemap="#smacc_2include_2smacc_2smacc__asynchronous__client__behavior_8hdep" alt=""/></div>
 <map name="smacc_2include_2smacc_2smacc__asynchronous__client__behavior_8hdep" id="smacc_2include_2smacc_2smacc__asynchronous__client__behavior_8hdep">
-<area shape="rect" id="node2" href="smacc__client__async__behavior_8cpp.html" title="smacc/src/smacc/smacc\l_client_async_behavior.cpp" alt="" coords="764,139,964,180"/>
-<area shape="rect" id="node3" href="cb__navigate__backward_8h.html" title="smacc_client_library\l/move_base_z_client/move\l_base_z_client_plugin/include\l/move_base_z_client_plugin/client\l_behaviors/cb_navigate_backward.h" alt="" coords="651,265,909,350"/>
-<area shape="rect" id="node26" href="cb__move__cartesian__relative_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_cartesian\l_relative.h" alt="" coords="1038,109,1261,209"/>
-<area shape="rect" id="node29" href="cb__move__end__effector_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_end_effector.h" alt="" coords="1557,117,1811,202"/>
-<area shape="rect" id="node31" href="cb__move__end__effector__relative_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_end_effector\l_relative.h" alt="" coords="1285,109,1529,209"/>
-<area shape="rect" id="node33" href="cb__move__joints_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_joints.h" alt="" coords="1895,117,2105,202"/>
-<area shape="rect" id="node37" href="cb__move__named__target_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_named_target.h" alt="" coords="2359,117,2625,202"/>
-<area shape="rect" id="node4" href="move__base__z__client_2move__base__z__client__plugin_2include_2move__base__z__client__plugin_2client__behaviors_8h.html" title="smacc_client_library\l/move_base_z_client/move\l_base_z_client_plugin/include\l/move_base_z_client_plugin/client\l_behaviors.h" alt="" coords="752,413,997,498"/>
-<area shape="rect" id="node25" href="cb__navigate__backward_8cpp.html" title="smacc_client_library\l/move_base_z_client/move\l_base_z_client_plugin/src\l/client_behaviors/cb_navigate\l_backward.cpp" alt="" coords="1021,413,1237,498"/>
+<area shape="rect" id="node2" href="smacc__client__async__behavior_8cpp.html" title="smacc/src/smacc/smacc\l_client_async_behavior.cpp" alt="" coords="665,139,865,180"/>
+<area shape="rect" id="node3" href="cb__navigate__backward_8h.html" title="smacc_client_library\l/move_base_z_client/move\l_base_z_client_plugin/include\l/move_base_z_client_plugin/client\l_behaviors/cb_navigate_backward.h" alt="" coords="569,265,828,350"/>
+<area shape="rect" id="node26" href="cb__move__cartesian__relative_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_cartesian\l_relative.h" alt="" coords="939,109,1162,209"/>
+<area shape="rect" id="node29" href="cb__move__end__effector_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_end_effector.h" alt="" coords="2029,117,2283,202"/>
+<area shape="rect" id="node31" href="cb__move__end__effector__relative_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_end_effector\l_relative.h" alt="" coords="1454,109,1698,209"/>
+<area shape="rect" id="node33" href="cb__move__end__effector__trajectory_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_end_effector\l_trajectory.h" alt="" coords="1186,109,1430,209"/>
+<area shape="rect" id="node35" href="cb__move__joints_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_joints.h" alt="" coords="2367,117,2577,202"/>
+<area shape="rect" id="node39" href="cb__move__named__target_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_named_target.h" alt="" coords="1723,117,1989,202"/>
+<area shape="rect" id="node4" href="move__base__z__client_2move__base__z__client__plugin_2include_2move__base__z__client__plugin_2client__behaviors_8h.html" title="smacc_client_library\l/move_base_z_client/move\l_base_z_client_plugin/include\l/move_base_z_client_plugin/client\l_behaviors.h" alt="" coords="675,413,920,498"/>
+<area shape="rect" id="node25" href="cb__navigate__backward_8cpp.html" title="smacc_client_library\l/move_base_z_client/move\l_base_z_client_plugin/src\l/client_behaviors/cb_navigate\l_backward.cpp" alt="" coords="944,413,1160,498"/>
 <area shape="rect" id="node5" href="sm__dance__bot_8h.html" title="smacc_sm_reference\l_library/sm_dance_bot\l/include/sm_dance_bot\l/sm_dance_bot.h" alt="" coords="5,561,176,631"/>
 <area shape="rect" id="node7" href="sm__dance__bot__2_8h.html" title="smacc_sm_reference\l_library/sm_dance_bot\l_2/include/sm_dance_bot\l_2/sm_dance_bot_2.h" alt="" coords="805,561,992,631"/>
 <area shape="rect" id="node9" href="sm__dance__bot__strikes__back_8h.html" title="smacc_sm_reference\l_library/sm_dance_bot\l_strikes_back/include\l/sm_dance_bot_strikes_back\l/sm_dance_bot_strikes_back.h" alt="" coords="1016,553,1237,639"/>
@@ -140,14 +116,15 @@ This graph shows which files directly or indirectly include this file:</div>
 <area shape="rect" id="node20" href="sm__opencv_8cpp.html" title="smacc_sm_reference\l_library/sm_opencv/src\l/sm_opencv.cpp" alt="" coords="214,694,386,750"/>
 <area shape="rect" id="node22" href="sm__opencv__2_8cpp.html" title="smacc_sm_reference\l_library/sm_opencv_2\l/src/sm_opencv_2.cpp" alt="" coords="420,694,585,750"/>
 <area shape="rect" id="node24" href="sm__opencv__3_8cpp.html" title="smacc_sm_reference\l_library/sm_opencv_3\l/src/sm_opencv_3.cpp" alt="" coords="609,694,775,750"/>
-<area shape="rect" id="node27" href="move__group__interface__client_2include_2move__group__interface__client_2client__behaviors_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors.h" alt="" coords="1710,413,1911,498"/>
-<area shape="rect" id="node28" href="cb__move__cartesian__relative_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_cartesian\l_relative.cpp" alt="" coords="933,257,1155,357"/>
-<area shape="rect" id="node30" href="cb__move__end__effector_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_end_effector.cpp" alt="" coords="1549,265,1819,350"/>
-<area shape="rect" id="node32" href="cb__move__end__effector__relative_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_end_effector\l_relative.cpp" alt="" coords="1281,257,1525,357"/>
-<area shape="rect" id="node34" href="cb__move__known__state_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_known_state.h" alt="" coords="2196,265,2455,350"/>
-<area shape="rect" id="node36" href="cb__move__joints_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_joints.cpp" alt="" coords="1945,265,2172,350"/>
-<area shape="rect" id="node35" href="cb__move__known__state_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_known\l_state.cpp" alt="" coords="2222,405,2429,505"/>
-<area shape="rect" id="node38" href="cb__move__named__target_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_named\l_target.cpp" alt="" coords="2529,257,2737,357"/>
+<area shape="rect" id="node27" href="move__group__interface__client_2include_2move__group__interface__client_2client__behaviors_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors.h" alt="" coords="1785,413,1986,498"/>
+<area shape="rect" id="node28" href="cb__move__cartesian__relative_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_cartesian\l_relative.cpp" alt="" coords="851,257,1074,357"/>
+<area shape="rect" id="node30" href="cb__move__end__effector_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_end_effector.cpp" alt="" coords="2021,265,2291,350"/>
+<area shape="rect" id="node32" href="cb__move__end__effector__relative_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_end_effector\l_relative.cpp" alt="" coords="1469,257,1713,357"/>
+<area shape="rect" id="node34" href="cb__move__end__effector__trajectory_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_end_effector\l_trajectory.cpp" alt="" coords="1149,257,1393,357"/>
+<area shape="rect" id="node36" href="cb__move__known__state_8h.html" title="smacc_client_library\l/move_group_interface\l_client/include/move_group\l_interface_client/client\l_behaviors/cb_move_known_state.h" alt="" coords="2668,265,2927,350"/>
+<area shape="rect" id="node38" href="cb__move__joints_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_joints.cpp" alt="" coords="2417,265,2644,350"/>
+<area shape="rect" id="node37" href="cb__move__known__state_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_known\l_state.cpp" alt="" coords="2694,405,2901,505"/>
+<area shape="rect" id="node40" href="cb__move__named__target_8cpp.html" title="smacc_client_library\l/move_group_interface\l_client/src/move_group\l_interface_client/client\l_behaviors/cb_move_named\l_target.cpp" alt="" coords="1737,257,1945,357"/>
 </map>
 </div>
 </div>
@@ -155,6 +132,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmacc_1_1EvCbFinished.html">smacc::EvCbFinished&lt; AsyncCB, Orthogonal &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmacc_1_1EvCbSuccess.html">smacc::EvCbSuccess&lt; AsyncCB, Orthogonal &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsmacc_1_1EvCbFailure.html">smacc::EvCbFailure&lt; AsyncCB, Orthogonal &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsmacc_1_1SmaccAsyncClientBehavior.html">smacc::SmaccAsyncClientBehavior</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">

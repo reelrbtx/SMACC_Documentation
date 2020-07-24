@@ -194,6 +194,7 @@ var searchData=
   ['st_5funsuspending_2eh',['st_unsuspending.h',['../st__unsuspending_8h.html',1,'']]],
   ['st_5fwednesday_2eh',['st_wednesday.h',['../st__wednesday_8h.html',1,'']]],
   ['state_5fbehavior_2ecpp',['state_behavior.cpp',['../state__behavior_8cpp.html',1,'']]],
+  ['state_5ftraits_2eh',['state_traits.h',['../state__traits_8h.html',1,'']]],
   ['sti_5fac_5fcycle_5fdwell_2eh',['sti_ac_cycle_dwell.h',['../sti__ac__cycle__dwell_8h.html',1,'']]],
   ['sti_5fac_5fcycle_5fexpire_2eh',['sti_ac_cycle_expire.h',['../sti__ac__cycle__expire_8h.html',1,'']]],
   ['sti_5fac_5fcycle_5finspire_2eh',['sti_ac_cycle_inspire.h',['../sti__ac__cycle__inspire_8h.html',1,'']]],

@@ -10,6 +10,6 @@ var searchData=
   ['movejoints',['moveJoints',['../classmove__group__interface__client_1_1CbMoveJoints.html#aa60670293a8fafcb6e091b85af722822',1,'move_group_interface_client::CbMoveJoints']]],
   ['moverelative',['moveRelative',['../classmove__group__interface__client_1_1CbMoveEndEffectorRelative.html#a8f64d14c4a398b455b1953ae61cc58bc',1,'move_group_interface_client::CbMoveEndEffectorRelative']]],
   ['moverelativecartesian',['moveRelativeCartesian',['../classmove__group__interface__client_1_1CbMoveCartesianRelative.html#a85b6b1c8738c372174dff8fd98ec1b7a',1,'move_group_interface_client::CbMoveCartesianRelative']]],
-  ['movetoabsolutepose',['moveToAbsolutePose',['../classmove__group__interface__client_1_1CbMoveEndEffector.html#a7850f5f9c6fbc040b77e8456a2ecee09',1,'move_group_interface_client::CbMoveEndEffector']]],
+  ['movetoabsolutepose',['moveToAbsolutePose',['../classmove__group__interface__client_1_1CbMoveEndEffector.html#a7850f5f9c6fbc040b77e8456a2ecee09',1,'move_group_interface_client::CbMoveEndEffector::moveToAbsolutePose()'],['../classmove__group__interface__client_1_1CbMoveEndEffectorTrajectory.html#a51655226081ce9a7e9095a92b1a635d9',1,'move_group_interface_client::CbMoveEndEffectorTrajectory::moveToAbsolutePose()']]],
   ['my_5fcontext',['my_context',['../structsmacc_1_1SmaccState_1_1my__context.html#af9c11c27b17bbf7de0d4e21c87d49f6f',1,'smacc::SmaccState::my_context']]]
 ];

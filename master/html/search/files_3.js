@@ -21,6 +21,8 @@ var searchData=
   ['cb_5fmove_5fend_5feffector_2eh',['cb_move_end_effector.h',['../cb__move__end__effector_8h.html',1,'']]],
   ['cb_5fmove_5fend_5feffector_5frelative_2ecpp',['cb_move_end_effector_relative.cpp',['../cb__move__end__effector__relative_8cpp.html',1,'']]],
   ['cb_5fmove_5fend_5feffector_5frelative_2eh',['cb_move_end_effector_relative.h',['../cb__move__end__effector__relative_8h.html',1,'']]],
+  ['cb_5fmove_5fend_5feffector_5ftrajectory_2ecpp',['cb_move_end_effector_trajectory.cpp',['../cb__move__end__effector__trajectory_8cpp.html',1,'']]],
+  ['cb_5fmove_5fend_5feffector_5ftrajectory_2eh',['cb_move_end_effector_trajectory.h',['../cb__move__end__effector__trajectory_8h.html',1,'']]],
   ['cb_5fmove_5fjoints_2ecpp',['cb_move_joints.cpp',['../cb__move__joints_8cpp.html',1,'']]],
   ['cb_5fmove_5fjoints_2eh',['cb_move_joints.h',['../cb__move__joints_8h.html',1,'']]],
   ['cb_5fmove_5fjoints_5frelative_2eh',['cb_move_joints_relative.h',['../cb__move__joints__relative_8h.html',1,'']]],
@@ -95,5 +97,6 @@ var searchData=
   ['cp_5fros_5fcontrol_5finterface_2eh',['cp_ros_control_interface.h',['../cp__ros__control__interface_8h.html',1,'']]],
   ['cp_5fscene_5fstate_2eh',['cp_scene_state.h',['../cp__scene__state_8h.html',1,'']]],
   ['cp_5fsimulated_5fgazebo_5fperception_2eh',['cp_simulated_gazebo_perception.h',['../cp__simulated__gazebo__perception_8h.html',1,'']]],
-  ['cp_5ftopic_5fsubscriber_2eh',['cp_topic_subscriber.h',['../cp__topic__subscriber_8h.html',1,'']]]
+  ['cp_5ftopic_5fsubscriber_2eh',['cp_topic_subscriber.h',['../cp__topic__subscriber_8h.html',1,'']]],
+  ['cp_5ftrajectory_5fhistory_2eh',['cp_trajectory_history.h',['../cp__trajectory__history_8h.html',1,'']]]
 ];

@@ -112,7 +112,7 @@ Definition at line 44 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+relative.
 
 
 
-References movegroup\+Client\+\_\+, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), and move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded().
+References movegroup\+Client\+\_\+, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Failure\+Event(), and smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Success\+Event().
 
 
 
@@ -159,25 +159,28 @@ Referenced by on\+Entry().
 79                 ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution succedded"});
 80                 \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->
       \hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a1b617e0018790b8ebf23aea75eb7acba}{postEventMotionExecutionSucceded}();
-81             \}
-82             \textcolor{keywordflow}{else}
-83             \{
-84                 moveGroupInterface.setPoseTarget(referenceStartPose); \textcolor{comment}{// undo to avoid abort-repeat state
+81                 this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_adf18efe1f0e4eacc1277b8865a8a94b1}{postSuccessEvent}();
+82             \}
+83             \textcolor{keywordflow}{else}
+84             \{
+85                 moveGroupInterface.setPoseTarget(referenceStartPose); \textcolor{comment}{// undo to avoid abort-repeat state
        issues with this relative motion}
-85                 ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
-86                 \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}
+86                 ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
+87                 \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}
       ();
-87             \}
-88         \}
-89         \textcolor{keywordflow}{else}
-90         \{
-91             moveGroupInterface.setPoseTarget(referenceStartPose); \textcolor{comment}{//undo since we did not executed the
+88                 this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+89             \}
+90         \}
+91         \textcolor{keywordflow}{else}
+92         \{
+93             moveGroupInterface.setPoseTarget(referenceStartPose); \textcolor{comment}{//undo since we did not executed the
        motion}
-92             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
-93             \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}(
+94             ROS\_INFO(\textcolor{stringliteral}{"[CbMoveEndEffectorRelative] motion execution failed"});
+95             \hyperlink{classmove__group__interface__client_1_1CbMoveEndEffectorRelative_a979ec9c309b1b52a0d0e254b49865fdc}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}(
       );
-94         \}
-95     \}
+96             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+97         \}
+98     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak

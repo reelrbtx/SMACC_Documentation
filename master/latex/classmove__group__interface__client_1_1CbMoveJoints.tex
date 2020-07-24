@@ -111,7 +111,7 @@ Definition at line 35 of file cb\+\_\+move\+\_\+joints.\+cpp.
 
 
 
-References joint\+Value\+Target\+\_\+, movegroup\+Client\+\_\+, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), and scaling\+Factor\+\_\+.
+References joint\+Value\+Target\+\_\+, movegroup\+Client\+\_\+, move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), move\+\_\+group\+\_\+interface\+\_\+client\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Failure\+Event(), smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Success\+Event(), and scaling\+Factor\+\_\+.
 
 
 
@@ -148,19 +148,22 @@ Referenced by on\+Entry().
 61         ROS\_INFO(\textcolor{stringliteral}{"[CbMoveJoints] motion execution succedded. Throwing success event."});
 62         \hyperlink{classmove__group__interface__client_1_1CbMoveJoints_a9c1ffe89b25fc5693949241217d73e90}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a1b617e0018790b8ebf23aea75eb7acba}{postEventMotionExecutionSucceded}(
       );
-63       \}
-64       \textcolor{keywordflow}{else}
-65       \{
-66         ROS\_WARN(\textcolor{stringliteral}{"[CbMoveJoints] motion execution failed. Throwing fail event."});
-67         \hyperlink{classmove__group__interface__client_1_1CbMoveJoints_a9c1ffe89b25fc5693949241217d73e90}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}();
-68       \}
-69     \}
-70     \textcolor{keywordflow}{else}
-71     \{
-72       ROS\_WARN(\textcolor{stringliteral}{"[CbMoveJoints] motion execution failed. Throwing fail event."});
-73       \hyperlink{classmove__group__interface__client_1_1CbMoveJoints_a9c1ffe89b25fc5693949241217d73e90}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}();
-74     \}
-75   \}
+63         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_adf18efe1f0e4eacc1277b8865a8a94b1}{postSuccessEvent}();
+64       \}
+65       \textcolor{keywordflow}{else}
+66       \{
+67         ROS\_WARN(\textcolor{stringliteral}{"[CbMoveJoints] motion execution failed. Throwing fail event."});
+68         \hyperlink{classmove__group__interface__client_1_1CbMoveJoints_a9c1ffe89b25fc5693949241217d73e90}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}();
+69         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+70       \}
+71     \}
+72     \textcolor{keywordflow}{else}
+73     \{
+74       ROS\_WARN(\textcolor{stringliteral}{"[CbMoveJoints] motion execution failed. Throwing fail event."});
+75       \hyperlink{classmove__group__interface__client_1_1CbMoveJoints_a9c1ffe89b25fc5693949241217d73e90}{movegroupClient\_}->\hyperlink{classmove__group__interface__client_1_1ClMoveGroup_a41c0eebdb446e6fbdd17113524c34869}{postEventMotionExecutionFailed}();
+76       this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+77     \}
+78   \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -233,12 +236,12 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf
 
 
 
-Definition at line 77 of file cb\+\_\+move\+\_\+joints.\+cpp.
+Definition at line 80 of file cb\+\_\+move\+\_\+joints.\+cpp.
 
 
 \begin{DoxyCode}
-78   \{
-79   \}
+81   \{
+82   \}
 \end{DoxyCode}
 
 
