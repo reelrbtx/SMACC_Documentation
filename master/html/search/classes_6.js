@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['graspingcomponent',['GraspingComponent',['../classmove__group__interface__client_1_1GraspingComponent.html',1,'move_group_interface_client']]]
+  ['graspingcomponent',['GraspingComponent',['../classcl__move__group__interface_1_1GraspingComponent.html',1,'cl_move_group_interface']]]
 ];
