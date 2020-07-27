@@ -36,7 +36,7 @@ typedef Message\+Type \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor
 \item 
 {\footnotesize template$<$typename T $>$ }\\boost\+::signals2\+::connection \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a9a2ffac7f03e1570bedc246ea4b00078}{on\+Message\+Timeout} (void(T\+::$\ast$\hyperlink{sm__ridgeback__barrel__search__2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback})(const ros\+::\+Timer\+Event \&), T $\ast$object)
 \item 
-{\footnotesize template$<$typename T\+Object\+Tag , typename T\+Derived $>$ }\\void \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a48474056b15f9cb24c5582bfbd228187}{configure\+Event\+Source\+Types} ()
+{\footnotesize template$<$typename T\+Orthogonal , typename T\+Source\+Object $>$ }\\void \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a1626a5caea2f4ea03052f70fe0117d83}{on\+Orthogonal\+Allocation} ()
 \item 
 virtual void \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a3847e19f925f65dd034964eb2d0b3594}{initialize} () override
 \end{DoxyCompactItemize}
@@ -117,33 +117,6 @@ Definition at line 31 of file cl\+\_\+multirole\+\_\+sensor.\+h.
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classcl__multirole__sensor_1_1ClMultiroleSensor_a48474056b15f9cb24c5582bfbd228187}\label{classcl__multirole__sensor_1_1ClMultiroleSensor_a48474056b15f9cb24c5582bfbd228187}} 
-\index{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor@{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor}!configure\+Event\+Source\+Types@{configure\+Event\+Source\+Types}}
-\index{configure\+Event\+Source\+Types@{configure\+Event\+Source\+Types}!cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor@{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor}}
-\subsubsection{\texorpdfstring{configure\+Event\+Source\+Types()}{configureEventSourceTypes()}}
-{\footnotesize\ttfamily template$<$typename Message\+Type$>$ \\
-template$<$typename T\+Object\+Tag , typename T\+Derived $>$ \\
-void \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor}{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor}$<$ Message\+Type $>$\+::configure\+Event\+Source\+Types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Definition at line 47 of file cl\+\_\+multirole\+\_\+sensor.\+h.
-
-
-\begin{DoxyCode}
-48   \{
-49     \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient}{SmaccSubscriberClient<MessageType>::template} 
-      configureEventSourceTypes<TObjectTag, TDerived>();
-50 
-51     this->\hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a61a6e5dce7f1b34508701a8bc8f06ab9}{postTimeoutMessageEvent} = [=](\textcolor{keyword}{auto} &timerdata) \{
-52       \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_afd37257b949c421d4f579b47352be95f}{onMessageTimeout\_}(timerdata);
-53 
-54       \textcolor{keyword}{auto} \textcolor{keyword}{event} = \textcolor{keyword}{new} EvTopicMessageTimeout<TDerived, TObjectTag>();
-55       \textcolor{keyword}{event}->timerData = timerdata;
-56       this->\hyperlink{classsmacc_1_1ISmaccClient_a21a79203cb44fc717d4d977c190327c6}{postEvent}(event);
-57     \};
-58   \}
-\end{DoxyCode}
 \mbox{\Hypertarget{classcl__multirole__sensor_1_1ClMultiroleSensor_a3847e19f925f65dd034964eb2d0b3594}\label{classcl__multirole__sensor_1_1ClMultiroleSensor_a3847e19f925f65dd034964eb2d0b3594}} 
 \index{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor@{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor}!initialize@{initialize}}
 \index{initialize@{initialize}!cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor@{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor}}
@@ -202,6 +175,33 @@ Definition at line 39 of file cl\+\_\+multirole\+\_\+sensor.\+h.
 41     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClient_aec51d4712404cb9882b86e4c854bb93a}{getStateMachine}()->\hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{createSignalConnection}(
       \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_afd37257b949c421d4f579b47352be95f}{onMessageTimeout\_}, \hyperlink{sm__ridgeback__barrel__search__1_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}, \textcolor{keywordtype}{object});
 42   \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classcl__multirole__sensor_1_1ClMultiroleSensor_a1626a5caea2f4ea03052f70fe0117d83}\label{classcl__multirole__sensor_1_1ClMultiroleSensor_a1626a5caea2f4ea03052f70fe0117d83}} 
+\index{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor@{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor}!on\+Orthogonal\+Allocation@{on\+Orthogonal\+Allocation}}
+\index{on\+Orthogonal\+Allocation@{on\+Orthogonal\+Allocation}!cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor@{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor}}
+\subsubsection{\texorpdfstring{on\+Orthogonal\+Allocation()}{onOrthogonalAllocation()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type$>$ \\
+template$<$typename T\+Orthogonal , typename T\+Source\+Object $>$ \\
+void \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor}{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor}$<$ Message\+Type $>$\+::on\+Orthogonal\+Allocation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 47 of file cl\+\_\+multirole\+\_\+sensor.\+h.
+
+
+\begin{DoxyCode}
+48   \{
+49     \hyperlink{classsmacc_1_1client__bases_1_1SmaccSubscriberClient}{SmaccSubscriberClient<MessageType>::template} 
+      onOrthogonalAllocation<TOrthogonal, TSourceObject>();
+50 
+51     this->\hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_a61a6e5dce7f1b34508701a8bc8f06ab9}{postTimeoutMessageEvent} = [=](\textcolor{keyword}{auto} &timerdata) \{
+52       \hyperlink{classcl__multirole__sensor_1_1ClMultiroleSensor_afd37257b949c421d4f579b47352be95f}{onMessageTimeout\_}(timerdata);
+53 
+54       \textcolor{keyword}{auto} \textcolor{keyword}{event} = \textcolor{keyword}{new} EvTopicMessageTimeout<TSourceObject, TOrthogonal>();
+55       \textcolor{keyword}{event}->timerData = timerdata;
+56       this->\hyperlink{classsmacc_1_1ISmaccClient_a21a79203cb44fc717d4d977c190327c6}{postEvent}(event);
+57     \};
+58   \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classcl__multirole__sensor_1_1ClMultiroleSensor_afa5b63048466234906971db69677b3f0}\label{classcl__multirole__sensor_1_1ClMultiroleSensor_afa5b63048466234906971db69677b3f0}} 
 \index{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor@{cl\+\_\+multirole\+\_\+sensor\+::\+Cl\+Multirole\+Sensor}!reset\+Timer@{reset\+Timer}}
