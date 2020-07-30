@@ -67,12 +67,12 @@ Definition at line 14 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+h.
 
 
 
-Definition at line 12 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
+Definition at line 11 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
 
 
 \begin{DoxyCode}
-13 \{
-14 \}
+12 \{
+13 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveCartesianRelative_a725ebdd1fdbc3c7a356e9c94cbc14259}\label{classcl__move__group__interface_1_1CbMoveCartesianRelative_a725ebdd1fdbc3c7a356e9c94cbc14259}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Cartesian\+Relative@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Cartesian\+Relative}!Cb\+Move\+Cartesian\+Relative@{Cb\+Move\+Cartesian\+Relative}}
@@ -82,14 +82,14 @@ Definition at line 12 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
 
 
 
-Definition at line 16 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
+Definition at line 15 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
 
 
 \begin{DoxyCode}
-16                                                                             : 
+15                                                                             : 
       \hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_aac5b6c2f42406da43f94cd5334aca925}{offset\_}(offset)
-17 \{
-18 \}
+16 \{
+17 \}
 \end{DoxyCode}
 
 
@@ -102,7 +102,7 @@ Definition at line 16 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
 
 
 
-Definition at line 40 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
+Definition at line 39 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
 
 
 
@@ -114,82 +114,82 @@ Referenced by on\+Entry().
 
 
 \begin{DoxyCode}
-42 \{
-43   std::vector<geometry\_msgs::Pose> waypoints;
-44 
-45   \textcolor{comment}{// this one was working fine but the issue is that for relative motions it grows up on ABORT-State-Loop
+41 \{
+42   std::vector<geometry\_msgs::Pose> waypoints;
+43 
+44   \textcolor{comment}{// this one was working fine but the issue is that for relative motions it grows up on ABORT-State-Loop
        pattern}
-46   \textcolor{keyword}{auto} referenceStartPose = movegroupClient->getPoseTarget(); 
-47   \textcolor{comment}{//auto referenceStartPose = this->moveGroupClientInterface.getCurrentPose();}
-48 
-49   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] RELATIVE MOTION, SOURCE POSE: "} << referenceStartPose);
-50   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] Offset: "} << offset);
-51 
-52   waypoints.push\_back(referenceStartPose.pose);  \textcolor{comment}{// up and out}
-53 
-54   \textcolor{keyword}{auto} targetObjectPose = movegroupClient->getPoseTarget();
-55 
-56   \textcolor{keyword}{auto} endPose = referenceStartPose.pose;
-57 
-58   endPose.position.x += offset.x;
-59   endPose.position.y += offset.y;
-60   endPose.position.z += offset.z;
-61 
-62   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] DESTINY POSE: "} << endPose);
-63 
-64   \textcolor{comment}{// target\_pose2.position.x -= 0.15;}
-65   waypoints.push\_back(endPose);  \textcolor{comment}{// left}
-66 
-67   movegroupClient->setPoseTarget(endPose);
-68 
-69   \textcolor{keywordtype}{float} scalinf = 0.5;
-70   \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_a2b5e5f05bce94dd3078abfd306c6ef39}{scalingFactor\_})
-71     scalinf = *\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_a2b5e5f05bce94dd3078abfd306c6ef39}{scalingFactor\_};
-72 
-73   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] Using scaling factor: "} << scalinf);
-74   movegroupClient->setMaxVelocityScalingFactor(scalinf);
-75 
-76   moveit\_msgs::RobotTrajectory trajectory;
-77   \textcolor{keywordtype}{double} fraction = movegroupClient->computeCartesianPath(waypoints,
-78                                                           0.01,  \textcolor{comment}{// eef\_step}
-79                                                           0.00,  \textcolor{comment}{// jump\_threshold}
-80                                                           trajectory);
-81 
-82   moveit::planning\_interface::MoveItErrorCode behaviorResult;
-83   \textcolor{keywordflow}{if} (fraction != 1.0 || fraction == -1)
-84   \{
-85     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] Cartesian plan joint-continuity percentaje. Execution
+45   \textcolor{keyword}{auto} referenceStartPose = movegroupClient->getPoseTarget(); 
+46   \textcolor{comment}{//auto referenceStartPose = this->moveGroupClientInterface.getCurrentPose();}
+47 
+48   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] RELATIVE MOTION, SOURCE POSE: "} << referenceStartPose);
+49   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] Offset: "} << offset);
+50 
+51   waypoints.push\_back(referenceStartPose.pose);  \textcolor{comment}{// up and out}
+52 
+53   \textcolor{keyword}{auto} targetObjectPose = movegroupClient->getPoseTarget();
+54 
+55   \textcolor{keyword}{auto} endPose = referenceStartPose.pose;
+56 
+57   endPose.position.x += offset.x;
+58   endPose.position.y += offset.y;
+59   endPose.position.z += offset.z;
+60 
+61   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] DESTINY POSE: "} << endPose);
+62 
+63   \textcolor{comment}{// target\_pose2.position.x -= 0.15;}
+64   waypoints.push\_back(endPose);  \textcolor{comment}{// left}
+65 
+66   movegroupClient->setPoseTarget(endPose);
+67 
+68   \textcolor{keywordtype}{float} scalinf = 0.5;
+69   \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_a2b5e5f05bce94dd3078abfd306c6ef39}{scalingFactor\_})
+70     scalinf = *\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_a2b5e5f05bce94dd3078abfd306c6ef39}{scalingFactor\_};
+71 
+72   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] Using scaling factor: "} << scalinf);
+73   movegroupClient->setMaxVelocityScalingFactor(scalinf);
+74 
+75   moveit\_msgs::RobotTrajectory trajectory;
+76   \textcolor{keywordtype}{double} fraction = movegroupClient->computeCartesianPath(waypoints,
+77                                                           0.01,  \textcolor{comment}{// eef\_step}
+78                                                           0.00,  \textcolor{comment}{// jump\_threshold}
+79                                                           trajectory);
+80 
+81   moveit::planning\_interface::MoveItErrorCode behaviorResult;
+82   \textcolor{keywordflow}{if} (fraction != 1.0 || fraction == -1)
+83   \{
+84     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] Cartesian plan joint-continuity percentaje. Execution
        skipped because not 100% of cartesian motion: "} << fraction*100<<\textcolor{stringliteral}{"%"});
-86     behaviorResult = moveit::planning\_interface::MoveItErrorCode::PLANNING\_FAILED;
-87   \}
-88   \textcolor{keywordflow}{else}
-89   \{
-90     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] Cartesian plan joint-continuity percentaje: "} << fraction);
-91 
-92     moveit::planning\_interface::MoveGroupInterface::Plan grasp\_pose\_plan;
-93 
-94     \textcolor{comment}{// grasp\_pose\_plan.start\_state\_ = *(moveGroupInterface.getCurrentState());}
-95     grasp\_pose\_plan.trajectory\_ = trajectory;
-96     behaviorResult = movegroupClient->execute(grasp\_pose\_plan);
-97   \}
-98 
-99   \textcolor{keywordflow}{if} (behaviorResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
-100   \{
-101     ROS\_INFO(\textcolor{stringliteral}{"[CbMoveCartesianRelative] relative motion execution succedded: fraction %lf."}, fraction);
-102     \hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_ac0226b2db9bf4de86eb64a535457e295}{moveGroupSmaccClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_aebaf269db373d41837bae87651458e54}{postEventMotionExecutionSucceded}
+85     behaviorResult = moveit::planning\_interface::MoveItErrorCode::PLANNING\_FAILED;
+86   \}
+87   \textcolor{keywordflow}{else}
+88   \{
+89     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbMoveCartesianRelative] Cartesian plan joint-continuity percentaje: "} << fraction);
+90 
+91     moveit::planning\_interface::MoveGroupInterface::Plan grasp\_pose\_plan;
+92 
+93     \textcolor{comment}{// grasp\_pose\_plan.start\_state\_ = *(moveGroupInterface.getCurrentState());}
+94     grasp\_pose\_plan.trajectory\_ = trajectory;
+95     behaviorResult = movegroupClient->execute(grasp\_pose\_plan);
+96   \}
+97 
+98   \textcolor{keywordflow}{if} (behaviorResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
+99   \{
+100     ROS\_INFO(\textcolor{stringliteral}{"[CbMoveCartesianRelative] relative motion execution succedded: fraction %lf."}, fraction);
+101     \hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_ac0226b2db9bf4de86eb64a535457e295}{moveGroupSmaccClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_aebaf269db373d41837bae87651458e54}{postEventMotionExecutionSucceded}
       ();
-103     this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_adf18efe1f0e4eacc1277b8865a8a94b1}{postSuccessEvent}();
-104   \}
-105   \textcolor{keywordflow}{else}
-106   \{
-107     movegroupClient->setPoseTarget(referenceStartPose); \textcolor{comment}{// undo changes since we did not executed the
+102     this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_adf18efe1f0e4eacc1277b8865a8a94b1}{postSuccessEvent}();
+103   \}
+104   \textcolor{keywordflow}{else}
+105   \{
+106     movegroupClient->setPoseTarget(referenceStartPose); \textcolor{comment}{// undo changes since we did not executed the
        motion}
-108     ROS\_INFO(\textcolor{stringliteral}{"[CbMoveCartesianRelative] relative motion execution failed: fraction %lf."}, fraction);
-109     \hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_ac0226b2db9bf4de86eb64a535457e295}{moveGroupSmaccClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a39dc3871d29b2af1ab739057f6ca6daa}{postEventMotionExecutionFailed}
+107     ROS\_INFO(\textcolor{stringliteral}{"[CbMoveCartesianRelative] relative motion execution failed: fraction %lf."}, fraction);
+108     \hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_ac0226b2db9bf4de86eb64a535457e295}{moveGroupSmaccClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a39dc3871d29b2af1ab739057f6ca6daa}{postEventMotionExecutionFailed}
       ();
-110     this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
-111   \}  
-112 \}
+109     this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+110   \}  
+111 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -219,7 +219,7 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a3ec24a839087c5
 
 
 
-Definition at line 20 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
+Definition at line 19 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
 
 
 
@@ -227,19 +227,19 @@ References group\+\_\+, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cl\+Move\+Gr
 
 
 \begin{DoxyCode}
-21 \{
-22   this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_ac0226b2db9bf4de86eb64a535457e295}{moveGroupSmaccClient\_});
-23 
-24   \textcolor{keywordflow}{if} (this->\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_a194d8357267ccd5ee0a10200f1c4cae0}{group\_})
-25   \{
-26       moveit::planning\_interface::MoveGroupInterface move\_group(*(this->\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_a194d8357267ccd5ee0a10200f1c4cae0}{group\_}));
-27   \}
-28   \textcolor{keywordflow}{else}
-29   \{
-30       this->\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_ae8443c7f81affe5c4450e83fc665487f}{moveRelativeCartesian}(&\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_ac0226b2db9bf4de86eb64a535457e295}{moveGroupSmaccClient\_}->
+20 \{
+21   this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_ac0226b2db9bf4de86eb64a535457e295}{moveGroupSmaccClient\_});
+22 
+23   \textcolor{keywordflow}{if} (this->\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_a194d8357267ccd5ee0a10200f1c4cae0}{group\_})
+24   \{
+25       moveit::planning\_interface::MoveGroupInterface move\_group(*(this->\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_a194d8357267ccd5ee0a10200f1c4cae0}{group\_}));
+26   \}
+27   \textcolor{keywordflow}{else}
+28   \{
+29       this->\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_ae8443c7f81affe5c4450e83fc665487f}{moveRelativeCartesian}(&\hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_ac0226b2db9bf4de86eb64a535457e295}{moveGroupSmaccClient\_}->
       \hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a92922ea689e4e1b7b91512c56629c95b}{moveGroupClientInterface}, \hyperlink{classcl__move__group__interface_1_1CbMoveCartesianRelative_aac5b6c2f42406da43f94cd5334aca925}{offset\_});
-31   \}
-32 \}
+30   \}
+31 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -261,13 +261,13 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf
 
 
 
-Definition at line 34 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
+Definition at line 33 of file cb\+\_\+move\+\_\+cartesian\+\_\+relative.\+cpp.
 
 
 \begin{DoxyCode}
-35 \{
-36     
-37 \}
+34 \{
+35     
+36 \}
 \end{DoxyCode}
 
 
