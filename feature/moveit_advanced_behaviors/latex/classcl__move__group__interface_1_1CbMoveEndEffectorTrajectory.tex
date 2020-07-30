@@ -27,16 +27,25 @@ Collaboration diagram for cl\+\_\+move\+\_\+group\+\_\+interface\+:\+:Cb\+Move\+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a65521ae766086fe31c46e9a0a18a2198}{Cb\+Move\+End\+Effector\+Trajectory} ()
+\item 
 \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae0a2197aae29ec2a5842e94014ba2065}{Cb\+Move\+End\+Effector\+Trajectory} (const std\+::vector$<$ geometry\+\_\+msgs\+::\+Pose\+Stamped $>$ \&end\+Effector\+Trajectory)
 \item 
 virtual void \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aaedd074fd178c6390a4a3f1ccff23ad3}{on\+Entry} () override
 \item 
-std\+::future$<$ moveit\+::planning\+\_\+interface\+::\+Move\+It\+Error\+Code $>$ \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a8490f52e1f8cb280657965b544bfed30}{plan\+And\+Execute\+Async} ()
+virtual void \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a57fedb6a0603fe569842a13faf19f5cd}{update} () override
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 boost\+::optional$<$ std\+::string $>$ \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aa247cf74c1d4878bacecba836a839fa7}{group\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aeae938ab66e18ab7d2fb2427bc83647b}{generate\+Trajectory} ()
+\item 
+void \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a9e18ba2a396a178c535b55b8b5de732a}{publish\+Trajectory\+Markers} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -45,37 +54,158 @@ std\+::vector$<$ geometry\+\_\+msgs\+::\+Pose\+Stamped $>$ \hyperlink{classcl__m
 \item 
 \hyperlink{classcl__move__group__interface_1_1ClMoveGroup}{Cl\+Move\+Group} $\ast$ \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroup\+Client\+\_\+}
 \end{DoxyCompactItemize}
-\subsection*{Additional Inherited Members}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_afcee8f3853a5cef8806137a304c8a14b}{initialize\+R\+OS} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ros\+::\+Publisher \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aabc2216b2d8625fecd83c5ec69928e63}{markers\+Pub\+\_\+}
+\item 
+visualization\+\_\+msgs\+::\+Marker\+Array \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aebdf8706efb24b30f4de6c5123b62f3c}{ma}
+\item 
+ros\+::\+Service\+Client \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a8a2e2225a5b53325241e45e4e28fa3a7}{iksrv\+\_\+}
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 14 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
+Definition at line 16 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a65521ae766086fe31c46e9a0a18a2198}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a65521ae766086fe31c46e9a0a18a2198}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!Cb\+Move\+End\+Effector\+Trajectory@{Cb\+Move\+End\+Effector\+Trajectory}}
+\index{Cb\+Move\+End\+Effector\+Trajectory@{Cb\+Move\+End\+Effector\+Trajectory}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
+\subsubsection{\texorpdfstring{Cb\+Move\+End\+Effector\+Trajectory()}{CbMoveEndEffectorTrajectory()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::\+Cb\+Move\+End\+Effector\+Trajectory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 14 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+
+
+
+References initialize\+R\+O\+S().
+
+
+\begin{DoxyCode}
+15     \{
+16         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_afcee8f3853a5cef8806137a304c8a14b}{initializeROS}();
+17     \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a65521ae766086fe31c46e9a0a18a2198_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae0a2197aae29ec2a5842e94014ba2065}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae0a2197aae29ec2a5842e94014ba2065}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!Cb\+Move\+End\+Effector\+Trajectory@{Cb\+Move\+End\+Effector\+Trajectory}}
 \index{Cb\+Move\+End\+Effector\+Trajectory@{Cb\+Move\+End\+Effector\+Trajectory}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
-\subsubsection{\texorpdfstring{Cb\+Move\+End\+Effector\+Trajectory()}{CbMoveEndEffectorTrajectory()}}
+\subsubsection{\texorpdfstring{Cb\+Move\+End\+Effector\+Trajectory()}{CbMoveEndEffectorTrajectory()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::\+Cb\+Move\+End\+Effector\+Trajectory (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ geometry\+\_\+msgs\+::\+Pose\+Stamped $>$ \&}]{end\+Effector\+Trajectory }\end{DoxyParamCaption})}
 
 
 
-Definition at line 12 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+Definition at line 19 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+
+
+
+References initialize\+R\+O\+S().
 
 
 \begin{DoxyCode}
-13         : \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}(endEffectorTrajectory)
-14 
-15     \{
-16     \}
+20         : \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}(endEffectorTrajectory)
+21 
+22     \{
+23         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_afcee8f3853a5cef8806137a304c8a14b}{initializeROS}();
+24     \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae0a2197aae29ec2a5842e94014ba2065_cgraph}
+\end{center}
+\end{figure}
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aeae938ab66e18ab7d2fb2427bc83647b}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aeae938ab66e18ab7d2fb2427bc83647b}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!generate\+Trajectory@{generate\+Trajectory}}
+\index{generate\+Trajectory@{generate\+Trajectory}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
+\subsubsection{\texorpdfstring{generate\+Trajectory()}{generateTrajectory()}}
+{\footnotesize\ttfamily void cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::generate\+Trajectory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \hyperlink{classcl__move__group__interface_1_1CbCircularPivotMotion_a7ff4ffd989cda695adc44a5a42eb3a18}{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pivot\+Motion}.
+
+
+
+Definition at line 237 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+
+
+
+Referenced by on\+Entry().
+
+
+\begin{DoxyCode}
+238     \{
+239         \textcolor{comment}{// bypass current trajectory, overriden in derived classes}
+240         \textcolor{comment}{// this->endEffectorTrajectory\_ = ...}
+241     \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aeae938ab66e18ab7d2fb2427bc83647b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_afcee8f3853a5cef8806137a304c8a14b}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_afcee8f3853a5cef8806137a304c8a14b}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!initialize\+R\+OS@{initialize\+R\+OS}}
+\index{initialize\+R\+OS@{initialize\+R\+OS}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
+\subsubsection{\texorpdfstring{initialize\+R\+O\+S()}{initializeROS()}}
+{\footnotesize\ttfamily void cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::initialize\+R\+OS (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 26 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+
+
+
+References iksrv\+\_\+, and markers\+Pub\+\_\+.
+
+
+
+Referenced by Cb\+Move\+End\+Effector\+Trajectory().
+
+
+\begin{DoxyCode}
+27     \{
+28         ros::NodeHandle nh;
+29         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aabc2216b2d8625fecd83c5ec69928e63}{markersPub\_} = nh.advertise<visualization\_msgs::MarkerArray>(\textcolor{stringliteral}{"trajectory\_markers"}, 1);
+30         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a8a2e2225a5b53325241e45e4e28fa3a7}{iksrv\_} = nh.serviceClient<moveit\_msgs::GetPositionIK>(\textcolor{stringliteral}{"/compute\_ik"});
+31     \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_afcee8f3853a5cef8806137a304c8a14b_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aaedd074fd178c6390a4a3f1ccff23ad3}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aaedd074fd178c6390a4a3f1ccff23ad3}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!on\+Entry@{on\+Entry}}
 \index{on\+Entry@{on\+Entry}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
@@ -88,136 +218,168 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a3ec24a839087c5
 
 
 
-Definition at line 18 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+Definition at line 33 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
 
 
 
-References smacc\+::\+I\+Smacc\+Client\+Behavior\+::current\+State, end\+Effector\+Trajectory\+\_\+, movegroup\+Client\+\_\+, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, smacc\+::\+I\+Smacc\+Client\+Behavior\+::requires\+Client(), and battery\+\_\+monitor\+\_\+node\+::t.
+References smacc\+::\+I\+Smacc\+Client\+Behavior\+::current\+State, smacc\+::introspection\+::demangle\+Symbol(), end\+Effector\+Trajectory\+\_\+, generate\+Trajectory(), iksrv\+\_\+, movegroup\+Client\+\_\+, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, publish\+Trajectory\+Markers(), and smacc\+::\+I\+Smacc\+Client\+Behavior\+::requires\+Client().
 
 
 \begin{DoxyCode}
-19     \{
-20         moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
-21 
-22         this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_});
-23         \textcolor{comment}{// get current robot state}
-24         \textcolor{keyword}{auto} \hyperlink{classsmacc_1_1ISmaccClientBehavior_a5a6658a2deb72b700ae595e594617616}{currentState} = \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->
-      \hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a92922ea689e4e1b7b91512c56629c95b}{moveGroupClientInterface}.getCurrentState();
-25 
-26         \textcolor{comment}{// get the IK client}
-27         ros::NodeHandle nh;
-28         \textcolor{keyword}{auto} iksrv = nh.serviceClient<moveit\_msgs::GetPositionIK>(\textcolor{stringliteral}{"/compute\_ik"});
-29         \textcolor{keyword}{auto} groupname = \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->
-      \hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a92922ea689e4e1b7b91512c56629c95b}{moveGroupClientInterface}.getName();
-30         \textcolor{keyword}{auto} currentjointnames = \hyperlink{classsmacc_1_1ISmaccClientBehavior_a5a6658a2deb72b700ae595e594617616}{currentState}->getJointModelGroup(groupname)->
-      getActiveJointModelNames();
-31 
-32         std::vector<double> jointPositions;
-33         \hyperlink{classsmacc_1_1ISmaccClientBehavior_a5a6658a2deb72b700ae595e594617616}{currentState}->copyJointGroupPositions(groupname, jointPositions);
-34 
-35         std::vector<std::vector<double>> trajectory;
-36         trajectory.push\_back(jointPositions);
+34     \{
+35 
+36         moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
 37 
-38         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.size(); k++)
-39         \{
-40             \textcolor{keyword}{auto} &pose = this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}[k];
-41             moveit\_msgs::GetPositionIKRequest req;
-42             req.ik\_request.robot\_state.joint\_state.name = currentjointnames;
-43             req.ik\_request.robot\_state.joint\_state.position = jointPositions;
-44 
-45             req.ik\_request.group\_name = groupname;
-46             req.ik\_request.avoid\_collisions = \textcolor{keyword}{true};
+38         this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_});
+39 
+40         this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aeae938ab66e18ab7d2fb2427bc83647b}{generateTrajectory}();
+41 
+42         \textcolor{keywordflow}{if} (this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.size() == 0)
+43         \{
+44             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{smacc::demangleSymbol}(\textcolor{keyword}{typeid}(*this).name()) << \textcolor{stringliteral}{"]
+       No points in the trajectory. Skipping behavior."});
+45             \textcolor{keywordflow}{return};
+46         \}
 47 
-48             moveit\_msgs::GetPositionIKResponse res;
+48         this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a9e18ba2a396a178c535b55b8b5de732a}{publishTrajectoryMarkers}();
 49 
-50             pose.header.stamp = ros::Time::now();
-51             req.ik\_request.pose\_stamped = pose;
+50         \textcolor{comment}{// get current robot state}
+51         \textcolor{keyword}{auto} \hyperlink{classsmacc_1_1ISmaccClientBehavior_a5a6658a2deb72b700ae595e594617616}{currentState} = \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->
+      \hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a92922ea689e4e1b7b91512c56629c95b}{moveGroupClientInterface}.getCurrentState();
 52 
-53             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"IK request: "} << req);
-54             \textcolor{keywordflow}{if} (iksrv.call(req, res))
-55             \{
-56                 \textcolor{keyword}{auto} &prevtrajpoint = trajectory.back();
-57                 \textcolor{comment}{//jointPositions.clear();}
-58 
-59                 std::stringstream ss;
-60                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < res.solution.joint\_state.position.size(); j++)
-61                 \{
-62                     \textcolor{keyword}{auto} &jointname = res.solution.joint\_state.name[j];
-63                     \textcolor{keyword}{auto} it = std::find(currentjointnames.begin(), currentjointnames.end(), jointname);
-64                     \textcolor{keywordflow}{if} (it != currentjointnames.end())
-65                     \{
-66                         \textcolor{keywordtype}{int} index = std::distance(currentjointnames.begin(), it);
-67                         jointPositions[index] = res.solution.joint\_state.position[j];
-68                         ss << jointname << \textcolor{stringliteral}{"("} << index << \textcolor{stringliteral}{"): "} << jointPositions[index] << std::endl;
-69                     \}
-70                 \}
-71 
-72                 \textcolor{comment}{// continuity check}
-73                 \textcolor{keywordtype}{bool} discontinuity = \textcolor{keyword}{false};
-74                 \textcolor{keywordflow}{if}(k!=0)
-75                 \{
-76                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < jointPositions.size(); j++)
-77                     \{
-78                         \textcolor{keyword}{auto} deltajoint = jointPositions[j] - prevtrajpoint[j];
-79 
-80                         \textcolor{keywordflow}{if} (fabs(deltajoint) > 0.07 \textcolor{comment}{/*2 deg*/})
-81                         \{
-82                             discontinuity = \textcolor{keyword}{true};
-83                             ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"IK discontinuity "} << currentjointnames[j] << \textcolor{stringliteral}{" : "} << 
-      deltajoint );
-84                             \textcolor{keywordflow}{break};
-85                         \}
-86                     \}
-87                 \}
-88 
-89                 \textcolor{keywordflow}{if} (discontinuity)
-90                 \{
-91                     k--;
-92                     ROS\_ERROR(\textcolor{stringliteral}{"IK discontinuity detected, retrying"});
-93                 \}
-94                 \textcolor{keywordflow}{else}
-95                 \{
-96                     trajectory.push\_back(jointPositions);
-97                     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"IK solution: "} << res.solution.joint\_state);
-98                     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"trajpoint: "} << std::endl
-99                                                   << ss.str());
-100                 \}
-101             \}
-102             \textcolor{keywordflow}{else}
-103             \{
-104                 ROS\_ERROR(\textcolor{stringliteral}{"[CbMoveEndEffectorTrajectory] wrong IK call"});
-105             \}
-106 
-107             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"-----"});
-108         \}
-109 
-110         \textcolor{comment}{// interpolate speeds?}
-111 
-112         \textcolor{comment}{// interpolate accelerations?}
-113 
-114         \textcolor{comment}{// get current robot state}
-115         \textcolor{comment}{// fill plan message}
-116         computedMotionPlan.start\_state\_.joint\_state.name = currentjointnames;
-117 
-118         computedMotionPlan.start\_state\_.joint\_state.position = trajectory.front();
-119         computedMotionPlan.trajectory\_.joint\_trajectory.joint\_names = currentjointnames;
-120 
-121         \textcolor{keywordtype}{double} \hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t} = 0;
-122         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
-123         \{
-124             trajectory\_msgs::JointTrajectoryPoint jp;
-125             jp.positions = p;
-126             jp.time\_from\_start = ros::Duration(t);
-127             t += 1.0;
-128             computedMotionPlan.trajectory\_.joint\_trajectory.points.push\_back(jp);
-129         \}
-130 
-131         \textcolor{comment}{// call execute}
-132         this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a92922ea689e4e1b7b91512c56629c95b}{moveGroupClientInterface}.execute(
-      computedMotionPlan.trajectory\_);
+53         \textcolor{comment}{// get the IK client}
+54         \textcolor{keyword}{auto} groupname = \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->
+      \hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a92922ea689e4e1b7b91512c56629c95b}{moveGroupClientInterface}.getName();
+55         \textcolor{keyword}{auto} currentjointnames = \hyperlink{classsmacc_1_1ISmaccClientBehavior_a5a6658a2deb72b700ae595e594617616}{currentState}->getJointModelGroup(groupname)->
+      getActiveJointModelNames();
+56 
+57         std::vector<double> jointPositions;
+58         \hyperlink{classsmacc_1_1ISmaccClientBehavior_a5a6658a2deb72b700ae595e594617616}{currentState}->copyJointGroupPositions(groupname, jointPositions);
+59 
+60         std::vector<std::vector<double>> trajectory;
+61         std::vector<ros::Duration> trajectoryTimeStamps;
+62 
+63         trajectory.push\_back(jointPositions);
+64         trajectoryTimeStamps.push\_back(ros::Duration(0));
+65 
+66         \textcolor{keyword}{auto}& first = \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.front();
+67         ros::Time referenceTime = first.header.stamp;
+68 
+69         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.size(); k++)
+70         \{
+71             \textcolor{keyword}{auto} &pose = this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}[k];
+72             moveit\_msgs::GetPositionIKRequest req;
+73             req.ik\_request.robot\_state.joint\_state.name = currentjointnames;
+74             req.ik\_request.robot\_state.joint\_state.position = jointPositions;
+75 
+76             req.ik\_request.group\_name = groupname;
+77             req.ik\_request.avoid\_collisions = \textcolor{keyword}{true};
+78 
+79             moveit\_msgs::GetPositionIKResponse res;
+80 
+81             \textcolor{comment}{//pose.header.stamp = ros::Time::now();}
+82             req.ik\_request.pose\_stamped = pose;
+83 
+84             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"IK request: "} << req);
+85             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a8a2e2225a5b53325241e45e4e28fa3a7}{iksrv\_}.call(req, res))
+86             \{
+87                 \textcolor{keyword}{auto} &prevtrajpoint = trajectory.back();
+88                 \textcolor{comment}{//jointPositions.clear();}
+89 
+90                 std::stringstream ss;
+91                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < res.solution.joint\_state.position.size(); j++)
+92                 \{
+93                     \textcolor{keyword}{auto} &jointname = res.solution.joint\_state.name[j];
+94                     \textcolor{keyword}{auto} it = std::find(currentjointnames.begin(), currentjointnames.end(), jointname);
+95                     \textcolor{keywordflow}{if} (it != currentjointnames.end())
+96                     \{
+97                         \textcolor{keywordtype}{int} index = std::distance(currentjointnames.begin(), it);
+98                         jointPositions[index] = res.solution.joint\_state.position[j];
+99                         ss << jointname << \textcolor{stringliteral}{"("} << index << \textcolor{stringliteral}{"): "} << jointPositions[index] << std::endl;
+100                     \}
+101                 \}
+102 
+103                 \textcolor{comment}{// continuity check}
+104                 \textcolor{keywordtype}{bool} discontinuity = \textcolor{keyword}{false};
+105                 \textcolor{keywordtype}{int} jointindex = 0;
+106                 \textcolor{keywordtype}{double} deltajoint;
+107                 \textcolor{keywordflow}{if} (k != 0)
+108                 \{
+109                     \textcolor{keywordflow}{for} (jointindex = 0; jointindex < jointPositions.size(); jointindex++)
+110                     \{
+111                         deltajoint = jointPositions[jointindex] - prevtrajpoint[jointindex];
+112 
+113                         discontinuity = fabs(deltajoint) > 0.07 \textcolor{comment}{/*2 deg*/};
+114 
+115                         \textcolor{keywordflow}{if} (discontinuity)
+116                         \{
+117                             \textcolor{keywordflow}{break};
+118                         \}
+119                     \}
+120                 \}
+121 
+122                 \textcolor{keywordflow}{if} (discontinuity)
+123                 \{
+124                     std::stringstream ss;
+125                     ss << \textcolor{stringliteral}{"Traj["} << k << \textcolor{stringliteral}{"/"} << \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.size() << \textcolor{stringliteral}{"] 
+      "} << currentjointnames[jointindex] << \textcolor{stringliteral}{" IK discontinuity : "} << deltajoint << std::endl
+126                        << \textcolor{stringliteral}{"prev joint value: "} << prevtrajpoint[jointindex] << std::endl
+127                        << \textcolor{stringliteral}{"current joint value: "} << jointPositions[jointindex] << std::endl;
+128 
+129                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} kindex = 0; kindex < trajectory.size(); kindex++)
+130                     \{
+131                         ss << \textcolor{stringliteral}{"["} << kindex << \textcolor{stringliteral}{"]: "} << trajectory[kindex][jointindex] << std::endl;
+132                     \}
 133 
-134         \textcolor{comment}{// handle finishing events}
-135     \}
+134                     ROS\_ERROR\_STREAM(ss.str());
+135                     k--;
+136                 \}
+137                 \textcolor{keywordflow}{else}
+138                 \{
+139                     trajectory.push\_back(jointPositions);
+140                     ros::Duration durationFromStart = pose.header.stamp - referenceTime;
+141                     trajectoryTimeStamps.push\_back(durationFromStart);
+142 
+143                     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"IK solution: "} << res.solution.joint\_state);
+144                     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"trajpoint: "} << std::endl
+145                                                   << ss.str());
+146                 \}
+147             \}
+148             \textcolor{keywordflow}{else}
+149             \{
+150                 ROS\_ERROR(\textcolor{stringliteral}{"[CbMoveEndEffectorTrajectory] wrong IK call"});
+151             \}
+152 
+153             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"-----"});
+154         \}
+155 
+156         \textcolor{comment}{// interpolate speeds?}
+157 
+158         \textcolor{comment}{// interpolate accelerations?}
+159 
+160         \textcolor{comment}{// get current robot state}
+161         \textcolor{comment}{// fill plan message}
+162         computedMotionPlan.start\_state\_.joint\_state.name = currentjointnames;
+163 
+164         computedMotionPlan.start\_state\_.joint\_state.position = trajectory.front();
+165         computedMotionPlan.trajectory\_.joint\_trajectory.joint\_names = currentjointnames;
+166 
+167         \textcolor{keywordtype}{int} i = 0;
+168         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
+169         \{
+170             trajectory\_msgs::JointTrajectoryPoint jp;
+171             jp.positions = p;
+172             jp.time\_from\_start = trajectoryTimeStamps[i]; \textcolor{comment}{//ros::Duration(t);}
+173             computedMotionPlan.trajectory\_.joint\_trajectory.points.push\_back(jp);
+174             i++;
+175         \}
+176 
+177         \textcolor{comment}{// call execute}
+178         this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a92922ea689e4e1b7b91512c56629c95b}{moveGroupClientInterface}.execute(
+      computedMotionPlan.trajectory\_);
+179 
+180         \textcolor{comment}{// handle finishing events}
+181     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -227,12 +389,106 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aaedd074fd178c6390a4a3f1ccff23ad3_cgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a8490f52e1f8cb280657965b544bfed30}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a8490f52e1f8cb280657965b544bfed30}} 
-\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!plan\+And\+Execute\+Async@{plan\+And\+Execute\+Async}}
-\index{plan\+And\+Execute\+Async@{plan\+And\+Execute\+Async}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
-\subsubsection{\texorpdfstring{plan\+And\+Execute\+Async()}{planAndExecuteAsync()}}
-{\footnotesize\ttfamily std\+::future$<$moveit\+::planning\+\_\+interface\+::\+Move\+It\+Error\+Code$>$ cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::plan\+And\+Execute\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a9e18ba2a396a178c535b55b8b5de732a}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a9e18ba2a396a178c535b55b8b5de732a}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!publish\+Trajectory\+Markers@{publish\+Trajectory\+Markers}}
+\index{publish\+Trajectory\+Markers@{publish\+Trajectory\+Markers}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
+\subsubsection{\texorpdfstring{publish\+Trajectory\+Markers()}{publishTrajectoryMarkers()}}
+{\footnotesize\ttfamily void cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::publish\+Trajectory\+Markers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
+
+
+Definition at line 191 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+
+
+
+References end\+Effector\+Trajectory\+\_\+, and ma.
+
+
+
+Referenced by on\+Entry().
+
+
+\begin{DoxyCode}
+192     \{
+193         tf::Transform localdirection;
+194         localdirection.setIdentity();
+195         localdirection.setOrigin(tf::Vector3(0.04, 0, 0));
+196         \textcolor{keyword}{auto} frameid = this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.front().header.frame\_id;
+197 
+198         \textcolor{keywordtype}{int} i = 0;
+199         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &pose : this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_})
+200         \{
+201             visualization\_msgs::Marker marker;
+202             marker.header.frame\_id = frameid;
+203             marker.header.stamp = ros::Time::now();
+204             marker.ns = \textcolor{stringliteral}{"trajectory"};
+205             marker.id = i++;
+206             marker.type = visualization\_msgs::Marker::ARROW;
+207             marker.action = visualization\_msgs::Marker::ADD;
+208             marker.scale.x = 0.01;
+209             marker.scale.y = 0.03;
+210             marker.scale.z = 0.01;
+211             marker.color.a = 1.0;
+212             marker.color.r = 1.0;
+213             marker.color.g = 0;
+214             marker.color.b = 0;
+215 
+216             geometry\_msgs::Point start, end;
+217             start.x = pose.pose.position.x;
+218             start.y = pose.pose.position.y;
+219             start.z = pose.pose.position.z;
+220 
+221             tf::Transform basetransform;
+222             tf::poseMsgToTF(pose.pose, basetransform);
+223             tf::Transform endarrow = localdirection * basetransform;
+224 
+225             end.x = endarrow.getOrigin().x();
+226             end.y = endarrow.getOrigin().y();
+227             end.z = endarrow.getOrigin().z();
+228 
+229             marker.pose.orientation.w = 1;
+230             marker.points.push\_back(start);
+231             marker.points.push\_back(end);
+232 
+233             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aebdf8706efb24b30f4de6c5123b62f3c}{ma}.markers.push\_back(marker);
+234         \}
+235     \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a9e18ba2a396a178c535b55b8b5de732a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a57fedb6a0603fe569842a13faf19f5cd}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a57fedb6a0603fe569842a13faf19f5cd}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!update@{update}}
+\index{update@{update}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \hyperlink{classsmacc_1_1ISmaccUpdatable_a84ee0520cbefdb1d412bed54650b028e}{smacc\+::\+I\+Smacc\+Updatable}.
+
+
+
+Definition at line 183 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+
+
+
+References end\+Effector\+Trajectory\+\_\+, ma, and markers\+Pub\+\_\+.
+
+
+\begin{DoxyCode}
+184     \{
+185         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aebdf8706efb24b30f4de6c5123b62f3c}{ma}.markers.size() == this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.size())
+186         \{
+187             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aabc2216b2d8625fecd83c5ec69928e63}{markersPub\_}.publish(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aebdf8706efb24b30f4de6c5123b62f3c}{ma});
+188         \}
+189     \}
+\end{DoxyCode}
 
 
 \subsection{Member Data Documentation}
@@ -244,11 +500,11 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 29 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
+Definition at line 34 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
 
 
 
-Referenced by on\+Entry().
+Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pivot\+Motion\+::generate\+Trajectory(), on\+Entry(), publish\+Trajectory\+Markers(), and update().
 
 \mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aa247cf74c1d4878bacecba836a839fa7}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aa247cf74c1d4878bacecba836a839fa7}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!group\+\_\+@{group\+\_\+}}
@@ -258,7 +514,49 @@ Referenced by on\+Entry().
 
 
 
-Definition at line 19 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
+Definition at line 21 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
+
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a8a2e2225a5b53325241e45e4e28fa3a7}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a8a2e2225a5b53325241e45e4e28fa3a7}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!iksrv\+\_\+@{iksrv\+\_\+}}
+\index{iksrv\+\_\+@{iksrv\+\_\+}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
+\subsubsection{\texorpdfstring{iksrv\+\_\+}{iksrv\_}}
+{\footnotesize\ttfamily ros\+::\+Service\+Client cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::iksrv\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 42 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
+
+
+
+Referenced by initialize\+R\+O\+S(), and on\+Entry().
+
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aebdf8706efb24b30f4de6c5123b62f3c}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aebdf8706efb24b30f4de6c5123b62f3c}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!ma@{ma}}
+\index{ma@{ma}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
+\subsubsection{\texorpdfstring{ma}{ma}}
+{\footnotesize\ttfamily visualization\+\_\+msgs\+::\+Marker\+Array cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::ma\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 41 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
+
+
+
+Referenced by publish\+Trajectory\+Markers(), and update().
+
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aabc2216b2d8625fecd83c5ec69928e63}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aabc2216b2d8625fecd83c5ec69928e63}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!markers\+Pub\+\_\+@{markers\+Pub\+\_\+}}
+\index{markers\+Pub\+\_\+@{markers\+Pub\+\_\+}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
+\subsubsection{\texorpdfstring{markers\+Pub\+\_\+}{markersPub\_}}
+{\footnotesize\ttfamily ros\+::\+Publisher cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::markers\+Pub\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 40 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
+
+
+
+Referenced by initialize\+R\+O\+S(), and update().
 
 \mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!movegroup\+Client\+\_\+@{movegroup\+Client\+\_\+}}
@@ -268,11 +566,11 @@ Definition at line 19 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajector
 
 
 
-Definition at line 31 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
+Definition at line 36 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
 
 
 
-Referenced by on\+Entry().
+Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pivot\+Motion\+::generate\+Trajectory(), and on\+Entry().
 
 
 

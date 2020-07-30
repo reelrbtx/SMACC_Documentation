@@ -516,23 +516,26 @@ Definition at line 315 of file smacc\+\_\+state\+\_\+base.\+h.
 357 
 358       ROS\_INFO(\textcolor{stringliteral}{"[%s] State runtime configuration"}, \hyperlink{smacc__state__base_8h_a0d7815723706a488b5bb65f7e3acf584}{STATE\_NAME});
 359 
-360       \textcolor{comment}{// first we runtime configure the state, where we create client behaviors}
-361       \textcolor{keyword}{static\_cast<}MostDerived *\textcolor{keyword}{>}(\textcolor{keyword}{this})->\hyperlink{classsmacc_1_1SmaccState_a6995704a0232e24f4c38250302c0a01f}{runtimeConfigure}();
-362 
-363       \textcolor{comment}{// second the orthogonals are internally configured}
-364       this->\hyperlink{classsmacc_1_1SmaccState_afc39f8e0ca4001b2159a100da2fccd0e}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_a7377ca0f79289fdc27f9ed3ff6e67263}{notifyOnRuntimeConfigured}(
-      static\_cast<MostDerived *>(\textcolor{keyword}{this}));
-365 
-366       ROS\_INFO(\textcolor{stringliteral}{"[%s] State OnEntry"}, \hyperlink{smacc__state__base_8h_a0d7815723706a488b5bb65f7e3acf584}{STATE\_NAME});
-367 
-368       \textcolor{comment}{// finally we go to the derived state onEntry Function}
-369       \textcolor{keyword}{static\_cast<}MostDerived *\textcolor{keyword}{>}(\textcolor{keyword}{this})->\hyperlink{classsmacc_1_1SmaccState_a4a10a74fdbe51a798b8d651668b8ed9a}{onEntry}();
-370       ROS\_INFO(\textcolor{stringliteral}{"[%s] State OnEntry code finished"}, \hyperlink{smacc__state__base_8h_a0d7815723706a488b5bb65f7e3acf584}{STATE\_NAME});
+360       \textcolor{keyword}{auto}* derivedthis = \textcolor{keyword}{static\_cast<}MostDerived *\textcolor{keyword}{>}(\textcolor{keyword}{this});
+361       
+362       \textcolor{comment}{// second the orthogonals are internally configured}
+363       this->\hyperlink{classsmacc_1_1SmaccState_afc39f8e0ca4001b2159a100da2fccd0e}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_a7377ca0f79289fdc27f9ed3ff6e67263}{notifyOnRuntimeConfigured}(derivedthis
+      );
+364 
+365       \textcolor{comment}{// first we runtime configure the state, where we create client behaviors}
+366       \textcolor{keyword}{static\_cast<}MostDerived *\textcolor{keyword}{>}(\textcolor{keyword}{this})->\hyperlink{classsmacc_1_1SmaccState_a6995704a0232e24f4c38250302c0a01f}{runtimeConfigure}();
+367       
+368       this->\hyperlink{classsmacc_1_1SmaccState_afc39f8e0ca4001b2159a100da2fccd0e}{getStateMachine}().
+      \hyperlink{classsmacc_1_1ISmaccStateMachine_a0a561ebd12c874a9fa85ba75b740871b}{notifyOnRuntimeConfigurationFinished}(derivedthis);
+369 
+370       ROS\_INFO(\textcolor{stringliteral}{"[%s] State OnEntry"}, \hyperlink{smacc__state__base_8h_a0d7815723706a488b5bb65f7e3acf584}{STATE\_NAME});
 371 
-372       \textcolor{comment}{// here orthogonals and client behaviors are entered OnEntry}
-373       this->\hyperlink{classsmacc_1_1SmaccState_afc39f8e0ca4001b2159a100da2fccd0e}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_a856cf2d25d84659b974cccfbf44aeec9}{notifyOnStateEntryEnd}(
-      static\_cast<MostDerived *>(\textcolor{keyword}{this}));
-374     \}
+372       \textcolor{comment}{// finally we go to the derived state onEntry Function}
+373       \textcolor{keyword}{static\_cast<}MostDerived *\textcolor{keyword}{>}(\textcolor{keyword}{this})->\hyperlink{classsmacc_1_1SmaccState_a4a10a74fdbe51a798b8d651668b8ed9a}{onEntry}();
+374       
+375       \textcolor{comment}{// here orthogonals and client behaviors are entered OnEntry}
+376       this->\hyperlink{classsmacc_1_1SmaccState_afc39f8e0ca4001b2159a100da2fccd0e}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_a856cf2d25d84659b974cccfbf44aeec9}{notifyOnStateEntryEnd}(derivedthis);
+377     \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1SmaccState_a34b22a3b1af1796f2bdc1383eeef3a74}\label{classsmacc_1_1SmaccState_a34b22a3b1af1796f2bdc1383eeef3a74}} 
 \index{smacc\+::\+Smacc\+State@{smacc\+::\+Smacc\+State}!exit@{exit}}
