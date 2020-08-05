@@ -30,6 +30,12 @@ Collaboration diagram for smacc\+:\+:Smacc\+Async\+Client\+Behavior\+:
 {\footnotesize template$<$typename T\+Orthogonal , typename T\+Source\+Object $>$ }\\void \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a85bf707ed4fc349e0e35d89c9e78bc54}{on\+Orthogonal\+Allocation} ()
 \item 
 virtual \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a0028345c409db6fdead7a16b23b9f0aa}{$\sim$\+Smacc\+Async\+Client\+Behavior} ()
+\item 
+{\footnotesize template$<$typename T\+Callback , typename T $>$ }\\boost\+::signals2\+::connection \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a48d8a07e7fc65220f1eeee49af02a82a}{on\+Success} (T\+Callback \hyperlink{sm__ridgeback__barrel__search__2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}, T $\ast$object)
+\item 
+{\footnotesize template$<$typename T\+Callback , typename T $>$ }\\boost\+::signals2\+::connection \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_aae9e2dd0d8e3ff25503f0908f040a221}{on\+Finished} (T\+Callback \hyperlink{sm__ridgeback__barrel__search__2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}, T $\ast$object)
+\item 
+{\footnotesize template$<$typename T\+Callback , typename T $>$ }\\boost\+::signals2\+::connection \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a34d7ba8f590393e4cd7d2f742f04189a}{on\+Failure} (T\+Callback \hyperlink{sm__ridgeback__barrel__search__2_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}, T $\ast$object)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -56,6 +62,12 @@ std\+::function$<$ void()$>$ \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a
 std\+::function$<$ void()$>$ \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a944ed10880796d53649bee39dc1299c0}{post\+Success\+Event\+Fn\+\_\+}
 \item 
 std\+::function$<$ void()$>$ \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a8041c43a0381f18fae6470a98eb9273d}{post\+Failure\+Event\+Fn\+\_\+}
+\item 
+\hyperlink{classsmacc_1_1SmaccSignal}{Smacc\+Signal}$<$ void()$>$ \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a3b4f8bbacabffb8a37934407bc79ed80}{on\+Finished\+\_\+}
+\item 
+\hyperlink{classsmacc_1_1SmaccSignal}{Smacc\+Signal}$<$ void()$>$ \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a31d8bdfa46fe70aea9adf0958806462b}{on\+Success\+\_\+}
+\item 
+\hyperlink{classsmacc_1_1SmaccSignal}{Smacc\+Signal}$<$ void()$>$ \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a34e6262de21b9fbbabbc466d3180cc18}{on\+Failure\+\_\+}
 \end{DoxyCompactItemize}
 
 
@@ -75,13 +87,12 @@ Definition at line 42 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.
 
 
 
-Definition at line 53 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
+Definition at line 70 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
 
 
 \begin{DoxyCode}
-54     \{
-55         
-56     \}
+71     \{
+72     \}
 \end{DoxyCode}
 
 
@@ -98,7 +109,7 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_abdc74a8d95fdd0
 
 
 
-Definition at line 38 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
+Definition at line 55 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
 
 
 
@@ -106,22 +117,22 @@ References smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+Name(), and on\+Exit\+T
 
 
 \begin{DoxyCode}
-39     \{
-40         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Destroying client behavior- Waiting finishing of
+56     \{
+57         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Destroying client behavior- Waiting finishing of
        asynchronous onExit thread"});
-41         \textcolor{keywordflow}{try}
-42         \{
-43             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af76d1c36b4a10425f2da043545b73299}{onExitThread\_} .get();
-44         \}
-45         \textcolor{keywordflow}{catch} (...)
-46         \{
-47             ROS\_DEBUG(\textcolor{stringliteral}{"[SmaccAsyncClientBehavior] trying to Join onExit function, but it was alredy
+58         \textcolor{keywordflow}{try}
+59         \{
+60             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af76d1c36b4a10425f2da043545b73299}{onExitThread\_}.get();
+61         \}
+62         \textcolor{keywordflow}{catch} (...)
+63         \{
+64             ROS\_DEBUG(\textcolor{stringliteral}{"[SmaccAsyncClientBehavior] trying to Join onExit function, but it was alredy
        finished."});
-48         \}
-49 
-50         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Destroying client behavior-  onExit thread finished.
+65         \}
+66 
+67         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Destroying client behavior-  onExit thread finished.
        Proccedding destruction."});
-51     \}
+68     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -154,11 +165,11 @@ References smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+Name(), smacc\+::\+I\+S
 6     \{
 7         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Creating asynchronous onEntry thread"});
 8         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a6346e036a68f41c4397d7336f8519645}{onEntryThread\_} = std::async(std::launch::async,
-9             [=] \{
-10                 this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a3ec24a839087c550e1d62a81e48cf530}{onEntry}();
-11                 this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af7a9ee952ba3fb8629aa55491606a7b2}{postFinishEventFn\_}();
-12                 \textcolor{keywordflow}{return} 0;
-13                 \});
+9                                           [=] \{
+10                                               this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a3ec24a839087c550e1d62a81e48cf530}{onEntry}();
+11                                               this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af7a9ee952ba3fb8629aa55491606a7b2}{postFinishEventFn\_}();
+12                                               \textcolor{keywordflow}{return} 0;
+13                                           \});
 14     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
@@ -185,7 +196,7 @@ Definition at line 16 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
 
 
 
-References smacc\+::\+I\+Smacc\+Client\+Behavior\+::execute\+On\+Exit(), smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+Name(), on\+Entry\+Thread\+\_\+, smacc\+::\+I\+Smacc\+Client\+Behavior\+::on\+Exit(), and on\+Exit\+Thread\+\_\+.
+References smacc\+::\+I\+Smacc\+Client\+Behavior\+::execute\+On\+Exit(), smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+Name(), on\+Entry\+Thread\+\_\+, smacc\+::\+I\+Smacc\+Client\+Behavior\+::on\+Exit(), on\+Exit\+Thread\+\_\+, and fake\+\_\+cube\+\_\+perception\+\_\+node\+::r.
 
 
 \begin{DoxyCode}
@@ -195,21 +206,39 @@ References smacc\+::\+I\+Smacc\+Client\+Behavior\+::execute\+On\+Exit(), smacc\+
 20 
 21         \textcolor{keywordflow}{try}
 22         \{
-23             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a6346e036a68f41c4397d7336f8519645}{onEntryThread\_}.get();
-24         \}
-25         \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception &e)
-26         \{
-27             ROS\_DEBUG(\textcolor{stringliteral}{"[SmaccAsyncClientBehavior] trying to Join onEntry function, but it was alredy
+23             ros::Rate \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}(200);
+24             \textcolor{keywordflow}{while} (ros::ok())
+25             \{
+26                 \textcolor{keywordtype}{bool} valid = this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a6346e036a68f41c4397d7336f8519645}{onEntryThread\_}.valid();
+27                 \textcolor{keywordflow}{if} (valid)
+28                 \{
+29                     \textcolor{keyword}{auto} status = this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a6346e036a68f41c4397d7336f8519645}{onEntryThread\_}.wait\_for(std::chrono::milliseconds(20)
+      );
+30                     \textcolor{keywordflow}{if} (status == std::future\_status::ready)
+31                     \{
+32                         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a6346e036a68f41c4397d7336f8519645}{onEntryThread\_}.get();
+33                         \textcolor{keywordflow}{break};
+34                     \}
+35                 \}
+36 
+37                 \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
+38                 ros::spinOnce();
+39                 ROS\_DEBUG(\textcolor{stringliteral}{"waiting for finishing client behavior"});
+40             \}
+41         \}
+42         \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception &e)
+43         \{
+44             ROS\_DEBUG(\textcolor{stringliteral}{"[SmaccAsyncClientBehavior] trying to Join onEntry function, but it was alredy
        finished."});
-28         \}
-29 
-30         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] onExit - Creating asynchronous onExit thread"});
-31         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af76d1c36b4a10425f2da043545b73299}{onExitThread\_} = std::async(std::launch::async,
-32             [=] \{
-33                 this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf750909a15e4215a9b3}{onExit}();
-34                 \textcolor{keywordflow}{return} 0;
-35             \});
-36     \}
+45         \}
+46 
+47         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] onExit - Creating asynchronous onExit thread"});
+48         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af76d1c36b4a10425f2da043545b73299}{onExitThread\_} = std::async(std::launch::async,
+49                                          [=] \{
+50                                              this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf750909a15e4215a9b3}{onExit}();
+51                                              \textcolor{keywordflow}{return} 0;
+52                                          \});
+53     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -219,28 +248,130 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{classsmacc_1_1SmaccAsyncClientBehavior_a3d982d370df4f133ad37c0b2370e9b82_cgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{classsmacc_1_1SmaccAsyncClientBehavior_a34d7ba8f590393e4cd7d2f742f04189a}\label{classsmacc_1_1SmaccAsyncClientBehavior_a34d7ba8f590393e4cd7d2f742f04189a}} 
+\index{smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}!on\+Failure@{on\+Failure}}
+\index{on\+Failure@{on\+Failure}!smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}}
+\subsubsection{\texorpdfstring{on\+Failure()}{onFailure()}}
+{\footnotesize\ttfamily template$<$typename T\+Callback , typename T $>$ \\
+boost\+::signals2\+::connection smacc\+::\+Smacc\+Async\+Client\+Behavior\+::on\+Failure (\begin{DoxyParamCaption}\item[{T\+Callback}]{callback,  }\item[{T $\ast$}]{object }\end{DoxyParamCaption})}
+
+
+
+Definition at line 46 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior\+\_\+impl.\+h.
+
+
+
+References smacc\+::\+I\+Smacc\+State\+Machine\+::create\+Signal\+Connection(), smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+State\+Machine(), and on\+Failure\+\_\+.
+
+
+\begin{DoxyCode}
+47     \{
+48         \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a9d55a85bf0a920033805a3c050de2019}{getStateMachine}()->\hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{createSignalConnection}(
+      \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a34e6262de21b9fbbabbc466d3180cc18}{onFailure\_}, \hyperlink{sm__ridgeback__barrel__search__1_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}, \textcolor{keywordtype}{object});
+49     \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1SmaccAsyncClientBehavior_a34d7ba8f590393e4cd7d2f742f04189a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classsmacc_1_1SmaccAsyncClientBehavior_aae9e2dd0d8e3ff25503f0908f040a221}\label{classsmacc_1_1SmaccAsyncClientBehavior_aae9e2dd0d8e3ff25503f0908f040a221}} 
+\index{smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}!on\+Finished@{on\+Finished}}
+\index{on\+Finished@{on\+Finished}!smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}}
+\subsubsection{\texorpdfstring{on\+Finished()}{onFinished()}}
+{\footnotesize\ttfamily template$<$typename T\+Callback , typename T $>$ \\
+boost\+::signals2\+::connection smacc\+::\+Smacc\+Async\+Client\+Behavior\+::on\+Finished (\begin{DoxyParamCaption}\item[{T\+Callback}]{callback,  }\item[{T $\ast$}]{object }\end{DoxyParamCaption})}
+
+
+
+Definition at line 40 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior\+\_\+impl.\+h.
+
+
+
+References smacc\+::\+I\+Smacc\+State\+Machine\+::create\+Signal\+Connection(), smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+State\+Machine(), and on\+Finished\+\_\+.
+
+
+\begin{DoxyCode}
+41     \{
+42         \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a9d55a85bf0a920033805a3c050de2019}{getStateMachine}()->\hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{createSignalConnection}(
+      \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a3b4f8bbacabffb8a37934407bc79ed80}{onFinished\_}, \hyperlink{sm__ridgeback__barrel__search__1_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}, \textcolor{keywordtype}{object});
+43     \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1SmaccAsyncClientBehavior_aae9e2dd0d8e3ff25503f0908f040a221_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1SmaccAsyncClientBehavior_a85bf707ed4fc349e0e35d89c9e78bc54}\label{classsmacc_1_1SmaccAsyncClientBehavior_a85bf707ed4fc349e0e35d89c9e78bc54}} 
 \index{smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}!on\+Orthogonal\+Allocation@{on\+Orthogonal\+Allocation}}
 \index{on\+Orthogonal\+Allocation@{on\+Orthogonal\+Allocation}!smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}}
 \subsubsection{\texorpdfstring{on\+Orthogonal\+Allocation()}{onOrthogonalAllocation()}}
 {\footnotesize\ttfamily template$<$typename T\+Orthogonal , typename T\+Source\+Object $>$ \\
-void smacc\+::\+Smacc\+Async\+Client\+Behavior\+::on\+Orthogonal\+Allocation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void smacc\+::\+Smacc\+Async\+Client\+Behavior\+::on\+Orthogonal\+Allocation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-Definition at line 46 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
+Definition at line 15 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior\+\_\+impl.\+h.
+
+
+
+References on\+Failure\+\_\+, on\+Finished\+\_\+, on\+Success\+\_\+, post\+Failure\+Event\+Fn\+\_\+, post\+Finish\+Event\+Fn\+\_\+, and post\+Success\+Event\+Fn\+\_\+.
 
 
 \begin{DoxyCode}
-47         \{
-48             \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af7a9ee952ba3fb8629aa55491606a7b2}{postFinishEventFn\_} = [=] \{ this->postEvent<EvCbFinished<TSourceObject,
-       TOrthogonal>>(); \};
-49             \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a944ed10880796d53649bee39dc1299c0}{postSuccessEventFn\_} = [=] \{ this->postEvent<EvCbSuccess<TSourceObject,
-       TOrthogonal>>(); \};
-50             \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a8041c43a0381f18fae6470a98eb9273d}{postFailureEventFn\_} = [=] \{ this->postEvent<EvCbFailure<TSourceObject,
-       TOrthogonal>>(); \};
-51         \}
+16     \{
+17         \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af7a9ee952ba3fb8629aa55491606a7b2}{postFinishEventFn\_} = [=] \{
+18             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a3b4f8bbacabffb8a37934407bc79ed80}{onFinished\_}();
+19             this->postEvent<EvCbFinished<TSourceObject, TOrthogonal>>();
+20         \};
+21 
+22         \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a944ed10880796d53649bee39dc1299c0}{postSuccessEventFn\_} = [=] \{
+23             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a31d8bdfa46fe70aea9adf0958806462b}{onSuccess\_}();
+24             this->postEvent<EvCbSuccess<TSourceObject, TOrthogonal>>();
+25         \};
+26 
+27         \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a8041c43a0381f18fae6470a98eb9273d}{postFailureEventFn\_} = [=] \{
+28             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a34e6262de21b9fbbabbc466d3180cc18}{onFailure\_}();
+29             this->postEvent<EvCbFailure<TSourceObject, TOrthogonal>>();
+30         \};
+31     \}
 \end{DoxyCode}
+\mbox{\Hypertarget{classsmacc_1_1SmaccAsyncClientBehavior_a48d8a07e7fc65220f1eeee49af02a82a}\label{classsmacc_1_1SmaccAsyncClientBehavior_a48d8a07e7fc65220f1eeee49af02a82a}} 
+\index{smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}!on\+Success@{on\+Success}}
+\index{on\+Success@{on\+Success}!smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}}
+\subsubsection{\texorpdfstring{on\+Success()}{onSuccess()}}
+{\footnotesize\ttfamily template$<$typename T\+Callback , typename T $>$ \\
+boost\+::signals2\+::connection smacc\+::\+Smacc\+Async\+Client\+Behavior\+::on\+Success (\begin{DoxyParamCaption}\item[{T\+Callback}]{callback,  }\item[{T $\ast$}]{object }\end{DoxyParamCaption})}
+
+
+
+Definition at line 34 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior\+\_\+impl.\+h.
+
+
+
+References smacc\+::\+I\+Smacc\+State\+Machine\+::create\+Signal\+Connection(), smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+State\+Machine(), and on\+Success\+\_\+.
+
+
+\begin{DoxyCode}
+35     \{
+36         \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a9d55a85bf0a920033805a3c050de2019}{getStateMachine}()->\hyperlink{classsmacc_1_1ISmaccStateMachine_adf0f42ade0c65cc471960fe2a7c42da2}{createSignalConnection}(
+      \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a31d8bdfa46fe70aea9adf0958806462b}{onSuccess\_}, \hyperlink{sm__ridgeback__barrel__search__1_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}, \textcolor{keywordtype}{object});
+37     \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1SmaccAsyncClientBehavior_a48d8a07e7fc65220f1eeee49af02a82a_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}\label{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}} 
 \index{smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}!post\+Failure\+Event@{post\+Failure\+Event}}
 \index{post\+Failure\+Event@{post\+Failure\+Event}!smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}}
@@ -249,7 +380,7 @@ Definition at line 46 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.
 
 
 
-Definition at line 63 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
+Definition at line 79 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
 
 
 
@@ -257,13 +388,13 @@ References post\+Failure\+Event\+Fn\+\_\+.
 
 
 
-Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Joints\+::move\+Joints(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Relative\+::move\+Relative(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Cartesian\+Relative\+::move\+Relative\+Cartesian(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+::move\+To\+Absolute\+Pose(), and cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::on\+Entry().
+Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::execute\+Joint\+Space\+Trajectory(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Joints\+::move\+Joints(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Relative\+::move\+Relative(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Cartesian\+Relative\+::move\+Relative\+Cartesian(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+::move\+To\+Absolute\+Pose(), and cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::on\+Entry().
 
 
 \begin{DoxyCode}
-64     \{
-65         \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a8041c43a0381f18fae6470a98eb9273d}{postFailureEventFn\_}();
-66     \}
+80     \{
+81         \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a8041c43a0381f18fae6470a98eb9273d}{postFailureEventFn\_}();
+82     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -281,7 +412,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 58 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
+Definition at line 74 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
 
 
 
@@ -289,13 +420,13 @@ References post\+Success\+Event\+Fn\+\_\+.
 
 
 
-Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Joints\+::move\+Joints(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Relative\+::move\+Relative(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Cartesian\+Relative\+::move\+Relative\+Cartesian(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+::move\+To\+Absolute\+Pose(), and cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::on\+Entry().
+Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::execute\+Joint\+Space\+Trajectory(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Joints\+::move\+Joints(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Relative\+::move\+Relative(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Cartesian\+Relative\+::move\+Relative\+Cartesian(), and cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+::move\+To\+Absolute\+Pose().
 
 
 \begin{DoxyCode}
-59     \{
-60         \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a944ed10880796d53649bee39dc1299c0}{postSuccessEventFn\_}();
-61     \}
+75     \{
+76         \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a944ed10880796d53649bee39dc1299c0}{postSuccessEventFn\_}();
+77     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -316,7 +447,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 65 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
+Definition at line 69 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
 
 
 
@@ -330,11 +461,53 @@ Referenced by execute\+On\+Entry(), and execute\+On\+Exit().
 
 
 
-Definition at line 66 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
+Definition at line 70 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
 
 
 
 Referenced by dispose(), and execute\+On\+Exit().
+
+\mbox{\Hypertarget{classsmacc_1_1SmaccAsyncClientBehavior_a34e6262de21b9fbbabbc466d3180cc18}\label{classsmacc_1_1SmaccAsyncClientBehavior_a34e6262de21b9fbbabbc466d3180cc18}} 
+\index{smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}!on\+Failure\+\_\+@{on\+Failure\+\_\+}}
+\index{on\+Failure\+\_\+@{on\+Failure\+\_\+}!smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}}
+\subsubsection{\texorpdfstring{on\+Failure\+\_\+}{onFailure\_}}
+{\footnotesize\ttfamily \hyperlink{classsmacc_1_1SmaccSignal}{Smacc\+Signal}$<$void()$>$ smacc\+::\+Smacc\+Async\+Client\+Behavior\+::on\+Failure\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 78 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
+
+
+
+Referenced by on\+Failure(), and on\+Orthogonal\+Allocation().
+
+\mbox{\Hypertarget{classsmacc_1_1SmaccAsyncClientBehavior_a3b4f8bbacabffb8a37934407bc79ed80}\label{classsmacc_1_1SmaccAsyncClientBehavior_a3b4f8bbacabffb8a37934407bc79ed80}} 
+\index{smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}!on\+Finished\+\_\+@{on\+Finished\+\_\+}}
+\index{on\+Finished\+\_\+@{on\+Finished\+\_\+}!smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}}
+\subsubsection{\texorpdfstring{on\+Finished\+\_\+}{onFinished\_}}
+{\footnotesize\ttfamily \hyperlink{classsmacc_1_1SmaccSignal}{Smacc\+Signal}$<$void()$>$ smacc\+::\+Smacc\+Async\+Client\+Behavior\+::on\+Finished\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 76 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
+
+
+
+Referenced by on\+Finished(), and on\+Orthogonal\+Allocation().
+
+\mbox{\Hypertarget{classsmacc_1_1SmaccAsyncClientBehavior_a31d8bdfa46fe70aea9adf0958806462b}\label{classsmacc_1_1SmaccAsyncClientBehavior_a31d8bdfa46fe70aea9adf0958806462b}} 
+\index{smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}!on\+Success\+\_\+@{on\+Success\+\_\+}}
+\index{on\+Success\+\_\+@{on\+Success\+\_\+}!smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}}
+\subsubsection{\texorpdfstring{on\+Success\+\_\+}{onSuccess\_}}
+{\footnotesize\ttfamily \hyperlink{classsmacc_1_1SmaccSignal}{Smacc\+Signal}$<$void()$>$ smacc\+::\+Smacc\+Async\+Client\+Behavior\+::on\+Success\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 77 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
+
+
+
+Referenced by on\+Orthogonal\+Allocation(), and on\+Success().
 
 \mbox{\Hypertarget{classsmacc_1_1SmaccAsyncClientBehavior_a8041c43a0381f18fae6470a98eb9273d}\label{classsmacc_1_1SmaccAsyncClientBehavior_a8041c43a0381f18fae6470a98eb9273d}} 
 \index{smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}!post\+Failure\+Event\+Fn\+\_\+@{post\+Failure\+Event\+Fn\+\_\+}}
@@ -344,11 +517,11 @@ Referenced by dispose(), and execute\+On\+Exit().
 
 
 
-Definition at line 70 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
+Definition at line 74 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
 
 
 
-Referenced by post\+Failure\+Event().
+Referenced by on\+Orthogonal\+Allocation(), and post\+Failure\+Event().
 
 \mbox{\Hypertarget{classsmacc_1_1SmaccAsyncClientBehavior_af7a9ee952ba3fb8629aa55491606a7b2}\label{classsmacc_1_1SmaccAsyncClientBehavior_af7a9ee952ba3fb8629aa55491606a7b2}} 
 \index{smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}!post\+Finish\+Event\+Fn\+\_\+@{post\+Finish\+Event\+Fn\+\_\+}}
@@ -358,11 +531,11 @@ Referenced by post\+Failure\+Event().
 
 
 
-Definition at line 68 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
+Definition at line 72 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
 
 
 
-Referenced by execute\+On\+Entry().
+Referenced by execute\+On\+Entry(), and on\+Orthogonal\+Allocation().
 
 \mbox{\Hypertarget{classsmacc_1_1SmaccAsyncClientBehavior_a944ed10880796d53649bee39dc1299c0}\label{classsmacc_1_1SmaccAsyncClientBehavior_a944ed10880796d53649bee39dc1299c0}} 
 \index{smacc\+::\+Smacc\+Async\+Client\+Behavior@{smacc\+::\+Smacc\+Async\+Client\+Behavior}!post\+Success\+Event\+Fn\+\_\+@{post\+Success\+Event\+Fn\+\_\+}}
@@ -372,15 +545,16 @@ Referenced by execute\+On\+Entry().
 
 
 
-Definition at line 69 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
+Definition at line 73 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h.
 
 
 
-Referenced by post\+Success\+Event().
+Referenced by on\+Orthogonal\+Allocation(), and post\+Success\+Event().
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
 smacc/include/smacc/\hyperlink{smacc__asynchronous__client__behavior_8h}{smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.\+h}\item 
+smacc/include/smacc/impl/\hyperlink{smacc__asynchronous__client__behavior__impl_8h}{smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior\+\_\+impl.\+h}\item 
 smacc/src/smacc/\hyperlink{smacc__client__async__behavior_8cpp}{smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp}\end{DoxyCompactItemize}

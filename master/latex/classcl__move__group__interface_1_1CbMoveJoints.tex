@@ -107,11 +107,11 @@ Definition at line 12 of file cb\+\_\+move\+\_\+joints.\+cpp.
 
 
 
-Definition at line 35 of file cb\+\_\+move\+\_\+joints.\+cpp.
+Definition at line 53 of file cb\+\_\+move\+\_\+joints.\+cpp.
 
 
 
-References joint\+Value\+Target\+\_\+, movegroup\+Client\+\_\+, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Failure\+Event(), smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Success\+Event(), and scaling\+Factor\+\_\+.
+References cl\+\_\+move\+\_\+group\+\_\+interface\+::current\+Joint\+States\+To\+String(), smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+Name(), joint\+Value\+Target\+\_\+, movegroup\+Client\+\_\+, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Failed(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cl\+Move\+Group\+::post\+Event\+Motion\+Execution\+Succeded(), smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Failure\+Event(), smacc\+::\+Smacc\+Async\+Client\+Behavior\+::post\+Success\+Event(), and scaling\+Factor\+\_\+.
 
 
 
@@ -119,51 +119,62 @@ Referenced by on\+Entry().
 
 
 \begin{DoxyCode}
-36   \{
-37     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveJoints_a2480db16c4bf55a40701c00cd2afe9a0}{scalingFactor\_})
-38       moveGroupInterface.setMaxVelocityScalingFactor(*\hyperlink{classcl__move__group__interface_1_1CbMoveJoints_a2480db16c4bf55a40701c00cd2afe9a0}{scalingFactor\_});
-39 
-40     \textcolor{keywordtype}{bool} success;
-41     moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
-42 
-43     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveJoints_a8103f7c923a34d9bf5a2c374ff88a277}{jointValueTarget\_}.size() == 0)
-44     \{
-45       ROS\_WARN(\textcolor{stringliteral}{"[CbMoveJoints] No joint was value specified. Skipping planning call."});
-46       success = \textcolor{keyword}{false};
-47     \}
-48     \textcolor{keywordflow}{else}
-49     \{
-50       moveGroupInterface.setJointValueTarget(\hyperlink{classcl__move__group__interface_1_1CbMoveJoints_a8103f7c923a34d9bf5a2c374ff88a277}{jointValueTarget\_});
-51       success = (moveGroupInterface.plan(computedMotionPlan) == 
+54   \{
+55     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveJoints_a2480db16c4bf55a40701c00cd2afe9a0}{scalingFactor\_})
+56       moveGroupInterface.setMaxVelocityScalingFactor(*\hyperlink{classcl__move__group__interface_1_1CbMoveJoints_a2480db16c4bf55a40701c00cd2afe9a0}{scalingFactor\_});
+57 
+58     \textcolor{keywordtype}{bool} success;
+59     moveit::planning\_interface::MoveGroupInterface::Plan computedMotionPlan;
+60 
+61     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveJoints_a8103f7c923a34d9bf5a2c374ff88a277}{jointValueTarget\_}.size() == 0)
+62     \{
+63       ROS\_WARN(\textcolor{stringliteral}{"[CbMoveJoints] No joint was value specified. Skipping planning call."});
+64       success = \textcolor{keyword}{false};
+65     \}
+66     \textcolor{keywordflow}{else}
+67     \{
+68       moveGroupInterface.setJointValueTarget(\hyperlink{classcl__move__group__interface_1_1CbMoveJoints_a8103f7c923a34d9bf5a2c374ff88a277}{jointValueTarget\_});
+69       \textcolor{comment}{//moveGroupInterface.setGoalJointTolerance(0.01);}
+70       success = (moveGroupInterface.plan(computedMotionPlan) == 
       moveit::planning\_interface::MoveItErrorCode::SUCCESS);
-52       ROS\_INFO\_NAMED(\textcolor{stringliteral}{"CbMoveJoints"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} : \textcolor{stringliteral}{"FAILED"});
-53     \}
-54 
-55     \textcolor{keywordflow}{if} (success)
-56     \{
-57       \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
-58 
-59       \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
-60       \{
-61         ROS\_INFO(\textcolor{stringliteral}{"[CbMoveJoints] motion execution succedded. Throwing success event."});
-62         \hyperlink{classcl__move__group__interface_1_1CbMoveJoints_aa5749bbc6bb5f09069e9e8115326f024}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_aebaf269db373d41837bae87651458e54}{postEventMotionExecutionSucceded}(
+71       ROS\_INFO\_NAMED(\textcolor{stringliteral}{"CbMoveJoints"}, \textcolor{stringliteral}{"Success Visualizing plan 1 (pose goal) %s"}, success ? \textcolor{stringliteral}{""} : \textcolor{stringliteral}{"FAILED"});
+72     \}
+73 
+74     \textcolor{keywordflow}{if} (success)
+75     \{
+76       \textcolor{keyword}{auto} executionResult = moveGroupInterface.execute(computedMotionPlan);
+77 
+78       \textcolor{keyword}{auto} statestr = \hyperlink{namespacecl__move__group__interface_aad71400738b3e25d9fa9ac924670de5d}{currentJointStatesToString}(moveGroupInterface, 
+      \hyperlink{classcl__move__group__interface_1_1CbMoveJoints_a8103f7c923a34d9bf5a2c374ff88a277}{jointValueTarget\_});
+79       
+80       \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
+81       \{
+82         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] motion execution succedded. Throwing success
+       event. "} << std::endl
+83                                                                                               << statestr);
+84         \hyperlink{classcl__move__group__interface_1_1CbMoveJoints_aa5749bbc6bb5f09069e9e8115326f024}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_aebaf269db373d41837bae87651458e54}{postEventMotionExecutionSucceded}(
       );
-63         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_adf18efe1f0e4eacc1277b8865a8a94b1}{postSuccessEvent}();
-64       \}
-65       \textcolor{keywordflow}{else}
-66       \{
-67         ROS\_WARN(\textcolor{stringliteral}{"[CbMoveJoints] motion execution failed. Throwing fail event."});
-68         \hyperlink{classcl__move__group__interface_1_1CbMoveJoints_aa5749bbc6bb5f09069e9e8115326f024}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a39dc3871d29b2af1ab739057f6ca6daa}{postEventMotionExecutionFailed}();
-69         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
-70       \}
-71     \}
-72     \textcolor{keywordflow}{else}
-73     \{
-74       ROS\_WARN(\textcolor{stringliteral}{"[CbMoveJoints] motion execution failed. Throwing fail event."});
-75       \hyperlink{classcl__move__group__interface_1_1CbMoveJoints_aa5749bbc6bb5f09069e9e8115326f024}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a39dc3871d29b2af1ab739057f6ca6daa}{postEventMotionExecutionFailed}();
-76       this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
-77     \}
-78   \}
+85         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_adf18efe1f0e4eacc1277b8865a8a94b1}{postSuccessEvent}();
+86       \}
+87       \textcolor{keywordflow}{else}
+88       \{
+89         ROS\_WARN\_STREAM(\textcolor{stringliteral}{"["} << this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] motion execution failed. Throwing fail event."} 
+      << std::endl
+90                                                                                        << statestr);
+91         \hyperlink{classcl__move__group__interface_1_1CbMoveJoints_aa5749bbc6bb5f09069e9e8115326f024}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a39dc3871d29b2af1ab739057f6ca6daa}{postEventMotionExecutionFailed}();
+92         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+93       \}
+94     \}
+95     \textcolor{keywordflow}{else}
+96     \{
+97       \textcolor{keyword}{auto} statestr = \hyperlink{namespacecl__move__group__interface_aad71400738b3e25d9fa9ac924670de5d}{currentJointStatesToString}(moveGroupInterface, 
+      \hyperlink{classcl__move__group__interface_1_1CbMoveJoints_a8103f7c923a34d9bf5a2c374ff88a277}{jointValueTarget\_});
+98       ROS\_WARN\_STREAM(\textcolor{stringliteral}{"["} << this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] motion execution failed. Throwing fail event."} <<
+       std::endl << statestr);
+99       \hyperlink{classcl__move__group__interface_1_1CbMoveJoints_aa5749bbc6bb5f09069e9e8115326f024}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a39dc3871d29b2af1ab739057f6ca6daa}{postEventMotionExecutionFailed}();
+100       this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+101     \}
+102   \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -193,11 +204,19 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a3ec24a839087c5
 
 
 
+Reimplemented in \hyperlink{classcl__move__group__interface_1_1CbMoveLastTrajectoryInitialState_ad51f4883ea1f7442875cda06c3d474c3}{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Last\+Trajectory\+Initial\+State}.
+
+
+
 Definition at line 20 of file cb\+\_\+move\+\_\+joints.\+cpp.
 
 
 
 References group\+\_\+, movegroup\+Client\+\_\+, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, move\+Joints(), and smacc\+::\+I\+Smacc\+Client\+Behavior\+::requires\+Client().
+
+
+
+Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Last\+Trajectory\+Initial\+State\+::on\+Entry().
 
 
 \begin{DoxyCode}
@@ -224,6 +243,14 @@ Here is the call graph for this function\+:
 \includegraphics[width=350pt]{classcl__move__group__interface_1_1CbMoveJoints_a23e4181af695aed9fa6bb4ae3f17fd76_cgraph}
 \end{center}
 \end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__group__interface_1_1CbMoveJoints_a23e4181af695aed9fa6bb4ae3f17fd76_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveJoints_aff7d27d2427a5a771cb9abce1609aa27}\label{classcl__move__group__interface_1_1CbMoveJoints_aff7d27d2427a5a771cb9abce1609aa27}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Joints@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Joints}!on\+Exit@{on\+Exit}}
 \index{on\+Exit@{on\+Exit}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Joints@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Joints}}
@@ -236,12 +263,12 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf
 
 
 
-Definition at line 80 of file cb\+\_\+move\+\_\+joints.\+cpp.
+Definition at line 104 of file cb\+\_\+move\+\_\+joints.\+cpp.
 
 
 \begin{DoxyCode}
-81   \{
-82   \}
+105   \{
+106   \}
 \end{DoxyCode}
 
 
@@ -272,7 +299,7 @@ Definition at line 20 of file cb\+\_\+move\+\_\+joints.\+h.
 
 
 
-Referenced by move\+Joints().
+Referenced by move\+Joints(), and cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Last\+Trajectory\+Initial\+State\+::on\+Entry().
 
 \mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveJoints_aa5749bbc6bb5f09069e9e8115326f024}\label{classcl__move__group__interface_1_1CbMoveJoints_aa5749bbc6bb5f09069e9e8115326f024}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Joints@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Joints}!movegroup\+Client\+\_\+@{movegroup\+Client\+\_\+}}
