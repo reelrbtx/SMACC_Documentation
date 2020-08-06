@@ -51,7 +51,7 @@ var searchData=
   ['registerproxyfromdynamicreconfigureserver',['registerProxyFromDynamicReconfigureServer',['../classcl__move__base__z_1_1CostmapSwitch.html#a0d04ca7b655f850ba3107393f1c437cb',1,'cl_move_base_z::CostmapSwitch']]],
   ['reject',['REJECT',['../structsmacc_1_1default__transition__tags_1_1REJECT.html',1,'smacc::default_transition_tags']]],
   ['relative_5fsmacc_5ffolder',['relative_smacc_folder',['../namespacegenerate__debs.html#abf6925bd06ac1da3981fe638eefb5a61',1,'generate_debs']]],
-  ['relativeinitialpose_5f',['relativeInitialPose_',['../classcl__move__group__interface_1_1CbCircularPivotMotion.html#a1b2cc65d2f27a4dec54c20f1f00d4bb8',1,'cl_move_group_interface::CbCircularPivotMotion::relativeInitialPose_()'],['../classcl__move__group__interface_1_1CbCircularPouringMotion.html#ab6323315364e1f8bc60cbad3daa72fa9',1,'cl_move_group_interface::CbCircularPouringMotion::relativeInitialPose_()']]],
+  ['relativeinitialpose_5f',['relativeInitialPose_',['../classcl__move__group__interface_1_1CbCircularPivotMotion.html#a1b2cc65d2f27a4dec54c20f1f00d4bb8',1,'cl_move_group_interface::CbCircularPivotMotion']]],
   ['release',['RELEASE',['../namespacesmacc.html#a3e4f79486ea6ea6342dd3c712d16a4f6a7d649ef069df9885e382417c79f3d5cd',1,'smacc']]],
   ['reloadcontrollerlibraries',['reloadControllerLibraries',['../classsmacc_1_1components_1_1CpRosControlInterface.html#acd3534897ecf6b28ee3804dcbefedae9',1,'smacc::components::CpRosControlInterface']]],
   ['remove_5fdebian_5ffiles',['remove_debian_files',['../namespacegenerate__debs.html#a08095040d038b3613ad0e77fd4e7f60e',1,'generate_debs']]],

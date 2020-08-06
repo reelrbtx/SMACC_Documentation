@@ -9,7 +9,7 @@ var searchData=
   ['pathstack_5f',['pathStack_',['../classcl__move__base__z_1_1odom__tracker_1_1OdomTracker.html#a1ccad1b568b6c65da43ba6639b6bd1ef',1,'cl_move_base_z::odom_tracker::OdomTracker']]],
   ['pcontext_5f',['pContext_',['../structsmacc_1_1SmaccState_1_1my__context.html#a85f6eff5aba687932efe3f8117be76d3',1,'smacc::SmaccState::my_context']]],
   ['periodduration_5f',['periodDuration_',['../classsmacc_1_1ISmaccUpdatable.html#ad02d9798ac5609f3ecb9fb8a46febc18',1,'smacc::ISmaccUpdatable']]],
-  ['pivotpose_5f',['pivotPose_',['../classcl__move__group__interface_1_1CbCircularPouringMotion.html#a58ce9c29e4ef8f09a7569d6d8f9df56b',1,'cl_move_group_interface::CbCircularPouringMotion']]],
+  ['pivotpoint_5f',['pivotPoint_',['../classcl__move__group__interface_1_1CbCircularPouringMotion.html#a4c100d8ba3e57f7ddfb614017d115fca',1,'cl_move_group_interface::CbCircularPouringMotion']]],
   ['plan_5f',['plan_',['../classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner.html#a929e5d0a9db3027810beb658a2343560',1,'cl_move_base_z::forward_local_planner::ForwardLocalPlanner::plan_()'],['../classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner.html#a31875ee78bae4698b579e20c0754860d',1,'cl_move_base_z::pure_spinning_local_planner::PureSpinningLocalPlanner::plan_()']]],
   ['planepivotpose_5f',['planePivotPose_',['../classcl__move__group__interface_1_1CbCircularPivotMotion.html#a0994efbe93b9f9a61fcf3703c360cda2',1,'cl_move_group_interface::CbCircularPivotMotion']]],
   ['planning_5fscene',['planning_scene',['../classfake__cube__perception__node_1_1FakePerceptionNode.html#a9385fd4c339eeaf1ca269ef9e314bb09',1,'fake_cube_perception_node::FakePerceptionNode']]],

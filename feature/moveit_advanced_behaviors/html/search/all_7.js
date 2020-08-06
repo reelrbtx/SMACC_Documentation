@@ -27,6 +27,7 @@ var searchData=
   ['getcomponents',['getComponents',['../classsmacc_1_1ISmaccClient.html#ac6db21c1ec7072178e9f7c721908e07d',1,'smacc::ISmaccClient']]],
   ['getconingscullingcomp',['getConingScullingComp',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#a6826c989f0b2a29b87c6e78140dfe6d1',1,'cl_microstrain_mips::ClMicrostainMips']]],
   ['getconingscullingcompsrv',['getConingScullingCompSrv',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#a877393b5cf4c313e0e433e9c92163265',1,'cl_microstrain_mips::ClMicrostainMips']]],
+  ['getcurrentendeffectorpose',['getCurrentEndEffectorPose',['../classcl__move__group__interface_1_1CbCircularPouringMotion.html#a0cc72cc5233ecb0c264621d4d9501b30',1,'cl_move_group_interface::CbCircularPouringMotion']]],
   ['getcurrentstate',['getCurrentState',['../classsmacc_1_1ISmaccClientBehavior.html#a34fde34e48fa13db622ee60d8374d0b8',1,'smacc::ISmaccClientBehavior::getCurrentState()'],['../classsmacc_1_1ISmaccStateMachine.html#a610d09dc5341fb63732be713c21fbe86',1,'smacc::ISmaccStateMachine::getCurrentState()']]],
   ['getcurrentstatecounter',['getCurrentStateCounter',['../classsmacc_1_1ISmaccStateMachine.html#aad27c0182b53245d0aded22e63cd83bd',1,'smacc::ISmaccStateMachine']]],
   ['getcurrentstateinfo',['getCurrentStateInfo',['../classsmacc_1_1ISmaccStateMachine.html#a4738679e8e5f7adab35e610dce0bfff7',1,'smacc::ISmaccStateMachine']]],
