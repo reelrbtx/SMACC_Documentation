@@ -429,25 +429,26 @@ Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\
 330             marker.color.b = 0;
 331 
 332             geometry\_msgs::Point start, end;
-333             start.x = pose.pose.position.x;
-334             start.y = pose.pose.position.y;
-335             start.z = pose.pose.position.z;
+333             start.x = 0;
+334             start.y = 0;
+335             start.z = 0;
 336 
 337             tf::Transform basetransform;
 338             tf::poseMsgToTF(pose.pose, basetransform);
 339             tf::Transform endarrow = localdirection * basetransform;
 340 
-341             end.x = endarrow.getOrigin().x();
-342             end.y = endarrow.getOrigin().y();
-343             end.z = endarrow.getOrigin().z();
+341             end.x = localdirection.getOrigin().x();
+342             end.y = localdirection.getOrigin().y();
+343             end.z = localdirection.getOrigin().z();
 344 
-345             marker.pose.orientation.w = 1;
-346             marker.points.push\_back(start);
-347             marker.points.push\_back(end);
-348 
-349             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers.push\_back(marker);
-350         \}
-351     \}
+345             marker.pose.position = pose.pose.position;
+346             marker.pose.orientation = pose.pose.orientation;
+347             marker.points.push\_back(start);
+348             marker.points.push\_back(end);
+349 
+350             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers.push\_back(marker);
+351         \}
+352     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -525,7 +526,7 @@ Reimplemented in \hyperlink{classcl__move__group__interface_1_1CbCircularPivotMo
 
 
 
-Definition at line 353 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+Definition at line 354 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
 
 
 
@@ -533,10 +534,10 @@ Referenced by on\+Entry().
 
 
 \begin{DoxyCode}
-354     \{
-355         \textcolor{comment}{// bypass current trajectory, overriden in derived classes}
-356         \textcolor{comment}{// this->endEffectorTrajectory\_ = ...}
-357     \}
+355     \{
+356         \textcolor{comment}{// bypass current trajectory, overriden in derived classes}
+357         \textcolor{comment}{// this->endEffectorTrajectory\_ = ...}
+358     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
