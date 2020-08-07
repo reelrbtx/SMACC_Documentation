@@ -89,6 +89,8 @@ std\+::function$<$ void(moveit\+\_\+msgs\+::\+Robot\+Trajectory \&)$>$ \hyperlin
 std\+::function$<$ void(moveit\+\_\+msgs\+::\+Robot\+Trajectory \&)$>$ \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a6180230347c922fa0d85f514ce5029df}{post\+Incorrect\+Initial\+State\+Event}
 \item 
 std\+::function$<$ void()$>$ \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a72c4a469b70617dc5ea75e225a013582}{post\+Motion\+Execution\+Failure\+Events}
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a790c30b94509dc6f4d0064f6356a04db}{autocleanmarkers} = false
 \end{DoxyCompactItemize}
 
 
@@ -215,162 +217,176 @@ Referenced by on\+Entry().
 61         \textcolor{keywordtype}{int} discontinuity = 0;
 62         \textcolor{keywordtype}{bool} initialStateDiscontinuity = \textcolor{keyword}{false};
 63 
-64         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.size(); k++)
-65         \{
-66             \textcolor{keyword}{auto} &pose = this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}[k];
-67             moveit\_msgs::GetPositionIKRequest req;
-68 
-69             req.ik\_request.ik\_link\_name = *\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a24c6c30b9b0761a61fa002d947bd3e11}{tipLink\_};
-70             req.ik\_request.robot\_state.joint\_state.name = currentjointnames;
-71             req.ik\_request.robot\_state.joint\_state.position = jointPositions;
-72 
-73             req.ik\_request.group\_name = groupname;
-74             req.ik\_request.avoid\_collisions = \textcolor{keyword}{true};
-75 
-76             moveit\_msgs::GetPositionIKResponse res;
-77 
-78             \textcolor{comment}{//pose.header.stamp = ros::Time::now();}
-79             req.ik\_request.pose\_stamped = pose;
-80 
-81             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"IK request: "} << req);
-82             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a8a2e2225a5b53325241e45e4e28fa3a7}{iksrv\_}.call(req, res))
-83             \{
-84                 \textcolor{keyword}{auto} &prevtrajpoint = trajectory.back();
-85                 \textcolor{comment}{//jointPositions.clear();}
-86 
-87                 std::stringstream ss;
-88                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < res.solution.joint\_state.position.size(); j++)
-89                 \{
-90                     \textcolor{keyword}{auto} &jointname = res.solution.joint\_state.name[j];
-91                     \textcolor{keyword}{auto} it = std::find(currentjointnames.begin(), currentjointnames.end(), jointname);
-92                     \textcolor{keywordflow}{if} (it != currentjointnames.end())
-93                     \{
-94                         \textcolor{keywordtype}{int} index = std::distance(currentjointnames.begin(), it);
-95                         jointPositions[index] = res.solution.joint\_state.position[j];
-96                         ss << jointname << \textcolor{stringliteral}{"("} << index << \textcolor{stringliteral}{"): "} << jointPositions[index] << std::endl;
-97                     \}
-98                 \}
-99 
-100                 \textcolor{comment}{// continuity check}
-101                 \textcolor{keywordtype}{int} jointindex = 0;
-102                 \textcolor{keywordtype}{int} discontinuityJointIndex = -1;
-103                 \textcolor{keywordtype}{double} discontinuityDeltaJointIndex = -1;
-104                 \textcolor{keywordtype}{double} deltajoint;
-105 
-106                 \textcolor{keywordtype}{bool} check = k > 0 || !
+64         \textcolor{keywordtype}{int} ikAttempts = 4;
+65         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.size(); k++)
+66         \{
+67             \textcolor{keyword}{auto} &pose = this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}[k];
+68             moveit\_msgs::GetPositionIKRequest req;
+69 
+70             req.ik\_request.ik\_link\_name = *\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a24c6c30b9b0761a61fa002d947bd3e11}{tipLink\_};
+71             req.ik\_request.robot\_state.joint\_state.name = currentjointnames;
+72             req.ik\_request.robot\_state.joint\_state.position = jointPositions;
+73 
+74             req.ik\_request.group\_name = groupname;
+75             req.ik\_request.avoid\_collisions = \textcolor{keyword}{true};
+76 
+77             moveit\_msgs::GetPositionIKResponse res;
+78 
+79             \textcolor{comment}{//pose.header.stamp = ros::Time::now();}
+80             req.ik\_request.pose\_stamped = pose;
+81 
+82             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"IK request: "} << req);
+83             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a8a2e2225a5b53325241e45e4e28fa3a7}{iksrv\_}.call(req, res))
+84             \{
+85                 \textcolor{keyword}{auto} &prevtrajpoint = trajectory.back();
+86                 \textcolor{comment}{//jointPositions.clear();}
+87 
+88                 std::stringstream ss;
+89                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < res.solution.joint\_state.position.size(); j++)
+90                 \{
+91                     \textcolor{keyword}{auto} &jointname = res.solution.joint\_state.name[j];
+92                     \textcolor{keyword}{auto} it = std::find(currentjointnames.begin(), currentjointnames.end(), jointname);
+93                     \textcolor{keywordflow}{if} (it != currentjointnames.end())
+94                     \{
+95                         \textcolor{keywordtype}{int} index = std::distance(currentjointnames.begin(), it);
+96                         jointPositions[index] = res.solution.joint\_state.position[j];
+97                         ss << jointname << \textcolor{stringliteral}{"("} << index << \textcolor{stringliteral}{"): "} << jointPositions[index] << std::endl;
+98                     \}
+99                 \}
+100 
+101                 \textcolor{comment}{// continuity check}
+102                 \textcolor{keywordtype}{int} jointindex = 0;
+103                 \textcolor{keywordtype}{int} discontinuityJointIndex = -1;
+104                 \textcolor{keywordtype}{double} discontinuityDeltaJointIndex = -1;
+105                 \textcolor{keywordtype}{double} deltajoint;
+106 
+107                 \textcolor{keywordtype}{bool} check = k > 0 || !
       \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a01e02533602d045538fd8ccc9a011ea7}{allowInitialTrajectoryStateJointDiscontinuity\_} || 
       \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a01e02533602d045538fd8ccc9a011ea7}{allowInitialTrajectoryStateJointDiscontinuity\_} && !
       (*allowInitialTrajectoryStateJointDiscontinuity\_);
-107                 \textcolor{keywordflow}{if} (check)
-108                 \{
-109                     \textcolor{keywordflow}{for} (jointindex = 0; jointindex < jointPositions.size(); jointindex++)
-110                     \{
-111                         deltajoint = jointPositions[jointindex] - prevtrajpoint[jointindex];
-112 
-113                         \textcolor{keywordflow}{if} (!discontinuity && fabs(deltajoint) > 0.1 \textcolor{comment}{/*2.5 deg*/})
-114                         \{
-115                             discontinuity++;
-116                             discontinuityDeltaJointIndex = deltajoint;
-117                             discontinuityJointIndex = jointindex;
-118                             
-119                             \textcolor{keywordflow}{if}(k == 0)
-120                                 initialStateDiscontinuity = \textcolor{keyword}{true};
-121                         \}
-122                     \}
-123                 \}
-124 
-125                 \textcolor{keywordflow}{if} (discontinuity && discontinuityJointIndex!= -1)
-126                 \{
-127                     \textcolor{comment}{// show a message and stop the trajectory generation}
-128                     std::stringstream ss;
-129                     ss << \textcolor{stringliteral}{"Traj["} << k << \textcolor{stringliteral}{"/"} << \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.size() << \textcolor{stringliteral}{"] 
-      "} << currentjointnames[discontinuityJointIndex] << \textcolor{stringliteral}{" IK discontinuity : "} << discontinuityDeltaJointIndex <<
-       std::endl
-130                        << \textcolor{stringliteral}{"prev joint value: "} << prevtrajpoint[discontinuityJointIndex] << std::endl
-131                        << \textcolor{stringliteral}{"current joint value: "} << jointPositions[discontinuityJointIndex] << std::endl;
-132 
-133                     ss << std::endl;
-134                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ji = 0; ji < jointPositions.size(); ji++)
-135                     \{
-136                         ss << currentjointnames[ji] << \textcolor{stringliteral}{": "} << jointPositions[ji] << std::endl;
-137                     \}
-138 
-139                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} kindex = 0; kindex < trajectory.size(); kindex++)
-140                     \{
-141                         ss << \textcolor{stringliteral}{"["} << kindex << \textcolor{stringliteral}{"]: "} << trajectory[kindex][discontinuityJointIndex] << 
+108                 \textcolor{keywordflow}{if} (check)
+109                 \{
+110                     \textcolor{keywordflow}{for} (jointindex = 0; jointindex < jointPositions.size(); jointindex++)
+111                     \{
+112                         deltajoint = jointPositions[jointindex] - prevtrajpoint[jointindex];
+113 
+114                         \textcolor{keywordflow}{if} (!discontinuity && fabs(deltajoint) > 0.1 \textcolor{comment}{/*2.5 deg*/})
+115                         \{
+116                             discontinuity++;
+117                             discontinuityDeltaJointIndex = deltajoint;
+118                             discontinuityJointIndex = jointindex;
+119 
+120                             \textcolor{keywordflow}{if} (k == 0)
+121                                 initialStateDiscontinuity = \textcolor{keyword}{true};
+122                         \}
+123                     \}
+124                 \}
+125 
+126                 \textcolor{keywordflow}{if}(ikAttempts > 0 && discontinuityJointIndex!= -1)
+127                 \{
+128                     k --;
+129                     ikAttempts --;
+130                     \textcolor{keywordflow}{continue};
+131                 \}
+132                 \textcolor{keywordflow}{else}
+133                 \{
+134                     ikAttempts = 4;
+135                 
+136                     \textcolor{keywordflow}{if} (discontinuity && discontinuityJointIndex!= -1)
+137                     \{
+138                         \textcolor{comment}{// show a message and stop the trajectory generation}
+139                         std::stringstream ss;
+140                         ss << \textcolor{stringliteral}{"Traj["} << k << \textcolor{stringliteral}{"/"} << \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.size() <<
+       \textcolor{stringliteral}{"] "} << currentjointnames[discontinuityJointIndex] << \textcolor{stringliteral}{" IK discontinuity : "} << 
+      discontinuityDeltaJointIndex << std::endl
+141                             << \textcolor{stringliteral}{"prev joint value: "} << prevtrajpoint[discontinuityJointIndex] << std::endl
+142                             << \textcolor{stringliteral}{"current joint value: "} << jointPositions[discontinuityJointIndex] << 
       std::endl;
-142                     \}
 143 
-144                     \textcolor{keywordflow}{if} (k == 0)
-145                     \{
-146                         ss << \textcolor{stringliteral}{"This is the first posture of the trajectory. Maybe the robot initial posture
-       is not coincident to the initial posture of the generated joint trajectory."} << std::endl;
-147                     \}
-148 
-149                     ROS\_ERROR\_STREAM(ss.str());
-150 
-151                     trajectory.push\_back(jointPositions);
-152                     ros::Duration durationFromStart = pose.header.stamp - referenceTime;
-153                     trajectoryTimeStamps.push\_back(durationFromStart);
+144                         ss << std::endl;
+145                         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ji = 0; ji < jointPositions.size(); ji++)
+146                         \{
+147                             ss << currentjointnames[ji] << \textcolor{stringliteral}{": "} << jointPositions[ji] << std::endl;
+148                         \}
+149 
+150                         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} kindex = 0; kindex < trajectory.size(); kindex++)
+151                         \{
+152                             ss << \textcolor{stringliteral}{"["} << kindex << \textcolor{stringliteral}{"]: "} << trajectory[kindex][discontinuityJointIndex] << 
+      std::endl;
+153                         \}
 154 
-155                     \textcolor{keywordflow}{continue};
-156                 \}
-157                 \textcolor{keywordflow}{else}
-158                 \{
-159                     trajectory.push\_back(jointPositions);
-160                     ros::Duration durationFromStart = pose.header.stamp - referenceTime;
-161                     trajectoryTimeStamps.push\_back(durationFromStart);
-162 
-163                     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"IK solution: "} << res.solution.joint\_state);
-164                     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"trajpoint: "} << std::endl
-165                                                   << ss.str());
-166                 \}
-167             \}
-168             \textcolor{keywordflow}{else}
-169             \{
-170                 ROS\_ERROR(\textcolor{stringliteral}{"[CbMoveEndEffectorTrajectory] wrong IK call"});
-171             \}
-172 
-173             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"-----"});
-174         \}
-175 
-176         \textcolor{comment}{// interpolate speeds?}
-177 
-178         \textcolor{comment}{// interpolate accelerations?}
-179 
-180         \textcolor{comment}{// get current robot state}
-181         \textcolor{comment}{// fill plan message}
-182         \textcolor{comment}{// computedMotionPlan.start\_state\_.joint\_state.name = currentjointnames;}
-183         \textcolor{comment}{// computedMotionPlan.start\_state\_.joint\_state.position = trajectory.front();}
-184         \textcolor{comment}{// computedMotionPlan.trajectory\_.joint\_trajectory.joint\_names = currentjointnames;}
+155                         \textcolor{keywordflow}{if} (k == 0)
+156                         \{
+157                             ss << \textcolor{stringliteral}{"This is the first posture of the trajectory. Maybe the robot initial
+       posture is not coincident to the initial posture of the generated joint trajectory."} << std::endl;
+158                         \}
+159 
+160                         ROS\_ERROR\_STREAM(ss.str());
+161 
+162                         trajectory.push\_back(jointPositions);
+163                         ros::Duration durationFromStart = pose.header.stamp - referenceTime;
+164                         trajectoryTimeStamps.push\_back(durationFromStart);
+165 
+166                         
+167                         \textcolor{keywordflow}{continue};
+168                     \}
+169                     \textcolor{keywordflow}{else}
+170                     \{
+171                         trajectory.push\_back(jointPositions);
+172                         ros::Duration durationFromStart = pose.header.stamp - referenceTime;
+173                         trajectoryTimeStamps.push\_back(durationFromStart);
+174 
+175                         ROS\_WARN\_STREAM(\textcolor{stringliteral}{"IK solution: "} << res.solution.joint\_state);
+176                         ROS\_WARN\_STREAM(\textcolor{stringliteral}{"trajpoint: "} << std::endl
+177                             << ss.str());
+178                     \}
+179                 \}
+180             \}
+181             \textcolor{keywordflow}{else}
+182             \{
+183                 ROS\_ERROR(\textcolor{stringliteral}{"[CbMoveEndEffectorTrajectory] wrong IK call"});
+184             \}
 185 
-186         computedJointTrajectory.joint\_trajectory.joint\_names = currentjointnames;
-187         \textcolor{keywordtype}{int} i = 0;
-188         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
-189         \{
-190             \textcolor{keywordflow}{if} (i == 0) \textcolor{comment}{// not copy the current state in the trajectory (used to solve discontinuity in
+186             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"-----"});
+187         \}
+188 
+189         \textcolor{comment}{// interpolate speeds?}
+190 
+191         \textcolor{comment}{// interpolate accelerations?}
+192 
+193         \textcolor{comment}{// get current robot state}
+194         \textcolor{comment}{// fill plan message}
+195         \textcolor{comment}{// computedMotionPlan.start\_state\_.joint\_state.name = currentjointnames;}
+196         \textcolor{comment}{// computedMotionPlan.start\_state\_.joint\_state.position = trajectory.front();}
+197         \textcolor{comment}{// computedMotionPlan.trajectory\_.joint\_trajectory.joint\_names = currentjointnames;}
+198 
+199         computedJointTrajectory.joint\_trajectory.joint\_names = currentjointnames;
+200         \textcolor{keywordtype}{int} i = 0;
+201         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
+202         \{
+203             \textcolor{keywordflow}{if} (i == 0) \textcolor{comment}{// not copy the current state in the trajectory (used to solve discontinuity in
        other behaviors)}
-191             \{
-192                 i++;
-193                 \textcolor{keywordflow}{continue};
-194             \}
-195 
-196             trajectory\_msgs::JointTrajectoryPoint jp;
-197             jp.positions = p;
-198             jp.time\_from\_start = trajectoryTimeStamps[i]; \textcolor{comment}{//ros::Duration(t);}
-199             computedJointTrajectory.joint\_trajectory.points.push\_back(jp);
-200             i++;
-201         \}
-202 
-203         \textcolor{keywordflow}{if}(initialStateDiscontinuity)
-204             \textcolor{keywordflow}{return} \hyperlink{namespacecl__move__group__interface_ae5fc1caf9a16ae5ad1c97c2e137a7017a1b748367c8d468cb9b65ecd6b2eab32c}{ComputeJointTrajectoryErrorCode::INCORRECT\_INITIAL\_STATE}
+204             \{
+205                 i++;
+206                 \textcolor{keywordflow}{continue};
+207             \}
+208 
+209             trajectory\_msgs::JointTrajectoryPoint jp;
+210             jp.positions = p;
+211             jp.time\_from\_start = trajectoryTimeStamps[i]; \textcolor{comment}{//ros::Duration(t);}
+212             computedJointTrajectory.joint\_trajectory.points.push\_back(jp);
+213             i++;
+214         \}
+215 
+216         \textcolor{keywordflow}{if} (initialStateDiscontinuity)
+217             \textcolor{keywordflow}{return} \hyperlink{namespacecl__move__group__interface_ae5fc1caf9a16ae5ad1c97c2e137a7017a1b748367c8d468cb9b65ecd6b2eab32c}{ComputeJointTrajectoryErrorCode::INCORRECT\_INITIAL\_STATE}
       ;
-205         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(discontinuity >0)
-206             \textcolor{keywordflow}{return} 
+218         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (discontinuity >0)
+219             \textcolor{keywordflow}{return} 
       \hyperlink{namespacecl__move__group__interface_ae5fc1caf9a16ae5ad1c97c2e137a7017a3e86842785cd7c42003e516418347c8e}{ComputeJointTrajectoryErrorCode::JOINT\_TRAJECTORY\_DISCONTINUITY}
       ;
-207         \textcolor{keywordflow}{return} \hyperlink{namespacecl__move__group__interface_ae5fc1caf9a16ae5ad1c97c2e137a7017ad0749aaba8b833466dfcbb0428e4f89c}{ComputeJointTrajectoryErrorCode::SUCCESS};
-208     \}
+220         \textcolor{keywordflow}{return} \hyperlink{namespacecl__move__group__interface_ae5fc1caf9a16ae5ad1c97c2e137a7017ad0749aaba8b833466dfcbb0428e4f89c}{ComputeJointTrajectoryErrorCode::SUCCESS};
+221     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -392,7 +408,7 @@ Reimplemented in \hyperlink{classcl__move__group__interface_1_1CbCircularPivotMo
 
 
 
-Definition at line 307 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+Definition at line 323 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
 
 
 
@@ -404,51 +420,50 @@ Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\
 
 
 \begin{DoxyCode}
-308     \{
-309         tf::Transform localdirection;
-310         localdirection.setIdentity();
-311         localdirection.setOrigin(tf::Vector3(0.05, 0, 0));
-312         \textcolor{keyword}{auto} frameid = this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.front().header.frame\_id;
-313 
-314         \textcolor{keywordtype}{int} i = 0;
-315         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &pose : this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_})
-316         \{
-317             visualization\_msgs::Marker marker;
-318             marker.header.frame\_id = frameid;
-319             marker.header.stamp = ros::Time::now();
-320             marker.ns = \textcolor{stringliteral}{"trajectory"};
-321             marker.id = i++;
-322             marker.type = visualization\_msgs::Marker::ARROW;
-323             marker.action = visualization\_msgs::Marker::ADD;
-324             marker.scale.x = 0.005;
-325             marker.scale.y = 0.01;
-326             marker.scale.z = 0.01;
-327             marker.color.a = 0.8;
-328             marker.color.r = 1.0;
-329             marker.color.g = 0;
-330             marker.color.b = 0;
-331 
-332             geometry\_msgs::Point start, end;
-333             start.x = 0;
-334             start.y = 0;
-335             start.z = 0;
-336 
-337             tf::Transform basetransform;
-338             tf::poseMsgToTF(pose.pose, basetransform);
-339             tf::Transform endarrow = localdirection * basetransform;
-340 
-341             end.x = localdirection.getOrigin().x();
-342             end.y = localdirection.getOrigin().y();
-343             end.z = localdirection.getOrigin().z();
-344 
-345             marker.pose.position = pose.pose.position;
-346             marker.pose.orientation = pose.pose.orientation;
-347             marker.points.push\_back(start);
-348             marker.points.push\_back(end);
-349 
-350             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers.push\_back(marker);
-351         \}
-352     \}
+324     \{
+325         tf::Transform localdirection;
+326         localdirection.setIdentity();
+327         localdirection.setOrigin(tf::Vector3(0.05, 0, 0));
+328         \textcolor{keyword}{auto} frameid = this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.front().header.frame\_id;
+329 
+330         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &pose : this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_})
+331         \{
+332             visualization\_msgs::Marker marker;
+333             marker.header.frame\_id = frameid;
+334             marker.header.stamp = ros::Time::now();
+335             marker.ns = \textcolor{stringliteral}{"trajectory"};
+336             marker.id = this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers.size();
+337             marker.type = visualization\_msgs::Marker::ARROW;
+338             marker.action = visualization\_msgs::Marker::ADD;
+339             marker.scale.x = 0.005;
+340             marker.scale.y = 0.01;
+341             marker.scale.z = 0.01;
+342             marker.color.a = 0.8;
+343             marker.color.r = 1.0;
+344             marker.color.g = 0;
+345             marker.color.b = 0;
+346 
+347             geometry\_msgs::Point start, end;
+348             start.x = 0;
+349             start.y = 0;
+350             start.z = 0;
+351 
+352             tf::Transform basetransform;
+353             tf::poseMsgToTF(pose.pose, basetransform);
+354             tf::Transform endarrow = localdirection * basetransform;
+355 
+356             end.x = localdirection.getOrigin().x();
+357             end.y = localdirection.getOrigin().y();
+358             end.z = localdirection.getOrigin().z();
+359 
+360             marker.pose.position = pose.pose.position;
+361             marker.pose.orientation = pose.pose.orientation;
+362             marker.points.push\_back(start);
+363             marker.points.push\_back(end);
+364 
+365             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers.push\_back(marker);
+366         \}
+367     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -466,7 +481,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 210 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+Definition at line 223 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
 
 
 
@@ -478,25 +493,25 @@ Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Execute\+Last\+Tra
 
 
 \begin{DoxyCode}
-211     \{
-212         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Executing joint trajectory"});
-213         \textcolor{comment}{// call execute}
-214         \textcolor{keyword}{auto} executionResult = this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->
+224     \{
+225         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Executing joint trajectory"});
+226         \textcolor{comment}{// call execute}
+227         \textcolor{keyword}{auto} executionResult = this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->
       \hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a92922ea689e4e1b7b91512c56629c95b}{moveGroupClientInterface}.execute(computedJointTrajectory);
-215 
-216         \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
-217         \{
-218             ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] motion execution succedded"});
-219             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_aebaf269db373d41837bae87651458e54}{postEventMotionExecutionSucceded}
+228 
+229         \textcolor{keywordflow}{if} (executionResult == moveit\_msgs::MoveItErrorCodes::SUCCESS)
+230         \{
+231             ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] motion execution succedded"});
+232             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_aebaf269db373d41837bae87651458e54}{postEventMotionExecutionSucceded}
       ();
-220             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_adf18efe1f0e4eacc1277b8865a8a94b1}{postSuccessEvent}();
-221         \}
-222         \textcolor{keywordflow}{else}
-223         \{
-224             this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a72c4a469b70617dc5ea75e225a013582}{postMotionExecutionFailureEvents}();
-225             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
-226         \}
-227     \}
+233             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_adf18efe1f0e4eacc1277b8865a8a94b1}{postSuccessEvent}();
+234         \}
+235         \textcolor{keywordflow}{else}
+236         \{
+237             this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a72c4a469b70617dc5ea75e225a013582}{postMotionExecutionFailureEvents}();
+238             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+239         \}
+240     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -526,7 +541,7 @@ Reimplemented in \hyperlink{classcl__move__group__interface_1_1CbCircularPivotMo
 
 
 
-Definition at line 354 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+Definition at line 369 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
 
 
 
@@ -534,10 +549,10 @@ Referenced by on\+Entry().
 
 
 \begin{DoxyCode}
-355     \{
-356         \textcolor{comment}{// bypass current trajectory, overriden in derived classes}
-357         \textcolor{comment}{// this->endEffectorTrajectory\_ = ...}
-358     \}
+370     \{
+371         \textcolor{comment}{// bypass current trajectory, overriden in derived classes}
+372         \textcolor{comment}{// this->endEffectorTrajectory\_ = ...}
+373     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -597,7 +612,7 @@ Reimplemented in \hyperlink{classcl__move__group__interface_1_1CbExecuteLastTraj
 
 
 
-Definition at line 229 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+Definition at line 242 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
 
 
 
@@ -609,67 +624,67 @@ Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+End\+Effector\+Rot
 
 
 \begin{DoxyCode}
-230     \{
-231         this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_});
-232 
-233         this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aeae938ab66e18ab7d2fb2427bc83647b}{generateTrajectory}();
-234 
-235         \textcolor{keywordflow}{if} (this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.size() == 0)
-236         \{
-237             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{smacc::demangleSymbol}(\textcolor{keyword}{typeid}(*this).name()) << \textcolor{stringliteral}{"]
-       No points in the trajectory. Skipping behavior."});
-238             \textcolor{keywordflow}{return};
-239         \}
-240 
-241         this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a442efa1d5bc9e9a16f74ecd31b13d9b5}{createMarkers}();
-242         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ac140a7f0adfb20f1e2900a5c8cd2ca5b}{markersInitialized\_} = \textcolor{keyword}{true};
-243 
-244         moveit\_msgs::RobotTrajectory computedTrajectory;
+243     \{
+244         this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_});
 245 
-246         \textcolor{keyword}{auto} errorcode = \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a485057c052729edd3e8303440b7ada66}{computeJointSpaceTrajectory}(computedTrajectory);
+246         this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aeae938ab66e18ab7d2fb2427bc83647b}{generateTrajectory}();
 247 
-248         \textcolor{keywordtype}{bool} trajectoryGenerationSuccess = errorcode == 
+248         \textcolor{keywordflow}{if} (this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.size() == 0)
+249         \{
+250             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{smacc::demangleSymbol}(\textcolor{keyword}{typeid}(*this).name()) << \textcolor{stringliteral}{"]
+       No points in the trajectory. Skipping behavior."});
+251             \textcolor{keywordflow}{return};
+252         \}
+253 
+254         this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a442efa1d5bc9e9a16f74ecd31b13d9b5}{createMarkers}();
+255         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ac140a7f0adfb20f1e2900a5c8cd2ca5b}{markersInitialized\_} = \textcolor{keyword}{true};
+256 
+257         moveit\_msgs::RobotTrajectory computedTrajectory;
+258 
+259         \textcolor{keyword}{auto} errorcode = \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a485057c052729edd3e8303440b7ada66}{computeJointSpaceTrajectory}(computedTrajectory);
+260 
+261         \textcolor{keywordtype}{bool} trajectoryGenerationSuccess = errorcode == 
       \hyperlink{namespacecl__move__group__interface_ae5fc1caf9a16ae5ad1c97c2e137a7017ad0749aaba8b833466dfcbb0428e4f89c}{ComputeJointTrajectoryErrorCode::SUCCESS};
-249 
-250         CpTrajectoryHistory *trajectoryHistory;
-251         this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a19c6d658c8e809bb93bfdc9b639a3ac3}{requiresComponent}(trajectoryHistory);
-252 
-253         \textcolor{keywordflow}{if} (!trajectoryGenerationSuccess)
-254         \{
-255             ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Incorrect trajectory. Posting failure
-       event."});
-256             \textcolor{keywordflow}{if} (trajectoryHistory != \textcolor{keyword}{nullptr})
-257             \{
-258                 moveit\_msgs::MoveItErrorCodes error;
-259                 error.val = moveit\_msgs::MoveItErrorCodes::NO\_IK\_SOLUTION;
-260                 trajectoryHistory->pushTrajectory(computedTrajectory, error);
-261             \}
 262 
-263             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a39dc3871d29b2af1ab739057f6ca6daa}{postEventMotionExecutionFailed}(
-      );
-264             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+263         CpTrajectoryHistory *trajectoryHistory;
+264         this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a19c6d658c8e809bb93bfdc9b639a3ac3}{requiresComponent}(trajectoryHistory);
 265 
-266             \textcolor{keywordflow}{if}(errorcode == 
+266         \textcolor{keywordflow}{if} (!trajectoryGenerationSuccess)
+267         \{
+268             ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Incorrect trajectory. Posting failure
+       event."});
+269             \textcolor{keywordflow}{if} (trajectoryHistory != \textcolor{keyword}{nullptr})
+270             \{
+271                 moveit\_msgs::MoveItErrorCodes error;
+272                 error.val = moveit\_msgs::MoveItErrorCodes::NO\_IK\_SOLUTION;
+273                 trajectoryHistory->pushTrajectory(computedTrajectory, error);
+274             \}
+275 
+276             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aea650d3e7836125b32be97392b71a7f3}{movegroupClient\_}->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a39dc3871d29b2af1ab739057f6ca6daa}{postEventMotionExecutionFailed}(
+      );
+277             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af6fa358cb1ab5ed16791a201f59260e0}{postFailureEvent}();
+278 
+279             \textcolor{keywordflow}{if} (errorcode == 
       \hyperlink{namespacecl__move__group__interface_ae5fc1caf9a16ae5ad1c97c2e137a7017a3e86842785cd7c42003e516418347c8e}{ComputeJointTrajectoryErrorCode::JOINT\_TRAJECTORY\_DISCONTINUITY}
       )
-267             \{
-268                 this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a308331beab9b2ec0eae72fa56fa999c9}{postJointDiscontinuityEvent}(computedTrajectory);
-269             \}
-270             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(errorcode == 
+280             \{
+281                 this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a308331beab9b2ec0eae72fa56fa999c9}{postJointDiscontinuityEvent}(computedTrajectory);
+282             \}
+283             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (errorcode == 
       \hyperlink{namespacecl__move__group__interface_ae5fc1caf9a16ae5ad1c97c2e137a7017a1b748367c8d468cb9b65ecd6b2eab32c}{ComputeJointTrajectoryErrorCode::INCORRECT\_INITIAL\_STATE}
       )
-271             \{
-272                 this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a6180230347c922fa0d85f514ce5029df}{postIncorrectInitialStateEvent}(computedTrajectory);
-273             \}
-274             \textcolor{keywordflow}{return};
-275         \}
-276         \textcolor{keywordflow}{else}
-277         \{
-278             this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a3a75fa185c62591e1869427650338a32}{executeJointSpaceTrajectory}(computedTrajectory);
-279         \}
-280 
-281         \textcolor{comment}{// handle finishing events}
-282     \} \textcolor{comment}{// namespace cl\_move\_group\_interface}
+284             \{
+285                 this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a6180230347c922fa0d85f514ce5029df}{postIncorrectInitialStateEvent}(computedTrajectory);
+286             \}
+287             \textcolor{keywordflow}{return};
+288         \}
+289         \textcolor{keywordflow}{else}
+290         \{
+291             this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a3a75fa185c62591e1869427650338a32}{executeJointSpaceTrajectory}(computedTrajectory);
+292         \}
+293 
+294         \textcolor{comment}{// handle finishing events}
+295     \} \textcolor{comment}{// namespace cl\_move\_group\_interface}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -699,26 +714,29 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf
 
 
 
-Definition at line 293 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+Definition at line 306 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
 
 
 
-References beahior\+Markers\+\_\+, m\+\_\+mutex\+\_\+, markers\+Initialized\+\_\+, and markers\+Pub\+\_\+.
+References autocleanmarkers, beahior\+Markers\+\_\+, m\+\_\+mutex\+\_\+, markers\+Initialized\+\_\+, and markers\+Pub\+\_\+.
 
 
 \begin{DoxyCode}
-294     \{
-295         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ac140a7f0adfb20f1e2900a5c8cd2ca5b}{markersInitialized\_} = \textcolor{keyword}{false};
-296 
-297         std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a2a98ef725cb3fc7f61654d3d6a2066bb}{m\_mutex\_});
-298         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &marker : this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers)
-299         \{
-300             marker.header.stamp = ros::Time::now();
-301             marker.action = visualization\_msgs::Marker::DELETE;
-302         \}
-303 
-304         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aabc2216b2d8625fecd83c5ec69928e63}{markersPub\_}.publish(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_});
-305     \}
+307     \{
+308         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ac140a7f0adfb20f1e2900a5c8cd2ca5b}{markersInitialized\_} = \textcolor{keyword}{false};
+309 
+310         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a790c30b94509dc6f4d0064f6356a04db}{autocleanmarkers})
+311         \{
+312             std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a2a98ef725cb3fc7f61654d3d6a2066bb}{m\_mutex\_});
+313             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &marker : this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers)
+314             \{
+315                 marker.header.stamp = ros::Time::now();
+316                 marker.action = visualization\_msgs::Marker::DELETE;
+317             \}
+318 
+319             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aabc2216b2d8625fecd83c5ec69928e63}{markersPub\_}.publish(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_});
+320         \}
+321     \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aae4797fba54cb3bf371cc67d26a82186}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aae4797fba54cb3bf371cc67d26a82186}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!on\+Orthogonal\+Allocation@{on\+Orthogonal\+Allocation}}
@@ -781,7 +799,7 @@ Implements \hyperlink{classsmacc_1_1ISmaccUpdatable_a84ee0520cbefdb1d412bed54650
 
 
 
-Definition at line 284 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
+Definition at line 297 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+cpp.
 
 
 
@@ -789,13 +807,13 @@ References beahior\+Markers\+\_\+, m\+\_\+mutex\+\_\+, markers\+Initialized\+\_\
 
 
 \begin{DoxyCode}
-285     \{
-286         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ac140a7f0adfb20f1e2900a5c8cd2ca5b}{markersInitialized\_})
-287         \{
-288             std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a2a98ef725cb3fc7f61654d3d6a2066bb}{m\_mutex\_});
-289             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aabc2216b2d8625fecd83c5ec69928e63}{markersPub\_}.publish(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_});
-290         \}
-291     \}
+298     \{
+299         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ac140a7f0adfb20f1e2900a5c8cd2ca5b}{markersInitialized\_})
+300         \{
+301             std::lock\_guard<std::mutex> guard(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a2a98ef725cb3fc7f61654d3d6a2066bb}{m\_mutex\_});
+302             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_aabc2216b2d8625fecd83c5ec69928e63}{markersPub\_}.publish(\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_});
+303         \}
+304     \}
 \end{DoxyCode}
 
 
@@ -813,6 +831,20 @@ Definition at line 43 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajector
 
 
 Referenced by compute\+Joint\+Space\+Trajectory().
+
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a790c30b94509dc6f4d0064f6356a04db}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a790c30b94509dc6f4d0064f6356a04db}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!autocleanmarkers@{autocleanmarkers}}
+\index{autocleanmarkers@{autocleanmarkers}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}}
+\subsubsection{\texorpdfstring{autocleanmarkers}{autocleanmarkers}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::autocleanmarkers = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 112 of file cb\+\_\+move\+\_\+end\+\_\+effector\+\_\+trajectory.\+h.
+
+
+
+Referenced by on\+Exit().
 
 \mbox{\Hypertarget{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}\label{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory}!beahior\+Markers\+\_\+@{beahior\+Markers\+\_\+}}

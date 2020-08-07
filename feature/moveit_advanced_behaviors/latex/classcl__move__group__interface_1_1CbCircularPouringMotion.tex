@@ -41,6 +41,10 @@ void \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a0cc7
 boost\+::optional$<$ double $>$ \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a7f69b3f95281fc14902117d637b59972}{angular\+Speed\+\_\+rad\+\_\+s\+\_\+}
 \item 
 boost\+::optional$<$ double $>$ \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_ac78ce543451cbb78c95862dd4273deb7}{linear\+Speed\+\_\+m\+\_\+s\+\_\+}
+\item 
+geometry\+\_\+msgs\+::\+Vector3 \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c2cc7f70981981a723818039450cfe8}{direction\+Vector\+\_\+}
+\item 
+geometry\+\_\+msgs\+::\+Pose \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a5ebef44cab4cb3dec5148232ef0eb2f8}{pointer\+Relative\+Pose\+\_\+}
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -48,6 +52,8 @@ boost\+::optional$<$ double $>$ \hyperlink{classcl__move__group__interface_1_1Cb
 geometry\+\_\+msgs\+::\+Point\+Stamped \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivot\+Point\+\_\+}
 \item 
 double \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a7009d617bcd8ac1fba49100444434f3c}{delta\+Height\+\_\+}
+\item 
+std\+::vector$<$ geometry\+\_\+msgs\+::\+Pose\+Stamped $>$ \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a6f53442c47cf9280d8be72ea1c35546f}{pointer\+Trajectory\+\_\+}
 \end{DoxyCompactItemize}
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -104,38 +110,82 @@ Reimplemented from \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffect
 
 
 
-Definition at line 116 of file cb\+\_\+pouring\+\_\+motion.\+cpp.
+Definition at line 137 of file cb\+\_\+pouring\+\_\+motion.\+cpp.
 
 
 
-References cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::beahior\+Markers\+\_\+, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::create\+Markers(), and pivot\+Point\+\_\+.
+References cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::beahior\+Markers\+\_\+, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::create\+Markers(), pivot\+Point\+\_\+, and pointer\+Trajectory\+\_\+.
 
 
 \begin{DoxyCode}
-117     \{
-118         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a442efa1d5bc9e9a16f74ecd31b13d9b5}{CbMoveEndEffectorTrajectory::createMarkers}();
-119 
-120         visualization\_msgs::Marker marker;
-121 
-122         marker.ns = \textcolor{stringliteral}{"trajectory"};
-123         marker.id = \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers.size();
-124         marker.type = visualization\_msgs::Marker::SPHERE;
-125         marker.action = visualization\_msgs::Marker::ADD;
-126         marker.scale.x = 0.05;
-127         marker.scale.y = 0.05;
-128         marker.scale.z = 0.05;
-129 
-130         marker.color.a = 1.0;
-131         marker.color.r = 0.0;
-132         marker.color.g = 0;
-133         marker.color.b = 1.0;
-134 
-135         marker.pose.position = this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.point;
-136         marker.header.frame\_id = this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.header.frame\_id;
-137         marker.header.stamp = ros::Time::now();
-138 
-139         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers.push\_back(marker);
-140     \}
+138     \{
+139         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a442efa1d5bc9e9a16f74ecd31b13d9b5}{CbMoveEndEffectorTrajectory::createMarkers}();
+140 
+141         visualization\_msgs::Marker marker;
+142 
+143         marker.ns = \textcolor{stringliteral}{"trajectory"};
+144         marker.id = \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers.size();
+145         marker.type = visualization\_msgs::Marker::SPHERE;
+146         marker.action = visualization\_msgs::Marker::ADD;
+147         marker.scale.x = 0.01;
+148         marker.scale.y = 0.01;
+149         marker.scale.z = 0.01;
+150 
+151         marker.color.a = 1.0;
+152         marker.color.r = 0.0;
+153         marker.color.g = 0;
+154         marker.color.b = 1.0;
+155 
+156         marker.pose.position = this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.point;
+157         marker.header.frame\_id = this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.header.frame\_id;
+158         marker.header.stamp = ros::Time::now();
+159 
+160         \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers.push\_back(marker);
+161 
+162 
+163         tf::Transform localdirection;
+164         localdirection.setIdentity();
+165         localdirection.setOrigin(tf::Vector3(0.05, 0, 0));
+166         \textcolor{keyword}{auto} frameid = this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a6f53442c47cf9280d8be72ea1c35546f}{pointerTrajectory\_}.front().header.frame\_id;
+167 
+168         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &pose : this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a6f53442c47cf9280d8be72ea1c35546f}{pointerTrajectory\_})
+169         \{
+170             visualization\_msgs::Marker marker;
+171             marker.header.frame\_id = frameid;
+172             marker.header.stamp = ros::Time::now();
+173             marker.ns = \textcolor{stringliteral}{"trajectory"};
+174             marker.id = this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers.size();
+175             marker.type = visualization\_msgs::Marker::ARROW;
+176             marker.action = visualization\_msgs::Marker::ADD;
+177             marker.scale.x = 0.005;
+178             marker.scale.y = 0.01;
+179             marker.scale.z = 0.01;
+180             marker.color.a = 0.8;
+181             marker.color.r = 0.0;
+182             marker.color.g = 1;
+183             marker.color.b = 0.0;
+184 
+185             geometry\_msgs::Point start, end;
+186             start.x = 0;
+187             start.y = 0;
+188             start.z = 0;
+189 
+190             tf::Transform basetransform;
+191             tf::poseMsgToTF(pose.pose, basetransform);
+192             tf::Transform endarrow = localdirection * basetransform;
+193 
+194             end.x = localdirection.getOrigin().x();
+195             end.y = localdirection.getOrigin().y();
+196             end.z = localdirection.getOrigin().z();
+197 
+198             marker.pose.position = pose.pose.position;
+199             marker.pose.orientation = pose.pose.orientation;
+200             marker.points.push\_back(start);
+201             marker.points.push\_back(end);
+202 
+203             \hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_a809fb5385adf27c0a1c8f8136566949c}{beahiorMarkers\_}.markers.push\_back(marker);
+204         \}
+205     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -161,13 +211,13 @@ Definition at line 44 of file cb\+\_\+pouring\+\_\+motion.\+cpp.
 
 
 
-References delta\+Height\+\_\+, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::end\+Effector\+Trajectory\+\_\+, get\+Current\+End\+Effector\+Pose(), linear\+Speed\+\_\+m\+\_\+s\+\_\+, and pivot\+Point\+\_\+.
+References delta\+Height\+\_\+, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effector\+Trajectory\+::end\+Effector\+Trajectory\+\_\+, get\+Current\+End\+Effector\+Pose(), linear\+Speed\+\_\+m\+\_\+s\+\_\+, pivot\+Point\+\_\+, pointer\+Relative\+Pose\+\_\+, and pointer\+Trajectory\+\_\+.
 
 
 \begin{DoxyCode}
 45     \{
 46         \textcolor{comment}{// at least 1 sample per centimeter (average)        }
-47         \textcolor{keyword}{const} \textcolor{keywordtype}{double} METERS\_PER\_SAMPLE = 0.01;
+47         \textcolor{keyword}{const} \textcolor{keywordtype}{double} METERS\_PER\_SAMPLE = 0.005;
 48 
 49         \textcolor{keywordtype}{float} dist\_meters =0;
 50         \textcolor{keywordtype}{float} totallineardist = fabs(this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a7009d617bcd8ac1fba49100444434f3c}{deltaHeight\_});
@@ -188,54 +238,81 @@ References delta\+Height\+\_\+, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+
 65             secondsPerSample = std::numeric\_limits<double>::max();
 66         \}
 67 
-68         tf::Vector3 v0, v1;
-69         tf::StampedTransform currentEndEffectorTransform;
-70 
-71         this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a0cc72cc5233ecb0c264621d4d9501b30}{getCurrentEndEffectorPose}(currentEndEffectorTransform);
-72 
-73         tf::Vector3 pivot;
-74         tf::pointMsgToTF(\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.point,pivot);
-75         v0 = currentEndEffectorTransform.getOrigin() - pivot ;
-76         v1 = v0;
-77         v1.setZ(v1.z()- this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a7009d617bcd8ac1fba49100444434f3c}{deltaHeight\_});
-78 
-79         tf::Quaternion initialOrientation = currentEndEffectorTransform.getRotation();
-80         tf::Vector3 vp1(v1);
-81         tf::Vector3 vp0(v0);
-82         tf::Quaternion rotation = tf::shortestArcQuatNormalize2(vp1,vp0);
-83         \textcolor{keyword}{auto} finalOrientation = initialOrientation*rotation ;
-84 
-85         \textcolor{keyword}{auto} shortestAngle = tf::angleShortestPath(initialOrientation, finalOrientation);
-86 
-87         v0+=pivot;
-88         v1+=pivot;
-89         
-90         \textcolor{keywordtype}{float} linc = \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a7009d617bcd8ac1fba49100444434f3c}{deltaHeight\_}/steps;\textcolor{comment}{// METERS\_PER\_SAMPLE with sign}
-91         \textcolor{keywordtype}{float} interpolation\_factor = 0;
-92         tf::Vector3 vi = v0;
-93         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} i =0; i < steps; i++)
-94         \{
-95             \textcolor{keyword}{auto} q = tf::slerp(initialOrientation, finalOrientation, interpolation\_factor);
-96 
-97             interpolation\_factor += interpolation\_factor\_step;
-98             dist\_meters += linc;
-99 
-100             vi = v0;
-101             vi.setZ(vi.getZ() + dist\_meters);
+68         tf::StampedTransform currentEndEffectorTransform;
+69 
+70         this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a0cc72cc5233ecb0c264621d4d9501b30}{getCurrentEndEffectorPose}(currentEndEffectorTransform);
+71 
+72         tf::Transform lidEndEffectorTransform;
+73         tf::poseMsgToTF(this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a5ebef44cab4cb3dec5148232ef0eb2f8}{pointerRelativePose\_}, lidEndEffectorTransform);
+74 
+75         tf::Vector3 v0, v1;
+76         v0 = (currentEndEffectorTransform * lidEndEffectorTransform).getOrigin();
+77 
+78         tf::Vector3 pivot;
+79         tf::pointMsgToTF(\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.point,pivot);
+80         v0 = v0 - pivot ;
+81         v1 = v0;
+82         v1.setZ(v1.z() + this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a7009d617bcd8ac1fba49100444434f3c}{deltaHeight\_});
+83 
+84         tf::Vector3 vp1(v1);
+85         tf::Vector3 vp0(v0);
+86         tf::Quaternion rotation = tf::shortestArcQuatNormalize2(vp0, vp1);
+87 
+88         tf::Quaternion initialEndEffectorOrientation = currentEndEffectorTransform.getRotation();
+89         \textcolor{keyword}{auto} finalEndEffectorOrientation = initialEndEffectorOrientation* rotation ;
+90 
+91         tf::Quaternion initialPointerOrientation = initialEndEffectorOrientation * lidEndEffectorTransform.
+      getRotation();
+92         tf::Quaternion finalPointerOrientation = finalEndEffectorOrientation * lidEndEffectorTransform.
+      getRotation();
+93 
+94         \textcolor{keyword}{auto} shortestAngle = tf::angleShortestPath(initialEndEffectorOrientation, 
+      finalEndEffectorOrientation);
+95 
+96         v0+=pivot;
+97         v1+=pivot;
+98         
+99         \textcolor{keywordtype}{float} linc = \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a7009d617bcd8ac1fba49100444434f3c}{deltaHeight\_}/steps;\textcolor{comment}{// METERS\_PER\_SAMPLE with sign}
+100         \textcolor{keywordtype}{float} interpolation\_factor = 0;
+101         tf::Vector3 vi = v0;
 102 
-103             tf::Transform pose;
-104             pose.setOrigin(vi);
-105             pose.setRotation(q);
-106 
-107             geometry\_msgs::PoseStamped globalPose;
-108             tf::poseTFToMsg(pose, globalPose.pose);
-109             globalPose.header.frame\_id = \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.header.frame\_id;
-110             globalPose.header.stamp = \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.header.stamp + ros::Duration(i * 
+103         tf::Transform invertedLidTransform = lidEndEffectorTransform.inverse(); 
+104 
+105         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} i =0; i < steps; i++)
+106         \{
+107             \textcolor{keyword}{auto} currentEndEffectorOrientation = tf::slerp(initialEndEffectorOrientation, 
+      finalEndEffectorOrientation, interpolation\_factor);
+108             \textcolor{keyword}{auto} currentPointerOrientation = tf::slerp(initialPointerOrientation, finalPointerOrientation, 
+      interpolation\_factor);
+109 
+110             interpolation\_factor += interpolation\_factor\_step;
+111             dist\_meters += linc;
+112 
+113             vi = v0;
+114             vi.setZ(vi.getZ() + dist\_meters);
+115 
+116             tf::Transform pose;
+117             pose.setOrigin(vi);
+118             pose.setRotation(currentPointerOrientation);
+119 
+120             geometry\_msgs::PoseStamped pointerPose;
+121             tf::poseTFToMsg(pose, pointerPose.pose);
+122             pointerPose.header.frame\_id = \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.header.frame\_id;
+123             pointerPose.header.stamp = \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.header.stamp + ros::Duration(i * 
       secondsPerSample);
-111 
-112             this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.push\_back(globalPose);
-113         \}
-114     \}
+124             this->\hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a6f53442c47cf9280d8be72ea1c35546f}{pointerTrajectory\_}.push\_back(pointerPose);
+125 
+126             tf::Transform poseEndEffector = pose * invertedLidTransform;
+127             
+128             geometry\_msgs::PoseStamped globalEndEffectorPose;
+129             tf::poseTFToMsg(poseEndEffector, globalEndEffectorPose.pose);
+130             globalEndEffectorPose.header.frame\_id = \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.header.frame\_id;
+131             globalEndEffectorPose.header.stamp = \hyperlink{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c100d8ba3e57f7ddfb614017d115fca}{pivotPoint\_}.header.stamp + ros::Duration(i * 
+      secondsPerSample);
+132 
+133             this->\hyperlink{classcl__move__group__interface_1_1CbMoveEndEffectorTrajectory_ae13dfd31ea3660646e03882f0c2c29f0}{endEffectorTrajectory\_}.push\_back(globalEndEffectorPose);
+134         \}
+135     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -322,11 +399,21 @@ Definition at line 17 of file cb\+\_\+pouring\+\_\+motion.\+h.
 
 
 
-Definition at line 33 of file cb\+\_\+pouring\+\_\+motion.\+h.
+Definition at line 38 of file cb\+\_\+pouring\+\_\+motion.\+h.
 
 
 
 Referenced by generate\+Trajectory().
+
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c2cc7f70981981a723818039450cfe8}\label{classcl__move__group__interface_1_1CbCircularPouringMotion_a4c2cc7f70981981a723818039450cfe8}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion}!direction\+Vector\+\_\+@{direction\+Vector\+\_\+}}
+\index{direction\+Vector\+\_\+@{direction\+Vector\+\_\+}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion}}
+\subsubsection{\texorpdfstring{direction\+Vector\+\_\+}{directionVector\_}}
+{\footnotesize\ttfamily geometry\+\_\+msgs\+::\+Vector3 cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion\+::direction\+Vector\+\_\+}
+
+
+
+Definition at line 29 of file cb\+\_\+pouring\+\_\+motion.\+h.
 
 \mbox{\Hypertarget{classcl__move__group__interface_1_1CbCircularPouringMotion_ac78ce543451cbb78c95862dd4273deb7}\label{classcl__move__group__interface_1_1CbCircularPouringMotion_ac78ce543451cbb78c95862dd4273deb7}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion}!linear\+Speed\+\_\+m\+\_\+s\+\_\+@{linear\+Speed\+\_\+m\+\_\+s\+\_\+}}
@@ -350,11 +437,39 @@ Referenced by generate\+Trajectory().
 
 
 
-Definition at line 30 of file cb\+\_\+pouring\+\_\+motion.\+h.
+Definition at line 35 of file cb\+\_\+pouring\+\_\+motion.\+h.
 
 
 
 Referenced by create\+Markers(), generate\+Trajectory(), and get\+Current\+End\+Effector\+Pose().
+
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbCircularPouringMotion_a5ebef44cab4cb3dec5148232ef0eb2f8}\label{classcl__move__group__interface_1_1CbCircularPouringMotion_a5ebef44cab4cb3dec5148232ef0eb2f8}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion}!pointer\+Relative\+Pose\+\_\+@{pointer\+Relative\+Pose\+\_\+}}
+\index{pointer\+Relative\+Pose\+\_\+@{pointer\+Relative\+Pose\+\_\+}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion}}
+\subsubsection{\texorpdfstring{pointer\+Relative\+Pose\+\_\+}{pointerRelativePose\_}}
+{\footnotesize\ttfamily geometry\+\_\+msgs\+::\+Pose cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion\+::pointer\+Relative\+Pose\+\_\+}
+
+
+
+Definition at line 33 of file cb\+\_\+pouring\+\_\+motion.\+h.
+
+
+
+Referenced by generate\+Trajectory().
+
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbCircularPouringMotion_a6f53442c47cf9280d8be72ea1c35546f}\label{classcl__move__group__interface_1_1CbCircularPouringMotion_a6f53442c47cf9280d8be72ea1c35546f}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion}!pointer\+Trajectory\+\_\+@{pointer\+Trajectory\+\_\+}}
+\index{pointer\+Trajectory\+\_\+@{pointer\+Trajectory\+\_\+}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion}}
+\subsubsection{\texorpdfstring{pointer\+Trajectory\+\_\+}{pointerTrajectory\_}}
+{\footnotesize\ttfamily std\+::vector$<$geometry\+\_\+msgs\+::\+Pose\+Stamped$>$ cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Circular\+Pouring\+Motion\+::pointer\+Trajectory\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 40 of file cb\+\_\+pouring\+\_\+motion.\+h.
+
+
+
+Referenced by create\+Markers(), and generate\+Trajectory().
 
 
 
