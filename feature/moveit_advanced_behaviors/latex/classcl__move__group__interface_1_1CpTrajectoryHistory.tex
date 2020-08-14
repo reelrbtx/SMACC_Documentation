@@ -27,14 +27,16 @@ Collaboration diagram for cl\+\_\+move\+\_\+group\+\_\+interface\+:\+:Cp\+Trajec
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hyperlink{classbool}{bool} \hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_acca64f5923a0960c704e3e8a727ba3ae}{get\+Last\+Trajectory} (int back\+Index, moveit\+\_\+msgs\+::\+Robot\+Trajectory \&trajectory)
+\item 
 \hyperlink{classbool}{bool} \hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_aa9026698871b1e9d3ef5ee29e362802f}{get\+Last\+Trajectory} (moveit\+\_\+msgs\+::\+Robot\+Trajectory \&trajectory)
 \item 
-void \hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_a27de15d0d6c5633475c59cd2ee3e7793}{push\+Trajectory} (const moveit\+\_\+msgs\+::\+Robot\+Trajectory \&trajectory, moveit\+\_\+msgs\+::\+Move\+It\+Error\+Codes result)
+void \hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_adf3f9a3fed4ef7b1adf23a098d3451ec}{push\+Trajectory} (std\+::string name, const moveit\+\_\+msgs\+::\+Robot\+Trajectory \&trajectory, moveit\+\_\+msgs\+::\+Move\+It\+Error\+Codes result)
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ \hyperlink{structTrajectoryHistoryEntry}{Trajectory\+History\+Entry} $>$ \hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectory\+History\+\_\+}
+std\+::vector$<$ \hyperlink{structcl__move__group__interface_1_1TrajectoryHistoryEntry}{Trajectory\+History\+Entry} $>$ \hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectory\+History\+\_\+}
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -42,58 +44,100 @@ std\+::vector$<$ \hyperlink{structTrajectoryHistoryEntry}{Trajectory\+History\+E
 \subsection{Detailed Description}
 
 
-Definition at line 21 of file cp\+\_\+trajectory\+\_\+history.\+h.
+Definition at line 23 of file cp\+\_\+trajectory\+\_\+history.\+h.
 
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classcl__move__group__interface_1_1CpTrajectoryHistory_aa9026698871b1e9d3ef5ee29e362802f}\label{classcl__move__group__interface_1_1CpTrajectoryHistory_aa9026698871b1e9d3ef5ee29e362802f}} 
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CpTrajectoryHistory_acca64f5923a0960c704e3e8a727ba3ae}\label{classcl__move__group__interface_1_1CpTrajectoryHistory_acca64f5923a0960c704e3e8a727ba3ae}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History}!get\+Last\+Trajectory@{get\+Last\+Trajectory}}
 \index{get\+Last\+Trajectory@{get\+Last\+Trajectory}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History}}
-\subsubsection{\texorpdfstring{get\+Last\+Trajectory()}{getLastTrajectory()}}
-{\footnotesize\ttfamily \hyperlink{classbool}{bool} cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History\+::get\+Last\+Trajectory (\begin{DoxyParamCaption}\item[{moveit\+\_\+msgs\+::\+Robot\+Trajectory \&}]{trajectory }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\subsubsection{\texorpdfstring{get\+Last\+Trajectory()}{getLastTrajectory()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History\+::get\+Last\+Trajectory (\begin{DoxyParamCaption}\item[{int}]{back\+Index,  }\item[{moveit\+\_\+msgs\+::\+Robot\+Trajectory \&}]{trajectory }\end{DoxyParamCaption})}
 
 
 
-Definition at line 26 of file cp\+\_\+trajectory\+\_\+history.\+h.
+Definition at line 12 of file cp\+\_\+trajectory\+\_\+history.\+cpp.
 
 
 
-Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Execute\+Last\+Trajectory\+::on\+Entry(), and cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Last\+Trajectory\+Initial\+State\+::on\+Entry().
+References trajectory\+History\+\_\+.
+
+
+
+Referenced by get\+Last\+Trajectory(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Execute\+Last\+Trajectory\+::on\+Entry(), cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Undo\+Last\+Trajectory\+::on\+Entry(), and cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Last\+Trajectory\+Initial\+State\+::on\+Entry().
 
 
 \begin{DoxyCode}
-27         \{
-28             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectoryHistory\_}.size() ==0)
-29             \{
-30                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-31             \}
-32 
-33             trajectory = this->\hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectoryHistory\_}.back().trajectory;
-34             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-35         \}
+13     \{
+14         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectoryHistory\_}.size() == 0 )
+15         \{
+16             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+17         \}
+18 
+19         \textcolor{keywordflow}{if} (backIndex < 0)
+20         \{
+21             backIndex = 0;
+22         \}
+23         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(backIndex >= this->\hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectoryHistory\_}.size())
+24         \{
+25             \textcolor{keywordflow}{return} \textcolor{keyword}{false}; 
+26         \}
+27 
+28         trajectory = this->\hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectoryHistory\_}[this->
+      \hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectoryHistory\_}.size() - 1 - backIndex].trajectory;
+29         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+30     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classcl__move__group__interface_1_1CpTrajectoryHistory_aa9026698871b1e9d3ef5ee29e362802f_icgraph}
+\includegraphics[width=350pt]{classcl__move__group__interface_1_1CpTrajectoryHistory_acca64f5923a0960c704e3e8a727ba3ae_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classcl__move__group__interface_1_1CpTrajectoryHistory_a27de15d0d6c5633475c59cd2ee3e7793}\label{classcl__move__group__interface_1_1CpTrajectoryHistory_a27de15d0d6c5633475c59cd2ee3e7793}} 
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CpTrajectoryHistory_aa9026698871b1e9d3ef5ee29e362802f}\label{classcl__move__group__interface_1_1CpTrajectoryHistory_aa9026698871b1e9d3ef5ee29e362802f}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History}!get\+Last\+Trajectory@{get\+Last\+Trajectory}}
+\index{get\+Last\+Trajectory@{get\+Last\+Trajectory}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History}}
+\subsubsection{\texorpdfstring{get\+Last\+Trajectory()}{getLastTrajectory()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History\+::get\+Last\+Trajectory (\begin{DoxyParamCaption}\item[{moveit\+\_\+msgs\+::\+Robot\+Trajectory \&}]{trajectory }\end{DoxyParamCaption})}
+
+
+
+Definition at line 32 of file cp\+\_\+trajectory\+\_\+history.\+cpp.
+
+
+
+References get\+Last\+Trajectory().
+
+
+\begin{DoxyCode}
+33     \{
+34         \textcolor{keywordflow}{return} \hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_acca64f5923a0960c704e3e8a727ba3ae}{getLastTrajectory}(-1, trajectory);
+35     \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__group__interface_1_1CpTrajectoryHistory_aa9026698871b1e9d3ef5ee29e362802f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CpTrajectoryHistory_adf3f9a3fed4ef7b1adf23a098d3451ec}\label{classcl__move__group__interface_1_1CpTrajectoryHistory_adf3f9a3fed4ef7b1adf23a098d3451ec}} 
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History}!push\+Trajectory@{push\+Trajectory}}
 \index{push\+Trajectory@{push\+Trajectory}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History}}
 \subsubsection{\texorpdfstring{push\+Trajectory()}{pushTrajectory()}}
-{\footnotesize\ttfamily void cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History\+::push\+Trajectory (\begin{DoxyParamCaption}\item[{const moveit\+\_\+msgs\+::\+Robot\+Trajectory \&}]{trajectory,  }\item[{moveit\+\_\+msgs\+::\+Move\+It\+Error\+Codes}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History\+::push\+Trajectory (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{const moveit\+\_\+msgs\+::\+Robot\+Trajectory \&}]{trajectory,  }\item[{moveit\+\_\+msgs\+::\+Move\+It\+Error\+Codes}]{result }\end{DoxyParamCaption})}
 
 
 
-Definition at line 37 of file cp\+\_\+trajectory\+\_\+history.\+h.
+Definition at line 37 of file cp\+\_\+trajectory\+\_\+history.\+cpp.
 
 
 
-References Trajectory\+History\+Entry\+::result, and Trajectory\+History\+Entry\+::trajectory.
+References trajectory\+History\+\_\+.
 
 
 
@@ -101,21 +145,22 @@ Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effecto
 
 
 \begin{DoxyCode}
-38         \{
-39             \hyperlink{structTrajectoryHistoryEntry}{TrajectoryHistoryEntry} entry;
-40             this->\hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectoryHistory\_}.push\_back(entry);
+38     \{
+39         TrajectoryHistoryEntry entry;
+40         this->\hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectoryHistory\_}.push\_back(entry);
 41 
-42             \textcolor{keyword}{auto} &last = this->\hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectoryHistory\_}.back();
-43             last.trajectory = trajectory;
-44             last.result = result;
-45         \}
+42         \textcolor{keyword}{auto} &last = this->\hyperlink{classcl__move__group__interface_1_1CpTrajectoryHistory_ac5f17b74ca856f6f8ccb96d9a4786fb2}{trajectoryHistory\_}.back();
+43         last.trajectory = trajectory;
+44         last.result = result;
+45         last.name = name;
+46     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classcl__move__group__interface_1_1CpTrajectoryHistory_a27de15d0d6c5633475c59cd2ee3e7793_icgraph}
+\includegraphics[width=350pt]{classcl__move__group__interface_1_1CpTrajectoryHistory_adf3f9a3fed4ef7b1adf23a098d3451ec_icgraph}
 \end{center}
 \end{figure}
 
@@ -125,14 +170,19 @@ Here is the caller graph for this function\+:
 \index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History}!trajectory\+History\+\_\+@{trajectory\+History\+\_\+}}
 \index{trajectory\+History\+\_\+@{trajectory\+History\+\_\+}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History}}
 \subsubsection{\texorpdfstring{trajectory\+History\+\_\+}{trajectoryHistory\_}}
-{\footnotesize\ttfamily std\+::vector$<$\hyperlink{structTrajectoryHistoryEntry}{Trajectory\+History\+Entry}$>$ cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History\+::trajectory\+History\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily std\+::vector$<$\hyperlink{structcl__move__group__interface_1_1TrajectoryHistoryEntry}{Trajectory\+History\+Entry}$>$ cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cp\+Trajectory\+History\+::trajectory\+History\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 48 of file cp\+\_\+trajectory\+\_\+history.\+h.
+Definition at line 34 of file cp\+\_\+trajectory\+\_\+history.\+h.
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+Referenced by get\+Last\+Trajectory(), and push\+Trajectory().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-smacc\+\_\+client\+\_\+library/move\+\_\+group\+\_\+interface\+\_\+client/include/move\+\_\+group\+\_\+interface\+\_\+client/components/\hyperlink{cp__trajectory__history_8h}{cp\+\_\+trajectory\+\_\+history.\+h}\end{DoxyCompactItemize}
+smacc\+\_\+client\+\_\+library/move\+\_\+group\+\_\+interface\+\_\+client/include/move\+\_\+group\+\_\+interface\+\_\+client/components/\hyperlink{cp__trajectory__history_8h}{cp\+\_\+trajectory\+\_\+history.\+h}\item 
+smacc\+\_\+client\+\_\+library/move\+\_\+group\+\_\+interface\+\_\+client/src/move\+\_\+group\+\_\+interface\+\_\+client/components/\hyperlink{cp__trajectory__history_8cpp}{cp\+\_\+trajectory\+\_\+history.\+cpp}\end{DoxyCompactItemize}

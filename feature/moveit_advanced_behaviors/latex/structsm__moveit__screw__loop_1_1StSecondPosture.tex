@@ -75,12 +75,12 @@ Definition at line 20 of file st\+\_\+second\+\_\+posture.\+h.
 
 
 
-Definition at line 54 of file st\+\_\+second\+\_\+posture.\+h.
+Definition at line 50 of file st\+\_\+second\+\_\+posture.\+h.
 
 
 \begin{DoxyCode}
-55         \{
-56         \}
+51         \{
+52         \}
 \end{DoxyCode}
 \mbox{\Hypertarget{structsm__moveit__screw__loop_1_1StSecondPosture_a19240afdfde0f7e7a99a40fef6a76b01}\label{structsm__moveit__screw__loop_1_1StSecondPosture_a19240afdfde0f7e7a99a40fef6a76b01}} 
 \index{sm\+\_\+moveit\+\_\+screw\+\_\+loop\+::\+St\+Second\+Posture@{sm\+\_\+moveit\+\_\+screw\+\_\+loop\+::\+St\+Second\+Posture}!on\+Exit@{on\+Exit}}
@@ -90,13 +90,13 @@ Definition at line 54 of file st\+\_\+second\+\_\+posture.\+h.
 
 
 
-Definition at line 58 of file st\+\_\+second\+\_\+posture.\+h.
+Definition at line 54 of file st\+\_\+second\+\_\+posture.\+h.
 
 
 \begin{DoxyCode}
-59         \{
-60             ros::Duration(1.0).sleep();
-61         \}
+55         \{
+56             ros::Duration(1.0).sleep();
+57         \}
 \end{DoxyCode}
 \mbox{\Hypertarget{structsm__moveit__screw__loop_1_1StSecondPosture_af6a1ca0635f3000eeaf9302a9aca1efa}\label{structsm__moveit__screw__loop_1_1StSecondPosture_af6a1ca0635f3000eeaf9302a9aca1efa}} 
 \index{sm\+\_\+moveit\+\_\+screw\+\_\+loop\+::\+St\+Second\+Posture@{sm\+\_\+moveit\+\_\+screw\+\_\+loop\+::\+St\+Second\+Posture}!runtime\+Configure@{runtime\+Configure}}
@@ -106,22 +106,20 @@ Definition at line 58 of file st\+\_\+second\+\_\+posture.\+h.
 
 
 
-Definition at line 42 of file st\+\_\+second\+\_\+posture.\+h.
+Definition at line 40 of file st\+\_\+second\+\_\+posture.\+h.
 
 
 \begin{DoxyCode}
-43         \{
-44             \textcolor{keyword}{auto} cbpivotMotion = this->getOrthogonal<OrArm>()->getClientBehavior<CbCircularPouringMotion>()
+41         \{
+42             \textcolor{keyword}{auto} cbpivotMotion = this->getOrthogonal<OrArm>()->getClientBehavior<CbCircularPouringMotion>()
       ;
-45             \textcolor{comment}{//cbpivotMotion->linearSpeed\_m\_s\_ = 0.05; // m/s}
-46             cbpivotMotion->linearSpeed\_m\_s\_ = 0.1; \textcolor{comment}{// m/s}
-47 
-48             cbpivotMotion->pointerRelativePose\_.position.z = 0.1;
-49             cbpivotMotion->pointerRelativePose\_.orientation = tf::createQuaternionMsgFromRollPitchYaw (0, -
-       M\_PI*0.5,0);
-50             
-51             \textcolor{comment}{//cbpivotMotion->allowInitialTrajectoryStateJointDiscontinuity\_ = true;}
-52         \}
+43             \textcolor{comment}{//cbpivotMotion->linearSpeed\_m\_s\_ = 0.05; // m/s}
+44             cbpivotMotion->linearSpeed\_m\_s\_ = 0.1; \textcolor{comment}{// m/s}
+45 
+46             cbpivotMotion->pointerRelativePose\_.position.z = 0.1;
+47             cbpivotMotion->pointerRelativePose\_.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, -
+      M\_PI * 0.5, 0);
+48         \}
 \end{DoxyCode}
 \mbox{\Hypertarget{structsm__moveit__screw__loop_1_1StSecondPosture_a704c12b1f6ee40039fa1c6f1e3ec0ba4}\label{structsm__moveit__screw__loop_1_1StSecondPosture_a704c12b1f6ee40039fa1c6f1e3ec0ba4}} 
 \index{sm\+\_\+moveit\+\_\+screw\+\_\+loop\+::\+St\+Second\+Posture@{sm\+\_\+moveit\+\_\+screw\+\_\+loop\+::\+St\+Second\+Posture}!static\+Configure@{static\+Configure}}
@@ -136,22 +134,20 @@ Definition at line 23 of file st\+\_\+second\+\_\+posture.\+h.
 
 \begin{DoxyCode}
 24         \{
-25             geometry\_msgs::PointStamped pivot;
-26             pivot.header.frame\_id = \textcolor{stringliteral}{"map"};
-27             pivot.header.stamp = ros::Time::now();
-28             pivot.point.x = 0.4;
-29             pivot.point.y = 0;
-30             pivot.point.z = 0.6;
+25             geometry\_msgs::Point pivot;
+26             pivot.x = 0.4;
+27             pivot.y = 0;
+28             pivot.z = 0.6;
+29 
+30             \textcolor{comment}{// configure\_orthogonal<OrArm, CbCircularPivotMotion>(pivot, M\_PI, "gripper\_link");}
 31 
-32             \textcolor{comment}{// configure\_orthogonal<OrArm, CbCircularPivotMotion>(pivot, M\_PI, "gripper\_link");}
-33 
-34             \textcolor{comment}{// geometry\_msgs::Pose initialOffset;}
-35             \textcolor{comment}{// initialOffset.position.y = 0.05;}
-36             \textcolor{comment}{// initialOffset.orientation.w = 1;}
-37 
-38             configure\_orthogonal<OrArm, CbCircularPouringMotion>(pivot, -0.35, \textcolor{stringliteral}{"gripper\_link"});
-39             configure\_orthogonal<OrGripper, CbCloseGripper>();
-40         \}
+32             \textcolor{comment}{// geometry\_msgs::Pose initialOffset;}
+33             \textcolor{comment}{// initialOffset.position.y = 0.05;}
+34             \textcolor{comment}{// initialOffset.orientation.w = 1;}
+35 
+36             configure\_orthogonal<OrArm, CbCircularPouringMotion>(pivot, -0.35, \textcolor{stringliteral}{"gripper\_link"}, \textcolor{stringliteral}{"map"});
+37             configure\_orthogonal<OrGripper, CbCloseGripper>();
+38         \}
 \end{DoxyCode}
 
 
