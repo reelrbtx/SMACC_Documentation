@@ -37,7 +37,7 @@ void \hyperlink{classsm__ridgeback__barrel__search__1_1_1OrNavigation_a875df5d1f
 \subsection{Detailed Description}
 
 
-Definition at line 14 of file or\+\_\+navigation.\+h.
+Definition at line 15 of file or\+\_\+navigation.\+h.
 
 
 
@@ -50,7 +50,7 @@ Definition at line 14 of file or\+\_\+navigation.\+h.
 
 
 
-Definition at line 38 of file or\+\_\+navigation.\+h.
+Definition at line 39 of file or\+\_\+navigation.\+h.
 
 
 
@@ -58,21 +58,21 @@ References cl\+\_\+move\+\_\+base\+\_\+z\+::\+Waypoint\+Navigator\+::load\+Way\+
 
 
 \begin{DoxyCode}
-39         \{
-40             \textcolor{comment}{// if it is the first time and the waypoints navigator is not configured}
-41 
-42             std::string planfilepath;
-43             ros::NodeHandle nh(\textcolor{stringliteral}{"~"});
-44             \textcolor{keywordflow}{if} (nh.getParam(\textcolor{stringliteral}{"waypoints\_plan"}, planfilepath))
-45             \{
-46                 ROS\_INFO(\textcolor{stringliteral}{"Loaded waypoints path file: %s"}, planfilepath.c\_str());
-47                 waypointsNavigator->\hyperlink{classcl__move__base__z_1_1WaypointNavigator_a18d74467ddf0e637a8d5a6e1fa2e93db}{loadWayPointsFromFile}(planfilepath);
-48             \}
-49             \textcolor{keywordflow}{else}
-50             \{
-51                 ROS\_ERROR(\textcolor{stringliteral}{"Error while loading waypoints\_path file: not found"});
-52             \}
-53         \}
+40         \{
+41             \textcolor{comment}{// if it is the first time and the waypoints navigator is not configured}
+42 
+43             std::string planfilepath;
+44             ros::NodeHandle nh(\textcolor{stringliteral}{"~"});
+45             \textcolor{keywordflow}{if} (nh.getParam(\textcolor{stringliteral}{"waypoints\_plan"}, planfilepath))
+46             \{
+47                 ROS\_INFO(\textcolor{stringliteral}{"Loaded waypoints path file: %s"}, planfilepath.c\_str());
+48                 waypointsNavigator->\hyperlink{classcl__move__base__z_1_1WaypointNavigator_a18d74467ddf0e637a8d5a6e1fa2e93db}{loadWayPointsFromFile}(planfilepath);
+49             \}
+50             \textcolor{keywordflow}{else}
+51             \{
+52                 ROS\_ERROR(\textcolor{stringliteral}{"Error while loading waypoints\_path file: not found"});
+53             \}
+54         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -94,30 +94,31 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccOrthogonal_a6bb31c620cb64dd7b8
 
 
 
-Definition at line 17 of file or\+\_\+navigation.\+h.
+Definition at line 18 of file or\+\_\+navigation.\+h.
 
 
 \begin{DoxyCode}
-18         \{
-19             \textcolor{keyword}{auto} movebaseClient = this->createClient<ClMoveBaseZ>();
-20             movebaseClient->initialize();
-21 
-22             movebaseClient->createComponent<\hyperlink{classcl__move__base__z_1_1Pose}{Pose}>();
-23 
-24             \textcolor{comment}{// create planner switcher}
-25             movebaseClient->createComponent<\hyperlink{classcl__move__base__z_1_1PlannerSwitcher}{PlannerSwitcher}>();
-26 
-27             \textcolor{comment}{// create odom tracker}
-28             movebaseClient->createComponent<OdomTracker>();
-29 
-30             \textcolor{comment}{// create waypoints navigator component}
-31             \textcolor{keyword}{auto} waypointsNavigator = movebaseClient->createComponent<
+19         \{
+20             \textcolor{keyword}{auto} movebaseClient = this->createClient<ClMoveBaseZ>();
+21             movebaseClient->initialize();
+22 
+23             movebaseClient->createComponent<\hyperlink{classcl__move__base__z_1_1Pose}{Pose}>();
+24 
+25             \textcolor{comment}{// create planner switcher}
+26             movebaseClient->createComponent<\hyperlink{classcl__move__base__z_1_1PlannerSwitcher}{PlannerSwitcher}>();
+27 
+28             \textcolor{comment}{// create odom tracker}
+29             movebaseClient->createComponent<
+      \hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker}{cl\_move\_base\_z::odom\_tracker::OdomTracker}>();
+30 
+31             \textcolor{comment}{// create waypoints navigator component}
+32             \textcolor{keyword}{auto} waypointsNavigator = movebaseClient->createComponent<
       \hyperlink{classcl__move__base__z_1_1WaypointNavigator}{WaypointNavigator}>();
-32             \hyperlink{classsm__ridgeback__barrel__search__1_1_1OrNavigation_a875df5d1fdcd34f568e6db573dfbaed7}{loadWaypointsFromYaml}(waypointsNavigator);
-33 
-34             \textcolor{comment}{// change this to skip some points of the yaml file, default = 0}
-35             \textcolor{comment}{// waypointsNavigator->currentWaypoint\_ = 3;}
-36         \}
+33             \hyperlink{classsm__ridgeback__barrel__search__1_1_1OrNavigation_a875df5d1fdcd34f568e6db573dfbaed7}{loadWaypointsFromYaml}(waypointsNavigator);
+34 
+35             \textcolor{comment}{// change this to skip some points of the yaml file, default = 0}
+36             \textcolor{comment}{// waypointsNavigator->currentWaypoint\_ = 3;}
+37         \}
 \end{DoxyCode}
 
 

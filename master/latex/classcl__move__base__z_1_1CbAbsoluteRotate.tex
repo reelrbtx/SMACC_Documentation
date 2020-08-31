@@ -48,8 +48,6 @@ virtual void \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a0e362b8e9f0d
 \item 
 tf\+::\+Transform\+Listener \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_ad946bb6486dc35baf03ec1cc430a3406}{listener}
 \item 
-\hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{Cl\+Move\+BaseZ} $\ast$ \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{move\+Base\+Client\+\_\+}
-\item 
 boost\+::optional$<$ float $>$ \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_ad5d0e21549940444e1cb525cda73329a}{absolute\+Goal\+Angle\+Degree}
 \item 
 boost\+::optional$<$ float $>$ \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8d8b5b9c2c821efe101bb07c96c4bdd3}{yaw\+Goal\+Tolerance}
@@ -72,7 +70,7 @@ float \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a2cfcd2978e7923494e2
 \subsection{Detailed Description}
 
 
-Definition at line 18 of file cb\+\_\+absolute\+\_\+rotate.\+h.
+Definition at line 14 of file cb\+\_\+absolute\+\_\+rotate.\+h.
 
 
 
@@ -99,11 +97,15 @@ Forward&\\
 \end{DoxyEnumFields}
 
 
-Definition at line 21 of file cb\+\_\+absolute\+\_\+rotate.\+h.
+Definition at line 17 of file cb\+\_\+absolute\+\_\+rotate.\+h.
 
 
 \begin{DoxyCode}
-21 \{Default, PureSpinning, Forward\};
+18         \{
+19             Default,
+20             PureSpinning,
+21             Forward
+22         \};
 \end{DoxyCode}
 
 
@@ -160,7 +162,7 @@ References absolute\+Goal\+Angle\+Degree, and yaw\+Goal\+Tolerance.
 
 
 
-Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ad5d3e1f1697c3cfe66c94cadba948493}{smacc\+::\+Smacc\+Client\+Behavior}.
+Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a3ec24a839087c550e1d62a81e48cf530}{smacc\+::\+I\+Smacc\+Client\+Behavior}.
 
 
 
@@ -168,7 +170,7 @@ Definition at line 61 of file cb\+\_\+absolute\+\_\+rotate.\+cpp.
 
 
 
-References absolute\+Goal\+Angle\+Degree, smacc\+::\+I\+Smacc\+Client\+::get\+Component(), smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+Current\+State(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::get\+Reference\+Frame(), move\+Base\+Client\+\_\+, smacc\+::\+I\+Smacc\+State\+::param(), Pure\+Spinning, cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::push\+Path(), cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+R\+E\+C\+O\+R\+D\+\_\+\+P\+A\+TH, smacc\+::\+I\+Smacc\+Client\+Behavior\+::requires\+Client(), smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ Action\+Type $>$\+::send\+Goal(), set\+Local\+Planner\+Yaw\+Tolerance(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Planner\+Switcher\+::set\+Pure\+Spinning\+Planner(), spinning\+Planner, and yaw\+Goal\+Tolerance.
+References absolute\+Goal\+Angle\+Degree, smacc\+::\+I\+Smacc\+Client\+::get\+Component(), smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+Current\+State(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::get\+Reference\+Frame(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Move\+Base\+Client\+Behavior\+Base\+::move\+Base\+Client\+\_\+, smacc\+::\+I\+Smacc\+State\+::param(), Pure\+Spinning, cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+Odom\+Tracker\+::push\+Path(), cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+tracker\+::\+R\+E\+C\+O\+R\+D\+\_\+\+P\+A\+TH, smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ Action\+Type $>$\+::send\+Goal(), set\+Local\+Planner\+Yaw\+Tolerance(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Planner\+Switcher\+::set\+Pure\+Spinning\+Planner(), spinning\+Planner, and yaw\+Goal\+Tolerance.
 
 
 \begin{DoxyCode}
@@ -186,57 +188,54 @@ References absolute\+Goal\+Angle\+Degree, smacc\+::\+I\+Smacc\+Client\+::get\+Co
 72         goal\_angle = *this->\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_ad5d0e21549940444e1cb525cda73329a}{absoluteGoalAngleDegree};
 73     \}
 74 
-75     this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_});
-76 
-77     \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
-78     \textcolor{comment}{//this should work better with a coroutine and await}
-79     \textcolor{comment}{//this->plannerSwitcher\_->setForwardPlanner();}
-80     
-81     \textcolor{keywordflow}{if}(\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a17d836524599af072cf2e3488e491a91}{spinningPlanner} && *\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a17d836524599af072cf2e3488e491a91}{spinningPlanner} == 
+75     \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
+76     \textcolor{comment}{//this should work better with a coroutine and await}
+77     \textcolor{comment}{//this->plannerSwitcher\_->setForwardPlanner();}
+78     
+79     \textcolor{keywordflow}{if}(\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a17d836524599af072cf2e3488e491a91}{spinningPlanner} && *\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a17d836524599af072cf2e3488e491a91}{spinningPlanner} == 
       \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_ab8d45e43594a3fc6a71c08f07b5dbef0aada5274435681a4ce04175bebfa6652f}{CbAbsoluteRotate::SpiningPlanner::PureSpinning})
-82     \{
-83         plannerSwitcher->setPureSpinningPlanner();
-84     \}
-85     \textcolor{keywordflow}{else}
-86     \{
-87         plannerSwitcher->setDefaultPlanners();
-88 
-89         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8d8b5b9c2c821efe101bb07c96c4bdd3}{yawGoalTolerance})
-90         \{
-91             this->\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_aba8d93d615ccd43acd0684f8e88e2209}{setLocalPlannerYawTolerance}(*
+80     \{
+81         plannerSwitcher->setPureSpinningPlanner();
+82     \}
+83     \textcolor{keywordflow}{else}
+84     \{
+85         plannerSwitcher->setDefaultPlanners();
+86 
+87         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8d8b5b9c2c821efe101bb07c96c4bdd3}{yawGoalTolerance})
+88         \{
+89             this->\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_aba8d93d615ccd43acd0684f8e88e2209}{setLocalPlannerYawTolerance}(*
       \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8d8b5b9c2c821efe101bb07c96c4bdd3}{yawGoalTolerance});
-92         \}
-93     \}
-94 
-95     \textcolor{keyword}{auto} p = \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
+90         \}
+91     \}
+92 
+93     \textcolor{keyword}{auto} p = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
       \hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose}>();
-96     \textcolor{keyword}{auto} referenceFrame = p->\hyperlink{classcl__move__base__z_1_1Pose_af8c2dc151e74aa8da6b283d1c8563051}{getReferenceFrame}();
-97     \textcolor{keyword}{auto} currentPoseMsg = p->toPoseMsg();
-98 
-99     ClMoveBaseZ::Goal goal;
-100     goal.target\_pose.header.frame\_id = referenceFrame;
-101     goal.target\_pose.header.stamp = ros::Time::now();
-102 
-103     \textcolor{keyword}{auto} currentAngle = tf::getYaw(currentPoseMsg.orientation);
-104     \textcolor{keyword}{auto} targetAngle = goal\_angle * M\_PI / 180.0;
-105     goal.target\_pose.pose.position = currentPoseMsg.position;
-106     goal.target\_pose.pose.orientation = tf::createQuaternionMsgFromYaw(targetAngle);
-107 
-108     this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_});
-109     \textcolor{keyword}{auto} odomTracker\_ = \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<odom\_tracker::OdomTracker>
+94     \textcolor{keyword}{auto} referenceFrame = p->\hyperlink{classcl__move__base__z_1_1Pose_af8c2dc151e74aa8da6b283d1c8563051}{getReferenceFrame}();
+95     \textcolor{keyword}{auto} currentPoseMsg = p->toPoseMsg();
+96 
+97     ClMoveBaseZ::Goal goal;
+98     goal.target\_pose.header.frame\_id = referenceFrame;
+99     goal.target\_pose.header.stamp = ros::Time::now();
+100 
+101     \textcolor{keyword}{auto} currentAngle = tf::getYaw(currentPoseMsg.orientation);
+102     \textcolor{keyword}{auto} targetAngle = goal\_angle * M\_PI / 180.0;
+103     goal.target\_pose.pose.position = currentPoseMsg.position;
+104     goal.target\_pose.pose.orientation = tf::createQuaternionMsgFromYaw(targetAngle);
+105 
+106     \textcolor{keyword}{auto} odomTracker\_ = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<odom\_tracker::OdomTracker>
       ();
-110     \textcolor{keywordflow}{if} (odomTracker\_!=\textcolor{keyword}{nullptr})
-111     \{
-112         odomTracker\_->pushPath();
-113         odomTracker\_->setStartPoint(p->toPoseStampedMsg());
-114         odomTracker\_->setWorkingMode(\hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a023bc3adf68871ef7a0c616765ac80a7}{odom\_tracker::WorkingMode::RECORD\_PATH}
+107     \textcolor{keywordflow}{if} (odomTracker\_!=\textcolor{keyword}{nullptr})
+108     \{
+109         odomTracker\_->pushPath();
+110         odomTracker\_->setStartPoint(p->toPoseStampedMsg());
+111         odomTracker\_->setWorkingMode(\hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a023bc3adf68871ef7a0c616765ac80a7}{odom\_tracker::WorkingMode::RECORD\_PATH}
       );
-115     \}
-116 
-117     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbAbsoluteRotate] current pose: "} << currentPoseMsg);
-118     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbAbsoluteRotate] goal pose: "} << goal.target\_pose.pose);
-119     \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
-120 \}
+112     \}
+113 
+114     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbAbsoluteRotate] current pose: "} << currentPoseMsg);
+115     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbAbsoluteRotate] goal pose: "} << goal.target\_pose.pose);
+116     \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
+117 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -254,7 +253,7 @@ Here is the call graph for this function\+:
 
 
 
-Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_a7e4fb6ce81ff96dc172425852d69c0c5}{smacc\+::\+Smacc\+Client\+Behavior}.
+Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf750909a15e4215a9b3}{smacc\+::\+I\+Smacc\+Client\+Behavior}.
 
 
 
@@ -354,7 +353,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 27 of file cb\+\_\+absolute\+\_\+rotate.\+h.
+Definition at line 26 of file cb\+\_\+absolute\+\_\+rotate.\+h.
 
 
 
@@ -368,21 +367,7 @@ Referenced by Cb\+Absolute\+Rotate(), and on\+Entry().
 
 
 
-Definition at line 23 of file cb\+\_\+absolute\+\_\+rotate.\+h.
-
-\mbox{\Hypertarget{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}\label{classcl__move__base__z_1_1CbAbsoluteRotate_a8ddbef73316ff96f30493b28b5627e35}} 
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate}!move\+Base\+Client\+\_\+@{move\+Base\+Client\+\_\+}}
-\index{move\+Base\+Client\+\_\+@{move\+Base\+Client\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate}}
-\subsubsection{\texorpdfstring{move\+Base\+Client\+\_\+}{moveBaseClient\_}}
-{\footnotesize\ttfamily \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{Cl\+Move\+BaseZ}$\ast$ cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate\+::move\+Base\+Client\+\_\+}
-
-
-
-Definition at line 25 of file cb\+\_\+absolute\+\_\+rotate.\+h.
-
-
-
-Referenced by on\+Entry().
+Definition at line 24 of file cb\+\_\+absolute\+\_\+rotate.\+h.
 
 \mbox{\Hypertarget{classcl__move__base__z_1_1CbAbsoluteRotate_a2cfcd2978e7923494e2e66107e134e27}\label{classcl__move__base__z_1_1CbAbsoluteRotate_a2cfcd2978e7923494e2e66107e134e27}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate}!old\+Yaw\+Tolerance@{old\+Yaw\+Tolerance}}
@@ -392,7 +377,7 @@ Referenced by on\+Entry().
 
 
 
-Definition at line 40 of file cb\+\_\+absolute\+\_\+rotate.\+h.
+Definition at line 39 of file cb\+\_\+absolute\+\_\+rotate.\+h.
 
 
 
@@ -406,7 +391,7 @@ Referenced by on\+Exit(), and set\+Local\+Planner\+Yaw\+Tolerance().
 
 
 
-Definition at line 29 of file cb\+\_\+absolute\+\_\+rotate.\+h.
+Definition at line 28 of file cb\+\_\+absolute\+\_\+rotate.\+h.
 
 
 
@@ -420,7 +405,7 @@ Referenced by on\+Entry(), on\+Exit(), and set\+Local\+Planner\+Yaw\+Tolerance()
 
 
 
-Definition at line 28 of file cb\+\_\+absolute\+\_\+rotate.\+h.
+Definition at line 27 of file cb\+\_\+absolute\+\_\+rotate.\+h.
 
 
 
