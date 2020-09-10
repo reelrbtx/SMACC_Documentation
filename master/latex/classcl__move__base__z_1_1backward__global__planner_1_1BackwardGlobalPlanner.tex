@@ -259,48 +259,38 @@ Referenced by make\+Plan().
 176     \textcolor{comment}{//ROS\_WARN\_STREAM( "MAKE PLAN INVOKED, plan size:"<< plan.size());}
 177     \hyperlink{classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner_a3c6784cad10fdadf28323380fe3d6d2b}{publishGoalMarker}(goal.pose, 1.0, 0, 1.0);
 178 
-179     \textcolor{keywordflow}{if} (plan.size() <= 1)
-180     \{
-181         \textcolor{comment}{// if the backward plan is too much small, we create one artificial path}
-182         \textcolor{comment}{// with two poses (the current pose) so that we do not reject the plan request        }
-183         plan.clear();
-184         plan.push\_back(start);
-185         plan.push\_back(start);
-186         ROS\_INFO(\textcolor{stringliteral}{"[BackwardGlobalPlanner] Artificial backward plan on current pose."});
-187     \}
-188 
-189     nav\_msgs::Path planMsg;
-190     planMsg.poses = plan;
-191     planMsg.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner_a7103c15e6540a514acd421c3c6e194a4}{costmap\_ros\_}->getGlobalFrameID();
-192 
-193         \textcolor{comment}{// check plan rejection}
-194     \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};
-195 
-196     \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
-197     \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
-198     \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
-199     \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
-200 
-201     costmap\_2d::Costmap2D *costmap2d = this->\hyperlink{classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner_a7103c15e6540a514acd421c3c6e194a4}{costmap\_ros\_}->getCostmap();
-202     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : plan)
-203     \{
-204         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
-205         costmap2d->worldToMap(p.pose.position.x, p.pose.position.y, mx, my);
-206         \textcolor{keyword}{auto} cost = costmap2d->getCost(mx, my);
-207 
-208         \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
-209         \{
-210             acceptedGlobalPlan = \textcolor{keyword}{false};
-211             \textcolor{keywordflow}{break};
-212         \}
-213     \}
-214     
-215     \hyperlink{classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner_a561eab039140948c52ec928c191f3f43}{planPub\_}.publish(planMsg);
-216 
-217     \textcolor{comment}{// this was previously set to size() <= 1, but a plan with a single point is also a valid plan (the
+179     nav\_msgs::Path planMsg;
+180     planMsg.poses = plan;
+181     planMsg.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner_a7103c15e6540a514acd421c3c6e194a4}{costmap\_ros\_}->getGlobalFrameID();
+182 
+183         \textcolor{comment}{// check plan rejection}
+184     \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};
+185 
+186     \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
+187     \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
+188     \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
+189     \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
+190 
+191     costmap\_2d::Costmap2D *costmap2d = this->\hyperlink{classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner_a7103c15e6540a514acd421c3c6e194a4}{costmap\_ros\_}->getCostmap();
+192     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : plan)
+193     \{
+194         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
+195         costmap2d->worldToMap(p.pose.position.x, p.pose.position.y, mx, my);
+196         \textcolor{keyword}{auto} cost = costmap2d->getCost(mx, my);
+197 
+198         \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
+199         \{
+200             acceptedGlobalPlan = \textcolor{keyword}{false};
+201             \textcolor{keywordflow}{break};
+202         \}
+203     \}
+204     
+205     \hyperlink{classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner_a561eab039140948c52ec928c191f3f43}{planPub\_}.publish(planMsg);
+206 
+207     \textcolor{comment}{// this was previously set to size() <= 1, but a plan with a single point is also a valid plan (the
        goal)}
-218     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-219 \}
+208     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+209 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -326,7 +316,7 @@ Here is the caller graph for this function\+:
 
 \hyperlink{classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner_a3f1f3c81e7c52c9305544fd793741a41}{make\+Plan()} 
 
-Definition at line 226 of file backward\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 216 of file backward\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -334,11 +324,11 @@ References make\+Plan().
 
 
 \begin{DoxyCode}
-229 \{
-230     cost = 0;
-231     \hyperlink{classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner_a3f1f3c81e7c52c9305544fd793741a41}{makePlan}(start, goal, plan);
-232     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-233 \}
+219 \{
+220     cost = 0;
+221     \hyperlink{classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner_a3f1f3c81e7c52c9305544fd793741a41}{makePlan}(start, goal, plan);
+222     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+223 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak

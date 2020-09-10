@@ -87,12 +87,12 @@ Definition at line 42 of file smacc\+\_\+asynchronous\+\_\+client\+\_\+behavior.
 
 
 
-Definition at line 70 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
+Definition at line 69 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
 
 
 \begin{DoxyCode}
-71     \{
-72     \}
+70     \{
+71     \}
 \end{DoxyCode}
 
 
@@ -109,7 +109,7 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_abdc74a8d95fdd0
 
 
 
-Definition at line 55 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
+Definition at line 54 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
 
 
 
@@ -117,22 +117,22 @@ References smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+Name(), and on\+Exit\+T
 
 
 \begin{DoxyCode}
-56     \{
-57         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Destroying client behavior- Waiting finishing of
+55     \{
+56         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Destroying client behavior- Waiting finishing of
        asynchronous onExit thread"});
-58         \textcolor{keywordflow}{try}
-59         \{
-60             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af76d1c36b4a10425f2da043545b73299}{onExitThread\_}.get();
-61         \}
-62         \textcolor{keywordflow}{catch} (...)
-63         \{
-64             ROS\_DEBUG(\textcolor{stringliteral}{"[SmaccAsyncClientBehavior] trying to Join onExit function, but it was alredy
+57         \textcolor{keywordflow}{try}
+58         \{
+59             this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af76d1c36b4a10425f2da043545b73299}{onExitThread\_}.get();
+60         \}
+61         \textcolor{keywordflow}{catch} (...)
+62         \{
+63             ROS\_DEBUG(\textcolor{stringliteral}{"[SmaccAsyncClientBehavior] trying to Join onExit function, but it was alredy
        finished."});
-65         \}
-66 
-67         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Destroying client behavior-  onExit thread finished.
+64         \}
+65 
+66         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] Destroying client behavior-  onExit thread finished.
        Proccedding destruction."});
-68     \}
+67     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -196,49 +196,48 @@ Definition at line 16 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
 
 
 
-References smacc\+::\+I\+Smacc\+Client\+Behavior\+::execute\+On\+Exit(), smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+Name(), on\+Entry\+Thread\+\_\+, smacc\+::\+I\+Smacc\+Client\+Behavior\+::on\+Exit(), on\+Exit\+Thread\+\_\+, and fake\+\_\+cube\+\_\+perception\+\_\+node\+::r.
+References smacc\+::\+I\+Smacc\+Client\+Behavior\+::get\+Name(), on\+Entry\+Thread\+\_\+, smacc\+::\+I\+Smacc\+Client\+Behavior\+::on\+Exit(), on\+Exit\+Thread\+\_\+, and fake\+\_\+cube\+\_\+perception\+\_\+node\+::r.
 
 
 \begin{DoxyCode}
 17     \{
-18         \hyperlink{classsmacc_1_1ISmaccClientBehavior_ac88fbad78c928b4bca6d18659ddfd8c0}{ISmaccClientBehavior::executeOnExit}();
-19         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] onExit - join async onEntry thread"});
-20 
-21         \textcolor{keywordflow}{try}
-22         \{
-23             ros::Rate \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}(200);
-24             \textcolor{keywordflow}{while} (ros::ok())
-25             \{
-26                 \textcolor{keywordtype}{bool} valid = this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a6346e036a68f41c4397d7336f8519645}{onEntryThread\_}.valid();
-27                 \textcolor{keywordflow}{if} (valid)
-28                 \{
-29                     \textcolor{keyword}{auto} status = this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a6346e036a68f41c4397d7336f8519645}{onEntryThread\_}.wait\_for(std::chrono::milliseconds(20)
+18         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] onExit - join async onEntry thread"});
+19 
+20         \textcolor{keywordflow}{try}
+21         \{
+22             ros::Rate \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}(200);
+23             \textcolor{keywordflow}{while} (ros::ok())
+24             \{
+25                 \textcolor{keywordtype}{bool} valid = this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a6346e036a68f41c4397d7336f8519645}{onEntryThread\_}.valid();
+26                 \textcolor{keywordflow}{if} (valid)
+27                 \{
+28                     \textcolor{keyword}{auto} status = this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a6346e036a68f41c4397d7336f8519645}{onEntryThread\_}.wait\_for(std::chrono::milliseconds(20)
       );
-30                     \textcolor{keywordflow}{if} (status == std::future\_status::ready)
-31                     \{
-32                         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a6346e036a68f41c4397d7336f8519645}{onEntryThread\_}.get();
-33                         \textcolor{keywordflow}{break};
-34                     \}
-35                 \}
-36 
-37                 \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
-38                 ros::spinOnce();
-39                 ROS\_DEBUG(\textcolor{stringliteral}{"waiting for finishing client behavior"});
-40             \}
-41         \}
-42         \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception &e)
-43         \{
-44             ROS\_DEBUG(\textcolor{stringliteral}{"[SmaccAsyncClientBehavior] trying to Join onEntry function, but it was alredy
+29                     \textcolor{keywordflow}{if} (status == std::future\_status::ready)
+30                     \{
+31                         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a6346e036a68f41c4397d7336f8519645}{onEntryThread\_}.get();
+32                         \textcolor{keywordflow}{break};
+33                     \}
+34                 \}
+35 
+36                 \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
+37                 ros::spinOnce();
+38                 ROS\_DEBUG(\textcolor{stringliteral}{"waiting for finishing client behavior"});
+39             \}
+40         \}
+41         \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception &e)
+42         \{
+43             ROS\_DEBUG(\textcolor{stringliteral}{"[SmaccAsyncClientBehavior] trying to Join onEntry function, but it was alredy
        finished."});
-45         \}
-46 
-47         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] onExit - Creating asynchronous onExit thread"});
-48         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af76d1c36b4a10425f2da043545b73299}{onExitThread\_} = std::async(std::launch::async,
-49                                          [=] \{
-50                                              this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf750909a15e4215a9b3}{onExit}();
-51                                              \textcolor{keywordflow}{return} 0;
-52                                          \});
-53     \}
+44         \}
+45 
+46         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"["} << \hyperlink{classsmacc_1_1ISmaccClientBehavior_a18e4bec9460b010f2894c0f7e7064a34}{getName}() << \textcolor{stringliteral}{"] onExit - Creating asynchronous onExit thread"});
+47         this->\hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_af76d1c36b4a10425f2da043545b73299}{onExitThread\_} = std::async(std::launch::async,
+48                                          [=] \{
+49                                              this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf750909a15e4215a9b3}{onExit}();
+50                                              \textcolor{keywordflow}{return} 0;
+51                                          \});
+52     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -380,7 +379,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 79 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
+Definition at line 78 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
 
 
 
@@ -392,9 +391,9 @@ Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effecto
 
 
 \begin{DoxyCode}
-80     \{
-81         \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a8041c43a0381f18fae6470a98eb9273d}{postFailureEventFn\_}();
-82     \}
+79     \{
+80         \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a8041c43a0381f18fae6470a98eb9273d}{postFailureEventFn\_}();
+81     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -412,7 +411,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 74 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
+Definition at line 73 of file smacc\+\_\+client\+\_\+async\+\_\+behavior.\+cpp.
 
 
 
@@ -424,9 +423,9 @@ Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+End\+Effecto
 
 
 \begin{DoxyCode}
-75     \{
-76         \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a944ed10880796d53649bee39dc1299c0}{postSuccessEventFn\_}();
-77     \}
+74     \{
+75         \hyperlink{classsmacc_1_1SmaccAsyncClientBehavior_a944ed10880796d53649bee39dc1299c0}{postSuccessEventFn\_}();
+76     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
