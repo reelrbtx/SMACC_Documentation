@@ -1,13 +1,13 @@
 \hypertarget{sm__ferrari_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+ferrari/servers/temperature\+\_\+sensor\+\_\+node/src/temperature\+\_\+sensor\+\_\+node.cpp File Reference}
 \label{sm__ferrari_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+ferrari/servers/temperature\+\_\+sensor\+\_\+node/src/temperature\+\_\+sensor\+\_\+node.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+ferrari/servers/temperature\+\_\+sensor\+\_\+node/src/temperature\+\_\+sensor\+\_\+node.\+cpp}}
 {\ttfamily \#include $<$ros/ros.\+h$>$}\newline
-{\ttfamily \#include $<$sensor\+\_\+msgs/\+Temperature.\+h$>$}\newline
+{\ttfamily \#include $<$std\+\_\+msgs/\+Float32.\+h$>$}\newline
 Include dependency graph for temperature\+\_\+sensor\+\_\+node.\+cpp\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=312pt]{sm__ferrari_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp__incl}
+\includegraphics[width=270pt]{sm__ferrari_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp__incl}
 \end{center}
 \end{figure}
 \subsection*{Functions}
@@ -38,17 +38,25 @@ References battery\+\_\+monitor\+\_\+node\+::msg, battery\+\_\+monitor\+\_\+node
 6     ros::init(argc,argv, \textcolor{stringliteral}{"temperature\_sensor\_node"});
 7 
 8     ros::NodeHandle nh;
-9     \textcolor{keyword}{auto} \hyperlink{namespacebattery__monitor__node_ab13957b56951b692f19d70ccac2e2511}{pub} = nh.advertise<sensor\_msgs::Temperature>(\textcolor{stringliteral}{"/temperature"},1);
+9     \textcolor{keyword}{auto} \hyperlink{namespacebattery__monitor__node_ab13957b56951b692f19d70ccac2e2511}{pub} = nh.advertise<std\_msgs::Float32>(\textcolor{stringliteral}{"/temperature"},1);
 10 
-11     ros::Rate \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}(10);
+11     ros::Rate \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}(30);
 12 
-13     \textcolor{keywordflow}{while}(ros::ok())
-14     \{
-15         sensor\_msgs::Temperature \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg};
-16         \hyperlink{namespacebattery__monitor__node_ab13957b56951b692f19d70ccac2e2511}{pub}.publish(msg);
-17 
-18         \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
-19         ros::spinOnce();
-20     \}
-21 \}
+13     \textcolor{keywordtype}{int} i=0;
+14     \textcolor{keywordflow}{while}(ros::ok())
+15     \{
+16         std\_msgs::Float32 \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg};
+17         \textcolor{comment}{// temperatures varies sinoidally from -20 to 20 degrees, but sporadically it has 32 deg}
+18         \textcolor{keywordflow}{if} (i %100 ==0 )
+19             msg.data = 32;
+20         \textcolor{keywordflow}{else}
+21             msg.data = 20 * sin(0.1 * ros::Time::now().toSec());
+22 
+23         \hyperlink{namespacebattery__monitor__node_ab13957b56951b692f19d70ccac2e2511}{pub}.publish(msg);
+24 
+25         \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
+26         ros::spinOnce();
+27         i++;
+28     \}
+29 \}
 \end{DoxyCode}
