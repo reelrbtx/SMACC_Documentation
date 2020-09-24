@@ -83,18 +83,25 @@ Definition at line 28 of file st\+\_\+acquire\+\_\+sensors.\+h.
 34       configure\_orthogonal<OrUpdatablePublisher, cl\_ros\_publisher::CbDefaultPublishLoop>();
 35 
 36       \textcolor{comment}{// Create State Reactor}
-37       \textcolor{keyword}{auto} srAllSensorsReady = static\_createStateReactor<SrAllEventsGo>();
-38       srAllSensorsReady->addInputEvent<
-      \hyperlink{structsmacc_1_1default__events_1_1EvTopicMessage}{EvTopicMessage<CbLidarSensor, OrObstaclePerception>}>();
-39       srAllSensorsReady->addInputEvent<
+37       \textcolor{comment}{// auto srAllSensorsReady = static\_createStateReactor<SrAllEventsGo>();}
+38 
+39       \textcolor{keyword}{auto} srAllSensorsReady = \hyperlink{classsmacc_1_1SmaccState_a892be704b48f93bf5c35635d1a58ed54}{static\_createStateReactor}<SrAllEventsGo,
+40                                                    EvAllGo<SrAllEventsGo, SrAcquireSensors>,
+41                                                    mpl::list<
+42                                                                
+      \hyperlink{structsmacc_1_1default__events_1_1EvTopicMessage}{EvTopicMessage<CbLidarSensor, OrObstaclePerception>},
+43                                                                
       \hyperlink{structsmacc_1_1default__events_1_1EvTopicMessage}{EvTopicMessage<CbConditionTemperatureSensor, OrTemperatureSensor>}
-      >();
-40 
-41       srAllSensorsReady->setOutputEvent<
-      \hyperlink{structsmacc_1_1state__reactors_1_1EvAllGo}{smacc::state\_reactors::EvAllGo<SrAllEventsGo, SrAcquireSensors>}
-      >();
-42       \textcolor{comment}{// srAllSensorsReady->setOutputEvent<EvAllGo<SrAllEventsGo, SrAcquireSensors>>();}
-43    \}
+44                                                             >>();
+45 
+46       
+47       \textcolor{comment}{//srAllSensorsReady->addInputEvent<EvTopicMessage<CbLidarSensor, OrObstaclePerception>>();}
+48       \textcolor{comment}{//srAllSensorsReady->addInputEvent<EvTopicMessage<CbConditionTemperatureSensor,
+       OrTemperatureSensor>>();}
+49 
+50       \textcolor{comment}{//srAllSensorsReady->setOutputEvent<smacc::state\_reactors::EvAllGo<SrAllEventsGo,
+       SrAcquireSensors>>();}
+51    \}
 \end{DoxyCode}
 
 

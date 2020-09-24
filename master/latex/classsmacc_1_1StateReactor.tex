@@ -94,7 +94,7 @@ Definition at line 29 of file smacc\+\_\+state\+\_\+reactor.\+h.
 
 
 
-Definition at line 7 of file state\+\_\+behavior.\+cpp.
+Definition at line 7 of file state\+\_\+reactor.\+cpp.
 
 
 \begin{DoxyCode}
@@ -120,11 +120,23 @@ Definition at line 37 of file smacc\+\_\+state\+\_\+reactor\+\_\+impl.\+h.
 References event\+Types.
 
 
+
+Referenced by smacc\+::\+Add\+T\+Event\+Type$<$ T\+Event\+List $>$\+::operator()().
+
+
 \begin{DoxyCode}
 38 \{
 39     this->\hyperlink{classsmacc_1_1StateReactor_a65c8ddfce40e7859e5c73fff1cf6c04b}{eventTypes}.push\_back(&\textcolor{keyword}{typeid}(TEv));
 40 \}
 \end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1StateReactor_acd4b35b4c82241fc27bb858761f6e4de_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_a68482e08f6449694a0bcda843b14b376}\label{classsmacc_1_1StateReactor_a68482e08f6449694a0bcda843b14b376}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!create\+Event\+Callback@{create\+Event\+Callback}}
 \index{create\+Event\+Callback@{create\+Event\+Callback}!smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}}
@@ -199,7 +211,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 11 of file state\+\_\+behavior.\+cpp.
+Definition at line 11 of file state\+\_\+reactor.\+cpp.
 
 
 
@@ -209,9 +221,8 @@ References on\+Initialized(), and owner\+State.
 \begin{DoxyCode}
 12 \{
 13     this->ownerState = \hyperlink{classsmacc_1_1StateReactor_aabd30af9412a8fea9ec5906f173d9d4a}{ownerState};
-14 
-15     this->\hyperlink{classsmacc_1_1StateReactor_aa10b2c6b7d1e80f01b00cbdac526a2bf}{onInitialized}();
-16 \}
+14     this->\hyperlink{classsmacc_1_1StateReactor_aa10b2c6b7d1e80f01b00cbdac526a2bf}{onInitialized}();
+15 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -230,7 +241,7 @@ void smacc\+::\+State\+Reactor\+::notify\+Event (\begin{DoxyParamCaption}\item[{
 
 
 
-Definition at line 93 of file smacc\+\_\+state\+\_\+reactor.\+h.
+Definition at line 78 of file smacc\+\_\+state\+\_\+reactor.\+h.
 
 
 
@@ -238,21 +249,21 @@ References update().
 
 
 \begin{DoxyCode}
-94     \{
-95         \textcolor{comment}{//the state machine uses this method to notify this state reactor some event happened.}
-96         \textcolor{keyword}{auto} tid = &(\textcolor{keyword}{typeid}(TEvent));
-97         \textcolor{keywordflow}{if} (std::find(\hyperlink{classsmacc_1_1StateReactor_a65c8ddfce40e7859e5c73fff1cf6c04b}{eventTypes}.begin(), \hyperlink{classsmacc_1_1StateReactor_a65c8ddfce40e7859e5c73fff1cf6c04b}{eventTypes}.end(), tid) != 
+79     \{
+80         \textcolor{comment}{//the state machine uses this method to notify this state reactor some event happened.}
+81         \textcolor{keyword}{auto} tid = &(\textcolor{keyword}{typeid}(TEvent));
+82         \textcolor{keywordflow}{if} (std::find(\hyperlink{classsmacc_1_1StateReactor_a65c8ddfce40e7859e5c73fff1cf6c04b}{eventTypes}.begin(), \hyperlink{classsmacc_1_1StateReactor_a65c8ddfce40e7859e5c73fff1cf6c04b}{eventTypes}.end(), tid) != 
       \hyperlink{classsmacc_1_1StateReactor_a65c8ddfce40e7859e5c73fff1cf6c04b}{eventTypes}.end())
-98         \{
-99             this->\hyperlink{classsmacc_1_1StateReactor_a17646b3c68a6d80d1e4da8c14238ce36}{onEventNotified}(tid);
-100             this->\hyperlink{classsmacc_1_1StateReactor_aca5d4f7af06532272db55943b7810a43}{update}();
-101 
-102             \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}.count(tid))
-103             \{
-104                 \hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}[tid]((\textcolor{keywordtype}{void} *)ev);
-105             \}
-106         \}
-107     \}
+83         \{
+84             this->\hyperlink{classsmacc_1_1StateReactor_a17646b3c68a6d80d1e4da8c14238ce36}{onEventNotified}(tid);
+85             this->\hyperlink{classsmacc_1_1StateReactor_aca5d4f7af06532272db55943b7810a43}{update}();
+86 
+87             \textcolor{keywordflow}{if} (\hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}.count(tid))
+88             \{
+89                 \hyperlink{classsmacc_1_1StateReactor_a63cce05c412f3699cc1b15af9aeaf8af}{eventCallbacks\_}[tid]((\textcolor{keywordtype}{void} *)ev);
+90             \}
+91         \}
+92     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -270,17 +281,13 @@ Here is the call graph for this function\+:
 
 
 
-Reimplemented in \hyperlink{classsmacc_1_1state__reactors_1_1SrRandomGenerator_a093fa3de1ca4f84c74cc0cb0f093cb31}{smacc\+::state\+\_\+reactors\+::\+Sr\+Random\+Generator}.
-
-
-
-Definition at line 26 of file state\+\_\+behavior.\+cpp.
+Definition at line 25 of file state\+\_\+reactor.\+cpp.
 
 
 \begin{DoxyCode}
-27 \{
-28 
-29 \}
+26 \{
+27 
+28 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_a17646b3c68a6d80d1e4da8c14238ce36}\label{classsmacc_1_1StateReactor_a17646b3c68a6d80d1e4da8c14238ce36}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!on\+Event\+Notified@{on\+Event\+Notified}}
@@ -290,16 +297,16 @@ Definition at line 26 of file state\+\_\+behavior.\+cpp.
 
 
 
-Reimplemented in \hyperlink{classsmacc_1_1state__reactors_1_1SrRandomGenerator_a8635347245b76d17355fe374e854144f}{smacc\+::state\+\_\+reactors\+::\+Sr\+Random\+Generator}, \hyperlink{classsmacc_1_1state__reactors_1_1SrEventCountdown_a6cc15cf6633bd882ac40a87d698b3b6b}{smacc\+::state\+\_\+reactors\+::\+Sr\+Event\+Countdown}, and \hyperlink{classsmacc_1_1state__reactors_1_1SrAllEventsGo_abd72dc79374c34111d24691c459850c2}{smacc\+::state\+\_\+reactors\+::\+Sr\+All\+Events\+Go}.
+Reimplemented in \hyperlink{classsmacc_1_1state__reactors_1_1SrEventCountdown_a6cc15cf6633bd882ac40a87d698b3b6b}{smacc\+::state\+\_\+reactors\+::\+Sr\+Event\+Countdown}, and \hyperlink{classsmacc_1_1state__reactors_1_1SrAllEventsGo_abd72dc79374c34111d24691c459850c2}{smacc\+::state\+\_\+reactors\+::\+Sr\+All\+Events\+Go}.
 
 
 
-Definition at line 22 of file state\+\_\+behavior.\+cpp.
+Definition at line 21 of file state\+\_\+reactor.\+cpp.
 
 
 \begin{DoxyCode}
-23 \{
-24 \}
+22 \{
+23 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_ace125d986cc787c3940306b90bb67f07}\label{classsmacc_1_1StateReactor_ace125d986cc787c3940306b90bb67f07}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!on\+Exit@{on\+Exit}}
@@ -309,13 +316,13 @@ Definition at line 22 of file state\+\_\+behavior.\+cpp.
 
 
 
-Definition at line 31 of file state\+\_\+behavior.\+cpp.
+Definition at line 30 of file state\+\_\+reactor.\+cpp.
 
 
 \begin{DoxyCode}
-32 \{
-33 
-34 \}
+31 \{
+32 
+33 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_aa10b2c6b7d1e80f01b00cbdac526a2bf}\label{classsmacc_1_1StateReactor_aa10b2c6b7d1e80f01b00cbdac526a2bf}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!on\+Initialized@{on\+Initialized}}
@@ -329,7 +336,7 @@ Reimplemented in \hyperlink{classsmacc_1_1state__reactors_1_1SrEventCountdown_a1
 
 
 
-Definition at line 18 of file state\+\_\+behavior.\+cpp.
+Definition at line 17 of file state\+\_\+reactor.\+cpp.
 
 
 
@@ -337,8 +344,8 @@ Referenced by initialize().
 
 
 \begin{DoxyCode}
-19 \{
-20 \}
+18 \{
+19 \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -469,7 +476,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 36 of file state\+\_\+behavior.\+cpp.
+Definition at line 35 of file state\+\_\+reactor.\+cpp.
 
 
 
@@ -477,13 +484,13 @@ References post\+Event\+Fn, and triggers().
 
 
 \begin{DoxyCode}
-37 \{
-38     \textcolor{keywordflow}{if} (this->\hyperlink{classsmacc_1_1StateReactor_a445bc3c90980d75d7d815b85cfb68b21}{triggers}())
-39     \{
-40         ROS\_INFO(\textcolor{stringliteral}{"State reactor base REALLY TRIGGERS!!"});
-41         this->\hyperlink{classsmacc_1_1StateReactor_a1d97ae5c1689b6716c60c19c94a7eeae}{postEventFn}();
-42     \}
-43 \}
+36 \{
+37     \textcolor{keywordflow}{if} (this->\hyperlink{classsmacc_1_1StateReactor_a445bc3c90980d75d7d815b85cfb68b21}{triggers}())
+38     \{
+39         ROS\_INFO(\textcolor{stringliteral}{"State reactor base REALLY TRIGGERS!!"});
+40         this->\hyperlink{classsmacc_1_1StateReactor_a1d97ae5c1689b6716c60c19c94a7eeae}{postEventFn}();
+41     \}
+42 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -532,7 +539,7 @@ Referenced by add\+Input\+Event(), and smacc\+::state\+\_\+reactors\+::\+Sr\+Eve
 
 
 
-Definition at line 90 of file smacc\+\_\+state\+\_\+reactor.\+h.
+Definition at line 75 of file smacc\+\_\+state\+\_\+reactor.\+h.
 
 \mbox{\Hypertarget{classsmacc_1_1StateReactor_aabd30af9412a8fea9ec5906f173d9d4a}\label{classsmacc_1_1StateReactor_aabd30af9412a8fea9ec5906f173d9d4a}} 
 \index{smacc\+::\+State\+Reactor@{smacc\+::\+State\+Reactor}!owner\+State@{owner\+State}}
@@ -568,4 +575,4 @@ The documentation for this class was generated from the following files\+:\begin
 \item 
 smacc/include/smacc/\hyperlink{smacc__state__reactor_8h}{smacc\+\_\+state\+\_\+reactor.\+h}\item 
 smacc/include/smacc/impl/\hyperlink{smacc__state__reactor__impl_8h}{smacc\+\_\+state\+\_\+reactor\+\_\+impl.\+h}\item 
-smacc/src/smacc/\hyperlink{state__behavior_8cpp}{state\+\_\+behavior.\+cpp}\end{DoxyCompactItemize}
+smacc/src/smacc/\hyperlink{state__reactor_8cpp}{state\+\_\+reactor.\+cpp}\end{DoxyCompactItemize}

@@ -69,6 +69,10 @@ Definition at line 15 of file st\+\_\+event\+\_\+count\+\_\+down.\+h.
 Definition at line 18 of file st\+\_\+event\+\_\+count\+\_\+down.\+h.
 
 
+
+References smacc\+::\+Smacc\+State$<$ St\+Event\+Count\+Down, Ms\+Dance\+Bot\+Run\+Mode $>$\+::static\+\_\+create\+State\+Reactor().
+
+
 \begin{DoxyCode}
 19     \{
 20         \textcolor{comment}{//   configure\_orthogonal<OrObstaclePerception, CbLidarSensor>();}
@@ -77,11 +81,25 @@ Definition at line 18 of file st\+\_\+event\+\_\+count\+\_\+down.\+h.
 23         \textcolor{comment}{//   configure\_orthogonal<OrService3, CbService3>(Service3Command::SERVICE3\_ON);      }
 24         
 25         \textcolor{comment}{// Create State Reactor}
-26         \textcolor{keyword}{auto} srCountdown = static\_createStateReactor<SrEventCountdown>(5);        
-27         srCountdown->addInputEvent<EvTimer<ClRosTimer, OrTimer>>();
-28         srCountdown->setOutputEvent<EvCountdownEnd<SrEventCountdown>>();
-29     \}
+26         \textcolor{comment}{// auto srCountdown = static\_createStateReactor<SrEventCountdown>(5);        }
+27         \textcolor{comment}{// srCountdown->addInputEvent<EvTimer<ClRosTimer, OrTimer>>();}
+28         \textcolor{comment}{// srCountdown->setOutputEvent<EvCountdownEnd<SrEventCountdown>>();}
+29 
+30         \textcolor{keyword}{auto} srCountdown = \hyperlink{classsmacc_1_1SmaccState_a892be704b48f93bf5c35635d1a58ed54}{static\_createStateReactor}<SrEventCountdown, 
+31                                                     EvCountdownEnd<SrEventCountdown>, 
+32                                                     mpl::list<
+33                                                             EvTimer<ClRosTimer, OrTimer>
+34                                                             >>(5);
+35     \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__dance__bot__2_1_1StEventCountDown_af5c378d5ea5e77c6ed3bc5e8870e4bcc_cgraph}
+\end{center}
+\end{figure}
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

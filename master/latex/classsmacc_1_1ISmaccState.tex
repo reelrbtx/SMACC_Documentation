@@ -43,6 +43,8 @@ virtual std\+::string \hyperlink{classsmacc_1_1ISmaccState_a5bf0b49d5ea6b9e8f45c
 \item 
 {\footnotesize template$<$typename T\+State\+Reactor , typename... T\+Ev\+Args$>$ }\\std\+::shared\+\_\+ptr$<$ T\+State\+Reactor $>$ \hyperlink{classsmacc_1_1ISmaccState_a92bba7b456f026467f23c3cd6ceb5985}{create\+State\+Reactor} (T\+Ev\+Args... args)
 \item 
+{\footnotesize template$<$typename T\+Event\+Generator , typename... T\+Ev\+Args$>$ }\\std\+::shared\+\_\+ptr$<$ T\+Event\+Generator $>$ \hyperlink{classsmacc_1_1ISmaccState_aa903fe48aa39795c9e7044e9a8bef4db}{create\+Event\+Generator} (T\+Ev\+Args... args)
+\item 
 {\footnotesize template$<$typename Event\+Type $>$ }\\void \hyperlink{classsmacc_1_1ISmaccState_acef404ab3766ddf2892e8dad14a4a7cf}{post\+Event} (const Event\+Type \&ev)
 \item 
 {\footnotesize template$<$typename Event\+Type $>$ }\\void \hyperlink{classsmacc_1_1ISmaccState_a1308e7a5348de1870c26b3b00a92cf55}{post\+Event} ()
@@ -53,6 +55,8 @@ void \hyperlink{classsmacc_1_1ISmaccState_acb3dd7d402c634004ae3b67a01169438}{not
 \item 
 std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1StateReactor}{State\+Reactor} $>$ $>$ \& \hyperlink{classsmacc_1_1ISmaccState_acc40f4b3dd02a39242c7e23fe13c3e16}{get\+State\+Reactors} ()
 \item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1SmaccEventGenerator}{Smacc\+Event\+Generator} $>$ $>$ \& \hyperlink{classsmacc_1_1ISmaccState_aec983375a9da218ba6af840f0b819d88}{get\+Event\+Generators} ()
+\item 
 {\footnotesize template$<$typename T $>$ }\\\hyperlink{classbool}{bool} \hyperlink{classsmacc_1_1ISmaccState_abbb3a24b912c6e8de28f7b86123b6357}{get\+Param} (std\+::string param\+\_\+name, T \&param\+\_\+storage)
 \item 
 {\footnotesize template$<$typename T $>$ }\\void \hyperlink{classsmacc_1_1ISmaccState_a0b6c531ca8c446052022308548f55b92}{set\+Param} (std\+::string param\+\_\+name, T param\+\_\+val)
@@ -60,11 +64,17 @@ std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1StateReactor
 {\footnotesize template$<$typename T $>$ }\\\hyperlink{classbool}{bool} \hyperlink{classsmacc_1_1ISmaccState_a4f2ff8e3eda8aa9bbb60c8ff17d0def1}{param} (std\+::string param\+\_\+name, T \&param\+\_\+val, const T \&default\+\_\+val) const
 \item 
 {\footnotesize template$<$typename T\+Orthogonal $>$ }\\T\+Orthogonal $\ast$ \hyperlink{classsmacc_1_1ISmaccState_afc5c5683cbe39964a52fc3a2553196d2}{get\+Orthogonal} ()
+\item 
+{\footnotesize template$<$typename T\+Event\+Generator $>$ }\\T\+Event\+Generator $\ast$ \hyperlink{classsmacc_1_1ISmaccState_a0fc590cfcf030b09376ddb75a0c4362e}{get\+Event\+Generator} ()
+\item 
+{\footnotesize template$<$typename T\+State\+Reactor $>$ }\\T\+State\+Reactor $\ast$ \hyperlink{classsmacc_1_1ISmaccState_a6dfd4a076d5f4e7521bea010a56ee49f}{get\+State\+Reactor} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1StateReactor}{State\+Reactor} $>$ $>$ \hyperlink{classsmacc_1_1ISmaccState_a7410a353b515f7b7357e94ef619a6c45}{state\+Reactors\+\_\+}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \hyperlink{classsmacc_1_1SmaccEventGenerator}{smacc\+::\+Smacc\+Event\+Generator} $>$ $>$ \hyperlink{classsmacc_1_1ISmaccState_a9bbef9aabd469f52c30e56b638266639}{event\+Generators\+\_\+}
 \item 
 ros\+::\+Node\+Handle \hyperlink{classsmacc_1_1ISmaccState_a13fe6e6abfdb87996402189d44b78494}{nh}
 \item 
@@ -93,7 +103,7 @@ std\+::shared\+\_\+ptr$<$ T\+Behavior $>$ smacc\+::\+I\+Smacc\+State\+::configur
 
 
 
-Definition at line 46 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 48 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
@@ -105,26 +115,26 @@ Referenced by get\+R\+O\+S\+Node().
 
 
 \begin{DoxyCode}
-47 \{
-48     std::string orthogonalkey = demangledTypeName<TOrthogonal>();
-49     ROS\_INFO(\textcolor{stringliteral}{"[%s] Configuring orthogonal: %s"}, \hyperlink{smacc__state__impl_8h_ad0127799795db099b49dd8d9025ba574}{THIS\_STATE\_NAME}, orthogonalkey.c\_str());
-50 
-51     TOrthogonal *orthogonal = this->getOrthogonal<TOrthogonal>();
-52     \textcolor{keywordflow}{if} (orthogonal != \textcolor{keyword}{nullptr})
-53     \{
-54         \textcolor{keyword}{auto} clientBehavior = std::shared\_ptr<TBehavior>(\textcolor{keyword}{new} TBehavior(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...));
-55         clientBehavior->currentState = \textcolor{keyword}{this};
-56         orthogonal->addClientBehavior(clientBehavior);
-57         clientBehavior->template onOrthogonalAllocation<TOrthogonal, TBehavior>();
-58         \textcolor{keywordflow}{return} clientBehavior;
-59     \}
-60     \textcolor{keywordflow}{else}
-61     \{
-62         ROS\_ERROR(\textcolor{stringliteral}{"[%s] Skipping client behavior creation in orthogonal [%s]. It does not exist."}, 
+49     \{
+50         std::string orthogonalkey = demangledTypeName<TOrthogonal>();
+51         ROS\_INFO(\textcolor{stringliteral}{"[%s] Configuring orthogonal: %s"}, \hyperlink{smacc__state__impl_8h_ad0127799795db099b49dd8d9025ba574}{THIS\_STATE\_NAME}, orthogonalkey.c\_str());
+52 
+53         TOrthogonal *orthogonal = this->getOrthogonal<TOrthogonal>();
+54         \textcolor{keywordflow}{if} (orthogonal != \textcolor{keyword}{nullptr})
+55         \{
+56             \textcolor{keyword}{auto} clientBehavior = std::shared\_ptr<TBehavior>(\textcolor{keyword}{new} TBehavior(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...));
+57             clientBehavior->currentState = \textcolor{keyword}{this};
+58             orthogonal->addClientBehavior(clientBehavior);
+59             clientBehavior->template onOrthogonalAllocation<TOrthogonal, TBehavior>();
+60             \textcolor{keywordflow}{return} clientBehavior;
+61         \}
+62         \textcolor{keywordflow}{else}
+63         \{
+64             ROS\_ERROR(\textcolor{stringliteral}{"[%s] Skipping client behavior creation in orthogonal [%s]. It does not exist."}, 
       \hyperlink{smacc__state__impl_8h_ad0127799795db099b49dd8d9025ba574}{THIS\_STATE\_NAME}, orthogonalkey.c\_str());
-63         \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
-64     \}
-65 \}
+65             \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};
+66         \}
+67     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -134,16 +144,16 @@ Here is the caller graph for this function\+:
 \includegraphics[width=346pt]{classsmacc_1_1ISmaccState_ad129c58b69a90e7056f2b3c3fa139a24_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classsmacc_1_1ISmaccState_a5b071f3034e2a0416d87ff26332f598f}\label{classsmacc_1_1ISmaccState_a5b071f3034e2a0416d87ff26332f598f}} 
-\index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!create\+State\+Reactor@{create\+State\+Reactor}}
-\index{create\+State\+Reactor@{create\+State\+Reactor}!smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}}
-\subsubsection{\texorpdfstring{create\+State\+Reactor()}{createStateReactor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename T\+State\+Reactor , typename T\+Trigger\+Event , typename T\+Event\+List , typename... T\+Ev\+Args$>$ \\
-std\+::shared\+\_\+ptr$<$ T\+State\+Reactor $>$ smacc\+::\+I\+Smacc\+State\+::create\+State\+Reactor (\begin{DoxyParamCaption}\item[{T\+Ev\+Args...}]{args }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{classsmacc_1_1ISmaccState_aa903fe48aa39795c9e7044e9a8bef4db}\label{classsmacc_1_1ISmaccState_aa903fe48aa39795c9e7044e9a8bef4db}} 
+\index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!create\+Event\+Generator@{create\+Event\+Generator}}
+\index{create\+Event\+Generator@{create\+Event\+Generator}!smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}}
+\subsubsection{\texorpdfstring{create\+Event\+Generator()}{createEventGenerator()}}
+{\footnotesize\ttfamily template$<$typename T\+Event\+Generator , typename... T\+Ev\+Args$>$ \\
+std\+::shared\+\_\+ptr$<$ T\+Event\+Generator $>$ smacc\+::\+I\+Smacc\+State\+::create\+Event\+Generator (\begin{DoxyParamCaption}\item[{T\+Ev\+Args...}]{args }\end{DoxyParamCaption})}
 
 
 
-Definition at line 118 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 120 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
@@ -155,14 +165,56 @@ Referenced by get\+R\+O\+S\+Node().
 
 
 \begin{DoxyCode}
-119 \{
-120     \textcolor{keyword}{auto} sb = std::make\_shared<TStateReactor>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
-121     TEventList *mock;
-122     sb->initialize(\textcolor{keyword}{this}, mock);
-123     sb->template setOutputEvent<TTriggerEvent>();
-124     \hyperlink{classsmacc_1_1ISmaccState_a7410a353b515f7b7357e94ef619a6c45}{stateReactors\_}.push\_back(sb);
-125     \textcolor{keywordflow}{return} sb;
-126 \}
+121     \{
+122         \textcolor{keyword}{auto} eg = std::make\_shared<TEventGenerator>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
+123         \hyperlink{classsmacc_1_1ISmaccState_a9bbef9aabd469f52c30e56b638266639}{eventGenerators\_}.push\_back(eg);
+124         \textcolor{keywordflow}{return} eg;
+125     \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccState_aa903fe48aa39795c9e7044e9a8bef4db_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classsmacc_1_1ISmaccState_a5b071f3034e2a0416d87ff26332f598f}\label{classsmacc_1_1ISmaccState_a5b071f3034e2a0416d87ff26332f598f}} 
+\index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!create\+State\+Reactor@{create\+State\+Reactor}}
+\index{create\+State\+Reactor@{create\+State\+Reactor}!smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}}
+\subsubsection{\texorpdfstring{create\+State\+Reactor()}{createStateReactor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+State\+Reactor , typename T\+Trigger\+Event , typename T\+Event\+List , typename... T\+Ev\+Args$>$ \\
+std\+::shared\+\_\+ptr$<$ T\+State\+Reactor $>$ smacc\+::\+I\+Smacc\+State\+::create\+State\+Reactor (\begin{DoxyParamCaption}\item[{T\+Ev\+Args...}]{args }\end{DoxyParamCaption})}
+
+
+
+Definition at line 143 of file smacc\+\_\+state\+\_\+impl.\+h.
+
+
+
+References generate\+\_\+debs\+::args, and generate\+\_\+debs\+::type.
+
+
+
+Referenced by get\+R\+O\+S\+Node().
+
+
+\begin{DoxyCode}
+144     \{
+145         \textcolor{keyword}{auto} sr = std::make\_shared<TStateReactor>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
+146         TEventList *mock;
+147         sr->initialize(\textcolor{keyword}{this});
+148         sr->template setOutputEvent<TTriggerEvent>();
+149 
+150         \textcolor{keyword}{using} boost::mpl::\_1;
+151         \textcolor{keyword}{using} wrappedList = \textcolor{keyword}{typename} \hyperlink{namespacegenerate__debs_a50bc9a7ecac9584553e089a448bcde58}{boost::mpl::transform<TEventList, \_1>::type}
+      ;
+152         AddTEventType<TEventList> op(sr.get());
+153         boost::mpl::for\_each<wrappedList>(op);
+154 
+155         \hyperlink{classsmacc_1_1ISmaccState_a7410a353b515f7b7357e94ef619a6c45}{stateReactors\_}.push\_back(sr);
+156         \textcolor{keywordflow}{return} sr;
+157     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -181,7 +233,7 @@ std\+::shared\+\_\+ptr$<$ T\+State\+Reactor $>$ smacc\+::\+I\+Smacc\+State\+::cr
 
 
 
-Definition at line 108 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 110 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
@@ -189,13 +241,13 @@ References generate\+\_\+debs\+::args.
 
 
 \begin{DoxyCode}
-109 \{
-110     \textcolor{keyword}{auto} sb = std::make\_shared<TStateReactor>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
-111     \textcolor{comment}{//sb->initialize(this, mock);}
-112     \textcolor{comment}{//sb->setOutputEvent(typelist<TTriggerEvent>());}
-113     \hyperlink{classsmacc_1_1ISmaccState_a7410a353b515f7b7357e94ef619a6c45}{stateReactors\_}.push\_back(sb);
-114     \textcolor{keywordflow}{return} sb;
-115 \}
+111     \{
+112         \textcolor{keyword}{auto} sr = std::make\_shared<TStateReactor>(\hyperlink{namespacegenerate__debs_a75f9143e38df82d83b2e8a6f99cae02c}{args}...);
+113         \textcolor{comment}{//sb->initialize(this, mock);}
+114         \textcolor{comment}{//sb->setOutputEvent(typelist<TTriggerEvent>());}
+115         \hyperlink{classsmacc_1_1ISmaccState_a7410a353b515f7b7357e94ef619a6c45}{stateReactors\_}.push\_back(sr);
+116         \textcolor{keywordflow}{return} sr;
+117     \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classsmacc_1_1ISmaccState_a5bf0b49d5ea6b9e8f45c26fa155b2664}\label{classsmacc_1_1ISmaccState_a5bf0b49d5ea6b9e8f45c26fa155b2664}} 
 \index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!get\+Class\+Name@{get\+Class\+Name}}
@@ -237,6 +289,80 @@ Here is the caller graph for this function\+:
 \includegraphics[width=350pt]{classsmacc_1_1ISmaccState_a5bf0b49d5ea6b9e8f45c26fa155b2664_icgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{classsmacc_1_1ISmaccState_a0fc590cfcf030b09376ddb75a0c4362e}\label{classsmacc_1_1ISmaccState_a0fc590cfcf030b09376ddb75a0c4362e}} 
+\index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!get\+Event\+Generator@{get\+Event\+Generator}}
+\index{get\+Event\+Generator@{get\+Event\+Generator}!smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}}
+\subsubsection{\texorpdfstring{get\+Event\+Generator()}{getEventGenerator()}}
+{\footnotesize\ttfamily template$<$typename T\+Event\+Generator $>$ \\
+T\+Event\+Generator $\ast$ smacc\+::\+I\+Smacc\+State\+::get\+Event\+Generator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 167 of file smacc\+\_\+state\+\_\+impl.\+h.
+
+
+
+Referenced by get\+Event\+Generators().
+
+
+\begin{DoxyCode}
+168     \{
+169         TEventGenerator* ret = \textcolor{keyword}{nullptr};
+170         \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}& evg: this->\hyperlink{classsmacc_1_1ISmaccState_a9bbef9aabd469f52c30e56b638266639}{eventGenerators\_})
+171         \{
+172             ret = \textcolor{keyword}{dynamic\_cast<}TEventGenerator *\textcolor{keyword}{>}(evg.get());
+173             \textcolor{keywordflow}{if}(ret!=\textcolor{keyword}{nullptr})
+174                 \textcolor{keywordflow}{break};
+175         \}
+176         \textcolor{keywordflow}{return} ret;
+177     \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccState_a0fc590cfcf030b09376ddb75a0c4362e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classsmacc_1_1ISmaccState_aec983375a9da218ba6af840f0b819d88}\label{classsmacc_1_1ISmaccState_aec983375a9da218ba6af840f0b819d88}} 
+\index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!get\+Event\+Generators@{get\+Event\+Generators}}
+\index{get\+Event\+Generators@{get\+Event\+Generators}!smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}}
+\subsubsection{\texorpdfstring{get\+Event\+Generators()}{getEventGenerators()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\hyperlink{classsmacc_1_1SmaccEventGenerator}{Smacc\+Event\+Generator}$>$ $>$\& smacc\+::\+I\+Smacc\+State\+::get\+Event\+Generators (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 62 of file smacc\+\_\+state.\+h.
+
+
+
+References event\+Generators\+\_\+, get\+Event\+Generator(), get\+Orthogonal(), get\+Param(), get\+State\+Reactor(), param(), and set\+Param().
+
+
+
+Referenced by smacc\+::\+Signal\+Detector\+::find\+Updatable\+State\+Elements().
+
+
+\begin{DoxyCode}
+62 \{ \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccState_a9bbef9aabd469f52c30e56b638266639}{eventGenerators\_}; \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccState_aec983375a9da218ba6af840f0b819d88_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccState_aec983375a9da218ba6af840f0b819d88_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1ISmaccState_ad6811b03329d9e694e78bc4b1220c2c0}\label{classsmacc_1_1ISmaccState_ad6811b03329d9e694e78bc4b1220c2c0}} 
 \index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!get\+Global\+S\+M\+Data@{get\+Global\+S\+M\+Data}}
 \index{get\+Global\+S\+M\+Data@{get\+Global\+S\+M\+Data}!smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}}
@@ -246,7 +372,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 93 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 95 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
@@ -254,9 +380,9 @@ Referenced by get\+R\+O\+S\+Node().
 
 
 \begin{DoxyCode}
-94 \{
-95     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_aeda2d6813c6c428bf318a5792e014b61}{getGlobalSMData}(name, ret);
-96 \}
+96     \{
+97         \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_aeda2d6813c6c428bf318a5792e014b61}{getGlobalSMData}(name, ret);
+98     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -275,17 +401,17 @@ T\+Orthogonal $\ast$ smacc\+::\+I\+Smacc\+State\+::get\+Orthogonal (\begin{DoxyP
 
 
 
-Definition at line 129 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 161 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
-Referenced by get\+State\+Reactors().
+Referenced by get\+Event\+Generators().
 
 
 \begin{DoxyCode}
-130 \{
-131     \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_a38b8b6e3d65b7de33020c9c397cf29bb}{getOrthogonal}<TOrthogonal>();
-132 \}
+162     \{
+163         \textcolor{keywordflow}{return} this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_a38b8b6e3d65b7de33020c9c397cf29bb}{getOrthogonal}<TOrthogonal>();
+164     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -304,17 +430,17 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 22 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 24 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
-Referenced by get\+State\+Reactors(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position\+::read\+Start\+Pose\+From\+Parameter\+Server().
+Referenced by get\+Event\+Generators(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Global\+Position\+::read\+Start\+Pose\+From\+Parameter\+Server().
 
 
 \begin{DoxyCode}
-23 \{
-24     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccState_a13fe6e6abfdb87996402189d44b78494}{nh}.getParam(param\_name, param\_storage);
-25 \}
+25     \{
+26         \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccState_a13fe6e6abfdb87996402189d44b78494}{nh}.getParam(param\_name, param\_storage);
+27     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -366,7 +492,7 @@ Definition at line 18 of file smacc\+\_\+state.\+h.
 
 
 
-References generate\+\_\+debs\+::args, configure(), create\+State\+Reactor(), get\+Class\+Name(), get\+Global\+S\+M\+Data(), nh, notify\+Transition(), notify\+Transition\+From\+Transition\+Type\+Info(), post\+Event(), requires\+Client(), requires\+Component(), and set\+Global\+S\+M\+Data().
+References generate\+\_\+debs\+::args, configure(), create\+Event\+Generator(), create\+State\+Reactor(), get\+Class\+Name(), get\+Global\+S\+M\+Data(), nh, notify\+Transition(), notify\+Transition\+From\+Transition\+Type\+Info(), post\+Event(), requires\+Client(), requires\+Component(), and set\+Global\+S\+M\+Data().
 
 
 \begin{DoxyCode}
@@ -402,6 +528,42 @@ Here is the caller graph for this function\+:
 \includegraphics[width=350pt]{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523_icgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{classsmacc_1_1ISmaccState_a6dfd4a076d5f4e7521bea010a56ee49f}\label{classsmacc_1_1ISmaccState_a6dfd4a076d5f4e7521bea010a56ee49f}} 
+\index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!get\+State\+Reactor@{get\+State\+Reactor}}
+\index{get\+State\+Reactor@{get\+State\+Reactor}!smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}}
+\subsubsection{\texorpdfstring{get\+State\+Reactor()}{getStateReactor()}}
+{\footnotesize\ttfamily template$<$typename T\+State\+Reactor $>$ \\
+T\+State\+Reactor $\ast$ smacc\+::\+I\+Smacc\+State\+::get\+State\+Reactor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 180 of file smacc\+\_\+state\+\_\+impl.\+h.
+
+
+
+Referenced by get\+Event\+Generators().
+
+
+\begin{DoxyCode}
+181     \{
+182         TStateReactor* ret = \textcolor{keyword}{nullptr};
+183         \textcolor{keywordflow}{for}(\textcolor{keyword}{auto}& sr: this->\hyperlink{classsmacc_1_1ISmaccState_a9bbef9aabd469f52c30e56b638266639}{eventGenerators\_})
+184         \{
+185             ret = \textcolor{keyword}{dynamic\_cast<}TStateReactor *\textcolor{keyword}{>}(sr.get());
+186             \textcolor{keywordflow}{if}(ret!=\textcolor{keyword}{nullptr})
+187                 \textcolor{keywordflow}{break};
+188         \}
+189         \textcolor{keywordflow}{return} ret;
+190     \}
+\end{DoxyCode}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsmacc_1_1ISmaccState_a6dfd4a076d5f4e7521bea010a56ee49f_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{classsmacc_1_1ISmaccState_acc40f4b3dd02a39242c7e23fe13c3e16}\label{classsmacc_1_1ISmaccState_acc40f4b3dd02a39242c7e23fe13c3e16}} 
 \index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!get\+State\+Reactors@{get\+State\+Reactors}}
 \index{get\+State\+Reactors@{get\+State\+Reactors}!smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}}
@@ -410,11 +572,11 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 57 of file smacc\+\_\+state.\+h.
+Definition at line 60 of file smacc\+\_\+state.\+h.
 
 
 
-References get\+Orthogonal(), get\+Param(), param(), set\+Param(), and state\+Reactors\+\_\+.
+References state\+Reactors\+\_\+.
 
 
 
@@ -422,16 +584,8 @@ Referenced by smacc\+::\+Signal\+Detector\+::find\+Updatable\+State\+Elements(),
 
 
 \begin{DoxyCode}
-57 \{ \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccState_a7410a353b515f7b7357e94ef619a6c45}{stateReactors\_}; \}
+60 \{ \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccState_a7410a353b515f7b7357e94ef619a6c45}{stateReactors\_}; \}
 \end{DoxyCode}
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=346pt]{classsmacc_1_1ISmaccState_acc40f4b3dd02a39242c7e23fe13c3e16_cgraph}
-\end{center}
-\end{figure}
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
@@ -449,7 +603,7 @@ void smacc\+::\+I\+Smacc\+State\+::notify\+Transition (\begin{DoxyParamCaption}{
 
 
 
-Definition at line 160 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 218 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
@@ -457,10 +611,10 @@ Referenced by get\+R\+O\+S\+Node().
 
 
 \begin{DoxyCode}
-161 \{
-162     \textcolor{keyword}{auto} transitionType = TypeInfo::getTypeInfoFromType<TransitionType>();
-163     this->\hyperlink{classsmacc_1_1ISmaccState_acb3dd7d402c634004ae3b67a01169438}{notifyTransitionFromTransitionTypeInfo}(transitionType);
-164 \}
+219     \{
+220         \textcolor{keyword}{auto} transitionType = TypeInfo::getTypeInfoFromType<TransitionType>();
+221         this->\hyperlink{classsmacc_1_1ISmaccState_acb3dd7d402c634004ae3b67a01169438}{notifyTransitionFromTransitionTypeInfo}(transitionType);
+222     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -575,17 +729,17 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 38 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 40 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
-Referenced by get\+State\+Reactors(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Rotate\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Backwards\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate\+::on\+Entry(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Forward\+::on\+Entry().
+Referenced by get\+Event\+Generators(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Rotate\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Backwards\+::on\+Entry(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate\+::on\+Entry(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Forward\+::on\+Entry().
 
 
 \begin{DoxyCode}
-39 \{
-40     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccState_a13fe6e6abfdb87996402189d44b78494}{nh}.param(param\_name, param\_val, default\_val);
-41 \}
+41     \{
+42         \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccState_a13fe6e6abfdb87996402189d44b78494}{nh}.param(param\_name, param\_val, default\_val);
+43     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -604,17 +758,17 @@ void smacc\+::\+I\+Smacc\+State\+::post\+Event (\begin{DoxyParamCaption}\item[{c
 
 
 
-Definition at line 147 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 205 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
-Referenced by sm\+\_\+viewer\+\_\+sim\+::delayed\+Post\+Event(), and smacc\+::\+State\+Reactor\+::post\+Event().
+Referenced by sm\+\_\+viewer\+\_\+sim\+::delayed\+Post\+Event(), smacc\+::\+Smacc\+Event\+Generator\+::post\+Event(), and smacc\+::\+State\+Reactor\+::post\+Event().
 
 
 \begin{DoxyCode}
-148 \{
-149     \hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_afcb6a216441aeaea2cba4e1ab12c366b}{postEvent}(ev);
-150 \}
+206     \{
+207         \hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_afcb6a216441aeaea2cba4e1ab12c366b}{postEvent}(ev);
+208     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -633,7 +787,7 @@ void smacc\+::\+I\+Smacc\+State\+::post\+Event (\begin{DoxyParamCaption}{ }\end{
 
 
 
-Definition at line 153 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 211 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
@@ -641,9 +795,9 @@ Referenced by get\+R\+O\+S\+Node().
 
 
 \begin{DoxyCode}
-154 \{
-155     \hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_afcb6a216441aeaea2cba4e1ab12c366b}{postEvent}<EventType>();
-156 \}
+212     \{
+213         \hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_afcb6a216441aeaea2cba4e1ab12c366b}{postEvent}<EventType>();
+214     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -662,7 +816,7 @@ void smacc\+::\+I\+Smacc\+State\+::requires\+Client (\begin{DoxyParamCaption}\it
 
 
 
-Definition at line 76 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 78 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
@@ -674,21 +828,22 @@ Referenced by sm\+\_\+fetch\+\_\+two\+\_\+table\+\_\+pick\+\_\+n\+\_\+place\+\_\
 
 
 \begin{DoxyCode}
-77 \{
-78     \textcolor{keyword}{const} \textcolor{keywordtype}{char}* sname = (\hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(*this).name()).c\_str());
-79     storage = \textcolor{keyword}{nullptr};
-80     \textcolor{keyword}{auto} &orthogonals = this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_a7f5b2882dbd077584767cb2533ed3c49}{getOrthogonals}();
-81     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &ortho : orthogonals)
-82     \{
-83         ortho.second->requiresClient(storage);
-84         \textcolor{keywordflow}{if} (storage != \textcolor{keyword}{nullptr})
-85             \textcolor{keywordflow}{return};
-86     \}
-87 
-88     ROS\_ERROR(\textcolor{stringliteral}{"[%s] Client of type '%s' not found in any orthogonal of the current state machine. This may
-       produce a segmentation fault if the returned reference is used."}, sname, demangleSymbol<SmaccClientType>().
-      c\_str());
-89 \}
+79     \{
+80         \textcolor{keyword}{const} \textcolor{keywordtype}{char} *sname = (\hyperlink{namespacesmacc_1_1introspection_a2f495108db3e57604d8d3ff5ef030302}{demangleSymbol}(\textcolor{keyword}{typeid}(*this).name()).c\_str());
+81         storage = \textcolor{keyword}{nullptr};
+82         \textcolor{keyword}{auto} &orthogonals = this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().
+      \hyperlink{classsmacc_1_1ISmaccStateMachine_a7f5b2882dbd077584767cb2533ed3c49}{getOrthogonals}();
+83         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &ortho : orthogonals)
+84         \{
+85             ortho.second->requiresClient(storage);
+86             \textcolor{keywordflow}{if} (storage != \textcolor{keyword}{nullptr})
+87                 \textcolor{keywordflow}{return};
+88         \}
+89 
+90         ROS\_ERROR(\textcolor{stringliteral}{"[%s] Client of type '%s' not found in any orthogonal of the current state machine. This
+       may produce a segmentation fault if the returned reference is used."}, sname, demangleSymbol<SmaccClientType>
+      ().c\_str());
+91     \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -715,7 +870,7 @@ void smacc\+::\+I\+Smacc\+State\+::requires\+Component (\begin{DoxyParamCaption}
 
 
 
-Definition at line 69 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 71 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
@@ -723,9 +878,9 @@ Referenced by get\+R\+O\+S\+Node().
 
 
 \begin{DoxyCode}
-70 \{
-71     this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_aa6b25e28f3bce24c4b356dc865a9eb7b}{requiresComponent}(storage);
-72 \}
+72     \{
+73         this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_aa6b25e28f3bce24c4b356dc865a9eb7b}{requiresComponent}(storage);
+74     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -744,7 +899,7 @@ void smacc\+::\+I\+Smacc\+State\+::set\+Global\+S\+M\+Data (\begin{DoxyParamCapt
 
 
 
-Definition at line 101 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 103 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
@@ -752,9 +907,9 @@ Referenced by get\+R\+O\+S\+Node().
 
 
 \begin{DoxyCode}
-102 \{
-103     this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_a8588f9e580fbb95b53e2bd2ca3ff1f98}{setGlobalSMData}(name, value);
-104 \}
+104     \{
+105         this->\hyperlink{classsmacc_1_1ISmaccState_a562bb3f9a3ac16b8be71e4794c9e7523}{getStateMachine}().\hyperlink{classsmacc_1_1ISmaccStateMachine_a8588f9e580fbb95b53e2bd2ca3ff1f98}{setGlobalSMData}(name, value);
+106     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -773,17 +928,17 @@ void smacc\+::\+I\+Smacc\+State\+::set\+Param (\begin{DoxyParamCaption}\item[{st
 
 
 
-Definition at line 30 of file smacc\+\_\+state\+\_\+impl.\+h.
+Definition at line 32 of file smacc\+\_\+state\+\_\+impl.\+h.
 
 
 
-Referenced by get\+State\+Reactors().
+Referenced by get\+Event\+Generators().
 
 
 \begin{DoxyCode}
-31 \{
-32     \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccState_a13fe6e6abfdb87996402189d44b78494}{nh}.setParam(param\_name, param\_val);
-33 \}
+33     \{
+34         \textcolor{keywordflow}{return} \hyperlink{classsmacc_1_1ISmaccState_a13fe6e6abfdb87996402189d44b78494}{nh}.setParam(param\_name, param\_val);
+35     \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -804,7 +959,21 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 79 of file smacc\+\_\+state.\+h.
+Definition at line 91 of file smacc\+\_\+state.\+h.
+
+\mbox{\Hypertarget{classsmacc_1_1ISmaccState_a9bbef9aabd469f52c30e56b638266639}\label{classsmacc_1_1ISmaccState_a9bbef9aabd469f52c30e56b638266639}} 
+\index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!event\+Generators\+\_\+@{event\+Generators\+\_\+}}
+\index{event\+Generators\+\_\+@{event\+Generators\+\_\+}!smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}}
+\subsubsection{\texorpdfstring{event\+Generators\+\_\+}{eventGenerators\_}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\hyperlink{classsmacc_1_1SmaccEventGenerator}{smacc\+::\+Smacc\+Event\+Generator}$>$ $>$ smacc\+::\+I\+Smacc\+State\+::event\+Generators\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 87 of file smacc\+\_\+state.\+h.
+
+
+
+Referenced by get\+Event\+Generators().
 
 \mbox{\Hypertarget{classsmacc_1_1ISmaccState_a13fe6e6abfdb87996402189d44b78494}\label{classsmacc_1_1ISmaccState_a13fe6e6abfdb87996402189d44b78494}} 
 \index{smacc\+::\+I\+Smacc\+State@{smacc\+::\+I\+Smacc\+State}!nh@{nh}}
@@ -814,7 +983,7 @@ Definition at line 79 of file smacc\+\_\+state.\+h.
 
 
 
-Definition at line 77 of file smacc\+\_\+state.\+h.
+Definition at line 89 of file smacc\+\_\+state.\+h.
 
 
 
@@ -828,7 +997,7 @@ Referenced by get\+R\+O\+S\+Node().
 
 
 
-Definition at line 81 of file smacc\+\_\+state.\+h.
+Definition at line 93 of file smacc\+\_\+state.\+h.
 
 
 
@@ -842,7 +1011,7 @@ Referenced by get\+Parent\+State().
 
 
 
-Definition at line 83 of file smacc\+\_\+state.\+h.
+Definition at line 95 of file smacc\+\_\+state.\+h.
 
 
 
@@ -856,7 +1025,7 @@ Referenced by notify\+Transition\+From\+Transition\+Type\+Info().
 
 
 
-Definition at line 75 of file smacc\+\_\+state.\+h.
+Definition at line 86 of file smacc\+\_\+state.\+h.
 
 
 
