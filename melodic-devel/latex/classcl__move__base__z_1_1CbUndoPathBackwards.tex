@@ -11,7 +11,7 @@ Inheritance diagram for cl\+\_\+move\+\_\+base\+\_\+z\+:\+:Cb\+Undo\+Path\+Backw
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=244pt]{classcl__move__base__z_1_1CbUndoPathBackwards__inherit__graph}
+\includegraphics[height=550pt]{classcl__move__base__z_1_1CbUndoPathBackwards__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -35,8 +35,6 @@ virtual void \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a20cee921a
 \begin{DoxyCompactItemize}
 \item 
 tf\+::\+Transform\+Listener \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_add2b6a0f1c19654a0cf07209fc123a71}{listener}
-\item 
-\hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{Cl\+Move\+BaseZ} $\ast$ \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{move\+Base\+Client\+\_\+}
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -44,7 +42,7 @@ tf\+::\+Transform\+Listener \hyperlink{classcl__move__base__z_1_1CbUndoPathBackw
 \subsection{Detailed Description}
 
 
-Definition at line 18 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
+Definition at line 13 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
 
 
 
@@ -57,39 +55,38 @@ Definition at line 18 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
 
 
 
-Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_a7962382f93987c720ad432fef55b123f}{smacc\+::\+Smacc\+Client\+Behavior}.
+Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a3ec24a839087c550e1d62a81e48cf530}{smacc\+::\+I\+Smacc\+Client\+Behavior}.
 
 
 
-Definition at line 7 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+cpp.
+Definition at line 9 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+cpp.
 
 
 
-References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), move\+Base\+Client\+\_\+, smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Client(), smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ Action\+Type $>$\+::send\+Goal(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Planner\+Switcher\+::set\+Backward\+Planner().
+References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Move\+Base\+Client\+Behavior\+Base\+::move\+Base\+Client\+\_\+, smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ Action\+Type $>$\+::send\+Goal(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Planner\+Switcher\+::set\+Undo\+Path\+Backward\+Planner().
 
 
 \begin{DoxyCode}
-8 \{
-9     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_});
-10     \textcolor{keyword}{auto} *odomTracker = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
-11 
-12     \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
-13 
-14     nav\_msgs::Path forwardpath = odomTracker->getPath();
-15     \textcolor{comment}{//ROS\_INFO\_STREAM("[UndoPathBackward] Current path backwards: " << forwardpath);}
-16 
-17     odomTracker->setWorkingMode(WorkingMode::CLEAR\_PATH);
-18 
-19     ClMoveBaseZ::Goal goal;
-20     \textcolor{comment}{// this line is used to flush/reset backward planner in the case it were already there}
-21     \textcolor{comment}{//plannerSwitcher->setDefaultPlanners();}
-22     \textcolor{keywordflow}{if} (forwardpath.poses.size() > 0)
-23     \{
-24         goal.target\_pose = forwardpath.poses.front();
-25         plannerSwitcher->setBackwardPlanner();
-26         \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
-27     \}
-28 \}
+10 \{
+11     \textcolor{keyword}{auto} *odomTracker = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
+12 
+13     \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
+14 
+15     nav\_msgs::Path forwardpath = odomTracker->getPath();
+16     \textcolor{comment}{//ROS\_INFO\_STREAM("[UndoPathBackward] Current path backwards: " << forwardpath);}
+17 
+18     odomTracker->setWorkingMode(WorkingMode::CLEAR\_PATH);
+19 
+20     ClMoveBaseZ::Goal goal;
+21     \textcolor{comment}{// this line is used to flush/reset backward planner in the case it were already there}
+22     \textcolor{comment}{//plannerSwitcher->setDefaultPlanners();}
+23     \textcolor{keywordflow}{if} (forwardpath.poses.size() > 0)
+24     \{
+25         goal.target\_pose = forwardpath.poses.front();
+26         plannerSwitcher->setUndoPathBackwardPlanner();
+27         \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
+28     \}
+29 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -107,21 +104,20 @@ Here is the call graph for this function\+:
 
 
 
-Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ac0cd72d42bd00425362a97c9803ecce5}{smacc\+::\+Smacc\+Client\+Behavior}.
+Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_a36bf771905e3bf750909a15e4215a9b3}{smacc\+::\+I\+Smacc\+Client\+Behavior}.
 
 
 
-Definition at line 30 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+cpp.
+Definition at line 31 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+cpp.
 
 
 
-References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), move\+Base\+Client\+\_\+, and smacc\+::\+Smacc\+Client\+Behavior\+::requires\+Client().
+References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Move\+Base\+Client\+Behavior\+Base\+::move\+Base\+Client\+\_\+.
 
 
 \begin{DoxyCode}
-31 \{
-32     this->\hyperlink{classsmacc_1_1SmaccClientBehavior_a917f001e763a1059af337bf4e164f542}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_});
-33     \textcolor{keyword}{auto} *odomTracker = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
+32 \{
+33     \textcolor{keyword}{auto} *odomTracker = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
 34     odomTracker->popPath();
 35 \}
 \end{DoxyCode}
@@ -144,21 +140,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 20 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
-
-\mbox{\Hypertarget{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}\label{classcl__move__base__z_1_1CbUndoPathBackwards_a306d616dab00f50141abed4bfb47aeb2}} 
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards}!move\+Base\+Client\+\_\+@{move\+Base\+Client\+\_\+}}
-\index{move\+Base\+Client\+\_\+@{move\+Base\+Client\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards}}
-\subsubsection{\texorpdfstring{move\+Base\+Client\+\_\+}{moveBaseClient\_}}
-{\footnotesize\ttfamily \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{Cl\+Move\+BaseZ}$\ast$ cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::move\+Base\+Client\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
-
-
-
-Definition at line 22 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
-
-
-
-Referenced by on\+Entry(), and on\+Exit().
+Definition at line 15 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
 
 
 

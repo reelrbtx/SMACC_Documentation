@@ -74,6 +74,10 @@ Definition at line 11 of file st\+\_\+acquire\+\_\+sensors.\+h.
 Definition at line 22 of file st\+\_\+acquire\+\_\+sensors.\+h.
 
 
+
+References smacc\+::\+Smacc\+State$<$ St\+Acquire\+Sensors, Ms\+Dance\+Bot\+Run\+Mode $>$\+::static\+\_\+create\+State\+Reactor().
+
+
 \begin{DoxyCode}
 23    \{
 24       configure\_orthogonal<OrObstaclePerception, CbLidarSensor>();
@@ -83,16 +87,33 @@ Definition at line 22 of file st\+\_\+acquire\+\_\+sensors.\+h.
 28       configure\_orthogonal<OrUpdatablePublisher, cl\_ros\_publisher::CbDefaultPublishLoop>();
 29 
 30       \textcolor{comment}{// Create State Reactor}
-31       \textcolor{keyword}{auto} srAllSensorsReady = static\_createStateReactor<SrAllEventsGo>();
-32       srAllSensorsReady->addInputEvent<EvTopicMessage<CbLidarSensor, OrObstaclePerception>>();
-33       srAllSensorsReady->addInputEvent<EvTopicMessage<CbConditionTemperatureSensor, OrTemperatureSensor>>()
-      ;
-34 
-35       srAllSensorsReady->setOutputEvent<EvAllGo<SrAllEventsGo, SrAcquireSensors>>();
-36    \}
+31       \textcolor{comment}{//auto srAllSensorsReady = static\_createStateReactor<SrAllEventsGo>();}
+32 
+33       \textcolor{keyword}{auto} srAllSensorsReady = \hyperlink{classsmacc_1_1SmaccState_a892be704b48f93bf5c35635d1a58ed54}{static\_createStateReactor}<SrAllEventsGo,
+34                                                          EvAllGo<SrAllEventsGo, SrAcquireSensors>,
+35                                                          mpl::list<
+36                                                                      EvTopicMessage<CbLidarSensor,
+       OrObstaclePerception>,
+37                                                                      
+      EvTopicMessage<CbConditionTemperatureSensor, OrTemperatureSensor>
+38                                                                   >>();
+39 
+40       \textcolor{comment}{//srAllSensorsReady->addInputEvent<EvTopicMessage<CbLidarSensor, OrObstaclePerception>>();}
+41       \textcolor{comment}{//srAllSensorsReady->addInputEvent<EvTopicMessage<CbConditionTemperatureSensor,
+       OrTemperatureSensor>>();}
+42       \textcolor{comment}{//srAllSensorsReady->setOutputEvent<EvAllGo<SrAllEventsGo, SrAcquireSensors>>();}
+43    \}
 \end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structsm__dance__bot__strikes__back_1_1StAcquireSensors_a83de29e9c8ce05f82c487b91255f9fe1_cgraph}
+\end{center}
+\end{figure}
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back/include/sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back/states/\hyperlink{strikes__back_2include_2sm__dance__bot__strikes__back_2states_2st__acquire__sensors_8h}{st\+\_\+acquire\+\_\+sensors.\+h}\end{DoxyCompactItemize}
+smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back/include/sm\+\_\+dance\+\_\+bot\+\_\+strikes\+\_\+back/states/\hyperlink{sm__dance__bot__strikes__back_2include_2sm__dance__bot__strikes__back_2states_2st__acquire__sensors_8h}{st\+\_\+acquire\+\_\+sensors.\+h}\end{DoxyCompactItemize}

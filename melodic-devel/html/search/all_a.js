@@ -1,5 +1,6 @@
 var searchData=
 [
   ['join',['join',['../classsmacc_1_1SignalDetector.html#a636f704e469bf74b4a9fdb15bd63d5be',1,'smacc::SignalDetector']]],
-  ['jointvaluetarget_5f',['jointValueTarget_',['../classmoveit__z__client_1_1CbMoveJoints.html#a0f52577dd2fccf25f36c4c93e733c0f4',1,'moveit_z_client::CbMoveJoints']]]
+  ['joint_5ftrajectory_5fdiscontinuity',['JOINT_TRAJECTORY_DISCONTINUITY',['../namespacecl__move__group__interface.html#ae5fc1caf9a16ae5ad1c97c2e137a7017a3e86842785cd7c42003e516418347c8e',1,'cl_move_group_interface']]],
+  ['jointvaluetarget_5f',['jointValueTarget_',['../classcl__move__group__interface_1_1CbMoveJoints.html#a8103f7c923a34d9bf5a2c374ff88a277',1,'cl_move_group_interface::CbMoveJoints']]]
 ];

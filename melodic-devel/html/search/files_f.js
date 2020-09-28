@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['waypoints_5fevent_5fdispatcher_2ecpp',['waypoints_event_dispatcher.cpp',['../waypoints__event__dispatcher_8cpp.html',1,'']]],
-  ['waypoints_5fevent_5fdispatcher_2eh',['waypoints_event_dispatcher.h',['../waypoints__event__dispatcher_8h.html',1,'']]],
-  ['waypoints_5fnavigator_2ecpp',['waypoints_navigator.cpp',['../waypoints__navigator_8cpp.html',1,'']]],
-  ['waypoints_5fnavigator_2eh',['waypoints_navigator.h',['../waypoints__navigator_8h.html',1,'']]]
+  ['temperature_5fsensor_5fnode_2ecpp',['temperature_sensor_node.cpp',['../sm__dance__bot_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp.html',1,'(Global Namespace)'],['../sm__dance__bot__2_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp.html',1,'(Global Namespace)'],['../sm__dance__bot__strikes__back_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp.html',1,'(Global Namespace)'],['../sm__ferrari_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp.html',1,'(Global Namespace)'],['../sm__ridgeback__floor__coverage__dynamic__1_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp.html',1,'(Global Namespace)'],['../sm__ridgeback__floor__coverage__static__1_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp.html',1,'(Global Namespace)']]],
+  ['timer_5fclient_2ecpp',['timer_client.cpp',['../timer__client_8cpp.html',1,'']]]
 ];

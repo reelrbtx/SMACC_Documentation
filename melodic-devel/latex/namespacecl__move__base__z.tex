@@ -14,11 +14,15 @@
  \hyperlink{namespacecl__move__base__z_1_1odom__tracker}{odom\+\_\+tracker}
 \item 
  \hyperlink{namespacecl__move__base__z_1_1pure__spinning__local__planner}{pure\+\_\+spinning\+\_\+local\+\_\+planner}
+\item 
+ \hyperlink{namespacecl__move__base__z_1_1undo__path__global__planner}{undo\+\_\+path\+\_\+global\+\_\+planner}
 \end{DoxyCompactItemize}
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{classcl__move__base__z_1_1CbAbsoluteRotate}{Cb\+Absolute\+Rotate}
+\item 
+class \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase}{Cb\+Move\+Base\+Client\+Behavior\+Base}
 \item 
 class \hyperlink{classcl__move__base__z_1_1CbNavigateBackwards}{Cb\+Navigate\+Backwards}
 \item 
@@ -37,6 +41,8 @@ class \hyperlink{classcl__move__base__z_1_1ClMoveBaseZ}{Cl\+Move\+BaseZ}
 class \hyperlink{classcl__move__base__z_1_1CostmapProxy}{Costmap\+Proxy}
 \item 
 class \hyperlink{classcl__move__base__z_1_1CostmapSwitch}{Costmap\+Switch}
+\item 
+class \hyperlink{classcl__move__base__z_1_1CpTFListener}{Cp\+T\+F\+Listener}
 \item 
 struct \hyperlink{structcl__move__base__z_1_1EvWaypoint0}{Ev\+Waypoint0}
 \item 
@@ -558,6 +564,8 @@ class \hyperlink{classcl__move__base__z_1_1Pose}{Pose}
 \item 
 struct \hyperlink{structcl__move__base__z_1_1Pose2D}{Pose2D}
 \item 
+struct \hyperlink{structcl__move__base__z_1_1TfPoseTrack}{Tf\+Pose\+Track}
+\item 
 class \hyperlink{classcl__move__base__z_1_1WaypointEventDispatcher}{Waypoint\+Event\+Dispatcher}
 \item 
 class \hyperlink{classcl__move__base__z_1_1WaypointNavigator}{Waypoint\+Navigator}
@@ -605,7 +613,7 @@ Definition at line 13 of file path\+\_\+tools.\+cpp.
 
 
 
-Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+global\+\_\+planner\+::\+Backward\+Global\+Planner\+::create\+Pure\+Spining\+And\+Stragiht\+Line\+Backward\+Path(), and cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+global\+\_\+planner\+::\+Forward\+Global\+Planner\+::make\+Plan().
+Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+global\+\_\+planner\+::\+Backward\+Global\+Planner\+::create\+Default\+Backward\+Path(), and cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+global\+\_\+planner\+::\+Forward\+Global\+Planner\+::make\+Plan().
 
 
 \begin{DoxyCode}
@@ -615,7 +623,7 @@ Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+global\+\_\+planner
 17         \textcolor{comment}{//ROS\_INFO("pure spining goal yaw: %lf", dstRads);}
 18         \textcolor{comment}{//ROS\_WARN\_STREAM("pure spinning start pose: " << start);}
 19 
-20         \textcolor{keywordtype}{double} goalAngleOffset = angles::shortest\_angular\_distance(startYaw, dstRads);
+20         \textcolor{keywordtype}{double} goalAngleOffset = fabs(angles::shortest\_angular\_distance(startYaw, dstRads));
 21         \textcolor{comment}{//ROS\_INFO("shortest angle: %lf", goalAngleOffset);}
 22 
 23         \textcolor{keywordtype}{double} radstep = 0.005;
@@ -682,7 +690,7 @@ References battery\+\_\+monitor\+\_\+node\+::t.
 
 
 
-Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+global\+\_\+planner\+::\+Backward\+Global\+Planner\+::create\+Pure\+Spining\+And\+Stragiht\+Line\+Backward\+Path(), and cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+global\+\_\+planner\+::\+Forward\+Global\+Planner\+::make\+Plan().
+Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+global\+\_\+planner\+::\+Backward\+Global\+Planner\+::create\+Default\+Backward\+Path(), and cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+global\+\_\+planner\+::\+Forward\+Global\+Planner\+::make\+Plan().
 
 
 \begin{DoxyCode}
