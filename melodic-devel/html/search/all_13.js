@@ -89,7 +89,6 @@ var searchData=
   ['setgyronoisesrv',['setGyroNoiseSrv',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#a712c389ca54fa2ebe89ffd601b03bd37',1,'cl_microstrain_mips::ClMicrostainMips']]],
   ['sethardironvalues',['setHardIronValues',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#a6f9ae5ca80db4a93db8b01192d38b426',1,'cl_microstrain_mips::ClMicrostainMips']]],
   ['sethardironvaluessrv',['setHardIronValuesSrv',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#abab500a095515c133d5edfea23736fad',1,'cl_microstrain_mips::ClMicrostainMips']]],
-  ['setlocalplanneryawtolerance',['setLocalPlannerYawTolerance',['../classcl__move__base__z_1_1CbAbsoluteRotate.html#aba8d93d615ccd43acd0684f8e88e2209',1,'cl_move_base_z::CbAbsoluteRotate']]],
   ['setmagadaptivevals',['setMagAdaptiveVals',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#ad28163dc7afc33064b337f6a76b99389',1,'cl_microstrain_mips::ClMicrostainMips']]],
   ['setmagadaptivevalssrv',['setMagAdaptiveValsSrv',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#aeb9fb755367cd253b65bf826e421cc05',1,'cl_microstrain_mips::ClMicrostainMips']]],
   ['setmagdipadaptivevals',['setMagDipAdaptiveVals',['../classcl__microstrain__mips_1_1ClMicrostainMips.html#a1b81980570d6ff87b58a823a73cc992d',1,'cl_microstrain_mips::ClMicrostainMips']]],
