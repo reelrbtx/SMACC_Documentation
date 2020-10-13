@@ -164,47 +164,46 @@ References costmap\+Ros\+\_\+, current\+Pose\+Index\+\_\+, goal\+Reached\+\_\+, 
 90     \textcolor{keyword}{auto} &goal = \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a31875ee78bae4698b579e20c0754860d}{plan\_}[\hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_}];
 91     \textcolor{keyword}{auto} targetYaw = tf::getYaw(goal.pose.orientation);
 92 
-93     \textcolor{keywordtype}{double} sign = targetYaw - currentYaw >0? 1.0: -1.0;
-94     \textcolor{keywordtype}{double} angular\_error = angles::shortest\_angular\_distance(targetYaw, currentYaw) * sign;
-95     \textcolor{comment}{//double angular\_error = ;}
-96 
-97     \textcolor{comment}{// all the points must be reached using the control rule, but the last one}
-98     \textcolor{comment}{// have an special condition}
-99     \textcolor{keywordflow}{if} ( (\hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_} < \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a31875ee78bae4698b579e20c0754860d}{plan\_}.size() -1 && fabs(angular\_error) < this->
+93     \textcolor{comment}{//double angular\_error = angles::shortest\_angular\_distance( currentYaw , targetYaw) ; }
+94     \textcolor{keywordtype}{double} angular\_error = targetYaw - currentYaw ;
+95 
+96     \textcolor{comment}{// all the points must be reached using the control rule, but the last one}
+97     \textcolor{comment}{// have an special condition}
+98     \textcolor{keywordflow}{if} ( (\hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_} < \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a31875ee78bae4698b579e20c0754860d}{plan\_}.size() -1 && fabs(angular\_error) < this->
       \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a2e8dfda5e9dea6f09db4056aa90b2aa8}{intermediate\_goal\_yaw\_tolerance\_})
-100          || (\hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_} == \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a31875ee78bae4698b579e20c0754860d}{plan\_}.size() -1 && fabs(angular\_error) < this->
+99          || (\hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_} == \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a31875ee78bae4698b579e20c0754860d}{plan\_}.size() -1 && fabs(angular\_error) < this->
       \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a2e8dfda5e9dea6f09db4056aa90b2aa8}{intermediate\_goal\_yaw\_tolerance\_})
-101     )
-102     \{
-103       \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_}++;
-104     \}
-105     \textcolor{keywordflow}{else}
-106     \{
-107       \textcolor{keyword}{auto} omega = angular\_error * \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a379d2ba057231d76edd1a661d3572d68}{k\_betta\_};
-108       cmd\_vel.angular.z = std::min(std::max(omega, -fabs(\hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a20edb2db356925684de4ee4fe03d5992}{max\_angular\_z\_speed\_})), fabs(
+100     )
+101     \{
+102       \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_}++;
+103     \}
+104     \textcolor{keywordflow}{else}
+105     \{
+106       \textcolor{keyword}{auto} omega = angular\_error * \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a379d2ba057231d76edd1a661d3572d68}{k\_betta\_};
+107       cmd\_vel.angular.z = std::min(std::max(omega, -fabs(\hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a20edb2db356925684de4ee4fe03d5992}{max\_angular\_z\_speed\_})), fabs(
       \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a20edb2db356925684de4ee4fe03d5992}{max\_angular\_z\_speed\_}));
-109 
-110       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] current yaw: "} << currentYaw);
-111       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] target yaw: "} << targetYaw);
-112       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] angular error: "} << angular\_error);
-113       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] param k\_betta: "} << k\_betta\_);
-114       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] param yaw\_goal\_tolerance: "} << 
+108 
+109       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] current yaw: "} << currentYaw);
+110       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] target yaw: "} << targetYaw);
+111       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] angular error: "} << angular\_error);
+112       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] param k\_betta: "} << k\_betta\_);
+113       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] param yaw\_goal\_tolerance: "} << 
       \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a07334cd7bf29f391c2553f0038fa94e8}{yaw\_goal\_tolerance\_});
-115       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] command angular speed: "} << cmd\_vel.angular.z);
-116       \textcolor{keywordflow}{break};
-117     \}
-118   \}
-119 
-120   ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] completion "} << \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_} << \textcolor{stringliteral}{"/"}<< 
+114       ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] command angular speed: "} << cmd\_vel.angular.z);
+115       \textcolor{keywordflow}{break};
+116     \}
+117   \}
+118 
+119   ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] completion "} << \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_} << \textcolor{stringliteral}{"/"}<< 
       \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a31875ee78bae4698b579e20c0754860d}{plan\_}.size());
-121 
-122   \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_} >= \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a31875ee78bae4698b579e20c0754860d}{plan\_}.size() -1)
-123   \{
-124     \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aecfe0dfc68b8c8e461e8b684e5fa4d2f}{goalReached\_} = \textcolor{keyword}{true};
-125   \}
-126 
-127   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-128 \}
+120 
+121   \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_} >= \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a31875ee78bae4698b579e20c0754860d}{plan\_}.size() -1)
+122   \{
+123     \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aecfe0dfc68b8c8e461e8b684e5fa4d2f}{goalReached\_} = \textcolor{keyword}{true};
+124   \}
+125 
+126   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+127 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -350,7 +349,7 @@ True if achieved, false otherwise
 \end{DoxyReturn}
 
 
-Definition at line 130 of file pure\+\_\+spinning\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 129 of file pure\+\_\+spinning\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -358,9 +357,9 @@ References goal\+Reached\+\_\+.
 
 
 \begin{DoxyCode}
-131 \{
-132   \textcolor{keywordflow}{return} \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aecfe0dfc68b8c8e461e8b684e5fa4d2f}{goalReached\_};
-133 \}
+130 \{
+131   \textcolor{keywordflow}{return} \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aecfe0dfc68b8c8e461e8b684e5fa4d2f}{goalReached\_};
+132 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_acbabe6590b2d5fc90275180ac09db43e}\label{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_acbabe6590b2d5fc90275180ac09db43e}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::pure\+\_\+spinning\+\_\+local\+\_\+planner\+::\+Pure\+Spinning\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::pure\+\_\+spinning\+\_\+local\+\_\+planner\+::\+Pure\+Spinning\+Local\+Planner}!publish\+Goal\+Marker@{publish\+Goal\+Marker}}
@@ -422,7 +421,7 @@ True if the plan was updated successfully, false otherwise
 \end{DoxyReturn}
 
 
-Definition at line 135 of file pure\+\_\+spinning\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 134 of file pure\+\_\+spinning\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -430,14 +429,14 @@ References current\+Pose\+Index\+\_\+, goal\+Reached\+\_\+, and plan\+\_\+.
 
 
 \begin{DoxyCode}
-136 \{
-137   ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] setting global plan to follow"});
-138 
-139   \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a31875ee78bae4698b579e20c0754860d}{plan\_} = plan;
-140   \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aecfe0dfc68b8c8e461e8b684e5fa4d2f}{goalReached\_} = \textcolor{keyword}{false};
-141   \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_} = 0;
-142   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-143 \}
+135 \{
+136   ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[PureSpinningLocalPlanner] setting global plan to follow"});
+137 
+138   \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_a31875ee78bae4698b579e20c0754860d}{plan\_} = plan;
+139   \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aecfe0dfc68b8c8e461e8b684e5fa4d2f}{goalReached\_} = \textcolor{keyword}{false};
+140   \hyperlink{classcl__move__base__z_1_1pure__spinning__local__planner_1_1PureSpinningLocalPlanner_aa0f9b4cf52a76e44dc2cfc5103d52dcd}{currentPoseIndex\_} = 0;
+141   \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+142 \}
 \end{DoxyCode}
 
 
