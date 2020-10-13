@@ -533,7 +533,7 @@ var searchData=
   ['sourcestate',['sourceState',['../structsmacc_1_1introspection_1_1SmaccTransitionInfo.html#aa44f16d098eb91ed222008fe0abf1275',1,'smacc::introspection::SmaccTransitionInfo']]],
   ['specificnamedonexit',['specificNamedOnExit',['../namespacesmacc.html#afd94fcb8f8c410a0ced7954bf76e845d',1,'smacc::specificNamedOnExit(TState &amp;st, TTransitionTagName tn, std::true_type)'],['../namespacesmacc.html#ab1896cb023506b0a47d26d32cc078eb4',1,'smacc::specificNamedOnExit(TState &amp;, TTransitionTagName tn, std::false_type)'],['../namespacesmacc.html#ad462e5c9a025fe42bb06de617fabeaa5',1,'smacc::specificNamedOnExit(TState &amp;m, TTransitionTagName tn)']]],
   ['speed',['speed',['../namespacebattery__monitor__node.html#a78ba7243610b635b1712c5af728edc13',1,'battery_monitor_node']]],
-  ['spiningplanner',['SpiningPlanner',['../classcl__move__base__z_1_1CbAbsoluteRotate.html#ab8d45e43594a3fc6a71c08f07b5dbef0',1,'cl_move_base_z::CbAbsoluteRotate']]],
+  ['spiningplanner',['SpiningPlanner',['../namespacecl__move__base__z.html#aab2ad3041275145f0065fb60b3299345',1,'cl_move_base_z']]],
   ['spinningplanner',['spinningPlanner',['../classcl__move__base__z_1_1CbAbsoluteRotate.html#a17d836524599af072cf2e3488e491a91',1,'cl_move_base_z::CbAbsoluteRotate']]],
   ['sr_5f',['sr_',['../structsmacc_1_1AddTEventType.html#aba9d00c23aeaae6299708f031a9168ba',1,'smacc::AddTEventType']]],
   ['sr_5fall_5fevents_5fgo_2ecpp',['sr_all_events_go.cpp',['../sr__all__events__go_8cpp.html',1,'']]],
