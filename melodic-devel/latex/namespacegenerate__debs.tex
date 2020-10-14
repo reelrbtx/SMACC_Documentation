@@ -104,46 +104,47 @@ Referenced by iterate\+\_\+debian\+\_\+generation().
 40 
 41     os.chdir(localpackagepath)
 42     fakerootprocess = subprocess.Popen(
-43         \textcolor{stringliteral}{"fakeroot debian/rules binary"}, shell=\textcolor{keyword}{True})
-44     fakerootprocess.wait()
-45 
-46     os.chdir(localpackagepath)
-47     shutil.rmtree(\textcolor{stringliteral}{"debian"})
-48     shutil.rmtree(\textcolor{stringliteral}{"obj-x86\_64-linux-gnu"})
-49 
-50     os.chdir(workspace\_source\_folder)
-51 
-52     \textcolor{comment}{# improve this regex}
-53 
-54     firstregexstr = \textcolor{stringliteral}{'.*ros-'} + ros\_distro + \textcolor{stringliteral}{'-.*\(\backslash\).deb'}
-55     regexstr = \textcolor{stringliteral}{'.*ros-'} + ros\_distro + \textcolor{stringliteral}{'-'} + \(\backslash\)
-56         package\_name.replace(\textcolor{stringliteral}{"\_"}, \textcolor{stringliteral}{"-"})+\textcolor{stringliteral}{".*\(\backslash\).deb"}
-57     print(\textcolor{stringliteral}{"Finding deb package: "} + str(regexstr))
-58 
-59     thisfolderfiles = []
-60     \textcolor{keywordflow}{for} root, dirs, files \textcolor{keywordflow}{in} os.walk(workspace\_source\_folder, topdown=\textcolor{keyword}{False}):
-61         thisfolderfiles = thisfolderfiles + \(\backslash\)
-62             [os.path.join(root, f) \textcolor{keywordflow}{for} f \textcolor{keywordflow}{in} files]
-63 
-64     debianfiles = [f \textcolor{keywordflow}{for} f \textcolor{keywordflow}{in} thisfolderfiles \textcolor{keywordflow}{if} re.search(firstregexstr, f)]
-65     \textcolor{keywordflow}{print} (\textcolor{stringliteral}{"DETECTED DEBIAN FILES:"})
-66     print(debianfiles)
-67     \textcolor{keywordflow}{print} (\textcolor{stringliteral}{"VISITED DEBIAN FILES:"})
-68     print(already\_visited)
-69 
-70     debianfilename = [f \textcolor{keywordflow}{for} f \textcolor{keywordflow}{in} debianfiles \textcolor{keywordflow}{if} re.search(
-71         regexstr, f) \textcolor{keywordflow}{and} \textcolor{keywordflow}{not} f \textcolor{keywordflow}{in} already\_visited][0]
-72 
-73     print(\textcolor{stringliteral}{"Debian file found: "})
-74     print(debianfilename)
-75 
-76     installdebiantask = subprocess.Popen(
-77         \textcolor{stringliteral}{"sudo dpkg -i "} + debianfilename, shell=\textcolor{keyword}{True})
-78     installdebiantask.wait()
-79 
-80     \textcolor{keywordflow}{return} debianfilename
-81 
+43         \textcolor{stringliteral}{"/usr/bin/fakeroot debian/rules binary"})
+44         \textcolor{comment}{#"/usr/bin/fakeroot debian/rules binary", shell=True)}
+45     fakerootprocess.wait()
+46 
+47     os.chdir(localpackagepath)
+48     shutil.rmtree(\textcolor{stringliteral}{"debian"})
+49     shutil.rmtree(\textcolor{stringliteral}{"obj-x86\_64-linux-gnu"})
+50 
+51     os.chdir(workspace\_source\_folder)
+52 
+53     \textcolor{comment}{# improve this regex}
+54 
+55     firstregexstr = \textcolor{stringliteral}{'.*ros-'} + ros\_distro + \textcolor{stringliteral}{'-.*\(\backslash\).deb'}
+56     regexstr = \textcolor{stringliteral}{'.*ros-'} + ros\_distro + \textcolor{stringliteral}{'-'} + \(\backslash\)
+57         package\_name.replace(\textcolor{stringliteral}{"\_"}, \textcolor{stringliteral}{"-"})+\textcolor{stringliteral}{".*\(\backslash\).deb"}
+58     print(\textcolor{stringliteral}{"Finding deb package: "} + str(regexstr))
+59 
+60     thisfolderfiles = []
+61     \textcolor{keywordflow}{for} root, dirs, files \textcolor{keywordflow}{in} os.walk(workspace\_source\_folder, topdown=\textcolor{keyword}{False}):
+62         thisfolderfiles = thisfolderfiles + \(\backslash\)
+63             [os.path.join(root, f) \textcolor{keywordflow}{for} f \textcolor{keywordflow}{in} files]
+64 
+65     debianfiles = [f \textcolor{keywordflow}{for} f \textcolor{keywordflow}{in} thisfolderfiles \textcolor{keywordflow}{if} re.search(firstregexstr, f)]
+66     \textcolor{keywordflow}{print} (\textcolor{stringliteral}{"DETECTED DEBIAN FILES:"})
+67     print(debianfiles)
+68     \textcolor{keywordflow}{print} (\textcolor{stringliteral}{"VISITED DEBIAN FILES:"})
+69     print(already\_visited)
+70 
+71     debianfilename = [f \textcolor{keywordflow}{for} f \textcolor{keywordflow}{in} debianfiles \textcolor{keywordflow}{if} re.search(
+72         regexstr, f) \textcolor{keywordflow}{and} \textcolor{keywordflow}{not} f \textcolor{keywordflow}{in} already\_visited][0]
+73 
+74     print(\textcolor{stringliteral}{"Debian file found: "})
+75     print(debianfilename)
+76 
+77     installdebiantask = subprocess.Popen(
+78         \textcolor{stringliteral}{"sudo dpkg -i "} + debianfilename, shell=\textcolor{keyword}{True})
+79     installdebiantask.wait()
+80 
+81     \textcolor{keywordflow}{return} debianfilename
 82 
+83 
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -161,7 +162,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 125 of file generate\+\_\+debs.\+py.
+Definition at line 126 of file generate\+\_\+debs.\+py.
 
 
 
@@ -169,51 +170,51 @@ References get\+\_\+identified\+\_\+packages(), iterate\+\_\+debian\+\_\+generat
 
 
 \begin{DoxyCode}
-125 \textcolor{keyword}{def }\hyperlink{namespacegenerate__debs_af7237c463c8e5b4df369e6befc154c50}{create\_and\_push\_smacc\_debians}(osname, osversion, rosversion):
-126     workspace\_source\_folder = os.path.join(
-127         workspace\_folder, relative\_smacc\_folder)
-128     identified\_install\_packages = \hyperlink{namespacegenerate__debs_aa91b87c6d9c3ed04015845cc9298431a}{get\_identified\_packages}(workspace\_folder)
-129 
-130     smacc\_manual\_order\_packages = [  \textcolor{comment}{# 'forward\_global\_planner',}
-131         \textcolor{stringliteral}{'smacc\_msgs'},
-132         \textcolor{stringliteral}{'smacc'},
-133         \textcolor{stringliteral}{'smacc\_runtime\_test'},
-134         \textcolor{stringliteral}{'sr\_all\_events\_go'},
-135          \textcolor{stringliteral}{'sr\_conditional'},
-136          \textcolor{stringliteral}{'sr\_event\_countdown'},
-137          \textcolor{stringliteral}{'keyboard\_client'},
-138          \textcolor{stringliteral}{'multirole\_sensor\_client'},
-139          \textcolor{stringliteral}{'ros\_publisher\_client'},
-140          \textcolor{stringliteral}{'ros\_timer\_client'},
-141          \textcolor{stringliteral}{'move\_base\_z\_client\_plugin'},
-142          \textcolor{stringliteral}{'forward\_global\_planner'},
-143          \textcolor{stringliteral}{'forward\_local\_planner'},
-144          \textcolor{stringliteral}{'backward\_global\_planner'},
-145          \textcolor{stringliteral}{'undo\_path\_global\_planner'},
-146          \textcolor{stringliteral}{'backward\_local\_planner'},        
-147          \textcolor{stringliteral}{'move\_group\_interface\_client'},
-148         \textcolor{comment}{# 'sm\_atomic',}
-149         \textcolor{comment}{# 'sm\_dance\_bot',}
-150         \textcolor{comment}{# 'sm\_dance\_bot\_strikes\_back',}
-151         \textcolor{comment}{# 'sm\_moveit',}
-152     ]
-153 
-154     smacc\_debian\_files = \hyperlink{namespacegenerate__debs_a2615a6fc7860b6aa9e920e6b4d886589}{iterate\_debian\_generation}(
-155         workspace\_source\_folder, smacc\_manual\_order\_packages, identified\_install\_packages, osversion, 
+126 \textcolor{keyword}{def }\hyperlink{namespacegenerate__debs_af7237c463c8e5b4df369e6befc154c50}{create\_and\_push\_smacc\_debians}(osname, osversion, rosversion):
+127     workspace\_source\_folder = os.path.join(
+128         workspace\_folder, relative\_smacc\_folder)
+129     identified\_install\_packages = \hyperlink{namespacegenerate__debs_aa91b87c6d9c3ed04015845cc9298431a}{get\_identified\_packages}(workspace\_folder)
+130 
+131     smacc\_manual\_order\_packages = [  \textcolor{comment}{# 'forward\_global\_planner',}
+132         \textcolor{stringliteral}{'smacc\_msgs'},
+133         \textcolor{stringliteral}{'smacc'},
+134         \textcolor{stringliteral}{'smacc\_runtime\_test'},
+135         \textcolor{stringliteral}{'sr\_all\_events\_go'},
+136          \textcolor{stringliteral}{'sr\_conditional'},
+137          \textcolor{stringliteral}{'sr\_event\_countdown'},
+138          \textcolor{stringliteral}{'keyboard\_client'},
+139          \textcolor{stringliteral}{'multirole\_sensor\_client'},
+140          \textcolor{stringliteral}{'ros\_publisher\_client'},
+141          \textcolor{stringliteral}{'ros\_timer\_client'},
+142          \textcolor{stringliteral}{'move\_base\_z\_client\_plugin'},
+143          \textcolor{stringliteral}{'forward\_global\_planner'},
+144          \textcolor{stringliteral}{'forward\_local\_planner'},
+145          \textcolor{stringliteral}{'backward\_global\_planner'},
+146          \textcolor{stringliteral}{'undo\_path\_global\_planner'},
+147          \textcolor{stringliteral}{'backward\_local\_planner'},        
+148          \textcolor{stringliteral}{'move\_group\_interface\_client'},
+149         \textcolor{comment}{# 'sm\_atomic',}
+150         \textcolor{comment}{# 'sm\_dance\_bot',}
+151         \textcolor{comment}{# 'sm\_dance\_bot\_strikes\_back',}
+152         \textcolor{comment}{# 'sm\_moveit',}
+153     ]
+154 
+155     smacc\_debian\_files = \hyperlink{namespacegenerate__debs_a2615a6fc7860b6aa9e920e6b4d886589}{iterate\_debian\_generation}(
+156         workspace\_source\_folder, smacc\_manual\_order\_packages, identified\_install\_packages, osversion, 
       rosversion)
-156 
-157     create\_repo\_task = subprocess.Popen(
-158         \textcolor{stringliteral}{"package\_cloud repository create smacc"}, shell=\textcolor{keyword}{True})
-159     create\_repo\_task.wait()
-160 
-161     \textcolor{comment}{# ----- PUSHING TO SMACC --------------}
-162     \hyperlink{namespacegenerate__debs_a08095040d038b3613ad0e77fd4e7f60e}{remove\_debian\_files}(repo\_owner, \textcolor{stringliteral}{"smacc"},  osname,
-163                         osversion, smacc\_debian\_files)
-164     \hyperlink{namespacegenerate__debs_a9b22f5ad65b40b7903c467eda308e575}{push\_debian\_files}(repo\_owner, \textcolor{stringliteral}{"smacc"},  osname,
-165                       osversion, smacc\_debian\_files)
-166 
-167     \textcolor{keywordflow}{return} smacc\_debian\_files
-168 
+157 
+158     create\_repo\_task = subprocess.Popen(
+159         \textcolor{stringliteral}{"package\_cloud repository create smacc"}, shell=\textcolor{keyword}{True})
+160     create\_repo\_task.wait()
+161 
+162     \textcolor{comment}{# ----- PUSHING TO SMACC --------------}
+163     \hyperlink{namespacegenerate__debs_a08095040d038b3613ad0e77fd4e7f60e}{remove\_debian\_files}(repo\_owner, \textcolor{stringliteral}{"smacc"},  osname,
+164                         osversion, smacc\_debian\_files)
+165     \hyperlink{namespacegenerate__debs_a9b22f5ad65b40b7903c467eda308e575}{push\_debian\_files}(repo\_owner, \textcolor{stringliteral}{"smacc"},  osname,
+166                       osversion, smacc\_debian\_files)
+167 
+168     \textcolor{keywordflow}{return} smacc\_debian\_files
+169 
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -231,7 +232,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 92 of file generate\+\_\+debs.\+py.
+Definition at line 93 of file generate\+\_\+debs.\+py.
 
 
 
@@ -239,20 +240,20 @@ Referenced by create\+\_\+and\+\_\+push\+\_\+smacc\+\_\+debians().
 
 
 \begin{DoxyCode}
-92 \textcolor{keyword}{def }\hyperlink{namespacegenerate__debs_aa91b87c6d9c3ed04015845cc9298431a}{get\_identified\_packages}(workspace\_folder):
-93     identified\_install\_packages = \{\}
-94     exclude\_with\_words = [\textcolor{stringliteral}{"ridgeback"}, \textcolor{stringliteral}{"mecanum"}, \textcolor{stringliteral}{"catkin"}]
-95     \textcolor{keywordflow}{for} pname \textcolor{keywordflow}{in} packagesl:
-96         packpath = rospack.get\_path(pname)
-97         print(pname)
-98         \textcolor{keywordflow}{if} workspace\_folder \textcolor{keywordflow}{in} packpath:
-99             \textcolor{keywordflow}{if} any([\textcolor{keyword}{True} \textcolor{keywordflow}{for} excludedword \textcolor{keywordflow}{in} exclude\_with\_words \textcolor{keywordflow}{if} excludedword \textcolor{keywordflow}{in} pname]):
-100                 \textcolor{keywordflow}{continue}
-101 
-102             identified\_install\_packages[pname] = packpath
-103     \textcolor{keywordflow}{return} identified\_install\_packages
-104 
+93 \textcolor{keyword}{def }\hyperlink{namespacegenerate__debs_aa91b87c6d9c3ed04015845cc9298431a}{get\_identified\_packages}(workspace\_folder):
+94     identified\_install\_packages = \{\}
+95     exclude\_with\_words = [\textcolor{stringliteral}{"ridgeback"}, \textcolor{stringliteral}{"mecanum"}, \textcolor{stringliteral}{"catkin"}]
+96     \textcolor{keywordflow}{for} pname \textcolor{keywordflow}{in} packagesl:
+97         packpath = rospack.get\_path(pname)
+98         print(pname)
+99         \textcolor{keywordflow}{if} workspace\_folder \textcolor{keywordflow}{in} packpath:
+100             \textcolor{keywordflow}{if} any([\textcolor{keyword}{True} \textcolor{keywordflow}{for} excludedword \textcolor{keywordflow}{in} exclude\_with\_words \textcolor{keywordflow}{if} excludedword \textcolor{keywordflow}{in} pname]):
+101                 \textcolor{keywordflow}{continue}
+102 
+103             identified\_install\_packages[pname] = packpath
+104     \textcolor{keywordflow}{return} identified\_install\_packages
 105 
+106 
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -270,7 +271,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 83 of file generate\+\_\+debs.\+py.
+Definition at line 84 of file generate\+\_\+debs.\+py.
 
 
 
@@ -282,17 +283,17 @@ Referenced by create\+\_\+and\+\_\+push\+\_\+smacc\+\_\+debians().
 
 
 \begin{DoxyCode}
-83 \textcolor{keyword}{def }\hyperlink{namespacegenerate__debs_a2615a6fc7860b6aa9e920e6b4d886589}{iterate\_debian\_generation}(workspace\_source\_folder, package\_names, 
+84 \textcolor{keyword}{def }\hyperlink{namespacegenerate__debs_a2615a6fc7860b6aa9e920e6b4d886589}{iterate\_debian\_generation}(workspace\_source\_folder, package\_names, 
       identified\_install\_packages, osversion, rosversion):
-84     os.chdir(workspace\_source\_folder)
-85     debianfiles = []
-86     \textcolor{keywordflow}{for} pname \textcolor{keywordflow}{in} package\_names:
-87         debianfiles.append(\hyperlink{namespacegenerate__debs_aa70c3f4917ddc57b13eaed8501f571a8}{build\_deb\_package}(workspace\_source\_folder,
-88                                              pname, identified\_install\_packages[pname], osversion, 
+85     os.chdir(workspace\_source\_folder)
+86     debianfiles = []
+87     \textcolor{keywordflow}{for} pname \textcolor{keywordflow}{in} package\_names:
+88         debianfiles.append(\hyperlink{namespacegenerate__debs_aa70c3f4917ddc57b13eaed8501f571a8}{build\_deb\_package}(workspace\_source\_folder,
+89                                              pname, identified\_install\_packages[pname], osversion, 
       rosversion, debianfiles))
-89     \textcolor{keywordflow}{return} debianfiles
-90 
+90     \textcolor{keywordflow}{return} debianfiles
 91 
+92 
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -318,7 +319,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 106 of file generate\+\_\+debs.\+py.
+Definition at line 107 of file generate\+\_\+debs.\+py.
 
 
 
@@ -326,15 +327,15 @@ Referenced by create\+\_\+and\+\_\+push\+\_\+smacc\+\_\+debians().
 
 
 \begin{DoxyCode}
-106 \textcolor{keyword}{def }\hyperlink{namespacegenerate__debs_a9b22f5ad65b40b7903c467eda308e575}{push\_debian\_files}(repo\_owner, reponame,  osname, osversion, debianfiles):
-107     \textcolor{keywordflow}{for} debf \textcolor{keywordflow}{in} debianfiles:
-108         print(\textcolor{stringliteral}{"pushing debfile"})
-109         push\_debian\_task = subprocess.Popen(
-110             \textcolor{stringliteral}{"package\_cloud push "} + repo\_owner+\textcolor{stringliteral}{"/"}+reponame+\textcolor{stringliteral}{"/"}+osname+\textcolor{stringliteral}{"/"} + osversion+\textcolor{stringliteral}{" "} + debf, shell=\textcolor{keyword}{
+107 \textcolor{keyword}{def }\hyperlink{namespacegenerate__debs_a9b22f5ad65b40b7903c467eda308e575}{push\_debian\_files}(repo\_owner, reponame,  osname, osversion, debianfiles):
+108     \textcolor{keywordflow}{for} debf \textcolor{keywordflow}{in} debianfiles:
+109         print(\textcolor{stringliteral}{"pushing debfile"})
+110         push\_debian\_task = subprocess.Popen(
+111             \textcolor{stringliteral}{"package\_cloud push "} + repo\_owner+\textcolor{stringliteral}{"/"}+reponame+\textcolor{stringliteral}{"/"}+osname+\textcolor{stringliteral}{"/"} + osversion+\textcolor{stringliteral}{" "} + debf, shell=\textcolor{keyword}{
       True})
-111         push\_debian\_task.wait()
-112 
+112         push\_debian\_task.wait()
 113 
+114 
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -352,7 +353,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 114 of file generate\+\_\+debs.\+py.
+Definition at line 115 of file generate\+\_\+debs.\+py.
 
 
 
@@ -360,18 +361,18 @@ Referenced by create\+\_\+and\+\_\+push\+\_\+smacc\+\_\+debians().
 
 
 \begin{DoxyCode}
-114 \textcolor{keyword}{def }\hyperlink{namespacegenerate__debs_a08095040d038b3613ad0e77fd4e7f60e}{remove\_debian\_files}(repo\_owner, reponame,  osname, osversion, debianfiles):
-115     \textcolor{keywordflow}{for} debf \textcolor{keywordflow}{in} debianfiles:
-116         shortdebfile = debf.split(\textcolor{stringliteral}{"/"})[-1]
-117         print(\textcolor{stringliteral}{"yanking debfile"})
-118         push\_debian\_task = subprocess.Popen(
-119             \textcolor{stringliteral}{"package\_cloud yank "} + repo\_owner+\textcolor{stringliteral}{"/"}+reponame+\textcolor{stringliteral}{"/"}+osname+\textcolor{stringliteral}{"/"} + osversion+\textcolor{stringliteral}{" "} + shortdebfile, 
+115 \textcolor{keyword}{def }\hyperlink{namespacegenerate__debs_a08095040d038b3613ad0e77fd4e7f60e}{remove\_debian\_files}(repo\_owner, reponame,  osname, osversion, debianfiles):
+116     \textcolor{keywordflow}{for} debf \textcolor{keywordflow}{in} debianfiles:
+117         shortdebfile = debf.split(\textcolor{stringliteral}{"/"})[-1]
+118         print(\textcolor{stringliteral}{"yanking debfile"})
+119         push\_debian\_task = subprocess.Popen(
+120             \textcolor{stringliteral}{"package\_cloud yank "} + repo\_owner+\textcolor{stringliteral}{"/"}+reponame+\textcolor{stringliteral}{"/"}+osname+\textcolor{stringliteral}{"/"} + osversion+\textcolor{stringliteral}{" "} + shortdebfile, 
       shell=\textcolor{keyword}{True})
-120         push\_debian\_task.wait()
-121 
-122 \textcolor{comment}{# ------------------------ SMACC PACKAGES -----------------------}
-123 
+121         push\_debian\_task.wait()
+122 
+123 \textcolor{comment}{# ------------------------ SMACC PACKAGES -----------------------}
 124 
+125 
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -392,7 +393,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 204 of file generate\+\_\+debs.\+py.
+Definition at line 205 of file generate\+\_\+debs.\+py.
 
 
 
@@ -406,7 +407,7 @@ Referenced by smacc\+::\+I\+Smacc\+State.\+configure(), smacc\+::\+Smacc\+State$
 
 
 
-Definition at line 191 of file generate\+\_\+debs.\+py.
+Definition at line 192 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_ab09f4294da5036d5f6881672de9ed9c7}\label{namespacegenerate__debs_ab09f4294da5036d5f6881672de9ed9c7}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!help@{help}}
@@ -416,7 +417,7 @@ Definition at line 191 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 191 of file generate\+\_\+debs.\+py.
+Definition at line 192 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_aeb83979be2939a8059435a906a91f682}\label{namespacegenerate__debs_aeb83979be2939a8059435a906a91f682}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!homefolder@{homefolder}}
@@ -426,7 +427,7 @@ Definition at line 191 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 222 of file generate\+\_\+debs.\+py.
+Definition at line 223 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_ad06322332de29cb27a40152d0cccc2ca}\label{namespacegenerate__debs_ad06322332de29cb27a40152d0cccc2ca}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!osname@{osname}}
@@ -436,7 +437,7 @@ Definition at line 222 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 208 of file generate\+\_\+debs.\+py.
+Definition at line 209 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_afd02fe6ead63bc5db5d3c3b9eb973b62}\label{namespacegenerate__debs_afd02fe6ead63bc5db5d3c3b9eb973b62}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!osversion@{osversion}}
@@ -446,7 +447,7 @@ Definition at line 208 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 209 of file generate\+\_\+debs.\+py.
+Definition at line 210 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_aa1faa039b35b72ee44dc6f106ad12911}\label{namespacegenerate__debs_aa1faa039b35b72ee44dc6f106ad12911}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!outfile@{outfile}}
@@ -456,7 +457,7 @@ Definition at line 209 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 225 of file generate\+\_\+debs.\+py.
+Definition at line 226 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_a836a20b989c3c8e46255d91d10cb524f}\label{namespacegenerate__debs_a836a20b989c3c8e46255d91d10cb524f}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!packagecloud\+\_\+token\+\_\+filepath@{packagecloud\+\_\+token\+\_\+filepath}}
@@ -466,7 +467,7 @@ Definition at line 225 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 223 of file generate\+\_\+debs.\+py.
+Definition at line 224 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_a40d4732827c5678f3f48354238245e1d}\label{namespacegenerate__debs_a40d4732827c5678f3f48354238245e1d}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!packages@{packages}}
@@ -476,7 +477,7 @@ Definition at line 223 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 186 of file generate\+\_\+debs.\+py.
+Definition at line 187 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_acac340506bc1d8ca0d0881b9c00bfea2}\label{namespacegenerate__debs_acac340506bc1d8ca0d0881b9c00bfea2}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!packagesl@{packagesl}}
@@ -486,7 +487,7 @@ Definition at line 186 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 187 of file generate\+\_\+debs.\+py.
+Definition at line 188 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_a4a9ae4bb85fc62d7973ea3d09ced6c26}\label{namespacegenerate__debs_a4a9ae4bb85fc62d7973ea3d09ced6c26}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!parser@{parser}}
@@ -496,7 +497,7 @@ Definition at line 187 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 189 of file generate\+\_\+debs.\+py.
+Definition at line 190 of file generate\+\_\+debs.\+py.
 
 
 
@@ -510,7 +511,7 @@ Referenced by cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Move\+Known\+State
 
 
 
-Definition at line 216 of file generate\+\_\+debs.\+py.
+Definition at line 217 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_a74472455382c9d55ee0d75c6df6bde74}\label{namespacegenerate__debs_a74472455382c9d55ee0d75c6df6bde74}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!repo\+\_\+owner@{repo\+\_\+owner}}
@@ -520,7 +521,7 @@ Definition at line 216 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 181 of file generate\+\_\+debs.\+py.
+Definition at line 182 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_af69f35c2a04a4cc8bd6b9805ab436872}\label{namespacegenerate__debs_af69f35c2a04a4cc8bd6b9805ab436872}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!ros\+\_\+version@{ros\+\_\+version}}
@@ -530,7 +531,7 @@ Definition at line 181 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 210 of file generate\+\_\+debs.\+py.
+Definition at line 211 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_a609fa33c1ebbff173ec90524eeb7b49d}\label{namespacegenerate__debs_a609fa33c1ebbff173ec90524eeb7b49d}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!rospack@{rospack}}
@@ -540,7 +541,7 @@ Definition at line 210 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 185 of file generate\+\_\+debs.\+py.
+Definition at line 186 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_acca5eaf9f83b81a32c26c7a7c5f9bdd7}\label{namespacegenerate__debs_acca5eaf9f83b81a32c26c7a7c5f9bdd7}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!smacc\+\_\+debians@{smacc\+\_\+debians}}
@@ -555,7 +556,7 @@ Definition at line 185 of file generate\+\_\+debs.\+py.
 \end{DoxyCode}
 
 
-Definition at line 229 of file generate\+\_\+debs.\+py.
+Definition at line 230 of file generate\+\_\+debs.\+py.
 
 \mbox{\Hypertarget{namespacegenerate__debs_a50bc9a7ecac9584553e089a448bcde58}\label{namespacegenerate__debs_a50bc9a7ecac9584553e089a448bcde58}} 
 \index{generate\+\_\+debs@{generate\+\_\+debs}!type@{type}}
@@ -565,7 +566,7 @@ Definition at line 229 of file generate\+\_\+debs.\+py.
 
 
 
-Definition at line 197 of file generate\+\_\+debs.\+py.
+Definition at line 198 of file generate\+\_\+debs.\+py.
 
 
 
@@ -579,5 +580,5 @@ Referenced by smacc\+::introspection.\+automatic\+Transition\+Tag(), smacc\+::in
 
 
 
-Definition at line 217 of file generate\+\_\+debs.\+py.
+Definition at line 218 of file generate\+\_\+debs.\+py.
 
