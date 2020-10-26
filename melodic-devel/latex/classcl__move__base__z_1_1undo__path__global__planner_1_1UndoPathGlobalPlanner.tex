@@ -72,7 +72,7 @@ double \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoP
 \subsection{Detailed Description}
 
 
-Definition at line 20 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
+Definition at line 17 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 
 
@@ -85,7 +85,7 @@ Definition at line 20 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 Constructor() 
 
-Definition at line 35 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 32 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -93,9 +93,9 @@ References skip\+\_\+straight\+\_\+motion\+\_\+distance\+\_\+.
 
 
 \begin{DoxyCode}
-36         \{
-37             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9cb4fb49c952deeb77eb1cb9648d122f}{skip\_straight\_motion\_distance\_} = 0.2;
-38         \}
+33         \{
+34             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9cb4fb49c952deeb77eb1cb9648d122f}{skip\_straight\_motion\_distance\_} = 0.2;
+35         \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_aae5dcc1ca67cffca6b96fc3d267ba448}\label{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_aae5dcc1ca67cffca6b96fc3d267ba448}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::undo\+\_\+path\+\_\+global\+\_\+planner\+::\+Undo\+Path\+Global\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::undo\+\_\+path\+\_\+global\+\_\+planner\+::\+Undo\+Path\+Global\+Planner}!````~Undo\+Path\+Global\+Planner@{$\sim$\+Undo\+Path\+Global\+Planner}}
@@ -105,7 +105,7 @@ References skip\+\_\+straight\+\_\+motion\+\_\+distance\+\_\+.
 
 
 
-Definition at line 40 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 37 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -113,12 +113,12 @@ References plan\+Pub\+\_\+.
 
 
 \begin{DoxyCode}
-41         \{
-42             \textcolor{comment}{//clear}
-43             nav\_msgs::Path planMsg;
-44             planMsg.header.stamp = ros::Time::now();
-45             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a65bf364a122d5950baf1bf8b42309d68}{planPub\_}.publish(planMsg);
-46         \}
+38         \{
+39             \textcolor{comment}{//clear}
+40             nav\_msgs::Path planMsg;
+41             planMsg.header.stamp = ros::Time::now();
+42             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a65bf364a122d5950baf1bf8b42309d68}{planPub\_}.publish(planMsg);
+43         \}
 \end{DoxyCode}
 
 
@@ -131,7 +131,7 @@ References plan\+Pub\+\_\+.
 
 default\+Backward\+Path() 
 
-Definition at line 121 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 118 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -143,128 +143,128 @@ Referenced by make\+Plan().
 
 
 \begin{DoxyCode}
-124         \{
-125             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Iterating in last forward cord path");}
-126             \textcolor{keywordtype}{int} i = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() - 1;
-127             \textcolor{keywordtype}{double} linear\_mindist = std::numeric\_limits<double>::max();
-128             \textcolor{keywordtype}{int} mindistindex = -1;
-129             \textcolor{keywordtype}{double} startPoseAngle = tf::getYaw(start.pose.orientation);
-130             geometry\_msgs::Pose startPositionProjected;
-131 
-132             \textcolor{comment}{// The goal of this code is finding the most convinient initial path pose.}
-133             \textcolor{comment}{// first, find closest linear point to the current robot position}
-134             \textcolor{comment}{// we start from the final goal, that is, the begining of the trajectory}
-135             \textcolor{comment}{// (since this was the forward motion from the odom tracker)}
-136             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses \textcolor{comment}{/*| boost::adaptors::reversed*/})
-137             \{
-138                 geometry\_msgs::PoseStamped pose = p;
-139                 pose.header.frame\_id = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getGlobalFrameID();
-140                 pose.header.stamp = ros::Time::now();
+121         \{
+122             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Iterating in last forward cord path");}
+123             \textcolor{keywordtype}{int} i = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() - 1;
+124             \textcolor{keywordtype}{double} linear\_mindist = std::numeric\_limits<double>::max();
+125             \textcolor{keywordtype}{int} mindistindex = -1;
+126             \textcolor{keywordtype}{double} startPoseAngle = tf::getYaw(start.pose.orientation);
+127             geometry\_msgs::Pose startPositionProjected;
+128 
+129             \textcolor{comment}{// The goal of this code is finding the most convinient initial path pose.}
+130             \textcolor{comment}{// first, find closest linear point to the current robot position}
+131             \textcolor{comment}{// we start from the final goal, that is, the begining of the trajectory}
+132             \textcolor{comment}{// (since this was the forward motion from the odom tracker)}
+133             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses \textcolor{comment}{/*| boost::adaptors::reversed*/})
+134             \{
+135                 geometry\_msgs::PoseStamped pose = p;
+136                 pose.header.frame\_id = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getGlobalFrameID();
+137                 pose.header.stamp = ros::Time::now();
+138 
+139                 \textcolor{keywordtype}{double} dx = pose.pose.position.x - start.pose.position.x;
+140                 \textcolor{keywordtype}{double} dy = pose.pose.position.y - start.pose.position.y;
 141 
-142                 \textcolor{keywordtype}{double} dx = pose.pose.position.x - start.pose.position.x;
-143                 \textcolor{keywordtype}{double} dy = pose.pose.position.y - start.pose.position.y;
-144 
-145                 \textcolor{keywordtype}{double} dist = sqrt(dx * dx + dy * dy);
-146                 \textcolor{keywordtype}{double} angleOrientation = tf::getYaw(pose.pose.orientation);
-147                 \textcolor{keywordtype}{double} angleError = fabs(angles::shortest\_angular\_distance(angleOrientation, startPoseAngle
+142                 \textcolor{keywordtype}{double} dist = sqrt(dx * dx + dy * dy);
+143                 \textcolor{keywordtype}{double} angleOrientation = tf::getYaw(pose.pose.orientation);
+144                 \textcolor{keywordtype}{double} angleError = fabs(angles::shortest\_angular\_distance(angleOrientation, startPoseAngle
       ));
-148                 \textcolor{keywordflow}{if} (dist <= linear\_mindist)
-149                 \{
-150                     mindistindex = i;
-151                     linear\_mindist = dist;
-152                     startPositionProjected = pose.pose;
-153 
-154                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] initial start point search, NEWBEST\_LINEAR= "}
+145                 \textcolor{keywordflow}{if} (dist <= linear\_mindist)
+146                 \{
+147                     mindistindex = i;
+148                     linear\_mindist = dist;
+149                     startPositionProjected = pose.pose;
+150 
+151                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] initial start point search, NEWBEST\_LINEAR= "}
        << i << \textcolor{stringliteral}{". error, linear: "} << linear\_mindist << \textcolor{stringliteral}{", angular: "} << angleError);
-155                 \}
-156                 \textcolor{keywordflow}{else}
-157                 \{
-158                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] initial start point search, skipped= "} << i 
+152                 \}
+153                 \textcolor{keywordflow}{else}
+154                 \{
+155                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] initial start point search, skipped= "} << i 
       << \textcolor{stringliteral}{". best linear error: "} << linear\_mindist << \textcolor{stringliteral}{". current error, linear: "} << dist << \textcolor{stringliteral}{" angular: "} << 
       angleError);
-159                 \}
+156                 \}
+157 
+158                 i--;
+159             \}
 160 
-161                 i--;
-162             \}
-163 
-164             \textcolor{keywordtype}{double} \textcolor{keyword}{const} ERROR\_DISTANCE\_PURE\_SPINNING\_FACTOR = 1.5;
-165             \textcolor{comment}{// Concept of second pass: now we only consider a pure spinning motion in this point. We want
+161             \textcolor{keywordtype}{double} \textcolor{keyword}{const} ERROR\_DISTANCE\_PURE\_SPINNING\_FACTOR = 1.5;
+162             \textcolor{comment}{// Concept of second pass: now we only consider a pure spinning motion in this point. We want
        to consume some very close angular targets, (accepting a larger linear minerror of 1.5 besterror. That is,
        more or less in the same point).}
-166 
-167             ROS\_DEBUG(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] second angular pass"});
-168             \textcolor{keywordtype}{double} angularMinDist = std::numeric\_limits<double>::max();
-169             
-170                 \textcolor{keywordflow}{if}(mindistindex >=  \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size())
-171                     mindistindex = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() -1;\textcolor{comment}{// workaround,
+163 
+164             ROS\_DEBUG(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] second angular pass"});
+165             \textcolor{keywordtype}{double} angularMinDist = std::numeric\_limits<double>::max();
+166             
+167                 \textcolor{keywordflow}{if}(mindistindex >=  \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size())
+168                     mindistindex = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() -1;\textcolor{comment}{// workaround,
        something is making a out of bound exception in poses array access}
-172             \{
-173                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = mindistindex; i >= 0; i--)
-174                 \{
-175                     \textcolor{comment}{// warning this index, i refers to some inverse interpretation from the previous loop,}
-176                     \textcolor{comment}{// (last indexes in this path corresponds to the poses closer to our current position)}
-177                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] "} << i << \textcolor{stringliteral}{"/"} << 
+169             \{
+170                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = mindistindex; i >= 0; i--)
+171                 \{
+172                     \textcolor{comment}{// warning this index, i refers to some inverse interpretation from the previous loop,}
+173                     \textcolor{comment}{// (last indexes in this path corresponds to the poses closer to our current position)}
+174                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] "} << i << \textcolor{stringliteral}{"/"} << 
       \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size());
-178                     geometry\_msgs::PoseStamped pose = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses[
+175                     geometry\_msgs::PoseStamped pose = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses[
       \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() - i -1];
-179                     pose.header.frame\_id = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getGlobalFrameID();
-180                     pose.header.stamp = ros::Time::now();
+176                     pose.header.frame\_id = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getGlobalFrameID();
+177                     pose.header.stamp = ros::Time::now();
+178 
+179                     \textcolor{keywordtype}{double} dx = pose.pose.position.x - start.pose.position.x;
+180                     \textcolor{keywordtype}{double} dy = pose.pose.position.y - start.pose.position.y;
 181 
-182                     \textcolor{keywordtype}{double} dx = pose.pose.position.x - start.pose.position.x;
-183                     \textcolor{keywordtype}{double} dy = pose.pose.position.y - start.pose.position.y;
-184 
-185                     \textcolor{keywordtype}{double} dist = sqrt(dx * dx + dy * dy);
-186                     \textcolor{keywordflow}{if} (dist <= linear\_mindist * ERROR\_DISTANCE\_PURE\_SPINNING\_FACTOR)
-187                     \{
-188                         \textcolor{keywordtype}{double} angleOrientation = tf::getYaw(pose.pose.orientation);
-189                         \textcolor{keywordtype}{double} angleError = fabs(angles::shortest\_angular\_distance(angleOrientation, 
+182                     \textcolor{keywordtype}{double} dist = sqrt(dx * dx + dy * dy);
+183                     \textcolor{keywordflow}{if} (dist <= linear\_mindist * ERROR\_DISTANCE\_PURE\_SPINNING\_FACTOR)
+184                     \{
+185                         \textcolor{keywordtype}{double} angleOrientation = tf::getYaw(pose.pose.orientation);
+186                         \textcolor{keywordtype}{double} angleError = fabs(angles::shortest\_angular\_distance(angleOrientation, 
       startPoseAngle));
-190                         \textcolor{keywordflow}{if} (angleError < angularMinDist)
-191                         \{
-192                             angularMinDist = angleError;
-193                             mindistindex = i;
-194                             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] initial start point search (angular
+187                         \textcolor{keywordflow}{if} (angleError < angularMinDist)
+188                         \{
+189                             angularMinDist = angleError;
+190                             mindistindex = i;
+191                             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] initial start point search (angular
        update), NEWBEST\_ANGULAR= "} << i << \textcolor{stringliteral}{". error, linear: "}<<  dist << \textcolor{stringliteral}{"("} << linear\_mindist << \textcolor{stringliteral}{")"} <<\textcolor{stringliteral}{", angular:
        "} << angleError << \textcolor{stringliteral}{"("} << angularMinDist << \textcolor{stringliteral}{")"});
-195                         \}
-196                         \textcolor{keywordflow}{else}
-197                         \{
-198                             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] initial start point search (angular
+192                         \}
+193                         \textcolor{keywordflow}{else}
+194                         \{
+195                             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] initial start point search (angular
        update), skipped= "} << i <<\textcolor{stringliteral}{". error, linear: "}<<  dist << \textcolor{stringliteral}{"("} << linear\_mindist << \textcolor{stringliteral}{")"} <<\textcolor{stringliteral}{", angular: "}  << 
       angleError << \textcolor{stringliteral}{"("} << angularMinDist << \textcolor{stringliteral}{")"});
-199                         \}
-200                     \}
-201                     \textcolor{keywordflow}{else}
-202                     \{
-203                         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] initial start point search (angular
+196                         \}
+197                     \}
+198                     \textcolor{keywordflow}{else}
+199                     \{
+200                         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] initial start point search (angular
        update) not in linear range, skipped= "} << i << \textcolor{stringliteral}{" linear error: "} << dist << \textcolor{stringliteral}{"("} << linear\_mindist << \textcolor{stringliteral}{")"});
-204                     \}
-205                 \}
-206             \}
-207 
-208             \textcolor{keywordflow}{if} (mindistindex != -1)
-209             \{
-210                 \textcolor{comment}{//plan.push\_back(start);}
-211 
-212                 ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] Creating the backwards plan from odom tracker path
+201                     \}
+202                 \}
+203             \}
+204 
+205             \textcolor{keywordflow}{if} (mindistindex != -1)
+206             \{
+207                 \textcolor{comment}{//plan.push\_back(start);}
+208 
+209                 ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] Creating the backwards plan from odom tracker path
        ("} << \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() << \textcolor{stringliteral}{") poses"});
-213                 ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] closer point to goal i="} << mindistindex << \textcolor{stringliteral}{"
+210                 ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] closer point to goal i="} << mindistindex << \textcolor{stringliteral}{"
        (linear min dist "} << linear\_mindist << \textcolor{stringliteral}{")"});
-214                 \textcolor{comment}{// copy the path at the inverse direction}
-215                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() - 1; i >= mindistindex; i-
+211                 \textcolor{comment}{// copy the path at the inverse direction}
+212                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() - 1; i >= mindistindex; i-
       -)
-216                 \{
-217                     \textcolor{keyword}{auto} &pose = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses[i];
-218                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] adding to plan i = "} << i);
-219                     plan.push\_back(pose);
-220                 \}
-221                 ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] refined plan has "} << plan.size() << \textcolor{stringliteral}{"  points"});
-222             \}
-223             \textcolor{keywordflow}{else}
-224             \{
-225                 ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner ] backward global plan size:  "} << plan.size());
-226             \}
-227         \}
+213                 \{
+214                     \textcolor{keyword}{auto} &pose = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses[i];
+215                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] adding to plan i = "} << i);
+216                     plan.push\_back(pose);
+217                 \}
+218                 ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] refined plan has "} << plan.size() << \textcolor{stringliteral}{"  points"});
+219             \}
+220             \textcolor{keywordflow}{else}
+221             \{
+222                 ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner ] backward global plan size:  "} << plan.size());
+223             \}
+224         \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -282,7 +282,7 @@ Here is the caller graph for this function\+:
 
 \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a69e0fbb98872f108f679b2a6620638f5}{initialize()} 
 
-Definition at line 53 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 50 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -290,20 +290,20 @@ References costmap\+\_\+ros\+\_\+, forward\+Path\+Sub\+\_\+, markers\+Pub\+\_\+,
 
 
 \begin{DoxyCode}
-54         \{
-55             \textcolor{comment}{//ROS\_INFO\_NAMED("Backwards", "UndoPathGlobalPlanner initialize");}
-56             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_} = costmap\_ros;
-57             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "initializating global planner, costmap address: %ld",
+51         \{
+52             \textcolor{comment}{//ROS\_INFO\_NAMED("Backwards", "UndoPathGlobalPlanner initialize");}
+53             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_} = costmap\_ros;
+54             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "initializating global planner, costmap address: %ld",
        (long)costmap\_ros);}
-58 
-59             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a1cdf8a98469b5841d05a8cec9ad6f675}{forwardPathSub\_} = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a5db1360cd47ccdf63276c75f507d6470}{nh\_}.subscribe(\textcolor{stringliteral}{"odom\_tracker\_path"}, 2, &
+55 
+56             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a1cdf8a98469b5841d05a8cec9ad6f675}{forwardPathSub\_} = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a5db1360cd47ccdf63276c75f507d6470}{nh\_}.subscribe(\textcolor{stringliteral}{"odom\_tracker\_path"}, 2, &
       \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ae5e3c5922ceb8783a6a01d904fc9c230}{UndoPathGlobalPlanner::onForwardTrailMsg}, \textcolor{keyword}{this});
-60 
-61             ros::NodeHandle nh;
-62             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a65bf364a122d5950baf1bf8b42309d68}{planPub\_} = nh.advertise<nav\_msgs::Path>(\textcolor{stringliteral}{"undo\_path\_planner/global\_plan"}, 1);
-63             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_abfa0536872a0e3f8c823bebf0ed398fb}{markersPub\_} = nh.advertise<visualization\_msgs::MarkerArray>(\textcolor{stringliteral}{"
+57 
+58             ros::NodeHandle nh;
+59             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a65bf364a122d5950baf1bf8b42309d68}{planPub\_} = nh.advertise<nav\_msgs::Path>(\textcolor{stringliteral}{"undo\_path\_planner/global\_plan"}, 1);
+60             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_abfa0536872a0e3f8c823bebf0ed398fb}{markersPub\_} = nh.advertise<visualization\_msgs::MarkerArray>(\textcolor{stringliteral}{"
       undo\_path\_planner/markers"}, 1);
-64         \}
+61         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -321,7 +321,7 @@ Here is the call graph for this function\+:
 
 \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{make\+Plan()} 
 
-Definition at line 234 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 231 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -333,59 +333,59 @@ Referenced by make\+Plan().
 
 
 \begin{DoxyCode}
-236         \{
-237             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Backwards global planner: Generating global plan ");}
-238             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Clearing...");}
-239 
-240             plan.clear();
-241 
-242             \textcolor{keyword}{auto} forcedGoal = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses[
+233         \{
+234             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Backwards global planner: Generating global plan ");}
+235             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Clearing...");}
+236 
+237             plan.clear();
+238 
+239             \textcolor{keyword}{auto} forcedGoal = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses[
       \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() - 1]; \textcolor{comment}{// FORCE LAST POSE}
-243             this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a659c16f439d33ac7026a54bb65c26ca8}{createDefaultUndoPathPlan}(start, forcedGoal, plan);
-244             \textcolor{comment}{//this->createPureSpiningAndStragihtLineBackwardPath(start, goal, plan);}
+240             this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a659c16f439d33ac7026a54bb65c26ca8}{createDefaultUndoPathPlan}(start, forcedGoal, plan);
+241             \textcolor{comment}{//this->createPureSpiningAndStragihtLineBackwardPath(start, goal, plan);}
+242 
+243             \textcolor{comment}{//ROS\_INFO\_STREAM(" start - " << start);}
+244             \textcolor{comment}{//ROS\_INFO\_STREAM(" end - " << goal.pose.position);}
 245 
-246             \textcolor{comment}{//ROS\_INFO\_STREAM(" start - " << start);}
-247             \textcolor{comment}{//ROS\_INFO\_STREAM(" end - " << goal.pose.position);}
-248 
-249             \textcolor{comment}{//ROS\_INFO("3 - heading to goal orientation");}
-250             \textcolor{comment}{//double goalOrientation = angles::normalize\_angle(tf::getYaw(goal.pose.orientation));}
-251             \textcolor{comment}{//cl\_move\_base\_z::makePureSpinningSubPlan(prevState,goalOrientation,plan);}
+246             \textcolor{comment}{//ROS\_INFO("3 - heading to goal orientation");}
+247             \textcolor{comment}{//double goalOrientation = angles::normalize\_angle(tf::getYaw(goal.pose.orientation));}
+248             \textcolor{comment}{//cl\_move\_base\_z::makePureSpinningSubPlan(prevState,goalOrientation,plan);}
+249 
+250             \textcolor{comment}{//ROS\_WARN\_STREAM( "MAKE PLAN INVOKED, plan size:"<< plan.size());}
+251             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a37a85e1cd57173902d8302cb8cb9b933}{publishGoalMarker}(forcedGoal.pose, 1.0, 0, 1.0);
 252 
-253             \textcolor{comment}{//ROS\_WARN\_STREAM( "MAKE PLAN INVOKED, plan size:"<< plan.size());}
-254             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a37a85e1cd57173902d8302cb8cb9b933}{publishGoalMarker}(forcedGoal.pose, 1.0, 0, 1.0);
-255 
-256             nav\_msgs::Path planMsg;
-257             planMsg.poses = plan;
-258             planMsg.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getGlobalFrameID();
+253             nav\_msgs::Path planMsg;
+254             planMsg.poses = plan;
+255             planMsg.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getGlobalFrameID();
+256 
+257             \textcolor{comment}{// check plan rejection}
+258             \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};
 259 
-260             \textcolor{comment}{// check plan rejection}
-261             \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};
-262 
-263             \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
-264             \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
-265             \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
-266             \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
-267 
-268             costmap\_2d::Costmap2D *costmap2d = this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getCostmap();
-269             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : plan)
-270             \{
-271                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
-272                 costmap2d->worldToMap(p.pose.position.x, p.pose.position.y, mx, my);
-273                 \textcolor{keyword}{auto} cost = costmap2d->getCost(mx, my);
-274 
-275                 \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
-276                 \{
-277                     acceptedGlobalPlan = \textcolor{keyword}{false};
-278                     \textcolor{keywordflow}{break};
-279                 \}
-280             \}
-281 
-282             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a65bf364a122d5950baf1bf8b42309d68}{planPub\_}.publish(planMsg);
-283 
-284             \textcolor{comment}{// this was previously set to size() <= 1, but a plan with a single point is also a valid plan
+260             \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
+261             \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
+262             \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
+263             \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
+264 
+265             costmap\_2d::Costmap2D *costmap2d = this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getCostmap();
+266             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : plan)
+267             \{
+268                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
+269                 costmap2d->worldToMap(p.pose.position.x, p.pose.position.y, mx, my);
+270                 \textcolor{keyword}{auto} cost = costmap2d->getCost(mx, my);
+271 
+272                 \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
+273                 \{
+274                     acceptedGlobalPlan = \textcolor{keyword}{false};
+275                     \textcolor{keywordflow}{break};
+276                 \}
+277             \}
+278 
+279             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a65bf364a122d5950baf1bf8b42309d68}{planPub\_}.publish(planMsg);
+280 
+281             \textcolor{comment}{// this was previously set to size() <= 1, but a plan with a single point is also a valid plan
        (the goal)}
-285             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-286         \}
+282             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+283         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -411,7 +411,7 @@ Here is the caller graph for this function\+:
 
 \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{make\+Plan()} 
 
-Definition at line 293 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 290 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -419,11 +419,11 @@ References make\+Plan().
 
 
 \begin{DoxyCode}
-296         \{
-297             cost = 0;
-298             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{makePlan}(start, goal, plan);
-299             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-300         \}
+293         \{
+294             cost = 0;
+295             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{makePlan}(start, goal, plan);
+296             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+297         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -441,7 +441,7 @@ Here is the call graph for this function\+:
 
 \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ae5e3c5922ceb8783a6a01d904fc9c230}{on\+Forward\+Trail\+Msg()} 
 
-Definition at line 71 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 68 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -453,11 +453,11 @@ Referenced by initialize().
 
 
 \begin{DoxyCode}
-72         \{
-73             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_} = *trailMessage;
-74             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] received backward path msg poses ["} << 
+69         \{
+70             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_} = *trailMessage;
+71             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner] received backward path msg poses ["} << 
       \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() << \textcolor{stringliteral}{"]"});
-75         \}
+72         \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -475,7 +475,7 @@ Here is the caller graph for this function\+:
 
 \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a37a85e1cd57173902d8302cb8cb9b933}{publish\+Goal\+Marker()} 
 
-Definition at line 82 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 79 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -487,38 +487,38 @@ Referenced by make\+Plan().
 
 
 \begin{DoxyCode}
-83         \{
-84             \textcolor{keywordtype}{double} phi = tf::getYaw(pose.orientation);
-85             visualization\_msgs::Marker marker;
-86             marker.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getGlobalFrameID();
-87             marker.header.stamp = ros::Time::now();
-88             marker.ns = \textcolor{stringliteral}{"my\_namespace2"};
-89             marker.id = 0;
-90             marker.type = visualization\_msgs::Marker::ARROW;
-91             marker.action = visualization\_msgs::Marker::ADD;
-92             marker.scale.x = 0.1;
-93             marker.scale.y = 0.3;
-94             marker.scale.z = 0.1;
-95             marker.color.a = 1.0;
-96             marker.color.r = \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r};
-97             marker.color.g = g;
-98             marker.color.b = b;
-99 
-100             geometry\_msgs::Point start, end;
-101             start.x = pose.position.x;
-102             start.y = pose.position.y;
+80         \{
+81             \textcolor{keywordtype}{double} phi = tf::getYaw(pose.orientation);
+82             visualization\_msgs::Marker marker;
+83             marker.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getGlobalFrameID();
+84             marker.header.stamp = ros::Time::now();
+85             marker.ns = \textcolor{stringliteral}{"my\_namespace2"};
+86             marker.id = 0;
+87             marker.type = visualization\_msgs::Marker::ARROW;
+88             marker.action = visualization\_msgs::Marker::ADD;
+89             marker.scale.x = 0.1;
+90             marker.scale.y = 0.3;
+91             marker.scale.z = 0.1;
+92             marker.color.a = 1.0;
+93             marker.color.r = \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r};
+94             marker.color.g = g;
+95             marker.color.b = b;
+96 
+97             geometry\_msgs::Point start, end;
+98             start.x = pose.position.x;
+99             start.y = pose.position.y;
+100 
+101             end.x = pose.position.x + 0.5 * cos(phi);
+102             end.y = pose.position.y + 0.5 * sin(phi);
 103 
-104             end.x = pose.position.x + 0.5 * cos(phi);
-105             end.y = pose.position.y + 0.5 * sin(phi);
+104             marker.points.push\_back(start);
+105             marker.points.push\_back(end);
 106 
-107             marker.points.push\_back(start);
-108             marker.points.push\_back(end);
+107             visualization\_msgs::MarkerArray ma;
+108             ma.markers.push\_back(marker);
 109 
-110             visualization\_msgs::MarkerArray ma;
-111             ma.markers.push\_back(marker);
-112 
-113             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_abfa0536872a0e3f8c823bebf0ed398fb}{markersPub\_}.publish(ma);
-114         \}
+110             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_abfa0536872a0e3f8c823bebf0ed398fb}{markersPub\_}.publish(ma);
+111         \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -539,7 +539,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 57 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
+Definition at line 54 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 \mbox{\Hypertarget{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}\label{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::undo\+\_\+path\+\_\+global\+\_\+planner\+::\+Undo\+Path\+Global\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::undo\+\_\+path\+\_\+global\+\_\+planner\+::\+Undo\+Path\+Global\+Planner}!costmap\+\_\+ros\+\_\+@{costmap\+\_\+ros\+\_\+}}
@@ -553,7 +553,7 @@ stored but almost not used
 
 
 
-Definition at line 51 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
+Definition at line 48 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 
 
@@ -567,7 +567,7 @@ Referenced by create\+Default\+Undo\+Path\+Plan(), initialize(), make\+Plan(), a
 
 
 
-Definition at line 42 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
+Definition at line 39 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 
 
@@ -581,7 +581,7 @@ Referenced by initialize().
 
 
 
-Definition at line 48 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
+Definition at line 45 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 
 
@@ -595,7 +595,7 @@ Referenced by create\+Default\+Undo\+Path\+Plan(), make\+Plan(), and on\+Forward
 
 
 
-Definition at line 46 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
+Definition at line 43 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 
 
@@ -609,7 +609,7 @@ Referenced by initialize(), and publish\+Goal\+Marker().
 
 
 
-Definition at line 40 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
+Definition at line 37 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 
 
@@ -623,7 +623,7 @@ Referenced by initialize().
 
 
 
-Definition at line 44 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
+Definition at line 41 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 
 
@@ -637,7 +637,7 @@ Referenced by initialize(), make\+Plan(), and $\sim$\+Undo\+Path\+Global\+Planne
 
 
 
-Definition at line 61 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
+Definition at line 58 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 \mbox{\Hypertarget{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9cb4fb49c952deeb77eb1cb9648d122f}\label{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9cb4fb49c952deeb77eb1cb9648d122f}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::undo\+\_\+path\+\_\+global\+\_\+planner\+::\+Undo\+Path\+Global\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::undo\+\_\+path\+\_\+global\+\_\+planner\+::\+Undo\+Path\+Global\+Planner}!skip\+\_\+straight\+\_\+motion\+\_\+distance\+\_\+@{skip\+\_\+straight\+\_\+motion\+\_\+distance\+\_\+}}
@@ -647,7 +647,7 @@ Definition at line 61 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 
 
-Definition at line 59 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
+Definition at line 56 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+h.
 
 
 
