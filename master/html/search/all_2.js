@@ -1,9 +1,9 @@
 var searchData=
 [
   ['backindex_5f',['backIndex_',['../classcl__move__group__interface_1_1CbMoveLastTrajectoryInitialState.html#ac4056048a84431f4256beecd03b956b2',1,'cl_move_group_interface::CbMoveLastTrajectoryInitialState::backIndex_()'],['../classcl__move__group__interface_1_1CbUndoLastTrajectory.html#a07b581e873b30625f06aea437a126d29',1,'cl_move_group_interface::CbUndoLastTrajectory::backIndex_()']]],
-  ['backward_5fcurved_5flocal_5fplanner_2ecpp',['backward_curved_local_planner.cpp',['../backward__curved__local__planner_8cpp.html',1,'']]],
   ['backward_5fglobal_5fplanner_2ecpp',['backward_global_planner.cpp',['../backward__global__planner_8cpp.html',1,'']]],
   ['backward_5fglobal_5fplanner_2eh',['backward_global_planner.h',['../backward__global__planner_8h.html',1,'']]],
+  ['backward_5flocal_5fplanner_2ecpp',['backward_local_planner.cpp',['../backward__local__planner_8cpp.html',1,'']]],
   ['backward_5flocal_5fplanner_2eh',['backward_local_planner.h',['../backward__local__planner_8h.html',1,'']]],
   ['backwarddistance',['backwardDistance',['../classcl__move__base__z_1_1CbNavigateBackwards.html#abb7099e4e18602f6cf06c4f5534a2a15',1,'cl_move_base_z::CbNavigateBackwards']]],
   ['backwardglobalplanner',['BackwardGlobalPlanner',['../classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner.html',1,'cl_move_base_z::backward_global_planner::BackwardGlobalPlanner'],['../classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner.html#a20888ea9b40dcbd86b8b12310a2ad60b',1,'cl_move_base_z::backward_global_planner::BackwardGlobalPlanner::BackwardGlobalPlanner()']]],
