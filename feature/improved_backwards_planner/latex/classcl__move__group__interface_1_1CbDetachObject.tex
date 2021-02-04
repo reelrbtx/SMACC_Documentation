@@ -1,0 +1,113 @@
+\hypertarget{classcl__move__group__interface_1_1CbDetachObject}{}\section{cl\+\_\+move\+\_\+group\+\_\+interface\+:\+:Cb\+Detach\+Object Class Reference}
+\label{classcl__move__group__interface_1_1CbDetachObject}\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object}}
+
+
+{\ttfamily \#include $<$cb\+\_\+detach\+\_\+object.\+h$>$}
+
+
+
+Inheritance diagram for cl\+\_\+move\+\_\+group\+\_\+interface\+:\+:Cb\+Detach\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classcl__move__group__interface_1_1CbDetachObject__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for cl\+\_\+move\+\_\+group\+\_\+interface\+:\+:Cb\+Detach\+Object\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__group__interface_1_1CbDetachObject__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classcl__move__group__interface_1_1CbDetachObject_a04af88f1d9b64c43eb2620ac5bd62c35}{on\+Entry} () override
+\item 
+virtual void \hyperlink{classcl__move__group__interface_1_1CbDetachObject_ae5c6ada3c6631c9fa0bfb2d461ce4678}{on\+Exit} () override
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 15 of file cb\+\_\+detach\+\_\+object.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbDetachObject_a04af88f1d9b64c43eb2620ac5bd62c35}\label{classcl__move__group__interface_1_1CbDetachObject_a04af88f1d9b64c43eb2620ac5bd62c35}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object}!on\+Entry@{on\+Entry}}
+\index{on\+Entry@{on\+Entry}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object}}
+\subsubsection{\texorpdfstring{on\+Entry()}{onEntry()}}
+{\footnotesize\ttfamily void cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object\+::on\+Entry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_ad5d3e1f1697c3cfe66c94cadba948493}{smacc\+::\+Smacc\+Client\+Behavior}.
+
+
+
+Definition at line 12 of file cb\+\_\+detach\+\_\+object.\+cpp.
+
+
+
+References cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Grasping\+Component\+::current\+Attached\+Object\+Name, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cl\+Move\+Group\+::move\+Group\+Client\+Interface, cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cl\+Move\+Group\+::planning\+Scene\+Interface, smacc\+::\+I\+Smacc\+Client\+Behavior\+::requires\+Client(), and smacc\+::\+I\+Smacc\+Client\+Behavior\+::requires\+Component().
+
+
+\begin{DoxyCode}
+13     \{
+14         \hyperlink{classcl__move__group__interface_1_1GraspingComponent}{cl\_move\_group\_interface::GraspingComponent} *
+      graspingComponent;
+15         this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a19c6d658c8e809bb93bfdc9b639a3ac3}{requiresComponent}(graspingComponent);
+16 
+17         \hyperlink{classcl__move__group__interface_1_1ClMoveGroup}{cl\_move\_group\_interface::ClMoveGroup} *moveGroupClient;
+18         this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(moveGroupClient);
+19 
+20         \textcolor{keyword}{auto} &planningSceneInterface = moveGroupClient->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a11bfab580f36e2ad32c9b37d6f58f44c}{planningSceneInterface};
+21 
+22         moveGroupClient->\hyperlink{classcl__move__group__interface_1_1ClMoveGroup_a92922ea689e4e1b7b91512c56629c95b}{moveGroupClientInterface}.detachObject(*(graspingComponent
+      ->\hyperlink{classcl__move__group__interface_1_1GraspingComponent_a486b5c831dc81ae0bf909b585ba7c615}{currentAttachedObjectName}));
+23         planningSceneInterface.removeCollisionObjects(\{*(graspingComponent->
+      \hyperlink{classcl__move__group__interface_1_1GraspingComponent_a486b5c831dc81ae0bf909b585ba7c615}{currentAttachedObjectName})\});
+24     \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__group__interface_1_1CbDetachObject_a04af88f1d9b64c43eb2620ac5bd62c35_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcl__move__group__interface_1_1CbDetachObject_ae5c6ada3c6631c9fa0bfb2d461ce4678}\label{classcl__move__group__interface_1_1CbDetachObject_ae5c6ada3c6631c9fa0bfb2d461ce4678}} 
+\index{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object}!on\+Exit@{on\+Exit}}
+\index{on\+Exit@{on\+Exit}!cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object@{cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object}}
+\subsubsection{\texorpdfstring{on\+Exit()}{onExit()}}
+{\footnotesize\ttfamily void cl\+\_\+move\+\_\+group\+\_\+interface\+::\+Cb\+Detach\+Object\+::on\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \hyperlink{classsmacc_1_1SmaccClientBehavior_a7e4fb6ce81ff96dc172425852d69c0c5}{smacc\+::\+Smacc\+Client\+Behavior}.
+
+
+
+Definition at line 26 of file cb\+\_\+detach\+\_\+object.\+cpp.
+
+
+\begin{DoxyCode}
+27     \{
+28     \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+client\+\_\+library/move\+\_\+group\+\_\+interface\+\_\+client/include/move\+\_\+group\+\_\+interface\+\_\+client/client\+\_\+behaviors/\hyperlink{cb__detach__object_8h}{cb\+\_\+detach\+\_\+object.\+h}\item 
+smacc\+\_\+client\+\_\+library/move\+\_\+group\+\_\+interface\+\_\+client/src/move\+\_\+group\+\_\+interface\+\_\+client/client\+\_\+behaviors/\hyperlink{cb__detach__object_8cpp}{cb\+\_\+detach\+\_\+object.\+cpp}\end{DoxyCompactItemize}
