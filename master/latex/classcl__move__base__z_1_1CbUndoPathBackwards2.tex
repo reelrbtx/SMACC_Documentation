@@ -106,7 +106,7 @@ References trigger\+Threshold\+\_\+.
 
 
 
-Definition at line 43 of file cb\+\_\+undo\+\_\+path\+\_\+backwards2.\+cpp.
+Definition at line 48 of file cb\+\_\+undo\+\_\+path\+\_\+backwards2.\+cpp.
 
 
 
@@ -118,16 +118,20 @@ Referenced by on\+Entry(), and update().
 
 
 \begin{DoxyCode}
-44 \{
-45   \textcolor{keyword}{auto} y = pose.position.y;
-46   \textcolor{keyword}{auto} x = pose.position.x;
-47   \textcolor{keyword}{auto} alpha = tf::getYaw(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_ad119c38ee9cb341c9b468682d1794538}{goal\_}.target\_pose.pose.orientation);
-48   \textcolor{keyword}{auto} y0 = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_ad119c38ee9cb341c9b468682d1794538}{goal\_}.target\_pose.pose.position.y;
-49   \textcolor{keyword}{auto} x0 = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_ad119c38ee9cb341c9b468682d1794538}{goal\_}.target\_pose.pose.position.x;
-50 
-51   \textcolor{keyword}{auto} evalimplicit = sin(alpha) * (y - y0) - acos(alpha) * (x - x0);
-52   \textcolor{keywordflow}{return} evalimplicit;
-53 \}
+49 \{
+50   \textcolor{comment}{// check the line was passed}
+51   \textcolor{comment}{// y = mx x + y0}
+52   \textcolor{comment}{// y = (sin(alpha)/cos(alpha)) (x -x0) + y0}
+53   \textcolor{comment}{// cos(alpha)(y - y0) - sin(alpha) (x -x0)= 0 // if greater one side if lower , the other}
+54   \textcolor{keyword}{auto} y = pose.position.y;
+55   \textcolor{keyword}{auto} x = pose.position.x;
+56   \textcolor{keyword}{auto} alpha = tf::getYaw(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_ad119c38ee9cb341c9b468682d1794538}{goal\_}.target\_pose.pose.orientation);
+57   \textcolor{keyword}{auto} y0 = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_ad119c38ee9cb341c9b468682d1794538}{goal\_}.target\_pose.pose.position.y;
+58   \textcolor{keyword}{auto} x0 = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_ad119c38ee9cb341c9b468682d1794538}{goal\_}.target\_pose.pose.position.x;
+59 
+60   \textcolor{keyword}{auto} evalimplicit = cos(alpha) * (y - y0) - sin (alpha) * (x - x0);
+61   \textcolor{keywordflow}{return} evalimplicit;
+62 \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -200,7 +204,7 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_ad1198fdb2cbdf1
 
 
 
-Definition at line 120 of file cb\+\_\+undo\+\_\+path\+\_\+backwards2.\+cpp.
+Definition at line 127 of file cb\+\_\+undo\+\_\+path\+\_\+backwards2.\+cpp.
 
 
 
@@ -208,10 +212,10 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), and cl\+\_\+move\+\_
 
 
 \begin{DoxyCode}
-121 \{
-122   \textcolor{keyword}{auto}* odomTracker = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
-123   odomTracker->popPath();
-124 \}
+128 \{
+129   \textcolor{keyword}{auto}* odomTracker = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
+130   odomTracker->popPath();
+131 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -249,7 +253,7 @@ Definition at line 32 of file cb\+\_\+undo\+\_\+path\+\_\+backwards2.\+h.
 
 
 
-Definition at line 83 of file cb\+\_\+undo\+\_\+path\+\_\+backwards2.\+cpp.
+Definition at line 90 of file cb\+\_\+undo\+\_\+path\+\_\+backwards2.\+cpp.
 
 
 
@@ -257,41 +261,41 @@ References cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::get\+Reference\+Frame(), g
 
 
 \begin{DoxyCode}
-84 \{
-85   \textcolor{keywordtype}{double} phi = tf::getYaw(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_ad119c38ee9cb341c9b468682d1794538}{goal\_}.target\_pose.pose.orientation);
-86   visualization\_msgs::Marker marker;
-87   marker.header.frame\_id = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_a2d398dac07efaca840fbcea31957cf7a}{robotPose\_}->\hyperlink{classcl__move__base__z_1_1Pose_af8c2dc151e74aa8da6b283d1c8563051}{getReferenceFrame}();
-88 
-89   marker.header.stamp = ros::Time::now();
-90   marker.ns = \textcolor{stringliteral}{"my\_namespace2"};
-91   marker.id = 0;
-92   marker.type = visualization\_msgs::Marker::SPHERE;
-93   marker.action = visualization\_msgs::Marker::ADD;
-94   marker.scale.x = 3;
-95   marker.scale.y = 3;
-96   marker.scale.z = 3;
-97   marker.color.a = 1.0;
-98   marker.color.r = 1.0;
-99   marker.color.g = 0.0;
-100   marker.color.b = 0.0;
-101 
-102   marker.pose = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_ad119c38ee9cb341c9b468682d1794538}{goal\_}.target\_pose.pose;
-103 
-104   \textcolor{comment}{// geometry\_msgs::Point start, end;}
-105   \textcolor{comment}{// start.x = pose.position.x;}
-106   \textcolor{comment}{// start.y = pose.position.y;}
-107 
-108   \textcolor{comment}{// end.x = pose.position.x + 0.5 * cos(phi);}
-109   \textcolor{comment}{// end.y = pose.position.y + 0.5 * sin(phi);}
+91 \{
+92   \textcolor{keywordtype}{double} phi = tf::getYaw(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_ad119c38ee9cb341c9b468682d1794538}{goal\_}.target\_pose.pose.orientation);
+93   visualization\_msgs::Marker marker;
+94   marker.header.frame\_id = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_a2d398dac07efaca840fbcea31957cf7a}{robotPose\_}->\hyperlink{classcl__move__base__z_1_1Pose_af8c2dc151e74aa8da6b283d1c8563051}{getReferenceFrame}();
+95 
+96   marker.header.stamp = ros::Time::now();
+97   marker.ns = \textcolor{stringliteral}{"my\_namespace2"};
+98   marker.id = 0;
+99   marker.type = visualization\_msgs::Marker::SPHERE;
+100   marker.action = visualization\_msgs::Marker::ADD;
+101   marker.scale.x = 3;
+102   marker.scale.y = 3;
+103   marker.scale.z = 3;
+104   marker.color.a = 1.0;
+105   marker.color.r = 1.0;
+106   marker.color.g = 0.0;
+107   marker.color.b = 0.0;
+108 
+109   marker.pose = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_ad119c38ee9cb341c9b468682d1794538}{goal\_}.target\_pose.pose;
 110 
-111   \textcolor{comment}{// marker.points.push\_back(start);}
-112   \textcolor{comment}{// marker.points.push\_back(end);}
-113 
-114   visualization\_msgs::MarkerArray ma;
-115   ma.markers.push\_back(marker);
-116 
-117   this->\hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_aff48fc567ae025b196efd8895b7fb35d}{visualizationMarkersPub\_}.publish(ma);
-118 \}
+111   \textcolor{comment}{// geometry\_msgs::Point start, end;}
+112   \textcolor{comment}{// start.x = pose.position.x;}
+113   \textcolor{comment}{// start.y = pose.position.y;}
+114 
+115   \textcolor{comment}{// end.x = pose.position.x + 0.5 * cos(phi);}
+116   \textcolor{comment}{// end.y = pose.position.y + 0.5 * sin(phi);}
+117 
+118   \textcolor{comment}{// marker.points.push\_back(start);}
+119   \textcolor{comment}{// marker.points.push\_back(end);}
+120 
+121   visualization\_msgs::MarkerArray ma;
+122   ma.markers.push\_back(marker);
+123 
+124   this->\hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_aff48fc567ae025b196efd8895b7fb35d}{visualizationMarkersPub\_}.publish(ma);
+125 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -313,7 +317,7 @@ Implements \hyperlink{classsmacc_1_1ISmaccUpdatable_a84ee0520cbefdb1d412bed54650
 
 
 
-Definition at line 55 of file cb\+\_\+undo\+\_\+path\+\_\+backwards2.\+cpp.
+Definition at line 64 of file cb\+\_\+undo\+\_\+path\+\_\+backwards2.\+cpp.
 
 
 
@@ -321,36 +325,34 @@ References smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ Action
 
 
 \begin{DoxyCode}
-56 \{
-57   \textcolor{comment}{// check the line was passed}
-58   \textcolor{comment}{// y = mx x + y0}
-59   \textcolor{comment}{// y = (acos(alpha)/sin(alpha)) (x -x0) + y0}
-60   \textcolor{comment}{// sin(alpha)(y - y0) - acos(alpha) (x -x0)= 0 // if greater one side if lower , the other}
-61   \textcolor{keyword}{auto} pose = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_a2d398dac07efaca840fbcea31957cf7a}{robotPose\_}->\hyperlink{classcl__move__base__z_1_1Pose_a9faf8c6b437ff6b19c8bddd692908dca}{toPoseMsg}();
-62 
-63   \textcolor{keywordtype}{float} evalimplicit = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_a20b9a6799b0484810b0319f5a97d020e}{evalPlaneSide}(pose);
-64   \textcolor{keywordflow}{if} (\hyperlink{namespacecl__move__base__z_ae144a2fabd00ba70fdc8099878cb3dac}{sgn}(evalimplicit) != \hyperlink{namespacecl__move__base__z_ae144a2fabd00ba70fdc8099878cb3dac}{sgn}(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_abc388e4c9576f04d1fad869aa8651750}{initial\_plane\_side\_}))
-65   \{
-66     ROS\_WARN\_STREAM\_THROTTLE(1.0, \textcolor{stringliteral}{"[CbUndoPathBackwards2] goal\_ line passed, stopping behavior and success:
-       "}
-67                                       << evalimplicit << \textcolor{stringliteral}{"/"} << this->
+65 \{
+66   \textcolor{keyword}{auto} pose = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_a2d398dac07efaca840fbcea31957cf7a}{robotPose\_}->\hyperlink{classcl__move__base__z_1_1Pose_a9faf8c6b437ff6b19c8bddd692908dca}{toPoseMsg}();
+67 
+68   \textcolor{keywordtype}{float} evalimplicit = \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_a20b9a6799b0484810b0319f5a97d020e}{evalPlaneSide}(pose);
+69   \textcolor{keywordflow}{if} (\hyperlink{namespacecl__move__base__z_ae144a2fabd00ba70fdc8099878cb3dac}{sgn}(evalimplicit) != \hyperlink{namespacecl__move__base__z_ae144a2fabd00ba70fdc8099878cb3dac}{sgn}(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_abc388e4c9576f04d1fad869aa8651750}{initial\_plane\_side\_}))
+70   \{
+71     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[CbUndoPathBackwards2] goal\_ line passed: "}
+72                                       << evalimplicit << \textcolor{stringliteral}{"/"} << this->
       \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_abc388e4c9576f04d1fad869aa8651750}{initial\_plane\_side\_});
-68 
-69     \textcolor{keywordflow}{if} (fabs(evalimplicit) > \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_a452bcdab678ea02d6d6a0ae06fb484ab}{triggerThreshold\_} \textcolor{comment}{/*meters*/})
-70     \{
-71       \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_aedeaf9704b73bf05b5522f7250416c9a}{cancelGoal}();
-72       \textcolor{comment}{// this->postSuccessEvent();}
-73       this->\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_a2405e8194c63dce4462b6d4910031fe8}{postVirtualLinePassed\_}();
-74     \}
-75   \}
-76   \textcolor{keywordflow}{else}
-77   \{
-78     ROS\_INFO\_STREAM\_THROTTLE(1.0, \textcolor{stringliteral}{"[CbUndoPathBackwards2] goal\_ line not passed yet: "} << evalimplicit << \textcolor{stringliteral}{"
+73 
+74     \textcolor{keywordflow}{if} (fabs(evalimplicit) > \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_a452bcdab678ea02d6d6a0ae06fb484ab}{triggerThreshold\_} \textcolor{comment}{/*meters*/})
+75     \{
+76        ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[CbUndoPathBackwards2] virtual goal line passed, stopping behavior and success: "}
+77                                       << evalimplicit << \textcolor{stringliteral}{"/"} << this->
+      \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_abc388e4c9576f04d1fad869aa8651750}{initial\_plane\_side\_});
+78       \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_aedeaf9704b73bf05b5522f7250416c9a}{cancelGoal}();
+79       \textcolor{comment}{// this->postSuccessEvent();}
+80       this->\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_a2405e8194c63dce4462b6d4910031fe8}{postVirtualLinePassed\_}();
+81     \}
+82   \}
+83   \textcolor{keywordflow}{else}
+84   \{
+85     ROS\_INFO\_STREAM\_THROTTLE(1.0, \textcolor{stringliteral}{"[CbUndoPathBackwards2] goal\_ line not passed yet: "} << evalimplicit << \textcolor{stringliteral}{"
       /"}
-79                                                                                        << this->
+86                                                                                        << this->
       \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards2_abc388e4c9576f04d1fad869aa8651750}{initial\_plane\_side\_});
-80   \}
-81 \}
+87   \}
+88 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
