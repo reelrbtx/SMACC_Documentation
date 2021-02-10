@@ -24,12 +24,17 @@ Collaboration diagram for cl\+\_\+move\+\_\+base\+\_\+z\+:\+:Cb\+Undo\+Path\+Bac
 \includegraphics[width=350pt]{classcl__move__base__z_1_1CbUndoPathBackwards__coll__graph}
 \end{center}
 \end{figure}
-\subsection*{Private Member Functions}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 virtual void \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a32e680530375b62c7053bf173f6b2b1b}{on\+Entry} () override
 \item 
 virtual void \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a20cee921ad92db16f8d17c3c3b9c2daf}{on\+Exit} () override
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::optional$<$ \hyperlink{namespacecl__move__base__z_aa8702d7f4bc14a650da006a263801a8b}{Undo\+Path\+Local\+Planner} $>$ \hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a2dfb07d7391147e2fc06e01749bfd5bc}{force\+Undo\+Local\+Planner}
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -42,7 +47,7 @@ tf\+::\+Transform\+Listener \hyperlink{classcl__move__base__z_1_1CbUndoPathBackw
 \subsection{Detailed Description}
 
 
-Definition at line 13 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
+Definition at line 21 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
 
 
 
@@ -51,7 +56,7 @@ Definition at line 13 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards}!on\+Entry@{on\+Entry}}
 \index{on\+Entry@{on\+Entry}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards}}
 \subsubsection{\texorpdfstring{on\+Entry()}{onEntry()}}
-{\footnotesize\ttfamily void cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::on\+Entry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::on\+Entry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -63,7 +68,7 @@ Definition at line 9 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+cpp.
 
 
 
-References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Move\+Base\+Client\+Behavior\+Base\+::move\+Base\+Client\+\_\+, smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ Action\+Type $>$\+::send\+Goal(), and cl\+\_\+move\+\_\+base\+\_\+z\+::\+Planner\+Switcher\+::set\+Undo\+Path\+Backward\+Planner().
+References force\+Undo\+Local\+Planner, smacc\+::\+I\+Smacc\+Client\+::get\+Component(), cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Move\+Base\+Client\+Behavior\+Base\+::move\+Base\+Client\+\_\+, cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pure\+Spinning\+Local\+Planner, and smacc\+::client\+\_\+bases\+::\+Smacc\+Action\+Client\+Base$<$ Action\+Type $>$\+::send\+Goal().
 
 
 \begin{DoxyCode}
@@ -83,10 +88,30 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), cl\+\_\+move\+\_\+ba
 23   \textcolor{keywordflow}{if} (forwardpath.poses.size() > 0)
 24   \{
 25     goal.target\_pose = forwardpath.poses.front();
-26     plannerSwitcher->setUndoPathBackwardPlanner();
-27     \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
-28   \}
-29 \}
+26 
+27     \textcolor{keywordflow}{if}(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a2dfb07d7391147e2fc06e01749bfd5bc}{forceUndoLocalPlanner})
+28     \{
+29       \textcolor{keywordflow}{if}(\hyperlink{classcl__move__base__z_1_1CbUndoPathBackwards_a2dfb07d7391147e2fc06e01749bfd5bc}{forceUndoLocalPlanner} == 
+      \hyperlink{namespacecl__move__base__z_aa8702d7f4bc14a650da006a263801a8ba87a2d2768806d402074aeaca3398b5ff}{UndoPathLocalPlanner::PureSpinningLocalPlanner})
+30       \{
+31         ROS\_INFO(\textcolor{stringliteral}{"[CbUndoPathBackwards] forced to use Pure Spinning local planner"});
+32         plannerSwitcher->setUndoPathPureSpinningPlannerConfiguration();
+33       \}
+34       \textcolor{keywordflow}{else}
+35       \{
+36         plannerSwitcher->setUndoPathBackwardsPlannerConfiguration();
+37         ROS\_INFO(\textcolor{stringliteral}{"[CbUndoPathBackwards] forced to use BackwardsLocalPlanner (default)"});
+38       \}
+39     \}
+40     \textcolor{keywordflow}{else}
+41     \{
+42       ROS\_INFO(\textcolor{stringliteral}{"[CbUndoPathBackwards] using default local planner: BackwardsLocalPlanner"});
+43       plannerSwitcher->setUndoPathBackwardsPlannerConfiguration();
+44     \}
+45 
+46     \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
+47   \}
+48 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -100,7 +125,7 @@ Here is the call graph for this function\+:
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards}!on\+Exit@{on\+Exit}}
 \index{on\+Exit@{on\+Exit}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards}}
 \subsubsection{\texorpdfstring{on\+Exit()}{onExit()}}
-{\footnotesize\ttfamily void cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::on\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily void cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::on\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -108,7 +133,7 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_ad1198fdb2cbdf1
 
 
 
-Definition at line 31 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+cpp.
+Definition at line 50 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+cpp.
 
 
 
@@ -116,10 +141,10 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), and cl\+\_\+move\+\_
 
 
 \begin{DoxyCode}
-32 \{
-33   \textcolor{keyword}{auto} *odomTracker = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
-34   odomTracker->popPath();
-35 \}
+51 \{
+52   \textcolor{keyword}{auto} *odomTracker = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
+53   odomTracker->popPath();
+54 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -132,6 +157,20 @@ Here is the call graph for this function\+:
 
 
 \subsection{Member Data Documentation}
+\mbox{\Hypertarget{classcl__move__base__z_1_1CbUndoPathBackwards_a2dfb07d7391147e2fc06e01749bfd5bc}\label{classcl__move__base__z_1_1CbUndoPathBackwards_a2dfb07d7391147e2fc06e01749bfd5bc}} 
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards}!force\+Undo\+Local\+Planner@{force\+Undo\+Local\+Planner}}
+\index{force\+Undo\+Local\+Planner@{force\+Undo\+Local\+Planner}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards}}
+\subsubsection{\texorpdfstring{force\+Undo\+Local\+Planner}{forceUndoLocalPlanner}}
+{\footnotesize\ttfamily boost\+::optional$<$\hyperlink{namespacecl__move__base__z_aa8702d7f4bc14a650da006a263801a8b}{Undo\+Path\+Local\+Planner}$>$ cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards\+::force\+Undo\+Local\+Planner}
+
+
+
+Definition at line 24 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
+
+
+
+Referenced by on\+Entry().
+
 \mbox{\Hypertarget{classcl__move__base__z_1_1CbUndoPathBackwards_add2b6a0f1c19654a0cf07209fc123a71}\label{classcl__move__base__z_1_1CbUndoPathBackwards_add2b6a0f1c19654a0cf07209fc123a71}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards}!listener@{listener}}
 \index{listener@{listener}!cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards@{cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards}}
@@ -140,7 +179,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 15 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
+Definition at line 31 of file cb\+\_\+undo\+\_\+path\+\_\+backwards.\+h.
 
 
 
