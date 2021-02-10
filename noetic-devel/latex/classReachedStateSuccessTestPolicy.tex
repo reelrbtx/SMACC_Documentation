@@ -1,0 +1,130 @@
+\hypertarget{classReachedStateSuccessTestPolicy}{}\section{Reached\+State\+Success\+Test\+Policy Class Reference}
+\label{classReachedStateSuccessTestPolicy}\index{Reached\+State\+Success\+Test\+Policy@{Reached\+State\+Success\+Test\+Policy}}
+
+
+Inheritance diagram for Reached\+State\+Success\+Test\+Policy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{classReachedStateSuccessTestPolicy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Reached\+State\+Success\+Test\+Policy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classReachedStateSuccessTestPolicy__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classReachedStateSuccessTestPolicy_a2a3e598a103fcad64d7a6546c56a0fdd}{init} (Xml\+Rpc\+::\+Xml\+Rpc\+Value \&init\+Xml\+Rpc\+Value) override
+\item 
+virtual void \hyperlink{classReachedStateSuccessTestPolicy_a34696eeabca13524db58dc8c72ffac6c}{update} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classReachedStateSuccessTestPolicy_a2dc3e3fae4d136b61ca9499eebb06ba2}{target\+State\+Name\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 158 of file smacc\+\_\+runtime\+\_\+test\+\_\+node.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classReachedStateSuccessTestPolicy_a2a3e598a103fcad64d7a6546c56a0fdd}\label{classReachedStateSuccessTestPolicy_a2a3e598a103fcad64d7a6546c56a0fdd}} 
+\index{Reached\+State\+Success\+Test\+Policy@{Reached\+State\+Success\+Test\+Policy}!init@{init}}
+\index{init@{init}!Reached\+State\+Success\+Test\+Policy@{Reached\+State\+Success\+Test\+Policy}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily virtual void Reached\+State\+Success\+Test\+Policy\+::init (\begin{DoxyParamCaption}\item[{Xml\+Rpc\+::\+Xml\+Rpc\+Value \&}]{init\+Xml\+Rpc\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \hyperlink{classTestPolicy_a43d28339f108860503ef66ce4692596d}{Test\+Policy}.
+
+
+
+Definition at line 161 of file smacc\+\_\+runtime\+\_\+test\+\_\+node.\+cpp.
+
+
+
+References battery\+\_\+monitor\+\_\+node\+::msg, Smacc\+Test\+Runtime\+Node\+::on\+Smacc\+Transition, Test\+Policy\+::owner\+\_\+, and Smacc\+Test\+Runtime\+Node\+::sucess().
+
+
+\begin{DoxyCode}
+162   \{
+163     ROS\_INFO(\textcolor{stringliteral}{"[ReachedStateSuccessTestPolicy] initializating"});
+164     \hyperlink{classReachedStateSuccessTestPolicy_a2dc3e3fae4d136b61ca9499eebb06ba2}{targetStateName\_} = ((std::string)initXmlRpcValue[\textcolor{stringliteral}{"state\_name"}]);
+165     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[ReachedStateSuccessTestPolicy] success state: "} << 
+      \hyperlink{classReachedStateSuccessTestPolicy_a2dc3e3fae4d136b61ca9499eebb06ba2}{targetStateName\_});
+166     this->\hyperlink{classTestPolicy_a717c3e59e35216a175398b85575aec43}{owner\_}->\hyperlink{classSmaccTestRuntimeNode_aaaedcb5c8a4cca432b5138bb1dfb0a6c}{onSmaccTransition}.connect(
+167     [=](\textcolor{keyword}{auto}& \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg})
+168     \{
+169         ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[ReachedStateSuccessTestPolicy] received state: "} << 
+      \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}.transition.destiny\_state\_name);
+170 
+171         \textcolor{keywordflow}{if}(\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}.transition.destiny\_state\_name == \hyperlink{classReachedStateSuccessTestPolicy_a2dc3e3fae4d136b61ca9499eebb06ba2}{targetStateName\_})
+172         \{
+173             this->\hyperlink{classTestPolicy_a717c3e59e35216a175398b85575aec43}{owner\_}->\hyperlink{classSmaccTestRuntimeNode_ae77d02680e11f7e128841b0ab9ed6e13}{sucess}(std::string(\textcolor{stringliteral}{"success destiny state "}) + 
+      \hyperlink{classReachedStateSuccessTestPolicy_a2dc3e3fae4d136b61ca9499eebb06ba2}{targetStateName\_});
+174         \}
+175     \});
+176   \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classReachedStateSuccessTestPolicy_a2a3e598a103fcad64d7a6546c56a0fdd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classReachedStateSuccessTestPolicy_a34696eeabca13524db58dc8c72ffac6c}\label{classReachedStateSuccessTestPolicy_a34696eeabca13524db58dc8c72ffac6c}} 
+\index{Reached\+State\+Success\+Test\+Policy@{Reached\+State\+Success\+Test\+Policy}!update@{update}}
+\index{update@{update}!Reached\+State\+Success\+Test\+Policy@{Reached\+State\+Success\+Test\+Policy}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual void Reached\+State\+Success\+Test\+Policy\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \hyperlink{classTestPolicy_ae7a8f2ef3c4d513122ad20d5cffc88db}{Test\+Policy}.
+
+
+
+Definition at line 178 of file smacc\+\_\+runtime\+\_\+test\+\_\+node.\+cpp.
+
+
+\begin{DoxyCode}
+179   \{
+180   
+181   \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classReachedStateSuccessTestPolicy_a2dc3e3fae4d136b61ca9499eebb06ba2}\label{classReachedStateSuccessTestPolicy_a2dc3e3fae4d136b61ca9499eebb06ba2}} 
+\index{Reached\+State\+Success\+Test\+Policy@{Reached\+State\+Success\+Test\+Policy}!target\+State\+Name\+\_\+@{target\+State\+Name\+\_\+}}
+\index{target\+State\+Name\+\_\+@{target\+State\+Name\+\_\+}!Reached\+State\+Success\+Test\+Policy@{Reached\+State\+Success\+Test\+Policy}}
+\subsubsection{\texorpdfstring{target\+State\+Name\+\_\+}{targetStateName\_}}
+{\footnotesize\ttfamily std\+::string Reached\+State\+Success\+Test\+Policy\+::target\+State\+Name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 160 of file smacc\+\_\+runtime\+\_\+test\+\_\+node.\+cpp.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+smacc\+\_\+diagnostics/smacc\+\_\+runtime\+\_\+test/src/\hyperlink{smacc__runtime__test__node_8cpp}{smacc\+\_\+runtime\+\_\+test\+\_\+node.\+cpp}\end{DoxyCompactItemize}
