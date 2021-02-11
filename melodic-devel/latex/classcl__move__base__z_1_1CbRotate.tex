@@ -83,7 +83,7 @@ References rotate\+Degree.
 
 \begin{DoxyCode}
 12 \{
-13     \hyperlink{classcl__move__base__z_1_1CbRotate_a83e9f97e917044f919c98a55d8e00db6}{rotateDegree} = rotate\_degree;
+13   \hyperlink{classcl__move__base__z_1_1CbRotate_a83e9f97e917044f919c98a55d8e00db6}{rotateDegree} = rotate\_degree;
 14 \}
 \end{DoxyCode}
 
@@ -110,57 +110,56 @@ References smacc\+::\+I\+Smacc\+Client\+::get\+Component(), smacc\+::\+I\+Smacc\
 
 \begin{DoxyCode}
 17 \{
-18     \textcolor{keywordtype}{double} angle\_increment\_degree;
+18   \textcolor{keywordtype}{double} angle\_increment\_degree;
 19 
-20     \textcolor{keywordflow}{if} (!\hyperlink{classcl__move__base__z_1_1CbRotate_a83e9f97e917044f919c98a55d8e00db6}{rotateDegree})
-21     \{
-22         this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a34fde34e48fa13db622ee60d8374d0b8}{getCurrentState}()->\hyperlink{classsmacc_1_1ISmaccState_a4f2ff8e3eda8aa9bbb60c8ff17d0def1}{param}(\textcolor{stringliteral}{"angle\_increment\_degree"}, angle\_increment\_degree
-      , 45.0);
-23     \}
-24     \textcolor{keywordflow}{else}
-25     \{
-26         angle\_increment\_degree = *\hyperlink{classcl__move__base__z_1_1CbRotate_a83e9f97e917044f919c98a55d8e00db6}{rotateDegree};
-27     \}
+20   \textcolor{keywordflow}{if} (!\hyperlink{classcl__move__base__z_1_1CbRotate_a83e9f97e917044f919c98a55d8e00db6}{rotateDegree})
+21   \{
+22     this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a34fde34e48fa13db622ee60d8374d0b8}{getCurrentState}()->\hyperlink{classsmacc_1_1ISmaccState_a4f2ff8e3eda8aa9bbb60c8ff17d0def1}{param}(\textcolor{stringliteral}{"angle\_increment\_degree"}, angle\_increment\_degree, 45
+      .0);
+23   \}
+24   \textcolor{keywordflow}{else}
+25   \{
+26     angle\_increment\_degree = *\hyperlink{classcl__move__base__z_1_1CbRotate_a83e9f97e917044f919c98a55d8e00db6}{rotateDegree};
+27   \}
 28 
-29     \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
-30     \textcolor{comment}{//this should work better with a coroutine and await}
-31     \textcolor{comment}{//this->plannerSwitcher\_->setForwardPlanner();}
-32     plannerSwitcher->setDefaultPlanners();
+29   \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
+30   \textcolor{comment}{// this should work better with a coroutine and await}
+31   \textcolor{comment}{// this->plannerSwitcher\_->setForwardPlanner();}
+32   plannerSwitcher->setDefaultPlanners();
 33 
-34     \textcolor{keyword}{auto} p = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
+34   \textcolor{keyword}{auto} p = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
       \hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose}>();
-35     \textcolor{keyword}{auto} referenceFrame = p->\hyperlink{classcl__move__base__z_1_1Pose_af8c2dc151e74aa8da6b283d1c8563051}{getReferenceFrame}();
-36     \textcolor{keyword}{auto} currentPoseMsg = p->toPoseMsg();
+35   \textcolor{keyword}{auto} referenceFrame = p->\hyperlink{classcl__move__base__z_1_1Pose_af8c2dc151e74aa8da6b283d1c8563051}{getReferenceFrame}();
+36   \textcolor{keyword}{auto} currentPoseMsg = p->toPoseMsg();
 37 
-38     tf::Transform currentPose;
-39     tf::poseMsgToTF(currentPoseMsg, currentPose);
+38   tf::Transform currentPose;
+39   tf::poseMsgToTF(currentPoseMsg, currentPose);
 40 
-41     \textcolor{keyword}{auto} odomTracker = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<odom\_tracker::OdomTracker>(
-      );
-42     ClMoveBaseZ::Goal goal;
-43     goal.target\_pose.header.frame\_id = referenceFrame;
-44     goal.target\_pose.header.stamp = ros::Time::now();
+41   \textcolor{keyword}{auto} odomTracker = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<odom\_tracker::OdomTracker>();
+42   ClMoveBaseZ::Goal goal;
+43   goal.target\_pose.header.frame\_id = referenceFrame;
+44   goal.target\_pose.header.stamp = ros::Time::now();
 45 
-46     \textcolor{keyword}{auto} currentAngle = tf::getYaw(currentPoseMsg.orientation);
-47     \textcolor{keyword}{auto} targetAngle = currentAngle + angle\_increment\_degree * M\_PI / 180.0;
-48     goal.target\_pose.pose.position = currentPoseMsg.position;
-49     goal.target\_pose.pose.orientation = tf::createQuaternionMsgFromYaw(targetAngle);
+46   \textcolor{keyword}{auto} currentAngle = tf::getYaw(currentPoseMsg.orientation);
+47   \textcolor{keyword}{auto} targetAngle = currentAngle + angle\_increment\_degree * M\_PI / 180.0;
+48   goal.target\_pose.pose.position = currentPoseMsg.position;
+49   goal.target\_pose.pose.orientation = tf::createQuaternionMsgFromYaw(targetAngle);
 50 
-51     geometry\_msgs::PoseStamped stampedCurrentPoseMsg;
-52     stampedCurrentPoseMsg.header.frame\_id = referenceFrame;
-53     stampedCurrentPoseMsg.header.stamp = ros::Time::now();
-54     stampedCurrentPoseMsg.pose = currentPoseMsg;
+51   geometry\_msgs::PoseStamped stampedCurrentPoseMsg;
+52   stampedCurrentPoseMsg.header.frame\_id = referenceFrame;
+53   stampedCurrentPoseMsg.header.stamp = ros::Time::now();
+54   stampedCurrentPoseMsg.pose = currentPoseMsg;
 55 
-56     this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_});
-57     odomTracker->pushPath();
+56   this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a32b16e99e3b4cb289414203dc861a440}{requiresClient}(\hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_});
+57   odomTracker->pushPath(\textcolor{stringliteral}{"RelativeRotation"});
 58 
-59     odomTracker->setStartPoint(stampedCurrentPoseMsg);
-60     odomTracker->setWorkingMode(\hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a023bc3adf68871ef7a0c616765ac80a7}{odom\_tracker::WorkingMode::RECORD\_PATH}
-      );
+59   odomTracker->setStartPoint(stampedCurrentPoseMsg);
+60   odomTracker->setWorkingMode(\hyperlink{namespacecl__move__base__z_1_1odom__tracker_ac46b05813b2791604f6cd0a39ace3ef8a023bc3adf68871ef7a0c616765ac80a7}{odom\_tracker::WorkingMode::RECORD\_PATH})
+      ;
 61 
-62     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"current pose: "} << currentPoseMsg);
-63     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"goal pose: "} << goal.target\_pose.pose);
-64     \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
+62   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"current pose: "} << currentPoseMsg);
+63   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"goal pose: "} << goal.target\_pose.pose);
+64   \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
 65 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:

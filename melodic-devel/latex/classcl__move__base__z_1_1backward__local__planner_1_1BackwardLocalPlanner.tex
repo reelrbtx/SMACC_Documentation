@@ -54,7 +54,7 @@ void \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLo
 \item 
 \hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a100fe8bdaaf89b0fa54ecf2aef0966ed}{resample\+Precise\+Plan} ()
 \item 
-void \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aaa88a0a47e7cfd449c59518577599928}{pure\+Spinning\+Cmd} (const tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \&tfpose, double vetta, double gamma, double alpha\+\_\+error, double betta\+\_\+error, double rho\+\_\+error, geometry\+\_\+msgs\+::\+Twist \&cmd\+\_\+vel)
+void \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6069866b4a3150883de3212d8e43e8f8}{straight\+Backwards\+And\+Pure\+Spin\+Cmd} (const tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \&tfpose, double vetta, double gamma, double alpha\+\_\+error, double betta\+\_\+error, double rho\+\_\+error, geometry\+\_\+msgs\+::\+Twist \&cmd\+\_\+vel)
 \item 
 void \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a1ebd69a028a22e3573e98f89d593f97d}{default\+Backward\+Cmd} (const tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \&tfpose, double vetta, double gamma, double alpha\+\_\+error, double betta\+\_\+error, geometry\+\_\+msgs\+::\+Twist \&cmd\+\_\+vel)
 \item 
@@ -62,7 +62,7 @@ void \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLo
 \item 
 void \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}{compute\+Current\+Euclidean\+And\+Angular\+Errors\+To\+Carrot\+Goal} (const tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \&tfpose, double \&dist, double \&angular\+\_\+error)
 \item 
-\hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6c4363e82119a6a8a5a3bfe309280898}{check\+Goal\+Reached} (const tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \&tfpose, double vetta, double gamma, double alpha\+\_\+error, geometry\+\_\+msgs\+::\+Twist \&cmd\+\_\+vel)
+\hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a8b84e3961a79317a9c978ec054e4a112}{check\+Current\+Pose\+In\+Goal\+Range} (const tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \&tfpose, double angle\+\_\+error, \hyperlink{classbool}{bool} \&in\+Linear\+Goal)
 \item 
 \hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a35832ebefc43e5977e1222389244c8d3}{reset\+Divergence\+Detection} ()
 \item 
@@ -101,9 +101,11 @@ double \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1Backward
 \item 
 \hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa0e2b0589fce0bb228eb87751528e822}{initial\+Pure\+Spinning\+Stage\+\_\+}
 \item 
-\hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aebc89ccfa79fdf6bd45ba35134bec3fb}{pure\+Spinning\+Mode\+\_\+} = false
+\hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a04febb67563add6f715051a94aed1b9b}{straight\+Backwards\+And\+Pure\+Spinning\+Mode\+\_\+} = false
 \item 
 \hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a154043366660cc02ec758dda32817511}{enable\+\_\+obstacle\+\_\+checking\+\_\+} = true
+\item 
+\hyperlink{classbool}{bool} \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4d7254afd19ae1f7bd8eac9f5d58b9a}{in\+Goal\+Pure\+Spinning\+State\+\_\+} = false
 \item 
 const double \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a09765b08935d9355447c44776e1b1c3a}{alpha\+\_\+offset\+\_\+} = M\+\_\+\+PI
 \item 
@@ -149,7 +151,7 @@ Definition at line 23 of file backward\+\_\+local\+\_\+planner.\+h.
 
 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a79e73a858b2a13c7fe10c52e08568fd6}{Backward\+Local\+Planner()} 
 
-Definition at line 20 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 20 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 \begin{DoxyCode}
@@ -165,7 +167,7 @@ Definition at line 20 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp
 
 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6a36aa94617786c6958e861e64abb862}{$\sim$\+Backward\+Local\+Planner()} 
 
-Definition at line 30 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 30 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 \begin{DoxyCode}
@@ -183,7 +185,7 @@ Definition at line 30 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp
 
 
 
-Definition at line 206 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 211 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -195,33 +197,36 @@ Referenced by compute\+Velocity\+Commands().
 
 
 \begin{DoxyCode}
-207         \{
-208             \textcolor{comment}{// this function is specially useful when we want to reach the goal with a lot}
-209             \textcolor{comment}{// of precission. We may pass the goal and then the controller enters in some}
-210             \textcolor{comment}{// unstable state. With this, we are able to detect when stop moving.}
-211 
-212             \textcolor{keyword}{auto} &carrot\_pose = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}[
+212         \{
+213             \textcolor{comment}{// this function is specially useful when we want to reach the goal with a lot}
+214             \textcolor{comment}{// of precission. We may pass the goal and then the controller enters in some}
+215             \textcolor{comment}{// unstable state. With this, we are able to detect when stop moving.}
+216 
+217             \textcolor{comment}{// only apply if the carrot is in goal position and also if we are not in a pure spinning
+       behavior v!=0}
+218 
+219             \textcolor{keyword}{auto} &carrot\_pose = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}[
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_}];
-213             \textcolor{keyword}{const} geometry\_msgs::Point &carrot\_point = carrot\_pose.pose.position;
-214             \textcolor{keywordtype}{double} yaw = tf::getYaw(carrot\_pose.pose.orientation);
-215 
-216             \textcolor{comment}{// direction vector}
-217             \textcolor{keywordtype}{double} vx = cos(yaw);
-218             \textcolor{keywordtype}{double} vy = sin(yaw);
-219 
-220             \textcolor{comment}{// line implicit equation}
-221             \textcolor{comment}{// ax + by + c = 0}
-222             \textcolor{keywordtype}{double} c = -vx * carrot\_point.x - vy * carrot\_point.y;
-223             \textcolor{keyword}{const} \textcolor{keywordtype}{double} C\_OFFSET\_METERS = 0.05; \textcolor{comment}{// 5 cm}
-224             \textcolor{keywordtype}{double} check = vx * tfpose.getOrigin().x() + vy * tfpose.getOrigin().y() + c + C\_OFFSET\_METERS;
-225 
-226             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] half plane contraint:"} << vx << \textcolor{stringliteral}{"*"} << carrot\_point.x 
+220             \textcolor{keyword}{const} geometry\_msgs::Point &carrot\_point = carrot\_pose.pose.position;
+221             \textcolor{keywordtype}{double} yaw = tf::getYaw(carrot\_pose.pose.orientation);
+222 
+223             \textcolor{comment}{// direction vector}
+224             \textcolor{keywordtype}{double} vx = cos(yaw);
+225             \textcolor{keywordtype}{double} vy = sin(yaw);
+226 
+227             \textcolor{comment}{// line implicit equation}
+228             \textcolor{comment}{// ax + by + c = 0}
+229             \textcolor{keywordtype}{double} c = -vx * carrot\_point.x - vy * carrot\_point.y;
+230             \textcolor{keyword}{const} \textcolor{keywordtype}{double} C\_OFFSET\_METERS = 0.05; \textcolor{comment}{// 5 cm}
+231             \textcolor{keywordtype}{double} check = vx * tfpose.getOrigin().x() + vy * tfpose.getOrigin().y() + c + C\_OFFSET\_METERS;
+232 
+233             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] half plane contraint:"} << vx << \textcolor{stringliteral}{"*"} << carrot\_point.x 
       << \textcolor{stringliteral}{" + "} << vy << \textcolor{stringliteral}{"*"} << carrot\_point.y << \textcolor{stringliteral}{" + "} << c);
-227             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] constraint evaluation: "} << vx << \textcolor{stringliteral}{"*"} << tfpose.
+234             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] constraint evaluation: "} << vx << \textcolor{stringliteral}{"*"} << tfpose.
       getOrigin().x() << \textcolor{stringliteral}{" + "} << vy << \textcolor{stringliteral}{"*"} << tfpose.getOrigin().y() << \textcolor{stringliteral}{" + "} << c << \textcolor{stringliteral}{" = "} << check);
-228 
-229             \textcolor{keywordflow}{return} check < 0;
-230         \}
+235 
+236             \textcolor{keywordflow}{return} check < 0;
+237         \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -231,57 +236,55 @@ Here is the caller graph for this function\+:
 \includegraphics[width=350pt]{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a22938e354a4ec489101295ed7f2539f6_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6c4363e82119a6a8a5a3bfe309280898}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6c4363e82119a6a8a5a3bfe309280898}} 
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!check\+Goal\+Reached@{check\+Goal\+Reached}}
-\index{check\+Goal\+Reached@{check\+Goal\+Reached}!cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}}
-\subsubsection{\texorpdfstring{check\+Goal\+Reached()}{checkGoalReached()}}
-{\footnotesize\ttfamily \hyperlink{classbool}{bool} cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner\+::check\+Goal\+Reached (\begin{DoxyParamCaption}\item[{const tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \&}]{tfpose,  }\item[{double}]{vetta,  }\item[{double}]{gamma,  }\item[{double}]{alpha\+\_\+error,  }\item[{geometry\+\_\+msgs\+::\+Twist \&}]{cmd\+\_\+vel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+\mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a8b84e3961a79317a9c978ec054e4a112}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a8b84e3961a79317a9c978ec054e4a112}} 
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!check\+Current\+Pose\+In\+Goal\+Range@{check\+Current\+Pose\+In\+Goal\+Range}}
+\index{check\+Current\+Pose\+In\+Goal\+Range@{check\+Current\+Pose\+In\+Goal\+Range}!cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}}
+\subsubsection{\texorpdfstring{check\+Current\+Pose\+In\+Goal\+Range()}{checkCurrentPoseInGoalRange()}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner\+::check\+Current\+Pose\+In\+Goal\+Range (\begin{DoxyParamCaption}\item[{const tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \&}]{tfpose,  }\item[{double}]{angle\+\_\+error,  }\item[{\hyperlink{classbool}{bool} \&}]{in\+Linear\+Goal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 232 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 239 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
-References backwards\+Plan\+Path\+\_\+, goal\+Reached\+\_\+, xy\+\_\+goal\+\_\+tolerance\+\_\+, and yaw\+\_\+goal\+\_\+tolerance\+\_\+.
+References backwards\+Plan\+Path\+\_\+, xy\+\_\+goal\+\_\+tolerance\+\_\+, and yaw\+\_\+goal\+\_\+tolerance\+\_\+.
 
 
 
-Referenced by default\+Backward\+Cmd(), and pure\+Spinning\+Cmd().
+Referenced by compute\+Velocity\+Commands().
 
 
 \begin{DoxyCode}
-233         \{
-234             \textcolor{keyword}{auto} &finalgoal = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.back();
-235             \textcolor{keywordtype}{double} gdx = finalgoal.pose.position.x - tfpose.getOrigin().x();
-236             \textcolor{keywordtype}{double} gdy = finalgoal.pose.position.y - tfpose.getOrigin().y();
-237             \textcolor{keywordtype}{double} goaldist = sqrt(gdx * gdx + gdy * gdy);
-238 
-239             \textcolor{keyword}{auto} abs\_angle\_error = fabs(angle\_error);
-240             \textcolor{comment}{// final\_alpha\_error =}
-241             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] goal check. linear dist: "} << goaldist << \textcolor{stringliteral}{"("} << 
+240         \{
+241             \textcolor{keyword}{auto} &finalgoal = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.back();
+242             \textcolor{keywordtype}{double} gdx = finalgoal.pose.position.x - tfpose.getOrigin().x();
+243             \textcolor{keywordtype}{double} gdy = finalgoal.pose.position.y - tfpose.getOrigin().y();
+244             \textcolor{keywordtype}{double} goaldist = sqrt(gdx * gdx + gdy * gdy);
+245 
+246             \textcolor{keyword}{auto} abs\_angle\_error = fabs(angle\_error);
+247             \textcolor{comment}{// final\_alpha\_error =}
+248             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] goal check. linear dist: "} << goaldist << \textcolor{stringliteral}{"("} << 
       this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_} << \textcolor{stringliteral}{")"}
-242                                                                                 << \textcolor{stringliteral}{", angular dist: "} << 
+249                                                                                 << \textcolor{stringliteral}{", angular dist: "} << 
       abs\_angle\_error << \textcolor{stringliteral}{"("} << this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_} << \textcolor{stringliteral}{")"});
-243 
-244             \textcolor{keywordflow}{if} (goaldist < this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_} && abs\_angle\_error < this->
-      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_}) \textcolor{comment}{// 5cm}
-245             \{
-246                 ROS\_INFO(\textcolor{stringliteral}{"[BackwardLocalPlanner] goal reached, clearing backwards Plan path"});
-247                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad443c52ef585a8eab0364f0909222f51}{goalReached\_} = \textcolor{keyword}{true};
-248                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.clear();
-249                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-250             \}
-251 
-252             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-253         \}
+250 
+251             linearGoalReached = goaldist < this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_};
+252 
+253             \textcolor{keywordflow}{if} (abs\_angle\_error < this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_}) \textcolor{comment}{// 5cm}
+254             \{
+255                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+256             \}
+257 
+258             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+259         \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6c4363e82119a6a8a5a3bfe309280898_icgraph}
+\includegraphics[width=350pt]{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a8b84e3961a79317a9c978ec054e4a112_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}} 
@@ -292,7 +295,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 99 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 99 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -352,7 +355,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 848 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 861 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -360,13 +363,13 @@ Referenced by generate\+Trajectory().
 
 
 \begin{DoxyCode}
-849         \{
-850             Eigen::Vector3f new\_pos = Eigen::Vector3f::Zero();
-851             new\_pos[0] = pos[0] + (vel[0] * cos(pos[2]) + vel[1] * cos(M\_PI\_2 + pos[2])) * dt;
-852             new\_pos[1] = pos[1] + (vel[0] * sin(pos[2]) + vel[1] * sin(M\_PI\_2 + pos[2])) * dt;
-853             new\_pos[2] = pos[2] + vel[2] * dt;
-854             \textcolor{keywordflow}{return} new\_pos;
-855         \}
+862         \{
+863             Eigen::Vector3f new\_pos = Eigen::Vector3f::Zero();
+864             new\_pos[0] = pos[0] + (vel[0] * cos(pos[2]) + vel[1] * cos(M\_PI\_2 + pos[2])) * dt;
+865             new\_pos[1] = pos[1] + (vel[0] * sin(pos[2]) + vel[1] * sin(M\_PI\_2 + pos[2])) * dt;
+866             new\_pos[2] = pos[2] + vel[2] * dt;
+867             \textcolor{keywordflow}{return} new\_pos;
+868         \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -396,45 +399,46 @@ True if a valid velocity command was found, false otherwise
 \end{DoxyReturn}
 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a25437208766366ca22f967fe72e80988}{compute\+Velocity\+Commands()} 
 
-Definition at line 332 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 330 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
-References alpha\+\_\+offset\+\_\+, backwards\+Plan\+Path\+\_\+, betta\+\_\+offset\+\_\+, check\+Carrot\+Half\+Plain\+Constraint(), costmap\+Ros\+\_\+, current\+Carrot\+Pose\+Index\+\_\+, default\+Backward\+Cmd(), enable\+\_\+obstacle\+\_\+checking\+\_\+, generate\+Trajectory(), goal\+Reached\+\_\+, k\+\_\+alpha\+\_\+, k\+\_\+betta\+\_\+, k\+\_\+rho\+\_\+, max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+, max\+\_\+linear\+\_\+x\+\_\+speed\+\_\+, cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::optional\+Robot\+Pose(), publish\+Goal\+Marker(), pure\+Spinning\+Cmd(), pure\+Spinning\+Mode\+\_\+, update\+Carrot\+Goal(), waiting\+\_\+, waiting\+Stamp\+\_\+, waiting\+Timeout\+\_\+, and xy\+\_\+goal\+\_\+tolerance\+\_\+.
+References alpha\+\_\+offset\+\_\+, backwards\+Plan\+Path\+\_\+, betta\+\_\+offset\+\_\+, check\+Carrot\+Half\+Plain\+Constraint(), check\+Current\+Pose\+In\+Goal\+Range(), costmap\+Ros\+\_\+, current\+Carrot\+Pose\+Index\+\_\+, default\+Backward\+Cmd(), enable\+\_\+obstacle\+\_\+checking\+\_\+, generate\+Trajectory(), goal\+Reached\+\_\+, in\+Goal\+Pure\+Spinning\+State\+\_\+, k\+\_\+alpha\+\_\+, k\+\_\+betta\+\_\+, k\+\_\+rho\+\_\+, max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+, max\+\_\+linear\+\_\+x\+\_\+speed\+\_\+, cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::optional\+Robot\+Pose(), publish\+Goal\+Marker(), straight\+Backwards\+And\+Pure\+Spin\+Cmd(), straight\+Backwards\+And\+Pure\+Spinning\+Mode\+\_\+, update\+Carrot\+Goal(), waiting\+\_\+, waiting\+Stamp\+\_\+, waiting\+Timeout\+\_\+, and xy\+\_\+goal\+\_\+tolerance\+\_\+.
 
 
 \begin{DoxyCode}
-333         \{
-334             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] LOCAL PLANNER LOOP"});
-335             geometry\_msgs::PoseStamped paux;
-336             tf::Stamped<tf::Pose> tfpose = \hyperlink{namespacecl__move__base__z_1_1backward__local__planner_afd5bb2a0d144f7b89f4215fbcb1fbe69}{optionalRobotPose}(
+331         \{
+332             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] ------------------- LOCAL PLANNER LOOP -----------------"});
+333             geometry\_msgs::PoseStamped paux;
+334             tf::Stamped<tf::Pose> tfpose = \hyperlink{namespacecl__move__base__z_1_1backward__local__planner_afd5bb2a0d144f7b89f4215fbcb1fbe69}{optionalRobotPose}(
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a4136268882a105d9e06e173d85d5c0dc}{costmapRos\_});
-337 
-338             \textcolor{comment}{//bool divergenceDetected = this->divergenceDetectionUpdate(tfpose);}
-339             \textcolor{comment}{// it is not working in the pure spinning reel example, maybe the hyperplane check is enough}
-340             \textcolor{keywordtype}{bool} divergenceDetected = \textcolor{keyword}{false};
-341 
-342             \textcolor{keywordtype}{bool} emergency\_stop = \textcolor{keyword}{false};
-343             \textcolor{keywordflow}{if} (divergenceDetected)
-344             \{
-345                 ROS\_ERROR(\textcolor{stringliteral}{"[BackwardLocalPlanner] Divergence detected. Sending emergency stop."});
-346                 emergency\_stop = \textcolor{keyword}{true};
-347             \}
-348 
-349             \textcolor{keywordtype}{bool} carrotGoalInRange = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a16e79a1b4c0f18879f6f0a8ba67103fd}{updateCarrotGoal}(tfpose);
-350             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] carrot goal created"});
-351 
-352             \textcolor{keywordflow}{if} (emergency\_stop)
-353             \{
-354                 cmd\_vel.linear.x = 0;
-355                 cmd\_vel.angular.z = 0;
-356                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] emergency stop, exit compute commands"});
-357                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-358             \}
-359 
-360             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} < 
-      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size())
-361             \{
+335 
+336             \textcolor{comment}{//bool divergenceDetected = this->divergenceDetectionUpdate(tfpose);}
+337             \textcolor{comment}{// it is not working in the pure spinning reel example, maybe the hyperplane check is enough}
+338             \textcolor{keywordtype}{bool} divergenceDetected = \textcolor{keyword}{false};
+339 
+340             \textcolor{keywordtype}{bool} emergency\_stop = \textcolor{keyword}{false};
+341             \textcolor{keywordflow}{if} (divergenceDetected)
+342             \{
+343                 ROS\_ERROR(\textcolor{stringliteral}{"[BackwardLocalPlanner] Divergence detected. Sending emergency stop."});
+344                 emergency\_stop = \textcolor{keyword}{true};
+345             \}
+346 
+347             \textcolor{keywordtype}{bool} carrotInLinearGoalRange = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a16e79a1b4c0f18879f6f0a8ba67103fd}{updateCarrotGoal}(tfpose);
+348             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] carrot goal created"});
+349 
+350             \textcolor{keywordflow}{if} (emergency\_stop)
+351             \{
+352                 cmd\_vel.linear.x = 0;
+353                 cmd\_vel.angular.z = 0;
+354                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] emergency stop, exit compute commands"});
+355                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+356             \}
+357 
+358             \textcolor{comment}{// ------ Evaluate the current context ----}
+359             \textcolor{keywordtype}{double} rho\_error, betta\_error, alpha\_error;
+360             
+361 
 362                 \textcolor{comment}{// getting carrot goal information}
 363                 tf::Quaternion q = tfpose.getRotation();
 364                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] carrot goal: "} << 
@@ -450,225 +454,245 @@ References alpha\+\_\+offset\+\_\+, backwards\+Plan\+Path\+\_\+, betta\+\_\+offs
 370                 tf::quaternionMsgToTF(carrotgoalpose.pose.orientation, goalQ);
 371                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] goal orientation: "} << goalQ);
 372 
-373                 \textcolor{comment}{// ------- COMMON CONTROL COMPUTATION -------------}
-374                 \textcolor{comment}{//goal orientation (global frame)}
-375                 \textcolor{keywordtype}{double} betta = tf::getYaw(goalQ);
-376                 betta = betta + \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a07e5f16f6951cca1e6d3483f345d0bb1}{betta\_offset\_};
-377 
-378                 \textcolor{keywordtype}{double} dx = carrotGoalPosition.x - tfpose.getOrigin().x();
-379                 \textcolor{keywordtype}{double} dy = carrotGoalPosition.y - tfpose.getOrigin().y();
-380 
-381                 \textcolor{comment}{//distance error to the targetpoint}
-382                 \textcolor{keywordtype}{double} rho\_error = sqrt(dx * dx + dy * dy);
-383 
-384                 \textcolor{comment}{//heading to goal angle}
-385                 \textcolor{keywordtype}{double} theta = tf::getYaw(q);
-386                 \textcolor{keywordtype}{double} alpha = atan2(dy, dx);
-387                 alpha = alpha + \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a09765b08935d9355447c44776e1b1c3a}{alpha\_offset\_};
-388 
-389                 \textcolor{keywordtype}{double} alpha\_error = angles::shortest\_angular\_distance(alpha, theta);
-390                 \textcolor{keywordtype}{double} betta\_error = angles::shortest\_angular\_distance(betta, theta);
+373                 \textcolor{comment}{//goal orientation (global frame)}
+374                 \textcolor{keywordtype}{double} betta = tf::getYaw(goalQ);
+375                 betta = betta + \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a07e5f16f6951cca1e6d3483f345d0bb1}{betta\_offset\_};
+376 
+377                 \textcolor{keywordtype}{double} dx = carrotGoalPosition.x - tfpose.getOrigin().x();
+378                 \textcolor{keywordtype}{double} dy = carrotGoalPosition.y - tfpose.getOrigin().y();
+379 
+380                 \textcolor{comment}{//distance error to the targetpoint}
+381                 rho\_error = sqrt(dx * dx + dy * dy);
+382 
+383                 \textcolor{comment}{//heading to goal angle}
+384                 \textcolor{keywordtype}{double} theta = tf::getYaw(q);
+385                 \textcolor{keywordtype}{double} alpha = atan2(dy, dx);
+386                 alpha = alpha + \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a09765b08935d9355447c44776e1b1c3a}{alpha\_offset\_};
+387 
+388                 alpha\_error = angles::shortest\_angular\_distance(alpha, theta);
+389                 betta\_error = angles::shortest\_angular\_distance(betta, theta);
+390             \textcolor{comment}{//------------- END CONTEXT EVAL ----------}
 391 
-392                 \textcolor{keywordtype}{double} vetta = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad8a36184bfb011545c751109e23d3b98}{k\_rho\_} * rho\_error;
-393                 \textcolor{keywordtype}{double} gamma = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_abf7a5a56de2ee41afba7e63c0628ec35}{k\_alpha\_} * alpha\_error + \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9f257183d87f1d732cb7e404f09905ad}{k\_betta\_} * betta\_error;
-394                 \textcolor{comment}{// --------------------}
-395 
-396                 \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aebc89ccfa79fdf6bd45ba35134bec3fb}{pureSpinningMode\_})
-397                 \{
-398                     this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aaa88a0a47e7cfd449c59518577599928}{pureSpinningCmd}(tfpose, vetta, gamma, alpha\_error, betta\_error, 
-      rho\_error, cmd\_vel);
-399                 \}
-400                 \textcolor{keywordflow}{else} \textcolor{comment}{// default curved backward-free motion mode}
-401                 \{
-402                     \textcolor{comment}{// case B: goal position reached but orientation not yet reached. deactivate linear
-       motion.}
-403                     \textcolor{keywordflow}{if} (carrotGoalInRange)
-404                     \{
-405                         ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] pure spinning even in not pure-spining mode,
-       carrotDistanceGoalReached: %d"}, carrotGoalInRange);
-406                         gamma = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9f257183d87f1d732cb7e404f09905ad}{k\_betta\_} * betta\_error;
-407                         vetta = 0;
-408                     \}
-409 
-410                     \textcolor{comment}{//clasical control to reach a goal backwards}
-411                     this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a1ebd69a028a22e3573e98f89d593f97d}{defaultBackwardCmd}(tfpose, vetta, gamma, alpha\_error, 
-      betta\_error, cmd\_vel);
-412                 \}
-413 
-414                 \textcolor{keywordflow}{if} (cmd\_vel.linear.x > \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4399072e9ae9cc60d8837860dc4807b}{max\_linear\_x\_speed\_})
-415                 \{
-416                     cmd\_vel.linear.x = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4399072e9ae9cc60d8837860dc4807b}{max\_linear\_x\_speed\_};
-417                 \}
-418                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (cmd\_vel.linear.x < -\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4399072e9ae9cc60d8837860dc4807b}{max\_linear\_x\_speed\_})
-419                 \{
-420                     cmd\_vel.linear.x = -\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4399072e9ae9cc60d8837860dc4807b}{max\_linear\_x\_speed\_};
-421                 \}
-422 
-423                 \textcolor{keywordflow}{if} (cmd\_vel.angular.z > \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_af7e492339ee2d1c90c00f6dd4cf95551}{max\_angular\_z\_speed\_})
-424                 \{
-425                     cmd\_vel.angular.z = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_af7e492339ee2d1c90c00f6dd4cf95551}{max\_angular\_z\_speed\_};
-426                 \}
-427                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (cmd\_vel.angular.z < -\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_af7e492339ee2d1c90c00f6dd4cf95551}{max\_angular\_z\_speed\_})
-428                 \{
-429                     cmd\_vel.angular.z = -\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_af7e492339ee2d1c90c00f6dd4cf95551}{max\_angular\_z\_speed\_};
-430                 \}
-431 
-432                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a70eaeb6cf31fd3378d9fbf9bcb975995}{publishGoalMarker}(carrotGoalPosition.x, carrotGoalPosition.y, betta);
-433 
-434                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] local planner,"} << std::endl
-435                                                                          << \textcolor{stringliteral}{" pureSpiningMode: "} << 
-      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aebc89ccfa79fdf6bd45ba35134bec3fb}{pureSpinningMode\_} << std::endl
-436                                                                          << \textcolor{stringliteral}{" theta: "} << theta << 
-      std::endl
-437                                                                          << \textcolor{stringliteral}{" betta: "} << theta << 
-      std::endl
-438                                                                          << \textcolor{stringliteral}{" err\_x: "} << dx << std::endl
-439                                                                          << \textcolor{stringliteral}{" err\_y:"} << dy << std::endl
-440                                                                          << \textcolor{stringliteral}{" rho\_error:"} << rho\_error << 
-      std::endl
-441                                                                          << \textcolor{stringliteral}{" alpha\_error:"} << alpha\_error 
-      << std::endl
-442                                                                          << \textcolor{stringliteral}{" betta\_error:"} << betta\_error 
-      << std::endl
-443                                                                          << \textcolor{stringliteral}{" vetta:"} << vetta << std::endl
-444                                                                          << \textcolor{stringliteral}{" gamma:"} << gamma);
-445 
-446                 \textcolor{keywordflow}{if} (cmd\_vel.linear.x != 0)
-447                 \{
-448                     \textcolor{keywordtype}{bool} carrotHalfPlaneConstraintFailure = 
-      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a22938e354a4ec489101295ed7f2539f6}{checkCarrotHalfPlainConstraint}(tfpose);
-449 
-450                     \textcolor{keywordflow}{if} (carrotHalfPlaneConstraintFailure)
-451                     \{
-452                         ROS\_ERROR(\textcolor{stringliteral}{"[BackwardLocalPlanner] CarrotHalfPlaneConstraintFailure detected.
-       Sending emergency stop."});
-453                         cmd\_vel.linear.x = 0;
-454                     \}
-455                 \}
-456             \}
-457             \textcolor{keywordflow}{else}
-458             \{
-459                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{" [BackwardLocalPlanner] all the points in the trajectory are reached, we
-       consider goal reached"});
-460                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad443c52ef585a8eab0364f0909222f51}{goalReached\_} = \textcolor{keyword}{true};
-461             \}
-462 
-463             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad443c52ef585a8eab0364f0909222f51}{goalReached\_})
-464             \{
-465                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{" [BackwardLocalPlanner] goal reached. Send stop command and skipping
+392             \textcolor{keywordtype}{bool} linearGoalReached;
+393             \textcolor{keywordtype}{bool} currentPoseInGoal = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a8b84e3961a79317a9c978ec054e4a112}{checkCurrentPoseInGoalRange}(tfpose,
+      betta\_error, linearGoalReached);
+394 
+395             \textcolor{keywordtype}{bool} carrotInFinalGoal = carrotInLinearGoalRange && 
+      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} == \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size() - 1;
+396 
+397             \textcolor{keywordflow}{if}(currentPoseInGoal && carrotInFinalGoal)
+398             \{
+399                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad443c52ef585a8eab0364f0909222f51}{goalReached\_} = \textcolor{keyword}{true};
+400                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.clear();
+401                 ROS\_INFO\_STREAM(\textcolor{stringliteral}{" [BackwardLocalPlanner] GOAL REACHED. Send stop command and skipping
        trajectory collision: "} << cmd\_vel);
-466                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-467             \}
-468 
-469             \textcolor{comment}{// ---------------------- TRAJECTORY PREDICTION AND COLLISION AVOIDANCE ---------------------}
-470             \textcolor{comment}{//cmd\_vel.linear.x=0;}
-471             \textcolor{comment}{//cmd\_vel.angular.z = 0;}
-472             tf::Stamped<tf::Pose> global\_pose = \hyperlink{namespacecl__move__base__z_1_1backward__local__planner_afd5bb2a0d144f7b89f4215fbcb1fbe69}{optionalRobotPose}(
+402                 cmd\_vel.linear.x =0;
+403                 cmd\_vel.angular.z = 0;
+404                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+405             \}
+406 
+407             \textcolor{keywordflow}{if} (carrotInLinearGoalRange && linearGoalReached) \textcolor{comment}{// we miss here and not any carrot ahead is
+       outside goal, replacing carrotInLinearGoalRange to carrotInFinalLinearGoalRange}
+408             \{
+409                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4d7254afd19ae1f7bd8eac9f5d58b9a}{inGoalPureSpinningState\_} = \textcolor{keyword}{true};
+410             \}
+411 
+412 
+413                 \textcolor{keywordtype}{double} vetta = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad8a36184bfb011545c751109e23d3b98}{k\_rho\_} * rho\_error;
+414                 \textcolor{keywordtype}{double} gamma = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_abf7a5a56de2ee41afba7e63c0628ec35}{k\_alpha\_} * alpha\_error + \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9f257183d87f1d732cb7e404f09905ad}{k\_betta\_} * betta\_error;
+415                 \textcolor{comment}{// --------------------}
+416 
+417                 \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a04febb67563add6f715051a94aed1b9b}{straightBackwardsAndPureSpinningMode\_})
+418                 \{
+419                     this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6069866b4a3150883de3212d8e43e8f8}{straightBackwardsAndPureSpinCmd}(tfpose, vetta, 
+      gamma, alpha\_error, betta\_error, rho\_error, cmd\_vel);
+420                 \}
+421                 \textcolor{keywordflow}{else} \textcolor{comment}{// default curved backward-free motion mode}
+422                 \{
+423                     \textcolor{comment}{// case B: goal position reached but orientation not yet reached. deactivate linear
+       motion.}
+424                     \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4d7254afd19ae1f7bd8eac9f5d58b9a}{inGoalPureSpinningState\_})
+425                     \{
+426                         ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] we entered in a pure spinning state even in not
+       pure-spining configuration, carrotDistanceGoalReached: %d"}, carrotInLinearGoalRange);
+427                         gamma = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9f257183d87f1d732cb7e404f09905ad}{k\_betta\_} * betta\_error;
+428                         vetta = 0;
+429                     \}
+430 
+431                     \textcolor{comment}{//clasical control to reach a goal backwards}
+432                     this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a1ebd69a028a22e3573e98f89d593f97d}{defaultBackwardCmd}(tfpose, vetta, gamma, alpha\_error, 
+      betta\_error, cmd\_vel);
+433                 \}
+434 
+435                 \textcolor{keywordflow}{if} (cmd\_vel.linear.x > \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4399072e9ae9cc60d8837860dc4807b}{max\_linear\_x\_speed\_})
+436                 \{
+437                     cmd\_vel.linear.x = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4399072e9ae9cc60d8837860dc4807b}{max\_linear\_x\_speed\_};
+438                 \}
+439                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (cmd\_vel.linear.x < -\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4399072e9ae9cc60d8837860dc4807b}{max\_linear\_x\_speed\_})
+440                 \{
+441                     cmd\_vel.linear.x = -\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4399072e9ae9cc60d8837860dc4807b}{max\_linear\_x\_speed\_};
+442                 \}
+443 
+444                 \textcolor{keywordflow}{if} (cmd\_vel.angular.z > \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_af7e492339ee2d1c90c00f6dd4cf95551}{max\_angular\_z\_speed\_})
+445                 \{
+446                     cmd\_vel.angular.z = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_af7e492339ee2d1c90c00f6dd4cf95551}{max\_angular\_z\_speed\_};
+447                 \}
+448                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (cmd\_vel.angular.z < -\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_af7e492339ee2d1c90c00f6dd4cf95551}{max\_angular\_z\_speed\_})
+449                 \{
+450                     cmd\_vel.angular.z = -\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_af7e492339ee2d1c90c00f6dd4cf95551}{max\_angular\_z\_speed\_};
+451                 \}
+452 
+453                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a70eaeb6cf31fd3378d9fbf9bcb975995}{publishGoalMarker}(carrotGoalPosition.x, carrotGoalPosition.y, betta);
+454 
+455                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] local planner,"} << std::endl
+456                                                                          << \textcolor{stringliteral}{" straightAnPureSpiningMode: "} 
+      << \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a04febb67563add6f715051a94aed1b9b}{straightBackwardsAndPureSpinningMode\_} << std::endl
+457                                                                          << \textcolor{stringliteral}{" inGoalPureSpinningState: "} <<
+       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4d7254afd19ae1f7bd8eac9f5d58b9a}{inGoalPureSpinningState\_} << std::endl
+458                                                                          << \textcolor{stringliteral}{"carrotInLinearGoalRange: "} << 
+      carrotInLinearGoalRange << std::endl
+459                                                                          << \textcolor{stringliteral}{" theta: "} << theta << 
+      std::endl
+460                                                                          << \textcolor{stringliteral}{" betta: "} << theta << 
+      std::endl
+461                                                                          << \textcolor{stringliteral}{" err\_x: "} << dx << std::endl
+462                                                                          << \textcolor{stringliteral}{" err\_y:"} << dy << std::endl
+463                                                                          << \textcolor{stringliteral}{" rho\_error:"} << rho\_error << 
+      std::endl
+464                                                                          << \textcolor{stringliteral}{" alpha\_error:"} << alpha\_error 
+      << std::endl
+465                                                                          << \textcolor{stringliteral}{" betta\_error:"} << betta\_error 
+      << std::endl
+466                                                                          << \textcolor{stringliteral}{" vetta:"} << vetta << std::endl
+467                                                                          << \textcolor{stringliteral}{" gamma:"} << gamma << std::endl
+468                                                                          << \textcolor{stringliteral}{" cmd\_vel.lin.x:"} << cmd\_vel.
+      linear.x << std::endl
+469                                                                          << \textcolor{stringliteral}{" cmd\_vel.ang.z:"} << cmd\_vel.
+      angular.z);
+470 
+471                 \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4d7254afd19ae1f7bd8eac9f5d58b9a}{inGoalPureSpinningState\_})
+472                 \{
+473                     \textcolor{keywordtype}{bool} carrotHalfPlaneConstraintFailure = 
+      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a22938e354a4ec489101295ed7f2539f6}{checkCarrotHalfPlainConstraint}(tfpose);
+474 
+475                     \textcolor{keywordflow}{if} (carrotHalfPlaneConstraintFailure)
+476                     \{
+477                         ROS\_ERROR(\textcolor{stringliteral}{"[BackwardLocalPlanner] CarrotHalfPlaneConstraintFailure detected.
+       Sending emergency stop and success to the planner."});
+478                         cmd\_vel.linear.x = 0;
+479                     \}
+480                 \}
+481         
+482 
+483             \textcolor{comment}{// ---------------------- TRAJECTORY PREDICTION AND COLLISION AVOIDANCE ---------------------}
+484             \textcolor{comment}{//cmd\_vel.linear.x=0;}
+485             \textcolor{comment}{//cmd\_vel.angular.z = 0;}
+486             tf::Stamped<tf::Pose> global\_pose = \hyperlink{namespacecl__move__base__z_1_1backward__local__planner_afd5bb2a0d144f7b89f4215fbcb1fbe69}{optionalRobotPose}(
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a4136268882a105d9e06e173d85d5c0dc}{costmapRos\_});
-473 
-474             \textcolor{keyword}{auto} *costmap2d = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a4136268882a105d9e06e173d85d5c0dc}{costmapRos\_}->getCostmap();
-475             \textcolor{keyword}{auto} yaw = tf::getYaw(global\_pose.getRotation());
-476 
-477             \textcolor{keyword}{auto} &pos = global\_pose.getOrigin();
-478 
-479             Eigen::Vector3f currentpose(pos.x(), pos.y(), yaw);
-480             Eigen::Vector3f currentvel(cmd\_vel.linear.x, cmd\_vel.linear.y, cmd\_vel.angular.z);
-481             std::vector<Eigen::Vector3f> trajectory;
-482             this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9e8921ca8ce379ca8ba321f82ca23cdc}{generateTrajectory}(currentpose, currentvel, 0.8 \textcolor{comment}{/*meters*/}, M\_PI / 8 \textcolor{comment}{/*
+487 
+488             \textcolor{keyword}{auto} *costmap2d = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a4136268882a105d9e06e173d85d5c0dc}{costmapRos\_}->getCostmap();
+489             \textcolor{keyword}{auto} yaw = tf::getYaw(global\_pose.getRotation());
+490 
+491             \textcolor{keyword}{auto} &pos = global\_pose.getOrigin();
+492 
+493             Eigen::Vector3f currentpose(pos.x(), pos.y(), yaw);
+494             Eigen::Vector3f currentvel(cmd\_vel.linear.x, cmd\_vel.linear.y, cmd\_vel.angular.z);
+495             std::vector<Eigen::Vector3f> trajectory;
+496             this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9e8921ca8ce379ca8ba321f82ca23cdc}{generateTrajectory}(currentpose, currentvel, 0.8 \textcolor{comment}{/*meters*/}, M\_PI / 8 \textcolor{comment}{/*
       rads*/}, 3.0 \textcolor{comment}{/*seconds*/}, 0.05 \textcolor{comment}{/*seconds*/}, trajectory);
-483 
-484             \textcolor{comment}{// check plan rejection}
-485             \textcolor{keywordtype}{bool} acceptedLocalTrajectoryFreeOfObstacles = \textcolor{keyword}{true};
-486 
-487             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
-488 
-489             \textcolor{keywordflow}{if} (this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a154043366660cc02ec758dda32817511}{enable\_obstacle\_checking\_})
-490             \{
-491                 \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size() > 0)
-492                 \{
-493                     \textcolor{keyword}{auto} &finalgoalpose = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.back();
-494 
-495                     \textcolor{keywordtype}{int} i = 0;
-496                     \textcolor{comment}{// ROS\_INFO\_STREAM("lplanner goal: " << finalgoalpose.pose.position);}
-497                     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
-498                     \{
-499                         \textcolor{keywordtype}{float} dx = p[0] - finalgoalpose.pose.position.x;
-500                         \textcolor{keywordtype}{float} dy = p[1] - finalgoalpose.pose.position.y;
-501 
-502                         \textcolor{keywordtype}{float} dst = sqrt(dx * dx + dy * dy);
-503                         \textcolor{keywordflow}{if} (dst < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_})
-504                         \{
-505                             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] trajectory simulation for collision checking:
-       goal reached with no collision"});
-506                             \textcolor{keywordflow}{break};
-507                         \}
+497 
+498             \textcolor{comment}{// check plan rejection}
+499             \textcolor{keywordtype}{bool} acceptedLocalTrajectoryFreeOfObstacles = \textcolor{keyword}{true};
+500 
+501             \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
+502 
+503             \textcolor{keywordflow}{if} (this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a154043366660cc02ec758dda32817511}{enable\_obstacle\_checking\_})
+504             \{
+505                 \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size() > 0)
+506                 \{
+507                     \textcolor{keyword}{auto} &finalgoalpose = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.back();
 508 
-509                         costmap2d->worldToMap(p[0], p[1], mx, my);
-510                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cost = costmap2d->getCost(mx, my);
-511 
-512                         \textcolor{comment}{// ROS\_DEBUG("[BackwardLocalPlanner] checking cost pt %d [%lf, %lf] cell[%d,%d] =
+509                     \textcolor{keywordtype}{int} i = 0;
+510                     \textcolor{comment}{// ROS\_INFO\_STREAM("lplanner goal: " << finalgoalpose.pose.position);}
+511                     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : trajectory)
+512                     \{
+513                         \textcolor{keywordtype}{float} dx = p[0] - finalgoalpose.pose.position.x;
+514                         \textcolor{keywordtype}{float} dy = p[1] - finalgoalpose.pose.position.y;
+515 
+516                         \textcolor{keywordtype}{float} dst = sqrt(dx * dx + dy * dy);
+517                         \textcolor{keywordflow}{if} (dst < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_})
+518                         \{
+519                             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] trajectory simulation for collision checking:
+       goal reached with no collision"});
+520                             \textcolor{keywordflow}{break};
+521                         \}
+522 
+523                         costmap2d->worldToMap(p[0], p[1], mx, my);
+524                         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cost = costmap2d->getCost(mx, my);
+525 
+526                         \textcolor{comment}{// ROS\_DEBUG("[BackwardLocalPlanner] checking cost pt %d [%lf, %lf] cell[%d,%d] =
        %d", i, p[0], p[1], mx, my, cost);}
-513                         \textcolor{comment}{// ROS\_DEBUG\_STREAM("[BackwardLocalPlanner] cost: " << cost);}
-514 
-515                         \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
-516                         \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
-517                         \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
-518                         \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
-519 
-520                         \textcolor{keywordflow}{if} (costmap2d->getCost(mx, my) >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
-521                         \{
-522                             acceptedLocalTrajectoryFreeOfObstacles = \textcolor{keyword}{false};
-523                             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] ABORTED LOCAL PLAN BECAUSE OBSTACLE
+527                         \textcolor{comment}{// ROS\_DEBUG\_STREAM("[BackwardLocalPlanner] cost: " << cost);}
+528 
+529                         \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
+530                         \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
+531                         \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
+532                         \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
+533 
+534                         \textcolor{keywordflow}{if} (costmap2d->getCost(mx, my) >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
+535                         \{
+536                             acceptedLocalTrajectoryFreeOfObstacles = \textcolor{keyword}{false};
+537                             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] ABORTED LOCAL PLAN BECAUSE OBSTACLE
        DETEDTED at point "} << i << \textcolor{stringliteral}{"/"} << trajectory.size() << std::endl
-524                                                                                                            
+538                                                                                                            
                        << p[0] << \textcolor{stringliteral}{", "} << p[1]);
-525                             \textcolor{keywordflow}{break};
-526                         \}
-527                         i++;
-528                     \}
-529                 \}
-530                 \textcolor{keywordflow}{else}
-531                 \{
-532                     ROS\_WARN(\textcolor{stringliteral}{"[BackwardLocalPlanner] Abort local - Backwards global plan size: %ld"}, 
+539                             \textcolor{keywordflow}{break};
+540                         \}
+541                         i++;
+542                     \}
+543                 \}
+544                 \textcolor{keywordflow}{else}
+545                 \{
+546                     ROS\_WARN(\textcolor{stringliteral}{"[BackwardLocalPlanner] Abort local - Backwards global plan size: %ld"}, 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size());
-533                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-534                 \}
-535             \}
-536 
-537             \textcolor{keywordflow}{if} (acceptedLocalTrajectoryFreeOfObstacles)
-538             \{
-539                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a00849266e4bdd9379c3717e8a41c303e}{waiting\_} = \textcolor{keyword}{false};
-540                 ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] accepted local trajectory free of obstacle. Local planner
+547                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+548                 \}
+549             \}
+550 
+551             \textcolor{keywordflow}{if} (acceptedLocalTrajectoryFreeOfObstacles)
+552             \{
+553                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a00849266e4bdd9379c3717e8a41c303e}{waiting\_} = \textcolor{keyword}{false};
+554                 ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] accepted local trajectory free of obstacle. Local planner
        continues."});
-541                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-542             \}
-543             \textcolor{keywordflow}{else} \textcolor{comment}{// that is not appceted because existence of obstacles}
-544             \{
-545                 \textcolor{comment}{// emergency stop for collision: waiting a while before sending error}
-546                 cmd\_vel.linear.x = 0;
-547                 cmd\_vel.angular.z = 0;
-548 
-549                 \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a00849266e4bdd9379c3717e8a41c303e}{waiting\_} == \textcolor{keyword}{false})
-550                 \{
-551                     \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a00849266e4bdd9379c3717e8a41c303e}{waiting\_} = \textcolor{keyword}{true};
-552                     \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_abe08faab5b784fcf64ac6b3f936459f1}{waitingStamp\_} = ros::Time::now();
-553                     ROS\_WARN(\textcolor{stringliteral}{"[BackwardLocalPlanner][Not accepted local plan] starting countdown"});
-554                 \}
-555                 \textcolor{keywordflow}{else}
-556                 \{
-557                     \textcolor{keyword}{auto} waitingduration = ros::Time::now() - \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_abe08faab5b784fcf64ac6b3f936459f1}{waitingStamp\_};
-558 
-559                     \textcolor{keywordflow}{if} (waitingduration > this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0c15da985f7f051164adb643c03a0c90}{waitingTimeout\_})
-560                     \{
-561                         ROS\_WARN(\textcolor{stringliteral}{"[BackwardLocalPlanner][Abort local] timeout! duration %lf/%f"}, 
+555                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+556             \}
+557             \textcolor{keywordflow}{else} \textcolor{comment}{// that is not appceted because existence of obstacles}
+558             \{
+559                 \textcolor{comment}{// emergency stop for collision: waiting a while before sending error}
+560                 cmd\_vel.linear.x = 0;
+561                 cmd\_vel.angular.z = 0;
+562 
+563                 \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a00849266e4bdd9379c3717e8a41c303e}{waiting\_} == \textcolor{keyword}{false})
+564                 \{
+565                     \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a00849266e4bdd9379c3717e8a41c303e}{waiting\_} = \textcolor{keyword}{true};
+566                     \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_abe08faab5b784fcf64ac6b3f936459f1}{waitingStamp\_} = ros::Time::now();
+567                     ROS\_WARN(\textcolor{stringliteral}{"[BackwardLocalPlanner][Not accepted local plan] starting countdown"});
+568                 \}
+569                 \textcolor{keywordflow}{else}
+570                 \{
+571                     \textcolor{keyword}{auto} waitingduration = ros::Time::now() - \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_abe08faab5b784fcf64ac6b3f936459f1}{waitingStamp\_};
+572 
+573                     \textcolor{keywordflow}{if} (waitingduration > this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0c15da985f7f051164adb643c03a0c90}{waitingTimeout\_})
+574                     \{
+575                         ROS\_WARN(\textcolor{stringliteral}{"[BackwardLocalPlanner][Abort local] timeout! duration %lf/%f"}, 
       waitingduration.toSec(), \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0c15da985f7f051164adb643c03a0c90}{waitingTimeout\_}.toSec());
-562                         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-563                     \}
-564                 \}
-565 
-566                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-567             \}
-568         \}
+576                         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+577                     \}
+578                 \}
+579 
+580                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+581             \}
+582         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -686,11 +710,7 @@ Here is the call graph for this function\+:
 
 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a1ebd69a028a22e3573e98f89d593f97d}{default\+Backward\+Cmd()} 
 
-Definition at line 259 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
-
-
-
-References check\+Goal\+Reached().
+Definition at line 265 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -698,21 +718,11 @@ Referenced by compute\+Velocity\+Commands().
 
 
 \begin{DoxyCode}
-260         \{
-261             cmd\_vel.linear.x = vetta;
-262             cmd\_vel.angular.z = gamma;
-263 
-264             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6c4363e82119a6a8a5a3bfe309280898}{checkGoalReached}(tfpose, vetta, gamma, betta\_error, cmd\_vel);
-265         \}
+266         \{
+267             cmd\_vel.linear.x = vetta;
+268             cmd\_vel.angular.z = gamma;
+269         \}
 \end{DoxyCode}
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a1ebd69a028a22e3573e98f89d593f97d_cgraph}
-\end{center}
-\end{figure}
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
@@ -729,7 +739,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 175 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 180 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -741,42 +751,42 @@ Referenced by set\+Plan().
 
 
 \begin{DoxyCode}
-176         \{
-177             \textcolor{keywordtype}{double} disterr = 0, angleerr = 0;
-178             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}{computeCurrentEuclideanAndAngularErrorsToCarrotGoal}
+181         \{
+182             \textcolor{keywordtype}{double} disterr = 0, angleerr = 0;
+183             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}{computeCurrentEuclideanAndAngularErrorsToCarrotGoal}
       (tfpose, disterr, angleerr);
-179 
-180             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] Divergence check. carrot goal distance. was: "} << 
+184 
+185             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] Divergence check. carrot goal distance. was: "} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a3187b3b0c9a640133556efd056f2e736}{divergenceDetectionLastCarrotLinearDistance\_} << \textcolor{stringliteral}{", now it is: "}
        << disterr);
-181             \textcolor{keywordflow}{if} (disterr > \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a3187b3b0c9a640133556efd056f2e736}{divergenceDetectionLastCarrotLinearDistance\_}
+186             \textcolor{keywordflow}{if} (disterr > \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a3187b3b0c9a640133556efd056f2e736}{divergenceDetectionLastCarrotLinearDistance\_}
       )
-182             \{
-183                 \textcolor{comment}{// candidate of divergence, we do not throw the divergence alarm yet}
-184                 \textcolor{comment}{// but we neither update the distance since it is worse than the one}
-185                 \textcolor{comment}{// we had previously with the same carrot.}
-186                 \textcolor{keyword}{const} \textcolor{keywordtype}{double} MARGIN\_FACTOR = 1.2;
-187                 \textcolor{keywordflow}{if} (disterr > MARGIN\_FACTOR * 
+187             \{
+188                 \textcolor{comment}{// candidate of divergence, we do not throw the divergence alarm yet}
+189                 \textcolor{comment}{// but we neither update the distance since it is worse than the one}
+190                 \textcolor{comment}{// we had previously with the same carrot.}
+191                 \textcolor{keyword}{const} \textcolor{keywordtype}{double} MARGIN\_FACTOR = 1.2;
+192                 \textcolor{keywordflow}{if} (disterr > MARGIN\_FACTOR * 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a3187b3b0c9a640133556efd056f2e736}{divergenceDetectionLastCarrotLinearDistance\_})
-188                 \{
-189                     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] Divergence detected. The same carrot goal
-       distance was previously: "} << divergenceDetectionLastCarrotLinearDistance\_ << \textcolor{stringliteral}{"but now it is: "} << disterr);
-190                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-191                 \}
-192                 \textcolor{keywordflow}{else}
 193                 \{
-194                     \textcolor{comment}{// divergence candidate}
-195                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+194                     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] Divergence detected. The same carrot goal
+       distance was previously: "} << divergenceDetectionLastCarrotLinearDistance\_ << \textcolor{stringliteral}{"but now it is: "} << disterr);
+195                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
 196                 \}
-197             \}
-198             \textcolor{keywordflow}{else}
-199             \{
-200                 \textcolor{comment}{//update:}
-201                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a3187b3b0c9a640133556efd056f2e736}{divergenceDetectionLastCarrotLinearDistance\_} = 
+197                 \textcolor{keywordflow}{else}
+198                 \{
+199                     \textcolor{comment}{// divergence candidate}
+200                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+201                 \}
+202             \}
+203             \textcolor{keywordflow}{else}
+204             \{
+205                 \textcolor{comment}{//update:}
+206                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a3187b3b0c9a640133556efd056f2e736}{divergenceDetectionLastCarrotLinearDistance\_} = 
       disterr;
-202                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-203             \}
-204         \}
+207                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+208             \}
+209         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -802,7 +812,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 618 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 632 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -814,66 +824,66 @@ Referenced by set\+Plan().
 
 
 \begin{DoxyCode}
-619         \{
-620             \textcolor{keywordtype}{double} lineardisterr, angleerr;
-621             \textcolor{keywordtype}{bool} inCarrotRange = \textcolor{keyword}{false};
-622 
-623             \textcolor{comment}{// initial state check}
-624             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}{computeCurrentEuclideanAndAngularErrorsToCarrotGoal}
+633         \{
+634             \textcolor{keywordtype}{double} lineardisterr, angleerr;
+635             \textcolor{keywordtype}{bool} inCarrotRange = \textcolor{keyword}{false};
+636 
+637             \textcolor{comment}{// initial state check}
+638             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}{computeCurrentEuclideanAndAngularErrorsToCarrotGoal}
       (tfpose, lineardisterr, angleerr);
-625 
-626             \textcolor{keywordtype}{int} closestIndex = -1;
-627             \textcolor{keywordtype}{double} minpointdist = std::numeric\_limits<double>::max();
-628 
-629             \textcolor{comment}{// lets set the carrot-goal in the corret place with this loop}
-630             \textcolor{keywordflow}{while} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} < 
+639 
+640             \textcolor{keywordtype}{int} closestIndex = -1;
+641             \textcolor{keywordtype}{double} minpointdist = std::numeric\_limits<double>::max();
+642 
+643             \textcolor{comment}{// lets set the carrot-goal in the corret place with this loop}
+644             \textcolor{keywordflow}{while} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} < 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size() && !inCarrotRange)
-631             \{
-632                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}{computeCurrentEuclideanAndAngularErrorsToCarrotGoal}
+645             \{
+646                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}{computeCurrentEuclideanAndAngularErrorsToCarrotGoal}
       (tfpose, lineardisterr, angleerr);
-633 
-634                 ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] Finding initial carrot goal i=%d - error to carrot,
+647 
+648                 ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] Finding initial carrot goal i=%d - error to carrot,
        linear = %lf (%lf), angular : %lf (%lf)"}, \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_}, lineardisterr, 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_}, angleerr, \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_});
-635 
-636                 \textcolor{comment}{// current path point is inside the carrot distance range, goal carrot tries to escape!}
-637                 \textcolor{keywordflow}{if} (lineardisterr < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} && angleerr < 
+649 
+650                 \textcolor{comment}{// current path point is inside the carrot distance range, goal carrot tries to escape!}
+651                 \textcolor{keywordflow}{if} (lineardisterr < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} && angleerr < 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_})
-638                 \{
-639                     ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] Finding initial carrot goal i=%d - in carrot Range"}, 
+652                 \{
+653                     ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] Finding initial carrot goal i=%d - in carrot Range"}, 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_});
-640                     inCarrotRange = \textcolor{keyword}{true};
-641                     \textcolor{comment}{// we are inside the goal range}
-642                 \}
-643                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (inCarrotRange && (lineardisterr > \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} || angleerr > 
+654                     inCarrotRange = \textcolor{keyword}{true};
+655                     \textcolor{comment}{// we are inside the goal range}
+656                 \}
+657                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (inCarrotRange && (lineardisterr > \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} || angleerr > 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_}))
-644                 \{
-645                     \textcolor{comment}{// we were inside the carrot range but not anymore, now we are just leaving. we want to
+658                 \{
+659                     \textcolor{comment}{// we were inside the carrot range but not anymore, now we are just leaving. we want to
        continue forward (currentCarrotPoseIndex\_++)}
-646                     \textcolor{comment}{// unless we go out of the carrot range}
-647 
-648                     \textcolor{comment}{// but we rollback last index increment (to go back inside the carrot goal scope) and
+660                     \textcolor{comment}{// unless we go out of the carrot range}
+661 
+662                     \textcolor{comment}{// but we rollback last index increment (to go back inside the carrot goal scope) and
        start motion with that carrot goal we found}
-649                     \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_}--;
-650                     \textcolor{keywordflow}{break};
-651                 \}
-652                 \textcolor{keywordflow}{else}
-653                 \{
-654                     ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] Finding initial carrot goal i=%d - carrot out of
+663                     \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_}--;
+664                     \textcolor{keywordflow}{break};
+665                 \}
+666                 \textcolor{keywordflow}{else}
+667                 \{
+668                     ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] Finding initial carrot goal i=%d - carrot out of
        range, searching coincidence..."}, \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_});
-655                 \}
-656 
-657                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_}++;
-658                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] setPlan: fw"} << 
+669                 \}
+670 
+671                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_}++;
+672                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] setPlan: fw"} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_});
-659             \}
-660 
-661             ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] setPlan: (found first carrot:"} << inCarrotRange << \textcolor{stringliteral}{")
+673             \}
+674 
+675             ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] setPlan: (found first carrot:"} << inCarrotRange << \textcolor{stringliteral}{")
        initial carrot point index: "} << \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} << \textcolor{stringliteral}{"/"} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size());
-662 
-663             \textcolor{keywordflow}{return} inCarrotRange;
-664         \}
+676 
+677             \textcolor{keywordflow}{return} inCarrotRange;
+678         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -899,7 +909,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 786 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 799 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -911,68 +921,68 @@ Referenced by compute\+Velocity\+Commands().
 
 
 \begin{DoxyCode}
-787         \{
-788             \textcolor{comment}{//simulate the trajectory and check for collisions, updating costs along the way}
-789             \textcolor{keywordtype}{bool} end = \textcolor{keyword}{false};
-790             \textcolor{keywordtype}{float} time = 0;
-791             Eigen::Vector3f currentpos = pos;
-792             \textcolor{keywordtype}{int} i = 0;
-793             \textcolor{keywordflow}{while} (!end)
-794             \{
-795                 \textcolor{comment}{//add the point to the trajectory so we can draw it later if we want}
-796                 \textcolor{comment}{//traj.addPoint(pos[0], pos[1], pos[2]);}
-797 
-798                 \textcolor{comment}{// if (continued\_acceleration\_) \{}
-799                 \textcolor{comment}{//   //calculate velocities}
-800                 \textcolor{comment}{//   loop\_vel = computeNewVelocities(sample\_target\_vel, loop\_vel, limits\_->getAccLimits(),
+800         \{
+801             \textcolor{comment}{//simulate the trajectory and check for collisions, updating costs along the way}
+802             \textcolor{keywordtype}{bool} end = \textcolor{keyword}{false};
+803             \textcolor{keywordtype}{float} time = 0;
+804             Eigen::Vector3f currentpos = pos;
+805             \textcolor{keywordtype}{int} i = 0;
+806             \textcolor{keywordflow}{while} (!end)
+807             \{
+808                 \textcolor{comment}{//add the point to the trajectory so we can draw it later if we want}
+809                 \textcolor{comment}{//traj.addPoint(pos[0], pos[1], pos[2]);}
+810 
+811                 \textcolor{comment}{// if (continued\_acceleration\_) \{}
+812                 \textcolor{comment}{//   //calculate velocities}
+813                 \textcolor{comment}{//   loop\_vel = computeNewVelocities(sample\_target\_vel, loop\_vel, limits\_->getAccLimits(),
        dt);}
-801                 \textcolor{comment}{//   //ROS\_WARN\_NAMED("Generator", "Flag: %d, Loop\_Vel %f, %f, %f",
+814                 \textcolor{comment}{//   //ROS\_WARN\_NAMED("Generator", "Flag: %d, Loop\_Vel %f, %f, %f",
        continued\_acceleration\_, loop\_vel[0], loop\_vel[1], loop\_vel[2]);}
-802                 \textcolor{comment}{// \}}
-803 
-804                 \textcolor{keyword}{auto} loop\_vel = vel;
-805                 \textcolor{comment}{//update the position of the robot using the velocities passed in}
-806                 \textcolor{keyword}{auto} newpos = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0fe2ebd23fd79e8b574127e819ef0e14}{computeNewPositions}(currentpos, loop\_vel, dt);
-807 
-808                 \textcolor{keyword}{auto} dx = newpos[0] - currentpos[0];
-809                 \textcolor{keyword}{auto} dy = newpos[1] - currentpos[1];
-810                 \textcolor{keywordtype}{float} dist, angledist;
-811 
-812                 \textcolor{comment}{//ROS\_INFO("traj point %d", i);}
-813                 dist = sqrt(dx * dx + dy * dy);
-814                 \textcolor{keywordflow}{if} (dist > maxdist)
-815                 \{
-816                     end = \textcolor{keyword}{true};
-817                     \textcolor{comment}{//ROS\_INFO("dist break: %f", dist);}
-818                 \}
-819                 \textcolor{keywordflow}{else}
-820                 \{
-821                     \textcolor{comment}{// ouble from, double to}
-822                     angledist = angles::shortest\_angular\_distance(currentpos[2], newpos[2]);
-823                     \textcolor{keywordflow}{if} (angledist > maxanglediff)
-824                     \{
-825                         end = \textcolor{keyword}{true};
-826                         \textcolor{comment}{//ROS\_INFO("angle dist break: %f", angledist);}
-827                     \}
-828                     \textcolor{keywordflow}{else}
-829                     \{
-830                         outtraj.push\_back(newpos);
-831 
-832                         time += dt;
-833                         \textcolor{keywordflow}{if} (time > maxtime)
-834                         \{
-835                             end = \textcolor{keyword}{true};
-836                             \textcolor{comment}{//ROS\_INFO("time break: %f", time);}
-837                         \}
-838 
-839                         \textcolor{comment}{//ROS\_INFO("dist: %f, angledist: %f, time: %f", dist, angledist, time);}
+815                 \textcolor{comment}{// \}}
+816 
+817                 \textcolor{keyword}{auto} loop\_vel = vel;
+818                 \textcolor{comment}{//update the position of the robot using the velocities passed in}
+819                 \textcolor{keyword}{auto} newpos = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0fe2ebd23fd79e8b574127e819ef0e14}{computeNewPositions}(currentpos, loop\_vel, dt);
+820 
+821                 \textcolor{keyword}{auto} dx = newpos[0] - currentpos[0];
+822                 \textcolor{keyword}{auto} dy = newpos[1] - currentpos[1];
+823                 \textcolor{keywordtype}{float} dist, angledist;
+824 
+825                 \textcolor{comment}{//ROS\_INFO("traj point %d", i);}
+826                 dist = sqrt(dx * dx + dy * dy);
+827                 \textcolor{keywordflow}{if} (dist > maxdist)
+828                 \{
+829                     end = \textcolor{keyword}{true};
+830                     \textcolor{comment}{//ROS\_INFO("dist break: %f", dist);}
+831                 \}
+832                 \textcolor{keywordflow}{else}
+833                 \{
+834                     \textcolor{comment}{// ouble from, double to}
+835                     angledist = angles::shortest\_angular\_distance(currentpos[2], newpos[2]);
+836                     \textcolor{keywordflow}{if} (angledist > maxanglediff)
+837                     \{
+838                         end = \textcolor{keyword}{true};
+839                         \textcolor{comment}{//ROS\_INFO("angle dist break: %f", angledist);}
 840                     \}
-841                 \}
-842 
-843                 currentpos = newpos;
-844                 i++;
-845             \} \textcolor{comment}{// end for simulation steps}
-846         \}
+841                     \textcolor{keywordflow}{else}
+842                     \{
+843                         outtraj.push\_back(newpos);
+844 
+845                         time += dt;
+846                         \textcolor{keywordflow}{if} (time > maxtime)
+847                         \{
+848                             end = \textcolor{keyword}{true};
+849                             \textcolor{comment}{//ROS\_INFO("time break: %f", time);}
+850                         \}
+851 
+852                         \textcolor{comment}{//ROS\_INFO("dist: %f, angledist: %f, time: %f", dist, angledist, time);}
+853                     \}
+854                 \}
+855 
+856                 currentpos = newpos;
+857                 i++;
+858             \} \textcolor{comment}{// end for simulation steps}
+859         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -1011,7 +1021,7 @@ Constructs the local planner.
 \end{DoxyParams}
 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a5c9815019cef272faed835cd8c575196}{initialize()} 
 
-Definition at line 93 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 93 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -1040,7 +1050,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 34 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 34 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -1069,11 +1079,11 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 40 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 40 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
-References carrot\+\_\+angular\+\_\+distance\+\_\+, carrot\+\_\+distance\+\_\+, current\+Carrot\+Pose\+Index\+\_\+, enable\+\_\+obstacle\+\_\+checking\+\_\+, f, goal\+Marker\+Publisher\+\_\+, k\+\_\+alpha\+\_\+, k\+\_\+betta\+\_\+, k\+\_\+rho\+\_\+, linear\+\_\+mode\+\_\+rho\+\_\+error\+\_\+threshold\+\_\+, max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+, max\+\_\+linear\+\_\+x\+\_\+speed\+\_\+, param\+Server\+\_\+, pure\+Spinning\+Mode\+\_\+, reconfig\+C\+B(), waiting\+Timeout\+\_\+, xy\+\_\+goal\+\_\+tolerance\+\_\+, and yaw\+\_\+goal\+\_\+tolerance\+\_\+.
+References carrot\+\_\+angular\+\_\+distance\+\_\+, carrot\+\_\+distance\+\_\+, current\+Carrot\+Pose\+Index\+\_\+, enable\+\_\+obstacle\+\_\+checking\+\_\+, f, goal\+Marker\+Publisher\+\_\+, k\+\_\+alpha\+\_\+, k\+\_\+betta\+\_\+, k\+\_\+rho\+\_\+, linear\+\_\+mode\+\_\+rho\+\_\+error\+\_\+threshold\+\_\+, max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+, max\+\_\+linear\+\_\+x\+\_\+speed\+\_\+, param\+Server\+\_\+, reconfig\+C\+B(), straight\+Backwards\+And\+Pure\+Spinning\+Mode\+\_\+, waiting\+Timeout\+\_\+, xy\+\_\+goal\+\_\+tolerance\+\_\+, and yaw\+\_\+goal\+\_\+tolerance\+\_\+.
 
 
 
@@ -1094,7 +1104,8 @@ Referenced by initialize().
 50             this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} = 0;
 51 
 52             ros::NodeHandle nh(\textcolor{stringliteral}{"~/BackwardLocalPlanner"});
-53             nh.param(\textcolor{stringliteral}{"pure\_spinning\_straight\_line\_mode"}, \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aebc89ccfa79fdf6bd45ba35134bec3fb}{pureSpinningMode\_}, \textcolor{keyword}{true});
+53             nh.param(\textcolor{stringliteral}{"pure\_spinning\_straight\_line\_mode"}, 
+      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a04febb67563add6f715051a94aed1b9b}{straightBackwardsAndPureSpinningMode\_}, \textcolor{keyword}{true});
 54             nh.param(\textcolor{stringliteral}{"yaw\_goal\_tolerance"}, \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_}, 0.05);
 55             nh.param(\textcolor{stringliteral}{"xy\_goal\_tolerance"}, \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_}, 0.10);
 56             nh.param(\textcolor{stringliteral}{"k\_rho"}, \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad8a36184bfb011545c751109e23d3b98}{k\_rho\_}, \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad8a36184bfb011545c751109e23d3b98}{k\_rho\_});
@@ -1175,7 +1186,7 @@ True if achieved, false otherwise
 \end{DoxyReturn}
 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a06a99e609ed31b97f765351dd6827722}{is\+Goal\+Reached()} 
 
-Definition at line 612 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 626 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -1183,10 +1194,11 @@ References goal\+Reached\+\_\+.
 
 
 \begin{DoxyCode}
-613         \{
-614             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] isGoalReached call"});
-615             \textcolor{keywordflow}{return} \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad443c52ef585a8eab0364f0909222f51}{goalReached\_};
-616         \}
+627         \{
+628             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] isGoalReached call: "} << 
+      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad443c52ef585a8eab0364f0909222f51}{goalReached\_});
+629             \textcolor{keywordflow}{return} \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad443c52ef585a8eab0364f0909222f51}{goalReached\_};
+630         \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a70eaeb6cf31fd3378d9fbf9bcb975995}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a70eaeb6cf31fd3378d9fbf9bcb975995}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!publish\+Goal\+Marker@{publish\+Goal\+Marker}}
@@ -1196,7 +1208,7 @@ References goal\+Reached\+\_\+.
 
 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a70eaeb6cf31fd3378d9fbf9bcb975995}{publish\+Goal\+Marker()} 
 
-Definition at line 862 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 875 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -1208,41 +1220,41 @@ Referenced by compute\+Velocity\+Commands().
 
 
 \begin{DoxyCode}
-863         \{
-864             visualization\_msgs::Marker marker;
-865             marker.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a4136268882a105d9e06e173d85d5c0dc}{costmapRos\_}->getGlobalFrameID();
-866             marker.header.stamp = ros::Time::now();
-867 
-868             marker.ns = \textcolor{stringliteral}{"my\_namespace2"};
-869             marker.id = 0;
-870             marker.type = visualization\_msgs::Marker::ARROW;
-871             marker.action = visualization\_msgs::Marker::ADD;
-872             marker.pose.orientation.w = 1;
-873 
-874             marker.scale.x = 0.05;
-875             marker.scale.y = 0.15;
-876             marker.scale.z = 0.05;
-877             marker.color.a = 1.0;
-878 
-879             marker.color.r = 1;
-880             marker.color.g = 0;
-881             marker.color.b = 0;
-882 
-883             geometry\_msgs::Point start, end;
-884             start.x = x;
-885             start.y = y;
+876         \{
+877             visualization\_msgs::Marker marker;
+878             marker.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a4136268882a105d9e06e173d85d5c0dc}{costmapRos\_}->getGlobalFrameID();
+879             marker.header.stamp = ros::Time::now();
+880 
+881             marker.ns = \textcolor{stringliteral}{"my\_namespace2"};
+882             marker.id = 0;
+883             marker.type = visualization\_msgs::Marker::ARROW;
+884             marker.action = visualization\_msgs::Marker::ADD;
+885             marker.pose.orientation.w = 1;
 886 
-887             end.x = x + 0.5 * cos(phi);
-888             end.y = y + 0.5 * sin(phi);
-889 
-890             marker.points.push\_back(start);
-891             marker.points.push\_back(end);
-892 
-893             visualization\_msgs::MarkerArray ma;
-894             ma.markers.push\_back(marker);
+887             marker.scale.x = 0.05;
+888             marker.scale.y = 0.15;
+889             marker.scale.z = 0.05;
+890             marker.color.a = 1.0;
+891 
+892             marker.color.r = 1;
+893             marker.color.g = 0;
+894             marker.color.b = 0;
 895 
-896             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a79f0ddfa686e2cd47bbc2f0bac9f3d4c}{goalMarkerPublisher\_}.publish(ma);
-897         \}
+896             geometry\_msgs::Point start, end;
+897             start.x = x;
+898             start.y = y;
+899 
+900             end.x = x + 0.5 * cos(phi);
+901             end.y = y + 0.5 * sin(phi);
+902 
+903             marker.points.push\_back(start);
+904             marker.points.push\_back(end);
+905 
+906             visualization\_msgs::MarkerArray ma;
+907             ma.markers.push\_back(marker);
+908 
+909             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a79f0ddfa686e2cd47bbc2f0bac9f3d4c}{goalMarkerPublisher\_}.publish(ma);
+910         \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -1250,79 +1262,6 @@ Here is the caller graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a70eaeb6cf31fd3378d9fbf9bcb975995_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aaa88a0a47e7cfd449c59518577599928}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aaa88a0a47e7cfd449c59518577599928}} 
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!pure\+Spinning\+Cmd@{pure\+Spinning\+Cmd}}
-\index{pure\+Spinning\+Cmd@{pure\+Spinning\+Cmd}!cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}}
-\subsubsection{\texorpdfstring{pure\+Spinning\+Cmd()}{pureSpinningCmd()}}
-{\footnotesize\ttfamily void cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner\+::pure\+Spinning\+Cmd (\begin{DoxyParamCaption}\item[{const tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \&}]{tfpose,  }\item[{double}]{vetta,  }\item[{double}]{gamma,  }\item[{double}]{alpha\+\_\+error,  }\item[{double}]{betta\+\_\+error,  }\item[{double}]{rho\+\_\+error,  }\item[{geometry\+\_\+msgs\+::\+Twist \&}]{cmd\+\_\+vel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
-
-\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aaa88a0a47e7cfd449c59518577599928}{pure\+Spinning\+Cmd()} 
-
-Definition at line 271 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
-
-
-
-References check\+Goal\+Reached(), k\+\_\+alpha\+\_\+, k\+\_\+betta\+\_\+, k\+\_\+rho\+\_\+, linear\+\_\+mode\+\_\+rho\+\_\+error\+\_\+threshold\+\_\+, cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::optional\+Robot\+Pose(), and yaw\+\_\+goal\+\_\+tolerance\+\_\+.
-
-
-
-Referenced by compute\+Velocity\+Commands().
-
-
-\begin{DoxyCode}
-272         \{
-273             \textcolor{keywordflow}{if} (rho\_error > \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a858efacf597a3a35c97aec9ca53e5900}{linear\_mode\_rho\_error\_threshold\_}) \textcolor{comment}{// works in
-       straight motion mode}
-274             \{
-275                 vetta = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad8a36184bfb011545c751109e23d3b98}{k\_rho\_} * rho\_error;
-276                 gamma = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_abf7a5a56de2ee41afba7e63c0628ec35}{k\_alpha\_} * alpha\_error;
-277             \}
-278             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (fabs(betta\_error) >= this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_}) \textcolor{comment}{// works in pure
-       spinning mode}
-279             \{
-280                 vetta = 0;
-281                 gamma = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9f257183d87f1d732cb7e404f09905ad}{k\_betta\_} * betta\_error;
-282             \}
-283             \textcolor{comment}{/*}
-284 \textcolor{comment}{            // THIS IS NOT TRUE, IF THE CARROT REACHES THE GOAL DOES NOT MEAN THE ROBOT IS}
-285 \textcolor{comment}{            // IN THE CORRECT POSITION}
-286 \textcolor{comment}{            else if (currentCarrotPoseIndex\_ >= backwardsPlanPath\_.size() - 1)}
-287 \textcolor{comment}{            \{}
-288 \textcolor{comment}{                vetta = 0;}
-289 \textcolor{comment}{                gamma = 0;}
-290 \textcolor{comment}{                goalReached\_ = true;}
-291 \textcolor{comment}{                backwardsPlanPath\_.clear();}
-292 \textcolor{comment}{}
-293 \textcolor{comment}{                ROS\_INFO\_STREAM("BACKWARD LOCAL PLANNER END: Goal Reached. Stop action [rhoerror: " <<
-       rho\_error<<"]");}
-294 \textcolor{comment}{            \}*/}
-295 
-296             \textcolor{keywordflow}{if} (this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6c4363e82119a6a8a5a3bfe309280898}{checkGoalReached}(tfpose, vetta, gamma, betta\_error, cmd\_vel))
-297             \{
-298                 vetta = 0;
-299                 gamma = 0;
-300             \}
-301 
-302             cmd\_vel.linear.x = vetta;
-303             cmd\_vel.angular.z = gamma;
-304         \}
-\end{DoxyCode}
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aaa88a0a47e7cfd449c59518577599928_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aaa88a0a47e7cfd449c59518577599928_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a62e4783adae03ce92190d855a021b91d}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a62e4783adae03ce92190d855a021b91d}} 
@@ -1333,11 +1272,11 @@ Here is the caller graph for this function\+:
 
 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a62e4783adae03ce92190d855a021b91d}{reconfig\+C\+B()} 
 
-Definition at line 575 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 589 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
-References carrot\+\_\+angular\+\_\+distance\+\_\+, carrot\+\_\+distance\+\_\+, enable\+\_\+obstacle\+\_\+checking\+\_\+, k\+\_\+alpha\+\_\+, k\+\_\+betta\+\_\+, k\+\_\+rho\+\_\+, pure\+Spinning\+Mode\+\_\+, xy\+\_\+goal\+\_\+tolerance\+\_\+, and yaw\+\_\+goal\+\_\+tolerance\+\_\+.
+References carrot\+\_\+angular\+\_\+distance\+\_\+, carrot\+\_\+distance\+\_\+, enable\+\_\+obstacle\+\_\+checking\+\_\+, k\+\_\+alpha\+\_\+, k\+\_\+betta\+\_\+, k\+\_\+rho\+\_\+, straight\+Backwards\+And\+Pure\+Spinning\+Mode\+\_\+, xy\+\_\+goal\+\_\+tolerance\+\_\+, and yaw\+\_\+goal\+\_\+tolerance\+\_\+.
 
 
 
@@ -1345,44 +1284,45 @@ Referenced by initialize().
 
 
 \begin{DoxyCode}
-576         \{
-577             ROS\_INFO(\textcolor{stringliteral}{"[BackwardLocalPlanner] reconfigure Request"});
-578             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_abf7a5a56de2ee41afba7e63c0628ec35}{k\_alpha\_} = config.k\_alpha;
-579             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9f257183d87f1d732cb7e404f09905ad}{k\_betta\_} = config.k\_betta;
-580             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad8a36184bfb011545c751109e23d3b98}{k\_rho\_} = config.k\_rho;
-581             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a154043366660cc02ec758dda32817511}{enable\_obstacle\_checking\_} = config.enable\_obstacle\_checking;
-582 
-583             \textcolor{comment}{//alpha\_offset\_ = config.alpha\_offset;}
-584             \textcolor{comment}{//betta\_offset\_ = config.betta\_offset;}
-585 
-586             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} = config.carrot\_distance;
-587             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_} = config.carrot\_angular\_distance;
-588             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_} = config.xy\_goal\_tolerance;
-589             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_} = config.yaw\_goal\_tolerance;
-590             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aebc89ccfa79fdf6bd45ba35134bec3fb}{pureSpinningMode\_} = config.pure\_spinning\_straight\_line\_mode;
-591 
-592             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_} < 
+590         \{
+591             ROS\_INFO(\textcolor{stringliteral}{"[BackwardLocalPlanner] reconfigure Request"});
+592             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_abf7a5a56de2ee41afba7e63c0628ec35}{k\_alpha\_} = config.k\_alpha;
+593             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9f257183d87f1d732cb7e404f09905ad}{k\_betta\_} = config.k\_betta;
+594             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad8a36184bfb011545c751109e23d3b98}{k\_rho\_} = config.k\_rho;
+595             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a154043366660cc02ec758dda32817511}{enable\_obstacle\_checking\_} = config.enable\_obstacle\_checking;
+596 
+597             \textcolor{comment}{//alpha\_offset\_ = config.alpha\_offset;}
+598             \textcolor{comment}{//betta\_offset\_ = config.betta\_offset;}
+599 
+600             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} = config.carrot\_distance;
+601             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_} = config.carrot\_angular\_distance;
+602             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_} = config.xy\_goal\_tolerance;
+603             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_} = config.yaw\_goal\_tolerance;
+604             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a04febb67563add6f715051a94aed1b9b}{straightBackwardsAndPureSpinningMode\_} = config.
+      pure\_spinning\_straight\_line\_mode;
+605 
+606             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_} < 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_})
-593             \{
-594                 ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] carrot\_angular\_distance ("} << 
+607             \{
+608                 ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] carrot\_angular\_distance ("} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_} << \textcolor{stringliteral}{") cannot be lower than yaw\_goal\_tolerance ("} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_} << \textcolor{stringliteral}{") setting carrot\_angular\_distance = "} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_});
-595                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_} = 
+609                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_} = 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_};
-596                 config.carrot\_angular\_distance = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_};
-597             \}
-598 
-599             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_})
-600             \{
-601                 ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] carrot\_linear\_distance ("} << 
+610                 config.carrot\_angular\_distance = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_};
+611             \}
+612 
+613             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_})
+614             \{
+615                 ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] carrot\_linear\_distance ("} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} << \textcolor{stringliteral}{") cannot be lower than xy\_goal\_tolerance\_ ("} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_} << \textcolor{stringliteral}{") setting carrot\_angular\_distance = "} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_});
-602                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_};
-603                 config.carrot\_distance = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_};
-604             \}
-605         \}
+616                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_};
+617                 config.carrot\_distance = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_};
+618             \}
+619         \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -1400,7 +1340,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 666 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 680 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -1412,88 +1352,88 @@ Referenced by set\+Plan().
 
 
 \begin{DoxyCode}
-667         \{
-668             \textcolor{comment}{// this algorithm is really important to have a precise carrot (linear or angular)}
-669             \textcolor{comment}{// and not being considered as a divergence from the path}
-670 
-671             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] resample precise"});
-672             \textcolor{keywordflow}{if}(\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size() <=1)
-673             \{
-674                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] resample precise skipping, size: "} << 
+681         \{
+682             \textcolor{comment}{// this algorithm is really important to have a precise carrot (linear or angular)}
+683             \textcolor{comment}{// and not being considered as a divergence from the path}
+684 
+685             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardLocalPlanner] resample precise"});
+686             \textcolor{keywordflow}{if}(\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size() <=1)
+687             \{
+688                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] resample precise skipping, size: "} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size());
-675                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-676             \}
-677 
-678             \textcolor{keywordtype}{int} counter = 0;
-679             \textcolor{keywordtype}{double} maxallowedAngularError = 0.45 * this->
-      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_}; \textcolor{comment}{// nyquist}
-680             \textcolor{keywordtype}{double} maxallowedLinearError = 0.45 * this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_};          \textcolor{comment}{//
-       nyquist}
-681 
-682             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size() - 1; i++)
-683             \{
-684                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] resample precise, check: "} << i);
-685                 \textcolor{keyword}{auto} &currpose = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}[i];
-686                 \textcolor{keyword}{auto} &nextpose = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}[i + 1];
-687 
-688                 tf::Quaternion qCurrent, qNext;
-689                 tf::quaternionMsgToTF(currpose.pose.orientation, qCurrent);
-690                 tf::quaternionMsgToTF(nextpose.pose.orientation, qNext);
+689                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+690             \}
 691 
-692                 \textcolor{keywordtype}{double} dx = nextpose.pose.position.x - currpose.pose.position.x;
-693                 \textcolor{keywordtype}{double} dy = nextpose.pose.position.y - currpose.pose.position.y;
-694                 \textcolor{keywordtype}{double} dist = sqrt(dx * dx + dy * dy);
+692             \textcolor{keywordtype}{int} counter = 0;
+693             \textcolor{keywordtype}{double} maxallowedAngularError = 0.45 * this->
+      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_}; \textcolor{comment}{// nyquist}
+694             \textcolor{keywordtype}{double} maxallowedLinearError = 0.45 * this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_};          \textcolor{comment}{//
+       nyquist}
 695 
-696                 \textcolor{keywordtype}{bool} resample = \textcolor{keyword}{false};
-697                 \textcolor{keywordflow}{if} (dist > maxallowedLinearError)
-698                 \{
-699                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] resampling point, linear distance:"} << dist <<
+696             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size() - 1; i++)
+697             \{
+698                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] resample precise, check: "} << i);
+699                 \textcolor{keyword}{auto} &currpose = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}[i];
+700                 \textcolor{keyword}{auto} &nextpose = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}[i + 1];
+701 
+702                 tf::Quaternion qCurrent, qNext;
+703                 tf::quaternionMsgToTF(currpose.pose.orientation, qCurrent);
+704                 tf::quaternionMsgToTF(nextpose.pose.orientation, qNext);
+705 
+706                 \textcolor{keywordtype}{double} dx = nextpose.pose.position.x - currpose.pose.position.x;
+707                 \textcolor{keywordtype}{double} dy = nextpose.pose.position.y - currpose.pose.position.y;
+708                 \textcolor{keywordtype}{double} dist = sqrt(dx * dx + dy * dy);
+709 
+710                 \textcolor{keywordtype}{bool} resample = \textcolor{keyword}{false};
+711                 \textcolor{keywordflow}{if} (dist > maxallowedLinearError)
+712                 \{
+713                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] resampling point, linear distance:"} << dist <<
        \textcolor{stringliteral}{"("} << maxallowedLinearError << \textcolor{stringliteral}{")"} << i);
-700                     resample = \textcolor{keyword}{true};
-701                 \}
-702                 \textcolor{keywordflow}{else}
-703                 \{
-704                     \textcolor{keywordtype}{double} currentAngle = tf::getYaw(qCurrent);
-705                     \textcolor{keywordtype}{double} nextAngle = tf::getYaw(qNext);
-706 
-707                     \textcolor{keywordtype}{double} angularError = fabs(angles::shortest\_angular\_distance(currentAngle, nextAngle));
-708                     \textcolor{keywordflow}{if} (angularError > maxallowedAngularError)
-709                     \{
-710                         resample = \textcolor{keyword}{true};
-711                         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] resampling point, angular distance:"} << 
+714                     resample = \textcolor{keyword}{true};
+715                 \}
+716                 \textcolor{keywordflow}{else}
+717                 \{
+718                     \textcolor{keywordtype}{double} currentAngle = tf::getYaw(qCurrent);
+719                     \textcolor{keywordtype}{double} nextAngle = tf::getYaw(qNext);
+720 
+721                     \textcolor{keywordtype}{double} angularError = fabs(angles::shortest\_angular\_distance(currentAngle, nextAngle));
+722                     \textcolor{keywordflow}{if} (angularError > maxallowedAngularError)
+723                     \{
+724                         resample = \textcolor{keyword}{true};
+725                         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] resampling point, angular distance:"} << 
       angularError << \textcolor{stringliteral}{"("} << maxallowedAngularError << \textcolor{stringliteral}{")"} << i);
-712                     \}
-713                 \}
-714 
-715                 \textcolor{keywordflow}{if} (resample)
-716                 \{
-717                     geometry\_msgs::PoseStamped pintermediate;
-718                     \textcolor{keyword}{auto} duration = nextpose.header.stamp - currpose.header.stamp;
-719                     pintermediate.header.frame\_id = currpose.header.frame\_id;
-720                     pintermediate.header.stamp = currpose.header.stamp + duration *0.5;
-721 
-722                     pintermediate.pose.position.x = 0.5 * (currpose.pose.position.x + nextpose.pose.
-      position.x);
-723                     pintermediate.pose.position.y = 0.5 * (currpose.pose.position.y + nextpose.pose.
-      position.y);
-724                     pintermediate.pose.position.z = 0.5 * (currpose.pose.position.z + nextpose.pose.
-      position.z);
-725                     tf::Quaternion intermediateQuat = tf::slerp(qCurrent, qNext, 0.5);
-726                     tf::quaternionTFToMsg(intermediateQuat, pintermediate.pose.orientation);
-727 
-728                     this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.insert(this->
-      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.begin() + i + 1, pintermediate);
-729 
-730                     \textcolor{comment}{// retry this point}
-731                     i--;
-732                     counter++;
-733                 \}
-734             \}
+726                     \}
+727                 \}
+728 
+729                 \textcolor{keywordflow}{if} (resample)
+730                 \{
+731                     geometry\_msgs::PoseStamped pintermediate;
+732                     \textcolor{keyword}{auto} duration = nextpose.header.stamp - currpose.header.stamp;
+733                     pintermediate.header.frame\_id = currpose.header.frame\_id;
+734                     pintermediate.header.stamp = currpose.header.stamp + duration *0.5;
 735 
-736             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] "} << counter << \textcolor{stringliteral}{" new inserted poses during precise
-       resmapling."});
-737             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-738         \}
+736                     pintermediate.pose.position.x = 0.5 * (currpose.pose.position.x + nextpose.pose.
+      position.x);
+737                     pintermediate.pose.position.y = 0.5 * (currpose.pose.position.y + nextpose.pose.
+      position.y);
+738                     pintermediate.pose.position.z = 0.5 * (currpose.pose.position.z + nextpose.pose.
+      position.z);
+739                     tf::Quaternion intermediateQuat = tf::slerp(qCurrent, qNext, 0.5);
+740                     tf::quaternionTFToMsg(intermediateQuat, pintermediate.pose.orientation);
+741 
+742                     this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.insert(this->
+      \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.begin() + i + 1, pintermediate);
+743 
+744                     \textcolor{comment}{// retry this point}
+745                     i--;
+746                     counter++;
+747                 \}
+748             \}
+749 
+750             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] End resampling. resampled:"} << counter << \textcolor{stringliteral}{" new
+       inserted poses during precise resmapling."});
+751             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+752         \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -1511,7 +1451,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 169 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 174 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -1523,11 +1463,11 @@ Referenced by set\+Plan(), and update\+Carrot\+Goal().
 
 
 \begin{DoxyCode}
-170         \{
-171             \textcolor{comment}{// this function should be called always the carrot is updated}
-172             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a3187b3b0c9a640133556efd056f2e736}{divergenceDetectionLastCarrotLinearDistance\_} = 
+175         \{
+176             \textcolor{comment}{// this function should be called always the carrot is updated}
+177             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a3187b3b0c9a640133556efd056f2e736}{divergenceDetectionLastCarrotLinearDistance\_} = 
       std::numeric\_limits<double>::max();
-173         \}
+178         \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -1557,57 +1497,56 @@ True if the plan was updated successfully, false otherwise
 \end{DoxyReturn}
 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ab11a0eec45f24b5a5a3987a50427eed4}{set\+Plan()} 
 
-Definition at line 745 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 759 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
-References backwards\+Plan\+Path\+\_\+, costmap\+Ros\+\_\+, current\+Carrot\+Pose\+Index\+\_\+, divergence\+Detection\+Update(), find\+Initial\+Carrot\+Goal(), goal\+Reached\+\_\+, initial\+Pure\+Spinning\+Stage\+\_\+, cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::optional\+Robot\+Pose(), resample\+Precise\+Plan(), and reset\+Divergence\+Detection().
+References backwards\+Plan\+Path\+\_\+, costmap\+Ros\+\_\+, current\+Carrot\+Pose\+Index\+\_\+, divergence\+Detection\+Update(), find\+Initial\+Carrot\+Goal(), goal\+Reached\+\_\+, in\+Goal\+Pure\+Spinning\+State\+\_\+, initial\+Pure\+Spinning\+Stage\+\_\+, cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::optional\+Robot\+Pose(), resample\+Precise\+Plan(), and reset\+Divergence\+Detection().
 
 
 \begin{DoxyCode}
-746         \{
-747             ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] setPlan: new global plan received ("} << plan.size() << \textcolor{stringliteral}{
+760         \{
+761             ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[BackwardLocalPlanner] setPlan: new global plan received ("} << plan.size() << \textcolor{stringliteral}{
       ")"});
-748             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa0e2b0589fce0bb228eb87751528e822}{initialPureSpinningStage\_} = \textcolor{keyword}{true};
-749             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad443c52ef585a8eab0364f0909222f51}{goalReached\_} = \textcolor{keyword}{false};
-750             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_} = plan;
-751 
-752             \textcolor{comment}{// find again the new carrot goal, from the destiny direction}
-753             tf::Stamped<tf::Pose> tfpose = \hyperlink{namespacecl__move__base__z_1_1backward__local__planner_afd5bb2a0d144f7b89f4215fbcb1fbe69}{optionalRobotPose}(
+762             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa0e2b0589fce0bb228eb87751528e822}{initialPureSpinningStage\_} = \textcolor{keyword}{true};
+763             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad443c52ef585a8eab0364f0909222f51}{goalReached\_} = \textcolor{keyword}{false};
+764             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_} = plan;
+765             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4d7254afd19ae1f7bd8eac9f5d58b9a}{inGoalPureSpinningState\_} =\textcolor{keyword}{false};
+766 
+767             \textcolor{comment}{// find again the new carrot goal, from the destiny direction}
+768             tf::Stamped<tf::Pose> tfpose = \hyperlink{namespacecl__move__base__z_1_1backward__local__planner_afd5bb2a0d144f7b89f4215fbcb1fbe69}{optionalRobotPose}(
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a4136268882a105d9e06e173d85d5c0dc}{costmapRos\_});
-754 
-755             geometry\_msgs::PoseStamped posestamped;
-756             tf::poseStampedTFToMsg(tfpose,posestamped);
-757             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.insert(\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.begin(), 
-      posestamped);
-758 
-759             this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a100fe8bdaaf89b0fa54ecf2aef0966ed}{resamplePrecisePlan}();
-760 
-761             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} = 0;
-762             this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a35832ebefc43e5977e1222389244c8d3}{resetDivergenceDetection}();
-763 
-764             \textcolor{keywordflow}{if} (plan.size() == 0)
-765             \{
-766                 ROS\_WARN(\textcolor{stringliteral}{"[BackwardLocalPlanner] received plan without any pose"});
-767                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-768             \}
 769 
-770             
-771 
-772             \textcolor{keywordtype}{bool} foundInitialCarrotGoal = this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0025cd3ffaa04a6a02492a33673a78a1}{findInitialCarrotGoal}(tfpose);
-773             \textcolor{keywordflow}{if} (!foundInitialCarrotGoal)
-774             \{
-775                 ROS\_ERROR(\textcolor{stringliteral}{"[BackwardLocalPlanner] new plan rejected. The initial point in the global path
-       is too much far away from the current state (according to carrot\_distance parameter)"});
-776                 \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \textcolor{comment}{// in this case, the new plan broke the current execution}
-777             \}
-778             \textcolor{keywordflow}{else}
-779             \{
-780                 this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ab1b01ecdb27641dde60661362d75465b}{divergenceDetectionUpdate}(tfpose);
-781                 \textcolor{comment}{// SANDARD AND PREFERED CASE ON NEW PLAN}
+770             geometry\_msgs::PoseStamped posestamped;
+771             tf::poseStampedTFToMsg(tfpose,posestamped);
+772             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.insert(\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.begin(), 
+      posestamped);
+773 
+774             this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a100fe8bdaaf89b0fa54ecf2aef0966ed}{resamplePrecisePlan}();
+775 
+776             \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} = 0;
+777             this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a35832ebefc43e5977e1222389244c8d3}{resetDivergenceDetection}();
+778 
+779             \textcolor{keywordflow}{if} (plan.size() == 0)
+780             \{
+781                 ROS\_WARN(\textcolor{stringliteral}{"[BackwardLocalPlanner] received plan without any pose"});
 782                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
 783             \}
-784         \}
+784 
+785             \textcolor{keywordtype}{bool} foundInitialCarrotGoal = this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0025cd3ffaa04a6a02492a33673a78a1}{findInitialCarrotGoal}(tfpose);
+786             \textcolor{keywordflow}{if} (!foundInitialCarrotGoal)
+787             \{
+788                 ROS\_ERROR(\textcolor{stringliteral}{"[BackwardLocalPlanner] new plan rejected. The initial point in the global path
+       is too much far away from the current state (according to carrot\_distance parameter)"});
+789                 \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \textcolor{comment}{// in this case, the new plan broke the current execution}
+790             \}
+791             \textcolor{keywordflow}{else}
+792             \{
+793                 this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ab1b01ecdb27641dde60661362d75465b}{divergenceDetectionUpdate}(tfpose);
+794                 \textcolor{comment}{// SANDARD AND PREFERED CASE ON NEW PLAN}
+795                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+796             \}
+797         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -1615,6 +1554,73 @@ Here is the call graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ab11a0eec45f24b5a5a3987a50427eed4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6069866b4a3150883de3212d8e43e8f8}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6069866b4a3150883de3212d8e43e8f8}} 
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!straight\+Backwards\+And\+Pure\+Spin\+Cmd@{straight\+Backwards\+And\+Pure\+Spin\+Cmd}}
+\index{straight\+Backwards\+And\+Pure\+Spin\+Cmd@{straight\+Backwards\+And\+Pure\+Spin\+Cmd}!cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}}
+\subsubsection{\texorpdfstring{straight\+Backwards\+And\+Pure\+Spin\+Cmd()}{straightBackwardsAndPureSpinCmd()}}
+{\footnotesize\ttfamily void cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner\+::straight\+Backwards\+And\+Pure\+Spin\+Cmd (\begin{DoxyParamCaption}\item[{const tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \&}]{tfpose,  }\item[{double}]{vetta,  }\item[{double}]{gamma,  }\item[{double}]{alpha\+\_\+error,  }\item[{double}]{betta\+\_\+error,  }\item[{double}]{rho\+\_\+error,  }\item[{geometry\+\_\+msgs\+::\+Twist \&}]{cmd\+\_\+vel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+pure\+Spinning\+Cmd() 
+
+Definition at line 275 of file backward\+\_\+local\+\_\+planner.\+cpp.
+
+
+
+References k\+\_\+alpha\+\_\+, k\+\_\+betta\+\_\+, k\+\_\+rho\+\_\+, linear\+\_\+mode\+\_\+rho\+\_\+error\+\_\+threshold\+\_\+, cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::optional\+Robot\+Pose(), and yaw\+\_\+goal\+\_\+tolerance\+\_\+.
+
+
+
+Referenced by compute\+Velocity\+Commands().
+
+
+\begin{DoxyCode}
+276         \{
+277             \textcolor{keywordflow}{if} (rho\_error > \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a858efacf597a3a35c97aec9ca53e5900}{linear\_mode\_rho\_error\_threshold\_}) \textcolor{comment}{// works in
+       straight motion mode}
+278             \{
+279                 vetta = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad8a36184bfb011545c751109e23d3b98}{k\_rho\_} * rho\_error;
+280                 gamma = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_abf7a5a56de2ee41afba7e63c0628ec35}{k\_alpha\_} * alpha\_error;
+281             \}
+282             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (fabs(betta\_error) >= this->\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}{yaw\_goal\_tolerance\_}) \textcolor{comment}{// works in pure
+       spinning mode}
+283             \{
+284                 vetta = 0;
+285                 gamma = \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9f257183d87f1d732cb7e404f09905ad}{k\_betta\_} * betta\_error;
+286             \}
+287             \textcolor{comment}{/*}
+288 \textcolor{comment}{            // THIS IS NOT TRUE, IF THE CARROT REACHES THE GOAL DOES NOT MEAN THE ROBOT IS}
+289 \textcolor{comment}{            // IN THE CORRECT POSITION}
+290 \textcolor{comment}{            else if (currentCarrotPoseIndex\_ >= backwardsPlanPath\_.size() - 1)}
+291 \textcolor{comment}{            \{}
+292 \textcolor{comment}{                vetta = 0;}
+293 \textcolor{comment}{                gamma = 0;}
+294 \textcolor{comment}{                goalReached\_ = true;}
+295 \textcolor{comment}{                backwardsPlanPath\_.clear();}
+296 \textcolor{comment}{}
+297 \textcolor{comment}{                ROS\_INFO\_STREAM("BACKWARD LOCAL PLANNER END: Goal Reached. Stop action [rhoerror: " <<
+       rho\_error<<"]");}
+298 \textcolor{comment}{            \}*/}
+299 
+300             cmd\_vel.linear.x = vetta;
+301             cmd\_vel.angular.z = gamma;
+302         \}
+\end{DoxyCode}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6069866b4a3150883de3212d8e43e8f8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a6069866b4a3150883de3212d8e43e8f8_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a16e79a1b4c0f18879f6f0a8ba67103fd}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a16e79a1b4c0f18879f6f0a8ba67103fd}} 
@@ -1625,7 +1631,7 @@ Here is the call graph for this function\+:
 
 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a16e79a1b4c0f18879f6f0a8ba67103fd}{update\+Carrot\+Goal()} 
 
-Definition at line 131 of file backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp.
+Definition at line 131 of file backward\+\_\+local\+\_\+planner.\+cpp.
 
 
 
@@ -1638,54 +1644,59 @@ Referenced by compute\+Velocity\+Commands().
 
 \begin{DoxyCode}
 132         \{
-133             \textcolor{keywordtype}{double} disterr = 0, angleerr = 0;
-134             \textcolor{comment}{// iterate the point from the current position and backward until reaching a new goal point in
+133             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardsLocalPlanner] --- Computing carrot pose ---"});
+134             \textcolor{keywordtype}{double} disterr = 0, angleerr = 0;
+135             \textcolor{comment}{// iterate the point from the current position and backward until reaching a new goal point in
        the path}
-135             \textcolor{comment}{// this algorithm among other advantages has that skip the looping with an eager global planner}
-136             \textcolor{comment}{// that recalls the same plan (the already performed part of the plan in the current pose is
+136             \textcolor{comment}{// this algorithm among other advantages has that skip the looping with an eager global planner}
+137             \textcolor{comment}{// that recalls the same plan (the already performed part of the plan in the current pose is
        skipped)}
-137             \textcolor{keywordflow}{while} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} < 
+138             \textcolor{keywordflow}{while} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} < 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size())
-138             \{
-139                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}{computeCurrentEuclideanAndAngularErrorsToCarrotGoal}
+139             \{
+140                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}{computeCurrentEuclideanAndAngularErrorsToCarrotGoal}
       (tfpose, disterr, angleerr);
-140 
-141                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardsLocalPlanner] update carrot goal: Current index: "} << 
+141 
+142                 ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardsLocalPlanner] update carrot goal: Current index: "} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} << \textcolor{stringliteral}{"/"} << \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size());
-142                 ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardsLocalPlanner] update carrot goal: linear error %lf, angular error: %lf
+143                 ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardsLocalPlanner] update carrot goal: linear error %lf, angular error: %lf
       "}, disterr, angleerr);
-143 
-144                 \textcolor{comment}{// target pose found, goal carrot tries to escape!}
-145                 \textcolor{keywordflow}{if} (disterr < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} && angleerr < 
+144 
+145                 \textcolor{comment}{// target pose found, goal carrot tries to escape!}
+146                 \textcolor{keywordflow}{if} (disterr < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a0bbb80ce5bae865c4322869422803296}{carrot\_distance\_} && angleerr < 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a63e30befa09c4a67cf55086923b760c7}{carrot\_angular\_distance\_})
-146                 \{
-147                     \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_}++;
-148                     \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a35832ebefc43e5977e1222389244c8d3}{resetDivergenceDetection}();
-149                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardsLocalPlanner] fw "} << 
+147                 \{
+148                     \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_}++;
+149                     \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a35832ebefc43e5977e1222389244c8d3}{resetDivergenceDetection}();
+150                     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[BackwardsLocalPlanner] fw "} << 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} << \textcolor{stringliteral}{"/"} << \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size());
-150                 \}
-151                 \textcolor{keywordflow}{else}
-152                 \{
-153                     \textcolor{keywordflow}{break};
-154                 \}
-155             \}
-156             \textcolor{comment}{//ROS\_DEBUG("[BackwardsLocalPlanner] computing angular error");}
-157             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} >= 
+151                 \}
+152                 \textcolor{keywordflow}{else}
+153                 \{
+154                     \textcolor{keywordflow}{break};
+155                 \}
+156             \}
+157             \textcolor{comment}{//ROS\_DEBUG("[BackwardsLocalPlanner] computing angular error");}
+158             \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} >= 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size() && \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size() > 0)
-158             \{
-159                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} = 
+159             \{
+160                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_} = 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad9cde5c85f782cab2ddb4030e3c3f2cf}{backwardsPlanPath\_}.size() - 1;
-160                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}{computeCurrentEuclideanAndAngularErrorsToCarrotGoal}
+161                 \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad39ba029c760fc63ea286c74b5b9b795}{computeCurrentEuclideanAndAngularErrorsToCarrotGoal}
       (tfpose, disterr, angleerr);
-161             \}
-162 
-163             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardsLocalPlanner] Current index carrot goal: %d"}, 
+162             \}
+163 
+164             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardsLocalPlanner] Current index carrot goal: %d"}, 
       \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a2e8f2b78bc97f27c5fa431f3af2261ed}{currentCarrotPoseIndex\_});
-164             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardsLocalPlanner] update carrot goal: linear error  %lf, angular error: %lf"}, 
+165             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardsLocalPlanner] Update carrot goal: linear error  %lf, angular error: %lf"}, 
       disterr, angleerr);
-165 
-166             \textcolor{keywordflow}{return} disterr < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_};
-167         \}
+166             \textcolor{keywordtype}{bool} carrotInGoalLinear = disterr < \hyperlink{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa4ec2c87947a3c08f8278eff052e7c8c}{xy\_goal\_tolerance\_};
+167             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardsLocalPlanner] carrot in goal radius: %d"}, carrotInGoalLinear);
+168 
+169             ROS\_DEBUG(\textcolor{stringliteral}{"[BackwardsLocalPlanner] --- Computing carrot pose ---"});
+170 
+171             \textcolor{keywordflow}{return} carrotInGoalLinear;
+172         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -1714,7 +1725,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 104 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 113 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1728,11 +1739,11 @@ Referenced by compute\+Velocity\+Commands().
 
 
 
-Definition at line 88 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 96 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
-Referenced by check\+Carrot\+Half\+Plain\+Constraint(), check\+Goal\+Reached(), compute\+Current\+Euclidean\+And\+Angular\+Errors\+To\+Carrot\+Goal(), compute\+Velocity\+Commands(), find\+Initial\+Carrot\+Goal(), resample\+Precise\+Plan(), set\+Plan(), and update\+Carrot\+Goal().
+Referenced by check\+Carrot\+Half\+Plain\+Constraint(), check\+Current\+Pose\+In\+Goal\+Range(), compute\+Current\+Euclidean\+And\+Angular\+Errors\+To\+Carrot\+Goal(), compute\+Velocity\+Commands(), find\+Initial\+Carrot\+Goal(), resample\+Precise\+Plan(), set\+Plan(), and update\+Carrot\+Goal().
 
 \mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a07e5f16f6951cca1e6d3483f345d0bb1}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a07e5f16f6951cca1e6d3483f345d0bb1}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!betta\+\_\+offset\+\_\+@{betta\+\_\+offset\+\_\+}}
@@ -1742,7 +1753,7 @@ Referenced by check\+Carrot\+Half\+Plain\+Constraint(), check\+Goal\+Reached(), 
 
 
 
-Definition at line 105 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 114 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1756,7 +1767,7 @@ Referenced by compute\+Velocity\+Commands().
 
 
 
-Definition at line 111 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 120 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1770,7 +1781,7 @@ Referenced by find\+Initial\+Carrot\+Goal(), initialize(), reconfig\+C\+B(), res
 
 
 
-Definition at line 110 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 119 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1784,7 +1795,7 @@ Referenced by find\+Initial\+Carrot\+Goal(), initialize(), reconfig\+C\+B(), res
 
 
 
-Definition at line 89 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 97 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1798,7 +1809,7 @@ Referenced by compute\+Velocity\+Commands(), initialize(), publish\+Goal\+Marker
 
 
 
-Definition at line 118 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 127 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1812,7 +1823,7 @@ Referenced by check\+Carrot\+Half\+Plain\+Constraint(), compute\+Current\+Euclid
 
 
 
-Definition at line 112 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 121 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1826,7 +1837,7 @@ Referenced by divergence\+Detection\+Update(), and reset\+Divergence\+Detection(
 
 
 
-Definition at line 102 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 110 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1840,7 +1851,7 @@ Referenced by compute\+Velocity\+Commands(), initialize(), and reconfig\+C\+B().
 
 
 
-Definition at line 86 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 94 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1854,7 +1865,7 @@ Referenced by initialize().
 
 
 
-Definition at line 91 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 99 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1868,11 +1879,25 @@ Referenced by initialize(), and publish\+Goal\+Marker().
 
 
 
-Definition at line 99 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 107 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
-Referenced by check\+Goal\+Reached(), compute\+Velocity\+Commands(), is\+Goal\+Reached(), and set\+Plan().
+Referenced by compute\+Velocity\+Commands(), is\+Goal\+Reached(), and set\+Plan().
+
+\mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4d7254afd19ae1f7bd8eac9f5d58b9a}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ae4d7254afd19ae1f7bd8eac9f5d58b9a}} 
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!in\+Goal\+Pure\+Spinning\+State\+\_\+@{in\+Goal\+Pure\+Spinning\+State\+\_\+}}
+\index{in\+Goal\+Pure\+Spinning\+State\+\_\+@{in\+Goal\+Pure\+Spinning\+State\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}}
+\subsubsection{\texorpdfstring{in\+Goal\+Pure\+Spinning\+State\+\_\+}{inGoalPureSpinningState\_}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner\+::in\+Goal\+Pure\+Spinning\+State\+\_\+ = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 111 of file backward\+\_\+local\+\_\+planner.\+h.
+
+
+
+Referenced by compute\+Velocity\+Commands(), and set\+Plan().
 
 \mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa0e2b0589fce0bb228eb87751528e822}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aa0e2b0589fce0bb228eb87751528e822}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!initial\+Pure\+Spinning\+Stage\+\_\+@{initial\+Pure\+Spinning\+Stage\+\_\+}}
@@ -1882,7 +1907,7 @@ Referenced by check\+Goal\+Reached(), compute\+Velocity\+Commands(), is\+Goal\+R
 
 
 
-Definition at line 100 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 108 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1896,11 +1921,11 @@ Referenced by set\+Plan().
 
 
 
-Definition at line 94 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 102 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
-Referenced by compute\+Velocity\+Commands(), initialize(), pure\+Spinning\+Cmd(), and reconfig\+C\+B().
+Referenced by compute\+Velocity\+Commands(), initialize(), reconfig\+C\+B(), and straight\+Backwards\+And\+Pure\+Spin\+Cmd().
 
 \mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9f257183d87f1d732cb7e404f09905ad}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9f257183d87f1d732cb7e404f09905ad}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!k\+\_\+betta\+\_\+@{k\+\_\+betta\+\_\+}}
@@ -1910,11 +1935,11 @@ Referenced by compute\+Velocity\+Commands(), initialize(), pure\+Spinning\+Cmd()
 
 
 
-Definition at line 95 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 103 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
-Referenced by compute\+Velocity\+Commands(), initialize(), pure\+Spinning\+Cmd(), and reconfig\+C\+B().
+Referenced by compute\+Velocity\+Commands(), initialize(), reconfig\+C\+B(), and straight\+Backwards\+And\+Pure\+Spin\+Cmd().
 
 \mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad8a36184bfb011545c751109e23d3b98}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_ad8a36184bfb011545c751109e23d3b98}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!k\+\_\+rho\+\_\+@{k\+\_\+rho\+\_\+}}
@@ -1924,11 +1949,11 @@ Referenced by compute\+Velocity\+Commands(), initialize(), pure\+Spinning\+Cmd()
 
 
 
-Definition at line 93 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 101 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
-Referenced by compute\+Velocity\+Commands(), initialize(), pure\+Spinning\+Cmd(), and reconfig\+C\+B().
+Referenced by compute\+Velocity\+Commands(), initialize(), reconfig\+C\+B(), and straight\+Backwards\+And\+Pure\+Spin\+Cmd().
 
 \mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a858efacf597a3a35c97aec9ca53e5900}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a858efacf597a3a35c97aec9ca53e5900}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!linear\+\_\+mode\+\_\+rho\+\_\+error\+\_\+threshold\+\_\+@{linear\+\_\+mode\+\_\+rho\+\_\+error\+\_\+threshold\+\_\+}}
@@ -1938,11 +1963,11 @@ Referenced by compute\+Velocity\+Commands(), initialize(), pure\+Spinning\+Cmd()
 
 
 
-Definition at line 97 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 105 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
-Referenced by initialize(), and pure\+Spinning\+Cmd().
+Referenced by initialize(), and straight\+Backwards\+And\+Pure\+Spin\+Cmd().
 
 \mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_af7e492339ee2d1c90c00f6dd4cf95551}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_af7e492339ee2d1c90c00f6dd4cf95551}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+@{max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+}}
@@ -1952,7 +1977,7 @@ Referenced by initialize(), and pure\+Spinning\+Cmd().
 
 
 
-Definition at line 115 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 124 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1966,7 +1991,7 @@ Referenced by compute\+Velocity\+Commands(), and initialize().
 
 
 
-Definition at line 114 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 123 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1980,7 +2005,7 @@ Referenced by compute\+Velocity\+Commands(), and initialize().
 
 
 
-Definition at line 85 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 93 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -1994,17 +2019,17 @@ Referenced by initialize().
 
 
 
-Definition at line 96 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 104 of file backward\+\_\+local\+\_\+planner.\+h.
 
-\mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aebc89ccfa79fdf6bd45ba35134bec3fb}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_aebc89ccfa79fdf6bd45ba35134bec3fb}} 
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!pure\+Spinning\+Mode\+\_\+@{pure\+Spinning\+Mode\+\_\+}}
-\index{pure\+Spinning\+Mode\+\_\+@{pure\+Spinning\+Mode\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}}
-\subsubsection{\texorpdfstring{pure\+Spinning\+Mode\+\_\+}{pureSpinningMode\_}}
-{\footnotesize\ttfamily \hyperlink{classbool}{bool} cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner\+::pure\+Spinning\+Mode\+\_\+ = false\hspace{0.3cm}{\ttfamily [private]}}
+\mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a04febb67563add6f715051a94aed1b9b}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a04febb67563add6f715051a94aed1b9b}} 
+\index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!straight\+Backwards\+And\+Pure\+Spinning\+Mode\+\_\+@{straight\+Backwards\+And\+Pure\+Spinning\+Mode\+\_\+}}
+\index{straight\+Backwards\+And\+Pure\+Spinning\+Mode\+\_\+@{straight\+Backwards\+And\+Pure\+Spinning\+Mode\+\_\+}!cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}}
+\subsubsection{\texorpdfstring{straight\+Backwards\+And\+Pure\+Spinning\+Mode\+\_\+}{straightBackwardsAndPureSpinningMode\_}}
+{\footnotesize\ttfamily \hyperlink{classbool}{bool} cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner\+::straight\+Backwards\+And\+Pure\+Spinning\+Mode\+\_\+ = false\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 101 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 109 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -2018,7 +2043,7 @@ Referenced by compute\+Velocity\+Commands(), initialize(), and reconfig\+C\+B().
 
 
 
-Definition at line 123 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 133 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -2032,7 +2057,7 @@ Referenced by compute\+Velocity\+Commands().
 
 
 
-Definition at line 125 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 135 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -2046,7 +2071,7 @@ Referenced by compute\+Velocity\+Commands().
 
 
 
-Definition at line 124 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 134 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
@@ -2060,11 +2085,11 @@ Referenced by compute\+Velocity\+Commands(), and initialize().
 
 
 
-Definition at line 108 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 117 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
-Referenced by check\+Goal\+Reached(), compute\+Velocity\+Commands(), initialize(), reconfig\+C\+B(), and update\+Carrot\+Goal().
+Referenced by check\+Current\+Pose\+In\+Goal\+Range(), compute\+Velocity\+Commands(), initialize(), reconfig\+C\+B(), and update\+Carrot\+Goal().
 
 \mbox{\Hypertarget{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}\label{classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner_a9c5104d328041fcde5a3c02664abad48}} 
 \index{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::backward\+\_\+local\+\_\+planner\+::\+Backward\+Local\+Planner}!yaw\+\_\+goal\+\_\+tolerance\+\_\+@{yaw\+\_\+goal\+\_\+tolerance\+\_\+}}
@@ -2074,15 +2099,15 @@ Referenced by check\+Goal\+Reached(), compute\+Velocity\+Commands(), initialize(
 
 
 
-Definition at line 107 of file backward\+\_\+local\+\_\+planner.\+h.
+Definition at line 116 of file backward\+\_\+local\+\_\+planner.\+h.
 
 
 
-Referenced by check\+Goal\+Reached(), initialize(), pure\+Spinning\+Cmd(), and reconfig\+C\+B().
+Referenced by check\+Current\+Pose\+In\+Goal\+Range(), initialize(), reconfig\+C\+B(), and straight\+Backwards\+And\+Pure\+Spin\+Cmd().
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
 smacc\+\_\+client\+\_\+library/move\+\_\+base\+\_\+z\+\_\+client/custom\+\_\+planners/backward\+\_\+local\+\_\+planner/include/backward\+\_\+local\+\_\+planner/\hyperlink{backward__local__planner_8h}{backward\+\_\+local\+\_\+planner.\+h}\item 
-smacc\+\_\+client\+\_\+library/move\+\_\+base\+\_\+z\+\_\+client/custom\+\_\+planners/backward\+\_\+local\+\_\+planner/src/\hyperlink{backward__curved__local__planner_8cpp}{backward\+\_\+curved\+\_\+local\+\_\+planner.\+cpp}\end{DoxyCompactItemize}
+smacc\+\_\+client\+\_\+library/move\+\_\+base\+\_\+z\+\_\+client/custom\+\_\+planners/backward\+\_\+local\+\_\+planner/src/\hyperlink{backward__local__planner_8cpp}{backward\+\_\+local\+\_\+planner.\+cpp}\end{DoxyCompactItemize}

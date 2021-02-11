@@ -1,13 +1,14 @@
 var searchData=
 [
   ['backindex_5f',['backIndex_',['../classcl__move__group__interface_1_1CbMoveLastTrajectoryInitialState.html#ac4056048a84431f4256beecd03b956b2',1,'cl_move_group_interface::CbMoveLastTrajectoryInitialState::backIndex_()'],['../classcl__move__group__interface_1_1CbUndoLastTrajectory.html#a07b581e873b30625f06aea437a126d29',1,'cl_move_group_interface::CbUndoLastTrajectory::backIndex_()']]],
-  ['backward_5fcurved_5flocal_5fplanner_2ecpp',['backward_curved_local_planner.cpp',['../backward__curved__local__planner_8cpp.html',1,'']]],
   ['backward_5fglobal_5fplanner_2ecpp',['backward_global_planner.cpp',['../backward__global__planner_8cpp.html',1,'']]],
   ['backward_5fglobal_5fplanner_2eh',['backward_global_planner.h',['../backward__global__planner_8h.html',1,'']]],
+  ['backward_5flocal_5fplanner_2ecpp',['backward_local_planner.cpp',['../backward__local__planner_8cpp.html',1,'']]],
   ['backward_5flocal_5fplanner_2eh',['backward_local_planner.h',['../backward__local__planner_8h.html',1,'']]],
   ['backwarddistance',['backwardDistance',['../classcl__move__base__z_1_1CbNavigateBackwards.html#abb7099e4e18602f6cf06c4f5534a2a15',1,'cl_move_base_z::CbNavigateBackwards']]],
   ['backwardglobalplanner',['BackwardGlobalPlanner',['../classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner.html',1,'cl_move_base_z::backward_global_planner::BackwardGlobalPlanner'],['../classcl__move__base__z_1_1backward__global__planner_1_1BackwardGlobalPlanner.html#a20888ea9b40dcbd86b8b12310a2ad60b',1,'cl_move_base_z::backward_global_planner::BackwardGlobalPlanner::BackwardGlobalPlanner()']]],
   ['backwardlocalplanner',['BackwardLocalPlanner',['../classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner.html',1,'cl_move_base_z::backward_local_planner::BackwardLocalPlanner'],['../classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner.html#a79e73a858b2a13c7fe10c52e08568fd6',1,'cl_move_base_z::backward_local_planner::BackwardLocalPlanner::BackwardLocalPlanner()']]],
+  ['backwardslocalplanner',['BackwardsLocalPlanner',['../namespacecl__move__base__z.html#aa8702d7f4bc14a650da006a263801a8ba89c94fa193c2a9e459400ca5bee38c47',1,'cl_move_base_z']]],
   ['backwardspeed',['backwardSpeed',['../classcl__move__base__z_1_1CbNavigateBackwards.html#aafadf3a154d4f805e63094a46a891764',1,'cl_move_base_z::CbNavigateBackwards']]],
   ['backwardsplanpath_5f',['backwardsPlanPath_',['../classcl__move__base__z_1_1backward__local__planner_1_1BackwardLocalPlanner.html#ad9cde5c85f782cab2ddb4030e3c3f2cf',1,'cl_move_base_z::backward_local_planner::BackwardLocalPlanner']]],
   ['base',['Base',['../classcl__move__base__z_1_1ClMoveBaseZ.html#a5e67ee7220b881368468613fa060b664',1,'cl_move_base_z::ClMoveBaseZ']]],

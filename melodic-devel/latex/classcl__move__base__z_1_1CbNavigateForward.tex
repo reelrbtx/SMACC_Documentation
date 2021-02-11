@@ -76,7 +76,7 @@ References forward\+Distance.
 
 \begin{DoxyCode}
 9 \{
-10     this->\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a41bc9c319c64be6302f7365173ccd2c5}{forwardDistance} = \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a41bc9c319c64be6302f7365173ccd2c5}{forwardDistance};
+10   this->\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a41bc9c319c64be6302f7365173ccd2c5}{forwardDistance} = \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a41bc9c319c64be6302f7365173ccd2c5}{forwardDistance};
 11 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classcl__move__base__z_1_1CbNavigateForward_a6322be3ee8a23652a0a9dbe8e203d00e}\label{classcl__move__base__z_1_1CbNavigateForward_a6322be3ee8a23652a0a9dbe8e203d00e}} 
@@ -118,65 +118,64 @@ References force\+Initial\+Orientation, forward\+Distance, smacc\+::\+I\+Smacc\+
 
 \begin{DoxyCode}
 18 \{
-19     \textcolor{comment}{// straight motion distance}
-20     \textcolor{keywordtype}{double} dist;
+19   \textcolor{comment}{// straight motion distance}
+20   \textcolor{keywordtype}{double} dist;
 21 
-22     \textcolor{keywordflow}{if} (!\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a41bc9c319c64be6302f7365173ccd2c5}{forwardDistance})
-23     \{
-24         this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a34fde34e48fa13db622ee60d8374d0b8}{getCurrentState}()->\hyperlink{classsmacc_1_1ISmaccState_a4f2ff8e3eda8aa9bbb60c8ff17d0def1}{param}(\textcolor{stringliteral}{"straight\_motion\_distance"}, dist, 3.5);
-25     \}
-26     \textcolor{keywordflow}{else}
-27     \{
-28         dist = *\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a41bc9c319c64be6302f7365173ccd2c5}{forwardDistance};
-29     \}
+22   \textcolor{keywordflow}{if} (!\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a41bc9c319c64be6302f7365173ccd2c5}{forwardDistance})
+23   \{
+24     this->\hyperlink{classsmacc_1_1ISmaccClientBehavior_a34fde34e48fa13db622ee60d8374d0b8}{getCurrentState}()->\hyperlink{classsmacc_1_1ISmaccState_a4f2ff8e3eda8aa9bbb60c8ff17d0def1}{param}(\textcolor{stringliteral}{"straight\_motion\_distance"}, dist, 3.5);
+25   \}
+26   \textcolor{keywordflow}{else}
+27   \{
+28     dist = *\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a41bc9c319c64be6302f7365173ccd2c5}{forwardDistance};
+29   \}
 30 
-31     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbNavigateForward] Straight motion distance: "} << dist);
+31   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"[CbNavigateForward] Straight motion distance: "} << dist);
 32 
-33     \textcolor{keyword}{auto} p = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
+33   \textcolor{keyword}{auto} p = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<
       \hyperlink{classcl__move__base__z_1_1Pose}{cl\_move\_base\_z::Pose}>();
-34     \textcolor{keyword}{auto} referenceFrame = p->\hyperlink{classcl__move__base__z_1_1Pose_af8c2dc151e74aa8da6b283d1c8563051}{getReferenceFrame}();
-35     \textcolor{keyword}{auto} currentPoseMsg = p->toPoseMsg();
+34   \textcolor{keyword}{auto} referenceFrame = p->\hyperlink{classcl__move__base__z_1_1Pose_af8c2dc151e74aa8da6b283d1c8563051}{getReferenceFrame}();
+35   \textcolor{keyword}{auto} currentPoseMsg = p->toPoseMsg();
 36 
-37     \textcolor{keywordflow}{if}(this->\hyperlink{classcl__move__base__z_1_1CbNavigateForward_ac73da1af2bca33f0927310f75d8d2e35}{forceInitialOrientation})
-38     \{
-39         currentPoseMsg.orientation = *\hyperlink{classcl__move__base__z_1_1CbNavigateForward_ac73da1af2bca33f0927310f75d8d2e35}{forceInitialOrientation};
-40         ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[CbNavigateForward] Forcing initial straight motion orientation: "} << 
-      currentPoseMsg.orientation );        
-41     \}
+37   \textcolor{keywordflow}{if} (this->\hyperlink{classcl__move__base__z_1_1CbNavigateForward_ac73da1af2bca33f0927310f75d8d2e35}{forceInitialOrientation})
+38   \{
+39     currentPoseMsg.orientation = *\hyperlink{classcl__move__base__z_1_1CbNavigateForward_ac73da1af2bca33f0927310f75d8d2e35}{forceInitialOrientation};
+40     ROS\_WARN\_STREAM(\textcolor{stringliteral}{"[CbNavigateForward] Forcing initial straight motion orientation: "} << currentPoseMsg.
+      orientation);
+41   \}
 42 
-43     tf::Transform currentPose;
-44     tf::poseMsgToTF(currentPoseMsg, currentPose);
+43   tf::Transform currentPose;
+44   tf::poseMsgToTF(currentPoseMsg, currentPose);
 45 
-46     tf::Transform forwardDeltaTransform;
-47     forwardDeltaTransform.setIdentity();
-48     forwardDeltaTransform.setOrigin(tf::Vector3(dist, 0, 0));
+46   tf::Transform forwardDeltaTransform;
+47   forwardDeltaTransform.setIdentity();
+48   forwardDeltaTransform.setOrigin(tf::Vector3(dist, 0, 0));
 49 
-50     tf::Transform targetPose = currentPose * forwardDeltaTransform;
+50   tf::Transform targetPose = currentPose * forwardDeltaTransform;
 51 
-52     ClMoveBaseZ::Goal goal;
-53     goal.target\_pose.header.frame\_id = referenceFrame;
-54     goal.target\_pose.header.stamp = ros::Time::now();
-55     tf::poseTFToMsg(targetPose, goal.target\_pose.pose);
+52   ClMoveBaseZ::Goal goal;
+53   goal.target\_pose.header.frame\_id = referenceFrame;
+54   goal.target\_pose.header.stamp = ros::Time::now();
+55   tf::poseTFToMsg(targetPose, goal.target\_pose.pose);
 56 
-57     ROS\_INFO\_STREAM(\textcolor{stringliteral}{"TARGET POSE FORWARD: "} << goal.target\_pose.pose);
+57   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"TARGET POSE FORWARD: "} << goal.target\_pose.pose);
 58 
-59     geometry\_msgs::PoseStamped currentStampedPoseMsg;
-60     currentStampedPoseMsg.header.frame\_id = referenceFrame;
-61     currentStampedPoseMsg.header.stamp = ros::Time::now();
-62     tf::poseTFToMsg(currentPose, currentStampedPoseMsg.pose);
+59   geometry\_msgs::PoseStamped currentStampedPoseMsg;
+60   currentStampedPoseMsg.header.frame\_id = referenceFrame;
+61   currentStampedPoseMsg.header.stamp = ros::Time::now();
+62   tf::poseTFToMsg(currentPose, currentStampedPoseMsg.pose);
 63 
-64     
-65     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_} = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
-66     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a205ee48ec8b4599658e7408fc4755239}{pushPath}();
-67 
-68     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a9f4989c6353022c2ec3b0546c09bf3bc}{setStartPoint}(currentStampedPoseMsg);
-69     \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::RECORD\_PATH);
-70 
-71     \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
-72     plannerSwitcher->setForwardPlanner();
-73 
-74     \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
-75 \}
+64   \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_} = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<OdomTracker>();
+65   \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_ab92735db58cfdf8d0055e3f01be124d3}{pushPath}(\textcolor{stringliteral}{"StraightNavigationForwards"});
+66 
+67   \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_a9f4989c6353022c2ec3b0546c09bf3bc}{setStartPoint}(currentStampedPoseMsg);
+68   \hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::RECORD\_PATH);
+69 
+70   \textcolor{keyword}{auto} plannerSwitcher = \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1ISmaccClient_adef78db601749ca63c19e74a27cb88cc}{getComponent}<PlannerSwitcher>();
+71   plannerSwitcher->setForwardPlanner();
+72 
+73   \hyperlink{classcl__move__base__z_1_1CbMoveBaseClientBehaviorBase_ab2ef219464cfac8659b4a87c8d0db6d5}{moveBaseClient\_}->\hyperlink{classsmacc_1_1client__bases_1_1SmaccActionClientBase_a9c47a5094ac8afb01680307fe5eca922}{sendGoal}(goal);
+74 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -198,7 +197,7 @@ Reimplemented from \hyperlink{classsmacc_1_1ISmaccClientBehavior_ad1198fdb2cbdf1
 
 
 
-Definition at line 77 of file cb\+\_\+navigate\+\_\+forward.\+cpp.
+Definition at line 76 of file cb\+\_\+navigate\+\_\+forward.\+cpp.
 
 
 
@@ -206,9 +205,9 @@ References odom\+Tracker\+\_\+, and cl\+\_\+move\+\_\+base\+\_\+z\+::odom\+\_\+t
 
 
 \begin{DoxyCode}
-78 \{
-79     this->\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::IDLE);
-80 \}
+77 \{
+78   this->\hyperlink{classcl__move__base__z_1_1CbNavigateForward_a7583a4d669af48618bd45950db8e5292}{odomTracker\_}->\hyperlink{classcl__move__base__z_1_1odom__tracker_1_1OdomTracker_aeed01bdefd9a1cc709b0b3e4eed285ed}{setWorkingMode}(WorkingMode::IDLE);
+79 \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
