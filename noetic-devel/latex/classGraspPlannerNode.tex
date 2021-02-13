@@ -1,0 +1,167 @@
+\hypertarget{classGraspPlannerNode}{}\doxysection{Grasp\+Planner\+Node Class Reference}
+\label{classGraspPlannerNode}\index{GraspPlannerNode@{GraspPlannerNode}}
+
+
+Collaboration diagram for Grasp\+Planner\+Node\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classGraspPlannerNode__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGraspPlannerNode_a27a75be5ad2b236911a7e872513a2f3f}{Grasp\+Planner\+Node}} (ros\+::\+Node\+Handle n)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef actionlib\+::\+Simple\+Action\+Server$<$ grasping\+\_\+msgs\+::\+Grasp\+Planning\+Action $>$ \mbox{\hyperlink{classGraspPlannerNode_a787559e5586c1b8b0d53c5ac0a9d5164}{server\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classGraspPlannerNode_a13d216d27b96519177065406aa72ac46}{execute\+Callback}} (const grasping\+\_\+msgs\+::\+Grasp\+Planning\+Goal\+Const\+Ptr \&goal)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classsimple__grasping_1_1ShapeGraspPlanner}{simple\+\_\+grasping\+::\+Shape\+Grasp\+Planner}} $>$ \mbox{\hyperlink{classGraspPlannerNode_a05cb2235cb92e94a1a212eb496347c3e}{planner\+\_\+}}
+\item 
+boost\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraspPlannerNode_a787559e5586c1b8b0d53c5ac0a9d5164}{server\+\_\+t}} $>$ \mbox{\hyperlink{classGraspPlannerNode_adf31ff0c1dccbc4372dbdb7feba47620}{server\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 37 of file grasp\+\_\+planner\+\_\+node.\+cpp.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classGraspPlannerNode_a787559e5586c1b8b0d53c5ac0a9d5164}\label{classGraspPlannerNode_a787559e5586c1b8b0d53c5ac0a9d5164}} 
+\index{GraspPlannerNode@{GraspPlannerNode}!server\_t@{server\_t}}
+\index{server\_t@{server\_t}!GraspPlannerNode@{GraspPlannerNode}}
+\doxysubsubsection{\texorpdfstring{server\_t}{server\_t}}
+{\footnotesize\ttfamily typedef actionlib\+::\+Simple\+Action\+Server$<$grasping\+\_\+msgs\+::\+Grasp\+Planning\+Action$>$ \mbox{\hyperlink{classGraspPlannerNode_a787559e5586c1b8b0d53c5ac0a9d5164}{Grasp\+Planner\+Node\+::server\+\_\+t}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 39 of file grasp\+\_\+planner\+\_\+node.\+cpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classGraspPlannerNode_a27a75be5ad2b236911a7e872513a2f3f}\label{classGraspPlannerNode_a27a75be5ad2b236911a7e872513a2f3f}} 
+\index{GraspPlannerNode@{GraspPlannerNode}!GraspPlannerNode@{GraspPlannerNode}}
+\index{GraspPlannerNode@{GraspPlannerNode}!GraspPlannerNode@{GraspPlannerNode}}
+\doxysubsubsection{\texorpdfstring{GraspPlannerNode()}{GraspPlannerNode()}}
+{\footnotesize\ttfamily Grasp\+Planner\+Node\+::\+Grasp\+Planner\+Node (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 42 of file grasp\+\_\+planner\+\_\+node.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{43   \{}
+\DoxyCodeLine{44     \textcolor{comment}{// Planner}}
+\DoxyCodeLine{45     \mbox{\hyperlink{classGraspPlannerNode_a05cb2235cb92e94a1a212eb496347c3e}{planner\_}}.reset(\textcolor{keyword}{new} \mbox{\hyperlink{classsimple__grasping_1_1ShapeGraspPlanner}{simple\_grasping::ShapeGraspPlanner}}(n));}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \textcolor{comment}{// Action for grasp planning}}
+\DoxyCodeLine{48     \mbox{\hyperlink{classGraspPlannerNode_adf31ff0c1dccbc4372dbdb7feba47620}{server\_}}.reset(\textcolor{keyword}{new} \mbox{\hyperlink{classGraspPlannerNode_a787559e5586c1b8b0d53c5ac0a9d5164}{server\_t}}(n, \textcolor{stringliteral}{"plan"},}
+\DoxyCodeLine{49                                boost::bind(\&\mbox{\hyperlink{classGraspPlannerNode_a13d216d27b96519177065406aa72ac46}{GraspPlannerNode::executeCallback}}, \textcolor{keyword}{this}, \_1),}
+\DoxyCodeLine{50                                \textcolor{keyword}{false}));}
+\DoxyCodeLine{51     \mbox{\hyperlink{classGraspPlannerNode_adf31ff0c1dccbc4372dbdb7feba47620}{server\_}}-\/>start();}
+\DoxyCodeLine{52   \}}
+
+\end{DoxyCode}
+
+
+References execute\+Callback(), planner\+\_\+, and server\+\_\+.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classGraspPlannerNode_a27a75be5ad2b236911a7e872513a2f3f_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classGraspPlannerNode_a13d216d27b96519177065406aa72ac46}\label{classGraspPlannerNode_a13d216d27b96519177065406aa72ac46}} 
+\index{GraspPlannerNode@{GraspPlannerNode}!executeCallback@{executeCallback}}
+\index{executeCallback@{executeCallback}!GraspPlannerNode@{GraspPlannerNode}}
+\doxysubsubsection{\texorpdfstring{executeCallback()}{executeCallback()}}
+{\footnotesize\ttfamily void Grasp\+Planner\+Node\+::execute\+Callback (\begin{DoxyParamCaption}\item[{const grasping\+\_\+msgs\+::\+Grasp\+Planning\+Goal\+Const\+Ptr \&}]{goal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 55 of file grasp\+\_\+planner\+\_\+node.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{56   \{}
+\DoxyCodeLine{57     grasping\_msgs::GraspPlanningResult \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}};}
+\DoxyCodeLine{58     \mbox{\hyperlink{classGraspPlannerNode_a05cb2235cb92e94a1a212eb496347c3e}{planner\_}}-\/>plan(\mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>object, \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.grasps);}
+\DoxyCodeLine{59     \mbox{\hyperlink{classGraspPlannerNode_adf31ff0c1dccbc4372dbdb7feba47620}{server\_}}-\/>setSucceeded(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}});}
+\DoxyCodeLine{60   \}}
+
+\end{DoxyCode}
+
+
+References get\+\_\+controller\+\_\+state\+::goal, planner\+\_\+, sick\+\_\+camera\+\_\+client\+::result, and server\+\_\+.
+
+
+
+Referenced by Grasp\+Planner\+Node().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classGraspPlannerNode_a13d216d27b96519177065406aa72ac46_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classGraspPlannerNode_a05cb2235cb92e94a1a212eb496347c3e}\label{classGraspPlannerNode_a05cb2235cb92e94a1a212eb496347c3e}} 
+\index{GraspPlannerNode@{GraspPlannerNode}!planner\_@{planner\_}}
+\index{planner\_@{planner\_}!GraspPlannerNode@{GraspPlannerNode}}
+\doxysubsubsection{\texorpdfstring{planner\_}{planner\_}}
+{\footnotesize\ttfamily boost\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classsimple__grasping_1_1ShapeGraspPlanner}{simple\+\_\+grasping\+::\+Shape\+Grasp\+Planner}}$>$ Grasp\+Planner\+Node\+::planner\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 62 of file grasp\+\_\+planner\+\_\+node.\+cpp.
+
+
+
+Referenced by execute\+Callback(), and Grasp\+Planner\+Node().
+
+\mbox{\Hypertarget{classGraspPlannerNode_adf31ff0c1dccbc4372dbdb7feba47620}\label{classGraspPlannerNode_adf31ff0c1dccbc4372dbdb7feba47620}} 
+\index{GraspPlannerNode@{GraspPlannerNode}!server\_@{server\_}}
+\index{server\_@{server\_}!GraspPlannerNode@{GraspPlannerNode}}
+\doxysubsubsection{\texorpdfstring{server\_}{server\_}}
+{\footnotesize\ttfamily boost\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classGraspPlannerNode_a787559e5586c1b8b0d53c5ac0a9d5164}{server\+\_\+t}}$>$ Grasp\+Planner\+Node\+::server\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 63 of file grasp\+\_\+planner\+\_\+node.\+cpp.
+
+
+
+Referenced by execute\+Callback(), and Grasp\+Planner\+Node().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/simple\+\_\+grasping/src/\mbox{\hyperlink{grasp__planner__node_8cpp}{grasp\+\_\+planner\+\_\+node.\+cpp}}\end{DoxyCompactItemize}

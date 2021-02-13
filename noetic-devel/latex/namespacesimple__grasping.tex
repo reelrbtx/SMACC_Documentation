@@ -1,0 +1,709 @@
+\hypertarget{namespacesimple__grasping}{}\doxysection{simple\+\_\+grasping Namespace Reference}
+\label{namespacesimple__grasping}\index{simple\_grasping@{simple\_grasping}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classsimple__grasping_1_1BasicGraspingPerception}{Basic\+Grasping\+Perception}}
+\begin{DoxyCompactList}\small\item\em R\+OS wrapper for shape grasp planner + object support segmentation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation}{Object\+Support\+Segmentation}}
+\begin{DoxyCompactList}\small\item\em Class that segments a point cloud into objects and supporting surfaces. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classsimple__grasping_1_1ShapeGraspPlanner}{Shape\+Grasp\+Planner}}
+\begin{DoxyCompactList}\small\item\em A simple grasp planner that uses the bounding box shape to generate viable grasps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacesimple__grasping_af21a15aabc2ee77498faa03833edd59e}{hsv2rgb}} (const float h, const float s, const float v, float \&r, float \&g, float \&b)
+\begin{DoxyCompactList}\small\item\em Fill in R\+GB values from H\+SV values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacesimple__grasping_a8e014f4263081ef7e674f78d46fb2eb3}{colorize\+Cloud}} (pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&cloud, float hue)
+\begin{DoxyCompactList}\small\item\em Update rgb component of an X\+Y\+Z\+R\+GB cloud to a new H\+SV color. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename PointT $>$ }\\double \mbox{\hyperlink{namespacesimple__grasping_a4cb42ccfb8bdcf0853840b6e6842635d}{distance\+Point\+To\+Plane}} (const PointT \&point, const pcl\+::\+Model\+Coefficients\+::\+Ptr plane)
+\begin{DoxyCompactList}\small\item\em Get distance from point to plane. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{namespacesimple__grasping_a4c0b1c958f2613c098d68d2f83987e0a}{distance\+Point\+To\+Plane}} (const Eigen\+::\+Vector4f \&point, const pcl\+::\+Model\+Coefficients\+::\+Ptr plane)
+\begin{DoxyCompactList}\small\item\em Get distance from point to plane. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{namespacesimple__grasping_a2a8cea55980f11b77c2cfa931dae1d93}{extract\+Shape}} (const pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&input, pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&output, shape\+\_\+msgs\+::\+Solid\+Primitive \&shape, geometry\+\_\+msgs\+::\+Pose \&pose)
+\begin{DoxyCompactList}\small\item\em Find the smallest shape primitive we can fit around this object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{namespacesimple__grasping_a5e500982f834eea5d24a33c8c63df2fe}{extract\+Shape}} (const pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&input, const pcl\+::\+Model\+Coefficients\+::\+Ptr model, pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&output, shape\+\_\+msgs\+::\+Solid\+Primitive \&shape, geometry\+\_\+msgs\+::\+Pose \&pose)
+\begin{DoxyCompactList}\small\item\em Find the smallest shape primitive we can fit around this object, given the plane parameters. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{namespacesimple__grasping_a53e673fbcf37067b954795386197b79f}{extract\+Unoriented\+Bounding\+Box}} (const pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&input, shape\+\_\+msgs\+::\+Solid\+Primitive \&shape, geometry\+\_\+msgs\+::\+Pose \&pose)
+\begin{DoxyCompactList}\small\item\em Find a bounding box around a cloud. This method does not attempt to find best orientation and so the bounding box will be oriented with the frame of the cloud. \end{DoxyCompactList}\item 
+moveit\+\_\+msgs\+::\+Gripper\+Translation \mbox{\hyperlink{namespacesimple__grasping_a15c9f18e2f479e851ad34783ed77cbee}{make\+Gripper\+Translation}} (std\+::string frame, double min, double desired, double x\+\_\+axis=1.\+0, double y\+\_\+axis=0.\+0, double z\+\_\+axis=0.\+0)
+\item 
+Eigen\+::\+Quaterniond \mbox{\hyperlink{namespacesimple__grasping_a9aa98ea782f0130968e07f0be3a035a9}{quaternion\+From\+Euler}} (float yaw, float pitch, float roll)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacesimple__grasping_a8e014f4263081ef7e674f78d46fb2eb3}\label{namespacesimple__grasping_a8e014f4263081ef7e674f78d46fb2eb3}} 
+\index{simple\_grasping@{simple\_grasping}!colorizeCloud@{colorizeCloud}}
+\index{colorizeCloud@{colorizeCloud}!simple\_grasping@{simple\_grasping}}
+\doxysubsubsection{\texorpdfstring{colorizeCloud()}{colorizeCloud()}}
+{\footnotesize\ttfamily void simple\+\_\+grasping\+::colorize\+Cloud (\begin{DoxyParamCaption}\item[{pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&}]{cloud,  }\item[{float}]{hue }\end{DoxyParamCaption})}
+
+
+
+Update rgb component of an X\+Y\+Z\+R\+GB cloud to a new H\+SV color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cloud} & The cloud to update. \\
+\hline
+{\em hue} & The hue to apply. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 67 of file cloud\+\_\+tools.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{68 \{}
+\DoxyCodeLine{69   std::vector<pcl::PCLPointField> fields;}
+\DoxyCodeLine{70   pcl::getFields(cloud, fields);}
+\DoxyCodeLine{71   \textcolor{keywordtype}{size\_t} rgb\_field\_index;}
+\DoxyCodeLine{72   \textcolor{keywordflow}{for} (rgb\_field\_index = 0; rgb\_field\_index < fields.size(); ++rgb\_field\_index)}
+\DoxyCodeLine{73   \{}
+\DoxyCodeLine{74     \textcolor{keywordflow}{if} (fields[rgb\_field\_index].\mbox{\hyperlink{namespacestart__controller_a7b97ae4906891a46251e92cce0503b41}{name}} == \textcolor{stringliteral}{"rgb"} ||}
+\DoxyCodeLine{75         fields[rgb\_field\_index].\mbox{\hyperlink{namespacestart__controller_a7b97ae4906891a46251e92cce0503b41}{name}} == \textcolor{stringliteral}{"rgba"})}
+\DoxyCodeLine{76       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{77   \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79   \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}}, g, b;}
+\DoxyCodeLine{80   \mbox{\hyperlink{namespacesimple__grasping_af21a15aabc2ee77498faa03833edd59e}{hsv2rgb}}(hue, 0.8 \textcolor{comment}{/*saturation*/}, 1.0 \textcolor{comment}{/*value*/}, \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}}, g, b);}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < cloud.points.size(); ++j)}
+\DoxyCodeLine{83   \{}
+\DoxyCodeLine{84     pcl::PointXYZRGB \&p = cloud.points[j];}
+\DoxyCodeLine{85     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* pt\_rgb = (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}*) \&p;}
+\DoxyCodeLine{86     pt\_rgb += fields[rgb\_field\_index].offset;}
+\DoxyCodeLine{87     (*pt\_rgb) = (\textcolor{keywordtype}{unsigned} char) (\mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}} * 255);}
+\DoxyCodeLine{88     (*(pt\_rgb+1)) = (\textcolor{keywordtype}{unsigned} char) (g * 255);}
+\DoxyCodeLine{89     (*(pt\_rgb+2)) = (\textcolor{keywordtype}{unsigned} char) (b * 255);}
+\DoxyCodeLine{90   \}}
+\DoxyCodeLine{91 \}}
+
+\end{DoxyCode}
+
+
+References hsv2rgb(), start\+\_\+controller\+::name, and fake\+\_\+cube\+\_\+perception\+\_\+node\+::r.
+
+
+
+Referenced by simple\+\_\+grasping\+::\+Object\+Support\+Segmentation\+::segment().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesimple__grasping_a8e014f4263081ef7e674f78d46fb2eb3_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesimple__grasping_a8e014f4263081ef7e674f78d46fb2eb3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacesimple__grasping_a4c0b1c958f2613c098d68d2f83987e0a}\label{namespacesimple__grasping_a4c0b1c958f2613c098d68d2f83987e0a}} 
+\index{simple\_grasping@{simple\_grasping}!distancePointToPlane@{distancePointToPlane}}
+\index{distancePointToPlane@{distancePointToPlane}!simple\_grasping@{simple\_grasping}}
+\doxysubsubsection{\texorpdfstring{distancePointToPlane()}{distancePointToPlane()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double simple\+\_\+grasping\+::distance\+Point\+To\+Plane (\begin{DoxyParamCaption}\item[{const Eigen\+::\+Vector4f \&}]{point,  }\item[{const pcl\+::\+Model\+Coefficients\+::\+Ptr}]{plane }\end{DoxyParamCaption})}
+
+
+
+Get distance from point to plane. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The point. \\
+\hline
+{\em plane} & Plane coefficients. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 93 of file cloud\+\_\+tools.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{94 \{}
+\DoxyCodeLine{95   Eigen::Vector4f pp(point);}
+\DoxyCodeLine{96   pp[3] = 1.0;}
+\DoxyCodeLine{97   Eigen::Vector4f m(plane-\/>values[0], plane-\/>values[1], plane-\/>values[2], plane-\/>values[3]);}
+\DoxyCodeLine{98   \textcolor{keywordflow}{return} pp.dot(m);}
+\DoxyCodeLine{99 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacesimple__grasping_a4cb42ccfb8bdcf0853840b6e6842635d}\label{namespacesimple__grasping_a4cb42ccfb8bdcf0853840b6e6842635d}} 
+\index{simple\_grasping@{simple\_grasping}!distancePointToPlane@{distancePointToPlane}}
+\index{distancePointToPlane@{distancePointToPlane}!simple\_grasping@{simple\_grasping}}
+\doxysubsubsection{\texorpdfstring{distancePointToPlane()}{distancePointToPlane()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename PointT $>$ \\
+double simple\+\_\+grasping\+::distance\+Point\+To\+Plane (\begin{DoxyParamCaption}\item[{const PointT \&}]{point,  }\item[{const pcl\+::\+Model\+Coefficients\+::\+Ptr}]{plane }\end{DoxyParamCaption})}
+
+
+
+Get distance from point to plane. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The point. \\
+\hline
+{\em plane} & Plane coefficients. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 71 of file cloud\+\_\+tools.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{72 \{}
+\DoxyCodeLine{73   Eigen::Vector4f pp(point.x, point.y, point.z, 1);}
+\DoxyCodeLine{74   Eigen::Vector4f m(plane-\/>values[0], plane-\/>values[1], plane-\/>values[2], plane-\/>values[3]);}
+\DoxyCodeLine{75   \textcolor{keywordflow}{return} pp.dot(m);}
+\DoxyCodeLine{76 \}}
+
+\end{DoxyCode}
+
+
+Referenced by simple\+\_\+grasping\+::\+Object\+Support\+Segmentation\+::segment().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesimple__grasping_a4cb42ccfb8bdcf0853840b6e6842635d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacesimple__grasping_a5e500982f834eea5d24a33c8c63df2fe}\label{namespacesimple__grasping_a5e500982f834eea5d24a33c8c63df2fe}} 
+\index{simple\_grasping@{simple\_grasping}!extractShape@{extractShape}}
+\index{extractShape@{extractShape}!simple\_grasping@{simple\_grasping}}
+\doxysubsubsection{\texorpdfstring{extractShape()}{extractShape()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} simple\+\_\+grasping\+::extract\+Shape (\begin{DoxyParamCaption}\item[{const pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&}]{input,  }\item[{const pcl\+::\+Model\+Coefficients\+::\+Ptr}]{model,  }\item[{pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&}]{output,  }\item[{shape\+\_\+msgs\+::\+Solid\+Primitive \&}]{shape,  }\item[{geometry\+\_\+msgs\+::\+Pose \&}]{pose }\end{DoxyParamCaption})}
+
+
+
+Find the smallest shape primitive we can fit around this object, given the plane parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Point Cloud of the object. \\
+\hline
+{\em model} & Model coefficients for the plane. \\
+\hline
+{\em output} & Point Cloud transformed to the pose frame of the shape primitive fit. \\
+\hline
+{\em shape} & Returned smallest shape primitive fit. \\
+\hline
+{\em pose} & The pose of the shape primitive fit. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if a shape was extracted, false if we have a failure. 
+\end{DoxyReturn}
+
+
+Definition at line 41 of file shape\+\_\+extraction.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{46 \{}
+\DoxyCodeLine{47   \textcolor{comment}{// Used to decide between various shapes}}
+\DoxyCodeLine{48   \textcolor{keywordtype}{double} min\_volume = 1000.0;  \textcolor{comment}{// the minimum volume shape found thus far.}}
+\DoxyCodeLine{49   Eigen::Matrix3f transformation;  \textcolor{comment}{// the transformation for the best-\/fit shape}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51   \textcolor{comment}{// Compute z height as maximum distance from planes}}
+\DoxyCodeLine{52   \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_ac86e2e03c89c329a264a1186844279b7}{height}} = 0.0;}
+\DoxyCodeLine{53   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < input.size(); ++i)}
+\DoxyCodeLine{54   \{}
+\DoxyCodeLine{55     Eigen::Vector4f pp(input[i].x, input[i].\mbox{\hyperlink{namespacepick__and__place_a9dc3a6efa6a9a0786df1b6a1b1d60ffc}{y}}, input[i].z, 1);}
+\DoxyCodeLine{56     Eigen::Vector4f m(model-\/>values[0], model-\/>values[1], model-\/>values[2], model-\/>values[3]);}
+\DoxyCodeLine{57     \textcolor{keywordtype}{double} distance\_to\_plane = fabs(pp.dot(m));}
+\DoxyCodeLine{58     \textcolor{keywordflow}{if} (distance\_to\_plane > \mbox{\hyperlink{namespacepick__and__place_ac86e2e03c89c329a264a1186844279b7}{height}})}
+\DoxyCodeLine{59       \mbox{\hyperlink{namespacepick__and__place_ac86e2e03c89c329a264a1186844279b7}{height}} = distance\_to\_plane;}
+\DoxyCodeLine{60   \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62   \textcolor{comment}{// Project object into 2d, using plane model coefficients}}
+\DoxyCodeLine{63   pcl::PointCloud<pcl::PointXYZRGB>::Ptr flat(\textcolor{keyword}{new} pcl::PointCloud<pcl::PointXYZRGB>);}
+\DoxyCodeLine{64   pcl::ProjectInliers<pcl::PointXYZRGB> projection;}
+\DoxyCodeLine{65   projection.setModelType(pcl::SACMODEL\_PLANE);}
+\DoxyCodeLine{66   projection.setInputCloud(input.makeShared());  \textcolor{comment}{// stupid API}}
+\DoxyCodeLine{67   projection.setModelCoefficients(model);}
+\DoxyCodeLine{68   projection.filter(*flat);}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70   \textcolor{comment}{// Rotate plane so that Z=0}}
+\DoxyCodeLine{71   pcl::PointCloud<pcl::PointXYZRGB>::Ptr flat\_projected(\textcolor{keyword}{new} pcl::PointCloud<pcl::PointXYZRGB>);}
+\DoxyCodeLine{72   Eigen::Vector3f normal(model-\/>values[0], model-\/>values[1], model-\/>values[2]);}
+\DoxyCodeLine{73   Eigen::Quaternionf qz; qz.setFromTwoVectors(normal, Eigen::Vector3f::UnitZ());}
+\DoxyCodeLine{74   Eigen::Matrix3f plane\_rotation = qz.toRotationMatrix();}
+\DoxyCodeLine{75   Eigen::Matrix3f inv\_plane\_rotation = plane\_rotation.inverse();}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < flat-\/>size(); ++i)}
+\DoxyCodeLine{78   \{}
+\DoxyCodeLine{79     pcl::PointXYZRGB p;}
+\DoxyCodeLine{80     p.getVector3fMap() = plane\_rotation * (*flat)[i].getVector3fMap();}
+\DoxyCodeLine{81     flat\_projected-\/>push\_back(p);}
+\DoxyCodeLine{82   \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84   \textcolor{comment}{// Find the convex hull}}
+\DoxyCodeLine{85   pcl::PointCloud<pcl::PointXYZRGB> hull;}
+\DoxyCodeLine{86   pcl::ConvexHull<pcl::PointXYZRGB> convex\_hull;}
+\DoxyCodeLine{87   convex\_hull.setInputCloud(flat\_projected);}
+\DoxyCodeLine{88   convex\_hull.setDimension(2);}
+\DoxyCodeLine{89   convex\_hull.reconstruct(hull);}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91   \textcolor{comment}{// Try fitting a rectangle}}
+\DoxyCodeLine{92   shape\_msgs::SolidPrimitive rect;  \textcolor{comment}{// the best-\/fit rectangle}}
+\DoxyCodeLine{93   rect.type = rect.BOX;}
+\DoxyCodeLine{94   rect.dimensions.resize(3);}
+\DoxyCodeLine{95   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < hull.size() -\/ 1; ++i)}
+\DoxyCodeLine{96   \{}
+\DoxyCodeLine{97     \textcolor{comment}{// For each pair of hull points, determine the angle}}
+\DoxyCodeLine{98     \textcolor{keywordtype}{double} rise = hull[i+1].y -\/ hull[i].y;}
+\DoxyCodeLine{99     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}{run}} = hull[i+1].x -\/ hull[i].x;}
+\DoxyCodeLine{100     \textcolor{comment}{// and normalize..}}
+\DoxyCodeLine{101     \{}
+\DoxyCodeLine{102       \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_af3d73e82ded5c187bafef2917883fc1a}{l}} = sqrt((rise * rise) + (\mbox{\hyperlink{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}{run}} * \mbox{\hyperlink{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}{run}}));}
+\DoxyCodeLine{103       rise = rise/\mbox{\hyperlink{namespacepick__and__place_af3d73e82ded5c187bafef2917883fc1a}{l}};}
+\DoxyCodeLine{104       \mbox{\hyperlink{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}{run}} = \mbox{\hyperlink{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}{run}}/\mbox{\hyperlink{namespacepick__and__place_af3d73e82ded5c187bafef2917883fc1a}{l}};}
+\DoxyCodeLine{105     \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{comment}{// Build rotation matrix from change of basis}}
+\DoxyCodeLine{108     Eigen::Matrix3f rotation;}
+\DoxyCodeLine{109     rotation(0, 0) = \mbox{\hyperlink{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}{run}};}
+\DoxyCodeLine{110     rotation(0, 1) = rise;}
+\DoxyCodeLine{111     rotation(0, 2) = 0.0;}
+\DoxyCodeLine{112     rotation(1, 0) = -\/rise;}
+\DoxyCodeLine{113     rotation(1, 1) = \mbox{\hyperlink{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}{run}};}
+\DoxyCodeLine{114     rotation(1, 2) = 0.0;}
+\DoxyCodeLine{115     rotation(2, 0) = 0.0;}
+\DoxyCodeLine{116     rotation(2, 1) = 0.0;}
+\DoxyCodeLine{117     rotation(2, 2) = 1.0;}
+\DoxyCodeLine{118     Eigen::Matrix3f inv\_rotation = rotation.inverse();}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \textcolor{comment}{// Project hull to new coordinate system}}
+\DoxyCodeLine{121     pcl::PointCloud<pcl::PointXYZRGB> projected\_cloud;}
+\DoxyCodeLine{122     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < hull.size(); ++j)}
+\DoxyCodeLine{123     \{}
+\DoxyCodeLine{124       pcl::PointXYZRGB p;}
+\DoxyCodeLine{125       p.getVector3fMap() = rotation * hull[j].getVector3fMap();}
+\DoxyCodeLine{126       projected\_cloud.push\_back(p);}
+\DoxyCodeLine{127     \}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129     \textcolor{comment}{// Compute min/max}}
+\DoxyCodeLine{130     \textcolor{keywordtype}{double} x\_min = 1000.0;}
+\DoxyCodeLine{131     \textcolor{keywordtype}{double} x\_max = -\/1000.0;}
+\DoxyCodeLine{132     \textcolor{keywordtype}{double} y\_min = 1000.0;}
+\DoxyCodeLine{133     \textcolor{keywordtype}{double} y\_max = -\/1000.0;}
+\DoxyCodeLine{134     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < projected\_cloud.size(); ++j)}
+\DoxyCodeLine{135     \{}
+\DoxyCodeLine{136       \textcolor{keywordflow}{if} (projected\_cloud[j].x < x\_min)}
+\DoxyCodeLine{137         x\_min = projected\_cloud[j].x;}
+\DoxyCodeLine{138       \textcolor{keywordflow}{if} (projected\_cloud[j].x > x\_max)}
+\DoxyCodeLine{139         x\_max = projected\_cloud[j].x;}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141       \textcolor{keywordflow}{if} (projected\_cloud[j].\mbox{\hyperlink{namespacepick__and__place_a9dc3a6efa6a9a0786df1b6a1b1d60ffc}{y}} < y\_min)}
+\DoxyCodeLine{142         y\_min = projected\_cloud[j].y;}
+\DoxyCodeLine{143       \textcolor{keywordflow}{if} (projected\_cloud[j].\mbox{\hyperlink{namespacepick__and__place_a9dc3a6efa6a9a0786df1b6a1b1d60ffc}{y}} > y\_max)}
+\DoxyCodeLine{144         y\_max = projected\_cloud[j].y;}
+\DoxyCodeLine{145     \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147     \textcolor{comment}{// Is this the best estimate?}}
+\DoxyCodeLine{148     \textcolor{keywordtype}{double} area = (x\_max -\/ x\_min) * (y\_max -\/ y\_min);}
+\DoxyCodeLine{149     \textcolor{keywordflow}{if} (area*\mbox{\hyperlink{namespacepick__and__place_ac86e2e03c89c329a264a1186844279b7}{height}} < min\_volume)}
+\DoxyCodeLine{150     \{}
+\DoxyCodeLine{151       transformation = inv\_plane\_rotation * inv\_rotation;}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153       rect.dimensions[0] = (x\_max -\/ x\_min);}
+\DoxyCodeLine{154       rect.dimensions[1] = (y\_max -\/ y\_min);}
+\DoxyCodeLine{155       rect.dimensions[2] = \mbox{\hyperlink{namespacepick__and__place_ac86e2e03c89c329a264a1186844279b7}{height}};}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157       Eigen::Vector3f pose3f((x\_max + x\_min)/2.0, (y\_max + y\_min)/2.0,}
+\DoxyCodeLine{158                              projected\_cloud[0].z + \mbox{\hyperlink{namespacepick__and__place_ac86e2e03c89c329a264a1186844279b7}{height}}/2.0);}
+\DoxyCodeLine{159       pose3f = transformation * pose3f;}
+\DoxyCodeLine{160       \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.x = pose3f(0);}
+\DoxyCodeLine{161       \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.y = pose3f(1);}
+\DoxyCodeLine{162       \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.z = pose3f(2);}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164       Eigen::Quaternionf q(transformation);}
+\DoxyCodeLine{165       \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.orientation.x = q.x();}
+\DoxyCodeLine{166       \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.orientation.y = q.y();}
+\DoxyCodeLine{167       \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.orientation.z = q.z();}
+\DoxyCodeLine{168       \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.orientation.w = q.w();}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170       min\_volume = area * \mbox{\hyperlink{namespacepick__and__place_ac86e2e03c89c329a264a1186844279b7}{height}};}
+\DoxyCodeLine{171       shape = rect;}
+\DoxyCodeLine{172     \}}
+\DoxyCodeLine{173   \}}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175   \textcolor{comment}{// Try fitting a cylinder}}
+\DoxyCodeLine{176   shape\_msgs::SolidPrimitive cylinder;  \textcolor{comment}{// the best-\/fit cylinder}}
+\DoxyCodeLine{177   cylinder.type = cylinder.CYLINDER;}
+\DoxyCodeLine{178   cylinder.dimensions.resize(2);}
+\DoxyCodeLine{179   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < hull.size(); ++i)}
+\DoxyCodeLine{180   \{}
+\DoxyCodeLine{181     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = i + 1; j < hull.size(); ++j)}
+\DoxyCodeLine{182     \{}
+\DoxyCodeLine{183       \textcolor{comment}{// For each pair of hull points determine the center point}}
+\DoxyCodeLine{184       \textcolor{comment}{//  between them as a possible cylinder}}
+\DoxyCodeLine{185       pcl::PointXYZRGB p;}
+\DoxyCodeLine{186       p.x = (hull[i].x + hull[j].x) / 2.0;}
+\DoxyCodeLine{187       p.y = (hull[i].y + hull[j].y) / 2.0;}
+\DoxyCodeLine{188       \textcolor{keywordtype}{double} radius = 0.0;}
+\DoxyCodeLine{189       \textcolor{comment}{// Find radius from this point}}
+\DoxyCodeLine{190       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} k = 0; k < hull.size(); ++k)}
+\DoxyCodeLine{191       \{}
+\DoxyCodeLine{192         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} = hull[k].x -\/ p.x;}
+\DoxyCodeLine{193         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}} = hull[k].y -\/ p.y;}
+\DoxyCodeLine{194         \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}} = sqrt((\mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} * \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}}) + (\mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}} * \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}}));}
+\DoxyCodeLine{195         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}} > radius)}
+\DoxyCodeLine{196           radius = \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}};}
+\DoxyCodeLine{197       \}}
+\DoxyCodeLine{198       \textcolor{comment}{// Is this cylinder the best match?}}
+\DoxyCodeLine{199       \textcolor{keywordtype}{double} volume = M\_PI * radius * radius * \mbox{\hyperlink{namespacepick__and__place_ac86e2e03c89c329a264a1186844279b7}{height}};}
+\DoxyCodeLine{200       \textcolor{keywordflow}{if} (volume < min\_volume)}
+\DoxyCodeLine{201       \{}
+\DoxyCodeLine{202         transformation = inv\_plane\_rotation;}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204         cylinder.dimensions[0] = \mbox{\hyperlink{namespacepick__and__place_ac86e2e03c89c329a264a1186844279b7}{height}};}
+\DoxyCodeLine{205         cylinder.dimensions[1] = radius;}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207         Eigen::Vector3f pose3f(p.x, p.y, hull[0].z + \mbox{\hyperlink{namespacepick__and__place_ac86e2e03c89c329a264a1186844279b7}{height}}/2.0);}
+\DoxyCodeLine{208         pose3f = transformation * pose3f;}
+\DoxyCodeLine{209         \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.x = pose3f(0);}
+\DoxyCodeLine{210         \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.y = pose3f(1);}
+\DoxyCodeLine{211         \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.z = pose3f(2);}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213         min\_volume = volume;}
+\DoxyCodeLine{214         shape = cylinder;}
+\DoxyCodeLine{215       \}}
+\DoxyCodeLine{216     \}}
+\DoxyCodeLine{217   \}}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219   \textcolor{comment}{// TODO: Try fitting a sphere?}}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221   \textcolor{comment}{// Project input to new frame}}
+\DoxyCodeLine{222   Eigen::Vector3f origin(\mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.x, \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.y, \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.z);}
+\DoxyCodeLine{223   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < input.size(); ++j)}
+\DoxyCodeLine{224   \{}
+\DoxyCodeLine{225     pcl::PointXYZRGB p;}
+\DoxyCodeLine{226     p.getVector3fMap() = transformation * (input[j].getVector3fMap() -\/ origin);}
+\DoxyCodeLine{227     output.push\_back(p);}
+\DoxyCodeLine{228   \}}
+\DoxyCodeLine{229   \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{230 \}}
+
+\end{DoxyCode}
+
+
+References pick\+\_\+and\+\_\+place\+::dx, pick\+\_\+and\+\_\+place\+::dy, pick\+\_\+and\+\_\+place\+::height, pick\+\_\+and\+\_\+place\+::l, demo\+::pose, fake\+\_\+cube\+\_\+perception\+\_\+node\+::r, smacc\+::run(), and pick\+\_\+and\+\_\+place\+::y.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=323pt]{namespacesimple__grasping_a5e500982f834eea5d24a33c8c63df2fe_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacesimple__grasping_a2a8cea55980f11b77c2cfa931dae1d93}\label{namespacesimple__grasping_a2a8cea55980f11b77c2cfa931dae1d93}} 
+\index{simple\_grasping@{simple\_grasping}!extractShape@{extractShape}}
+\index{extractShape@{extractShape}!simple\_grasping@{simple\_grasping}}
+\doxysubsubsection{\texorpdfstring{extractShape()}{extractShape()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} simple\+\_\+grasping\+::extract\+Shape (\begin{DoxyParamCaption}\item[{const pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&}]{input,  }\item[{pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&}]{output,  }\item[{shape\+\_\+msgs\+::\+Solid\+Primitive \&}]{shape,  }\item[{geometry\+\_\+msgs\+::\+Pose \&}]{pose }\end{DoxyParamCaption})}
+
+
+
+Find the smallest shape primitive we can fit around this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Point Cloud of the object. \\
+\hline
+{\em output} & Point Cloud transformed to the pose frame of the shape primitive fit. \\
+\hline
+{\em shape} & Returned smallest shape primitive fit. \\
+\hline
+{\em pose} & The pose of the shape primitive fit. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if a shape was extracted, false if we have a failure. 
+\end{DoxyReturn}
+
+
+Definition at line 232 of file shape\+\_\+extraction.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{236 \{}
+\DoxyCodeLine{237   \textcolor{comment}{// Find lowest point, use as z height}}
+\DoxyCodeLine{238   pcl::ModelCoefficients::Ptr coefficients(\textcolor{keyword}{new} pcl::ModelCoefficients);}
+\DoxyCodeLine{239   coefficients-\/>values.resize(4);}
+\DoxyCodeLine{240   coefficients-\/>values[0] = 0.0;}
+\DoxyCodeLine{241   coefficients-\/>values[1] = 0.0;}
+\DoxyCodeLine{242   coefficients-\/>values[2] = 1.0;}
+\DoxyCodeLine{243   coefficients-\/>values[3] = 1000.0;  \textcolor{comment}{// z-\/height}}
+\DoxyCodeLine{244   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < input.size(); ++i)}
+\DoxyCodeLine{245   \{}
+\DoxyCodeLine{246     \textcolor{keywordflow}{if} (input[i].z < coefficients-\/>values[3])}
+\DoxyCodeLine{247       coefficients-\/>values[3] = input[i].z;}
+\DoxyCodeLine{248   \}}
+\DoxyCodeLine{249   coefficients-\/>values[3] = -\/coefficients-\/>values[3];}
+\DoxyCodeLine{250   \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacesimple__grasping_a2a8cea55980f11b77c2cfa931dae1d93}{extractShape}}(input, coefficients, output, shape, \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}});}
+\DoxyCodeLine{251 \}}
+
+\end{DoxyCode}
+
+
+References demo\+::pose.
+
+
+
+Referenced by simple\+\_\+grasping\+::\+Object\+Support\+Segmentation\+::segment().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesimple__grasping_a2a8cea55980f11b77c2cfa931dae1d93_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacesimple__grasping_a53e673fbcf37067b954795386197b79f}\label{namespacesimple__grasping_a53e673fbcf37067b954795386197b79f}} 
+\index{simple\_grasping@{simple\_grasping}!extractUnorientedBoundingBox@{extractUnorientedBoundingBox}}
+\index{extractUnorientedBoundingBox@{extractUnorientedBoundingBox}!simple\_grasping@{simple\_grasping}}
+\doxysubsubsection{\texorpdfstring{extractUnorientedBoundingBox()}{extractUnorientedBoundingBox()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} simple\+\_\+grasping\+::extract\+Unoriented\+Bounding\+Box (\begin{DoxyParamCaption}\item[{const pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&}]{input,  }\item[{shape\+\_\+msgs\+::\+Solid\+Primitive \&}]{shape,  }\item[{geometry\+\_\+msgs\+::\+Pose \&}]{pose }\end{DoxyParamCaption})}
+
+
+
+Find a bounding box around a cloud. This method does not attempt to find best orientation and so the bounding box will be oriented with the frame of the cloud. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Point Cloud of the object. \\
+\hline
+{\em shape} & The box fit to this cloud. \\
+\hline
+{\em pose} & The pose of the shape primitive extracted. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 253 of file shape\+\_\+extraction.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{256 \{}
+\DoxyCodeLine{257   \textcolor{keywordtype}{double} x\_min = 1000.0;}
+\DoxyCodeLine{258   \textcolor{keywordtype}{double} x\_max = -\/1000.0;}
+\DoxyCodeLine{259   \textcolor{keywordtype}{double} y\_min = 1000.0;}
+\DoxyCodeLine{260   \textcolor{keywordtype}{double} y\_max = -\/1000.0;}
+\DoxyCodeLine{261   \textcolor{keywordtype}{double} z\_min = 1000.0;}
+\DoxyCodeLine{262   \textcolor{keywordtype}{double} z\_max = -\/1000.0;}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < input.size(); ++i)}
+\DoxyCodeLine{265   \{}
+\DoxyCodeLine{266     \textcolor{keywordflow}{if} (input[i].x < x\_min)}
+\DoxyCodeLine{267       x\_min = input[i].x;}
+\DoxyCodeLine{268     \textcolor{keywordflow}{if} (input[i].x > x\_max)}
+\DoxyCodeLine{269       x\_max = input[i].x;}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271     \textcolor{keywordflow}{if} (input[i].\mbox{\hyperlink{namespacepick__and__place_a9dc3a6efa6a9a0786df1b6a1b1d60ffc}{y}} < y\_min)}
+\DoxyCodeLine{272       y\_min = input[i].y;}
+\DoxyCodeLine{273     \textcolor{keywordflow}{if} (input[i].\mbox{\hyperlink{namespacepick__and__place_a9dc3a6efa6a9a0786df1b6a1b1d60ffc}{y}} > y\_max)}
+\DoxyCodeLine{274       y\_max = input[i].y;}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276     \textcolor{keywordflow}{if} (input[i].z < z\_min)}
+\DoxyCodeLine{277       z\_min = input[i].z;}
+\DoxyCodeLine{278     \textcolor{keywordflow}{if} (input[i].z > z\_max)}
+\DoxyCodeLine{279       z\_max = input[i].z;}
+\DoxyCodeLine{280   \}}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282   \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.x = (x\_min + x\_max)/2.0;}
+\DoxyCodeLine{283   \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.y = (y\_min + y\_max)/2.0;}
+\DoxyCodeLine{284   \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.position.z = (z\_min + z\_max)/2.0;}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286   shape.type = shape.BOX;}
+\DoxyCodeLine{287   shape.dimensions.push\_back(x\_max-\/x\_min);}
+\DoxyCodeLine{288   shape.dimensions.push\_back(y\_max-\/y\_min);}
+\DoxyCodeLine{289   shape.dimensions.push\_back(z\_max-\/z\_min);}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291   \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{292 \}}
+
+\end{DoxyCode}
+
+
+References demo\+::pose, and pick\+\_\+and\+\_\+place\+::y.
+
+
+
+Referenced by simple\+\_\+grasping\+::\+Object\+Support\+Segmentation\+::segment().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesimple__grasping_a53e673fbcf37067b954795386197b79f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacesimple__grasping_af21a15aabc2ee77498faa03833edd59e}\label{namespacesimple__grasping_af21a15aabc2ee77498faa03833edd59e}} 
+\index{simple\_grasping@{simple\_grasping}!hsv2rgb@{hsv2rgb}}
+\index{hsv2rgb@{hsv2rgb}!simple\_grasping@{simple\_grasping}}
+\doxysubsubsection{\texorpdfstring{hsv2rgb()}{hsv2rgb()}}
+{\footnotesize\ttfamily void simple\+\_\+grasping\+::hsv2rgb (\begin{DoxyParamCaption}\item[{const float}]{h,  }\item[{const float}]{s,  }\item[{const float}]{v,  }\item[{float \&}]{r,  }\item[{float \&}]{g,  }\item[{float \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Fill in R\+GB values from H\+SV values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em h} & H\+SV hue input. \\
+\hline
+{\em s} & H\+SV saturation input. \\
+\hline
+{\em v} & H\+SV value input. \\
+\hline
+{\em r} & R\+GB red output. \\
+\hline
+{\em g} & R\+GB green output. \\
+\hline
+{\em b} & R\+GB blue output. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 41 of file cloud\+\_\+tools.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43   \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}} = v * \mbox{\hyperlink{namespaceservice__node__3_aa976421a49e0b54f23833423400849ae}{s}};}
+\DoxyCodeLine{44   \textcolor{keywordtype}{float} hprime = \mbox{\hyperlink{namespacetilt__head_a4a7d5558e8b128bb16f501f4434670f9}{h}}/60.0;}
+\DoxyCodeLine{45   \textcolor{keywordtype}{float} x = \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}} * (1.0 -\/ fabs(fmodf(hprime, 2.0f) -\/ 1));}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47   \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}} = g = b = 0;}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49   \textcolor{keywordflow}{if} (hprime < 1) \{}
+\DoxyCodeLine{50     \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}} = \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}; g = x;}
+\DoxyCodeLine{51   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hprime < 2) \{}
+\DoxyCodeLine{52     \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}} = x; g = \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}};}
+\DoxyCodeLine{53   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hprime < 3) \{}
+\DoxyCodeLine{54     g = \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}; b = x;}
+\DoxyCodeLine{55   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hprime < 4) \{}
+\DoxyCodeLine{56     g = x; b = \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}};}
+\DoxyCodeLine{57   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hprime < 5) \{}
+\DoxyCodeLine{58     \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}} = x; b = \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}};}
+\DoxyCodeLine{59   \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hprime < 6) \{}
+\DoxyCodeLine{60     \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}} = \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}; b = x;}
+\DoxyCodeLine{61   \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63   \textcolor{keywordtype}{float} m = v -\/ \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}};}
+\DoxyCodeLine{64   \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}} += m; g+=m; b+=m;}
+\DoxyCodeLine{65 \}}
+
+\end{DoxyCode}
+
+
+References gripper\+\_\+keyboard\+::c, tilt\+\_\+head\+::h, fake\+\_\+cube\+\_\+perception\+\_\+node\+::r, and service\+\_\+node\+\_\+3\+::s.
+
+
+
+Referenced by colorize\+Cloud().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesimple__grasping_af21a15aabc2ee77498faa03833edd59e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacesimple__grasping_a15c9f18e2f479e851ad34783ed77cbee}\label{namespacesimple__grasping_a15c9f18e2f479e851ad34783ed77cbee}} 
+\index{simple\_grasping@{simple\_grasping}!makeGripperTranslation@{makeGripperTranslation}}
+\index{makeGripperTranslation@{makeGripperTranslation}!simple\_grasping@{simple\_grasping}}
+\doxysubsubsection{\texorpdfstring{makeGripperTranslation()}{makeGripperTranslation()}}
+{\footnotesize\ttfamily moveit\+\_\+msgs\+::\+Gripper\+Translation simple\+\_\+grasping\+::make\+Gripper\+Translation (\begin{DoxyParamCaption}\item[{std\+::string}]{frame,  }\item[{double}]{min,  }\item[{double}]{desired,  }\item[{double}]{x\+\_\+axis = {\ttfamily 1.0},  }\item[{double}]{y\+\_\+axis = {\ttfamily 0.0},  }\item[{double}]{z\+\_\+axis = {\ttfamily 0.0} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 42 of file shape\+\_\+grasp\+\_\+planner.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{49 \{}
+\DoxyCodeLine{50   moveit\_msgs::GripperTranslation translation;}
+\DoxyCodeLine{51   translation.direction.vector.x = x\_axis;}
+\DoxyCodeLine{52   translation.direction.vector.y = y\_axis;}
+\DoxyCodeLine{53   translation.direction.vector.z = z\_axis;}
+\DoxyCodeLine{54   translation.direction.header.frame\_id = frame;}
+\DoxyCodeLine{55   translation.min\_distance = min;}
+\DoxyCodeLine{56   translation.desired\_distance = desired;}
+\DoxyCodeLine{57   \textcolor{keywordflow}{return} translation;}
+\DoxyCodeLine{58 \}}
+
+\end{DoxyCode}
+
+
+Referenced by simple\+\_\+grasping\+::\+Shape\+Grasp\+Planner\+::create\+Grasp().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesimple__grasping_a15c9f18e2f479e851ad34783ed77cbee_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacesimple__grasping_a9aa98ea782f0130968e07f0be3a035a9}\label{namespacesimple__grasping_a9aa98ea782f0130968e07f0be3a035a9}} 
+\index{simple\_grasping@{simple\_grasping}!quaternionFromEuler@{quaternionFromEuler}}
+\index{quaternionFromEuler@{quaternionFromEuler}!simple\_grasping@{simple\_grasping}}
+\doxysubsubsection{\texorpdfstring{quaternionFromEuler()}{quaternionFromEuler()}}
+{\footnotesize\ttfamily Eigen\+::\+Quaterniond simple\+\_\+grasping\+::quaternion\+From\+Euler (\begin{DoxyParamCaption}\item[{float}]{yaw,  }\item[{float}]{pitch,  }\item[{float}]{roll }\end{DoxyParamCaption})}
+
+
+
+Definition at line 60 of file shape\+\_\+grasp\+\_\+planner.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{61 \{}
+\DoxyCodeLine{62   \textcolor{keywordtype}{float} sy = sin(yaw*0.5);}
+\DoxyCodeLine{63   \textcolor{keywordtype}{float} cy = cos(yaw*0.5);}
+\DoxyCodeLine{64   \textcolor{keywordtype}{float} sp = sin(pitch*0.5);}
+\DoxyCodeLine{65   \textcolor{keywordtype}{float} cp = cos(pitch*0.5);}
+\DoxyCodeLine{66   \textcolor{keywordtype}{float} sr = sin(roll*0.5);}
+\DoxyCodeLine{67   \textcolor{keywordtype}{float} cr = cos(roll*0.5);}
+\DoxyCodeLine{68   \textcolor{keywordtype}{float} w = cr*cp*cy + sr*sp*sy;}
+\DoxyCodeLine{69   \textcolor{keywordtype}{float} x = sr*cp*cy -\/ cr*sp*sy;}
+\DoxyCodeLine{70   \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacepick__and__place_a9dc3a6efa6a9a0786df1b6a1b1d60ffc}{y}} = cr*sp*cy + sr*cp*sy;}
+\DoxyCodeLine{71   \textcolor{keywordtype}{float} z = cr*cp*sy -\/ sr*sp*cy;}
+\DoxyCodeLine{72   \textcolor{keywordflow}{return} Eigen::Quaterniond(w,x,\mbox{\hyperlink{namespacepick__and__place_a9dc3a6efa6a9a0786df1b6a1b1d60ffc}{y}},z);}
+\DoxyCodeLine{73 \}}
+
+\end{DoxyCode}
+
+
+References pick\+\_\+and\+\_\+place\+::y.
+
+
+
+Referenced by simple\+\_\+grasping\+::\+Shape\+Grasp\+Planner\+::create\+Grasp(), and simple\+\_\+grasping\+::\+Shape\+Grasp\+Planner\+::plan().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesimple__grasping_a9aa98ea782f0130968e07f0be3a035a9_icgraph}
+\end{center}
+\end{figure}

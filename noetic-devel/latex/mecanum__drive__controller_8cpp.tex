@@ -1,0 +1,80 @@
+\hypertarget{mecanum__drive__controller_8cpp}{}\doxysection{submodules/ridgeback/ridgeback\+\_\+control/src/mecanum\+\_\+drive\+\_\+controller.cpp File Reference}
+\label{mecanum__drive__controller_8cpp}\index{submodules/ridgeback/ridgeback\_control/src/mecanum\_drive\_controller.cpp@{submodules/ridgeback/ridgeback\_control/src/mecanum\_drive\_controller.cpp}}
+{\ttfamily \#include $<$tf/transform\+\_\+datatypes.\+h$>$}\newline
+{\ttfamily \#include $<$urdf\+\_\+parser/urdf\+\_\+parser.\+h$>$}\newline
+{\ttfamily \#include $<$boost/assign.\+hpp$>$}\newline
+{\ttfamily \#include $<$mecanum\+\_\+drive\+\_\+controller/mecanum\+\_\+drive\+\_\+controller.\+h$>$}\newline
+Include dependency graph for mecanum\+\_\+drive\+\_\+controller.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mecanum__drive__controller_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacemecanum__drive__controller}{mecanum\+\_\+drive\+\_\+controller}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{mecanum__drive__controller_8cpp_a93c4844264f80022e93e236f6cb59e93}{is\+Cylinder\+Or\+Sphere}} (const urdf\+::\+Link\+Const\+Shared\+Ptr \&link)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mecanum__drive__controller_8cpp_a93c4844264f80022e93e236f6cb59e93}\label{mecanum__drive__controller_8cpp_a93c4844264f80022e93e236f6cb59e93}} 
+\index{mecanum\_drive\_controller.cpp@{mecanum\_drive\_controller.cpp}!isCylinderOrSphere@{isCylinderOrSphere}}
+\index{isCylinderOrSphere@{isCylinderOrSphere}!mecanum\_drive\_controller.cpp@{mecanum\_drive\_controller.cpp}}
+\doxysubsubsection{\texorpdfstring{isCylinderOrSphere()}{isCylinderOrSphere()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classbool}{bool}} is\+Cylinder\+Or\+Sphere (\begin{DoxyParamCaption}\item[{const urdf\+::\+Link\+Const\+Shared\+Ptr \&}]{link }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 48 of file mecanum\+\_\+drive\+\_\+controller.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{49 \{}
+\DoxyCodeLine{50   \textcolor{keywordflow}{if}(!link)}
+\DoxyCodeLine{51   \{}
+\DoxyCodeLine{52     ROS\_ERROR(\textcolor{stringliteral}{"Link == NULL."});}
+\DoxyCodeLine{53     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{54   \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56   \textcolor{keywordflow}{if}(!link-\/>collision)}
+\DoxyCodeLine{57   \{}
+\DoxyCodeLine{58     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Link "} << link-\/>name << \textcolor{stringliteral}{" does not have collision description. Add collision description for link to urdf."});}
+\DoxyCodeLine{59     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{60   \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62   \textcolor{keywordflow}{if}(!link-\/>collision-\/>geometry)}
+\DoxyCodeLine{63   \{}
+\DoxyCodeLine{64     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Link "} << link-\/>name << \textcolor{stringliteral}{" does not have collision geometry description. Add collision geometry description for link to urdf."});}
+\DoxyCodeLine{65     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{66   \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68   \textcolor{keywordflow}{if}(link-\/>collision-\/>geometry-\/>type != urdf::Geometry::CYLINDER \&\& link-\/>collision-\/>geometry-\/>type != urdf::Geometry::SPHERE)}
+\DoxyCodeLine{69   \{}
+\DoxyCodeLine{70     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Link "} << link-\/>name << \textcolor{stringliteral}{" does not have cylinder nor sphere geometry"});}
+\DoxyCodeLine{71     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{72   \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74   \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{75 \}}
+
+\end{DoxyCode}
+
+
+Referenced by mecanum\+\_\+drive\+\_\+controller\+::\+Mecanum\+Drive\+Controller\+::get\+Wheel\+Radius().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mecanum__drive__controller_8cpp_a93c4844264f80022e93e236f6cb59e93_icgraph}
+\end{center}
+\end{figure}

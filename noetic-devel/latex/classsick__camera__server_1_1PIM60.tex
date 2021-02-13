@@ -1,0 +1,225 @@
+\hypertarget{classsick__camera__server_1_1PIM60}{}\doxysection{sick\+\_\+camera\+\_\+server.\+P\+I\+M60 Class Reference}
+\label{classsick__camera__server_1_1PIM60}\index{sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}}
+
+
+Collaboration diagram for sick\+\_\+camera\+\_\+server.\+P\+I\+M60\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classsick__camera__server_1_1PIM60__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsick__camera__server_1_1PIM60_ad7a1f345ffcdbfb264e5abbcbd7b3abc}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, ip, port=2116)
+\item 
+def \mbox{\hyperlink{classsick__camera__server_1_1PIM60_af22c55ac2442f2f3e88bdf50e2f76d36}{trigger}} (self)
+\item 
+def \mbox{\hyperlink{classsick__camera__server_1_1PIM60_a536d6f2fa7bc76121b3c81300e9ff03a}{send}} (self, msg)
+\item 
+def \mbox{\hyperlink{classsick__camera__server_1_1PIM60_a6dd71af31bddb36b4a192efd4001d2fc}{recv}} (self, timeout=0.\+5)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsick__camera__server_1_1PIM60_ac4a9cf8d618aedd5ed3457daa4b50cc1}{buf}}
+\item 
+\mbox{\hyperlink{classsick__camera__server_1_1PIM60_a0ac4f7ac8476cec581e9a2cde9bf8f12}{sock}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Interface for the PIm60 camera\end{DoxyVerb}
+ 
+
+Definition at line 18 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsick__camera__server_1_1PIM60_ad7a1f345ffcdbfb264e5abbcbd7b3abc}\label{classsick__camera__server_1_1PIM60_ad7a1f345ffcdbfb264e5abbcbd7b3abc}} 
+\index{sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{ip,  }\item[{}]{port = {\ttfamily 2116} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 20 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{20     \textcolor{keyword}{def }\_\_init\_\_(self, ip, port=2116):}
+\DoxyCodeLine{21         self.buf = \textcolor{stringliteral}{''}}
+\DoxyCodeLine{22         self.sock = socket.socket(socket.AF\_INET, socket.SOCK\_STREAM)}
+\DoxyCodeLine{23         self.sock.connect( (ip, port) )}
+\DoxyCodeLine{24         self.sock.settimeout(1.0)}
+\DoxyCodeLine{25 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsick__camera__server_1_1PIM60_a6dd71af31bddb36b4a192efd4001d2fc}\label{classsick__camera__server_1_1PIM60_a6dd71af31bddb36b4a192efd4001d2fc}} 
+\index{sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}!recv@{recv}}
+\index{recv@{recv}!sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}}
+\doxysubsubsection{\texorpdfstring{recv()}{recv()}}
+{\footnotesize\ttfamily def sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+recv (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{timeout = {\ttfamily 0.5} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Received respose, will strip <STX> and <ETX> from response message \end{DoxyVerb}
+ 
+
+Definition at line 37 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{37     \textcolor{keyword}{def }recv(self, timeout = 0.5):}
+\DoxyCodeLine{38         \textcolor{stringliteral}{""" Received respose, will strip <STX> and <ETX> from response message """}}
+\DoxyCodeLine{39         buf = self.buf}
+\DoxyCodeLine{40         \textcolor{keywordflow}{while} buf.find(chr(3)) < 0:}
+\DoxyCodeLine{41             buf += self.sock.recv(1000)}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43         start\_idx = buf.find(chr(2))}
+\DoxyCodeLine{44         \textcolor{keywordflow}{if} start\_idx < 0:}
+\DoxyCodeLine{45             print(\textcolor{stringliteral}{" Could not find STX in buffer :"}, self.prettyMsg(buf))}
+\DoxyCodeLine{46         \textcolor{keywordflow}{elif} start\_idx != 0:}
+\DoxyCodeLine{47             print(\textcolor{stringliteral}{" Garbage data before STX :"}, self.prettyMsg(buf[:start\_idx+1]))}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49         stop\_idx = buf.find(chr(3))}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         \textcolor{comment}{\# Store any following messages in buffer}}
+\DoxyCodeLine{52         self.buf = buf[stop\_idx+1:]}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54         \textcolor{comment}{\# Make sure remaining message has a STX at begining}}
+\DoxyCodeLine{55         \textcolor{keywordflow}{if} len(self.buf) \textcolor{keywordflow}{and} (self.buf[0] != chr(2)):}
+\DoxyCodeLine{56             print(\textcolor{stringliteral}{" Extra garbage after ETX :"}, self.prettyMsg(buf[stop\_idx+1:]))}
+\DoxyCodeLine{57         \textcolor{keywordflow}{if} start\_idx > stop\_idx:}
+\DoxyCodeLine{58             print(\textcolor{stringliteral}{" Found stop before start"}, start\_idx, stop\_idx)}
+\DoxyCodeLine{59         \textcolor{keywordflow}{return} buf[start\_idx+1:stop\_idx]}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 }
+
+\end{DoxyCode}
+
+
+References sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+buf, and sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+sock.
+
+
+
+Referenced by sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+trigger().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsick__camera__server_1_1PIM60_a6dd71af31bddb36b4a192efd4001d2fc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classsick__camera__server_1_1PIM60_a536d6f2fa7bc76121b3c81300e9ff03a}\label{classsick__camera__server_1_1PIM60_a536d6f2fa7bc76121b3c81300e9ff03a}} 
+\index{sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}!send@{send}}
+\index{send@{send}!sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily def sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+send (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{msg }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sends messages to device \end{DoxyVerb}
+ 
+
+Definition at line 32 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{32     \textcolor{keyword}{def }send(self, msg):}
+\DoxyCodeLine{33         \textcolor{stringliteral}{""" Sends messages to device """}}
+\DoxyCodeLine{34         print(\textcolor{stringliteral}{'SENT'})}
+\DoxyCodeLine{35         self.sock.sendall(msg)}
+\DoxyCodeLine{36 }
+
+\end{DoxyCode}
+
+
+References sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+sock.
+
+
+
+Referenced by sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+trigger().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsick__camera__server_1_1PIM60_a536d6f2fa7bc76121b3c81300e9ff03a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classsick__camera__server_1_1PIM60_af22c55ac2442f2f3e88bdf50e2f76d36}\label{classsick__camera__server_1_1PIM60_af22c55ac2442f2f3e88bdf50e2f76d36}} 
+\index{sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}!trigger@{trigger}}
+\index{trigger@{trigger}!sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}}
+\doxysubsubsection{\texorpdfstring{trigger()}{trigger()}}
+{\footnotesize\ttfamily def sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+trigger (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Triggers the camera click\end{DoxyVerb}
+ 
+
+Definition at line 26 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{26     \textcolor{keyword}{def }trigger(self):}
+\DoxyCodeLine{27         \textcolor{stringliteral}{"""Triggers the camera click"""}}
+\DoxyCodeLine{28         self.send(\textcolor{stringliteral}{"TRIG"})}
+\DoxyCodeLine{29         resp = self.recv()}
+\DoxyCodeLine{30         print(resp)}
+\DoxyCodeLine{31 }
+
+\end{DoxyCode}
+
+
+References sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+recv(), and sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+send().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsick__camera__server_1_1PIM60_af22c55ac2442f2f3e88bdf50e2f76d36_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsick__camera__server_1_1PIM60_ac4a9cf8d618aedd5ed3457daa4b50cc1}\label{classsick__camera__server_1_1PIM60_ac4a9cf8d618aedd5ed3457daa4b50cc1}} 
+\index{sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}!buf@{buf}}
+\index{buf@{buf}!sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}}
+\doxysubsubsection{\texorpdfstring{buf}{buf}}
+{\footnotesize\ttfamily sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+buf}
+
+
+
+Definition at line 21 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+
+Referenced by sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+recv().
+
+\mbox{\Hypertarget{classsick__camera__server_1_1PIM60_a0ac4f7ac8476cec581e9a2cde9bf8f12}\label{classsick__camera__server_1_1PIM60_a0ac4f7ac8476cec581e9a2cde9bf8f12}} 
+\index{sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}!sock@{sock}}
+\index{sock@{sock}!sick\_camera\_server.PIM60@{sick\_camera\_server.PIM60}}
+\doxysubsubsection{\texorpdfstring{sock}{sock}}
+{\footnotesize\ttfamily sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+sock}
+
+
+
+Definition at line 22 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+
+Referenced by sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+recv(), and sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+send().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+gazebo/fetchit\+\_\+challenge/nodes/\mbox{\hyperlink{sick__camera__server_8py}{sick\+\_\+camera\+\_\+server.\+py}}\end{DoxyCompactItemize}

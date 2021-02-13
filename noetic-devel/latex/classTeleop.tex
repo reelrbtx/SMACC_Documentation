@@ -1,0 +1,409 @@
+\hypertarget{classTeleop}{}\doxysection{Teleop Class Reference}
+\label{classTeleop}\index{Teleop@{Teleop}}
+
+
+Collaboration diagram for Teleop\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTeleop__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classTeleop_a3eecea5298a9868336ccac940929e837}{init}} (ros\+::\+Node\+Handle \&nh)
+\item 
+void \mbox{\hyperlink{classTeleop_a3c9109240335ab4949b64c550b1f2e12}{publish}} (const ros\+::\+Duration \&dt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef boost\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classTeleopComponent}{Teleop\+Component}} $>$ \mbox{\hyperlink{classTeleop_a12b21dba47726181d4f06132aec0799b}{Teleop\+Component\+Ptr}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classTeleop_a2f978d63cedb128bbf7b662a0588211d}{joy\+Callback}} (const sensor\+\_\+msgs\+::\+Joy\+::\+Const\+Ptr \&msg)
+\item 
+void \mbox{\hyperlink{classTeleop_aef4569d6076302bf32f27adb3ccc243c}{state\+Callback}} (const sensor\+\_\+msgs\+::\+Joint\+State\+Const\+Ptr \&msg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classTeleop_a12b21dba47726181d4f06132aec0799b}{Teleop\+Component\+Ptr}} $>$ \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\+\_\+}}
+\item 
+ros\+::\+Time \mbox{\hyperlink{classTeleop_a9f96e64d403670bfd62704742ab0c79a}{last\+\_\+update\+\_\+}}
+\item 
+boost\+::mutex \mbox{\hyperlink{classTeleop_a7cee191cba9790b4fbed5893221294b6}{state\+\_\+mutex\+\_\+}}
+\item 
+sensor\+\_\+msgs\+::\+Joint\+State\+Ptr \mbox{\hyperlink{classTeleop_aa4e1eec2968b32de98310c5aee405907}{state\+\_\+msg\+\_\+}}
+\item 
+ros\+::\+Subscriber \mbox{\hyperlink{classTeleop_a80e28e0147df3cd82570c4d3d1453a61}{joy\+\_\+sub\+\_\+}}
+\item 
+ros\+::\+Subscriber \mbox{\hyperlink{classTeleop_a205202e7a40a60d65d61f66d120e3f21}{state\+\_\+sub\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 715 of file joystick\+\_\+teleop.\+cpp.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classTeleop_a12b21dba47726181d4f06132aec0799b}\label{classTeleop_a12b21dba47726181d4f06132aec0799b}} 
+\index{Teleop@{Teleop}!TeleopComponentPtr@{TeleopComponentPtr}}
+\index{TeleopComponentPtr@{TeleopComponentPtr}!Teleop@{Teleop}}
+\doxysubsubsection{\texorpdfstring{TeleopComponentPtr}{TeleopComponentPtr}}
+{\footnotesize\ttfamily typedef boost\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classTeleopComponent}{Teleop\+Component}}$>$ \mbox{\hyperlink{classTeleop_a12b21dba47726181d4f06132aec0799b}{Teleop\+::\+Teleop\+Component\+Ptr}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 717 of file joystick\+\_\+teleop.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTeleop_a3eecea5298a9868336ccac940929e837}\label{classTeleop_a3eecea5298a9868336ccac940929e837}} 
+\index{Teleop@{Teleop}!init@{init}}
+\index{init@{init}!Teleop@{Teleop}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Teleop\+::init (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{nh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 720 of file joystick\+\_\+teleop.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{721   \{}
+\DoxyCodeLine{722     \textcolor{keywordtype}{bool} is\_fetch;}
+\DoxyCodeLine{723     \textcolor{keywordtype}{bool} use\_torso;}
+\DoxyCodeLine{724     \textcolor{keywordtype}{bool} use\_gripper;}
+\DoxyCodeLine{725     \textcolor{keywordtype}{bool} use\_head;}
+\DoxyCodeLine{726     \textcolor{keywordtype}{bool} use\_arm;}
+\DoxyCodeLine{727     \textcolor{keywordtype}{bool} use\_base;}
+\DoxyCodeLine{728     nh.param(\textcolor{stringliteral}{"is\_fetch"}, is\_fetch, \textcolor{keyword}{true});}
+\DoxyCodeLine{729     nh.param(\textcolor{stringliteral}{"use\_torso"}, use\_torso, \textcolor{keyword}{true});}
+\DoxyCodeLine{730     nh.param(\textcolor{stringliteral}{"use\_gripper"}, use\_gripper, \textcolor{keyword}{true});}
+\DoxyCodeLine{731     nh.param(\textcolor{stringliteral}{"use\_head"}, use\_head, \textcolor{keyword}{true});}
+\DoxyCodeLine{732     nh.param(\textcolor{stringliteral}{"use\_arm"}, use\_arm, \textcolor{keyword}{true});}
+\DoxyCodeLine{733     nh.param(\textcolor{stringliteral}{"use\_base"}, use\_base, \textcolor{keyword}{true});}
+\DoxyCodeLine{734 }
+\DoxyCodeLine{735     \textcolor{comment}{// TODO: load these from YAML}}
+\DoxyCodeLine{736 }
+\DoxyCodeLine{737     \mbox{\hyperlink{classTeleop_a12b21dba47726181d4f06132aec0799b}{TeleopComponentPtr}} \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}};}
+\DoxyCodeLine{738     \textcolor{keywordflow}{if} (is\_fetch)}
+\DoxyCodeLine{739     \{}
+\DoxyCodeLine{740       \textcolor{keywordflow}{if} (use\_torso)}
+\DoxyCodeLine{741       \{}
+\DoxyCodeLine{742         \textcolor{comment}{// Torso does not override}}
+\DoxyCodeLine{743         \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}.reset(\textcolor{keyword}{new} \mbox{\hyperlink{classFollowTeleop}{FollowTeleop}}(\textcolor{stringliteral}{"torso"}, nh));}
+\DoxyCodeLine{744         \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}.push\_back(\mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}});}
+\DoxyCodeLine{745       \}}
+\DoxyCodeLine{746 }
+\DoxyCodeLine{747       \textcolor{keywordflow}{if} (use\_gripper)}
+\DoxyCodeLine{748       \{}
+\DoxyCodeLine{749         \textcolor{comment}{// Gripper does not override}}
+\DoxyCodeLine{750         \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}.reset(\textcolor{keyword}{new} \mbox{\hyperlink{classGripperTeleop}{GripperTeleop}}(\textcolor{stringliteral}{"gripper"}, nh));}
+\DoxyCodeLine{751         \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}.push\_back(\mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}});}
+\DoxyCodeLine{752       \}}
+\DoxyCodeLine{753 }
+\DoxyCodeLine{754       \textcolor{keywordflow}{if} (use\_head)}
+\DoxyCodeLine{755       \{}
+\DoxyCodeLine{756         \textcolor{comment}{// Head overrides base}}
+\DoxyCodeLine{757         \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}.reset(\textcolor{keyword}{new} \mbox{\hyperlink{classHeadTeleop}{HeadTeleop}}(\textcolor{stringliteral}{"head"}, nh));}
+\DoxyCodeLine{758         \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}.push\_back(\mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}});}
+\DoxyCodeLine{759       \}}
+\DoxyCodeLine{760 }
+\DoxyCodeLine{761       \textcolor{keywordflow}{if} (use\_arm)}
+\DoxyCodeLine{762       \{}
+\DoxyCodeLine{763         \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}.reset(\textcolor{keyword}{new} \mbox{\hyperlink{classArmTeleop}{ArmTeleop}}(\textcolor{stringliteral}{"arm"}, nh));}
+\DoxyCodeLine{764         \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}.push\_back(\mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}});}
+\DoxyCodeLine{765       \}}
+\DoxyCodeLine{766     \}}
+\DoxyCodeLine{767 }
+\DoxyCodeLine{768     \textcolor{keywordflow}{if} (use\_base)}
+\DoxyCodeLine{769     \{}
+\DoxyCodeLine{770       \textcolor{comment}{// BaseTeleop goes last}}
+\DoxyCodeLine{771       \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}.reset(\textcolor{keyword}{new} \mbox{\hyperlink{classBaseTeleop}{BaseTeleop}}(\textcolor{stringliteral}{"base"}, nh));}
+\DoxyCodeLine{772       \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}.push\_back(\mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}});}
+\DoxyCodeLine{773     \}}
+\DoxyCodeLine{774 }
+\DoxyCodeLine{775     \mbox{\hyperlink{classTeleop_aa4e1eec2968b32de98310c5aee405907}{state\_msg\_}}.reset(\textcolor{keyword}{new} sensor\_msgs::JointState());}
+\DoxyCodeLine{776     \mbox{\hyperlink{classTeleop_a80e28e0147df3cd82570c4d3d1453a61}{joy\_sub\_}} = nh.subscribe(\textcolor{stringliteral}{"/joy"}, 1, \&\mbox{\hyperlink{classTeleop_a2f978d63cedb128bbf7b662a0588211d}{Teleop::joyCallback}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{777     \mbox{\hyperlink{classTeleop_a205202e7a40a60d65d61f66d120e3f21}{state\_sub\_}} = nh.subscribe(\textcolor{stringliteral}{"/joint\_states"}, 10, \&\mbox{\hyperlink{classTeleop_aef4569d6076302bf32f27adb3ccc243c}{Teleop::stateCallback}}, \textcolor{keyword}{this});}
+\DoxyCodeLine{778   \}}
+
+\end{DoxyCode}
+
+
+References gripper\+\_\+keyboard\+::c, components\+\_\+, joy\+\_\+sub\+\_\+, joy\+Callback(), state\+\_\+msg\+\_\+, state\+\_\+sub\+\_\+, and state\+Callback().
+
+
+
+Referenced by main().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=307pt]{classTeleop_a3eecea5298a9868336ccac940929e837_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{classTeleop_a3eecea5298a9868336ccac940929e837_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classTeleop_a2f978d63cedb128bbf7b662a0588211d}\label{classTeleop_a2f978d63cedb128bbf7b662a0588211d}} 
+\index{Teleop@{Teleop}!joyCallback@{joyCallback}}
+\index{joyCallback@{joyCallback}!Teleop@{Teleop}}
+\doxysubsubsection{\texorpdfstring{joyCallback()}{joyCallback()}}
+{\footnotesize\ttfamily void Teleop\+::joy\+Callback (\begin{DoxyParamCaption}\item[{const sensor\+\_\+msgs\+::\+Joy\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 800 of file joystick\+\_\+teleop.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{801   \{}
+\DoxyCodeLine{802     \textcolor{comment}{// Lock mutex on state message}}
+\DoxyCodeLine{803     boost::mutex::scoped\_lock lock(\mbox{\hyperlink{classTeleop_a7cee191cba9790b4fbed5893221294b6}{state\_mutex\_}});}
+\DoxyCodeLine{804 }
+\DoxyCodeLine{805     \textcolor{keywordtype}{bool} ok = \textcolor{keyword}{true};}
+\DoxyCodeLine{806     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}} = 0; \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}} < \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}.size(); \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}++)}
+\DoxyCodeLine{807     \{}
+\DoxyCodeLine{808       \textcolor{keywordflow}{if} (ok)}
+\DoxyCodeLine{809       \{}
+\DoxyCodeLine{810         ok \&= !\mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}[\mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}]-\/>update(\mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}, \mbox{\hyperlink{classTeleop_aa4e1eec2968b32de98310c5aee405907}{state\_msg\_}});}
+\DoxyCodeLine{811       \}}
+\DoxyCodeLine{812       \textcolor{keywordflow}{else}}
+\DoxyCodeLine{813       \{}
+\DoxyCodeLine{814         \textcolor{comment}{// supressed by a higher priority component}}
+\DoxyCodeLine{815         \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}[\mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}]-\/>stop();}
+\DoxyCodeLine{816       \}}
+\DoxyCodeLine{817     \}}
+\DoxyCodeLine{818     \mbox{\hyperlink{classTeleop_a9f96e64d403670bfd62704742ab0c79a}{last\_update\_}} = ros::Time::now();}
+\DoxyCodeLine{819   \}}
+
+\end{DoxyCode}
+
+
+References gripper\+\_\+keyboard\+::c, components\+\_\+, last\+\_\+update\+\_\+, battery\+\_\+monitor\+\_\+node\+::msg, state\+\_\+msg\+\_\+, and state\+\_\+mutex\+\_\+.
+
+
+
+Referenced by init().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTeleop_a2f978d63cedb128bbf7b662a0588211d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classTeleop_a3c9109240335ab4949b64c550b1f2e12}\label{classTeleop_a3c9109240335ab4949b64c550b1f2e12}} 
+\index{Teleop@{Teleop}!publish@{publish}}
+\index{publish@{publish}!Teleop@{Teleop}}
+\doxysubsubsection{\texorpdfstring{publish()}{publish()}}
+{\footnotesize\ttfamily void Teleop\+::publish (\begin{DoxyParamCaption}\item[{const ros\+::\+Duration \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 780 of file joystick\+\_\+teleop.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{781   \{}
+\DoxyCodeLine{782     \textcolor{keywordflow}{if} (ros::Time::now() -\/ \mbox{\hyperlink{classTeleop_a9f96e64d403670bfd62704742ab0c79a}{last\_update\_}} > ros::Duration(0.25))}
+\DoxyCodeLine{783     \{}
+\DoxyCodeLine{784       \textcolor{comment}{// Timed out}}
+\DoxyCodeLine{785       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}} = 0; \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}} < \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}.size(); \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}++)}
+\DoxyCodeLine{786       \{}
+\DoxyCodeLine{787         \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}[\mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}]-\/>stop();}
+\DoxyCodeLine{788       \}}
+\DoxyCodeLine{789     \}}
+\DoxyCodeLine{790     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{791     \{}
+\DoxyCodeLine{792       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}} = 0; \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}} < \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}.size(); \mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}++)}
+\DoxyCodeLine{793       \{}
+\DoxyCodeLine{794         \mbox{\hyperlink{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}{components\_}}[\mbox{\hyperlink{namespacegripper__keyboard_acfeac6e6eb88569d286c6675d43d670e}{c}}]-\/>publish(dt);}
+\DoxyCodeLine{795       \}}
+\DoxyCodeLine{796     \}}
+\DoxyCodeLine{797   \}}
+
+\end{DoxyCode}
+
+
+References gripper\+\_\+keyboard\+::c, components\+\_\+, and last\+\_\+update\+\_\+.
+
+
+
+Referenced by main().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{classTeleop_a3c9109240335ab4949b64c550b1f2e12_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classTeleop_aef4569d6076302bf32f27adb3ccc243c}\label{classTeleop_aef4569d6076302bf32f27adb3ccc243c}} 
+\index{Teleop@{Teleop}!stateCallback@{stateCallback}}
+\index{stateCallback@{stateCallback}!Teleop@{Teleop}}
+\doxysubsubsection{\texorpdfstring{stateCallback()}{stateCallback()}}
+{\footnotesize\ttfamily void Teleop\+::state\+Callback (\begin{DoxyParamCaption}\item[{const sensor\+\_\+msgs\+::\+Joint\+State\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 821 of file joystick\+\_\+teleop.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{822   \{}
+\DoxyCodeLine{823     \textcolor{comment}{// Lock mutex on state message}}
+\DoxyCodeLine{824     boost::mutex::scoped\_lock lock(\mbox{\hyperlink{classTeleop_a7cee191cba9790b4fbed5893221294b6}{state\_mutex\_}});}
+\DoxyCodeLine{825 }
+\DoxyCodeLine{826     \textcolor{comment}{// Update each joint based on message}}
+\DoxyCodeLine{827     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} msg\_j = 0; msg\_j < \mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}-\/>name.size(); msg\_j++)}
+\DoxyCodeLine{828     \{}
+\DoxyCodeLine{829       \textcolor{keywordtype}{size\_t} state\_j;}
+\DoxyCodeLine{830       \textcolor{keywordflow}{for} (state\_j = 0; state\_j < \mbox{\hyperlink{classTeleop_aa4e1eec2968b32de98310c5aee405907}{state\_msg\_}}-\/>name.size(); state\_j++)}
+\DoxyCodeLine{831       \{}
+\DoxyCodeLine{832         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classTeleop_aa4e1eec2968b32de98310c5aee405907}{state\_msg\_}}-\/>name[state\_j] == \mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}-\/>name[msg\_j])}
+\DoxyCodeLine{833         \{}
+\DoxyCodeLine{834           \mbox{\hyperlink{classTeleop_aa4e1eec2968b32de98310c5aee405907}{state\_msg\_}}-\/>position[state\_j] = \mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}-\/>position[msg\_j];}
+\DoxyCodeLine{835           \mbox{\hyperlink{classTeleop_aa4e1eec2968b32de98310c5aee405907}{state\_msg\_}}-\/>velocity[state\_j] = \mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}-\/>velocity[msg\_j];}
+\DoxyCodeLine{836           \textcolor{keywordflow}{break};}
+\DoxyCodeLine{837         \}}
+\DoxyCodeLine{838       \}}
+\DoxyCodeLine{839       \textcolor{keywordflow}{if} (state\_j == \mbox{\hyperlink{classTeleop_aa4e1eec2968b32de98310c5aee405907}{state\_msg\_}}-\/>name.size())}
+\DoxyCodeLine{840       \{}
+\DoxyCodeLine{841         \textcolor{comment}{// New joint}}
+\DoxyCodeLine{842         \mbox{\hyperlink{classTeleop_aa4e1eec2968b32de98310c5aee405907}{state\_msg\_}}-\/>name.push\_back(\mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}-\/>name[msg\_j]);}
+\DoxyCodeLine{843         \mbox{\hyperlink{classTeleop_aa4e1eec2968b32de98310c5aee405907}{state\_msg\_}}-\/>position.push\_back(\mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}-\/>position[msg\_j]);}
+\DoxyCodeLine{844         \mbox{\hyperlink{classTeleop_aa4e1eec2968b32de98310c5aee405907}{state\_msg\_}}-\/>velocity.push\_back(\mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}-\/>velocity[msg\_j]);}
+\DoxyCodeLine{845       \}}
+\DoxyCodeLine{846     \}}
+\DoxyCodeLine{847   \}}
+
+\end{DoxyCode}
+
+
+References battery\+\_\+monitor\+\_\+node\+::msg, state\+\_\+msg\+\_\+, and state\+\_\+mutex\+\_\+.
+
+
+
+Referenced by init().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classTeleop_aef4569d6076302bf32f27adb3ccc243c_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}\label{classTeleop_a3969c45db9e751259bbe068d1ddb4e19}} 
+\index{Teleop@{Teleop}!components\_@{components\_}}
+\index{components\_@{components\_}!Teleop@{Teleop}}
+\doxysubsubsection{\texorpdfstring{components\_}{components\_}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classTeleop_a12b21dba47726181d4f06132aec0799b}{Teleop\+Component\+Ptr}}$>$ Teleop\+::components\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 849 of file joystick\+\_\+teleop.\+cpp.
+
+
+
+Referenced by init(), joy\+Callback(), and publish().
+
+\mbox{\Hypertarget{classTeleop_a80e28e0147df3cd82570c4d3d1453a61}\label{classTeleop_a80e28e0147df3cd82570c4d3d1453a61}} 
+\index{Teleop@{Teleop}!joy\_sub\_@{joy\_sub\_}}
+\index{joy\_sub\_@{joy\_sub\_}!Teleop@{Teleop}}
+\doxysubsubsection{\texorpdfstring{joy\_sub\_}{joy\_sub\_}}
+{\footnotesize\ttfamily ros\+::\+Subscriber Teleop\+::joy\+\_\+sub\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 853 of file joystick\+\_\+teleop.\+cpp.
+
+
+
+Referenced by init().
+
+\mbox{\Hypertarget{classTeleop_a9f96e64d403670bfd62704742ab0c79a}\label{classTeleop_a9f96e64d403670bfd62704742ab0c79a}} 
+\index{Teleop@{Teleop}!last\_update\_@{last\_update\_}}
+\index{last\_update\_@{last\_update\_}!Teleop@{Teleop}}
+\doxysubsubsection{\texorpdfstring{last\_update\_}{last\_update\_}}
+{\footnotesize\ttfamily ros\+::\+Time Teleop\+::last\+\_\+update\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 850 of file joystick\+\_\+teleop.\+cpp.
+
+
+
+Referenced by joy\+Callback(), and publish().
+
+\mbox{\Hypertarget{classTeleop_aa4e1eec2968b32de98310c5aee405907}\label{classTeleop_aa4e1eec2968b32de98310c5aee405907}} 
+\index{Teleop@{Teleop}!state\_msg\_@{state\_msg\_}}
+\index{state\_msg\_@{state\_msg\_}!Teleop@{Teleop}}
+\doxysubsubsection{\texorpdfstring{state\_msg\_}{state\_msg\_}}
+{\footnotesize\ttfamily sensor\+\_\+msgs\+::\+Joint\+State\+Ptr Teleop\+::state\+\_\+msg\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 852 of file joystick\+\_\+teleop.\+cpp.
+
+
+
+Referenced by init(), joy\+Callback(), and state\+Callback().
+
+\mbox{\Hypertarget{classTeleop_a7cee191cba9790b4fbed5893221294b6}\label{classTeleop_a7cee191cba9790b4fbed5893221294b6}} 
+\index{Teleop@{Teleop}!state\_mutex\_@{state\_mutex\_}}
+\index{state\_mutex\_@{state\_mutex\_}!Teleop@{Teleop}}
+\doxysubsubsection{\texorpdfstring{state\_mutex\_}{state\_mutex\_}}
+{\footnotesize\ttfamily boost\+::mutex Teleop\+::state\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 851 of file joystick\+\_\+teleop.\+cpp.
+
+
+
+Referenced by joy\+Callback(), and state\+Callback().
+
+\mbox{\Hypertarget{classTeleop_a205202e7a40a60d65d61f66d120e3f21}\label{classTeleop_a205202e7a40a60d65d61f66d120e3f21}} 
+\index{Teleop@{Teleop}!state\_sub\_@{state\_sub\_}}
+\index{state\_sub\_@{state\_sub\_}!Teleop@{Teleop}}
+\doxysubsubsection{\texorpdfstring{state\_sub\_}{state\_sub\_}}
+{\footnotesize\ttfamily ros\+::\+Subscriber Teleop\+::state\+\_\+sub\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 853 of file joystick\+\_\+teleop.\+cpp.
+
+
+
+Referenced by init().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+ros/fetch\+\_\+teleop/src/\mbox{\hyperlink{joystick__teleop_8cpp}{joystick\+\_\+teleop.\+cpp}}\end{DoxyCompactItemize}

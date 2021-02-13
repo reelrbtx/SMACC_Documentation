@@ -1,0 +1,380 @@
+\hypertarget{classsimple__grasping_1_1ObjectSupportSegmentation}{}\doxysection{simple\+\_\+grasping\+::Object\+Support\+Segmentation Class Reference}
+\label{classsimple__grasping_1_1ObjectSupportSegmentation}\index{simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}}
+
+
+Class that segments a point cloud into objects and supporting surfaces.  
+
+
+
+
+{\ttfamily \#include $<$object\+\_\+support\+\_\+segmentation.\+h$>$}
+
+
+
+Collaboration diagram for simple\+\_\+grasping\+::Object\+Support\+Segmentation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsimple__grasping_1_1ObjectSupportSegmentation__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_a4805d58b0866e5d4e2b36715ebb47f7c}{Object\+Support\+Segmentation}} (ros\+::\+Node\+Handle \&nh)
+\begin{DoxyCompactList}\small\item\em Constructor, loads pipeline using R\+OS parameters. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ad2a5de33f859df6001c6a735ada66f06}{segment}} (const pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$\+::Const\+Ptr \&cloud, std\+::vector$<$ grasping\+\_\+msgs\+::\+Object $>$ \&objects, std\+::vector$<$ grasping\+\_\+msgs\+::\+Object $>$ \&supports, pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&object\+\_\+cloud, pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&support\+\_\+cloud, \mbox{\hyperlink{classbool}{bool}} output\+\_\+clouds)
+\begin{DoxyCompactList}\small\item\em Split a cloud into objects and supporting surfaces. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+pcl\+::\+Voxel\+Grid$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ac2b60f8b2467da11ce7601375f89ffe6}{voxel\+\_\+grid\+\_\+}}
+\item 
+pcl\+::\+S\+A\+C\+Segmentation$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ad48a62d9972f7fbca20d63e73d646595}{segment\+\_\+}}
+\item 
+pcl\+::\+Euclidean\+Cluster\+Extraction$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_a20700a90cb5e0ce963c39905f587abda}{extract\+\_\+clusters\+\_\+}}
+\item 
+pcl\+::\+Extract\+Indices$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_aaae696cfb9e22ad22bd53852a0666b09}{extract\+\_\+indices\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that segments a point cloud into objects and supporting surfaces. 
+
+Definition at line 51 of file object\+\_\+support\+\_\+segmentation.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsimple__grasping_1_1ObjectSupportSegmentation_a4805d58b0866e5d4e2b36715ebb47f7c}\label{classsimple__grasping_1_1ObjectSupportSegmentation_a4805d58b0866e5d4e2b36715ebb47f7c}} 
+\index{simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}!ObjectSupportSegmentation@{ObjectSupportSegmentation}}
+\index{ObjectSupportSegmentation@{ObjectSupportSegmentation}!simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}}
+\doxysubsubsection{\texorpdfstring{ObjectSupportSegmentation()}{ObjectSupportSegmentation()}}
+{\footnotesize\ttfamily simple\+\_\+grasping\+::\+Object\+Support\+Segmentation\+::\+Object\+Support\+Segmentation (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{nh }\end{DoxyParamCaption})}
+
+
+
+Constructor, loads pipeline using R\+OS parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nh} & Node handle to use for accessing parameters. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 43 of file object\+\_\+support\+\_\+segmentation.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47   \textcolor{comment}{// cluster\_tolerance: minimum separation distance of two objects}}
+\DoxyCodeLine{48   \textcolor{keywordtype}{double} cluster\_tolerance;}
+\DoxyCodeLine{49   nh.param<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"cluster\_tolerance"}, cluster\_tolerance, 0.01);}
+\DoxyCodeLine{50   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_a20700a90cb5e0ce963c39905f587abda}{extract\_clusters\_}}.setClusterTolerance(cluster\_tolerance);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52   \textcolor{comment}{// cluster\_min\_size: minimum size of an object}}
+\DoxyCodeLine{53   \textcolor{keywordtype}{int} cluster\_min\_size;}
+\DoxyCodeLine{54   nh.param<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"cluster\_min\_size"}, cluster\_min\_size, 50);}
+\DoxyCodeLine{55   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_a20700a90cb5e0ce963c39905f587abda}{extract\_clusters\_}}.setMinClusterSize(cluster\_min\_size);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57   \textcolor{comment}{// voxel grid the data before segmenting}}
+\DoxyCodeLine{58   \textcolor{keywordtype}{double} leaf\_size, llimit, ulimit;}
+\DoxyCodeLine{59   std::string field;}
+\DoxyCodeLine{60   nh.param<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"voxel\_leaf\_size"}, leaf\_size, 0.005);}
+\DoxyCodeLine{61   nh.param<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"voxel\_limit\_min"}, llimit, 0.0);}
+\DoxyCodeLine{62   nh.param<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"voxel\_limit\_max"}, ulimit, 1.8);}
+\DoxyCodeLine{63   nh.param<std::string>(\textcolor{stringliteral}{"voxel\_field\_name"}, field, \textcolor{stringliteral}{"z"});}
+\DoxyCodeLine{64   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ac2b60f8b2467da11ce7601375f89ffe6}{voxel\_grid\_}}.setLeafSize(leaf\_size, leaf\_size, leaf\_size);}
+\DoxyCodeLine{65   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ac2b60f8b2467da11ce7601375f89ffe6}{voxel\_grid\_}}.setFilterFieldName(field);}
+\DoxyCodeLine{66   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ac2b60f8b2467da11ce7601375f89ffe6}{voxel\_grid\_}}.setFilterLimits(llimit, ulimit);}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68   \textcolor{comment}{// segment objects}}
+\DoxyCodeLine{69   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ad48a62d9972f7fbca20d63e73d646595}{segment\_}}.setOptimizeCoefficients(\textcolor{keyword}{true});}
+\DoxyCodeLine{70   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ad48a62d9972f7fbca20d63e73d646595}{segment\_}}.setModelType(pcl::SACMODEL\_PLANE);}
+\DoxyCodeLine{71   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ad48a62d9972f7fbca20d63e73d646595}{segment\_}}.setMaxIterations(100);}
+\DoxyCodeLine{72   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ad48a62d9972f7fbca20d63e73d646595}{segment\_}}.setDistanceThreshold(cluster\_tolerance);}
+\DoxyCodeLine{73 \}}
+
+\end{DoxyCode}
+
+
+References extract\+\_\+clusters\+\_\+, segment\+\_\+, and voxel\+\_\+grid\+\_\+.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsimple__grasping_1_1ObjectSupportSegmentation_ad2a5de33f859df6001c6a735ada66f06}\label{classsimple__grasping_1_1ObjectSupportSegmentation_ad2a5de33f859df6001c6a735ada66f06}} 
+\index{simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}!segment@{segment}}
+\index{segment@{segment}!simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}}
+\doxysubsubsection{\texorpdfstring{segment()}{segment()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} simple\+\_\+grasping\+::\+Object\+Support\+Segmentation\+::segment (\begin{DoxyParamCaption}\item[{const pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$\+::Const\+Ptr \&}]{cloud,  }\item[{std\+::vector$<$ grasping\+\_\+msgs\+::\+Object $>$ \&}]{objects,  }\item[{std\+::vector$<$ grasping\+\_\+msgs\+::\+Object $>$ \&}]{supports,  }\item[{pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&}]{object\+\_\+cloud,  }\item[{pcl\+::\+Point\+Cloud$<$ pcl\+::\+Point\+X\+Y\+Z\+R\+GB $>$ \&}]{support\+\_\+cloud,  }\item[{\mbox{\hyperlink{classbool}{bool}}}]{output\+\_\+clouds }\end{DoxyParamCaption})}
+
+
+
+Split a cloud into objects and supporting surfaces. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cloud} & The point cloud to segment. This cloud should already be transformed into a coordinate frame where XY plane is horizontal. \\
+\hline
+{\em objects} & The vector to fill in with objects found. \\
+\hline
+{\em supports} & The vector to fill in with support surfaces found. \\
+\hline
+{\em object\+\_\+cloud} & A colored cloud of objects found (if output\+\_\+clouds). \\
+\hline
+{\em support\+\_\+cloud} & A colored cloud of supports found (if output\+\_\+clouds). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 75 of file object\+\_\+support\+\_\+segmentation.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{82 \{}
+\DoxyCodeLine{83   ROS\_INFO(\textcolor{stringliteral}{"object support segmentation starting..."});}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85   \textcolor{comment}{// process the cloud with a voxel grid}}
+\DoxyCodeLine{86   pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud\_filtered(\textcolor{keyword}{new} pcl::PointCloud<pcl::PointXYZRGB>);}
+\DoxyCodeLine{87   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ac2b60f8b2467da11ce7601375f89ffe6}{voxel\_grid\_}}.setInputCloud(cloud);}
+\DoxyCodeLine{88   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ac2b60f8b2467da11ce7601375f89ffe6}{voxel\_grid\_}}.filter(*cloud\_filtered);}
+\DoxyCodeLine{89   ROS\_DEBUG(\textcolor{stringliteral}{"object\_support\_segmentation"},}
+\DoxyCodeLine{90             \textcolor{stringliteral}{"Filtered for transformed Z, now \%d points."}, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(cloud\_filtered-\/>points.size()));}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92   \textcolor{comment}{// remove support planes}}
+\DoxyCodeLine{93   pcl::PointCloud<pcl::PointXYZRGB>::Ptr non\_horizontal\_planes(\textcolor{keyword}{new} pcl::PointCloud<pcl::PointXYZRGB>);}
+\DoxyCodeLine{94   std::vector<pcl::ModelCoefficients::Ptr> plane\_coefficients;  \textcolor{comment}{// coefs of all planes found}}
+\DoxyCodeLine{95   \textcolor{keywordtype}{int} thresh = cloud\_filtered-\/>points.size()/8;}
+\DoxyCodeLine{96   \textcolor{keywordflow}{while} (cloud\_filtered-\/>points.size() > 500)}
+\DoxyCodeLine{97   \{}
+\DoxyCodeLine{98     pcl::PointIndices::Ptr inliers(\textcolor{keyword}{new} pcl::PointIndices);}
+\DoxyCodeLine{99     pcl::ModelCoefficients::Ptr coefficients(\textcolor{keyword}{new} pcl::ModelCoefficients);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{comment}{// Segment the largest planar component from the remaining cloud}}
+\DoxyCodeLine{102     \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ad48a62d9972f7fbca20d63e73d646595}{segment\_}}.setInputCloud(cloud\_filtered);}
+\DoxyCodeLine{103     \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_ad48a62d9972f7fbca20d63e73d646595}{segment\_}}.segment(*inliers, *coefficients);}
+\DoxyCodeLine{104     \textcolor{keywordflow}{if} (inliers-\/>indices.size() < (\textcolor{keywordtype}{size\_t}) thresh)  \textcolor{comment}{// TODO: make configurable? TODO make this based on "can we grasp object"}}
+\DoxyCodeLine{105     \{}
+\DoxyCodeLine{106       ROS\_DEBUG(\textcolor{stringliteral}{"object\_support\_segmentation"}, \textcolor{stringliteral}{"No more planes to remove."});}
+\DoxyCodeLine{107       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{108     \}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{comment}{// Extract planar part for message}}
+\DoxyCodeLine{111     pcl::PointCloud<pcl::PointXYZRGB> plane;}
+\DoxyCodeLine{112     pcl::ExtractIndices<pcl::PointXYZRGB> extract;}
+\DoxyCodeLine{113     extract.setInputCloud(cloud\_filtered);}
+\DoxyCodeLine{114     extract.setIndices(inliers);}
+\DoxyCodeLine{115     extract.setNegative(\textcolor{keyword}{false});}
+\DoxyCodeLine{116     extract.filter(plane);}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \textcolor{comment}{// Check plane is mostly horizontal}}
+\DoxyCodeLine{119     Eigen::Vector3f normal(coefficients-\/>values[0], coefficients-\/>values[1], coefficients-\/>values[2]);}
+\DoxyCodeLine{120     \textcolor{keywordtype}{float} angle = acos(Eigen::Vector3f::UnitZ().dot(normal));}
+\DoxyCodeLine{121     \textcolor{keywordflow}{if} (angle < 0.15)}
+\DoxyCodeLine{122     \{}
+\DoxyCodeLine{123       ROS\_DEBUG(\textcolor{stringliteral}{"object\_support\_segmentation"},}
+\DoxyCodeLine{124                 \textcolor{stringliteral}{"Removing a plane with \%d points."}, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(inliers-\/>indices.size()));}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126       \textcolor{comment}{// new support object, with cluster, bounding box, and plane}}
+\DoxyCodeLine{127       grasping\_msgs::Object \mbox{\hyperlink{classobject}{object}};}
+\DoxyCodeLine{128       pcl::toROSMsg(plane, \textcolor{keywordtype}{object}.point\_cluster);}
+\DoxyCodeLine{129       \textcolor{comment}{// give the object a temporary name}}
+\DoxyCodeLine{130       \textcolor{keywordtype}{object}.name = std::string(\textcolor{stringliteral}{"surface"}) + boost::lexical\_cast<std::string>(supports.size());}
+\DoxyCodeLine{131       \textcolor{comment}{// add shape and pose}}
+\DoxyCodeLine{132       shape\_msgs::SolidPrimitive box;}
+\DoxyCodeLine{133       geometry\_msgs::Pose \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}};}
+\DoxyCodeLine{134       \mbox{\hyperlink{namespacesimple__grasping_a53e673fbcf37067b954795386197b79f}{extractUnorientedBoundingBox}}(plane, box, \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}});}
+\DoxyCodeLine{135       \textcolor{keywordtype}{object}.primitives.push\_back(box);}
+\DoxyCodeLine{136       \textcolor{keywordtype}{object}.primitive\_poses.push\_back(\mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}});}
+\DoxyCodeLine{137       \textcolor{comment}{// add plane}}
+\DoxyCodeLine{138       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 4; ++i)}
+\DoxyCodeLine{139         \textcolor{keywordtype}{object}.surface.coef[i] = coefficients-\/>values[i];}
+\DoxyCodeLine{140       \textcolor{comment}{// stamp and frame}}
+\DoxyCodeLine{141       \textcolor{keywordtype}{object}.header.stamp = ros::Time::now();}
+\DoxyCodeLine{142       \textcolor{keywordtype}{object}.header.frame\_id = cloud-\/>header.frame\_id;}
+\DoxyCodeLine{143       \textcolor{comment}{// add support surface to object list}}
+\DoxyCodeLine{144       supports.push\_back(\textcolor{keywordtype}{object});}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146       \textcolor{keywordflow}{if} (output\_clouds)}
+\DoxyCodeLine{147       \{}
+\DoxyCodeLine{148         ROS\_DEBUG(\textcolor{stringliteral}{"object\_support\_segmentation"},}
+\DoxyCodeLine{149                   \textcolor{stringliteral}{"Adding support cluster of size \%d."}, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(plane.points.size()));}
+\DoxyCodeLine{150         \textcolor{keywordtype}{float} hue = (360.0 / 8) * supports.size();}
+\DoxyCodeLine{151         \mbox{\hyperlink{namespacesimple__grasping_a8e014f4263081ef7e674f78d46fb2eb3}{colorizeCloud}}(plane, hue);}
+\DoxyCodeLine{152         support\_cloud += plane;}
+\DoxyCodeLine{153       \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155       \textcolor{comment}{// track plane for later use when determining objects}}
+\DoxyCodeLine{156       plane\_coefficients.push\_back(coefficients);}
+\DoxyCodeLine{157     \}}
+\DoxyCodeLine{158     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{159     \{}
+\DoxyCodeLine{160       \textcolor{comment}{// Add plane to temporary point cloud so we can recover points for object extraction below}}
+\DoxyCodeLine{161       ROS\_DEBUG(\textcolor{stringliteral}{"object\_support\_segmentation"},}
+\DoxyCodeLine{162                 \textcolor{stringliteral}{"Plane is not horizontal"});}
+\DoxyCodeLine{163       *non\_horizontal\_planes += plane;}
+\DoxyCodeLine{164     \}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166     \textcolor{comment}{// Extract the non-\/planar parts and proceed}}
+\DoxyCodeLine{167     extract.setNegative(\textcolor{keyword}{true});}
+\DoxyCodeLine{168     extract.filter(*cloud\_filtered);}
+\DoxyCodeLine{169   \}}
+\DoxyCodeLine{170   ROS\_DEBUG(\textcolor{stringliteral}{"object\_support\_segmentation"},}
+\DoxyCodeLine{171             \textcolor{stringliteral}{"Cloud now \%d points."}, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(cloud\_filtered-\/>points.size()));}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173   \textcolor{comment}{// Add the non-\/horizontal planes back in}}
+\DoxyCodeLine{174   *cloud\_filtered += *non\_horizontal\_planes;}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176   \textcolor{comment}{// Cluster}}
+\DoxyCodeLine{177   std::vector<pcl::PointIndices> clusters;}
+\DoxyCodeLine{178   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_a20700a90cb5e0ce963c39905f587abda}{extract\_clusters\_}}.setInputCloud(cloud\_filtered);}
+\DoxyCodeLine{179   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_a20700a90cb5e0ce963c39905f587abda}{extract\_clusters\_}}.extract(clusters);}
+\DoxyCodeLine{180   ROS\_DEBUG(\textcolor{stringliteral}{"object\_support\_segmentation"},}
+\DoxyCodeLine{181             \textcolor{stringliteral}{"Extracted \%d clusters."}, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(clusters.size()));}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183   \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_aaae696cfb9e22ad22bd53852a0666b09}{extract\_indices\_}}.setInputCloud(cloud\_filtered);}
+\DoxyCodeLine{184   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i= 0; i < clusters.size(); i++)}
+\DoxyCodeLine{185   \{}
+\DoxyCodeLine{186     \textcolor{comment}{// Extract object}}
+\DoxyCodeLine{187     pcl::PointCloud<pcl::PointXYZRGB> new\_cloud;}
+\DoxyCodeLine{188     \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_aaae696cfb9e22ad22bd53852a0666b09}{extract\_indices\_}}.setIndices(pcl::PointIndicesPtr(\textcolor{keyword}{new} pcl::PointIndices(clusters[i])));}
+\DoxyCodeLine{189     \mbox{\hyperlink{classsimple__grasping_1_1ObjectSupportSegmentation_aaae696cfb9e22ad22bd53852a0666b09}{extract\_indices\_}}.filter(new\_cloud);}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191     \textcolor{comment}{// Find centroid}}
+\DoxyCodeLine{192     Eigen::Vector4f centroid;}
+\DoxyCodeLine{193     pcl::compute3DCentroid(new\_cloud, centroid);}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195     \textcolor{comment}{// Compare centroid to planes to find which plane we are supported by}}
+\DoxyCodeLine{196     \textcolor{keywordtype}{int} support\_plane\_index = -\/1;}
+\DoxyCodeLine{197     \textcolor{keywordtype}{double} support\_plane\_distance = 1000.0;}
+\DoxyCodeLine{198     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} p = 0; p < plane\_coefficients.size(); ++p)}
+\DoxyCodeLine{199     \{}
+\DoxyCodeLine{200       \textcolor{keywordtype}{double} distance = \mbox{\hyperlink{namespacesimple__grasping_a4cb42ccfb8bdcf0853840b6e6842635d}{distancePointToPlane}}(centroid, plane\_coefficients[p]);}
+\DoxyCodeLine{201       \textcolor{keywordflow}{if} (distance > 0.0 \&\& distance < support\_plane\_distance)}
+\DoxyCodeLine{202       \{}
+\DoxyCodeLine{203         support\_plane\_distance = distance;}
+\DoxyCodeLine{204         support\_plane\_index = p;}
+\DoxyCodeLine{205       \}}
+\DoxyCodeLine{206     \}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208     \textcolor{keywordflow}{if} (support\_plane\_index == -\/1)}
+\DoxyCodeLine{209     \{}
+\DoxyCodeLine{210       ROS\_DEBUG(\textcolor{stringliteral}{"object\_support\_segmentation"},}
+\DoxyCodeLine{211                 \textcolor{stringliteral}{"No support plane found for object"});}
+\DoxyCodeLine{212       \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{213     \}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215     \textcolor{comment}{// new object, with cluster and bounding box}}
+\DoxyCodeLine{216     grasping\_msgs::Object \mbox{\hyperlink{classobject}{object}};}
+\DoxyCodeLine{217     \textcolor{comment}{// set name of supporting surface}}
+\DoxyCodeLine{218     \textcolor{keywordtype}{object}.support\_surface = std::string(\textcolor{stringliteral}{"surface"}) + boost::lexical\_cast<std::string>(support\_plane\_index);}
+\DoxyCodeLine{219     \textcolor{comment}{// add shape, pose and transformed cluster}}
+\DoxyCodeLine{220     shape\_msgs::SolidPrimitive box;}
+\DoxyCodeLine{221     geometry\_msgs::Pose \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}};}
+\DoxyCodeLine{222     pcl::PointCloud<pcl::PointXYZRGB> projected\_cloud;}
+\DoxyCodeLine{223     \mbox{\hyperlink{namespacesimple__grasping_a2a8cea55980f11b77c2cfa931dae1d93}{extractShape}}(new\_cloud, plane\_coefficients[support\_plane\_index], projected\_cloud, box, \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}});}
+\DoxyCodeLine{224     pcl::toROSMsg(projected\_cloud, \textcolor{keywordtype}{object}.point\_cluster);}
+\DoxyCodeLine{225     \textcolor{keywordtype}{object}.primitives.push\_back(box);}
+\DoxyCodeLine{226     \textcolor{keywordtype}{object}.primitive\_poses.push\_back(\mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}});}
+\DoxyCodeLine{227     \textcolor{comment}{// add stamp and frame}}
+\DoxyCodeLine{228     \textcolor{keywordtype}{object}.header.stamp = ros::Time::now();}
+\DoxyCodeLine{229     \textcolor{keywordtype}{object}.header.frame\_id = cloud-\/>header.frame\_id;}
+\DoxyCodeLine{230     \textcolor{comment}{// add object to object list}}
+\DoxyCodeLine{231     objects.push\_back(\textcolor{keywordtype}{object});}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233     \textcolor{keywordflow}{if} (output\_clouds)}
+\DoxyCodeLine{234     \{}
+\DoxyCodeLine{235       ROS\_DEBUG(\textcolor{stringliteral}{"object\_support\_segmentation"},}
+\DoxyCodeLine{236                 \textcolor{stringliteral}{"Adding an object cluster of size \%d."}, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(new\_cloud.points.size()));}
+\DoxyCodeLine{237       \textcolor{keywordtype}{float} hue = (360.0 / clusters.size()) * i;}
+\DoxyCodeLine{238       \mbox{\hyperlink{namespacesimple__grasping_a8e014f4263081ef7e674f78d46fb2eb3}{colorizeCloud}}(new\_cloud, hue);}
+\DoxyCodeLine{239       object\_cloud += new\_cloud;}
+\DoxyCodeLine{240     \}}
+\DoxyCodeLine{241   \}}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243   ROS\_INFO(\textcolor{stringliteral}{"object support segmentation done processing."});}
+\DoxyCodeLine{244   \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{245 \}}
+
+\end{DoxyCode}
+
+
+References simple\+\_\+grasping\+::colorize\+Cloud(), simple\+\_\+grasping\+::distance\+Point\+To\+Plane(), extract\+\_\+clusters\+\_\+, extract\+\_\+indices\+\_\+, simple\+\_\+grasping\+::extract\+Shape(), simple\+\_\+grasping\+::extract\+Unoriented\+Bounding\+Box(), demo\+::pose, segment\+\_\+, and voxel\+\_\+grid\+\_\+.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsimple__grasping_1_1ObjectSupportSegmentation_ad2a5de33f859df6001c6a735ada66f06_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsimple__grasping_1_1ObjectSupportSegmentation_a20700a90cb5e0ce963c39905f587abda}\label{classsimple__grasping_1_1ObjectSupportSegmentation_a20700a90cb5e0ce963c39905f587abda}} 
+\index{simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}!extract\_clusters\_@{extract\_clusters\_}}
+\index{extract\_clusters\_@{extract\_clusters\_}!simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}}
+\doxysubsubsection{\texorpdfstring{extract\_clusters\_}{extract\_clusters\_}}
+{\footnotesize\ttfamily pcl\+::\+Euclidean\+Cluster\+Extraction$<$pcl\+::\+Point\+X\+Y\+Z\+R\+GB$>$ simple\+\_\+grasping\+::\+Object\+Support\+Segmentation\+::extract\+\_\+clusters\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 80 of file object\+\_\+support\+\_\+segmentation.\+h.
+
+
+
+Referenced by Object\+Support\+Segmentation(), and segment().
+
+\mbox{\Hypertarget{classsimple__grasping_1_1ObjectSupportSegmentation_aaae696cfb9e22ad22bd53852a0666b09}\label{classsimple__grasping_1_1ObjectSupportSegmentation_aaae696cfb9e22ad22bd53852a0666b09}} 
+\index{simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}!extract\_indices\_@{extract\_indices\_}}
+\index{extract\_indices\_@{extract\_indices\_}!simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}}
+\doxysubsubsection{\texorpdfstring{extract\_indices\_}{extract\_indices\_}}
+{\footnotesize\ttfamily pcl\+::\+Extract\+Indices$<$pcl\+::\+Point\+X\+Y\+Z\+R\+GB$>$ simple\+\_\+grasping\+::\+Object\+Support\+Segmentation\+::extract\+\_\+indices\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 81 of file object\+\_\+support\+\_\+segmentation.\+h.
+
+
+
+Referenced by segment().
+
+\mbox{\Hypertarget{classsimple__grasping_1_1ObjectSupportSegmentation_ad48a62d9972f7fbca20d63e73d646595}\label{classsimple__grasping_1_1ObjectSupportSegmentation_ad48a62d9972f7fbca20d63e73d646595}} 
+\index{simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}!segment\_@{segment\_}}
+\index{segment\_@{segment\_}!simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}}
+\doxysubsubsection{\texorpdfstring{segment\_}{segment\_}}
+{\footnotesize\ttfamily pcl\+::\+S\+A\+C\+Segmentation$<$pcl\+::\+Point\+X\+Y\+Z\+R\+GB$>$ simple\+\_\+grasping\+::\+Object\+Support\+Segmentation\+::segment\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 79 of file object\+\_\+support\+\_\+segmentation.\+h.
+
+
+
+Referenced by Object\+Support\+Segmentation(), and segment().
+
+\mbox{\Hypertarget{classsimple__grasping_1_1ObjectSupportSegmentation_ac2b60f8b2467da11ce7601375f89ffe6}\label{classsimple__grasping_1_1ObjectSupportSegmentation_ac2b60f8b2467da11ce7601375f89ffe6}} 
+\index{simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}!voxel\_grid\_@{voxel\_grid\_}}
+\index{voxel\_grid\_@{voxel\_grid\_}!simple\_grasping::ObjectSupportSegmentation@{simple\_grasping::ObjectSupportSegmentation}}
+\doxysubsubsection{\texorpdfstring{voxel\_grid\_}{voxel\_grid\_}}
+{\footnotesize\ttfamily pcl\+::\+Voxel\+Grid$<$pcl\+::\+Point\+X\+Y\+Z\+R\+GB$>$ simple\+\_\+grasping\+::\+Object\+Support\+Segmentation\+::voxel\+\_\+grid\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 78 of file object\+\_\+support\+\_\+segmentation.\+h.
+
+
+
+Referenced by Object\+Support\+Segmentation(), and segment().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+submodules/simple\+\_\+grasping/include/simple\+\_\+grasping/\mbox{\hyperlink{object__support__segmentation_8h}{object\+\_\+support\+\_\+segmentation.\+h}}\item 
+submodules/simple\+\_\+grasping/src/\mbox{\hyperlink{object__support__segmentation_8cpp}{object\+\_\+support\+\_\+segmentation.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,418 @@
+\hypertarget{classrobot__controllers_1_1GravityCompensation}{}\doxysection{robot\+\_\+controllers\+::Gravity\+Compensation Class Reference}
+\label{classrobot__controllers_1_1GravityCompensation}\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+
+
+\mbox{\hyperlink{classrobot__controllers_1_1Controller}{Controller}} which uses K\+DL to compute torque needed for static holding of the chain at the current pose.  
+
+
+
+
+{\ttfamily \#include $<$gravity\+\_\+compensation.\+h$>$}
+
+
+
+Inheritance diagram for robot\+\_\+controllers\+::Gravity\+Compensation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classrobot__controllers_1_1GravityCompensation__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for robot\+\_\+controllers\+::Gravity\+Compensation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1GravityCompensation__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a1599817d9deed40386f06887bb0b3783}{Gravity\+Compensation}} ()
+\item 
+virtual \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a788da2b427782adf66f34fa795f3f524}{$\sim$\+Gravity\+Compensation}} ()
+\item 
+virtual int \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a4ed283a6d94d4a68dd3e845871303bdd}{init}} (ros\+::\+Node\+Handle \&nh, \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} $\ast$manager)
+\begin{DoxyCompactList}\small\item\em Initialize the controller and any required data structures. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_ac514f0f8402a6450a3d50d0fddf4fb3b}{start}} ()
+\begin{DoxyCompactList}\small\item\em Attempt to start the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a1b72065ae2540303f0af8a98541d41f9}{stop}} (\mbox{\hyperlink{classbool}{bool}} force)
+\begin{DoxyCompactList}\small\item\em Stop this controller. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_af71261e6935f41a78e3c1884cb5c8bcc}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Cleanly reset the controller to it\textquotesingle{}s initial state. Some controllers may choose to stop themselves. This is mainly used in the case of the the robot exiting some fault condition. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_afeb1a4a9f065022e38c08f5080843244}{update}} (const ros\+::\+Time \&time, const ros\+::\+Duration \&dt)
+\begin{DoxyCompactList}\small\item\em This is the update loop for the controller. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a9d6e5cb129a4edf247c6b10de3855244}{get\+Type}} ()
+\begin{DoxyCompactList}\small\item\em Get the type of this controller. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a9dc0ceafb24aea28a3721639ec0081dc}{get\+Commanded\+Names}} ()
+\begin{DoxyCompactList}\small\item\em Get the names of joints/controllers which this controller commands. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a92937b8422b1ae49c5b6bf79b089ca4b}{get\+Claimed\+Names}} ()
+\begin{DoxyCompactList}\small\item\em Get the names of joints/controllers which this controller exclusively claims. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} $\ast$ \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_aace9091e130dcefe34e72d4bdbd6a3aa}{manager\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{namespacerobot__controllers_a9c7cc37a8e0d295ea24c75cbb656ecfa}{Joint\+Handle\+Ptr}} $>$ \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a47e16a6f18596a78e95416bf8e4f8bbf}{joints\+\_\+}}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_ae588f5a5e8f051297364fbc3783d63b6}{initialized\+\_\+}}
+\item 
+K\+D\+L\+::\+Chain \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_affa422691adeb0503fa54ac6e6ebc84c}{kdl\+\_\+chain\+\_\+}}
+\begin{DoxyCompactList}\small\item\em is K\+DL structure setup \end{DoxyCompactList}\item 
+K\+D\+L\+::\+Jnt\+Array\+Vel \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_aa427e1c2c0bde39ab3023bbec98b7c4f}{positions\+\_\+}}
+\item 
+boost\+::shared\+\_\+ptr$<$ K\+D\+L\+::\+Chain\+Dyn\+Param $>$ \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a0b665ad46298f265af19f35c23f888d0}{kdl\+\_\+chain\+\_\+dynamics\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classrobot__controllers_1_1Controller}{Controller}} which uses K\+DL to compute torque needed for static holding of the chain at the current pose. 
+
+Definition at line 100 of file gravity\+\_\+compensation.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_a1599817d9deed40386f06887bb0b3783}\label{classrobot__controllers_1_1GravityCompensation_a1599817d9deed40386f06887bb0b3783}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!GravityCompensation@{GravityCompensation}}
+\index{GravityCompensation@{GravityCompensation}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{GravityCompensation()}{GravityCompensation()}}
+{\footnotesize\ttfamily robot\+\_\+controllers\+::\+Gravity\+Compensation\+::\+Gravity\+Compensation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 103 of file gravity\+\_\+compensation.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{108 \{}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_a788da2b427782adf66f34fa795f3f524}\label{classrobot__controllers_1_1GravityCompensation_a788da2b427782adf66f34fa795f3f524}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!````~GravityCompensation@{$\sim$GravityCompensation}}
+\index{````~GravityCompensation@{$\sim$GravityCompensation}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{$\sim$GravityCompensation()}{~GravityCompensation()}}
+{\footnotesize\ttfamily virtual robot\+\_\+controllers\+::\+Gravity\+Compensation\+::$\sim$\+Gravity\+Compensation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 104 of file gravity\+\_\+compensation.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{108 \{}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_a92937b8422b1ae49c5b6bf79b089ca4b}\label{classrobot__controllers_1_1GravityCompensation_a92937b8422b1ae49c5b6bf79b089ca4b}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!getClaimedNames@{getClaimedNames}}
+\index{getClaimedNames@{getClaimedNames}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{getClaimedNames()}{getClaimedNames()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ robot\+\_\+controllers\+::\+Gravity\+Compensation\+::get\+Claimed\+Names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the names of joints/controllers which this controller exclusively claims. 
+
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_acb21ed7e8c391eb7151a7072416b4987}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 172 of file gravity\+\_\+compensation.\+cpp.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_a9dc0ceafb24aea28a3721639ec0081dc}\label{classrobot__controllers_1_1GravityCompensation_a9dc0ceafb24aea28a3721639ec0081dc}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!getCommandedNames@{getCommandedNames}}
+\index{getCommandedNames@{getCommandedNames}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{getCommandedNames()}{getCommandedNames()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ robot\+\_\+controllers\+::\+Gravity\+Compensation\+::get\+Commanded\+Names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the names of joints/controllers which this controller commands. 
+
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_a9b55bc2d5f95ef80dbf05878b7163fc0}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 160 of file gravity\+\_\+compensation.\+cpp.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_a9d6e5cb129a4edf247c6b10de3855244}\label{classrobot__controllers_1_1GravityCompensation_a9d6e5cb129a4edf247c6b10de3855244}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!getType@{getType}}
+\index{getType@{getType}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily virtual std\+::string robot\+\_\+controllers\+::\+Gravity\+Compensation\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the type of this controller. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classrobot__controllers_1_1Controller_ac527e1ae39519d5da149b78d79a37763}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 154 of file gravity\+\_\+compensation.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_a4ed283a6d94d4a68dd3e845871303bdd}\label{classrobot__controllers_1_1GravityCompensation_a4ed283a6d94d4a68dd3e845871303bdd}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!init@{init}}
+\index{init@{init}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily int robot\+\_\+controllers\+::\+Gravity\+Compensation\+::init (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{nh,  }\item[{\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} $\ast$}]{manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Initialize the controller and any required data structures. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nh} & Node handle for this controller. \\
+\hline
+{\em manager} & The controller manager instance, this is needed for the controller to get information about joints, etc. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if succesfully configured, negative values are error codes. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classrobot__controllers_1_1Controller_ac1b7a94badc6c8c4f22770fb027845a0}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 79 of file gravity\+\_\+compensation.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{102 \{}
+\DoxyCodeLine{103   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_ae588f5a5e8f051297364fbc3783d63b6}{initialized\_}})}
+\DoxyCodeLine{104     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{105   \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{106 \}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108 \textcolor{keywordtype}{void} \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_afeb1a4a9f065022e38c08f5080843244}{GravityCompensation::update}}(\textcolor{keyword}{const} ros::Time\& time, \textcolor{keyword}{const} ros::Duration\& dt)}
+\DoxyCodeLine{109 \{}
+\DoxyCodeLine{110   \textcolor{comment}{// Need to initialize KDL structs}}
+\DoxyCodeLine{111   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_ae588f5a5e8f051297364fbc3783d63b6}{initialized\_}})}
+\DoxyCodeLine{112     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114   \textcolor{comment}{// Get current positions}}
+\DoxyCodeLine{115   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_affa422691adeb0503fa54ac6e6ebc84c}{kdl\_chain\_}}.getNrOfJoints(); ++i)}
+\DoxyCodeLine{116     \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_aa427e1c2c0bde39ab3023bbec98b7c4f}{positions\_}}.q.data[i] = \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a47e16a6f18596a78e95416bf8e4f8bbf}{joints\_}}[i]-\/>getPosition();}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118   \textcolor{comment}{// Do the gravity compensation}}
+\DoxyCodeLine{119   KDL::JntArray torques(\mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_affa422691adeb0503fa54ac6e6ebc84c}{kdl\_chain\_}}.getNrOfJoints());}
+\DoxyCodeLine{120   \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a0b665ad46298f265af19f35c23f888d0}{kdl\_chain\_dynamics\_}}-\/>JntToGravity(\mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_aa427e1c2c0bde39ab3023bbec98b7c4f}{positions\_}}.q, torques);}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122   \textcolor{comment}{// Update effort command}}
+\DoxyCodeLine{123   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_affa422691adeb0503fa54ac6e6ebc84c}{kdl\_chain\_}}.getNrOfJoints(); ++i)}
+\DoxyCodeLine{124     \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a47e16a6f18596a78e95416bf8e4f8bbf}{joints\_}}[i]-\/>setEffort(torques.data[i]);}
+\DoxyCodeLine{125 \}}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127 std::vector<std::string> \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a9dc0ceafb24aea28a3721639ec0081dc}{GravityCompensation::getCommandedNames}}()}
+\DoxyCodeLine{128 \{}
+\DoxyCodeLine{129   std::vector<std::string> names;}
+\DoxyCodeLine{130   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_ae588f5a5e8f051297364fbc3783d63b6}{initialized\_}})}
+\DoxyCodeLine{131   \{}
+\DoxyCodeLine{132     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_affa422691adeb0503fa54ac6e6ebc84c}{kdl\_chain\_}}.getNrOfSegments(); ++i)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_af71261e6935f41a78e3c1884cb5c8bcc}\label{classrobot__controllers_1_1GravityCompensation_af71261e6935f41a78e3c1884cb5c8bcc}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!reset@{reset}}
+\index{reset@{reset}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Gravity\+Compensation\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Cleanly reset the controller to it\textquotesingle{}s initial state. Some controllers may choose to stop themselves. This is mainly used in the case of the the robot exiting some fault condition. 
+
+\begin{DoxyReturn}{Returns}
+True if successfully reset, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_af5170a159c210de2bcb20b89531d5e49}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 140 of file gravity\+\_\+compensation.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_ac514f0f8402a6450a3d50d0fddf4fb3b}\label{classrobot__controllers_1_1GravityCompensation_ac514f0f8402a6450a3d50d0fddf4fb3b}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!start@{start}}
+\index{start@{start}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Gravity\+Compensation\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Attempt to start the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. 
+
+\begin{DoxyReturn}{Returns}
+True if successfully started, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_a781e023ddefd3a60fd2c47d68838016b}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 134 of file gravity\+\_\+compensation.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{140 \{}
+
+\end{DoxyCode}
+
+
+Referenced by tuck\+\_\+arm.\+Move\+It\+Thread\+::\+\_\+\+\_\+init\+\_\+\+\_\+().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1GravityCompensation_ac514f0f8402a6450a3d50d0fddf4fb3b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_a1b72065ae2540303f0af8a98541d41f9}\label{classrobot__controllers_1_1GravityCompensation_a1b72065ae2540303f0af8a98541d41f9}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!stop@{stop}}
+\index{stop@{stop}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Gravity\+Compensation\+::stop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbool}{bool}}}]{force }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Stop this controller. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em force} & If true, this controller will be stopped regardless of return value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if controller preempted successfully. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_a64d4f0032496c26c0fa788a91bc0b466}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 128 of file gravity\+\_\+compensation.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{132        :}
+\DoxyCodeLine{133   ControllerManager* \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_aace9091e130dcefe34e72d4bdbd6a3aa}{manager\_}};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_afeb1a4a9f065022e38c08f5080843244}\label{classrobot__controllers_1_1GravityCompensation_afeb1a4a9f065022e38c08f5080843244}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!update@{update}}
+\index{update@{update}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void robot\+\_\+controllers\+::\+Gravity\+Compensation\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{time,  }\item[{const ros\+::\+Duration \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+This is the update loop for the controller. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The system time. \\
+\hline
+{\em dt} & The timestep since last call to update. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_ab079e1d49a8afc4872049680dd950858}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 141 of file gravity\+\_\+compensation.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_ae588f5a5e8f051297364fbc3783d63b6}\label{classrobot__controllers_1_1GravityCompensation_ae588f5a5e8f051297364fbc3783d63b6}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!initialized\_@{initialized\_}}
+\index{initialized\_@{initialized\_}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{initialized\_}{initialized\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Gravity\+Compensation\+::initialized\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 169 of file gravity\+\_\+compensation.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_a47e16a6f18596a78e95416bf8e4f8bbf}\label{classrobot__controllers_1_1GravityCompensation_a47e16a6f18596a78e95416bf8e4f8bbf}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!joints\_@{joints\_}}
+\index{joints\_@{joints\_}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{joints\_}{joints\_}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{namespacerobot__controllers_a9c7cc37a8e0d295ea24c75cbb656ecfa}{Joint\+Handle\+Ptr}}$>$ robot\+\_\+controllers\+::\+Gravity\+Compensation\+::joints\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 167 of file gravity\+\_\+compensation.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_affa422691adeb0503fa54ac6e6ebc84c}\label{classrobot__controllers_1_1GravityCompensation_affa422691adeb0503fa54ac6e6ebc84c}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!kdl\_chain\_@{kdl\_chain\_}}
+\index{kdl\_chain\_@{kdl\_chain\_}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{kdl\_chain\_}{kdl\_chain\_}}
+{\footnotesize\ttfamily K\+D\+L\+::\+Chain robot\+\_\+controllers\+::\+Gravity\+Compensation\+::kdl\+\_\+chain\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+is K\+DL structure setup 
+
+
+
+Definition at line 171 of file gravity\+\_\+compensation.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_a0b665ad46298f265af19f35c23f888d0}\label{classrobot__controllers_1_1GravityCompensation_a0b665ad46298f265af19f35c23f888d0}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!kdl\_chain\_dynamics\_@{kdl\_chain\_dynamics\_}}
+\index{kdl\_chain\_dynamics\_@{kdl\_chain\_dynamics\_}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{kdl\_chain\_dynamics\_}{kdl\_chain\_dynamics\_}}
+{\footnotesize\ttfamily boost\+::shared\+\_\+ptr$<$K\+D\+L\+::\+Chain\+Dyn\+Param$>$ robot\+\_\+controllers\+::\+Gravity\+Compensation\+::kdl\+\_\+chain\+\_\+dynamics\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 173 of file gravity\+\_\+compensation.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_aace9091e130dcefe34e72d4bdbd6a3aa}\label{classrobot__controllers_1_1GravityCompensation_aace9091e130dcefe34e72d4bdbd6a3aa}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!manager\_@{manager\_}}
+\index{manager\_@{manager\_}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{manager\_}{manager\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}}$\ast$ robot\+\_\+controllers\+::\+Gravity\+Compensation\+::manager\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 166 of file gravity\+\_\+compensation.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1GravityCompensation_aa427e1c2c0bde39ab3023bbec98b7c4f}\label{classrobot__controllers_1_1GravityCompensation_aa427e1c2c0bde39ab3023bbec98b7c4f}} 
+\index{robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}!positions\_@{positions\_}}
+\index{positions\_@{positions\_}!robot\_controllers::GravityCompensation@{robot\_controllers::GravityCompensation}}
+\doxysubsubsection{\texorpdfstring{positions\_}{positions\_}}
+{\footnotesize\ttfamily K\+D\+L\+::\+Jnt\+Array\+Vel robot\+\_\+controllers\+::\+Gravity\+Compensation\+::positions\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 172 of file gravity\+\_\+compensation.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+submodules/robot\+\_\+controllers/robot\+\_\+controllers/include/robot\+\_\+controllers/\mbox{\hyperlink{gravity__compensation_8h}{gravity\+\_\+compensation.\+h}}\item 
+submodules/robot\+\_\+controllers/robot\+\_\+controllers/src/\mbox{\hyperlink{gravity__compensation_8cpp}{gravity\+\_\+compensation.\+cpp}}\end{DoxyCompactItemize}

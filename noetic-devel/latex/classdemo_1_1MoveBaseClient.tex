@@ -1,0 +1,120 @@
+\hypertarget{classdemo_1_1MoveBaseClient}{}\doxysection{demo.\+Move\+Base\+Client Class Reference}
+\label{classdemo_1_1MoveBaseClient}\index{demo.MoveBaseClient@{demo.MoveBaseClient}}
+
+
+Inheritance diagram for demo.\+Move\+Base\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{classdemo_1_1MoveBaseClient__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for demo.\+Move\+Base\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{classdemo_1_1MoveBaseClient__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdemo_1_1MoveBaseClient_a00b80080799ac02270ea4d2f147fb1cd}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classdemo_1_1MoveBaseClient_a61a466a38c89ca7f7be4701cddd83e0c}{goto}} (self, x, y, theta, frame=\char`\"{}map\char`\"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdemo_1_1MoveBaseClient_a9d8f666c1b7d98402b7ec865f5a01847}{client}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 50 of file demo.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdemo_1_1MoveBaseClient_a00b80080799ac02270ea4d2f147fb1cd}\label{classdemo_1_1MoveBaseClient_a00b80080799ac02270ea4d2f147fb1cd}} 
+\index{demo.MoveBaseClient@{demo.MoveBaseClient}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!demo.MoveBaseClient@{demo.MoveBaseClient}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def demo.\+Move\+Base\+Client.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 52 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{52     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{53         self.client = actionlib.SimpleActionClient(\textcolor{stringliteral}{"move\_base"}, MoveBaseAction)}
+\DoxyCodeLine{54         rospy.loginfo(\textcolor{stringliteral}{"Waiting for move\_base..."})}
+\DoxyCodeLine{55         self.client.wait\_for\_server()}
+\DoxyCodeLine{56 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdemo_1_1MoveBaseClient_a61a466a38c89ca7f7be4701cddd83e0c}\label{classdemo_1_1MoveBaseClient_a61a466a38c89ca7f7be4701cddd83e0c}} 
+\index{demo.MoveBaseClient@{demo.MoveBaseClient}!goto@{goto}}
+\index{goto@{goto}!demo.MoveBaseClient@{demo.MoveBaseClient}}
+\doxysubsubsection{\texorpdfstring{goto()}{goto()}}
+{\footnotesize\ttfamily def demo.\+Move\+Base\+Client.\+goto (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{theta,  }\item[{}]{frame = {\ttfamily \char`\"{}map\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 57 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{57     \textcolor{keyword}{def }goto(self, x, y, theta, frame="map"):}
+\DoxyCodeLine{58         move\_goal = MoveBaseGoal()}
+\DoxyCodeLine{59         move\_goal.target\_pose.pose.position.x = x}
+\DoxyCodeLine{60         move\_goal.target\_pose.pose.position.y = y}
+\DoxyCodeLine{61         move\_goal.target\_pose.pose.orientation.z = sin(theta/2.0)}
+\DoxyCodeLine{62         move\_goal.target\_pose.pose.orientation.w = cos(theta/2.0)}
+\DoxyCodeLine{63         move\_goal.target\_pose.header.frame\_id = frame}
+\DoxyCodeLine{64         move\_goal.target\_pose.header.stamp = rospy.Time.now()}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66         \textcolor{comment}{\# TODO wait for things to work}}
+\DoxyCodeLine{67         self.client.send\_goal(move\_goal)}
+\DoxyCodeLine{68         self.client.wait\_for\_result()}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{comment}{\# Send a trajectory to controller}}
+
+\end{DoxyCode}
+
+
+References smacc\+::default\+\_\+events\+::\+Ev\+Action\+Feedback$<$ Action\+Feedback, T\+Orthogonal $>$.\+client, and demo.\+Move\+Base\+Client.\+client.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdemo_1_1MoveBaseClient_a9d8f666c1b7d98402b7ec865f5a01847}\label{classdemo_1_1MoveBaseClient_a9d8f666c1b7d98402b7ec865f5a01847}} 
+\index{demo.MoveBaseClient@{demo.MoveBaseClient}!client@{client}}
+\index{client@{client}!demo.MoveBaseClient@{demo.MoveBaseClient}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily demo.\+Move\+Base\+Client.\+client}
+
+
+
+Definition at line 53 of file demo.\+py.
+
+
+
+Referenced by camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+disable\+\_\+auto(), camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+enable\+\_\+auto(), demo.\+Move\+Base\+Client.\+goto(), pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+goto(), tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+goto(), tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+look\+\_\+at(), demo.\+Point\+Head\+Client.\+look\+\_\+at(), pick\+\_\+place\+\_\+demo.\+Point\+Head\+Client.\+look\+\_\+at(), tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop(), demo.\+Follow\+Trajectory\+Client.\+move\+\_\+to(), pick\+\_\+place\+\_\+demo.\+Follow\+Trajectory\+Client.\+move\+\_\+to(), tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+move\+\_\+to(), tuck\+\_\+arm.\+Tuck\+Thread.\+run(), gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position(), and tuck\+\_\+arm.\+Tuck\+Thread.\+stop().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+gazebo/fetch\+\_\+gazebo\+\_\+demo/scripts/\mbox{\hyperlink{demo_8py}{demo.\+py}}\end{DoxyCompactItemize}

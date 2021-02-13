@@ -1,0 +1,430 @@
+\hypertarget{classrobot__controllers_1_1PID}{}\doxysection{robot\+\_\+controllers\+::P\+ID Class Reference}
+\label{classrobot__controllers_1_1PID}\index{robot\_controllers::PID@{robot\_controllers::PID}}
+
+
+{\ttfamily \#include $<$pid.\+h$>$}
+
+
+
+Collaboration diagram for robot\+\_\+controllers\+::P\+ID\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{classrobot__controllers_1_1PID__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classrobot__controllers_1_1PID_ad8ac674e4932af855ffd1362b590b42a}{P\+ID}} (double p, double i, double d, double i\+\_\+max, double i\+\_\+min)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classrobot__controllers_1_1PID_a505f68c15483ca1e743b2d063f26f29e}{P\+ID}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. Starts all gains and limits at zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1PID_a60d0e0b7098380cdf2afada4469c7fd9}{init}} (const ros\+::\+Node\+Handle \&nh)
+\begin{DoxyCompactList}\small\item\em initialize gain settings from R\+OS parameter values \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classrobot__controllers_1_1PID_a90f414fe43e365298bba9d9bf7082f19}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Reset integral wind-\/up term. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1PID_aca64881e3233015f2c988934cafd3252}{update}} (double error, double dt)
+\begin{DoxyCompactList}\small\item\em Run \mbox{\hyperlink{classrobot__controllers_1_1PID}{P\+ID}} calculation and return control result. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1PID_ad664ab0321aaeba4c11192964f1386e9}{update}} (double error, double error\+\_\+dot, double dt)
+\begin{DoxyCompactList}\small\item\em Run \mbox{\hyperlink{classrobot__controllers_1_1PID}{P\+ID}} calculation and return control result. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1PID_a0579db0e852f0654cc298e1b5dd26bc2}{check\+Gains}} ()
+\begin{DoxyCompactList}\small\item\em Checks and fixes gain settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1PID_a2499b7666348c03b873ecbb439d1e07b}{p\+\_\+gain\+\_\+}}
+\begin{DoxyCompactList}\small\item\em proportial gain \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1PID_ae6acef73c2b554f21688f2e14b0ca9f0}{i\+\_\+gain\+\_\+}}
+\begin{DoxyCompactList}\small\item\em integral gain \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1PID_a9bccbe393f2c5093be695c05b638294a}{d\+\_\+gain\+\_\+}}
+\begin{DoxyCompactList}\small\item\em derivative gain \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1PID_af8347bc85a68a5b7c6c38645a1b78665}{i\+\_\+max\+\_\+}}
+\begin{DoxyCompactList}\small\item\em integral gain min and max limits \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1PID_a157d26b92f6af1c93855795152f6f01d}{i\+\_\+min\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1PID_aec9a571303e0eacef0e9246b0d16102e}{i\+\_\+term\+\_\+}}
+\begin{DoxyCompactList}\small\item\em integral wind-\/up term \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1PID_a3802227c5e9f2a16c2d21cd7f139e542}{error\+\_\+last\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Last error value, used for calculating error\+\_\+dot when not provided. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 79 of file pid.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_ad8ac674e4932af855ffd1362b590b42a}\label{classrobot__controllers_1_1PID_ad8ac674e4932af855ffd1362b590b42a}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!PID@{PID}}
+\index{PID@{PID}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{PID()}{PID()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily robot\+\_\+controllers\+::\+P\+I\+D\+::\+P\+ID (\begin{DoxyParamCaption}\item[{double}]{p,  }\item[{double}]{i,  }\item[{double}]{d,  }\item[{double}]{i\+\_\+max,  }\item[{double}]{i\+\_\+min }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & proportional gain \\
+\hline
+{\em i} & integral gain \\
+\hline
+{\em d} & derivative gain \\
+\hline
+{\em i\+\_\+max} & integral wind-\/up max value \\
+\hline
+{\em i\+\_\+min} & integral wind-\/up min value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 81 of file pid.\+cpp.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_a505f68c15483ca1e743b2d063f26f29e}\label{classrobot__controllers_1_1PID_a505f68c15483ca1e743b2d063f26f29e}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!PID@{PID}}
+\index{PID@{PID}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{PID()}{PID()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily robot\+\_\+controllers\+::\+P\+I\+D\+::\+P\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. Starts all gains and limits at zero. 
+
+
+
+Definition at line 92 of file pid.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{93 \{}
+\DoxyCodeLine{94   \textcolor{keywordtype}{bool} pass = \textcolor{keyword}{true};}
+\DoxyCodeLine{95   \textcolor{keywordflow}{if} (!std::isfinite(\mbox{\hyperlink{classrobot__controllers_1_1PID_a2499b7666348c03b873ecbb439d1e07b}{p\_gain\_}}))}
+\DoxyCodeLine{96   \{}
+\DoxyCodeLine{97     ROS\_WARN(\textcolor{stringliteral}{"Proportional gain is not finite"});}
+\DoxyCodeLine{98     \mbox{\hyperlink{classrobot__controllers_1_1PID_a2499b7666348c03b873ecbb439d1e07b}{p\_gain\_}} = 0.0;}
+\DoxyCodeLine{99     pass = \textcolor{keyword}{false};}
+\DoxyCodeLine{100   \}}
+
+\end{DoxyCode}
+
+
+References i\+\_\+gain\+\_\+, and p\+\_\+gain\+\_\+.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_a0579db0e852f0654cc298e1b5dd26bc2}\label{classrobot__controllers_1_1PID_a0579db0e852f0654cc298e1b5dd26bc2}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!checkGains@{checkGains}}
+\index{checkGains@{checkGains}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{checkGains()}{checkGains()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+P\+I\+D\+::check\+Gains (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Checks and fixes gain settings. 
+
+\begin{DoxyReturn}{Returns}
+true is gains are ok, false if gains are invalid 
+\end{DoxyReturn}
+
+
+Definition at line 126 of file pid.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{129   \{}
+\DoxyCodeLine{130     \textcolor{comment}{// It is easy to forgot to set a wind-\/up limit}}
+\DoxyCodeLine{131     ROS\_WARN(\textcolor{stringliteral}{"Integral gain is non-\/zero, but integral wind-\/up limit is zero"});}
+\DoxyCodeLine{132   \}}
+\DoxyCodeLine{133   \textcolor{keywordflow}{if} ( ((\mbox{\hyperlink{classrobot__controllers_1_1PID_a157d26b92f6af1c93855795152f6f01d}{i\_min\_}} != 0) || (\mbox{\hyperlink{classrobot__controllers_1_1PID_af8347bc85a68a5b7c6c38645a1b78665}{i\_max\_}} != 0)) \&\& (\mbox{\hyperlink{classrobot__controllers_1_1PID_ae6acef73c2b554f21688f2e14b0ca9f0}{i\_gain\_}} == 0) )}
+\DoxyCodeLine{134   \{}
+\DoxyCodeLine{135     ROS\_WARN(\textcolor{stringliteral}{"Integral gain is zero, but wind-\/yup limit is zero"});}
+\DoxyCodeLine{136   \}}
+\DoxyCodeLine{137   \textcolor{keywordflow}{return} pass;}
+\DoxyCodeLine{138 \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 \textcolor{keywordtype}{void} \mbox{\hyperlink{classrobot__controllers_1_1PID_a90f414fe43e365298bba9d9bf7082f19}{PID::reset}}()}
+\DoxyCodeLine{141 \{}
+\DoxyCodeLine{142   \mbox{\hyperlink{classrobot__controllers_1_1PID_aec9a571303e0eacef0e9246b0d16102e}{i\_term\_}} = 0.0;}
+\DoxyCodeLine{143   \mbox{\hyperlink{classrobot__controllers_1_1PID_a3802227c5e9f2a16c2d21cd7f139e542}{error\_last\_}} = 0.0;}
+\DoxyCodeLine{144 \}}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146 \textcolor{keywordtype}{double} \mbox{\hyperlink{classrobot__controllers_1_1PID_aca64881e3233015f2c988934cafd3252}{PID::update}}(\textcolor{keywordtype}{double} error, \textcolor{keywordtype}{double} dt)}
+\DoxyCodeLine{147 \{}
+\DoxyCodeLine{148   \textcolor{keywordtype}{double} error\_dot;}
+\DoxyCodeLine{149   \textcolor{keywordflow}{if} (dt <= 0.0)}
+\DoxyCodeLine{150   \{    }
+\DoxyCodeLine{151     ROS\_ERROR\_THROTTLE(1.0, \textcolor{stringliteral}{"PID::update : dt value is less than or equal to zero"});}
+\DoxyCodeLine{152     \textcolor{comment}{// if dt is zero is not possible to perform division}}
+\DoxyCodeLine{153     \textcolor{comment}{// in this case assume error\_dot is zero and perform reset of calculation}}
+\DoxyCodeLine{154     error\_dot = 0.0;}
+\DoxyCodeLine{155   \}}
+\DoxyCodeLine{156   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{157   \{}
+\DoxyCodeLine{158     error\_dot = (error-\/\mbox{\hyperlink{classrobot__controllers_1_1PID_a3802227c5e9f2a16c2d21cd7f139e542}{error\_last\_}})/dt;}
+\DoxyCodeLine{159   \}}
+\DoxyCodeLine{160   \mbox{\hyperlink{classrobot__controllers_1_1PID_a3802227c5e9f2a16c2d21cd7f139e542}{error\_last\_}} = error;}
+\DoxyCodeLine{161   \textcolor{keywordflow}{return} \mbox{\hyperlink{classrobot__controllers_1_1PID_aca64881e3233015f2c988934cafd3252}{update}}(error, error\_dot, dt);}
+\DoxyCodeLine{162 \}}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164 \textcolor{keywordtype}{double} \mbox{\hyperlink{classrobot__controllers_1_1PID_aca64881e3233015f2c988934cafd3252}{PID::update}}(\textcolor{keywordtype}{double} error, \textcolor{keywordtype}{double} error\_dot, \textcolor{keywordtype}{double} dt)}
+\DoxyCodeLine{165 \{}
+\DoxyCodeLine{166   \textcolor{keywordflow}{if} (!std::isfinite(error) || !std::isfinite(error\_dot) || !std::isfinite(dt))}
+\DoxyCodeLine{167   \{}
+\DoxyCodeLine{168     ROS\_ERROR\_THROTTLE(1.0, \textcolor{stringliteral}{"PID::update : input value is NaN or infinity"});}
+\DoxyCodeLine{169     \textcolor{keywordflow}{return} 0.0;}
+\DoxyCodeLine{170   \}}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172   \textcolor{keywordflow}{if} (dt <= 0.0)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_a60d0e0b7098380cdf2afada4469c7fd9}\label{classrobot__controllers_1_1PID_a60d0e0b7098380cdf2afada4469c7fd9}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!init@{init}}
+\index{init@{init}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+P\+I\+D\+::init (\begin{DoxyParamCaption}\item[{const ros\+::\+Node\+Handle \&}]{nh }\end{DoxyParamCaption})}
+
+
+
+initialize gain settings from R\+OS parameter values 
+
+
+
+Definition at line 102 of file pid.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{102   \{}
+\DoxyCodeLine{103     ROS\_WARN(\textcolor{stringliteral}{"Integral gain is not finite"});}
+\DoxyCodeLine{104     \mbox{\hyperlink{classrobot__controllers_1_1PID_ae6acef73c2b554f21688f2e14b0ca9f0}{i\_gain\_}} = 0.0;}
+\DoxyCodeLine{105     pass = \textcolor{keyword}{false};}
+\DoxyCodeLine{106   \}}
+\DoxyCodeLine{107   \textcolor{keywordflow}{if} (!std::isfinite(\mbox{\hyperlink{classrobot__controllers_1_1PID_a9bccbe393f2c5093be695c05b638294a}{d\_gain\_}}))}
+\DoxyCodeLine{108   \{}
+\DoxyCodeLine{109     ROS\_WARN(\textcolor{stringliteral}{"Derivative gain is not finite"});}
+\DoxyCodeLine{110     \mbox{\hyperlink{classrobot__controllers_1_1PID_a9bccbe393f2c5093be695c05b638294a}{d\_gain\_}} = 0.0;}
+\DoxyCodeLine{111     pass = \textcolor{keyword}{false};}
+\DoxyCodeLine{112   \}}
+\DoxyCodeLine{113   \textcolor{keywordflow}{if} (!std::isfinite(\mbox{\hyperlink{classrobot__controllers_1_1PID_af8347bc85a68a5b7c6c38645a1b78665}{i\_max\_}}) || !std::isfinite(\mbox{\hyperlink{classrobot__controllers_1_1PID_a157d26b92f6af1c93855795152f6f01d}{i\_min\_}}))}
+\DoxyCodeLine{114   \{}
+\DoxyCodeLine{115     ROS\_WARN(\textcolor{stringliteral}{"Integral wind-\/up limit is not finite"});}
+\DoxyCodeLine{116     \mbox{\hyperlink{classrobot__controllers_1_1PID_af8347bc85a68a5b7c6c38645a1b78665}{i\_max\_}} = 0.0;}
+\DoxyCodeLine{117     \mbox{\hyperlink{classrobot__controllers_1_1PID_a157d26b92f6af1c93855795152f6f01d}{i\_min\_}} = 0.0;}
+\DoxyCodeLine{118     pass = \textcolor{keyword}{false};}
+\DoxyCodeLine{119   \}}
+\DoxyCodeLine{120   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1PID_af8347bc85a68a5b7c6c38645a1b78665}{i\_max\_}} < \mbox{\hyperlink{classrobot__controllers_1_1PID_a157d26b92f6af1c93855795152f6f01d}{i\_min\_}})}
+\DoxyCodeLine{121   \{}
+\DoxyCodeLine{122     ROS\_WARN(\textcolor{stringliteral}{"Integral max windup value is smaller than minimum value"});}
+\DoxyCodeLine{123     \textcolor{keywordtype}{double} tmp = \mbox{\hyperlink{classrobot__controllers_1_1PID_af8347bc85a68a5b7c6c38645a1b78665}{i\_max\_}};}
+\DoxyCodeLine{124     \mbox{\hyperlink{classrobot__controllers_1_1PID_af8347bc85a68a5b7c6c38645a1b78665}{i\_max\_}} = \mbox{\hyperlink{classrobot__controllers_1_1PID_a157d26b92f6af1c93855795152f6f01d}{i\_min\_}};}
+
+\end{DoxyCode}
+
+
+References i\+\_\+gain\+\_\+.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_a90f414fe43e365298bba9d9bf7082f19}\label{classrobot__controllers_1_1PID_a90f414fe43e365298bba9d9bf7082f19}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!reset@{reset}}
+\index{reset@{reset}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void robot\+\_\+controllers\+::\+P\+I\+D\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reset integral wind-\/up term. 
+
+
+
+Definition at line 174 of file pid.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{174                                        : dt value is less than or equal to zero\textcolor{stringliteral}{");}}
+\DoxyCodeLine{175 \textcolor{stringliteral}{    dt = 0.0;}}
+\DoxyCodeLine{176 \textcolor{stringliteral}{  \}}}
+\DoxyCodeLine{177 \textcolor{stringliteral}{}}
+\DoxyCodeLine{178 \textcolor{stringliteral}{  double p\_term = p\_gain\_*error;}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_aca64881e3233015f2c988934cafd3252}\label{classrobot__controllers_1_1PID_aca64881e3233015f2c988934cafd3252}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!update@{update}}
+\index{update@{update}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+P\+I\+D\+::update (\begin{DoxyParamCaption}\item[{double}]{error,  }\item[{double}]{dt }\end{DoxyParamCaption})}
+
+
+
+Run \mbox{\hyperlink{classrobot__controllers_1_1PID}{P\+ID}} calculation and return control result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em error} & error term (goal-\/actual) \\
+\hline
+{\em dt} & timestep used for calculating derivative term and integral windup \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+calculated \mbox{\hyperlink{classrobot__controllers_1_1PID}{P\+ID}} command
+\end{DoxyReturn}
+\mbox{\hyperlink{classrobot__controllers_1_1PID}{P\+ID}} derivate term is calculated from change in error value and dt ~\newline
+ 
+
+Definition at line 180 of file pid.\+cpp.
+
+
+
+Referenced by robot\+\_\+controllers\+::\+Parallel\+Gripper\+Controller\+::stop().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1PID_aca64881e3233015f2c988934cafd3252_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_ad664ab0321aaeba4c11192964f1386e9}\label{classrobot__controllers_1_1PID_ad664ab0321aaeba4c11192964f1386e9}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!update@{update}}
+\index{update@{update}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+P\+I\+D\+::update (\begin{DoxyParamCaption}\item[{double}]{error,  }\item[{double}]{error\+\_\+dot,  }\item[{double}]{dt }\end{DoxyParamCaption})}
+
+
+
+Run \mbox{\hyperlink{classrobot__controllers_1_1PID}{P\+ID}} calculation and return control result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em error} & error term (goal-\/actual) \\
+\hline
+{\em error\+\_\+dot} & value that is used for derivative term calculation \\
+\hline
+{\em dt} & timestep used for integral windup \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+calculated \mbox{\hyperlink{classrobot__controllers_1_1PID}{P\+ID}} command 
+\end{DoxyReturn}
+
+
+Definition at line 198 of file pid.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_a9bccbe393f2c5093be695c05b638294a}\label{classrobot__controllers_1_1PID_a9bccbe393f2c5093be695c05b638294a}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!d\_gain\_@{d\_gain\_}}
+\index{d\_gain\_@{d\_gain\_}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{d\_gain\_}{d\_gain\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+P\+I\+D\+::d\+\_\+gain\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+derivative gain 
+
+
+
+Definition at line 167 of file pid.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_a3802227c5e9f2a16c2d21cd7f139e542}\label{classrobot__controllers_1_1PID_a3802227c5e9f2a16c2d21cd7f139e542}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!error\_last\_@{error\_last\_}}
+\index{error\_last\_@{error\_last\_}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{error\_last\_}{error\_last\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+P\+I\+D\+::error\+\_\+last\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Last error value, used for calculating error\+\_\+dot when not provided. 
+
+
+
+Definition at line 175 of file pid.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_ae6acef73c2b554f21688f2e14b0ca9f0}\label{classrobot__controllers_1_1PID_ae6acef73c2b554f21688f2e14b0ca9f0}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!i\_gain\_@{i\_gain\_}}
+\index{i\_gain\_@{i\_gain\_}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{i\_gain\_}{i\_gain\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+P\+I\+D\+::i\+\_\+gain\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+integral gain 
+
+
+
+Definition at line 165 of file pid.\+h.
+
+
+
+Referenced by init(), and P\+I\+D().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_af8347bc85a68a5b7c6c38645a1b78665}\label{classrobot__controllers_1_1PID_af8347bc85a68a5b7c6c38645a1b78665}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!i\_max\_@{i\_max\_}}
+\index{i\_max\_@{i\_max\_}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{i\_max\_}{i\_max\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+P\+I\+D\+::i\+\_\+max\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+integral gain min and max limits 
+
+
+
+Definition at line 169 of file pid.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_a157d26b92f6af1c93855795152f6f01d}\label{classrobot__controllers_1_1PID_a157d26b92f6af1c93855795152f6f01d}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!i\_min\_@{i\_min\_}}
+\index{i\_min\_@{i\_min\_}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{i\_min\_}{i\_min\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+P\+I\+D\+::i\+\_\+min\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 169 of file pid.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_aec9a571303e0eacef0e9246b0d16102e}\label{classrobot__controllers_1_1PID_aec9a571303e0eacef0e9246b0d16102e}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!i\_term\_@{i\_term\_}}
+\index{i\_term\_@{i\_term\_}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{i\_term\_}{i\_term\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+P\+I\+D\+::i\+\_\+term\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+integral wind-\/up term 
+
+
+
+Definition at line 172 of file pid.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1PID_a2499b7666348c03b873ecbb439d1e07b}\label{classrobot__controllers_1_1PID_a2499b7666348c03b873ecbb439d1e07b}} 
+\index{robot\_controllers::PID@{robot\_controllers::PID}!p\_gain\_@{p\_gain\_}}
+\index{p\_gain\_@{p\_gain\_}!robot\_controllers::PID@{robot\_controllers::PID}}
+\doxysubsubsection{\texorpdfstring{p\_gain\_}{p\_gain\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+P\+I\+D\+::p\+\_\+gain\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+proportial gain 
+
+
+
+Definition at line 163 of file pid.\+h.
+
+
+
+Referenced by P\+I\+D().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+submodules/robot\+\_\+controllers/robot\+\_\+controllers/include/robot\+\_\+controllers/\mbox{\hyperlink{pid_8h}{pid.\+h}}\item 
+submodules/robot\+\_\+controllers/robot\+\_\+controllers/src/\mbox{\hyperlink{pid_8cpp}{pid.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,133 @@
+\hypertarget{classtests__arm__movements_1_1GripperActionClient}{}\doxysection{tests\+\_\+arm\+\_\+movements.\+Gripper\+Action\+Client Class Reference}
+\label{classtests__arm__movements_1_1GripperActionClient}\index{tests\_arm\_movements.GripperActionClient@{tests\_arm\_movements.GripperActionClient}}
+
+
+Inheritance diagram for tests\+\_\+arm\+\_\+movements.\+Gripper\+Action\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{classtests__arm__movements_1_1GripperActionClient__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for tests\+\_\+arm\+\_\+movements.\+Gripper\+Action\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{classtests__arm__movements_1_1GripperActionClient__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classtests__arm__movements_1_1GripperActionClient_ac0fc4dd52f1e2ee7320b18a7350c8b55}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classtests__arm__movements_1_1GripperActionClient_a5d4d2ad81a569c9c5b7e7b126a862e66}{move\+\_\+gripper}} (self, gripper\+\_\+x, max\+\_\+effort, timeout=5.\+0)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtests__arm__movements_1_1GripperActionClient_aa4063967d8f599ef26b37c511b799b2e}{gripper\+\_\+client}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 103 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1GripperActionClient_ac0fc4dd52f1e2ee7320b18a7350c8b55}\label{classtests__arm__movements_1_1GripperActionClient_ac0fc4dd52f1e2ee7320b18a7350c8b55}} 
+\index{tests\_arm\_movements.GripperActionClient@{tests\_arm\_movements.GripperActionClient}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!tests\_arm\_movements.GripperActionClient@{tests\_arm\_movements.GripperActionClient}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def tests\+\_\+arm\+\_\+movements.\+Gripper\+Action\+Client.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 104 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{104     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106         rospy.loginfo(\textcolor{stringliteral}{"Waiting for gripper\_controller..."})}
+\DoxyCodeLine{107         self.gripper\_client = actionlib.SimpleActionClient(}
+\DoxyCodeLine{108             \textcolor{stringliteral}{"gripper\_controller/gripper\_action"}, GripperCommandAction)}
+\DoxyCodeLine{109         self.gripper\_client.wait\_for\_server()}
+\DoxyCodeLine{110         rospy.loginfo(\textcolor{stringliteral}{"...connected."})}
+\DoxyCodeLine{111 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1GripperActionClient_a5d4d2ad81a569c9c5b7e7b126a862e66}\label{classtests__arm__movements_1_1GripperActionClient_a5d4d2ad81a569c9c5b7e7b126a862e66}} 
+\index{tests\_arm\_movements.GripperActionClient@{tests\_arm\_movements.GripperActionClient}!move\_gripper@{move\_gripper}}
+\index{move\_gripper@{move\_gripper}!tests\_arm\_movements.GripperActionClient@{tests\_arm\_movements.GripperActionClient}}
+\doxysubsubsection{\texorpdfstring{move\_gripper()}{move\_gripper()}}
+{\footnotesize\ttfamily def tests\+\_\+arm\+\_\+movements.\+Gripper\+Action\+Client.\+move\+\_\+gripper (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{gripper\+\_\+x,  }\item[{}]{max\+\_\+effort,  }\item[{}]{timeout = {\ttfamily 5.0} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 112 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{112     \textcolor{keyword}{def }move\_gripper(self, gripper\_x, max\_effort, timeout=5.0):}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114         gripper\_goal = GripperCommandGoal()}
+\DoxyCodeLine{115         gripper\_goal.command.max\_effort = max\_effort}
+\DoxyCodeLine{116         gripper\_goal.command.position = gripper\_x}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118         self.gripper\_client.send\_goal(gripper\_goal)}
+\DoxyCodeLine{119         result = self.gripper\_client.wait\_for\_result(rospy.Duration(timeout))}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121         \textcolor{keywordflow}{return} result}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 }
+
+\end{DoxyCode}
+
+
+References tests\+\_\+arm\+\_\+movements.\+Gripper\+Action\+Client.\+gripper\+\_\+client.
+
+
+
+Referenced by tests\+\_\+arm\+\_\+movements.\+Move\+Fetch.\+move\+\_\+manager().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classtests__arm__movements_1_1GripperActionClient_a5d4d2ad81a569c9c5b7e7b126a862e66_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1GripperActionClient_aa4063967d8f599ef26b37c511b799b2e}\label{classtests__arm__movements_1_1GripperActionClient_aa4063967d8f599ef26b37c511b799b2e}} 
+\index{tests\_arm\_movements.GripperActionClient@{tests\_arm\_movements.GripperActionClient}!gripper\_client@{gripper\_client}}
+\index{gripper\_client@{gripper\_client}!tests\_arm\_movements.GripperActionClient@{tests\_arm\_movements.GripperActionClient}}
+\doxysubsubsection{\texorpdfstring{gripper\_client}{gripper\_client}}
+{\footnotesize\ttfamily tests\+\_\+arm\+\_\+movements.\+Gripper\+Action\+Client.\+gripper\+\_\+client}
+
+
+
+Definition at line 107 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+
+Referenced by tests\+\_\+arm\+\_\+movements.\+Gripper\+Action\+Client.\+move\+\_\+gripper().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+gazebo/fetch\+\_\+gazebo\+\_\+demo/scripts/\mbox{\hyperlink{tests__arm__movements_8py}{tests\+\_\+arm\+\_\+movements.\+py}}\end{DoxyCompactItemize}

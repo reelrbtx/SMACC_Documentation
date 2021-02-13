@@ -1,0 +1,1121 @@
+\hypertarget{classrobot__controllers_1_1DiffDriveBaseController}{}\doxysection{robot\+\_\+controllers\+::Diff\+Drive\+Base\+Controller Class Reference}
+\label{classrobot__controllers_1_1DiffDriveBaseController}\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+
+
+R\+O\+S-\/aware controller to manage a differential drive mobile base. This subcribes to cmd\+\_\+vel topic, publishes odom and tf, and manages the two wheel joints.  
+
+
+
+
+{\ttfamily \#include $<$diff\+\_\+drive\+\_\+base.\+h$>$}
+
+
+
+Inheritance diagram for robot\+\_\+controllers\+::Diff\+Drive\+Base\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classrobot__controllers_1_1DiffDriveBaseController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for robot\+\_\+controllers\+::Diff\+Drive\+Base\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1DiffDriveBaseController__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_acd18beb7dcd4f6c4d68e3dd00956e82e}{Diff\+Drive\+Base\+Controller}} ()
+\item 
+virtual \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a3f3672e595493938ffd80882d1c47b04}{$\sim$\+Diff\+Drive\+Base\+Controller}} ()
+\item 
+virtual int \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ac82933539b7ec62f030ce51df0a3fa2a}{init}} (ros\+::\+Node\+Handle \&nh, \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} $\ast$manager)
+\begin{DoxyCompactList}\small\item\em Initialize the controller and any required data structures. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a6ded85e20b87068103ea99189259c384}{start}} ()
+\begin{DoxyCompactList}\small\item\em Attempt to start the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a3ad0b9414582b668bd4650741ee3d2d8}{stop}} (\mbox{\hyperlink{classbool}{bool}} force)
+\begin{DoxyCompactList}\small\item\em Attempt to stop the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a84a70fe9f485591ef9815c10b0df098c}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Cleanly reset the controller to it\textquotesingle{}s initial state. Some controllers may choose to stop themselves. This is mainly used in the case of the the robot exiting some fault condition. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_abb4ba1b08e6d76edd3a7f98500f23c2b}{update}} (const ros\+::\+Time \&now, const ros\+::\+Duration \&dt)
+\begin{DoxyCompactList}\small\item\em This is the update loop for the controller. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a7a61ba77ae6b377bef6b8b2cf722ccef}{get\+Type}} ()
+\begin{DoxyCompactList}\small\item\em Get the type of this controller. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a2bbe39e9d1742d0bc4f6e1cd1535f5fc}{get\+Commanded\+Names}} ()
+\begin{DoxyCompactList}\small\item\em Get the names of joints/controllers which this controller commands. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_af68ca6b3e4cc9a961f6e8b7ded33d4bf}{get\+Claimed\+Names}} ()
+\begin{DoxyCompactList}\small\item\em Get the names of joints/controllers which this controller exclusively claims. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a32fbd52e3000c4e9a53dfe91c48640ac}{command}} (const geometry\+\_\+msgs\+::\+Twist\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em Command callback from either a R\+OS topic, or a higher controller. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_adb95320ee2225aab1eabc1de2efc4b23}{publish\+Callback}} (const ros\+::\+Timer\+Event \&event)
+\item 
+void \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a4123b6b9521ec3686ff83d58b61fbed7}{scan\+Callback}} (const sensor\+\_\+msgs\+::\+Laser\+Scan\+Const\+Ptr \&scan)
+\item 
+void \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a8374161311f3d1923551283477786b01}{set\+Command}} (float left, float right)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a88ec83d49bba5c59b72da2d59c83e50d}{initialized\+\_\+}}
+\item 
+\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} $\ast$ \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a019ca80f4acbf55129dce175b1aad37c}{manager\+\_\+}}
+\item 
+\mbox{\hyperlink{namespacerobot__controllers_a9c7cc37a8e0d295ea24c75cbb656ecfa}{Joint\+Handle\+Ptr}} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a08b89a8763a8e8cffc06674f414399a3}{left\+\_\+}}
+\item 
+\mbox{\hyperlink{namespacerobot__controllers_a9c7cc37a8e0d295ea24c75cbb656ecfa}{Joint\+Handle\+Ptr}} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a618f060392848c6344bbc4cca1df7e50}{right\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a8425de186f2ff6e29c19a31fde388dd0}{track\+\_\+width\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_afd7fd130c341ae259e066752223b7174}{radians\+\_\+per\+\_\+meter\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a39208421d1337e5762b6a12c96c6517a}{theta\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a6880a0d680dd9d1bf3a42a23064641c9}{wheel\+\_\+rotating\+\_\+threshold\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a9fcfeaaff61a194881e79587534fd980}{rotating\+\_\+threshold\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Threshold for wheel velocity to be \char`\"{}moving\char`\"{}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a56b2c2f578ccdff917e7bb98c63b0ea9}{moving\+\_\+threshold\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Threshold for dr to be considered \char`\"{}moving\char`\"{}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad78974b9dfbdb31cbfea1bfd0e6e4bad}{max\+\_\+velocity\+\_\+x\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Threshold for dx to be considered \char`\"{}moving\char`\"{}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_aabb066cc698772eb8a894c194aa2c277}{max\+\_\+velocity\+\_\+r\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a21f94c7c799b67432fb7da9c8b728726}{max\+\_\+acceleration\+\_\+x\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a7d67ae536c1b740ea8e7ec503b4f7aa7}{max\+\_\+acceleration\+\_\+r\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a026e3f466dc47a505e26fd472059e609}{safety\+\_\+scaling\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a96246ea500e707b89805a0b806fd9a63}{safety\+\_\+scaling\+\_\+distance\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a28dfce9cdc38e9ba9662cc1a27d753f7}{robot\+\_\+width\+\_\+}}
+\item 
+ros\+::\+Time \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a3e7567893e8fafe71075a1d57594d628}{last\+\_\+laser\+\_\+scan\+\_\+}}
+\item 
+boost\+::mutex \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_aa89304289daebf64c084b92674cfa4b8}{command\+\_\+mutex\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ab849b2b1f9258045abb5402c8e6f34ce}{desired\+\_\+x\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_aea7aa70eb5d0148961c750e0bc9ac326}{desired\+\_\+r\+\_\+}}
+\item 
+float \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\+\_\+sent\+\_\+x\+\_\+}}
+\item 
+float \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\+\_\+sent\+\_\+r\+\_\+}}
+\item 
+float \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a6fa19ec2459197687a6129b0ff3366c7}{left\+\_\+last\+\_\+position\+\_\+}}
+\item 
+float \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad564d1ef0512eca5fd70edf7396bd3e9}{right\+\_\+last\+\_\+position\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a068c909e84c346458ada01b726f69681}{left\+\_\+last\+\_\+timestamp\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ac38d0b713341e75535881eb36b12d6cf}{right\+\_\+last\+\_\+timestamp\+\_\+}}
+\item 
+ros\+::\+Time \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a043d40f4b823d4bfeaf81bc7d478565d}{last\+\_\+command\+\_\+}}
+\item 
+ros\+::\+Time \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a845d0031814cd40b5b5641cf2731ba30}{last\+\_\+update\+\_\+}}
+\item 
+ros\+::\+Duration \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_aa74a8e810f4922802472f9d17db74bc5}{timeout\+\_\+}}
+\item 
+boost\+::mutex \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ac15e4c5e11ac1d4675212cbe3ded8aef}{odom\+\_\+mutex\+\_\+}}
+\item 
+nav\+\_\+msgs\+::\+Odometry \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a5b1ecf131b796efd42436b67cc4c33e1}{odom\+\_\+}}
+\item 
+ros\+::\+Publisher \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad43a38b36cefa2f6f34a3621719454c0}{odom\+\_\+pub\+\_\+}}
+\item 
+ros\+::\+Timer \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a794967c71e175f0cca4018f7eabd730b}{odom\+\_\+timer\+\_\+}}
+\item 
+ros\+::\+Subscriber \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ac8e3cc8a31e0f3c3938c46784b1152c5}{cmd\+\_\+sub\+\_\+}}
+\item 
+ros\+::\+Subscriber \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a2d59f8d98de6ed272f3713cd67a75912}{scan\+\_\+sub\+\_\+}}
+\item 
+boost\+::shared\+\_\+ptr$<$ tf\+::\+Transform\+Broadcaster $>$ \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a92f47032df33ba7f1fe2f5ecabca64cd}{broadcaster\+\_\+}}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ae006fe3c38902945ab1cdefd6451f0a5}{publish\+\_\+tf\+\_\+}}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a9b301eeabd8e3752bec04825b35a13fc}{enabled\+\_\+}}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_aad87422517e11600ff4e4c4a7b8918ed}{ready\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+R\+O\+S-\/aware controller to manage a differential drive mobile base. This subcribes to cmd\+\_\+vel topic, publishes odom and tf, and manages the two wheel joints. 
+
+Definition at line 96 of file diff\+\_\+drive\+\_\+base.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_acd18beb7dcd4f6c4d68e3dd00956e82e}\label{classrobot__controllers_1_1DiffDriveBaseController_acd18beb7dcd4f6c4d68e3dd00956e82e}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!DiffDriveBaseController@{DiffDriveBaseController}}
+\index{DiffDriveBaseController@{DiffDriveBaseController}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{DiffDriveBaseController()}{DiffDriveBaseController()}}
+{\footnotesize\ttfamily robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::\+Diff\+Drive\+Base\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 80 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{83   \{}
+\DoxyCodeLine{84     ROS\_ERROR\_NAMED(\textcolor{stringliteral}{"BaseController"}, \textcolor{stringliteral}{"Cannot get wheel joints."});}
+\DoxyCodeLine{85     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a88ec83d49bba5c59b72da2d59c83e50d}{initialized\_}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{86     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{87   \}}
+\DoxyCodeLine{88   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a6fa19ec2459197687a6129b0ff3366c7}{left\_last\_position\_}} = \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a08b89a8763a8e8cffc06674f414399a3}{left\_}}-\/>getPosition();}
+\DoxyCodeLine{89   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad564d1ef0512eca5fd70edf7396bd3e9}{right\_last\_position\_}} = \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a618f060392848c6344bbc4cca1df7e50}{right\_}}-\/>getPosition();}
+\DoxyCodeLine{90   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a845d0031814cd40b5b5641cf2731ba30}{last\_update\_}} = ros::Time::now();}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92   \textcolor{comment}{// Get base parameters}}
+\DoxyCodeLine{93   nh.param<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"track\_width"}, \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a8425de186f2ff6e29c19a31fde388dd0}{track\_width\_}}, 0.37476);}
+\DoxyCodeLine{94   nh.param<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"radians\_per\_meter"}, \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_afd7fd130c341ae259e066752223b7174}{radians\_per\_meter\_}}, 16.5289);}
+
+\end{DoxyCode}
+
+
+References initialized\+\_\+.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a3f3672e595493938ffd80882d1c47b04}\label{classrobot__controllers_1_1DiffDriveBaseController_a3f3672e595493938ffd80882d1c47b04}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!````~DiffDriveBaseController@{$\sim$DiffDriveBaseController}}
+\index{````~DiffDriveBaseController@{$\sim$DiffDriveBaseController}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{$\sim$DiffDriveBaseController()}{~DiffDriveBaseController()}}
+{\footnotesize\ttfamily virtual robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::$\sim$\+Diff\+Drive\+Base\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 133 of file diff\+\_\+drive\+\_\+base.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a32fbd52e3000c4e9a53dfe91c48640ac}\label{classrobot__controllers_1_1DiffDriveBaseController_a32fbd52e3000c4e9a53dfe91c48640ac}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!command@{command}}
+\index{command@{command}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{command()}{command()}}
+{\footnotesize\ttfamily void robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::command (\begin{DoxyParamCaption}\item[{const geometry\+\_\+msgs\+::\+Twist\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+Command callback from either a R\+OS topic, or a higher controller. 
+
+
+
+Definition at line 191 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{194 \{}
+\DoxyCodeLine{195   \textcolor{comment}{// If we have timed out, certainly stop}}
+\DoxyCodeLine{196   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a845d0031814cd40b5b5641cf2731ba30}{last\_update\_}} -\/ \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a043d40f4b823d4bfeaf81bc7d478565d}{last\_command\_}} >= \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_aa74a8e810f4922802472f9d17db74bc5}{timeout\_}})}
+\DoxyCodeLine{197     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199   \textcolor{comment}{// If not moving, stop}}
+\DoxyCodeLine{200   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\_sent\_x\_}} == 0.0 \&\& \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}} == 0.0)}
+\DoxyCodeLine{201     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203   \textcolor{comment}{// If forced, stop}}
+\DoxyCodeLine{204   \textcolor{keywordflow}{if} (force)}
+\DoxyCodeLine{205     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207   \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{208 \}}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210 \textcolor{keywordtype}{bool} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a84a70fe9f485591ef9815c10b0df098c}{DiffDriveBaseController::reset}}()}
+\DoxyCodeLine{211 \{}
+\DoxyCodeLine{212   \textcolor{comment}{// Reset command}}
+\DoxyCodeLine{213   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a043d40f4b823d4bfeaf81bc7d478565d}{last\_command\_}} = ros::Time(0);}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_af68ca6b3e4cc9a961f6e8b7ded33d4bf}\label{classrobot__controllers_1_1DiffDriveBaseController_af68ca6b3e4cc9a961f6e8b7ded33d4bf}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!getClaimedNames@{getClaimedNames}}
+\index{getClaimedNames@{getClaimedNames}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{getClaimedNames()}{getClaimedNames()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::get\+Claimed\+Names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the names of joints/controllers which this controller exclusively claims. 
+
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_acb21ed7e8c391eb7151a7072416b4987}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 381 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{385 \{}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a2bbe39e9d1742d0bc4f6e1cd1535f5fc}\label{classrobot__controllers_1_1DiffDriveBaseController_a2bbe39e9d1742d0bc4f6e1cd1535f5fc}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!getCommandedNames@{getCommandedNames}}
+\index{getCommandedNames@{getCommandedNames}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{getCommandedNames()}{getCommandedNames()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::get\+Commanded\+Names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the names of joints/controllers which this controller commands. 
+
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_a9b55bc2d5f95ef80dbf05878b7163fc0}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 371 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a7a61ba77ae6b377bef6b8b2cf722ccef}\label{classrobot__controllers_1_1DiffDriveBaseController_a7a61ba77ae6b377bef6b8b2cf722ccef}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!getType@{getType}}
+\index{getType@{getType}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily virtual std\+::string robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the type of this controller. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classrobot__controllers_1_1Controller_ac527e1ae39519d5da149b78d79a37763}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 176 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_ac82933539b7ec62f030ce51df0a3fa2a}\label{classrobot__controllers_1_1DiffDriveBaseController_ac82933539b7ec62f030ce51df0a3fa2a}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!init@{init}}
+\index{init@{init}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily int robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::init (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{nh,  }\item[{\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} $\ast$}]{manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Initialize the controller and any required data structures. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nh} & Node handle for this controller. \\
+\hline
+{\em manager} & The controller manager instance, this is needed for the controller to get information about joints, etc. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if succesfully configured, negative values are error codes. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classrobot__controllers_1_1Controller_ac1b7a94badc6c8c4f22770fb027845a0}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 96 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{142   \{}
+\DoxyCodeLine{143     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a2d59f8d98de6ed272f3713cd67a75912}{scan\_sub\_}} = n.subscribe<sensor\_msgs::LaserScan>(\textcolor{stringliteral}{"base\_scan"}, 1,}
+\DoxyCodeLine{144                   boost::bind(\&\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a4123b6b9521ec3686ff83d58b61fbed7}{DiffDriveBaseController::scanCallback}}, \textcolor{keyword}{this}, \_1));}
+\DoxyCodeLine{145   \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a88ec83d49bba5c59b72da2d59c83e50d}{initialized\_}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149   \textcolor{comment}{// Should we autostart?}}
+\DoxyCodeLine{150   \textcolor{keywordtype}{bool} autostart;}
+\DoxyCodeLine{151   nh.param(\textcolor{stringliteral}{"autostart"}, autostart, \textcolor{keyword}{false});}
+\DoxyCodeLine{152   \textcolor{keywordflow}{if} (autostart)}
+\DoxyCodeLine{153     manager-\/>requestStart(\mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{getName}}());}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{156 \}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158 \textcolor{keywordtype}{void} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a32fbd52e3000c4e9a53dfe91c48640ac}{DiffDriveBaseController::command}}(\textcolor{keyword}{const} geometry\_msgs::TwistConstPtr\& \mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}})}
+\DoxyCodeLine{159 \{}
+\DoxyCodeLine{160   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a88ec83d49bba5c59b72da2d59c83e50d}{initialized\_}})}
+\DoxyCodeLine{161   \{}
+\DoxyCodeLine{162     ROS\_ERROR\_NAMED(\textcolor{stringliteral}{"BaseController"}, \textcolor{stringliteral}{"Unable to accept command, not initialized."});}
+\DoxyCodeLine{163     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{164   \}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166   \textcolor{keywordflow}{if} (std::isfinite(\mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}-\/>linear.x) \&\& std::isfinite(\mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}-\/>angular.z))}
+\DoxyCodeLine{167   \{}
+\DoxyCodeLine{168     boost::mutex::scoped\_lock lock(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_aa89304289daebf64c084b92674cfa4b8}{command\_mutex\_}});}
+\DoxyCodeLine{169     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a043d40f4b823d4bfeaf81bc7d478565d}{last\_command\_}} = ros::Time::now();}
+\DoxyCodeLine{170     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ab849b2b1f9258045abb5402c8e6f34ce}{desired\_x\_}} = \mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}-\/>linear.x;}
+\DoxyCodeLine{171     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_aea7aa70eb5d0148961c750e0bc9ac326}{desired\_r\_}} = \mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}-\/>angular.z;}
+\DoxyCodeLine{172   \}}
+\DoxyCodeLine{173   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{174   \{}
+\DoxyCodeLine{175     ROS\_ERROR\_NAMED(\textcolor{stringliteral}{"BaseController"}, \textcolor{stringliteral}{"Commanded velocities not finite!"});}
+\DoxyCodeLine{176     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{177   \}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a019ca80f4acbf55129dce175b1aad37c}{manager\_}}-\/>\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager_a280fcfa78c20a84a0b902d74e7d40560}{requestStart}}(\mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{getName}}());}
+\DoxyCodeLine{180 \}}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182 \textcolor{keywordtype}{bool} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a6ded85e20b87068103ea99189259c384}{DiffDriveBaseController::start}}()}
+\DoxyCodeLine{183 \{}
+\DoxyCodeLine{184   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a88ec83d49bba5c59b72da2d59c83e50d}{initialized\_}})}
+\DoxyCodeLine{185   \{}
+\DoxyCodeLine{186     ROS\_ERROR\_NAMED(\textcolor{stringliteral}{"BaseController"}, \textcolor{stringliteral}{"Unable to start, not initialized."});}
+\DoxyCodeLine{187     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{188   \}}
+\DoxyCodeLine{189 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_adb95320ee2225aab1eabc1de2efc4b23}\label{classrobot__controllers_1_1DiffDriveBaseController_adb95320ee2225aab1eabc1de2efc4b23}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!publishCallback@{publishCallback}}
+\index{publishCallback@{publishCallback}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{publishCallback()}{publishCallback()}}
+{\footnotesize\ttfamily void robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::publish\+Callback (\begin{DoxyParamCaption}\item[{const ros\+::\+Timer\+Event \&}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 387 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{390   \{}
+\DoxyCodeLine{391     \textcolor{keywordflow}{if} (std::isfinite(scan-\/>ranges[i]) \&\&}
+\DoxyCodeLine{392         scan-\/>ranges[i] > scan-\/>range\_min \&\&}
+\DoxyCodeLine{393         scan-\/>ranges[i] < min\_dist)}
+\DoxyCodeLine{394     \{}
+\DoxyCodeLine{395       \textcolor{comment}{// Only test points in the forward 180 degrees}}
+\DoxyCodeLine{396       \textcolor{keywordflow}{if} (angle < -\/1.5 || angle > 1.5)}
+\DoxyCodeLine{397         \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399       \textcolor{comment}{// Check if point is inside the width of the robot}}
+\DoxyCodeLine{400       \textcolor{keywordtype}{double} py = sin(angle) * scan-\/>ranges[i];}
+\DoxyCodeLine{401       \textcolor{keywordflow}{if} (fabs(py) < (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a28dfce9cdc38e9ba9662cc1a27d753f7}{robot\_width\_}}/2.0))}
+\DoxyCodeLine{402         min\_dist = scan-\/>ranges[i];}
+\DoxyCodeLine{403     \}}
+\DoxyCodeLine{404   \}}
+\DoxyCodeLine{405 }
+\DoxyCodeLine{406   boost::mutex::scoped\_lock lock(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_aa89304289daebf64c084b92674cfa4b8}{command\_mutex\_}});}
+\DoxyCodeLine{407   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a026e3f466dc47a505e26fd472059e609}{safety\_scaling\_}} = std::max(0.1, min\_dist / \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a96246ea500e707b89805a0b806fd9a63}{safety\_scaling\_distance\_}});}
+\DoxyCodeLine{408   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a3e7567893e8fafe71075a1d57594d628}{last\_laser\_scan\_}} = ros::Time::now();}
+\DoxyCodeLine{409 \}}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{411 \textcolor{keywordtype}{void} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a8374161311f3d1923551283477786b01}{DiffDriveBaseController::setCommand}}(\textcolor{keywordtype}{float} left, \textcolor{keywordtype}{float} right)}
+\DoxyCodeLine{412 \{}
+\DoxyCodeLine{413   \textcolor{comment}{// Convert meters/sec into radians/sec}}
+\DoxyCodeLine{414   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a08b89a8763a8e8cffc06674f414399a3}{left\_}}-\/>setVelocity(left * \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_afd7fd130c341ae259e066752223b7174}{radians\_per\_meter\_}}, 0.0);}
+
+\end{DoxyCode}
+
+
+References robot\+\_\+width\+\_\+.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a84a70fe9f485591ef9815c10b0df098c}\label{classrobot__controllers_1_1DiffDriveBaseController_a84a70fe9f485591ef9815c10b0df098c}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!reset@{reset}}
+\index{reset@{reset}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Cleanly reset the controller to it\textquotesingle{}s initial state. Some controllers may choose to stop themselves. This is mainly used in the case of the the robot exiting some fault condition. 
+
+\begin{DoxyReturn}{Returns}
+True if successfully reset, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_af5170a159c210de2bcb20b89531d5e49}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 243 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a4123b6b9521ec3686ff83d58b61fbed7}\label{classrobot__controllers_1_1DiffDriveBaseController_a4123b6b9521ec3686ff83d58b61fbed7}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!scanCallback@{scanCallback}}
+\index{scanCallback@{scanCallback}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{scanCallback()}{scanCallback()}}
+{\footnotesize\ttfamily void robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::scan\+Callback (\begin{DoxyParamCaption}\item[{const sensor\+\_\+msgs\+::\+Laser\+Scan\+Const\+Ptr \&}]{scan }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 416 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a8374161311f3d1923551283477786b01}\label{classrobot__controllers_1_1DiffDriveBaseController_a8374161311f3d1923551283477786b01}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!setCommand@{setCommand}}
+\index{setCommand@{setCommand}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{setCommand()}{setCommand()}}
+{\footnotesize\ttfamily void robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::set\+Command (\begin{DoxyParamCaption}\item[{float}]{left,  }\item[{float}]{right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 444 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a6ded85e20b87068103ea99189259c384}\label{classrobot__controllers_1_1DiffDriveBaseController_a6ded85e20b87068103ea99189259c384}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!start@{start}}
+\index{start@{start}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Attempt to start the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. 
+
+\begin{DoxyReturn}{Returns}
+True if successfully started, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_a781e023ddefd3a60fd2c47d68838016b}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 215 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{218 \{}
+\DoxyCodeLine{219   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a88ec83d49bba5c59b72da2d59c83e50d}{initialized\_}})}
+\DoxyCodeLine{220     \textcolor{keywordflow}{return};  \textcolor{comment}{// should never really hit this}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222   \textcolor{comment}{// See if we have timed out and need to stop}}
+\DoxyCodeLine{223   \textcolor{keywordflow}{if} (now -\/ \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a043d40f4b823d4bfeaf81bc7d478565d}{last\_command\_}} >= \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_aa74a8e810f4922802472f9d17db74bc5}{timeout\_}})}
+\DoxyCodeLine{224   \{}
+
+\end{DoxyCode}
+
+
+Referenced by tuck\+\_\+arm.\+Move\+It\+Thread\+::\+\_\+\+\_\+init\+\_\+\+\_\+().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1DiffDriveBaseController_a6ded85e20b87068103ea99189259c384_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a3ad0b9414582b668bd4650741ee3d2d8}\label{classrobot__controllers_1_1DiffDriveBaseController_a3ad0b9414582b668bd4650741ee3d2d8}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!stop@{stop}}
+\index{stop@{stop}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::stop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbool}{bool}}}]{force }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Attempt to stop the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em force} & Should we force the controller to stop? Some controllers may wish to continue running until they absolutely have to stop. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successfully stopped, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_a64d4f0032496c26c0fa788a91bc0b466}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 226 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{233   \{}
+\DoxyCodeLine{234     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a026e3f466dc47a505e26fd472059e609}{safety\_scaling\_}} = 0.1;}
+\DoxyCodeLine{235   \}}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237   \textcolor{comment}{// Do velocity acceleration/limiting}}
+\DoxyCodeLine{238   \textcolor{keywordtype}{double} x, \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}};}
+\DoxyCodeLine{239   \{}
+\DoxyCodeLine{240     boost::mutex::scoped\_lock lock(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_aa89304289daebf64c084b92674cfa4b8}{command\_mutex\_}});}
+\DoxyCodeLine{241     \textcolor{comment}{// Limit linear velocity based on obstacles}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_abb4ba1b08e6d76edd3a7f98500f23c2b}\label{classrobot__controllers_1_1DiffDriveBaseController_abb4ba1b08e6d76edd3a7f98500f23c2b}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!update@{update}}
+\index{update@{update}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{now,  }\item[{const ros\+::\+Duration \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+This is the update loop for the controller. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The system time. \\
+\hline
+{\em dt} & The timestep since last call to update. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_ab079e1d49a8afc4872049680dd950858}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 250 of file diff\+\_\+drive\+\_\+base.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{252   \{}
+\DoxyCodeLine{253     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\_sent\_x\_}} += \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a21f94c7c799b67432fb7da9c8b728726}{max\_acceleration\_x\_}} * (now -\/ \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a845d0031814cd40b5b5641cf2731ba30}{last\_update\_}}).toSec();}
+\DoxyCodeLine{254     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\_sent\_x\_}} > x)}
+\DoxyCodeLine{255       \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\_sent\_x\_}} = x;}
+\DoxyCodeLine{256   \}}
+\DoxyCodeLine{257   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{258   \{}
+\DoxyCodeLine{259     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\_sent\_x\_}} -\/= \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a21f94c7c799b67432fb7da9c8b728726}{max\_acceleration\_x\_}} * (now -\/ \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a845d0031814cd40b5b5641cf2731ba30}{last\_update\_}}).toSec();}
+\DoxyCodeLine{260     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\_sent\_x\_}} < x)}
+\DoxyCodeLine{261       \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\_sent\_x\_}} = x;}
+\DoxyCodeLine{262   \}}
+\DoxyCodeLine{263   \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}} > \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}})}
+\DoxyCodeLine{264   \{}
+\DoxyCodeLine{265     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}} += \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a7d67ae536c1b740ea8e7ec503b4f7aa7}{max\_acceleration\_r\_}} * (now -\/ \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a845d0031814cd40b5b5641cf2731ba30}{last\_update\_}}).toSec();}
+\DoxyCodeLine{266     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}} > \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}})}
+\DoxyCodeLine{267       \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}} = \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}};}
+\DoxyCodeLine{268   \}}
+\DoxyCodeLine{269   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{270   \{}
+\DoxyCodeLine{271     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}} -\/= \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a7d67ae536c1b740ea8e7ec503b4f7aa7}{max\_acceleration\_r\_}} * (now -\/ \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a845d0031814cd40b5b5641cf2731ba30}{last\_update\_}}).toSec();}
+\DoxyCodeLine{272     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}} < \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}})}
+\DoxyCodeLine{273       \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}} = \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}};}
+\DoxyCodeLine{274   \}}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276   \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} = 0.0;}
+\DoxyCodeLine{277   \textcolor{keywordtype}{double} dr = 0.0;}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279   \textcolor{keywordtype}{double} left\_pos = \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a08b89a8763a8e8cffc06674f414399a3}{left\_}}-\/>getPosition();}
+\DoxyCodeLine{280   \textcolor{keywordtype}{double} right\_pos = \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a618f060392848c6344bbc4cca1df7e50}{right\_}}-\/>getPosition();}
+\DoxyCodeLine{281   \textcolor{keywordtype}{double} left\_dx = angles::shortest\_angular\_distance(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a6fa19ec2459197687a6129b0ff3366c7}{left\_last\_position\_}}, left\_pos)/\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_afd7fd130c341ae259e066752223b7174}{radians\_per\_meter\_}};}
+\DoxyCodeLine{282   \textcolor{keywordtype}{double} right\_dx = angles::shortest\_angular\_distance(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad564d1ef0512eca5fd70edf7396bd3e9}{right\_last\_position\_}}, right\_pos)/\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_afd7fd130c341ae259e066752223b7174}{radians\_per\_meter\_}};}
+\DoxyCodeLine{283   \textcolor{keywordtype}{double} left\_vel = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a08b89a8763a8e8cffc06674f414399a3}{left\_}}-\/>getVelocity())/\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_afd7fd130c341ae259e066752223b7174}{radians\_per\_meter\_}};}
+\DoxyCodeLine{284   \textcolor{keywordtype}{double} right\_vel = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a618f060392848c6344bbc4cca1df7e50}{right\_}}-\/>getVelocity())/\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_afd7fd130c341ae259e066752223b7174}{radians\_per\_meter\_}};}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286   \textcolor{comment}{// Threshold the odometry to avoid noise (especially in simulation)}}
+\DoxyCodeLine{287   \textcolor{keywordflow}{if} (fabs(left\_dx) > \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a6880a0d680dd9d1bf3a42a23064641c9}{wheel\_rotating\_threshold\_}} ||}
+\DoxyCodeLine{288       fabs(right\_dx) > \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a6880a0d680dd9d1bf3a42a23064641c9}{wheel\_rotating\_threshold\_}} ||}
+\DoxyCodeLine{289       \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\_sent\_x\_}} != 0.0 ||}
+\DoxyCodeLine{290       \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}} != 0.0)}
+\DoxyCodeLine{291   \{}
+\DoxyCodeLine{292     \textcolor{comment}{// Above threshold, update last position}}
+\DoxyCodeLine{293     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a6fa19ec2459197687a6129b0ff3366c7}{left\_last\_position\_}} = left\_pos;}
+\DoxyCodeLine{294     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad564d1ef0512eca5fd70edf7396bd3e9}{right\_last\_position\_}} = right\_pos;}
+\DoxyCodeLine{295   \}}
+\DoxyCodeLine{296   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{297   \{}
+\DoxyCodeLine{298     \textcolor{comment}{// Below threshold, zero delta/velocities}}
+\DoxyCodeLine{299     left\_dx = right\_dx = 0.0;}
+\DoxyCodeLine{300     left\_vel = right\_vel = 0.0;}
+\DoxyCodeLine{301   \}}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303   \textcolor{comment}{// Calculate forward and angular differences}}
+\DoxyCodeLine{304   \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacesetup_aa2586b6c4dd84a0aaaf49cb1565cee6e}{d}} = (left\_dx+right\_dx)/2.0;}
+\DoxyCodeLine{305   \textcolor{keywordtype}{double} th = (right\_dx-\/left\_dx)/\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a8425de186f2ff6e29c19a31fde388dd0}{track\_width\_}};}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307   \textcolor{comment}{// Calculate forward and angular velocities}}
+\DoxyCodeLine{308   \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} = (left\_vel + right\_vel)/2.0;}
+\DoxyCodeLine{309   dr = (right\_vel -\/ left\_vel)/\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a8425de186f2ff6e29c19a31fde388dd0}{track\_width\_}};}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311   \textcolor{comment}{// Actually set command}}
+\DoxyCodeLine{312   \textcolor{keywordflow}{if} (fabs(\mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}}) > \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a56b2c2f578ccdff917e7bb98c63b0ea9}{moving\_threshold\_}} ||}
+\DoxyCodeLine{313       fabs(dr) > \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a9fcfeaaff61a194881e79587534fd980}{rotating\_threshold\_}} ||}
+\DoxyCodeLine{314       \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\_sent\_x\_}} != 0.0 ||}
+\DoxyCodeLine{315       \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}} != 0.0)}
+\DoxyCodeLine{316   \{}
+\DoxyCodeLine{317     \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a8374161311f3d1923551283477786b01}{setCommand}}(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\_sent\_x\_}} -\/ (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}}/2.0 * \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a8425de186f2ff6e29c19a31fde388dd0}{track\_width\_}}),}
+\DoxyCodeLine{318                \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}{last\_sent\_x\_}} + (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}{last\_sent\_r\_}}/2.0 * \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a8425de186f2ff6e29c19a31fde388dd0}{track\_width\_}}));}
+\DoxyCodeLine{319   \}}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321   \textcolor{comment}{// Lock mutex before updating}}
+\DoxyCodeLine{322   boost::mutex::scoped\_lock lock(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ac15e4c5e11ac1d4675212cbe3ded8aef}{odom\_mutex\_}});}
+\DoxyCodeLine{323 }
+\DoxyCodeLine{324   \textcolor{comment}{// Update stored odometry pose...}}
+\DoxyCodeLine{325   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a39208421d1337e5762b6a12c96c6517a}{theta\_}} += th/2.0;}
+\DoxyCodeLine{326   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a5b1ecf131b796efd42436b67cc4c33e1}{odom\_}}.pose.pose.position.x += \mbox{\hyperlink{namespacesetup_aa2586b6c4dd84a0aaaf49cb1565cee6e}{d}}*cos(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a39208421d1337e5762b6a12c96c6517a}{theta\_}});}
+\DoxyCodeLine{327   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a5b1ecf131b796efd42436b67cc4c33e1}{odom\_}}.pose.pose.position.y += \mbox{\hyperlink{namespacesetup_aa2586b6c4dd84a0aaaf49cb1565cee6e}{d}}*sin(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a39208421d1337e5762b6a12c96c6517a}{theta\_}});}
+\DoxyCodeLine{328   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a39208421d1337e5762b6a12c96c6517a}{theta\_}} += th/2.0;}
+\DoxyCodeLine{329   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a5b1ecf131b796efd42436b67cc4c33e1}{odom\_}}.pose.pose.orientation.z = sin(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a39208421d1337e5762b6a12c96c6517a}{theta\_}}/2.0);}
+\DoxyCodeLine{330   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a5b1ecf131b796efd42436b67cc4c33e1}{odom\_}}.pose.pose.orientation.w = cos(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a39208421d1337e5762b6a12c96c6517a}{theta\_}}/2.0);}
+\DoxyCodeLine{331   \textcolor{comment}{// ...and twist}}
+\DoxyCodeLine{332   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a5b1ecf131b796efd42436b67cc4c33e1}{odom\_}}.twist.twist.linear.x = \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}};}
+\DoxyCodeLine{333   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a5b1ecf131b796efd42436b67cc4c33e1}{odom\_}}.twist.twist.angular.z = dr;}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a845d0031814cd40b5b5641cf2731ba30}{last\_update\_}} = now;}
+\DoxyCodeLine{336 \}}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338 std::vector<std::string> \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a2bbe39e9d1742d0bc4f6e1cd1535f5fc}{DiffDriveBaseController::getCommandedNames}}()}
+\DoxyCodeLine{339 \{}
+\DoxyCodeLine{340   std::vector<std::string> names;}
+\DoxyCodeLine{341   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a08b89a8763a8e8cffc06674f414399a3}{left\_}})}
+\DoxyCodeLine{342     names.push\_back(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a08b89a8763a8e8cffc06674f414399a3}{left\_}}-\/>getName());}
+\DoxyCodeLine{343   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a618f060392848c6344bbc4cca1df7e50}{right\_}})}
+\DoxyCodeLine{344     names.push\_back(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a618f060392848c6344bbc4cca1df7e50}{right\_}}-\/>getName());}
+\DoxyCodeLine{345   \textcolor{keywordflow}{return} names;}
+\DoxyCodeLine{346 \}}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348 std::vector<std::string> \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_af68ca6b3e4cc9a961f6e8b7ded33d4bf}{DiffDriveBaseController::getClaimedNames}}()}
+\DoxyCodeLine{349 \{}
+\DoxyCodeLine{350   \textcolor{comment}{// Claimed == Commanded}}
+\DoxyCodeLine{351   \textcolor{keywordflow}{return} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a2bbe39e9d1742d0bc4f6e1cd1535f5fc}{getCommandedNames}}();}
+\DoxyCodeLine{352 \}}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{354 \textcolor{keywordtype}{void} \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_adb95320ee2225aab1eabc1de2efc4b23}{DiffDriveBaseController::publishCallback}}(\textcolor{keyword}{const} ros::TimerEvent\& event)}
+\DoxyCodeLine{355 \{}
+\DoxyCodeLine{356   \textcolor{comment}{// Copy message under lock of mutex}}
+\DoxyCodeLine{357   nav\_msgs::Odometry \mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}};}
+\DoxyCodeLine{358   \{}
+\DoxyCodeLine{359     boost::mutex::scoped\_lock lock(\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ac15e4c5e11ac1d4675212cbe3ded8aef}{odom\_mutex\_}});}
+\DoxyCodeLine{360     \mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}} = \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a5b1ecf131b796efd42436b67cc4c33e1}{odom\_}};}
+\DoxyCodeLine{361   \}}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363   \textcolor{comment}{// Publish or perish}}
+\DoxyCodeLine{364   \mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}}.header.stamp = ros::Time::now();}
+\DoxyCodeLine{365   \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ad43a38b36cefa2f6f34a3621719454c0}{odom\_pub\_}}.publish(\mbox{\hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg}});}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{367   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ae006fe3c38902945ab1cdefd6451f0a5}{publish\_tf\_}})}
+\DoxyCodeLine{368   \{}
+\DoxyCodeLine{369     tf::Transform transform;}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a92f47032df33ba7f1fe2f5ecabca64cd}\label{classrobot__controllers_1_1DiffDriveBaseController_a92f47032df33ba7f1fe2f5ecabca64cd}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!broadcaster\_@{broadcaster\_}}
+\index{broadcaster\_@{broadcaster\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{broadcaster\_}{broadcaster\_}}
+{\footnotesize\ttfamily boost\+::shared\+\_\+ptr$<$tf\+::\+Transform\+Broadcaster$>$ robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::broadcaster\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 246 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_ac8e3cc8a31e0f3c3938c46784b1152c5}\label{classrobot__controllers_1_1DiffDriveBaseController_ac8e3cc8a31e0f3c3938c46784b1152c5}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!cmd\_sub\_@{cmd\_sub\_}}
+\index{cmd\_sub\_@{cmd\_sub\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{cmd\_sub\_}{cmd\_sub\_}}
+{\footnotesize\ttfamily ros\+::\+Subscriber robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::cmd\+\_\+sub\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 244 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_aa89304289daebf64c084b92674cfa4b8}\label{classrobot__controllers_1_1DiffDriveBaseController_aa89304289daebf64c084b92674cfa4b8}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!command\_mutex\_@{command\_mutex\_}}
+\index{command\_mutex\_@{command\_mutex\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{command\_mutex\_}{command\_mutex\_}}
+{\footnotesize\ttfamily boost\+::mutex robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::command\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 223 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_aea7aa70eb5d0148961c750e0bc9ac326}\label{classrobot__controllers_1_1DiffDriveBaseController_aea7aa70eb5d0148961c750e0bc9ac326}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!desired\_r\_@{desired\_r\_}}
+\index{desired\_r\_@{desired\_r\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{desired\_r\_}{desired\_r\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::desired\+\_\+r\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 225 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_ab849b2b1f9258045abb5402c8e6f34ce}\label{classrobot__controllers_1_1DiffDriveBaseController_ab849b2b1f9258045abb5402c8e6f34ce}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!desired\_x\_@{desired\_x\_}}
+\index{desired\_x\_@{desired\_x\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{desired\_x\_}{desired\_x\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::desired\+\_\+x\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 224 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a9b301eeabd8e3752bec04825b35a13fc}\label{classrobot__controllers_1_1DiffDriveBaseController_a9b301eeabd8e3752bec04825b35a13fc}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!enabled\_@{enabled\_}}
+\index{enabled\_@{enabled\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{enabled\_}{enabled\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::enabled\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 249 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a88ec83d49bba5c59b72da2d59c83e50d}\label{classrobot__controllers_1_1DiffDriveBaseController_a88ec83d49bba5c59b72da2d59c83e50d}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!initialized\_@{initialized\_}}
+\index{initialized\_@{initialized\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{initialized\_}{initialized\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::initialized\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 191 of file diff\+\_\+drive\+\_\+base.\+h.
+
+
+
+Referenced by Diff\+Drive\+Base\+Controller().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a043d40f4b823d4bfeaf81bc7d478565d}\label{classrobot__controllers_1_1DiffDriveBaseController_a043d40f4b823d4bfeaf81bc7d478565d}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!last\_command\_@{last\_command\_}}
+\index{last\_command\_@{last\_command\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{last\_command\_}{last\_command\_}}
+{\footnotesize\ttfamily ros\+::\+Time robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::last\+\_\+command\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 236 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a3e7567893e8fafe71075a1d57594d628}\label{classrobot__controllers_1_1DiffDriveBaseController_a3e7567893e8fafe71075a1d57594d628}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!last\_laser\_scan\_@{last\_laser\_scan\_}}
+\index{last\_laser\_scan\_@{last\_laser\_scan\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{last\_laser\_scan\_}{last\_laser\_scan\_}}
+{\footnotesize\ttfamily ros\+::\+Time robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::last\+\_\+laser\+\_\+scan\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 220 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}\label{classrobot__controllers_1_1DiffDriveBaseController_a887af06ba36ff76eaa2b7f4ce9a5796b}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!last\_sent\_r\_@{last\_sent\_r\_}}
+\index{last\_sent\_r\_@{last\_sent\_r\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{last\_sent\_r\_}{last\_sent\_r\_}}
+{\footnotesize\ttfamily float robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::last\+\_\+sent\+\_\+r\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 229 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}\label{classrobot__controllers_1_1DiffDriveBaseController_ad517763ba11fb940bb2130b353ba51d6}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!last\_sent\_x\_@{last\_sent\_x\_}}
+\index{last\_sent\_x\_@{last\_sent\_x\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{last\_sent\_x\_}{last\_sent\_x\_}}
+{\footnotesize\ttfamily float robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::last\+\_\+sent\+\_\+x\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 228 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a845d0031814cd40b5b5641cf2731ba30}\label{classrobot__controllers_1_1DiffDriveBaseController_a845d0031814cd40b5b5641cf2731ba30}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!last\_update\_@{last\_update\_}}
+\index{last\_update\_@{last\_update\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{last\_update\_}{last\_update\_}}
+{\footnotesize\ttfamily ros\+::\+Time robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::last\+\_\+update\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 237 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a08b89a8763a8e8cffc06674f414399a3}\label{classrobot__controllers_1_1DiffDriveBaseController_a08b89a8763a8e8cffc06674f414399a3}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!left\_@{left\_}}
+\index{left\_@{left\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{left\_}{left\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacerobot__controllers_a9c7cc37a8e0d295ea24c75cbb656ecfa}{Joint\+Handle\+Ptr}} robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::left\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 200 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a6fa19ec2459197687a6129b0ff3366c7}\label{classrobot__controllers_1_1DiffDriveBaseController_a6fa19ec2459197687a6129b0ff3366c7}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!left\_last\_position\_@{left\_last\_position\_}}
+\index{left\_last\_position\_@{left\_last\_position\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{left\_last\_position\_}{left\_last\_position\_}}
+{\footnotesize\ttfamily float robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::left\+\_\+last\+\_\+position\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 231 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a068c909e84c346458ada01b726f69681}\label{classrobot__controllers_1_1DiffDriveBaseController_a068c909e84c346458ada01b726f69681}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!left\_last\_timestamp\_@{left\_last\_timestamp\_}}
+\index{left\_last\_timestamp\_@{left\_last\_timestamp\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{left\_last\_timestamp\_}{left\_last\_timestamp\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::left\+\_\+last\+\_\+timestamp\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 233 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a019ca80f4acbf55129dce175b1aad37c}\label{classrobot__controllers_1_1DiffDriveBaseController_a019ca80f4acbf55129dce175b1aad37c}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!manager\_@{manager\_}}
+\index{manager\_@{manager\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{manager\_}{manager\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}}$\ast$ robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::manager\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 192 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a7d67ae536c1b740ea8e7ec503b4f7aa7}\label{classrobot__controllers_1_1DiffDriveBaseController_a7d67ae536c1b740ea8e7ec503b4f7aa7}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!max\_acceleration\_r\_@{max\_acceleration\_r\_}}
+\index{max\_acceleration\_r\_@{max\_acceleration\_r\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{max\_acceleration\_r\_}{max\_acceleration\_r\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::max\+\_\+acceleration\+\_\+r\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 214 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a21f94c7c799b67432fb7da9c8b728726}\label{classrobot__controllers_1_1DiffDriveBaseController_a21f94c7c799b67432fb7da9c8b728726}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!max\_acceleration\_x\_@{max\_acceleration\_x\_}}
+\index{max\_acceleration\_x\_@{max\_acceleration\_x\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{max\_acceleration\_x\_}{max\_acceleration\_x\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::max\+\_\+acceleration\+\_\+x\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 213 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_aabb066cc698772eb8a894c194aa2c277}\label{classrobot__controllers_1_1DiffDriveBaseController_aabb066cc698772eb8a894c194aa2c277}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!max\_velocity\_r\_@{max\_velocity\_r\_}}
+\index{max\_velocity\_r\_@{max\_velocity\_r\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{max\_velocity\_r\_}{max\_velocity\_r\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::max\+\_\+velocity\+\_\+r\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 212 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_ad78974b9dfbdb31cbfea1bfd0e6e4bad}\label{classrobot__controllers_1_1DiffDriveBaseController_ad78974b9dfbdb31cbfea1bfd0e6e4bad}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!max\_velocity\_x\_@{max\_velocity\_x\_}}
+\index{max\_velocity\_x\_@{max\_velocity\_x\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{max\_velocity\_x\_}{max\_velocity\_x\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::max\+\_\+velocity\+\_\+x\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Threshold for dx to be considered \char`\"{}moving\char`\"{}. 
+
+
+
+Definition at line 211 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a56b2c2f578ccdff917e7bb98c63b0ea9}\label{classrobot__controllers_1_1DiffDriveBaseController_a56b2c2f578ccdff917e7bb98c63b0ea9}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!moving\_threshold\_@{moving\_threshold\_}}
+\index{moving\_threshold\_@{moving\_threshold\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{moving\_threshold\_}{moving\_threshold\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::moving\+\_\+threshold\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Threshold for dr to be considered \char`\"{}moving\char`\"{}. 
+
+
+
+Definition at line 209 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a5b1ecf131b796efd42436b67cc4c33e1}\label{classrobot__controllers_1_1DiffDriveBaseController_a5b1ecf131b796efd42436b67cc4c33e1}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!odom\_@{odom\_}}
+\index{odom\_@{odom\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{odom\_}{odom\_}}
+{\footnotesize\ttfamily nav\+\_\+msgs\+::\+Odometry robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::odom\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 241 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_ac15e4c5e11ac1d4675212cbe3ded8aef}\label{classrobot__controllers_1_1DiffDriveBaseController_ac15e4c5e11ac1d4675212cbe3ded8aef}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!odom\_mutex\_@{odom\_mutex\_}}
+\index{odom\_mutex\_@{odom\_mutex\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{odom\_mutex\_}{odom\_mutex\_}}
+{\footnotesize\ttfamily boost\+::mutex robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::odom\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 240 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_ad43a38b36cefa2f6f34a3621719454c0}\label{classrobot__controllers_1_1DiffDriveBaseController_ad43a38b36cefa2f6f34a3621719454c0}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!odom\_pub\_@{odom\_pub\_}}
+\index{odom\_pub\_@{odom\_pub\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{odom\_pub\_}{odom\_pub\_}}
+{\footnotesize\ttfamily ros\+::\+Publisher robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::odom\+\_\+pub\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 242 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a794967c71e175f0cca4018f7eabd730b}\label{classrobot__controllers_1_1DiffDriveBaseController_a794967c71e175f0cca4018f7eabd730b}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!odom\_timer\_@{odom\_timer\_}}
+\index{odom\_timer\_@{odom\_timer\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{odom\_timer\_}{odom\_timer\_}}
+{\footnotesize\ttfamily ros\+::\+Timer robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::odom\+\_\+timer\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 243 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_ae006fe3c38902945ab1cdefd6451f0a5}\label{classrobot__controllers_1_1DiffDriveBaseController_ae006fe3c38902945ab1cdefd6451f0a5}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!publish\_tf\_@{publish\_tf\_}}
+\index{publish\_tf\_@{publish\_tf\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{publish\_tf\_}{publish\_tf\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::publish\+\_\+tf\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 247 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_afd7fd130c341ae259e066752223b7174}\label{classrobot__controllers_1_1DiffDriveBaseController_afd7fd130c341ae259e066752223b7174}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!radians\_per\_meter\_@{radians\_per\_meter\_}}
+\index{radians\_per\_meter\_@{radians\_per\_meter\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{radians\_per\_meter\_}{radians\_per\_meter\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::radians\+\_\+per\+\_\+meter\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 204 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_aad87422517e11600ff4e4c4a7b8918ed}\label{classrobot__controllers_1_1DiffDriveBaseController_aad87422517e11600ff4e4c4a7b8918ed}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!ready\_@{ready\_}}
+\index{ready\_@{ready\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{ready\_}{ready\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::ready\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 250 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a618f060392848c6344bbc4cca1df7e50}\label{classrobot__controllers_1_1DiffDriveBaseController_a618f060392848c6344bbc4cca1df7e50}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!right\_@{right\_}}
+\index{right\_@{right\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{right\_}{right\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacerobot__controllers_a9c7cc37a8e0d295ea24c75cbb656ecfa}{Joint\+Handle\+Ptr}} robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::right\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 201 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_ad564d1ef0512eca5fd70edf7396bd3e9}\label{classrobot__controllers_1_1DiffDriveBaseController_ad564d1ef0512eca5fd70edf7396bd3e9}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!right\_last\_position\_@{right\_last\_position\_}}
+\index{right\_last\_position\_@{right\_last\_position\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{right\_last\_position\_}{right\_last\_position\_}}
+{\footnotesize\ttfamily float robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::right\+\_\+last\+\_\+position\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 232 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_ac38d0b713341e75535881eb36b12d6cf}\label{classrobot__controllers_1_1DiffDriveBaseController_ac38d0b713341e75535881eb36b12d6cf}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!right\_last\_timestamp\_@{right\_last\_timestamp\_}}
+\index{right\_last\_timestamp\_@{right\_last\_timestamp\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{right\_last\_timestamp\_}{right\_last\_timestamp\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::right\+\_\+last\+\_\+timestamp\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 234 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a28dfce9cdc38e9ba9662cc1a27d753f7}\label{classrobot__controllers_1_1DiffDriveBaseController_a28dfce9cdc38e9ba9662cc1a27d753f7}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!robot\_width\_@{robot\_width\_}}
+\index{robot\_width\_@{robot\_width\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{robot\_width\_}{robot\_width\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::robot\+\_\+width\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 219 of file diff\+\_\+drive\+\_\+base.\+h.
+
+
+
+Referenced by publish\+Callback().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a9fcfeaaff61a194881e79587534fd980}\label{classrobot__controllers_1_1DiffDriveBaseController_a9fcfeaaff61a194881e79587534fd980}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!rotating\_threshold\_@{rotating\_threshold\_}}
+\index{rotating\_threshold\_@{rotating\_threshold\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{rotating\_threshold\_}{rotating\_threshold\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::rotating\+\_\+threshold\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Threshold for wheel velocity to be \char`\"{}moving\char`\"{}. 
+
+
+
+Definition at line 208 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a026e3f466dc47a505e26fd472059e609}\label{classrobot__controllers_1_1DiffDriveBaseController_a026e3f466dc47a505e26fd472059e609}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!safety\_scaling\_@{safety\_scaling\_}}
+\index{safety\_scaling\_@{safety\_scaling\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{safety\_scaling\_}{safety\_scaling\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::safety\+\_\+scaling\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 217 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a96246ea500e707b89805a0b806fd9a63}\label{classrobot__controllers_1_1DiffDriveBaseController_a96246ea500e707b89805a0b806fd9a63}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!safety\_scaling\_distance\_@{safety\_scaling\_distance\_}}
+\index{safety\_scaling\_distance\_@{safety\_scaling\_distance\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{safety\_scaling\_distance\_}{safety\_scaling\_distance\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::safety\+\_\+scaling\+\_\+distance\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 218 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a2d59f8d98de6ed272f3713cd67a75912}\label{classrobot__controllers_1_1DiffDriveBaseController_a2d59f8d98de6ed272f3713cd67a75912}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!scan\_sub\_@{scan\_sub\_}}
+\index{scan\_sub\_@{scan\_sub\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{scan\_sub\_}{scan\_sub\_}}
+{\footnotesize\ttfamily ros\+::\+Subscriber robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::scan\+\_\+sub\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 244 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a39208421d1337e5762b6a12c96c6517a}\label{classrobot__controllers_1_1DiffDriveBaseController_a39208421d1337e5762b6a12c96c6517a}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!theta\_@{theta\_}}
+\index{theta\_@{theta\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{theta\_}{theta\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::theta\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 205 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_aa74a8e810f4922802472f9d17db74bc5}\label{classrobot__controllers_1_1DiffDriveBaseController_aa74a8e810f4922802472f9d17db74bc5}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!timeout\_@{timeout\_}}
+\index{timeout\_@{timeout\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{timeout\_}{timeout\_}}
+{\footnotesize\ttfamily ros\+::\+Duration robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::timeout\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 238 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a8425de186f2ff6e29c19a31fde388dd0}\label{classrobot__controllers_1_1DiffDriveBaseController_a8425de186f2ff6e29c19a31fde388dd0}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!track\_width\_@{track\_width\_}}
+\index{track\_width\_@{track\_width\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{track\_width\_}{track\_width\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::track\+\_\+width\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 203 of file diff\+\_\+drive\+\_\+base.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1DiffDriveBaseController_a6880a0d680dd9d1bf3a42a23064641c9}\label{classrobot__controllers_1_1DiffDriveBaseController_a6880a0d680dd9d1bf3a42a23064641c9}} 
+\index{robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}!wheel\_rotating\_threshold\_@{wheel\_rotating\_threshold\_}}
+\index{wheel\_rotating\_threshold\_@{wheel\_rotating\_threshold\_}!robot\_controllers::DiffDriveBaseController@{robot\_controllers::DiffDriveBaseController}}
+\doxysubsubsection{\texorpdfstring{wheel\_rotating\_threshold\_}{wheel\_rotating\_threshold\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller\+::wheel\+\_\+rotating\+\_\+threshold\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 207 of file diff\+\_\+drive\+\_\+base.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+submodules/robot\+\_\+controllers/robot\+\_\+controllers/include/robot\+\_\+controllers/\mbox{\hyperlink{diff__drive__base_8h}{diff\+\_\+drive\+\_\+base.\+h}}\item 
+submodules/robot\+\_\+controllers/robot\+\_\+controllers/src/\mbox{\hyperlink{diff__drive__base_8cpp}{diff\+\_\+drive\+\_\+base.\+cpp}}\end{DoxyCompactItemize}

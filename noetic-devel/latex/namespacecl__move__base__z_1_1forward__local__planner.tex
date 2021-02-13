@@ -1,94 +1,74 @@
-\hypertarget{namespacecl__move__base__z_1_1forward__local__planner}{}\section{cl\+\_\+move\+\_\+base\+\_\+z\+:\+:forward\+\_\+local\+\_\+planner Namespace Reference}
-\label{namespacecl__move__base__z_1_1forward__local__planner}\index{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner}}
-\subsection*{Classes}
+\hypertarget{namespacecl__move__base__z_1_1forward__local__planner}{}\doxysection{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner Namespace Reference}
+\label{namespacecl__move__base__z_1_1forward__local__planner}\index{cl\_move\_base\_z::forward\_local\_planner@{cl\_move\_base\_z::forward\_local\_planner}}
+\doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner}{Forward\+Local\+Planner}
+class \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner}{Forward\+Local\+Planner}}
 \end{DoxyCompactItemize}
-\subsection*{Functions}
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \hyperlink{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}{optional\+Robot\+Pose} (costmap\+\_\+2d\+::\+Costmap2\+D\+R\+OS $\ast$costmap\+Ros)
+tf\+::\+Stamped$<$ tf\+::\+Pose $>$ \mbox{\hyperlink{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}{optional\+Robot\+Pose}} (costmap\+\_\+2d\+::\+Costmap2\+D\+R\+OS $\ast$costmap\+Ros)
 \item 
-void \hyperlink{namespacecl__move__base__z_1_1forward__local__planner_a6cd0f1c55d79df6809ad5d726e190607}{clamp} (geometry\+\_\+msgs\+::\+Twist \&cmd\+\_\+vel, double max\+\_\+linear\+\_\+x\+\_\+speed\+\_\+, double max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+)
+void \mbox{\hyperlink{namespacecl__move__base__z_1_1forward__local__planner_a6cd0f1c55d79df6809ad5d726e190607}{clamp}} (geometry\+\_\+msgs\+::\+Twist \&cmd\+\_\+vel, double max\+\_\+linear\+\_\+x\+\_\+speed\+\_\+, double max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+)
 \end{DoxyCompactItemize}
 
 
-\subsection{Function Documentation}
+\doxysubsection{Function Documentation}
 \mbox{\Hypertarget{namespacecl__move__base__z_1_1forward__local__planner_a6cd0f1c55d79df6809ad5d726e190607}\label{namespacecl__move__base__z_1_1forward__local__planner_a6cd0f1c55d79df6809ad5d726e190607}} 
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner}!clamp@{clamp}}
-\index{clamp@{clamp}!cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner}}
-\subsubsection{\texorpdfstring{clamp()}{clamp()}}
+\index{cl\_move\_base\_z::forward\_local\_planner@{cl\_move\_base\_z::forward\_local\_planner}!clamp@{clamp}}
+\index{clamp@{clamp}!cl\_move\_base\_z::forward\_local\_planner@{cl\_move\_base\_z::forward\_local\_planner}}
+\doxysubsubsection{\texorpdfstring{clamp()}{clamp()}}
 {\footnotesize\ttfamily void cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::clamp (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Twist \&}]{cmd\+\_\+vel,  }\item[{double}]{max\+\_\+linear\+\_\+x\+\_\+speed\+\_\+,  }\item[{double}]{max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 232 of file forward\+\_\+local\+\_\+planner.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{234     \{}
+\DoxyCodeLine{235         \textcolor{keywordtype}{double} kurvature = cmd\_vel.linear.x / cmd\_vel.angular.z;}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237         \textcolor{keywordtype}{double} linearAuthority = fabs(cmd\_vel.linear.x / max\_linear\_x\_speed\_);}
+\DoxyCodeLine{238         \textcolor{keywordtype}{double} angularAuthority = fabs(cmd\_vel.angular.z / max\_angular\_z\_speed\_);}
+\DoxyCodeLine{239         \textcolor{keywordflow}{if} (linearAuthority < angularAuthority)}
+\DoxyCodeLine{240         \{}
+\DoxyCodeLine{241             \textcolor{comment}{// lets go to maximum linear speed}}
+\DoxyCodeLine{242             cmd\_vel.linear.x = max\_linear\_x\_speed\_;}
+\DoxyCodeLine{243             cmd\_vel.angular.z = kurvature / max\_linear\_x\_speed\_;}
+\DoxyCodeLine{244             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"k="} << kurvature << \textcolor{stringliteral}{"lets go to maximum linear capacity: "} << cmd\_vel);}
+\DoxyCodeLine{245         \}}
+\DoxyCodeLine{246         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{247         \{}
+\DoxyCodeLine{248             \textcolor{comment}{// lets go with maximum angular speed}}
+\DoxyCodeLine{249             cmd\_vel.angular.x = max\_angular\_z\_speed\_;}
+\DoxyCodeLine{250             cmd\_vel.linear.x = kurvature * max\_angular\_z\_speed\_;}
+\DoxyCodeLine{251             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"lets go to maximum angular capacity: "} << cmd\_vel);}
+\DoxyCodeLine{252         \}}
+\DoxyCodeLine{253     \}}
+\DoxyCodeLine{254 \}}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{261 \textcolor{keywordtype}{bool} ForwardLocalPlanner::computeVelocityCommands(geometry\_msgs::Twist \&cmd\_vel)}
+\DoxyCodeLine{262 \{}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}\label{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}} 
+\index{cl\_move\_base\_z::forward\_local\_planner@{cl\_move\_base\_z::forward\_local\_planner}!optionalRobotPose@{optionalRobotPose}}
+\index{optionalRobotPose@{optionalRobotPose}!cl\_move\_base\_z::forward\_local\_planner@{cl\_move\_base\_z::forward\_local\_planner}}
+\doxysubsubsection{\texorpdfstring{optionalRobotPose()}{optionalRobotPose()}}
+{\footnotesize\ttfamily tf\+::\+Stamped$<$tf\+::\+Pose$>$ cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::optional\+Robot\+Pose (\begin{DoxyParamCaption}\item[{costmap\+\_\+2d\+::\+Costmap2\+D\+R\+OS $\ast$}]{costmap\+Ros }\end{DoxyParamCaption})}
 
 
 
 Definition at line 224 of file forward\+\_\+local\+\_\+planner.\+cpp.
 
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{225 \{}
+\DoxyCodeLine{226     \textcolor{keywordflow}{if} (max\_angular\_z\_speed\_ == 0 || max\_linear\_x\_speed\_ == 0)}
+\DoxyCodeLine{227         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229     \textcolor{keywordflow}{if} (cmd\_vel.angular.z == 0)}
 
-References cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner\+::max\+\_\+angular\+\_\+z\+\_\+speed\+\_\+, and cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner\+::max\+\_\+linear\+\_\+x\+\_\+speed\+\_\+.
-
-
-\begin{DoxyCode}
-225 \{
-226     \textcolor{keywordflow}{if} (max\_angular\_z\_speed\_ == 0 || max\_linear\_x\_speed\_ == 0)
-227         \textcolor{keywordflow}{return};
-228 
-229     \textcolor{keywordflow}{if} (cmd\_vel.angular.z == 0)
-230     \{
-231         cmd\_vel.linear.x = max\_linear\_x\_speed\_;
-232     \}
-233     \textcolor{keywordflow}{else}
-234     \{
-235         \textcolor{keywordtype}{double} kurvature = cmd\_vel.linear.x / cmd\_vel.angular.z;
-236 
-237         \textcolor{keywordtype}{double} linearAuthority = fabs(cmd\_vel.linear.x / max\_linear\_x\_speed\_);
-238         \textcolor{keywordtype}{double} angularAuthority = fabs(cmd\_vel.angular.z / max\_angular\_z\_speed\_);
-239         \textcolor{keywordflow}{if} (linearAuthority < angularAuthority)
-240         \{
-241             \textcolor{comment}{// lets go to maximum linear speed}
-242             cmd\_vel.linear.x = max\_linear\_x\_speed\_;
-243             cmd\_vel.angular.z = kurvature / max\_linear\_x\_speed\_;
-244             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"k="} << kurvature << \textcolor{stringliteral}{"lets go to maximum linear capacity: "} << cmd\_vel);
-245         \}
-246         \textcolor{keywordflow}{else}
-247         \{
-248             \textcolor{comment}{// lets go with maximum angular speed}
-249             cmd\_vel.angular.x = max\_angular\_z\_speed\_;
-250             cmd\_vel.linear.x = kurvature * max\_angular\_z\_speed\_;
-251             ROS\_WARN\_STREAM(\textcolor{stringliteral}{"lets go to maximum angular capacity: "} << cmd\_vel);
-252         \}
-253     \}
-254 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}\label{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997}} 
-\index{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner}!optional\+Robot\+Pose@{optional\+Robot\+Pose}}
-\index{optional\+Robot\+Pose@{optional\+Robot\+Pose}!cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner@{cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner}}
-\subsubsection{\texorpdfstring{optional\+Robot\+Pose()}{optionalRobotPose()}}
-{\footnotesize\ttfamily tf\+::\+Stamped$<$tf\+::\+Pose$>$ cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::optional\+Robot\+Pose (\begin{DoxyParamCaption}\item[{costmap\+\_\+2d\+::\+Costmap2\+D\+R\+OS $\ast$}]{costmap\+Ros }\end{DoxyParamCaption})}
-
-
-
-Definition at line 216 of file forward\+\_\+local\+\_\+planner.\+cpp.
-
-
-
-Referenced by cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner\+::compute\+Velocity\+Commands(), and cl\+\_\+move\+\_\+base\+\_\+z\+::forward\+\_\+local\+\_\+planner\+::\+Forward\+Local\+Planner\+::publish\+Goal\+Marker().
-
-
-\begin{DoxyCode}
-217 \{
-218     tf::Stamped<tf::Pose> tfpose;
-219     costmapRos->getRobotPose(tfpose);
-220     \textcolor{keywordflow}{return} tfpose;
-221 \}
-\end{DoxyCode}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{namespacecl__move__base__z_1_1forward__local__planner_a4c20f9fe0ca67779c53e90182baf4997_icgraph}
-\end{center}
-\end{figure}

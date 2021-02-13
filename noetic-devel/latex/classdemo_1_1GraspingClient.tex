@@ -1,0 +1,425 @@
+\hypertarget{classdemo_1_1GraspingClient}{}\doxysection{demo.\+Grasping\+Client Class Reference}
+\label{classdemo_1_1GraspingClient}\index{demo.GraspingClient@{demo.GraspingClient}}
+
+
+Inheritance diagram for demo.\+Grasping\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classdemo_1_1GraspingClient__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for demo.\+Grasping\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classdemo_1_1GraspingClient__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdemo_1_1GraspingClient_aaf7138dd7964d2a3754130af34d6e37a}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classdemo_1_1GraspingClient_a7de55d2b9c3823c76f937fffc1f08d20}{update\+Scene}} (self)
+\item 
+def \mbox{\hyperlink{classdemo_1_1GraspingClient_a2e7a38c1383cb843458c63c83a552a6e}{get\+Graspable\+Cube}} (self)
+\item 
+def \mbox{\hyperlink{classdemo_1_1GraspingClient_a1af8ab5423a9d86555cc97c04e317340}{get\+Support\+Surface}} (self, name)
+\item 
+def \mbox{\hyperlink{classdemo_1_1GraspingClient_a0da299e389b1c39833bec4c25afc0008}{get\+Place\+Location}} (self)
+\item 
+def \mbox{\hyperlink{classdemo_1_1GraspingClient_aa9607b7ff26d0dfe4479dd371ec8f1d6}{pick}} (self, block, \mbox{\hyperlink{namespacedemo_ab91a224f8f9ef8031ed0a09206edf52d}{grasps}})
+\item 
+def \mbox{\hyperlink{classdemo_1_1GraspingClient_a35332d6185bd5adac2e35c2f80a9c7a0}{place}} (self, block, pose\+\_\+stamped)
+\item 
+def \mbox{\hyperlink{classdemo_1_1GraspingClient_a45c6e8a5115d4a66118301d91fa2b214}{tuck}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdemo_1_1GraspingClient_af90f4ab21b482f708e4f646699a7f442}{scene}}
+\item 
+\mbox{\hyperlink{classdemo_1_1GraspingClient_a896aa1613802f70655cc97220ff812f6}{pickplace}}
+\item 
+\mbox{\hyperlink{classdemo_1_1GraspingClient_a68c225d962d0b5f8fb63588109f2c65c}{move\+\_\+group}}
+\item 
+\mbox{\hyperlink{classdemo_1_1GraspingClient_a06f93d43490fdecf65283c6e12a67e7e}{find\+\_\+client}}
+\item 
+\mbox{\hyperlink{classdemo_1_1GraspingClient_ae15f547f38e0fc00137fa8030699b324}{objects}}
+\item 
+\mbox{\hyperlink{classdemo_1_1GraspingClient_a469b2423b3706f2339116acf6e88dd7b}{surfaces}}
+\item 
+\mbox{\hyperlink{classdemo_1_1GraspingClient_a712a3d6618b7bcfeaa5a1752a132d4b7}{pick\+\_\+result}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 117 of file demo.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_aaf7138dd7964d2a3754130af34d6e37a}\label{classdemo_1_1GraspingClient_aaf7138dd7964d2a3754130af34d6e37a}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def demo.\+Grasping\+Client.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 119 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{119     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{120         self.scene = PlanningSceneInterface(\textcolor{stringliteral}{"base\_link"})}
+\DoxyCodeLine{121         self.pickplace = PickPlaceInterface(\textcolor{stringliteral}{"arm"}, \textcolor{stringliteral}{"gripper"}, verbose=\textcolor{keyword}{True})}
+\DoxyCodeLine{122         self.move\_group = MoveGroupInterface(\textcolor{stringliteral}{"arm"}, \textcolor{stringliteral}{"base\_link"})}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124         find\_topic = \textcolor{stringliteral}{"basic\_grasping\_perception/find\_objects"}}
+\DoxyCodeLine{125         rospy.loginfo(\textcolor{stringliteral}{"Waiting for \%s..."} \% find\_topic)}
+\DoxyCodeLine{126         self.find\_client = actionlib.SimpleActionClient(find\_topic, FindGraspableObjectsAction)}
+\DoxyCodeLine{127         self.find\_client.wait\_for\_server()}
+\DoxyCodeLine{128 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_a2e7a38c1383cb843458c63c83a552a6e}\label{classdemo_1_1GraspingClient_a2e7a38c1383cb843458c63c83a552a6e}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!getGraspableCube@{getGraspableCube}}
+\index{getGraspableCube@{getGraspableCube}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{getGraspableCube()}{getGraspableCube()}}
+{\footnotesize\ttfamily def demo.\+Grasping\+Client.\+get\+Graspable\+Cube (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 173 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{173     \textcolor{keyword}{def }getGraspableCube(self):}
+\DoxyCodeLine{174         graspable = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{175         \textcolor{keywordflow}{for} obj \textcolor{keywordflow}{in} self.objects:}
+\DoxyCodeLine{176             \textcolor{comment}{\# need grasps}}
+\DoxyCodeLine{177             \textcolor{keywordflow}{if} len(obj.grasps) < 1:}
+\DoxyCodeLine{178                 \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{179             \textcolor{comment}{\# check size}}
+\DoxyCodeLine{180             \textcolor{keywordflow}{if} obj.object.primitives[0].dimensions[0] < 0.05 \textcolor{keywordflow}{or} \(\backslash\)}
+\DoxyCodeLine{181                obj.object.primitives[0].dimensions[0] > 0.07 \textcolor{keywordflow}{or} \(\backslash\)}
+\DoxyCodeLine{182                obj.object.primitives[0].dimensions[0] < 0.05 \textcolor{keywordflow}{or} \(\backslash\)}
+\DoxyCodeLine{183                obj.object.primitives[0].dimensions[0] > 0.07 \textcolor{keywordflow}{or} \(\backslash\)}
+\DoxyCodeLine{184                obj.object.primitives[0].dimensions[0] < 0.05 \textcolor{keywordflow}{or} \(\backslash\)}
+\DoxyCodeLine{185                obj.object.primitives[0].dimensions[0] > 0.07:}
+\DoxyCodeLine{186                 \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{187             \textcolor{comment}{\# has to be on table}}
+\DoxyCodeLine{188             \textcolor{keywordflow}{if} obj.object.primitive\_poses[0].position.z < 0.5:}
+\DoxyCodeLine{189                 \textcolor{keywordflow}{continue}}
+\DoxyCodeLine{190             \textcolor{keywordflow}{return} obj.object, obj.grasps}
+\DoxyCodeLine{191         \textcolor{comment}{\# nothing detected}}
+\DoxyCodeLine{192         \textcolor{keywordflow}{return} \textcolor{keywordtype}{None}, \textcolor{keywordtype}{None}}
+\DoxyCodeLine{193 }
+
+\end{DoxyCode}
+
+
+References demo.\+Grasping\+Client.\+objects.
+
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_a0da299e389b1c39833bec4c25afc0008}\label{classdemo_1_1GraspingClient_a0da299e389b1c39833bec4c25afc0008}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!getPlaceLocation@{getPlaceLocation}}
+\index{getPlaceLocation@{getPlaceLocation}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{getPlaceLocation()}{getPlaceLocation()}}
+{\footnotesize\ttfamily def demo.\+Grasping\+Client.\+get\+Place\+Location (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 200 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{200     \textcolor{keyword}{def }getPlaceLocation(self):}
+\DoxyCodeLine{201         \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{202 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_a1af8ab5423a9d86555cc97c04e317340}\label{classdemo_1_1GraspingClient_a1af8ab5423a9d86555cc97c04e317340}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!getSupportSurface@{getSupportSurface}}
+\index{getSupportSurface@{getSupportSurface}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{getSupportSurface()}{getSupportSurface()}}
+{\footnotesize\ttfamily def demo.\+Grasping\+Client.\+get\+Support\+Surface (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{name }\end{DoxyParamCaption})}
+
+
+
+Definition at line 194 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{194     \textcolor{keyword}{def }getSupportSurface(self, name):}
+\DoxyCodeLine{195         \textcolor{keywordflow}{for} surface \textcolor{keywordflow}{in} self.support\_surfaces:}
+\DoxyCodeLine{196             \textcolor{keywordflow}{if} surface.name == name:}
+\DoxyCodeLine{197                 \textcolor{keywordflow}{return} surface}
+\DoxyCodeLine{198         \textcolor{keywordflow}{return} \textcolor{keywordtype}{None}}
+\DoxyCodeLine{199 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_aa9607b7ff26d0dfe4479dd371ec8f1d6}\label{classdemo_1_1GraspingClient_aa9607b7ff26d0dfe4479dd371ec8f1d6}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!pick@{pick}}
+\index{pick@{pick}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{pick()}{pick()}}
+{\footnotesize\ttfamily def demo.\+Grasping\+Client.\+pick (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{block,  }\item[{}]{grasps }\end{DoxyParamCaption})}
+
+
+
+Definition at line 203 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{203     \textcolor{keyword}{def }pick(self, block, grasps):}
+\DoxyCodeLine{204         success, pick\_result = self.pickplace.pick\_with\_retry(block.name,}
+\DoxyCodeLine{205                                                               grasps,}
+\DoxyCodeLine{206                                                               support\_name=block.support\_surface,}
+\DoxyCodeLine{207                                                               scene=self.scene)}
+\DoxyCodeLine{208         self.pick\_result = pick\_result}
+\DoxyCodeLine{209         \textcolor{keywordflow}{return} success}
+\DoxyCodeLine{210 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_a35332d6185bd5adac2e35c2f80a9c7a0}\label{classdemo_1_1GraspingClient_a35332d6185bd5adac2e35c2f80a9c7a0}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!place@{place}}
+\index{place@{place}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{place()}{place()}}
+{\footnotesize\ttfamily def demo.\+Grasping\+Client.\+place (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{block,  }\item[{}]{pose\+\_\+stamped }\end{DoxyParamCaption})}
+
+
+
+Definition at line 211 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{211     \textcolor{keyword}{def }place(self, block, pose\_stamped):}
+\DoxyCodeLine{212         places = list()}
+\DoxyCodeLine{213         l = PlaceLocation()}
+\DoxyCodeLine{214         l.place\_pose.pose = pose\_stamped.pose}
+\DoxyCodeLine{215         l.place\_pose.header.frame\_id = pose\_stamped.header.frame\_id}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217         \textcolor{comment}{\# copy the posture, approach and retreat from the grasp used}}
+\DoxyCodeLine{218         l.post\_place\_posture = self.pick\_result.grasp.pre\_grasp\_posture}
+\DoxyCodeLine{219         l.pre\_place\_approach = self.pick\_result.grasp.pre\_grasp\_approach}
+\DoxyCodeLine{220         l.post\_place\_retreat = self.pick\_result.grasp.post\_grasp\_retreat}
+\DoxyCodeLine{221         places.append(copy.deepcopy(l))}
+\DoxyCodeLine{222         \textcolor{comment}{\# create another several places, rotate each by 360/m degrees in yaw direction}}
+\DoxyCodeLine{223         m = 16 \textcolor{comment}{\# number of possible place poses}}
+\DoxyCodeLine{224         pi = 3.141592653589}
+\DoxyCodeLine{225         \textcolor{keywordflow}{for} i \textcolor{keywordflow}{in} range(0, m-\/1):}
+\DoxyCodeLine{226             l.place\_pose.pose = rotate\_pose\_msg\_by\_euler\_angles(l.place\_pose.pose, 0, 0, 2 * pi / m)}
+\DoxyCodeLine{227             places.append(copy.deepcopy(l))}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229         success, place\_result = self.pickplace.place\_with\_retry(block.name,}
+\DoxyCodeLine{230                                                                 places,}
+\DoxyCodeLine{231                                                                 scene=self.scene)}
+\DoxyCodeLine{232         \textcolor{keywordflow}{return} success}
+\DoxyCodeLine{233 }
+
+\end{DoxyCode}
+
+
+References demo.\+Grasping\+Client.\+pick\+\_\+result, demo.\+Grasping\+Client.\+pickplace, and demo.\+Grasping\+Client.\+scene.
+
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_a45c6e8a5115d4a66118301d91fa2b214}\label{classdemo_1_1GraspingClient_a45c6e8a5115d4a66118301d91fa2b214}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!tuck@{tuck}}
+\index{tuck@{tuck}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{tuck()}{tuck()}}
+{\footnotesize\ttfamily def demo.\+Grasping\+Client.\+tuck (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 234 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{234     \textcolor{keyword}{def }tuck(self):}
+\DoxyCodeLine{235         joints = [\textcolor{stringliteral}{"shoulder\_pan\_joint"}, \textcolor{stringliteral}{"shoulder\_lift\_joint"}, \textcolor{stringliteral}{"upperarm\_roll\_joint"},}
+\DoxyCodeLine{236                   \textcolor{stringliteral}{"elbow\_flex\_joint"}, \textcolor{stringliteral}{"forearm\_roll\_joint"}, \textcolor{stringliteral}{"wrist\_flex\_joint"}, \textcolor{stringliteral}{"wrist\_roll\_joint"}]}
+\DoxyCodeLine{237         pose = [1.32, 1.40, -\/0.2, 1.72, 0.0, 1.66, 0.0]}
+\DoxyCodeLine{238         \textcolor{keywordflow}{while} \textcolor{keywordflow}{not} rospy.is\_shutdown():}
+\DoxyCodeLine{239             result = self.move\_group.moveToJointPosition(joints, pose, 0.02)}
+\DoxyCodeLine{240             \textcolor{keywordflow}{if} result.error\_code.val == MoveItErrorCodes.SUCCESS:}
+\DoxyCodeLine{241                 \textcolor{keywordflow}{return}}
+\DoxyCodeLine{242 }
+
+\end{DoxyCode}
+
+
+References demo.\+Grasping\+Client.\+move\+\_\+group.
+
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_a7de55d2b9c3823c76f937fffc1f08d20}\label{classdemo_1_1GraspingClient_a7de55d2b9c3823c76f937fffc1f08d20}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!updateScene@{updateScene}}
+\index{updateScene@{updateScene}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{updateScene()}{updateScene()}}
+{\footnotesize\ttfamily def demo.\+Grasping\+Client.\+update\+Scene (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 129 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{129     \textcolor{keyword}{def }updateScene(self):}
+\DoxyCodeLine{130         \textcolor{comment}{\# find objects}}
+\DoxyCodeLine{131         goal = FindGraspableObjectsGoal()}
+\DoxyCodeLine{132         goal.plan\_grasps = \textcolor{keyword}{True}}
+\DoxyCodeLine{133         self.find\_client.send\_goal(goal)}
+\DoxyCodeLine{134         self.find\_client.wait\_for\_result(rospy.Duration(5.0))}
+\DoxyCodeLine{135         find\_result = self.find\_client.get\_result()}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137         \textcolor{comment}{\# remove previous objects}}
+\DoxyCodeLine{138         \textcolor{keywordflow}{for} name \textcolor{keywordflow}{in} self.scene.getKnownCollisionObjects():}
+\DoxyCodeLine{139             self.scene.removeCollisionObject(name, use\_service=\textcolor{keyword}{False})}
+\DoxyCodeLine{140         \textcolor{keywordflow}{for} name \textcolor{keywordflow}{in} self.scene.getKnownAttachedObjects():}
+\DoxyCodeLine{141             self.scene.removeAttachedObject(name, use\_service=\textcolor{keyword}{False})}
+\DoxyCodeLine{142         self.scene.waitForSync()}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144         \textcolor{comment}{\# insert objects to scene}}
+\DoxyCodeLine{145         idx = -\/1}
+\DoxyCodeLine{146         \textcolor{keywordflow}{for} obj \textcolor{keywordflow}{in} find\_result.objects:}
+\DoxyCodeLine{147             idx += 1}
+\DoxyCodeLine{148             obj.object.name = \textcolor{stringliteral}{"object\%d"}\%idx}
+\DoxyCodeLine{149             self.scene.addSolidPrimitive(obj.object.name,}
+\DoxyCodeLine{150                                          obj.object.primitives[0],}
+\DoxyCodeLine{151                                          obj.object.primitive\_poses[0],}
+\DoxyCodeLine{152                                          use\_service=\textcolor{keyword}{False})}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154         \textcolor{keywordflow}{for} obj \textcolor{keywordflow}{in} find\_result.support\_surfaces:}
+\DoxyCodeLine{155             \textcolor{comment}{\# extend surface to floor, and make wider since we have narrow field of view}}
+\DoxyCodeLine{156             height = obj.primitive\_poses[0].position.z}
+\DoxyCodeLine{157             obj.primitives[0].dimensions = [obj.primitives[0].dimensions[0],}
+\DoxyCodeLine{158                                             1.5,  \textcolor{comment}{\# wider}}
+\DoxyCodeLine{159                                             obj.primitives[0].dimensions[2] + height]}
+\DoxyCodeLine{160             obj.primitive\_poses[0].position.z += -\/height/2.0}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162             \textcolor{comment}{\# add to scene}}
+\DoxyCodeLine{163             self.scene.addSolidPrimitive(obj.name,}
+\DoxyCodeLine{164                                          obj.primitives[0],}
+\DoxyCodeLine{165                                          obj.primitive\_poses[0],}
+\DoxyCodeLine{166                                          use\_service=\textcolor{keyword}{False})}
+\DoxyCodeLine{167         self.scene.waitForSync()}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169         \textcolor{comment}{\# store for grasping}}
+\DoxyCodeLine{170         self.objects = find\_result.objects}
+\DoxyCodeLine{171         self.surfaces = find\_result.support\_surfaces}
+\DoxyCodeLine{172 }
+
+\end{DoxyCode}
+
+
+References demo.\+Grasping\+Client.\+find\+\_\+client, and demo.\+Grasping\+Client.\+scene.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_a06f93d43490fdecf65283c6e12a67e7e}\label{classdemo_1_1GraspingClient_a06f93d43490fdecf65283c6e12a67e7e}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!find\_client@{find\_client}}
+\index{find\_client@{find\_client}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{find\_client}{find\_client}}
+{\footnotesize\ttfamily demo.\+Grasping\+Client.\+find\+\_\+client}
+
+
+
+Definition at line 126 of file demo.\+py.
+
+
+
+Referenced by demo.\+Grasping\+Client.\+update\+Scene(), and pick\+\_\+place\+\_\+demo.\+Grasping\+Client.\+update\+Scene().
+
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_a68c225d962d0b5f8fb63588109f2c65c}\label{classdemo_1_1GraspingClient_a68c225d962d0b5f8fb63588109f2c65c}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!move\_group@{move\_group}}
+\index{move\_group@{move\_group}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{move\_group}{move\_group}}
+{\footnotesize\ttfamily demo.\+Grasping\+Client.\+move\+\_\+group}
+
+
+
+Definition at line 122 of file demo.\+py.
+
+
+
+Referenced by pick\+\_\+place\+\_\+demo.\+Grasping\+Client.\+intermediate\+\_\+stow(), pick\+\_\+place\+\_\+demo.\+Grasping\+Client.\+stow(), demo.\+Grasping\+Client.\+tuck(), and pick\+\_\+place\+\_\+demo.\+Grasping\+Client.\+tuck().
+
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_ae15f547f38e0fc00137fa8030699b324}\label{classdemo_1_1GraspingClient_ae15f547f38e0fc00137fa8030699b324}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!objects@{objects}}
+\index{objects@{objects}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{objects}{objects}}
+{\footnotesize\ttfamily demo.\+Grasping\+Client.\+objects}
+
+
+
+Definition at line 170 of file demo.\+py.
+
+
+
+Referenced by demo.\+Grasping\+Client.\+get\+Graspable\+Cube(), and pick\+\_\+place\+\_\+demo.\+Grasping\+Client.\+get\+Graspable\+Object().
+
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_a712a3d6618b7bcfeaa5a1752a132d4b7}\label{classdemo_1_1GraspingClient_a712a3d6618b7bcfeaa5a1752a132d4b7}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!pick\_result@{pick\_result}}
+\index{pick\_result@{pick\_result}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{pick\_result}{pick\_result}}
+{\footnotesize\ttfamily demo.\+Grasping\+Client.\+pick\+\_\+result}
+
+
+
+Definition at line 208 of file demo.\+py.
+
+
+
+Referenced by demo.\+Grasping\+Client.\+place(), and pick\+\_\+place\+\_\+demo.\+Grasping\+Client.\+place().
+
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_a896aa1613802f70655cc97220ff812f6}\label{classdemo_1_1GraspingClient_a896aa1613802f70655cc97220ff812f6}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!pickplace@{pickplace}}
+\index{pickplace@{pickplace}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{pickplace}{pickplace}}
+{\footnotesize\ttfamily demo.\+Grasping\+Client.\+pickplace}
+
+
+
+Definition at line 121 of file demo.\+py.
+
+
+
+Referenced by demo.\+Grasping\+Client.\+place(), and pick\+\_\+place\+\_\+demo.\+Grasping\+Client.\+place().
+
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_af90f4ab21b482f708e4f646699a7f442}\label{classdemo_1_1GraspingClient_af90f4ab21b482f708e4f646699a7f442}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!scene@{scene}}
+\index{scene@{scene}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{scene}{scene}}
+{\footnotesize\ttfamily demo.\+Grasping\+Client.\+scene}
+
+
+
+Definition at line 120 of file demo.\+py.
+
+
+
+Referenced by demo.\+Grasping\+Client.\+place(), pick\+\_\+place\+\_\+demo.\+Grasping\+Client.\+place(), demo.\+Grasping\+Client.\+update\+Scene(), and pick\+\_\+place\+\_\+demo.\+Grasping\+Client.\+update\+Scene().
+
+\mbox{\Hypertarget{classdemo_1_1GraspingClient_a469b2423b3706f2339116acf6e88dd7b}\label{classdemo_1_1GraspingClient_a469b2423b3706f2339116acf6e88dd7b}} 
+\index{demo.GraspingClient@{demo.GraspingClient}!surfaces@{surfaces}}
+\index{surfaces@{surfaces}!demo.GraspingClient@{demo.GraspingClient}}
+\doxysubsubsection{\texorpdfstring{surfaces}{surfaces}}
+{\footnotesize\ttfamily demo.\+Grasping\+Client.\+surfaces}
+
+
+
+Definition at line 171 of file demo.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+gazebo/fetch\+\_\+gazebo\+\_\+demo/scripts/\mbox{\hyperlink{demo_8py}{demo.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,176 @@
+\hypertarget{fetch__arm__ikfast__moveit__plugin_8cpp}{}\doxysection{submodules/fetch\+\_\+ros/fetch\+\_\+ikfast\+\_\+plugin/src/fetch\+\_\+arm\+\_\+ikfast\+\_\+moveit\+\_\+plugin.cpp File Reference}
+\label{fetch__arm__ikfast__moveit__plugin_8cpp}\index{submodules/fetch\_ros/fetch\_ikfast\_plugin/src/fetch\_arm\_ikfast\_moveit\_plugin.cpp@{submodules/fetch\_ros/fetch\_ikfast\_plugin/src/fetch\_arm\_ikfast\_moveit\_plugin.cpp}}
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/kinematics\+\_\+base/kinematics\+\_\+base.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/robot\+\_\+state/robot\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$Eigen/\+Geometry$>$}\newline
+{\ttfamily \#include $<$tf2\+\_\+kdl/tf2\+\_\+kdl.\+h$>$}\newline
+{\ttfamily \#include $<$tf2\+\_\+eigen/tf2\+\_\+eigen.\+h$>$}\newline
+{\ttfamily \#include $<$eigen\+\_\+conversions/eigen\+\_\+kdl.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp\char`\"{}}\newline
+{\ttfamily \#include $<$pluginlib/class\+\_\+list\+\_\+macros.\+hpp$>$}\newline
+Include dependency graph for fetch\+\_\+arm\+\_\+ikfast\+\_\+moveit\+\_\+plugin.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__moveit__plugin_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfetch__arm_1_1LimitObeyingSol}{fetch\+\_\+arm\+::\+Limit\+Obeying\+Sol}}
+\item 
+class \mbox{\hyperlink{classfetch__arm_1_1IKFastKinematicsPlugin}{fetch\+\_\+arm\+::\+I\+K\+Fast\+Kinematics\+Plugin}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefetch__arm}{fetch\+\_\+arm}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__moveit__plugin_8cpp_a2acf0f2516ebf5481d4db7f86f4d0da6}{I\+K\+F\+A\+S\+T\+\_\+\+N\+O\+\_\+\+M\+A\+IN}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43d}{S\+E\+A\+R\+C\+H\+\_\+\+M\+O\+DE}} \{ \mbox{\hyperlink{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43da257354ce1bd1b71c18c1f02e5c615dcc}{O\+P\+T\+I\+M\+I\+Z\+E\+\_\+\+F\+R\+E\+E\+\_\+\+J\+O\+I\+NT}} = 1, 
+\mbox{\hyperlink{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43dacf12e2a0ff681edbb1582e9afc627d90}{O\+P\+T\+I\+M\+I\+Z\+E\+\_\+\+M\+A\+X\+\_\+\+J\+O\+I\+NT}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em Search modes for search\+Position\+I\+K(), see there. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7f}{fetch\+\_\+arm\+::\+Ik\+Parameterization\+Type}} \{ \newline
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa65980eaea039d9c0d4107b0462bd5d5d}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+None}} = 0, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa4e12b1f799acebbe08a3eb82621bd1fe}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Transform6D}} = 0x67000001, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa144f544ea8b0da24534612cb970d3cbd}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Rotation3D}} = 0x34000002, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fae243b6da2163bd071711a3549bda8262}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation3D}} = 0x33000003, 
+\newline
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa9dddd78b22947f7913450811b1acdb3c}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Direction3D}} = 0x23000004, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa25e50206ae6f0e82918bb919fff57737}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Ray4D}} = 0x46000005, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa2cf8fcbfefd8f2b9651bf09690b6a653}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Lookat3D}} = 0x23000006, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa532b636671a51a7410f4c508cfeec70c}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Direction5D}} = 0x56000007, 
+\newline
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa7c9375e41de1e71798d90bf462c735fb}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+X\+Y2D}} = 0x22000008, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa23b8b9eb5aab41ad1c642f7c0471df66}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+X\+Y\+Orientation3D}} = 0x33000009, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa91adbd9166f205ae8553b8d84a95b5c3}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Local\+Global6D}} = 0x3600000a, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa4e93feabf395600a41ef04382cbd15c1}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+X\+Axis\+Angle4D}} = 0x4400000b, 
+\newline
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa95d95994a30e36440c0fb446a151d561}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Y\+Axis\+Angle4D}} = 0x4400000c, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa1f6aede70047c558e564726173fb7791}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Z\+Axis\+Angle4D}} = 0x4400000d, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa661c70799c2026c1600638b5d5f2046d}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+X\+Axis\+Angle\+Z\+Norm4D}} = 0x4400000e, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fad477746fe38638fd3ee38b44139e33c8}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Y\+Axis\+Angle\+X\+Norm4D}} = 0x4400000f, 
+\newline
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa303a2977c91019ef922bc366506ec270}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Z\+Axis\+Angle\+Y\+Norm4D}} = 0x44000010, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa4dfe5c81b11282c9a356935ed3cab822}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Number\+Of\+Parameterizations}} = 16, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fae0d45faaa3d55332838036282d5dd2e3}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Velocity\+Data\+Bit}}, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa6bd4cbe4b9319f9ff08d8dd4e41579a3}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Transform6\+D\+Velocity}} = I\+K\+P\+\_\+\+Transform6D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\newline
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7faf3bcfd47555984e4b52792e56bcc9a08}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Rotation3\+D\+Velocity}} = I\+K\+P\+\_\+\+Rotation3D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa87d5e5549cc91d5186a6fc65680bc14d}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation3\+D\+Velocity}} = I\+K\+P\+\_\+\+Translation3D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa69026b207a1ad87514174a380fafb071}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Direction3\+D\+Velocity}} = I\+K\+P\+\_\+\+Direction3D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7faf101d87965ec1a8b66c6e1d031186b23}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Ray4\+D\+Velocity}} = I\+K\+P\+\_\+\+Ray4D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\newline
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7faad6e21bdaeb4b08b2256c552eecaeda5}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Lookat3\+D\+Velocity}} = I\+K\+P\+\_\+\+Lookat3D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa3913352808514e188fee504802f005d6}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Direction5\+D\+Velocity}} = I\+K\+P\+\_\+\+Translation\+Direction5D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7faa6b9bb47e6581dfc3de05e695c29ec10}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+X\+Y2\+D\+Velocity}} = I\+K\+P\+\_\+\+Translation\+X\+Y2D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa40080d65d0c993a6ccc44a0a56441f98}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+X\+Y\+Orientation3\+D\+Velocity}} = I\+K\+P\+\_\+\+Translation\+X\+Y\+Orientation3D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\newline
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fafd11617eff5bb09d7389145528e6f0a8}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Local\+Global6\+D\+Velocity}} = I\+K\+P\+\_\+\+Translation\+Local\+Global6D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fac10a74ef079f5e38de447545531bd91c}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+X\+Axis\+Angle4\+D\+Velocity}} = I\+K\+P\+\_\+\+Translation\+X\+Axis\+Angle4D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa3bfd38c850bb4e27dcf6cdf334e0f266}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Y\+Axis\+Angle4\+D\+Velocity}} = I\+K\+P\+\_\+\+Translation\+Y\+Axis\+Angle4D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7facbd7d28d63a7c235d1b1e7aedb0d5fce}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Z\+Axis\+Angle4\+D\+Velocity}} = I\+K\+P\+\_\+\+Translation\+Z\+Axis\+Angle4D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\newline
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa1f2b2d3423244df176751655df4f3b4a}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+X\+Axis\+Angle\+Z\+Norm4\+D\+Velocity}} = I\+K\+P\+\_\+\+Translation\+X\+Axis\+Angle\+Z\+Norm4D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa54ed5627e6579ddae688763c1cd61a05}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Y\+Axis\+Angle\+X\+Norm4\+D\+Velocity}} = I\+K\+P\+\_\+\+Translation\+Y\+Axis\+Angle\+X\+Norm4D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa4e752d08d3a70a12e5cc375ef175ecad}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Translation\+Z\+Axis\+Angle\+Y\+Norm4\+D\+Velocity}} = I\+K\+P\+\_\+\+Translation\+Z\+Axis\+Angle\+Y\+Norm4D $\vert$ I\+K\+P\+\_\+\+Velocity\+Data\+Bit, 
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fac2f599de7ac518ab4508f18eb92f0401}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Unique\+Id\+Mask}} = 0x0000ffff, 
+\newline
+\mbox{\hyperlink{namespacefetch__arm_ad13e098da829fa4da30d559d6c8cfe7fa7a6d6c5f95f92736714799007c2825c0}{fetch\+\_\+arm\+::\+I\+K\+P\+\_\+\+Custom\+Data\+Bit}} = 0x00010000
+ \}
+\begin{DoxyCompactList}\small\item\em The types of inverse kinematics parameterizations supported. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fetch__arm__ikfast__moveit__plugin_8cpp_ae40ea4e3fc72654c5a7ef04bf18b6a9c}{P\+L\+U\+G\+I\+N\+L\+I\+B\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+C\+L\+A\+SS}} (\mbox{\hyperlink{classfetch__arm_1_1IKFastKinematicsPlugin}{fetch\+\_\+arm\+::\+I\+K\+Fast\+Kinematics\+Plugin}}, kinematics\+::\+Kinematics\+Base)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const double \mbox{\hyperlink{fetch__arm__ikfast__moveit__plugin_8cpp_a6db90f19cce82ba375acd26f431403b6}{L\+I\+M\+I\+T\+\_\+\+T\+O\+L\+E\+R\+A\+N\+CE}} = .\+0000001
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{fetch__arm__ikfast__moveit__plugin_8cpp_a2acf0f2516ebf5481d4db7f86f4d0da6}\label{fetch__arm__ikfast__moveit__plugin_8cpp_a2acf0f2516ebf5481d4db7f86f4d0da6}} 
+\index{fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}!IKFAST\_NO\_MAIN@{IKFAST\_NO\_MAIN}}
+\index{IKFAST\_NO\_MAIN@{IKFAST\_NO\_MAIN}!fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}}
+\doxysubsubsection{\texorpdfstring{IKFAST\_NO\_MAIN}{IKFAST\_NO\_MAIN}}
+{\footnotesize\ttfamily \#define I\+K\+F\+A\+S\+T\+\_\+\+N\+O\+\_\+\+M\+A\+IN}
+
+
+
+Definition at line 65 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+moveit\+\_\+plugin.\+cpp.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43d}\label{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43d}} 
+\index{fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}!SEARCH\_MODE@{SEARCH\_MODE}}
+\index{SEARCH\_MODE@{SEARCH\_MODE}!fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}}
+\doxysubsubsection{\texorpdfstring{SEARCH\_MODE}{SEARCH\_MODE}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43d}{S\+E\+A\+R\+C\+H\+\_\+\+M\+O\+DE}}}
+
+
+
+Search modes for search\+Position\+I\+K(), see there. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPTIMIZE\_FREE\_JOINT@{OPTIMIZE\_FREE\_JOINT}!fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}}\index{fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}!OPTIMIZE\_FREE\_JOINT@{OPTIMIZE\_FREE\_JOINT}}}\mbox{\Hypertarget{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43da257354ce1bd1b71c18c1f02e5c615dcc}\label{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43da257354ce1bd1b71c18c1f02e5c615dcc}} 
+O\+P\+T\+I\+M\+I\+Z\+E\+\_\+\+F\+R\+E\+E\+\_\+\+J\+O\+I\+NT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPTIMIZE\_MAX\_JOINT@{OPTIMIZE\_MAX\_JOINT}!fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}}\index{fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}!OPTIMIZE\_MAX\_JOINT@{OPTIMIZE\_MAX\_JOINT}}}\mbox{\Hypertarget{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43dacf12e2a0ff681edbb1582e9afc627d90}\label{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43dacf12e2a0ff681edbb1582e9afc627d90}} 
+O\+P\+T\+I\+M\+I\+Z\+E\+\_\+\+M\+A\+X\+\_\+\+J\+O\+I\+NT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 57 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+moveit\+\_\+plugin.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{58 \{}
+\DoxyCodeLine{59   \mbox{\hyperlink{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43da257354ce1bd1b71c18c1f02e5c615dcc}{OPTIMIZE\_FREE\_JOINT}} = 1,}
+\DoxyCodeLine{60   \mbox{\hyperlink{fetch__arm__ikfast__moveit__plugin_8cpp_a7e3e138f11a31c3d463b94d39ee5f43dacf12e2a0ff681edbb1582e9afc627d90}{OPTIMIZE\_MAX\_JOINT}} = 2}
+\DoxyCodeLine{61 \};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{fetch__arm__ikfast__moveit__plugin_8cpp_ae40ea4e3fc72654c5a7ef04bf18b6a9c}\label{fetch__arm__ikfast__moveit__plugin_8cpp_ae40ea4e3fc72654c5a7ef04bf18b6a9c}} 
+\index{fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}!PLUGINLIB\_EXPORT\_CLASS@{PLUGINLIB\_EXPORT\_CLASS}}
+\index{PLUGINLIB\_EXPORT\_CLASS@{PLUGINLIB\_EXPORT\_CLASS}!fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}}
+\doxysubsubsection{\texorpdfstring{PLUGINLIB\_EXPORT\_CLASS()}{PLUGINLIB\_EXPORT\_CLASS()}}
+{\footnotesize\ttfamily P\+L\+U\+G\+I\+N\+L\+I\+B\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfetch__arm_1_1IKFastKinematicsPlugin}{fetch\+\_\+arm\+::\+I\+K\+Fast\+Kinematics\+Plugin}}}]{,  }\item[{kinematics\+::\+Kinematics\+Base}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{fetch__arm__ikfast__moveit__plugin_8cpp_a6db90f19cce82ba375acd26f431403b6}\label{fetch__arm__ikfast__moveit__plugin_8cpp_a6db90f19cce82ba375acd26f431403b6}} 
+\index{fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}!LIMIT\_TOLERANCE@{LIMIT\_TOLERANCE}}
+\index{LIMIT\_TOLERANCE@{LIMIT\_TOLERANCE}!fetch\_arm\_ikfast\_moveit\_plugin.cpp@{fetch\_arm\_ikfast\_moveit\_plugin.cpp}}
+\doxysubsubsection{\texorpdfstring{LIMIT\_TOLERANCE}{LIMIT\_TOLERANCE}}
+{\footnotesize\ttfamily const double L\+I\+M\+I\+T\+\_\+\+T\+O\+L\+E\+R\+A\+N\+CE = .\+0000001}
+
+
+
+Definition at line 55 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+moveit\+\_\+plugin.\+cpp.
+
+
+
+Referenced by fetch\+\_\+arm\+::\+I\+K\+Fast\+Kinematics\+Plugin\+::get\+Position\+I\+K(), and fetch\+\_\+arm\+::\+I\+K\+Fast\+Kinematics\+Plugin\+::get\+Solution().
+

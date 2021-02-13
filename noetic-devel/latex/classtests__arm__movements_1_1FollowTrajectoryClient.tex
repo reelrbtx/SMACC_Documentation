@@ -1,0 +1,144 @@
+\hypertarget{classtests__arm__movements_1_1FollowTrajectoryClient}{}\doxysection{tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client Class Reference}
+\label{classtests__arm__movements_1_1FollowTrajectoryClient}\index{tests\_arm\_movements.FollowTrajectoryClient@{tests\_arm\_movements.FollowTrajectoryClient}}
+
+
+Inheritance diagram for tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classtests__arm__movements_1_1FollowTrajectoryClient__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classtests__arm__movements_1_1FollowTrajectoryClient__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classtests__arm__movements_1_1FollowTrajectoryClient_a9bc9931eb4865157aaba58d5735a58b6}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, name, \mbox{\hyperlink{classtests__arm__movements_1_1FollowTrajectoryClient_a7b4215af9e8dcc855119cfb335044a1d}{joint\+\_\+names}})
+\item 
+def \mbox{\hyperlink{classtests__arm__movements_1_1FollowTrajectoryClient_a1d62b0a352dea0653e0ff7519679ac20}{move\+\_\+to}} (self, positions, duration=5.\+0)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtests__arm__movements_1_1FollowTrajectoryClient_aa49618f4442b93efd07eeb376db177c3}{client}}
+\item 
+\mbox{\hyperlink{classtests__arm__movements_1_1FollowTrajectoryClient_a7b4215af9e8dcc855119cfb335044a1d}{joint\+\_\+names}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 74 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1FollowTrajectoryClient_a9bc9931eb4865157aaba58d5735a58b6}\label{classtests__arm__movements_1_1FollowTrajectoryClient_a9bc9931eb4865157aaba58d5735a58b6}} 
+\index{tests\_arm\_movements.FollowTrajectoryClient@{tests\_arm\_movements.FollowTrajectoryClient}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!tests\_arm\_movements.FollowTrajectoryClient@{tests\_arm\_movements.FollowTrajectoryClient}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{name,  }\item[{}]{joint\+\_\+names }\end{DoxyParamCaption})}
+
+
+
+Definition at line 76 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{76     \textcolor{keyword}{def }\_\_init\_\_(self, name, joint\_names):}
+\DoxyCodeLine{77         self.client = actionlib.SimpleActionClient(\textcolor{stringliteral}{"\%s/follow\_joint\_trajectory"} \% name,}
+\DoxyCodeLine{78                                                    FollowJointTrajectoryAction)}
+\DoxyCodeLine{79         rospy.loginfo(\textcolor{stringliteral}{"Waiting for \%s..."} \% name)}
+\DoxyCodeLine{80         self.client.wait\_for\_server()}
+\DoxyCodeLine{81         self.joint\_names = joint\_names}
+\DoxyCodeLine{82 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1FollowTrajectoryClient_a1d62b0a352dea0653e0ff7519679ac20}\label{classtests__arm__movements_1_1FollowTrajectoryClient_a1d62b0a352dea0653e0ff7519679ac20}} 
+\index{tests\_arm\_movements.FollowTrajectoryClient@{tests\_arm\_movements.FollowTrajectoryClient}!move\_to@{move\_to}}
+\index{move\_to@{move\_to}!tests\_arm\_movements.FollowTrajectoryClient@{tests\_arm\_movements.FollowTrajectoryClient}}
+\doxysubsubsection{\texorpdfstring{move\_to()}{move\_to()}}
+{\footnotesize\ttfamily def tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+move\+\_\+to (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{positions,  }\item[{}]{duration = {\ttfamily 5.0} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 83 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{83     \textcolor{keyword}{def }move\_to(self, positions, duration=5.0):}
+\DoxyCodeLine{84         \textcolor{keywordflow}{if} len(self.joint\_names) != len(positions):}
+\DoxyCodeLine{85             print(\textcolor{stringliteral}{"Invalid trajectory position"})}
+\DoxyCodeLine{86             \textcolor{keywordflow}{return} \textcolor{keyword}{False}}
+\DoxyCodeLine{87         trajectory = JointTrajectory()}
+\DoxyCodeLine{88         trajectory.joint\_names = self.joint\_names}
+\DoxyCodeLine{89         trajectory.points.append(JointTrajectoryPoint())}
+\DoxyCodeLine{90         trajectory.points[0].positions = positions}
+\DoxyCodeLine{91         trajectory.points[0].velocities = [0.0 \textcolor{keywordflow}{for} \_ \textcolor{keywordflow}{in} positions]}
+\DoxyCodeLine{92         trajectory.points[0].accelerations = [0.0 \textcolor{keywordflow}{for} \_ \textcolor{keywordflow}{in} positions]}
+\DoxyCodeLine{93         trajectory.points[0].time\_from\_start = rospy.Duration(duration)}
+\DoxyCodeLine{94         follow\_goal = FollowJointTrajectoryGoal()}
+\DoxyCodeLine{95         follow\_goal.trajectory = trajectory}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         self.client.send\_goal(follow\_goal)}
+\DoxyCodeLine{98         result = self.client.wait\_for\_result()}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100         \textcolor{keywordflow}{return} result}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 }
+
+\end{DoxyCode}
+
+
+References smacc\+::default\+\_\+events\+::\+Ev\+Action\+Feedback$<$ Action\+Feedback, T\+Orthogonal $>$.\+client, tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+client, demo.\+Move\+Base\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+client, tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+client, demo.\+Follow\+Trajectory\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Follow\+Trajectory\+Client.\+client, tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+client, demo.\+Point\+Head\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Point\+Head\+Client.\+client, demo.\+Follow\+Trajectory\+Client.\+joint\+\_\+names, pick\+\_\+place\+\_\+demo.\+Follow\+Trajectory\+Client.\+joint\+\_\+names, and tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+joint\+\_\+names.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1FollowTrajectoryClient_aa49618f4442b93efd07eeb376db177c3}\label{classtests__arm__movements_1_1FollowTrajectoryClient_aa49618f4442b93efd07eeb376db177c3}} 
+\index{tests\_arm\_movements.FollowTrajectoryClient@{tests\_arm\_movements.FollowTrajectoryClient}!client@{client}}
+\index{client@{client}!tests\_arm\_movements.FollowTrajectoryClient@{tests\_arm\_movements.FollowTrajectoryClient}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+client}
+
+
+
+Definition at line 77 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+
+Referenced by camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+disable\+\_\+auto(), camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+enable\+\_\+auto(), tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop(), tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+move\+\_\+to(), tuck\+\_\+arm.\+Tuck\+Thread.\+run(), gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position(), and tuck\+\_\+arm.\+Tuck\+Thread.\+stop().
+
+\mbox{\Hypertarget{classtests__arm__movements_1_1FollowTrajectoryClient_a7b4215af9e8dcc855119cfb335044a1d}\label{classtests__arm__movements_1_1FollowTrajectoryClient_a7b4215af9e8dcc855119cfb335044a1d}} 
+\index{tests\_arm\_movements.FollowTrajectoryClient@{tests\_arm\_movements.FollowTrajectoryClient}!joint\_names@{joint\_names}}
+\index{joint\_names@{joint\_names}!tests\_arm\_movements.FollowTrajectoryClient@{tests\_arm\_movements.FollowTrajectoryClient}}
+\doxysubsubsection{\texorpdfstring{joint\_names}{joint\_names}}
+{\footnotesize\ttfamily tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+joint\+\_\+names}
+
+
+
+Definition at line 81 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+
+Referenced by tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+move\+\_\+to().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+gazebo/fetch\+\_\+gazebo\+\_\+demo/scripts/\mbox{\hyperlink{tests__arm__movements_8py}{tests\+\_\+arm\+\_\+movements.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,183 @@
+\hypertarget{namespacetests__arm__movements}{}\doxysection{tests\+\_\+arm\+\_\+movements Namespace Reference}
+\label{namespacetests__arm__movements}\index{tests\_arm\_movements@{tests\_arm\_movements}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classtests__arm__movements_1_1FollowTrajectoryClient}{Follow\+Trajectory\+Client}}
+\item 
+class \mbox{\hyperlink{classtests__arm__movements_1_1GripperActionClient}{Gripper\+Action\+Client}}
+\item 
+class \mbox{\hyperlink{classtests__arm__movements_1_1MoveBaseClient}{Move\+Base\+Client}}
+\item 
+class \mbox{\hyperlink{classtests__arm__movements_1_1MoveFetch}{Move\+Fetch}}
+\item 
+class \mbox{\hyperlink{classtests__arm__movements_1_1PointHeadClient}{Point\+Head\+Client}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacetests__arm__movements_ae39b2c3363549530e76919881b89abb2}{friction\+\_\+base\+\_\+tests}} ()
+\item 
+def \mbox{\hyperlink{namespacetests__arm__movements_a6230343ed3bf9cb4ecc0a28ba54cd54c}{move\+\_\+tests}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetests__arm__movements_a929c2e0321187b0004be9fd2c8970a55}{anonymous}}
+\item 
+\mbox{\hyperlink{namespacetests__arm__movements_a727626723b1c73d1729b55cc3a661020}{True}}
+\item 
+\mbox{\hyperlink{namespacetests__arm__movements_a6a1bc8ff1f847b9e1e59f11551295599}{log\+\_\+level}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacetests__arm__movements_ae39b2c3363549530e76919881b89abb2}\label{namespacetests__arm__movements_ae39b2c3363549530e76919881b89abb2}} 
+\index{tests\_arm\_movements@{tests\_arm\_movements}!friction\_base\_tests@{friction\_base\_tests}}
+\index{friction\_base\_tests@{friction\_base\_tests}!tests\_arm\_movements@{tests\_arm\_movements}}
+\doxysubsubsection{\texorpdfstring{friction\_base\_tests()}{friction\_base\_tests()}}
+{\footnotesize\ttfamily def tests\+\_\+arm\+\_\+movements.\+friction\+\_\+base\+\_\+tests (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 268 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{268 \textcolor{keyword}{def }\mbox{\hyperlink{namespacetests__arm__movements_ae39b2c3363549530e76919881b89abb2}{friction\_base\_tests}}():}
+\DoxyCodeLine{269     arm\_joint\_positions\_L = [-\/1.57, -\/0.9, 0, 0.9, 0.0, 1.57, 0.0]}
+\DoxyCodeLine{270     arm\_joint\_positions\_R = [1.57, -\/0.9, 0, 0.9, 0.0, 1.57, 0.0]}
+\DoxyCodeLine{271     move\_fetch\_obj = MoveFetch()}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273     side = \textcolor{stringliteral}{"LEFT"}}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275     rate\_obj = rospy.Rate(1)}
+\DoxyCodeLine{276     \textcolor{keywordflow}{while} \textcolor{keywordflow}{not} rospy.is\_shutdown():}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278         \textcolor{keywordflow}{if} side == \textcolor{stringliteral}{"LEFT"}:}
+\DoxyCodeLine{279             side = \textcolor{stringliteral}{"RIGHT"}}
+\DoxyCodeLine{280             move\_fetch\_obj.move\_manager(pose\_requested=\textcolor{keywordtype}{None},}
+\DoxyCodeLine{281                                         joints\_array\_requested=arm\_joint\_positions\_L,}
+\DoxyCodeLine{282                                         movement\_type\_requested=\textcolor{stringliteral}{"JOINTS"})}
+\DoxyCodeLine{283         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{284             side = \textcolor{stringliteral}{"LEFT"}}
+\DoxyCodeLine{285             move\_fetch\_obj.move\_manager(pose\_requested=\textcolor{keywordtype}{None},}
+\DoxyCodeLine{286                                         joints\_array\_requested=arm\_joint\_positions\_R,}
+\DoxyCodeLine{287                                         movement\_type\_requested=\textcolor{stringliteral}{"JOINTS"})}
+\DoxyCodeLine{288         rate\_obj.sleep()}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290 }
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetests__arm__movements_a6230343ed3bf9cb4ecc0a28ba54cd54c}\label{namespacetests__arm__movements_a6230343ed3bf9cb4ecc0a28ba54cd54c}} 
+\index{tests\_arm\_movements@{tests\_arm\_movements}!move\_tests@{move\_tests}}
+\index{move\_tests@{move\_tests}!tests\_arm\_movements@{tests\_arm\_movements}}
+\doxysubsubsection{\texorpdfstring{move\_tests()}{move\_tests()}}
+{\footnotesize\ttfamily def tests\+\_\+arm\+\_\+movements.\+move\+\_\+tests (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 291 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{291 \textcolor{keyword}{def }\mbox{\hyperlink{namespacetests__arm__movements_a6230343ed3bf9cb4ecc0a28ba54cd54c}{move\_tests}}():}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293     move\_fetch\_obj = MoveFetch()}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{295     \textcolor{comment}{\# Move P1}}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{297     move\_fetch\_obj.move\_manager(pose\_requested=[],}
+\DoxyCodeLine{298                                 joints\_array\_requested=[0.6, 0.0, 0.75],}
+\DoxyCodeLine{299                                 movement\_type\_requested=\textcolor{stringliteral}{"HEAD"})}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301     pose = Pose()}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303     pose.position.x = 0.6}
+\DoxyCodeLine{304     pose.position.y = 0.1}
+\DoxyCodeLine{305     pose.position.z = 1.0}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307     quat = quaternion\_from\_euler(ai=0.0, aj=1.57, ak=0.0)}
+\DoxyCodeLine{308     pose.orientation.x = quat[0]}
+\DoxyCodeLine{309     pose.orientation.y = quat[1]}
+\DoxyCodeLine{310     pose.orientation.z = quat[2]}
+\DoxyCodeLine{311     pose.orientation.w = quat[3]}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313     LEFT\_Y = -\/0.09}
+\DoxyCodeLine{314     RIGHT\_Y = 0.09}
+\DoxyCodeLine{315     UP\_Z = 1.0}
+\DoxyCodeLine{316     DOWN\_Z = 0.9}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{318     pose\_y\_seq = [RIGHT\_Y, RIGHT\_Y, RIGHT\_Y,}
+\DoxyCodeLine{319                   LEFT\_Y, LEFT\_Y, LEFT\_Y, LEFT\_Y, LEFT\_Y, RIGHT\_Y, RIGHT\_Y]}
+\DoxyCodeLine{320     pose\_z\_seq = [UP\_Z, DOWN\_Z, UP\_Z, UP\_Z,}
+\DoxyCodeLine{321                   DOWN\_Z, UP\_Z, DOWN\_Z, UP\_Z, UP\_Z, DOWN\_Z]}
+\DoxyCodeLine{322     seq\_num = 0}
+\DoxyCodeLine{323     raw\_input(\textcolor{stringliteral}{"Start...Go Right"})}
+\DoxyCodeLine{324     \textcolor{keywordflow}{while} \textcolor{keywordflow}{not} rospy.is\_shutdown():}
+\DoxyCodeLine{325         print(\textcolor{stringliteral}{"Seq Num="}+str(seq\_num))}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327         pose.position.y = pose\_y\_seq[seq\_num]}
+\DoxyCodeLine{328         pose.position.z = pose\_z\_seq[seq\_num]}
+\DoxyCodeLine{329         print(str(pose.position))}
+\DoxyCodeLine{330         move\_fetch\_obj.move\_manager(pose\_requested=pose,}
+\DoxyCodeLine{331                                     joints\_array\_requested=[],}
+\DoxyCodeLine{332                                     movement\_type\_requested=\textcolor{stringliteral}{"TCP"})}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{334         \textcolor{keywordflow}{if} (seq\_num == 1 \textcolor{keywordflow}{or} seq\_num == 6):}
+\DoxyCodeLine{335             print(\textcolor{stringliteral}{"CLOSE GRIPPER"})}
+\DoxyCodeLine{336             max\_effort = 10.0}
+\DoxyCodeLine{337             grip\_position = 0.02}
+\DoxyCodeLine{338             move\_fetch\_obj.move\_manager(pose\_requested=\textcolor{keywordtype}{None},}
+\DoxyCodeLine{339                                         joints\_array\_requested=[}
+\DoxyCodeLine{340                                             grip\_position, max\_effort],}
+\DoxyCodeLine{341                                         movement\_type\_requested=\textcolor{stringliteral}{"GRIPPER"})}
+\DoxyCodeLine{342         elif(seq\_num == 4 \textcolor{keywordflow}{or} seq\_num == 9):}
+\DoxyCodeLine{343             print(\textcolor{stringliteral}{"OPEN GRIPPER"})}
+\DoxyCodeLine{344             max\_effort = 10.0}
+\DoxyCodeLine{345             grip\_position = 0.5}
+\DoxyCodeLine{346             move\_fetch\_obj.move\_manager(pose\_requested=\textcolor{keywordtype}{None},}
+\DoxyCodeLine{347                                         joints\_array\_requested=[}
+\DoxyCodeLine{348                                             grip\_position, max\_effort],}
+\DoxyCodeLine{349                                         movement\_type\_requested=\textcolor{stringliteral}{"GRIPPER"})}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{351         seq\_num += 1}
+\DoxyCodeLine{352         \textcolor{keywordflow}{if} seq\_num > 9:}
+\DoxyCodeLine{353             seq\_num = 0}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{355 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacetests__arm__movements_a929c2e0321187b0004be9fd2c8970a55}\label{namespacetests__arm__movements_a929c2e0321187b0004be9fd2c8970a55}} 
+\index{tests\_arm\_movements@{tests\_arm\_movements}!anonymous@{anonymous}}
+\index{anonymous@{anonymous}!tests\_arm\_movements@{tests\_arm\_movements}}
+\doxysubsubsection{\texorpdfstring{anonymous}{anonymous}}
+{\footnotesize\ttfamily tests\+\_\+arm\+\_\+movements.\+anonymous}
+
+
+
+Definition at line 357 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+\mbox{\Hypertarget{namespacetests__arm__movements_a6a1bc8ff1f847b9e1e59f11551295599}\label{namespacetests__arm__movements_a6a1bc8ff1f847b9e1e59f11551295599}} 
+\index{tests\_arm\_movements@{tests\_arm\_movements}!log\_level@{log\_level}}
+\index{log\_level@{log\_level}!tests\_arm\_movements@{tests\_arm\_movements}}
+\doxysubsubsection{\texorpdfstring{log\_level}{log\_level}}
+{\footnotesize\ttfamily tests\+\_\+arm\+\_\+movements.\+log\+\_\+level}
+
+
+
+Definition at line 357 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+\mbox{\Hypertarget{namespacetests__arm__movements_a727626723b1c73d1729b55cc3a661020}\label{namespacetests__arm__movements_a727626723b1c73d1729b55cc3a661020}} 
+\index{tests\_arm\_movements@{tests\_arm\_movements}!True@{True}}
+\index{True@{True}!tests\_arm\_movements@{tests\_arm\_movements}}
+\doxysubsubsection{\texorpdfstring{True}{True}}
+{\footnotesize\ttfamily tests\+\_\+arm\+\_\+movements.\+True}
+
+
+
+Definition at line 357 of file tests\+\_\+arm\+\_\+movements.\+py.
+

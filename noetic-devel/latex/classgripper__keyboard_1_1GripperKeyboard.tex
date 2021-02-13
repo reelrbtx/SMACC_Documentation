@@ -1,0 +1,346 @@
+\hypertarget{classgripper__keyboard_1_1GripperKeyboard}{}\doxysection{gripper\+\_\+keyboard.\+Gripper\+Keyboard Class Reference}
+\label{classgripper__keyboard_1_1GripperKeyboard}\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+
+
+Inheritance diagram for gripper\+\_\+keyboard.\+Gripper\+Keyboard\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classgripper__keyboard_1_1GripperKeyboard__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gripper\+\_\+keyboard.\+Gripper\+Keyboard\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgripper__keyboard_1_1GripperKeyboard__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_ae81ccfa0fdfad429fb59aa3857134a5c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_a8584dda97b88bdf8e8966b28ec4b3517}{set\+\_\+position}} (self, \mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_a79745c03b83aa653fec9ba7ae98a3f31}{position}})
+\item 
+def \mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_a7575d46d3adbb27f0d5ae06cd1919e8a}{open}} (self)
+\item 
+def \mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_adeba9f6557d3651a5949165feb130881}{close}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_a45879f10865688e8028c34a8ac06678a}{max\+\_\+effort}}
+\item 
+\mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_a79745c03b83aa653fec9ba7ae98a3f31}{position}}
+\item 
+\mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_a353f2792201841f2d2a0389c9fcbe4e6}{action\+\_\+name}}
+\item 
+\mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_a5cdd72c8e6ad0aba18884c44010414e2}{client}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_a97a9f6971c92f0ee68d114e8ca954815}{O\+P\+E\+N\+\_\+\+P\+O\+S\+I\+T\+I\+ON}} = 0.\+1
+\item 
+int \mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_a2dd78d69addd5cb7b3e622dc616268b9}{C\+L\+O\+S\+E\+D\+\_\+\+P\+O\+S\+I\+T\+I\+ON}} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_ac3af0444f943102479e35999baad4c15}{\+\_\+set\+\_\+state}} (self, joint\+\_\+state)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_a9ea9a94a7887a601f47fab5d102617a1}{\+\_\+lock}}
+\item 
+\mbox{\hyperlink{classgripper__keyboard_1_1GripperKeyboard_a0fa8404ce19580089d96492bc0ea920b}{\+\_\+sub\+\_\+pos}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 52 of file gripper\+\_\+keyboard.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_ae81ccfa0fdfad429fb59aa3857134a5c}\label{classgripper__keyboard_1_1GripperKeyboard_ae81ccfa0fdfad429fb59aa3857134a5c}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 57 of file gripper\+\_\+keyboard.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{57     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{58         self.\_lock = Lock()}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60         self.max\_effort = 20.0}
+\DoxyCodeLine{61         self.position = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{62         self.\_sub\_pos = rospy.Subscriber(\textcolor{stringliteral}{'joint\_states'}, JointState,}
+\DoxyCodeLine{63                                          self.\_set\_state)}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         self.action\_name = \textcolor{stringliteral}{'gripper\_controller/gripper\_action'}}
+\DoxyCodeLine{66         self.client = actionlib.SimpleActionClient(self.action\_name,}
+\DoxyCodeLine{67                                                    GripperCommandAction)}
+\DoxyCodeLine{68         rospy.loginfo(\textcolor{stringliteral}{'Waiting for gripper\_controller...'})}
+\DoxyCodeLine{69         self.client.wait\_for\_server()}
+\DoxyCodeLine{70         rospy.loginfo(\textcolor{stringliteral}{'...connected.'})}
+\DoxyCodeLine{71 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_ac3af0444f943102479e35999baad4c15}\label{classgripper__keyboard_1_1GripperKeyboard_ac3af0444f943102479e35999baad4c15}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!\_set\_state@{\_set\_state}}
+\index{\_set\_state@{\_set\_state}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{\_set\_state()}{\_set\_state()}}
+{\footnotesize\ttfamily def gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+\_\+set\+\_\+state (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{joint\+\_\+state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 72 of file gripper\+\_\+keyboard.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{72     \textcolor{keyword}{def }\_set\_state(self, joint\_state):}
+\DoxyCodeLine{73         l\_gripper\_position = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{74         r\_gripper\_position = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{75         \textcolor{keywordflow}{for} joint, pos \textcolor{keywordflow}{in} zip(joint\_state.name, joint\_state.position):}
+\DoxyCodeLine{76             \textcolor{keywordflow}{if} joint == \textcolor{stringliteral}{'l\_gripper\_finger\_joint'}:}
+\DoxyCodeLine{77                 l\_gripper\_finger\_pos = pos}
+\DoxyCodeLine{78             \textcolor{keywordflow}{if} joint == \textcolor{stringliteral}{'r\_gripper\_finger\_joint'}:}
+\DoxyCodeLine{79                 r\_gripper\_finger\_pos = pos}
+\DoxyCodeLine{80         \textcolor{keyword}{with} self.\_lock:}
+\DoxyCodeLine{81             self.position = l\_gripper\_finger\_pos + r\_gripper\_finger\_pos}
+\DoxyCodeLine{82 }
+
+\end{DoxyCode}
+
+
+References gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+\_\+lock, and gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+position.
+
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_adeba9f6557d3651a5949165feb130881}\label{classgripper__keyboard_1_1GripperKeyboard_adeba9f6557d3651a5949165feb130881}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!close@{close}}
+\index{close@{close}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily def gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+close (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 97 of file gripper\+\_\+keyboard.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{97     \textcolor{keyword}{def }close(self):}
+\DoxyCodeLine{98         self.set\_position(self.CLOSED\_POSITION)}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 }
+
+\end{DoxyCode}
+
+
+References gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+C\+L\+O\+S\+E\+D\+\_\+\+P\+O\+S\+I\+T\+I\+ON, and gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgripper__keyboard_1_1GripperKeyboard_adeba9f6557d3651a5949165feb130881_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_a7575d46d3adbb27f0d5ae06cd1919e8a}\label{classgripper__keyboard_1_1GripperKeyboard_a7575d46d3adbb27f0d5ae06cd1919e8a}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!open@{open}}
+\index{open@{open}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily def gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+open (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 94 of file gripper\+\_\+keyboard.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{94     \textcolor{keyword}{def }open(self):}
+\DoxyCodeLine{95         self.set\_position(self.OPEN\_POSITION)}
+\DoxyCodeLine{96 }
+
+\end{DoxyCode}
+
+
+References gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+O\+P\+E\+N\+\_\+\+P\+O\+S\+I\+T\+I\+ON, and gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgripper__keyboard_1_1GripperKeyboard_a7575d46d3adbb27f0d5ae06cd1919e8a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_a8584dda97b88bdf8e8966b28ec4b3517}\label{classgripper__keyboard_1_1GripperKeyboard_a8584dda97b88bdf8e8966b28ec4b3517}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!set\_position@{set\_position}}
+\index{set\_position@{set\_position}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{set\_position()}{set\_position()}}
+{\footnotesize\ttfamily def gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{position }\end{DoxyParamCaption})}
+
+
+
+Definition at line 83 of file gripper\+\_\+keyboard.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{83     \textcolor{keyword}{def }set\_position(self, position):}
+\DoxyCodeLine{84         goal = GripperCommandGoal()}
+\DoxyCodeLine{85         goal.command.max\_effort = self.max\_effort}
+\DoxyCodeLine{86         goal.command.position = position}
+\DoxyCodeLine{87         \textcolor{comment}{\# Fill in the goal here}}
+\DoxyCodeLine{88         self.client.send\_goal(goal)}
+\DoxyCodeLine{89         self.client.wait\_for\_result(rospy.Duration.from\_sec(5.0))}
+\DoxyCodeLine{90         res = self.client.get\_result()}
+\DoxyCodeLine{91         \textcolor{keyword}{with} self.\_lock:}
+\DoxyCodeLine{92             self.position = res.position}
+\DoxyCodeLine{93 }
+
+\end{DoxyCode}
+
+
+References gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+\_\+lock, smacc\+::default\+\_\+events\+::\+Ev\+Action\+Feedback$<$ Action\+Feedback, T\+Orthogonal $>$.\+client, camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+client, tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+client, demo.\+Move\+Base\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+client, tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+client, tilt\+\_\+head.\+Nav\+Head\+Controller.\+client, gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+client, demo.\+Follow\+Trajectory\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Follow\+Trajectory\+Client.\+client, tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+client, demo.\+Point\+Head\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Point\+Head\+Client.\+client, gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+max\+\_\+effort, and gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+position.
+
+
+
+Referenced by gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+close(), and gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+open().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgripper__keyboard_1_1GripperKeyboard_a8584dda97b88bdf8e8966b28ec4b3517_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_a9ea9a94a7887a601f47fab5d102617a1}\label{classgripper__keyboard_1_1GripperKeyboard_a9ea9a94a7887a601f47fab5d102617a1}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!\_lock@{\_lock}}
+\index{\_lock@{\_lock}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{\_lock}{\_lock}}
+{\footnotesize\ttfamily gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+\_\+lock\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 58 of file gripper\+\_\+keyboard.\+py.
+
+
+
+Referenced by gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+\_\+set\+\_\+state(), and gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position().
+
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_a0fa8404ce19580089d96492bc0ea920b}\label{classgripper__keyboard_1_1GripperKeyboard_a0fa8404ce19580089d96492bc0ea920b}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!\_sub\_pos@{\_sub\_pos}}
+\index{\_sub\_pos@{\_sub\_pos}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{\_sub\_pos}{\_sub\_pos}}
+{\footnotesize\ttfamily gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+\_\+sub\+\_\+pos\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 62 of file gripper\+\_\+keyboard.\+py.
+
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_a353f2792201841f2d2a0389c9fcbe4e6}\label{classgripper__keyboard_1_1GripperKeyboard_a353f2792201841f2d2a0389c9fcbe4e6}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!action\_name@{action\_name}}
+\index{action\_name@{action\_name}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{action\_name}{action\_name}}
+{\footnotesize\ttfamily gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+action\+\_\+name}
+
+
+
+Definition at line 65 of file gripper\+\_\+keyboard.\+py.
+
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_a5cdd72c8e6ad0aba18884c44010414e2}\label{classgripper__keyboard_1_1GripperKeyboard_a5cdd72c8e6ad0aba18884c44010414e2}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!client@{client}}
+\index{client@{client}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+client}
+
+
+
+Definition at line 66 of file gripper\+\_\+keyboard.\+py.
+
+
+
+Referenced by tuck\+\_\+arm.\+Tuck\+Thread.\+run(), gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position(), and tuck\+\_\+arm.\+Tuck\+Thread.\+stop().
+
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_a2dd78d69addd5cb7b3e622dc616268b9}\label{classgripper__keyboard_1_1GripperKeyboard_a2dd78d69addd5cb7b3e622dc616268b9}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!CLOSED\_POSITION@{CLOSED\_POSITION}}
+\index{CLOSED\_POSITION@{CLOSED\_POSITION}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{CLOSED\_POSITION}{CLOSED\_POSITION}}
+{\footnotesize\ttfamily int gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+C\+L\+O\+S\+E\+D\+\_\+\+P\+O\+S\+I\+T\+I\+ON = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 55 of file gripper\+\_\+keyboard.\+py.
+
+
+
+Referenced by gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+close().
+
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_a45879f10865688e8028c34a8ac06678a}\label{classgripper__keyboard_1_1GripperKeyboard_a45879f10865688e8028c34a8ac06678a}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!max\_effort@{max\_effort}}
+\index{max\_effort@{max\_effort}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{max\_effort}{max\_effort}}
+{\footnotesize\ttfamily gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+max\+\_\+effort}
+
+
+
+Definition at line 60 of file gripper\+\_\+keyboard.\+py.
+
+
+
+Referenced by gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position().
+
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_a97a9f6971c92f0ee68d114e8ca954815}\label{classgripper__keyboard_1_1GripperKeyboard_a97a9f6971c92f0ee68d114e8ca954815}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!OPEN\_POSITION@{OPEN\_POSITION}}
+\index{OPEN\_POSITION@{OPEN\_POSITION}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{OPEN\_POSITION}{OPEN\_POSITION}}
+{\footnotesize\ttfamily float gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+O\+P\+E\+N\+\_\+\+P\+O\+S\+I\+T\+I\+ON = 0.\+1\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 54 of file gripper\+\_\+keyboard.\+py.
+
+
+
+Referenced by gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+open().
+
+\mbox{\Hypertarget{classgripper__keyboard_1_1GripperKeyboard_a79745c03b83aa653fec9ba7ae98a3f31}\label{classgripper__keyboard_1_1GripperKeyboard_a79745c03b83aa653fec9ba7ae98a3f31}} 
+\index{gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}!position@{position}}
+\index{position@{position}!gripper\_keyboard.GripperKeyboard@{gripper\_keyboard.GripperKeyboard}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+position}
+
+
+
+Definition at line 61 of file gripper\+\_\+keyboard.\+py.
+
+
+
+Referenced by gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+\_\+set\+\_\+state(), and gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+ros/fetch\+\_\+teleop/scripts/\mbox{\hyperlink{gripper__keyboard_8py}{gripper\+\_\+keyboard.\+py}}\end{DoxyCompactItemize}

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['meter',['meter',['../backward__local__planner_8h.html#ab6024a26b088c11b8a5218a469ae5a57',1,'meter():&#160;backward_local_planner.h'],['../forward__local__planner_8h.html#ab6024a26b088c11b8a5218a469ae5a57',1,'meter():&#160;forward_local_planner.h'],['../pure__spinning__local__planner_8h.html#ab6024a26b088c11b8a5218a469ae5a57',1,'meter():&#160;pure_spinning_local_planner.h']]],
-  ['my_5fcontext',['my_context',['../common_8h.html#af2dcacead80d69b96952496fe413bbfe',1,'common.h']]]
+  ['jointhandlelist_7201',['JointHandleList',['../classrobot__controllers_1_1ControllerManager.html#a533dc0670ac59f59bdd7a7a34556985c',1,'robot_controllers::ControllerManager']]],
+  ['jointhandleptr_7202',['JointHandlePtr',['../namespacegazebo.html#a82eb012bf8b1175bb16b884e20331162',1,'gazebo::JointHandlePtr()'],['../namespacerobot__controllers.html#a9c7cc37a8e0d295ea24c75cbb656ecfa',1,'robot_controllers::JointHandlePtr()']]]
 ];

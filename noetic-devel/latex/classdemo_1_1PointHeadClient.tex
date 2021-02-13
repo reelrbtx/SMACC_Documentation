@@ -1,0 +1,118 @@
+\hypertarget{classdemo_1_1PointHeadClient}{}\doxysection{demo.\+Point\+Head\+Client Class Reference}
+\label{classdemo_1_1PointHeadClient}\index{demo.PointHeadClient@{demo.PointHeadClient}}
+
+
+Inheritance diagram for demo.\+Point\+Head\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{classdemo_1_1PointHeadClient__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for demo.\+Point\+Head\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{classdemo_1_1PointHeadClient__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdemo_1_1PointHeadClient_acd8098dd369bab9c0d92eb4e8f85b62f}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classdemo_1_1PointHeadClient_a1f65139d119bbb1d035456ddf58010c6}{look\+\_\+at}} (self, x, y, z, frame, duration=1.\+0)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdemo_1_1PointHeadClient_a25cbfdb17b2fe281f37af2ca1dff7227}{client}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 98 of file demo.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdemo_1_1PointHeadClient_acd8098dd369bab9c0d92eb4e8f85b62f}\label{classdemo_1_1PointHeadClient_acd8098dd369bab9c0d92eb4e8f85b62f}} 
+\index{demo.PointHeadClient@{demo.PointHeadClient}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!demo.PointHeadClient@{demo.PointHeadClient}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def demo.\+Point\+Head\+Client.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 100 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{100     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{101         self.client = actionlib.SimpleActionClient(\textcolor{stringliteral}{"head\_controller/point\_head"}, PointHeadAction)}
+\DoxyCodeLine{102         rospy.loginfo(\textcolor{stringliteral}{"Waiting for head\_controller..."})}
+\DoxyCodeLine{103         self.client.wait\_for\_server()}
+\DoxyCodeLine{104 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdemo_1_1PointHeadClient_a1f65139d119bbb1d035456ddf58010c6}\label{classdemo_1_1PointHeadClient_a1f65139d119bbb1d035456ddf58010c6}} 
+\index{demo.PointHeadClient@{demo.PointHeadClient}!look\_at@{look\_at}}
+\index{look\_at@{look\_at}!demo.PointHeadClient@{demo.PointHeadClient}}
+\doxysubsubsection{\texorpdfstring{look\_at()}{look\_at()}}
+{\footnotesize\ttfamily def demo.\+Point\+Head\+Client.\+look\+\_\+at (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{z,  }\item[{}]{frame,  }\item[{}]{duration = {\ttfamily 1.0} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 105 of file demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{105     \textcolor{keyword}{def }look\_at(self, x, y, z, frame, duration=1.0):}
+\DoxyCodeLine{106         goal = PointHeadGoal()}
+\DoxyCodeLine{107         goal.target.header.stamp = rospy.Time.now()}
+\DoxyCodeLine{108         goal.target.header.frame\_id = frame}
+\DoxyCodeLine{109         goal.target.point.x = x}
+\DoxyCodeLine{110         goal.target.point.y = y}
+\DoxyCodeLine{111         goal.target.point.z = z}
+\DoxyCodeLine{112         goal.min\_duration = rospy.Duration(duration)}
+\DoxyCodeLine{113         self.client.send\_goal(goal)}
+\DoxyCodeLine{114         self.client.wait\_for\_result()}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{comment}{\# Tools for grasping}}
+
+\end{DoxyCode}
+
+
+References smacc\+::default\+\_\+events\+::\+Ev\+Action\+Feedback$<$ Action\+Feedback, T\+Orthogonal $>$.\+client, demo.\+Move\+Base\+Client.\+client, demo.\+Follow\+Trajectory\+Client.\+client, and demo.\+Point\+Head\+Client.\+client.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdemo_1_1PointHeadClient_a25cbfdb17b2fe281f37af2ca1dff7227}\label{classdemo_1_1PointHeadClient_a25cbfdb17b2fe281f37af2ca1dff7227}} 
+\index{demo.PointHeadClient@{demo.PointHeadClient}!client@{client}}
+\index{client@{client}!demo.PointHeadClient@{demo.PointHeadClient}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily demo.\+Point\+Head\+Client.\+client}
+
+
+
+Definition at line 101 of file demo.\+py.
+
+
+
+Referenced by camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+disable\+\_\+auto(), camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+enable\+\_\+auto(), pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+goto(), tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+goto(), tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+look\+\_\+at(), demo.\+Point\+Head\+Client.\+look\+\_\+at(), pick\+\_\+place\+\_\+demo.\+Point\+Head\+Client.\+look\+\_\+at(), tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop(), pick\+\_\+place\+\_\+demo.\+Follow\+Trajectory\+Client.\+move\+\_\+to(), tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+move\+\_\+to(), tuck\+\_\+arm.\+Tuck\+Thread.\+run(), gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position(), and tuck\+\_\+arm.\+Tuck\+Thread.\+stop().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+gazebo/fetch\+\_\+gazebo\+\_\+demo/scripts/\mbox{\hyperlink{demo_8py}{demo.\+py}}\end{DoxyCompactItemize}

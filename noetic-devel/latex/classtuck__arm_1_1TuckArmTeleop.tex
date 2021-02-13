@@ -1,0 +1,216 @@
+\hypertarget{classtuck__arm_1_1TuckArmTeleop}{}\doxysection{tuck\+\_\+arm.\+Tuck\+Arm\+Teleop Class Reference}
+\label{classtuck__arm_1_1TuckArmTeleop}\index{tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}}
+
+
+Collaboration diagram for tuck\+\_\+arm.\+Tuck\+Arm\+Teleop\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{classtuck__arm_1_1TuckArmTeleop__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classtuck__arm_1_1TuckArmTeleop_adf75251f93866cd3f80a6c8558bb399c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classtuck__arm_1_1TuckArmTeleop_afb54c36eca570315889d20a5e2060327}{joy\+\_\+callback}} (self, msg)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtuck__arm_1_1TuckArmTeleop_a4f0773d6943004342167e107db5e4a53}{tuck\+\_\+button}}
+\item 
+\mbox{\hyperlink{classtuck__arm_1_1TuckArmTeleop_a0ca0e5893b9c04c55a2e5d2218f4541d}{deadman}}
+\item 
+\mbox{\hyperlink{classtuck__arm_1_1TuckArmTeleop_a7bdc45cf5552108e0fc1f03c56887ed0}{tucking}}
+\item 
+\mbox{\hyperlink{classtuck__arm_1_1TuckArmTeleop_a5896a0121053e2911bb19633fca146c6}{pressed}}
+\item 
+\mbox{\hyperlink{classtuck__arm_1_1TuckArmTeleop_a8875566c0c210fba3fe8a9d870ebfce6}{pressed\+\_\+last}}
+\item 
+\mbox{\hyperlink{classtuck__arm_1_1TuckArmTeleop_abf05a81b5d464902d7cc965d3e11a100}{joy\+\_\+sub}}
+\item 
+\mbox{\hyperlink{classtuck__arm_1_1TuckArmTeleop_a51a4f9d20ff2cd4be1d826def6611b5a}{tuck\+\_\+thread}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 122 of file tuck\+\_\+arm.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtuck__arm_1_1TuckArmTeleop_adf75251f93866cd3f80a6c8558bb399c}\label{classtuck__arm_1_1TuckArmTeleop_adf75251f93866cd3f80a6c8558bb399c}} 
+\index{tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 124 of file tuck\+\_\+arm.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{124     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{125         self.tuck\_button = rospy.get\_param(\textcolor{stringliteral}{"\string~tuck\_button"}, 6)  \textcolor{comment}{\# default button is the down button}}
+\DoxyCodeLine{126         self.deadman = rospy.get\_param(\textcolor{stringliteral}{"\string~deadman\_button"}, 10)}
+\DoxyCodeLine{127         self.tucking = \textcolor{keyword}{False}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129         self.pressed = \textcolor{keyword}{False}}
+\DoxyCodeLine{130         self.pressed\_last = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132         self.joy\_sub = rospy.Subscriber(\textcolor{stringliteral}{"joy"}, Joy, self.joy\_callback)}
+\DoxyCodeLine{133 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtuck__arm_1_1TuckArmTeleop_afb54c36eca570315889d20a5e2060327}\label{classtuck__arm_1_1TuckArmTeleop_afb54c36eca570315889d20a5e2060327}} 
+\index{tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}!joy\_callback@{joy\_callback}}
+\index{joy\_callback@{joy\_callback}!tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}}
+\doxysubsubsection{\texorpdfstring{joy\_callback()}{joy\_callback()}}
+{\footnotesize\ttfamily def tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+Definition at line 134 of file tuck\+\_\+arm.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{134     \textcolor{keyword}{def }joy\_callback(self, msg):}
+\DoxyCodeLine{135         \textcolor{keywordflow}{if} self.tucking:}
+\DoxyCodeLine{136             \textcolor{comment}{\# Only run once}}
+\DoxyCodeLine{137             \textcolor{keywordflow}{if} msg.buttons[self.deadman] <= 0:}
+\DoxyCodeLine{138                 \textcolor{comment}{\# Deadman has been released, don't tuck}}
+\DoxyCodeLine{139                 rospy.loginfo(\textcolor{stringliteral}{"Stopping tuck thread"})}
+\DoxyCodeLine{140                 self.tuck\_thread.stop()}
+\DoxyCodeLine{141             \textcolor{keywordflow}{return}}
+\DoxyCodeLine{142         \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{143             \textcolor{keywordflow}{if} msg.buttons[self.tuck\_button] > 0 \textcolor{keywordflow}{and} msg.buttons[self.deadman] > 0:}
+\DoxyCodeLine{144                 \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} self.pressed:}
+\DoxyCodeLine{145                     self.pressed\_last = rospy.Time.now()}
+\DoxyCodeLine{146                     self.pressed = \textcolor{keyword}{True}}
+\DoxyCodeLine{147                 \textcolor{keywordflow}{elif} self.pressed\_last \textcolor{keywordflow}{and} rospy.Time.now() > self.pressed\_last + rospy.Duration(1.0):}
+\DoxyCodeLine{148                     \textcolor{comment}{\# Tuck the arm}}
+\DoxyCodeLine{149                     self.tucking = \textcolor{keyword}{True}}
+\DoxyCodeLine{150                     rospy.loginfo(\textcolor{stringliteral}{"Starting tuck thread"})}
+\DoxyCodeLine{151                     self.tuck\_thread = TuckThread()}
+\DoxyCodeLine{152             \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{153                 self.pressed = \textcolor{keyword}{False}}
+\DoxyCodeLine{154         \textcolor{keywordflow}{except} KeyError:}
+\DoxyCodeLine{155             rospy.logwarn(\textcolor{stringliteral}{"tuck\_button is out of range"})}
+\DoxyCodeLine{156 }
+
+\end{DoxyCode}
+
+
+References tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+deadman, tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+pressed, tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+pressed\+\_\+last, tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+tuck\+\_\+button, tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+tuck\+\_\+thread, and tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+tucking.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtuck__arm_1_1TuckArmTeleop_a0ca0e5893b9c04c55a2e5d2218f4541d}\label{classtuck__arm_1_1TuckArmTeleop_a0ca0e5893b9c04c55a2e5d2218f4541d}} 
+\index{tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}!deadman@{deadman}}
+\index{deadman@{deadman}!tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}}
+\doxysubsubsection{\texorpdfstring{deadman}{deadman}}
+{\footnotesize\ttfamily tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+deadman}
+
+
+
+Definition at line 126 of file tuck\+\_\+arm.\+py.
+
+
+
+Referenced by tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback().
+
+\mbox{\Hypertarget{classtuck__arm_1_1TuckArmTeleop_abf05a81b5d464902d7cc965d3e11a100}\label{classtuck__arm_1_1TuckArmTeleop_abf05a81b5d464902d7cc965d3e11a100}} 
+\index{tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}!joy\_sub@{joy\_sub}}
+\index{joy\_sub@{joy\_sub}!tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}}
+\doxysubsubsection{\texorpdfstring{joy\_sub}{joy\_sub}}
+{\footnotesize\ttfamily tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+sub}
+
+
+
+Definition at line 132 of file tuck\+\_\+arm.\+py.
+
+\mbox{\Hypertarget{classtuck__arm_1_1TuckArmTeleop_a5896a0121053e2911bb19633fca146c6}\label{classtuck__arm_1_1TuckArmTeleop_a5896a0121053e2911bb19633fca146c6}} 
+\index{tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}!pressed@{pressed}}
+\index{pressed@{pressed}!tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}}
+\doxysubsubsection{\texorpdfstring{pressed}{pressed}}
+{\footnotesize\ttfamily tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+pressed}
+
+
+
+Definition at line 129 of file tuck\+\_\+arm.\+py.
+
+
+
+Referenced by tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback().
+
+\mbox{\Hypertarget{classtuck__arm_1_1TuckArmTeleop_a8875566c0c210fba3fe8a9d870ebfce6}\label{classtuck__arm_1_1TuckArmTeleop_a8875566c0c210fba3fe8a9d870ebfce6}} 
+\index{tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}!pressed\_last@{pressed\_last}}
+\index{pressed\_last@{pressed\_last}!tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}}
+\doxysubsubsection{\texorpdfstring{pressed\_last}{pressed\_last}}
+{\footnotesize\ttfamily tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+pressed\+\_\+last}
+
+
+
+Definition at line 130 of file tuck\+\_\+arm.\+py.
+
+
+
+Referenced by tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback().
+
+\mbox{\Hypertarget{classtuck__arm_1_1TuckArmTeleop_a4f0773d6943004342167e107db5e4a53}\label{classtuck__arm_1_1TuckArmTeleop_a4f0773d6943004342167e107db5e4a53}} 
+\index{tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}!tuck\_button@{tuck\_button}}
+\index{tuck\_button@{tuck\_button}!tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}}
+\doxysubsubsection{\texorpdfstring{tuck\_button}{tuck\_button}}
+{\footnotesize\ttfamily tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+tuck\+\_\+button}
+
+
+
+Definition at line 125 of file tuck\+\_\+arm.\+py.
+
+
+
+Referenced by tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback().
+
+\mbox{\Hypertarget{classtuck__arm_1_1TuckArmTeleop_a51a4f9d20ff2cd4be1d826def6611b5a}\label{classtuck__arm_1_1TuckArmTeleop_a51a4f9d20ff2cd4be1d826def6611b5a}} 
+\index{tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}!tuck\_thread@{tuck\_thread}}
+\index{tuck\_thread@{tuck\_thread}!tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}}
+\doxysubsubsection{\texorpdfstring{tuck\_thread}{tuck\_thread}}
+{\footnotesize\ttfamily tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+tuck\+\_\+thread}
+
+
+
+Definition at line 151 of file tuck\+\_\+arm.\+py.
+
+
+
+Referenced by tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback().
+
+\mbox{\Hypertarget{classtuck__arm_1_1TuckArmTeleop_a7bdc45cf5552108e0fc1f03c56887ed0}\label{classtuck__arm_1_1TuckArmTeleop_a7bdc45cf5552108e0fc1f03c56887ed0}} 
+\index{tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}!tucking@{tucking}}
+\index{tucking@{tucking}!tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}}
+\doxysubsubsection{\texorpdfstring{tucking}{tucking}}
+{\footnotesize\ttfamily tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+tucking}
+
+
+
+Definition at line 127 of file tuck\+\_\+arm.\+py.
+
+
+
+Referenced by tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+ros/fetch\+\_\+teleop/scripts/\mbox{\hyperlink{tuck__arm_8py}{tuck\+\_\+arm.\+py}}\end{DoxyCompactItemize}

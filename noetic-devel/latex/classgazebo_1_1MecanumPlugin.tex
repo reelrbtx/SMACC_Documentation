@@ -1,0 +1,319 @@
+\hypertarget{classgazebo_1_1MecanumPlugin}{}\doxysection{gazebo\+::Mecanum\+Plugin Class Reference}
+\label{classgazebo_1_1MecanumPlugin}\index{gazebo::MecanumPlugin@{gazebo::MecanumPlugin}}
+
+
+Inheritance diagram for gazebo\+::Mecanum\+Plugin\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{classgazebo_1_1MecanumPlugin__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gazebo\+::Mecanum\+Plugin\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgazebo_1_1MecanumPlugin__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_ac3d15989a9782449a40f4167d1c1bd17}{Load}} (physics\+::\+Model\+Ptr \+\_\+parent, sdf\+::\+Element\+Ptr \+\_\+sdf)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_abfcf8c22643dae5ecc1f68b807051667}{Gazebo\+Update}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+event\+::\+Connection\+Ptr \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a994fcc5f31582fe9b3147627a6f4be2c}{update\+\_\+connection\+\_\+}}
+\item 
+physics\+::\+Model\+Ptr \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a768a8c18e9b6752f8673ed0ca873062f}{model\+\_\+}}
+\item 
+physics\+::\+Link\+Ptr \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a365d1ae22b78cc4f23a509d8d07d9d8c}{wheel\+\_\+link\+\_\+}}
+\item 
+physics\+::\+Link\+Ptr \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a83d3528df17260fc4586a381ceef93dc}{fixed\+\_\+link\+\_\+}}
+\item 
+double \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a35f480270f6404a9b1b4ad4bd77b2196}{roller\+\_\+angle\+\_\+}}
+\item 
+double \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a778dcdd01acb854ddae52171d8600df3}{roller\+\_\+friction\+\_\+}}
+\item 
+double \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_acc62c5dcef498c48374d252417494b65}{roller\+\_\+skid\+\_\+friction\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 38 of file mecanum\+\_\+plugin.\+cpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgazebo_1_1MecanumPlugin_abfcf8c22643dae5ecc1f68b807051667}\label{classgazebo_1_1MecanumPlugin_abfcf8c22643dae5ecc1f68b807051667}} 
+\index{gazebo::MecanumPlugin@{gazebo::MecanumPlugin}!GazeboUpdate@{GazeboUpdate}}
+\index{GazeboUpdate@{GazeboUpdate}!gazebo::MecanumPlugin@{gazebo::MecanumPlugin}}
+\doxysubsubsection{\texorpdfstring{GazeboUpdate()}{GazeboUpdate()}}
+{\footnotesize\ttfamily void gazebo\+::\+Mecanum\+Plugin\+::\+Gazebo\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 134 of file mecanum\+\_\+plugin.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{135 \{}
+\DoxyCodeLine{136   math::Pose wheel\_pose = \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a365d1ae22b78cc4f23a509d8d07d9d8c}{wheel\_link\_}}-\/>GetWorldCoGPose();}
+\DoxyCodeLine{137   math::Pose fixed\_pose = \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a83d3528df17260fc4586a381ceef93dc}{fixed\_link\_}}-\/>GetWorldCoGPose();}
+\DoxyCodeLine{138   math::Quaternion wheel\_orientation = wheel\_pose.CoordRotationSub(fixed\_pose.rot);}
+\DoxyCodeLine{139   \textcolor{keywordtype}{double} wheel\_angle = wheel\_orientation.GetPitch();}
+\DoxyCodeLine{140   ROS\_DEBUG\_STREAM(\mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a365d1ae22b78cc4f23a509d8d07d9d8c}{wheel\_link\_}}-\/>GetName() << \textcolor{stringliteral}{" angle is "} << wheel\_angle << \textcolor{stringliteral}{" radians."});}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142   \textcolor{comment}{// TODO: Understand better what the deal is with multiple collisions on a link.}}
+\DoxyCodeLine{143   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} collision\_index = 0;}
+\DoxyCodeLine{144   physics::SurfaceParamsPtr surface = \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a365d1ae22b78cc4f23a509d8d07d9d8c}{wheel\_link\_}}-\/>GetCollision(collision\_index)-\/>GetSurface();}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146   \textcolor{comment}{// TODO: Check that the physics engine is ODE to avoid a segfault here.}}
+\DoxyCodeLine{147   physics::ODESurfaceParams* ode\_surface = \textcolor{keyword}{dynamic\_cast<}physics::ODESurfaceParams*\textcolor{keyword}{>}(surface.get());}
+\DoxyCodeLine{148   physics::FrictionPyramid\& fric(ode\_surface-\/>frictionPyramid);}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150   \textcolor{comment}{// TODO: Parameterize these.}}
+\DoxyCodeLine{151   fric.SetMuPrimary(\mbox{\hyperlink{classgazebo_1_1MecanumPlugin_acc62c5dcef498c48374d252417494b65}{roller\_skid\_friction\_}});}
+\DoxyCodeLine{152   fric.SetMuSecondary(\mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a778dcdd01acb854ddae52171d8600df3}{roller\_friction\_}});}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154   \textcolor{comment}{// TODO: Investigate replacing this manual trigonometry with Pose::rot::RotateVector. Doing this}}
+\DoxyCodeLine{155   \textcolor{comment}{// would also make it easier to support wheels which rotate about an axis other than Y.}}
+\DoxyCodeLine{156   fric.direction1.x = cos(\mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a35f480270f6404a9b1b4ad4bd77b2196}{roller\_angle\_}}) * cos(wheel\_angle);}
+\DoxyCodeLine{157   fric.direction1.y = sin(\mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a35f480270f6404a9b1b4ad4bd77b2196}{roller\_angle\_}});}
+\DoxyCodeLine{158   fric.direction1.z = cos(\mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a35f480270f6404a9b1b4ad4bd77b2196}{roller\_angle\_}}) * sin(wheel\_angle);}
+\DoxyCodeLine{159 \}}
+
+\end{DoxyCode}
+
+
+References fixed\+\_\+link\+\_\+, roller\+\_\+angle\+\_\+, roller\+\_\+friction\+\_\+, roller\+\_\+skid\+\_\+friction\+\_\+, and wheel\+\_\+link\+\_\+.
+
+
+
+Referenced by Load().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgazebo_1_1MecanumPlugin_abfcf8c22643dae5ecc1f68b807051667_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classgazebo_1_1MecanumPlugin_ac3d15989a9782449a40f4167d1c1bd17}\label{classgazebo_1_1MecanumPlugin_ac3d15989a9782449a40f4167d1c1bd17}} 
+\index{gazebo::MecanumPlugin@{gazebo::MecanumPlugin}!Load@{Load}}
+\index{Load@{Load}!gazebo::MecanumPlugin@{gazebo::MecanumPlugin}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily void gazebo\+::\+Mecanum\+Plugin\+::\+Load (\begin{DoxyParamCaption}\item[{physics\+::\+Model\+Ptr}]{\+\_\+parent,  }\item[{sdf\+::\+Element\+Ptr}]{\+\_\+sdf }\end{DoxyParamCaption})}
+
+
+
+Definition at line 59 of file mecanum\+\_\+plugin.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{60 \{}
+\DoxyCodeLine{61   \textcolor{comment}{// Store the model}}
+\DoxyCodeLine{62   \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a768a8c18e9b6752f8673ed0ca873062f}{model\_}} = \_parent;}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64   std::string link\_name;}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66   \textcolor{keywordflow}{if} (\_sdf-\/>HasElement(\textcolor{stringliteral}{"wheelLinkName"}))}
+\DoxyCodeLine{67   \{}
+\DoxyCodeLine{68     link\_name = \_sdf-\/>Get<std::string>(\textcolor{stringliteral}{"wheelLinkName"});}
+\DoxyCodeLine{69     \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a365d1ae22b78cc4f23a509d8d07d9d8c}{wheel\_link\_}} = \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a768a8c18e9b6752f8673ed0ca873062f}{model\_}}-\/>GetLink(link\_name);}
+\DoxyCodeLine{70     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a365d1ae22b78cc4f23a509d8d07d9d8c}{wheel\_link\_}})}
+\DoxyCodeLine{71     \{}
+\DoxyCodeLine{72       ROS\_FATAL\_STREAM(\textcolor{stringliteral}{"Wheel link ["} << link\_name << \textcolor{stringliteral}{"] not found!"});}
+\DoxyCodeLine{73       \textcolor{keywordflow}{return};}
+\DoxyCodeLine{74     \}}
+\DoxyCodeLine{75   \}}
+\DoxyCodeLine{76   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{77   \{}
+\DoxyCodeLine{78     ROS\_FATAL(\textcolor{stringliteral}{"The mecanum plugin requires a `wheelLinkName` parameter."});}
+\DoxyCodeLine{79     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{80   \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82   \textcolor{keywordflow}{if} (\_sdf-\/>HasElement(\textcolor{stringliteral}{"fixedLinkName"}))}
+\DoxyCodeLine{83   \{}
+\DoxyCodeLine{84     link\_name = \_sdf-\/>Get<std::string>(\textcolor{stringliteral}{"fixedLinkName"});}
+\DoxyCodeLine{85     \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a83d3528df17260fc4586a381ceef93dc}{fixed\_link\_}} = \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a768a8c18e9b6752f8673ed0ca873062f}{model\_}}-\/>GetLink(link\_name);}
+\DoxyCodeLine{86     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a83d3528df17260fc4586a381ceef93dc}{fixed\_link\_}})}
+\DoxyCodeLine{87     \{}
+\DoxyCodeLine{88       ROS\_FATAL\_STREAM(\textcolor{stringliteral}{"Fixed link ["} << link\_name << \textcolor{stringliteral}{"] not found!"});}
+\DoxyCodeLine{89       \textcolor{keywordflow}{return};}
+\DoxyCodeLine{90     \}}
+\DoxyCodeLine{91   \}}
+\DoxyCodeLine{92   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{93   \{}
+\DoxyCodeLine{94     ROS\_FATAL(\textcolor{stringliteral}{"The mecanum plugin requires a `fixedLinkName` parameter."});}
+\DoxyCodeLine{95     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{96   \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98   \textcolor{keywordflow}{if} (\_sdf-\/>HasElement(\textcolor{stringliteral}{"rollerAngle"}))}
+\DoxyCodeLine{99   \{}
+\DoxyCodeLine{100     \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a35f480270f6404a9b1b4ad4bd77b2196}{roller\_angle\_}} = \_sdf-\/>Get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"rollerAngle"});}
+\DoxyCodeLine{101   \}}
+\DoxyCodeLine{102   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{103   \{}
+\DoxyCodeLine{104     \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a35f480270f6404a9b1b4ad4bd77b2196}{roller\_angle\_}} = M\_PI / 4;}
+\DoxyCodeLine{105   \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107   \textcolor{keywordflow}{if} (\_sdf-\/>HasElement(\textcolor{stringliteral}{"rollerFriction"}))}
+\DoxyCodeLine{108   \{}
+\DoxyCodeLine{109     \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a778dcdd01acb854ddae52171d8600df3}{roller\_friction\_}} = \_sdf-\/>Get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"rollerFriction"});}
+\DoxyCodeLine{110   \}}
+\DoxyCodeLine{111   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{112   \{}
+\DoxyCodeLine{113     \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a778dcdd01acb854ddae52171d8600df3}{roller\_friction\_}} = 100;}
+\DoxyCodeLine{114   \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116   \textcolor{keywordflow}{if} (\_sdf-\/>HasElement(\textcolor{stringliteral}{"rollerSkidFriction"}))}
+\DoxyCodeLine{117   \{}
+\DoxyCodeLine{118     \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_acc62c5dcef498c48374d252417494b65}{roller\_skid\_friction\_}} = \_sdf-\/>Get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"rollerSkidFriction"});}
+\DoxyCodeLine{119   \}}
+\DoxyCodeLine{120   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{121   \{}
+\DoxyCodeLine{122     \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_acc62c5dcef498c48374d252417494b65}{roller\_skid\_friction\_}} = 100000;}
+\DoxyCodeLine{123   \}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125   ROS\_INFO\_STREAM(\textcolor{stringliteral}{"Mecanum plugin initialized for "} << \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a365d1ae22b78cc4f23a509d8d07d9d8c}{wheel\_link\_}}-\/>GetName() <<}
+\DoxyCodeLine{126                   \textcolor{stringliteral}{", referenced to "} << \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a83d3528df17260fc4586a381ceef93dc}{fixed\_link\_}}-\/>GetName() << \textcolor{stringliteral}{", with a roller "} <<}
+\DoxyCodeLine{127                   \textcolor{stringliteral}{"angle of "} << \mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a35f480270f6404a9b1b4ad4bd77b2196}{roller\_angle\_}} << \textcolor{stringliteral}{" radians."});}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129   \textcolor{comment}{// Register update event handler}}
+\DoxyCodeLine{130   this-\/>\mbox{\hyperlink{classgazebo_1_1MecanumPlugin_a994fcc5f31582fe9b3147627a6f4be2c}{update\_connection\_}} = event::Events::ConnectWorldUpdateBegin(}
+\DoxyCodeLine{131       boost::bind(\&\mbox{\hyperlink{classgazebo_1_1MecanumPlugin_abfcf8c22643dae5ecc1f68b807051667}{MecanumPlugin::GazeboUpdate}}, \textcolor{keyword}{this}));}
+\DoxyCodeLine{132 \}}
+
+\end{DoxyCode}
+
+
+References fixed\+\_\+link\+\_\+, Gazebo\+Update(), model\+\_\+, roller\+\_\+angle\+\_\+, roller\+\_\+friction\+\_\+, roller\+\_\+skid\+\_\+friction\+\_\+, update\+\_\+connection\+\_\+, and wheel\+\_\+link\+\_\+.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgazebo_1_1MecanumPlugin_ac3d15989a9782449a40f4167d1c1bd17_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classgazebo_1_1MecanumPlugin_a83d3528df17260fc4586a381ceef93dc}\label{classgazebo_1_1MecanumPlugin_a83d3528df17260fc4586a381ceef93dc}} 
+\index{gazebo::MecanumPlugin@{gazebo::MecanumPlugin}!fixed\_link\_@{fixed\_link\_}}
+\index{fixed\_link\_@{fixed\_link\_}!gazebo::MecanumPlugin@{gazebo::MecanumPlugin}}
+\doxysubsubsection{\texorpdfstring{fixed\_link\_}{fixed\_link\_}}
+{\footnotesize\ttfamily physics\+::\+Link\+Ptr gazebo\+::\+Mecanum\+Plugin\+::fixed\+\_\+link\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 50 of file mecanum\+\_\+plugin.\+cpp.
+
+
+
+Referenced by Gazebo\+Update(), and Load().
+
+\mbox{\Hypertarget{classgazebo_1_1MecanumPlugin_a768a8c18e9b6752f8673ed0ca873062f}\label{classgazebo_1_1MecanumPlugin_a768a8c18e9b6752f8673ed0ca873062f}} 
+\index{gazebo::MecanumPlugin@{gazebo::MecanumPlugin}!model\_@{model\_}}
+\index{model\_@{model\_}!gazebo::MecanumPlugin@{gazebo::MecanumPlugin}}
+\doxysubsubsection{\texorpdfstring{model\_}{model\_}}
+{\footnotesize\ttfamily physics\+::\+Model\+Ptr gazebo\+::\+Mecanum\+Plugin\+::model\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 48 of file mecanum\+\_\+plugin.\+cpp.
+
+
+
+Referenced by Load().
+
+\mbox{\Hypertarget{classgazebo_1_1MecanumPlugin_a35f480270f6404a9b1b4ad4bd77b2196}\label{classgazebo_1_1MecanumPlugin_a35f480270f6404a9b1b4ad4bd77b2196}} 
+\index{gazebo::MecanumPlugin@{gazebo::MecanumPlugin}!roller\_angle\_@{roller\_angle\_}}
+\index{roller\_angle\_@{roller\_angle\_}!gazebo::MecanumPlugin@{gazebo::MecanumPlugin}}
+\doxysubsubsection{\texorpdfstring{roller\_angle\_}{roller\_angle\_}}
+{\footnotesize\ttfamily double gazebo\+::\+Mecanum\+Plugin\+::roller\+\_\+angle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 51 of file mecanum\+\_\+plugin.\+cpp.
+
+
+
+Referenced by Gazebo\+Update(), and Load().
+
+\mbox{\Hypertarget{classgazebo_1_1MecanumPlugin_a778dcdd01acb854ddae52171d8600df3}\label{classgazebo_1_1MecanumPlugin_a778dcdd01acb854ddae52171d8600df3}} 
+\index{gazebo::MecanumPlugin@{gazebo::MecanumPlugin}!roller\_friction\_@{roller\_friction\_}}
+\index{roller\_friction\_@{roller\_friction\_}!gazebo::MecanumPlugin@{gazebo::MecanumPlugin}}
+\doxysubsubsection{\texorpdfstring{roller\_friction\_}{roller\_friction\_}}
+{\footnotesize\ttfamily double gazebo\+::\+Mecanum\+Plugin\+::roller\+\_\+friction\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 52 of file mecanum\+\_\+plugin.\+cpp.
+
+
+
+Referenced by Gazebo\+Update(), and Load().
+
+\mbox{\Hypertarget{classgazebo_1_1MecanumPlugin_acc62c5dcef498c48374d252417494b65}\label{classgazebo_1_1MecanumPlugin_acc62c5dcef498c48374d252417494b65}} 
+\index{gazebo::MecanumPlugin@{gazebo::MecanumPlugin}!roller\_skid\_friction\_@{roller\_skid\_friction\_}}
+\index{roller\_skid\_friction\_@{roller\_skid\_friction\_}!gazebo::MecanumPlugin@{gazebo::MecanumPlugin}}
+\doxysubsubsection{\texorpdfstring{roller\_skid\_friction\_}{roller\_skid\_friction\_}}
+{\footnotesize\ttfamily double gazebo\+::\+Mecanum\+Plugin\+::roller\+\_\+skid\+\_\+friction\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 53 of file mecanum\+\_\+plugin.\+cpp.
+
+
+
+Referenced by Gazebo\+Update(), and Load().
+
+\mbox{\Hypertarget{classgazebo_1_1MecanumPlugin_a994fcc5f31582fe9b3147627a6f4be2c}\label{classgazebo_1_1MecanumPlugin_a994fcc5f31582fe9b3147627a6f4be2c}} 
+\index{gazebo::MecanumPlugin@{gazebo::MecanumPlugin}!update\_connection\_@{update\_connection\_}}
+\index{update\_connection\_@{update\_connection\_}!gazebo::MecanumPlugin@{gazebo::MecanumPlugin}}
+\doxysubsubsection{\texorpdfstring{update\_connection\_}{update\_connection\_}}
+{\footnotesize\ttfamily event\+::\+Connection\+Ptr gazebo\+::\+Mecanum\+Plugin\+::update\+\_\+connection\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 47 of file mecanum\+\_\+plugin.\+cpp.
+
+
+
+Referenced by Load().
+
+\mbox{\Hypertarget{classgazebo_1_1MecanumPlugin_a365d1ae22b78cc4f23a509d8d07d9d8c}\label{classgazebo_1_1MecanumPlugin_a365d1ae22b78cc4f23a509d8d07d9d8c}} 
+\index{gazebo::MecanumPlugin@{gazebo::MecanumPlugin}!wheel\_link\_@{wheel\_link\_}}
+\index{wheel\_link\_@{wheel\_link\_}!gazebo::MecanumPlugin@{gazebo::MecanumPlugin}}
+\doxysubsubsection{\texorpdfstring{wheel\_link\_}{wheel\_link\_}}
+{\footnotesize\ttfamily physics\+::\+Link\+Ptr gazebo\+::\+Mecanum\+Plugin\+::wheel\+\_\+link\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 49 of file mecanum\+\_\+plugin.\+cpp.
+
+
+
+Referenced by Gazebo\+Update(), and Load().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/ridgeback\+\_\+simulator/mecanum\+\_\+gazebo\+\_\+plugin/src/\mbox{\hyperlink{mecanum__plugin_8cpp}{mecanum\+\_\+plugin.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,183 @@
+\hypertarget{classtuck__arm_1_1TuckThread}{}\doxysection{tuck\+\_\+arm.\+Tuck\+Thread Class Reference}
+\label{classtuck__arm_1_1TuckThread}\index{tuck\_arm.TuckThread@{tuck\_arm.TuckThread}}
+
+
+Inheritance diagram for tuck\+\_\+arm.\+Tuck\+Thread\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{classtuck__arm_1_1TuckThread__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for tuck\+\_\+arm.\+Tuck\+Thread\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{classtuck__arm_1_1TuckThread__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classtuck__arm_1_1TuckThread_ab7ab7a395869315a11cc7058d4ab2743}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classtuck__arm_1_1TuckThread_ab97b7f917b76263eab7e4f95890c9862}{run}} (self)
+\item 
+def \mbox{\hyperlink{classtuck__arm_1_1TuckThread_a0fc61608d02a66717f536275d1dadc81}{stop}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtuck__arm_1_1TuckThread_a690a29ba96551ce5302a63f0f121d3f9}{client}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 66 of file tuck\+\_\+arm.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtuck__arm_1_1TuckThread_ab7ab7a395869315a11cc7058d4ab2743}\label{classtuck__arm_1_1TuckThread_ab7ab7a395869315a11cc7058d4ab2743}} 
+\index{tuck\_arm.TuckThread@{tuck\_arm.TuckThread}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!tuck\_arm.TuckThread@{tuck\_arm.TuckThread}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def tuck\+\_\+arm.\+Tuck\+Thread.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 68 of file tuck\+\_\+arm.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{68     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{69         Thread.\_\_init\_\_(self)}
+\DoxyCodeLine{70         self.client = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{71         self.start()}
+\DoxyCodeLine{72 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtuck__arm_1_1TuckThread_ab97b7f917b76263eab7e4f95890c9862}\label{classtuck__arm_1_1TuckThread_ab97b7f917b76263eab7e4f95890c9862}} 
+\index{tuck\_arm.TuckThread@{tuck\_arm.TuckThread}!run@{run}}
+\index{run@{run}!tuck\_arm.TuckThread@{tuck\_arm.TuckThread}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily def tuck\+\_\+arm.\+Tuck\+Thread.\+run (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 73 of file tuck\+\_\+arm.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{73     \textcolor{keyword}{def }\mbox{\hyperlink{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}{run}}(self):}
+\DoxyCodeLine{74         move\_thread = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{75         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} \mbox{\hyperlink{namespacetuck__arm_a3cef60e1f84a756fb4d90b2bdc0dc4e9}{is\_moveit\_running}}():}
+\DoxyCodeLine{76             rospy.loginfo(\textcolor{stringliteral}{"starting moveit"})}
+\DoxyCodeLine{77             move\_thread = MoveItThread()}
+\DoxyCodeLine{78         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{79             rospy.loginfo(\textcolor{stringliteral}{"moveit already started"})}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81         rospy.loginfo(\textcolor{stringliteral}{"Waiting for MoveIt..."})}
+\DoxyCodeLine{82         self.client = MoveGroupInterface(\textcolor{stringliteral}{"arm\_with\_torso"}, \textcolor{stringliteral}{"base\_link"})}
+\DoxyCodeLine{83         rospy.loginfo(\textcolor{stringliteral}{"...connected"})}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85         \textcolor{comment}{\# Padding does not work (especially for self collisions)}}
+\DoxyCodeLine{86         \textcolor{comment}{\# So we are adding a box above the base of the robot}}
+\DoxyCodeLine{87         scene = PlanningSceneInterface(\textcolor{stringliteral}{"base\_link"})}
+\DoxyCodeLine{88         scene.addBox(\textcolor{stringliteral}{"keepout"}, 0.3, 0.5, 0.05, 0.12, 0.0, 0.375)}
+\DoxyCodeLine{89         scene.addBox(\textcolor{stringliteral}{"ground"}, 1.5, 1.5, 0.05, 0.5, 0.0, 0.0)}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91         joints = [\textcolor{stringliteral}{"torso\_lift\_joint"}, \textcolor{stringliteral}{"shoulder\_pan\_joint"}, \textcolor{stringliteral}{"shoulder\_lift\_joint"}, \textcolor{stringliteral}{"upperarm\_roll\_joint"},}
+\DoxyCodeLine{92                   \textcolor{stringliteral}{"elbow\_flex\_joint"}, \textcolor{stringliteral}{"forearm\_roll\_joint"}, \textcolor{stringliteral}{"wrist\_flex\_joint"}, \textcolor{stringliteral}{"wrist\_roll\_joint"}]}
+\DoxyCodeLine{93         pose = [0.05, 1.32, 1.40, -\/0.2, 1.72, 0.0, 1.66, 0.0]}
+\DoxyCodeLine{94         \textcolor{keywordflow}{while} \textcolor{keywordflow}{not} rospy.is\_shutdown():}
+\DoxyCodeLine{95             result = self.client.moveToJointPosition(joints,}
+\DoxyCodeLine{96                                                      pose,}
+\DoxyCodeLine{97                                                      0.0,}
+\DoxyCodeLine{98                                                      max\_velocity\_scaling\_factor=0.5)}
+\DoxyCodeLine{99             \textcolor{keywordflow}{if} result \textcolor{keywordflow}{and} result.error\_code.val == MoveItErrorCodes.SUCCESS:}
+\DoxyCodeLine{100                 scene.removeCollisionObject(\textcolor{stringliteral}{"keepout"})}
+\DoxyCodeLine{101                 scene.removeCollisionObject(\textcolor{stringliteral}{"ground"})}
+\DoxyCodeLine{102                 \textcolor{keywordflow}{if} move\_thread:}
+\DoxyCodeLine{103                     move\_thread.stop()}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105                 \textcolor{comment}{\# On success quit}}
+\DoxyCodeLine{106                 \textcolor{comment}{\# Stopping the MoveIt thread works, however, the action client}}
+\DoxyCodeLine{107                 \textcolor{comment}{\# does not get shut down, and future tucks will not work.}}
+\DoxyCodeLine{108                 \textcolor{comment}{\# As a work-\/around, we die and roslaunch will respawn us.}}
+\DoxyCodeLine{109                 rospy.signal\_shutdown(\textcolor{stringliteral}{"done"})}
+\DoxyCodeLine{110                 sys.exit(0)}
+\DoxyCodeLine{111                 \textcolor{keywordflow}{return}}
+\DoxyCodeLine{112 }
+
+\end{DoxyCode}
+
+
+References smacc\+::default\+\_\+events\+::\+Ev\+Action\+Feedback$<$ Action\+Feedback, T\+Orthogonal $>$.\+client, camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+client, tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+client, demo.\+Move\+Base\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+client, tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+client, tilt\+\_\+head.\+Nav\+Head\+Controller.\+client, gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+client, tuck\+\_\+arm.\+Tuck\+Thread.\+client, demo.\+Follow\+Trajectory\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Follow\+Trajectory\+Client.\+client, tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+client, demo.\+Point\+Head\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Point\+Head\+Client.\+client, and tuck\+\_\+arm.\+is\+\_\+moveit\+\_\+running().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classtuck__arm_1_1TuckThread_ab97b7f917b76263eab7e4f95890c9862_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classtuck__arm_1_1TuckThread_a0fc61608d02a66717f536275d1dadc81}\label{classtuck__arm_1_1TuckThread_a0fc61608d02a66717f536275d1dadc81}} 
+\index{tuck\_arm.TuckThread@{tuck\_arm.TuckThread}!stop@{stop}}
+\index{stop@{stop}!tuck\_arm.TuckThread@{tuck\_arm.TuckThread}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily def tuck\+\_\+arm.\+Tuck\+Thread.\+stop (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 113 of file tuck\+\_\+arm.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{113     \textcolor{keyword}{def }stop(self):}
+\DoxyCodeLine{114         \textcolor{keywordflow}{if} self.client:}
+\DoxyCodeLine{115             self.client.get\_move\_action().cancel\_goal()}
+\DoxyCodeLine{116         \textcolor{comment}{\# Stopping the MoveIt thread works, however, the action client}}
+\DoxyCodeLine{117         \textcolor{comment}{\# does not get shut down, and future tucks will not work.}}
+\DoxyCodeLine{118         \textcolor{comment}{\# As a work-\/around, we die and roslaunch will respawn us.}}
+\DoxyCodeLine{119         rospy.signal\_shutdown(\textcolor{stringliteral}{"failed"})}
+\DoxyCodeLine{120         sys.exit(0)}
+\DoxyCodeLine{121 }
+
+\end{DoxyCode}
+
+
+References smacc\+::default\+\_\+events\+::\+Ev\+Action\+Feedback$<$ Action\+Feedback, T\+Orthogonal $>$.\+client, camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+client, tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+client, demo.\+Move\+Base\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+client, tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+client, tilt\+\_\+head.\+Nav\+Head\+Controller.\+client, gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+client, tuck\+\_\+arm.\+Tuck\+Thread.\+client, demo.\+Follow\+Trajectory\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Follow\+Trajectory\+Client.\+client, tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+client, demo.\+Point\+Head\+Client.\+client, and pick\+\_\+place\+\_\+demo.\+Point\+Head\+Client.\+client.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtuck__arm_1_1TuckThread_a690a29ba96551ce5302a63f0f121d3f9}\label{classtuck__arm_1_1TuckThread_a690a29ba96551ce5302a63f0f121d3f9}} 
+\index{tuck\_arm.TuckThread@{tuck\_arm.TuckThread}!client@{client}}
+\index{client@{client}!tuck\_arm.TuckThread@{tuck\_arm.TuckThread}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily tuck\+\_\+arm.\+Tuck\+Thread.\+client}
+
+
+
+Definition at line 70 of file tuck\+\_\+arm.\+py.
+
+
+
+Referenced by tuck\+\_\+arm.\+Tuck\+Thread.\+run(), and tuck\+\_\+arm.\+Tuck\+Thread.\+stop().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+ros/fetch\+\_\+teleop/scripts/\mbox{\hyperlink{tuck__arm_8py}{tuck\+\_\+arm.\+py}}\end{DoxyCompactItemize}

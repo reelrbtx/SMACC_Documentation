@@ -1,0 +1,121 @@
+\hypertarget{classtests__arm__movements_1_1PointHeadClient}{}\doxysection{tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client Class Reference}
+\label{classtests__arm__movements_1_1PointHeadClient}\index{tests\_arm\_movements.PointHeadClient@{tests\_arm\_movements.PointHeadClient}}
+
+
+Inheritance diagram for tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classtests__arm__movements_1_1PointHeadClient__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classtests__arm__movements_1_1PointHeadClient__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classtests__arm__movements_1_1PointHeadClient_aabac46c185257b3845a4f5462ce08872}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classtests__arm__movements_1_1PointHeadClient_ab267059c2daa6c3bdfa3067d605970e8}{look\+\_\+at}} (self, x, y, z, frame, duration=1.\+0)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtests__arm__movements_1_1PointHeadClient_a0d50de9642eb7286ab9d4709207572ba}{client}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 31 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1PointHeadClient_aabac46c185257b3845a4f5462ce08872}\label{classtests__arm__movements_1_1PointHeadClient_aabac46c185257b3845a4f5462ce08872}} 
+\index{tests\_arm\_movements.PointHeadClient@{tests\_arm\_movements.PointHeadClient}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!tests\_arm\_movements.PointHeadClient@{tests\_arm\_movements.PointHeadClient}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 33 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{33     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{34         self.client = actionlib.SimpleActionClient(}
+\DoxyCodeLine{35             \textcolor{stringliteral}{"head\_controller/point\_head"}, PointHeadAction)}
+\DoxyCodeLine{36         rospy.loginfo(\textcolor{stringliteral}{"Waiting for head\_controller..."})}
+\DoxyCodeLine{37         self.client.wait\_for\_server()}
+\DoxyCodeLine{38 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1PointHeadClient_ab267059c2daa6c3bdfa3067d605970e8}\label{classtests__arm__movements_1_1PointHeadClient_ab267059c2daa6c3bdfa3067d605970e8}} 
+\index{tests\_arm\_movements.PointHeadClient@{tests\_arm\_movements.PointHeadClient}!look\_at@{look\_at}}
+\index{look\_at@{look\_at}!tests\_arm\_movements.PointHeadClient@{tests\_arm\_movements.PointHeadClient}}
+\doxysubsubsection{\texorpdfstring{look\_at()}{look\_at()}}
+{\footnotesize\ttfamily def tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+look\+\_\+at (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{z,  }\item[{}]{frame,  }\item[{}]{duration = {\ttfamily 1.0} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 39 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{39     \textcolor{keyword}{def }look\_at(self, x, y, z, frame, duration=1.0):}
+\DoxyCodeLine{40         goal = PointHeadGoal()}
+\DoxyCodeLine{41         goal.target.header.stamp = rospy.Time.now()}
+\DoxyCodeLine{42         goal.target.header.frame\_id = frame}
+\DoxyCodeLine{43         goal.target.point.x = x}
+\DoxyCodeLine{44         goal.target.point.y = y}
+\DoxyCodeLine{45         goal.target.point.z = z}
+\DoxyCodeLine{46         goal.min\_duration = rospy.Duration(duration)}
+\DoxyCodeLine{47         self.client.send\_goal(goal)}
+\DoxyCodeLine{48         self.client.wait\_for\_result()}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{comment}{\# Move base using navigation stack}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 }
+
+\end{DoxyCode}
+
+
+References smacc\+::default\+\_\+events\+::\+Ev\+Action\+Feedback$<$ Action\+Feedback, T\+Orthogonal $>$.\+client, tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+client, demo.\+Move\+Base\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+client, demo.\+Follow\+Trajectory\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Follow\+Trajectory\+Client.\+client, demo.\+Point\+Head\+Client.\+client, and pick\+\_\+place\+\_\+demo.\+Point\+Head\+Client.\+client.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1PointHeadClient_a0d50de9642eb7286ab9d4709207572ba}\label{classtests__arm__movements_1_1PointHeadClient_a0d50de9642eb7286ab9d4709207572ba}} 
+\index{tests\_arm\_movements.PointHeadClient@{tests\_arm\_movements.PointHeadClient}!client@{client}}
+\index{client@{client}!tests\_arm\_movements.PointHeadClient@{tests\_arm\_movements.PointHeadClient}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+client}
+
+
+
+Definition at line 34 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+
+Referenced by camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+disable\+\_\+auto(), camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+enable\+\_\+auto(), tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+goto(), tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+look\+\_\+at(), tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop(), tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+move\+\_\+to(), tuck\+\_\+arm.\+Tuck\+Thread.\+run(), gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position(), and tuck\+\_\+arm.\+Tuck\+Thread.\+stop().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+gazebo/fetch\+\_\+gazebo\+\_\+demo/scripts/\mbox{\hyperlink{tests__arm__movements_8py}{tests\+\_\+arm\+\_\+movements.\+py}}\end{DoxyCompactItemize}

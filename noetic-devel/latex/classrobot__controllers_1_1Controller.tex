@@ -1,0 +1,374 @@
+\hypertarget{classrobot__controllers_1_1Controller}{}\doxysection{robot\+\_\+controllers\+::Controller Class Reference}
+\label{classrobot__controllers_1_1Controller}\index{robot\_controllers::Controller@{robot\_controllers::Controller}}
+
+
+Base class for a controller. Is derived from a \mbox{\hyperlink{classrobot__controllers_1_1Handle}{Handle}}, so that controllers can be passed from \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager_a3b8f41c4cead191f21df92d532d3ed06}{Controller\+Manager\+::get\+Handle()}}, thus allowing controllers to access other controllers (to stack their commands.  
+
+
+
+
+{\ttfamily \#include $<$controller.\+h$>$}
+
+
+
+Inheritance diagram for robot\+\_\+controllers\+::Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1Controller__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for robot\+\_\+controllers\+::Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{classrobot__controllers_1_1Controller__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classrobot__controllers_1_1Controller_a6382c96c78d9555ca3eaa6e3d59d18c7}{Controller}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor, does almost nothing, all setup is done in \mbox{\hyperlink{classrobot__controllers_1_1Controller_ac1b7a94badc6c8c4f22770fb027845a0}{init()}}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classrobot__controllers_1_1Controller_af69debf2fd8fc162a5961cb9fe6f5741}{$\sim$\+Controller}} ()
+\begin{DoxyCompactList}\small\item\em Ensure proper cleanup with virtual destructor. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{classrobot__controllers_1_1Controller_ac1b7a94badc6c8c4f22770fb027845a0}{init}} (ros\+::\+Node\+Handle \&nh, \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} $\ast$manager)
+\begin{DoxyCompactList}\small\item\em Initialize the controller and any required data structures. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1Controller_a781e023ddefd3a60fd2c47d68838016b}{start}} ()=0
+\begin{DoxyCompactList}\small\item\em Attempt to start the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1Controller_a64d4f0032496c26c0fa788a91bc0b466}{stop}} (\mbox{\hyperlink{classbool}{bool}} force)=0
+\begin{DoxyCompactList}\small\item\em Attempt to stop the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1Controller_af5170a159c210de2bcb20b89531d5e49}{reset}} ()=0
+\begin{DoxyCompactList}\small\item\em Cleanly reset the controller to it\textquotesingle{}s initial state. Some controllers may choose to stop themselves. This is mainly used in the case of the the robot exiting some fault condition. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classrobot__controllers_1_1Controller_ab079e1d49a8afc4872049680dd950858}{update}} (const ros\+::\+Time \&time, const ros\+::\+Duration \&dt)=0
+\begin{DoxyCompactList}\small\item\em This is the update loop for the controller. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{get\+Name}} ()
+\begin{DoxyCompactList}\small\item\em Get the name of this controller. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classrobot__controllers_1_1Controller_ac527e1ae39519d5da149b78d79a37763}{get\+Type}} ()
+\begin{DoxyCompactList}\small\item\em Get the type of this controller. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classrobot__controllers_1_1Controller_a9b55bc2d5f95ef80dbf05878b7163fc0}{get\+Commanded\+Names}} ()=0
+\begin{DoxyCompactList}\small\item\em Get the names of joints/controllers which this controller commands. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classrobot__controllers_1_1Controller_acb21ed7e8c391eb7151a7072416b4987}{get\+Claimed\+Names}} ()=0
+\begin{DoxyCompactList}\small\item\em Get the names of joints/controllers which this controller exclusively claims. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classrobot__controllers_1_1Controller_ab6092a8e3771bfb57ec5ab78e1daa555}{name\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for a controller. Is derived from a \mbox{\hyperlink{classrobot__controllers_1_1Handle}{Handle}}, so that controllers can be passed from \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager_a3b8f41c4cead191f21df92d532d3ed06}{Controller\+Manager\+::get\+Handle()}}, thus allowing controllers to access other controllers (to stack their commands. 
+
+Definition at line 66 of file controller.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_a6382c96c78d9555ca3eaa6e3d59d18c7}\label{classrobot__controllers_1_1Controller_a6382c96c78d9555ca3eaa6e3d59d18c7}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!Controller@{Controller}}
+\index{Controller@{Controller}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{Controller()}{Controller()}}
+{\footnotesize\ttfamily robot\+\_\+controllers\+::\+Controller\+::\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor, does almost nothing, all setup is done in \mbox{\hyperlink{classrobot__controllers_1_1Controller_ac1b7a94badc6c8c4f22770fb027845a0}{init()}}. 
+
+
+
+Definition at line 72 of file controller.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{73   \{}
+\DoxyCodeLine{74   \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_af69debf2fd8fc162a5961cb9fe6f5741}\label{classrobot__controllers_1_1Controller_af69debf2fd8fc162a5961cb9fe6f5741}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!````~Controller@{$\sim$Controller}}
+\index{````~Controller@{$\sim$Controller}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{$\sim$Controller()}{~Controller()}}
+{\footnotesize\ttfamily virtual robot\+\_\+controllers\+::\+Controller\+::$\sim$\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Ensure proper cleanup with virtual destructor. 
+
+
+
+Definition at line 77 of file controller.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{78   \{}
+\DoxyCodeLine{79   \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_acb21ed7e8c391eb7151a7072416b4987}\label{classrobot__controllers_1_1Controller_acb21ed7e8c391eb7151a7072416b4987}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!getClaimedNames@{getClaimedNames}}
+\index{getClaimedNames@{getClaimedNames}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{getClaimedNames()}{getClaimedNames()}}
+{\footnotesize\ttfamily virtual std\+::vector$<$std\+::string$>$ robot\+\_\+controllers\+::\+Controller\+::get\+Claimed\+Names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the names of joints/controllers which this controller exclusively claims. 
+
+
+
+Implemented in \mbox{\hyperlink{classrobot__controllers_1_1CartesianTwistController_a3cf57cdd84fada86308fd0715fbd8820}{robot\+\_\+controllers\+::\+Cartesian\+Twist\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianPoseController_af2aca93a774e8f77f18b92efb89525aa}{robot\+\_\+controllers\+::\+Cartesian\+Pose\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianWrenchController_adc253d8ff854dae755a18fdacbaef36b}{robot\+\_\+controllers\+::\+Cartesian\+Wrench\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_af68ca6b3e4cc9a961f6e8b7ded33d4bf}{robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1PointHeadController_a32612e8dac88534a68254cc14f54f0e5}{robot\+\_\+controllers\+::\+Point\+Head\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ParallelGripperController_abb759a9658422520ad5c1f0dbb041474}{robot\+\_\+controllers\+::\+Parallel\+Gripper\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ScaledMimicController_a31f18a9d4f72d4ad784b5ec089fc36bf}{robot\+\_\+controllers\+::\+Scaled\+Mimic\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a92937b8422b1ae49c5b6bf79b089ca4b}{robot\+\_\+controllers\+::\+Gravity\+Compensation}}, and \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a57876c932ba03d8b6e8e42bf7560124a}{robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller}}.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_a9b55bc2d5f95ef80dbf05878b7163fc0}\label{classrobot__controllers_1_1Controller_a9b55bc2d5f95ef80dbf05878b7163fc0}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!getCommandedNames@{getCommandedNames}}
+\index{getCommandedNames@{getCommandedNames}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{getCommandedNames()}{getCommandedNames()}}
+{\footnotesize\ttfamily virtual std\+::vector$<$std\+::string$>$ robot\+\_\+controllers\+::\+Controller\+::get\+Commanded\+Names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the names of joints/controllers which this controller commands. 
+
+
+
+Implemented in \mbox{\hyperlink{classrobot__controllers_1_1CartesianTwistController_a6ff6554e52c251c1a0c682e31c387a17}{robot\+\_\+controllers\+::\+Cartesian\+Twist\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianPoseController_a6693a72ab9fccccdaa06f7855cf53eb9}{robot\+\_\+controllers\+::\+Cartesian\+Pose\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianWrenchController_a5d90a1edbc650074bdbaaf420af30314}{robot\+\_\+controllers\+::\+Cartesian\+Wrench\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a2bbe39e9d1742d0bc4f6e1cd1535f5fc}{robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1PointHeadController_a78d8a3c2ce35115e6e259bb35ddaea22}{robot\+\_\+controllers\+::\+Point\+Head\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ParallelGripperController_abca8259d584e0004c694950fa48ab209}{robot\+\_\+controllers\+::\+Parallel\+Gripper\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ScaledMimicController_aaea7d12b4f4b11d9fd48124f5583e751}{robot\+\_\+controllers\+::\+Scaled\+Mimic\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a9dc0ceafb24aea28a3721639ec0081dc}{robot\+\_\+controllers\+::\+Gravity\+Compensation}}, and \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ace7193138d924c565b4aac42a3b0f40e}{robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller}}.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}\label{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!getName@{getName}}
+\index{getName@{getName}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily std\+::string robot\+\_\+controllers\+::\+Controller\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the name of this controller. 
+
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Handle_a652f2738eecfafe7d189dc23cc419fc3}{robot\+\_\+controllers\+::\+Handle}}.
+
+
+
+Definition at line 129 of file controller.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{130   \{}
+\DoxyCodeLine{131     \textcolor{keywordflow}{return} \mbox{\hyperlink{classrobot__controllers_1_1Controller_ab6092a8e3771bfb57ec5ab78e1daa555}{name\_}};}
+\DoxyCodeLine{132   \}}
+
+\end{DoxyCode}
+
+
+References name\+\_\+.
+
+
+
+Referenced by robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::execute\+Cb(), robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::reset(), robot\+\_\+controllers\+::\+Cartesian\+Wrench\+Controller\+::start(), robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::update(), and robot\+\_\+controllers\+::\+Cartesian\+Twist\+Controller\+::update().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_ac527e1ae39519d5da149b78d79a37763}\label{classrobot__controllers_1_1Controller_ac527e1ae39519d5da149b78d79a37763}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!getType@{getType}}
+\index{getType@{getType}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily virtual std\+::string robot\+\_\+controllers\+::\+Controller\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the type of this controller. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classrobot__controllers_1_1CartesianTwistController_a508ef3995116021f24d24964cd7787a5}{robot\+\_\+controllers\+::\+Cartesian\+Twist\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianPoseController_a728a799fe0148778972870378088e49a}{robot\+\_\+controllers\+::\+Cartesian\+Pose\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianWrenchController_abb41b351419a44d0649539353c3f644d}{robot\+\_\+controllers\+::\+Cartesian\+Wrench\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a7a61ba77ae6b377bef6b8b2cf722ccef}{robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1PointHeadController_aa8486e1a5439471068bcb76ce23390ff}{robot\+\_\+controllers\+::\+Point\+Head\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ParallelGripperController_a2cad06684aa4fdc7aa1bed7180a5866c}{robot\+\_\+controllers\+::\+Parallel\+Gripper\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ScaledMimicController_a342acc3fe7e62323a08ceef60603c113}{robot\+\_\+controllers\+::\+Scaled\+Mimic\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a9d6e5cb129a4edf247c6b10de3855244}{robot\+\_\+controllers\+::\+Gravity\+Compensation}}, and \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5da0fca950cfedfd5c5f24eb64a1e006}{robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller}}.
+
+
+
+Definition at line 135 of file controller.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{136   \{}
+\DoxyCodeLine{137     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"UnknownType"};}
+\DoxyCodeLine{138   \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_ac1b7a94badc6c8c4f22770fb027845a0}\label{classrobot__controllers_1_1Controller_ac1b7a94badc6c8c4f22770fb027845a0}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!init@{init}}
+\index{init@{init}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily virtual int robot\+\_\+controllers\+::\+Controller\+::init (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{nh,  }\item[{\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} $\ast$}]{manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Initialize the controller and any required data structures. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nh} & Node handle for this controller. \\
+\hline
+{\em manager} & The controller manager instance, this is needed for the controller to get information about joints, etc. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if succesfully configured, negative values are error codes. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classrobot__controllers_1_1CartesianTwistController_a91f88e338d0c49f6f6023e6246680778}{robot\+\_\+controllers\+::\+Cartesian\+Twist\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianPoseController_ab0eb6b856efc9a1daec7561493d1b00a}{robot\+\_\+controllers\+::\+Cartesian\+Pose\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianWrenchController_ab4ed45e06174ffb1f39d1a8278fc9a90}{robot\+\_\+controllers\+::\+Cartesian\+Wrench\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_ac82933539b7ec62f030ce51df0a3fa2a}{robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1PointHeadController_acd378486a05ac394cdc8991851f60719}{robot\+\_\+controllers\+::\+Point\+Head\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ParallelGripperController_ace8af6a7707db63197e5cff874af3f2e}{robot\+\_\+controllers\+::\+Parallel\+Gripper\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ScaledMimicController_a204e7317e7893d4d756c3e0dd718fdde}{robot\+\_\+controllers\+::\+Scaled\+Mimic\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a22075b75a8c9994333c9ed9108818e7b}{robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller}}, and \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a4ed283a6d94d4a68dd3e845871303bdd}{robot\+\_\+controllers\+::\+Gravity\+Compensation}}.
+
+
+
+Definition at line 88 of file controller.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{89   \{}
+\DoxyCodeLine{90     \mbox{\hyperlink{classrobot__controllers_1_1Controller_ab6092a8e3771bfb57ec5ab78e1daa555}{name\_}} = nh.getNamespace();}
+\DoxyCodeLine{91     \textcolor{comment}{// remove leading slash}}
+\DoxyCodeLine{92     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1Controller_ab6092a8e3771bfb57ec5ab78e1daa555}{name\_}}.at(0) == \textcolor{charliteral}{'/'})}
+\DoxyCodeLine{93       \mbox{\hyperlink{classrobot__controllers_1_1Controller_ab6092a8e3771bfb57ec5ab78e1daa555}{name\_}}.erase(0, 1);}
+\DoxyCodeLine{94     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{95   \}}
+
+\end{DoxyCode}
+
+
+References name\+\_\+.
+
+
+
+Referenced by robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::init().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1Controller_ac1b7a94badc6c8c4f22770fb027845a0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_af5170a159c210de2bcb20b89531d5e49}\label{classrobot__controllers_1_1Controller_af5170a159c210de2bcb20b89531d5e49}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!reset@{reset}}
+\index{reset@{reset}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Controller\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Cleanly reset the controller to it\textquotesingle{}s initial state. Some controllers may choose to stop themselves. This is mainly used in the case of the the robot exiting some fault condition. 
+
+\begin{DoxyReturn}{Returns}
+True if successfully reset, false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classrobot__controllers_1_1CartesianTwistController_a22156cb9c9f873073cb90a39bc7f1dae}{robot\+\_\+controllers\+::\+Cartesian\+Twist\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianPoseController_abc3cc7cf3ed0a11c090c4356ab24adf5}{robot\+\_\+controllers\+::\+Cartesian\+Pose\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianWrenchController_aab62d1cc6ec953ebe6d5e479051a6380}{robot\+\_\+controllers\+::\+Cartesian\+Wrench\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a84a70fe9f485591ef9815c10b0df098c}{robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1PointHeadController_a44b4b8d9807c73c42aec798d20878d2d}{robot\+\_\+controllers\+::\+Point\+Head\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ParallelGripperController_a1d8fbee531ce77a677658c2799a3a440}{robot\+\_\+controllers\+::\+Parallel\+Gripper\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ScaledMimicController_a18e950eaa3daca9b9a9ef0ed72796115}{robot\+\_\+controllers\+::\+Scaled\+Mimic\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_af71261e6935f41a78e3c1884cb5c8bcc}{robot\+\_\+controllers\+::\+Gravity\+Compensation}}, and \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_af5840ca1c92381be32cadca2764c7769}{robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller}}.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_a781e023ddefd3a60fd2c47d68838016b}\label{classrobot__controllers_1_1Controller_a781e023ddefd3a60fd2c47d68838016b}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!start@{start}}
+\index{start@{start}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Controller\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Attempt to start the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. 
+
+\begin{DoxyReturn}{Returns}
+True if successfully started, false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classrobot__controllers_1_1CartesianTwistController_a486f731e7030142ff7e978fc5d4074c4}{robot\+\_\+controllers\+::\+Cartesian\+Twist\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianPoseController_a620cc466fb2926eec0f545ab07ab57d4}{robot\+\_\+controllers\+::\+Cartesian\+Pose\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianWrenchController_a1980462c6aa6417fa341b3bb63854545}{robot\+\_\+controllers\+::\+Cartesian\+Wrench\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a6ded85e20b87068103ea99189259c384}{robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1PointHeadController_a1067c29d13d431c980f3d2bd7c327005}{robot\+\_\+controllers\+::\+Point\+Head\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ParallelGripperController_a1c3c8719f2ea822156f89cac8b84c68b}{robot\+\_\+controllers\+::\+Parallel\+Gripper\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ScaledMimicController_a9f1a2afd6a93edcc3de74b1355a1345a}{robot\+\_\+controllers\+::\+Scaled\+Mimic\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ac6bf93a3a4c56fe2deba84e909e34466}{robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller}}, and \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_ac514f0f8402a6450a3d50d0fddf4fb3b}{robot\+\_\+controllers\+::\+Gravity\+Compensation}}.
+
+
+
+Referenced by tuck\+\_\+arm.\+Move\+It\+Thread\+::\+\_\+\+\_\+init\+\_\+\+\_\+().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1Controller_a781e023ddefd3a60fd2c47d68838016b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_a64d4f0032496c26c0fa788a91bc0b466}\label{classrobot__controllers_1_1Controller_a64d4f0032496c26c0fa788a91bc0b466}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!stop@{stop}}
+\index{stop@{stop}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Controller\+::stop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbool}{bool}}}]{force }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Attempt to stop the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em force} & Should we force the controller to stop? Some controllers may wish to continue running until they absolutely have to stop. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successfully stopped, false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classrobot__controllers_1_1CartesianTwistController_ac46d83696091b627e7c8cdaec52d7caa}{robot\+\_\+controllers\+::\+Cartesian\+Twist\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianPoseController_ae0a61f11e0e0d2e9cb96ea91002782f2}{robot\+\_\+controllers\+::\+Cartesian\+Pose\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianWrenchController_a9e6e83b2cdf5106e585ba8e6fa1e5f6f}{robot\+\_\+controllers\+::\+Cartesian\+Wrench\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_a3ad0b9414582b668bd4650741ee3d2d8}{robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1PointHeadController_a7bf48208e3295227e67272fad2fb22ac}{robot\+\_\+controllers\+::\+Point\+Head\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ParallelGripperController_a29eb0eb738d74478fca0de6a74493ad7}{robot\+\_\+controllers\+::\+Parallel\+Gripper\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ScaledMimicController_a6b8a6415dd7c2557db9953717d0702ff}{robot\+\_\+controllers\+::\+Scaled\+Mimic\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a6f9fcc135a1e4513ffd4c5419869ad5f}{robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller}}, and \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_a1b72065ae2540303f0af8a98541d41f9}{robot\+\_\+controllers\+::\+Gravity\+Compensation}}.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_ab079e1d49a8afc4872049680dd950858}\label{classrobot__controllers_1_1Controller_ab079e1d49a8afc4872049680dd950858}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!update@{update}}
+\index{update@{update}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual void robot\+\_\+controllers\+::\+Controller\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{time,  }\item[{const ros\+::\+Duration \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+This is the update loop for the controller. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The system time. \\
+\hline
+{\em dt} & The timestep since last call to update. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classrobot__controllers_1_1GravityCompensation_afeb1a4a9f065022e38c08f5080843244}{robot\+\_\+controllers\+::\+Gravity\+Compensation}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianTwistController_acdbfef5b74e90d1c4d375897a4d1cac9}{robot\+\_\+controllers\+::\+Cartesian\+Twist\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianPoseController_a119084dd1d7e52d456519627a5f52b34}{robot\+\_\+controllers\+::\+Cartesian\+Pose\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1CartesianWrenchController_a12c433287f8433a7f8b62b6c02285118}{robot\+\_\+controllers\+::\+Cartesian\+Wrench\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1DiffDriveBaseController_abb4ba1b08e6d76edd3a7f98500f23c2b}{robot\+\_\+controllers\+::\+Diff\+Drive\+Base\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1PointHeadController_a6877c5cfaa6c2fe0de94a2f3452b8274}{robot\+\_\+controllers\+::\+Point\+Head\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ParallelGripperController_a95a664fb1ccb0e99225ad40e9cd8c8da}{robot\+\_\+controllers\+::\+Parallel\+Gripper\+Controller}}, \mbox{\hyperlink{classrobot__controllers_1_1ScaledMimicController_a3dcf429802fc1aa7a2ae1ae493ceadf1}{robot\+\_\+controllers\+::\+Scaled\+Mimic\+Controller}}, and \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_acd845a6ace37822ce84c979c74c51403}{robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1Controller_ab6092a8e3771bfb57ec5ab78e1daa555}\label{classrobot__controllers_1_1Controller_ab6092a8e3771bfb57ec5ab78e1daa555}} 
+\index{robot\_controllers::Controller@{robot\_controllers::Controller}!name\_@{name\_}}
+\index{name\_@{name\_}!robot\_controllers::Controller@{robot\_controllers::Controller}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily std\+::string robot\+\_\+controllers\+::\+Controller\+::name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 147 of file controller.\+h.
+
+
+
+Referenced by get\+Name(), and init().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/robot\+\_\+controllers/robot\+\_\+controllers\+\_\+interface/include/robot\+\_\+controllers\+\_\+interface/\mbox{\hyperlink{controller_8h}{controller.\+h}}\end{DoxyCompactItemize}

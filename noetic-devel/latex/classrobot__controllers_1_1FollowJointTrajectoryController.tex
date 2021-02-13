@@ -1,0 +1,1328 @@
+\hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController}{}\doxysection{robot\+\_\+controllers\+::Follow\+Joint\+Trajectory\+Controller Class Reference}
+\label{classrobot__controllers_1_1FollowJointTrajectoryController}\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+
+
+This R\+OS interface implements a Follow\+Joint\+Trajectory\+Action interface for controlling (primarily) robot arms.  
+
+
+
+
+{\ttfamily \#include $<$follow\+\_\+joint\+\_\+trajectory.\+h$>$}
+
+
+
+Inheritance diagram for robot\+\_\+controllers\+::Follow\+Joint\+Trajectory\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classrobot__controllers_1_1FollowJointTrajectoryController__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for robot\+\_\+controllers\+::Follow\+Joint\+Trajectory\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1FollowJointTrajectoryController__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aa4adff1b4fb7a19aadf98e1f8bc95eba}{Follow\+Joint\+Trajectory\+Controller}} ()
+\item 
+virtual \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a223e8ac466b99e2e253e873f9842cf08}{$\sim$\+Follow\+Joint\+Trajectory\+Controller}} ()
+\item 
+virtual int \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a22075b75a8c9994333c9ed9108818e7b}{init}} (ros\+::\+Node\+Handle \&nh, \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} $\ast$manager)
+\begin{DoxyCompactList}\small\item\em Initialize the controller and any required data structures. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ac6bf93a3a4c56fe2deba84e909e34466}{start}} ()
+\begin{DoxyCompactList}\small\item\em Attempt to start the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a6f9fcc135a1e4513ffd4c5419869ad5f}{stop}} (\mbox{\hyperlink{classbool}{bool}} force)
+\begin{DoxyCompactList}\small\item\em Attempt to stop the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_af5840ca1c92381be32cadca2764c7769}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Cleanly reset the controller to it\textquotesingle{}s initial state. Some controllers may choose to stop themselves. This is mainly used in the case of the the robot exiting some fault condition. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_acd845a6ace37822ce84c979c74c51403}{update}} (const ros\+::\+Time \&now, const ros\+::\+Duration \&dt)
+\begin{DoxyCompactList}\small\item\em This is the update loop for the controller. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5da0fca950cfedfd5c5f24eb64a1e006}{get\+Type}} ()
+\begin{DoxyCompactList}\small\item\em Get the type of this controller. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ace7193138d924c565b4aac42a3b0f40e}{get\+Commanded\+Names}} ()
+\begin{DoxyCompactList}\small\item\em Get the names of joints/controllers which this controller commands. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a57876c932ba03d8b6e8e42bf7560124a}{get\+Claimed\+Names}} ()
+\begin{DoxyCompactList}\small\item\em Get the names of joints/controllers which this controller exclusively claims. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef actionlib\+::\+Simple\+Action\+Server$<$ control\+\_\+msgs\+::\+Follow\+Joint\+Trajectory\+Action $>$ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a6c33b2ed3f28d7a48eeedd0f15451883}{server\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae22514964d54e9392cb6160a68589b57}{execute\+Cb}} (const control\+\_\+msgs\+::\+Follow\+Joint\+Trajectory\+Goal\+Const\+Ptr \&goal)
+\begin{DoxyCompactList}\small\item\em Callback for goal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint}{Trajectory\+Point}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_add7d1a58d09d0e9de1ce7e65caff2c3d}{get\+Point\+From\+Current}} (\mbox{\hyperlink{classbool}{bool}} incl\+\_\+vel, \mbox{\hyperlink{classbool}{bool}} incl\+\_\+acc, \mbox{\hyperlink{classbool}{bool}} zero\+\_\+vel)
+\begin{DoxyCompactList}\small\item\em Get a trajectory point from the current position/velocity/acceleration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5bd6e5733dc845d69fd6671378fa7d8f}{initialized\+\_\+}}
+\item 
+\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} $\ast$ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}{manager\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{namespacerobot__controllers_a9c7cc37a8e0d295ea24c75cbb656ecfa}{Joint\+Handle\+Ptr}} $>$ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\+\_\+}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae9a86d9ed87c4f61a6fb29c8040a54fb}{joint\+\_\+names\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classbool}{bool}} $>$ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aadba351ef2cb4ea10de39dc756a82060}{continuous\+\_\+}}
+\item 
+boost\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a6c33b2ed3f28d7a48eeedd0f15451883}{server\+\_\+t}} $>$ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\+\_\+}}
+\item 
+boost\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classrobot__controllers_1_1TrajectorySampler}{Trajectory\+Sampler}} $>$ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}{sampler\+\_\+}}
+\item 
+boost\+::mutex \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aed66999a621086d0b97e9c01bd764ec1}{sampler\+\_\+mutex\+\_\+}}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a014f02099977e6c724ab06a9de249af0}{stop\+\_\+with\+\_\+action\+\_\+}}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a31a675e3bd98ecc7583ed37f538aba0a}{stop\+\_\+on\+\_\+path\+\_\+violation\+\_\+}}
+\item 
+\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint}{Trajectory\+Point}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ac7949dd64878b63195d71831369e66b0}{last\+\_\+sample\+\_\+}}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ab589fa8064daa6cae9fd7d5918860d5b}{preempted\+\_\+}}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae60bd78568416e3b03e4b8a28f742167}{has\+\_\+path\+\_\+tolerance\+\_\+}}
+\item 
+\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint}{Trajectory\+Point}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\+\_\+tolerance\+\_\+}}
+\item 
+\mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a820b65a94d28d1b49f7e912daad2c9af}{has\+\_\+goal\+\_\+tolerance\+\_\+}}
+\item 
+\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint}{Trajectory\+Point}} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\+\_\+tolerance\+\_\+}}
+\item 
+double \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a625c0202ee4e5db3ee045aff9d67cd77}{goal\+\_\+time\+\_\+tolerance\+\_\+}}
+\item 
+control\+\_\+msgs\+::\+Follow\+Joint\+Trajectory\+Feedback \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\+\_\+}}
+\item 
+ros\+::\+Time \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5a7c2185bfcc9f50737e1a25f1de6db8}{goal\+\_\+time}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This R\+OS interface implements a Follow\+Joint\+Trajectory\+Action interface for controlling (primarily) robot arms. 
+
+Definition at line 98 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a6c33b2ed3f28d7a48eeedd0f15451883}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a6c33b2ed3f28d7a48eeedd0f15451883}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!server\_t@{server\_t}}
+\index{server\_t@{server\_t}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{server\_t}{server\_t}}
+{\footnotesize\ttfamily typedef actionlib\+::\+Simple\+Action\+Server$<$control\+\_\+msgs\+::\+Follow\+Joint\+Trajectory\+Action$>$ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a6c33b2ed3f28d7a48eeedd0f15451883}{robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::server\+\_\+t}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 100 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_aa4adff1b4fb7a19aadf98e1f8bc95eba}\label{classrobot__controllers_1_1FollowJointTrajectoryController_aa4adff1b4fb7a19aadf98e1f8bc95eba}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!FollowJointTrajectoryController@{FollowJointTrajectoryController}}
+\index{FollowJointTrajectoryController@{FollowJointTrajectoryController}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{FollowJointTrajectoryController()}{FollowJointTrajectoryController()}}
+{\footnotesize\ttfamily robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::\+Follow\+Joint\+Trajectory\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 48 of file follow\+\_\+joint\+\_\+trajectory.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{48                                                                  :}
+\DoxyCodeLine{49     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5bd6e5733dc845d69fd6671378fa7d8f}{initialized\_}}(\textcolor{keyword}{false})}
+\DoxyCodeLine{50 \{}
+\DoxyCodeLine{51 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a223e8ac466b99e2e253e873f9842cf08}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a223e8ac466b99e2e253e873f9842cf08}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!````~FollowJointTrajectoryController@{$\sim$FollowJointTrajectoryController}}
+\index{````~FollowJointTrajectoryController@{$\sim$FollowJointTrajectoryController}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{$\sim$FollowJointTrajectoryController()}{~FollowJointTrajectoryController()}}
+{\footnotesize\ttfamily virtual robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::$\sim$\+Follow\+Joint\+Trajectory\+Controller (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Definition at line 104 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_ae22514964d54e9392cb6160a68589b57}\label{classrobot__controllers_1_1FollowJointTrajectoryController_ae22514964d54e9392cb6160a68589b57}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!executeCb@{executeCb}}
+\index{executeCb@{executeCb}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{executeCb()}{executeCb()}}
+{\footnotesize\ttfamily void robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::execute\+Cb (\begin{DoxyParamCaption}\item[{const control\+\_\+msgs\+::\+Follow\+Joint\+Trajectory\+Goal\+Const\+Ptr \&}]{goal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Callback for goal. 
+
+
+
+Definition at line 344 of file follow\+\_\+joint\+\_\+trajectory.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{345 \{}
+\DoxyCodeLine{346   control\_msgs::FollowJointTrajectoryResult \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}};}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5bd6e5733dc845d69fd6671378fa7d8f}{initialized\_}})}
+\DoxyCodeLine{349   \{}
+\DoxyCodeLine{350     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Controller is not initialized."});}
+\DoxyCodeLine{351     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{352   \}}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{354   \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>trajectory.points.empty())}
+\DoxyCodeLine{355   \{}
+\DoxyCodeLine{356     \textcolor{comment}{// Stop}}
+\DoxyCodeLine{357     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}{manager\_}}-\/>\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager_a0bc70bc7e49bc48322e569186e25791f}{requestStop}}(\mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{getName}}());}
+\DoxyCodeLine{358     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{359   \}}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{361   \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>trajectory.joint\_names.size() != \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size())}
+\DoxyCodeLine{362   \{}
+\DoxyCodeLine{363     \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.error\_code = control\_msgs::FollowJointTrajectoryResult::INVALID\_JOINTS;}
+\DoxyCodeLine{364     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Trajectory goal size does not match controlled joints size."});}
+\DoxyCodeLine{365     ROS\_ERROR(\textcolor{stringliteral}{"Trajectory goal size does not match controlled joints size."});}
+\DoxyCodeLine{366     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{367   \}}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{369   Trajectory new\_trajectory;}
+\DoxyCodeLine{370   Trajectory executable\_trajectory;}
+\DoxyCodeLine{371   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5a7c2185bfcc9f50737e1a25f1de6db8}{goal\_time}} = \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>trajectory.header.stamp;}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373   \textcolor{comment}{// Make a trajectory from our message}}
+\DoxyCodeLine{374   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespacerobot__controllers_a8215470f02696cad051c9de8f32f1093}{trajectoryFromMsg}}(\mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>trajectory, \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae9a86d9ed87c4f61a6fb29c8040a54fb}{joint\_names\_}}, \&new\_trajectory))}
+\DoxyCodeLine{375   \{}
+\DoxyCodeLine{376     \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.error\_code = control\_msgs::FollowJointTrajectoryResult::INVALID\_JOINTS;}
+\DoxyCodeLine{377     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Trajectory goal does not match controlled joints"});}
+\DoxyCodeLine{378     ROS\_ERROR(\textcolor{stringliteral}{"Trajectory goal does not match controlled joints"});}
+\DoxyCodeLine{379     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{380   \}}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382   \textcolor{comment}{// If preempted, need to splice on things together}}
+\DoxyCodeLine{383   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ab589fa8064daa6cae9fd7d5918860d5b}{preempted\_}})}
+\DoxyCodeLine{384   \{}
+\DoxyCodeLine{385     \textcolor{comment}{// If the sampler had a large trajectory, we may just be cutting into it}}
+\DoxyCodeLine{386     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}{sampler\_}} \&\& (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}{sampler\_}}-\/>getTrajectory().size() > 2))}
+\DoxyCodeLine{387     \{}
+\DoxyCodeLine{388       \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespacerobot__controllers_a228ffe003a8499f637051d407aaaf351}{spliceTrajectories}}(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}{sampler\_}}-\/>getTrajectory(),}
+\DoxyCodeLine{389                               new\_trajectory,}
+\DoxyCodeLine{390                               ros::Time::now().toSec(),}
+\DoxyCodeLine{391                               \&executable\_trajectory))}
+\DoxyCodeLine{392       \{}
+\DoxyCodeLine{393         \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.error\_code = control\_msgs::FollowJointTrajectoryResult::INVALID\_JOINTS;}
+\DoxyCodeLine{394         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Unable to splice trajectory"});}
+\DoxyCodeLine{395         ROS\_ERROR(\textcolor{stringliteral}{"Unable to splice trajectory"});}
+\DoxyCodeLine{396         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{397       \}}
+\DoxyCodeLine{398     \}}
+\DoxyCodeLine{399     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{400     \{}
+\DoxyCodeLine{401       \textcolor{comment}{// Previous trajectory was only 2 points, use last\_sample + new trajectory}}
+\DoxyCodeLine{402       Trajectory \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}};}
+\DoxyCodeLine{403       \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}.points.push\_back(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ac7949dd64878b63195d71831369e66b0}{last\_sample\_}});}
+\DoxyCodeLine{404       \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespacerobot__controllers_a228ffe003a8499f637051d407aaaf351}{spliceTrajectories}}(\mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}},}
+\DoxyCodeLine{405                               new\_trajectory,}
+\DoxyCodeLine{406                               0.0, \textcolor{comment}{/* take all points */}}
+\DoxyCodeLine{407                               \&executable\_trajectory))}
+\DoxyCodeLine{408       \{}
+\DoxyCodeLine{409         \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.error\_code = control\_msgs::FollowJointTrajectoryResult::INVALID\_JOINTS;}
+\DoxyCodeLine{410         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Unable to splice trajectory"});}
+\DoxyCodeLine{411         ROS\_ERROR(\textcolor{stringliteral}{"Unable to splice trajectory"});}
+\DoxyCodeLine{412         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{413       \}}
+\DoxyCodeLine{414     \}}
+\DoxyCodeLine{415   \}}
+\DoxyCodeLine{416   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{417   \{}
+\DoxyCodeLine{418     \textcolor{keywordflow}{if} (new\_trajectory.size() > 1)}
+\DoxyCodeLine{419     \{}
+\DoxyCodeLine{420       \textcolor{comment}{// use the generated trajectory}}
+\DoxyCodeLine{421       executable\_trajectory = new\_trajectory;}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423       \textcolor{comment}{// if this hasn't started yet or if the header stamp is in the future,}}
+\DoxyCodeLine{424       \textcolor{comment}{// need to insert current position}}
+\DoxyCodeLine{425       \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>trajectory.points[0].time\_from\_start.toSec() > 0.0 ||}
+\DoxyCodeLine{426           executable\_trajectory.points[0].time > ros::Time::now().toSec())}
+\DoxyCodeLine{427       \{}
+\DoxyCodeLine{428         executable\_trajectory.points.insert(}
+\DoxyCodeLine{429           executable\_trajectory.points.begin(),}
+\DoxyCodeLine{430           \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_add7d1a58d09d0e9de1ce7e65caff2c3d}{getPointFromCurrent}}(new\_trajectory.points[0].qd.size() > 0,}
+\DoxyCodeLine{431                               new\_trajectory.points[0].qdd.size() > 0,}
+\DoxyCodeLine{432                               \textcolor{keyword}{true}));}
+\DoxyCodeLine{433       \}}
+\DoxyCodeLine{434     \}}
+\DoxyCodeLine{435     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{436     \{}
+\DoxyCodeLine{437       \textcolor{comment}{// A single point, with nothing in the queue!}}
+\DoxyCodeLine{438       executable\_trajectory.points.push\_back(}
+\DoxyCodeLine{439           \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_add7d1a58d09d0e9de1ce7e65caff2c3d}{getPointFromCurrent}}(new\_trajectory.points[0].qd.size() > 0,}
+\DoxyCodeLine{440                               new\_trajectory.points[0].qdd.size() > 0,}
+\DoxyCodeLine{441                               \textcolor{keyword}{true}));}
+\DoxyCodeLine{442       executable\_trajectory.points.push\_back(new\_trajectory.points[0]);}
+\DoxyCodeLine{443     \}}
+\DoxyCodeLine{444   \}}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{446   \textcolor{comment}{// Windup executable trajectory so spline is smooth}}
+\DoxyCodeLine{447   \mbox{\hyperlink{namespacerobot__controllers_ab4ed5e5990bf69181d259b8a96d72d52}{windupTrajectory}}(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aadba351ef2cb4ea10de39dc756a82060}{continuous\_}}, executable\_trajectory);}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449   \textcolor{comment}{// Create trajectory sampler}}
+\DoxyCodeLine{450   \{}
+\DoxyCodeLine{451     boost::mutex::scoped\_lock lock(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aed66999a621086d0b97e9c01bd764ec1}{sampler\_mutex\_}});}
+\DoxyCodeLine{452     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}{sampler\_}}.reset(\textcolor{keyword}{new} SplineTrajectorySampler(executable\_trajectory));}
+\DoxyCodeLine{453   \}}
+\DoxyCodeLine{454 }
+\DoxyCodeLine{455   \textcolor{comment}{// Convert the path tolerances into a more usable form}}
+\DoxyCodeLine{456   \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>path\_tolerance.size() == \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size())}
+\DoxyCodeLine{457   \{}
+\DoxyCodeLine{458     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae60bd78568416e3b03e4b8a28f742167}{has\_path\_tolerance\_}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{459     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{460     \{}
+\DoxyCodeLine{461       \textcolor{comment}{// Find corresponding indices between path\_tolerance and joints}}
+\DoxyCodeLine{462       \textcolor{keywordtype}{int} index = -\/1;}
+\DoxyCodeLine{463       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>path\_tolerance.size(); ++i)}
+\DoxyCodeLine{464       \{}
+\DoxyCodeLine{465         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}[j]-\/>\mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{getName}}() == \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>path\_tolerance[i].name)}
+\DoxyCodeLine{466         \{}
+\DoxyCodeLine{467           index = i;}
+\DoxyCodeLine{468           \textcolor{keywordflow}{break};}
+\DoxyCodeLine{469         \}}
+\DoxyCodeLine{470       \}}
+\DoxyCodeLine{471       \textcolor{keywordflow}{if} (index == -\/1)}
+\DoxyCodeLine{472       \{}
+\DoxyCodeLine{473         \textcolor{comment}{// Every joint must have a tolerance and this one does not}}
+\DoxyCodeLine{474         \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.error\_code = control\_msgs::FollowJointTrajectoryResult::INVALID\_JOINTS;}
+\DoxyCodeLine{475         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Unable to convert path tolerances"});}
+\DoxyCodeLine{476         ROS\_ERROR(\textcolor{stringliteral}{"Unable to convert path tolerances"});}
+\DoxyCodeLine{477         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{478       \}}
+\DoxyCodeLine{479       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}[j] = \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>path\_tolerance[index].position;}
+\DoxyCodeLine{480       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_ae6471ff5bcaad7c3c8b116b4af12e0a0}{qd}}[j] = \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>path\_tolerance[index].velocity;}
+\DoxyCodeLine{481       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a4867a1ab07c8f575ce9cb5c42eb680c2}{qdd}}[j] = \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>path\_tolerance[index].acceleration;}
+\DoxyCodeLine{482     \}}
+\DoxyCodeLine{483   \}}
+\DoxyCodeLine{484   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{485   \{}
+\DoxyCodeLine{486     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae60bd78568416e3b03e4b8a28f742167}{has\_path\_tolerance\_}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{487   \}}
+\DoxyCodeLine{488 }
+\DoxyCodeLine{489   \textcolor{comment}{// Convert the goal tolerances into a more usable form}}
+\DoxyCodeLine{490   \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>goal\_tolerance.size() == \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size())}
+\DoxyCodeLine{491   \{}
+\DoxyCodeLine{492     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{493     \{}
+\DoxyCodeLine{494       \textcolor{comment}{// Find corresponding indices between goal\_tolerance and joints}}
+\DoxyCodeLine{495       \textcolor{keywordtype}{int} index = -\/1;}
+\DoxyCodeLine{496       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>goal\_tolerance.size(); ++i)}
+\DoxyCodeLine{497       \{}
+\DoxyCodeLine{498         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}[j]-\/>\mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{getName}}() == \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>goal\_tolerance[i].name)}
+\DoxyCodeLine{499         \{}
+\DoxyCodeLine{500           index = i;}
+\DoxyCodeLine{501           \textcolor{keywordflow}{break};}
+\DoxyCodeLine{502         \}}
+\DoxyCodeLine{503       \}}
+\DoxyCodeLine{504       \textcolor{keywordflow}{if} (index == -\/1)}
+\DoxyCodeLine{505       \{}
+\DoxyCodeLine{506         \textcolor{comment}{// Every joint must have a tolerance and this one does not}}
+\DoxyCodeLine{507         \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.error\_code = control\_msgs::FollowJointTrajectoryResult::INVALID\_JOINTS;}
+\DoxyCodeLine{508         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Unable to convert goal tolerances"});}
+\DoxyCodeLine{509         ROS\_ERROR(\textcolor{stringliteral}{"Unable to convert goal tolerances"});}
+\DoxyCodeLine{510         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{511       \}}
+\DoxyCodeLine{512       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}[j] = \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>goal\_tolerance[index].position;}
+\DoxyCodeLine{513       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_ae6471ff5bcaad7c3c8b116b4af12e0a0}{qd}}[j] = \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>goal\_tolerance[index].velocity;}
+\DoxyCodeLine{514       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a4867a1ab07c8f575ce9cb5c42eb680c2}{qdd}}[j] = \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>goal\_tolerance[index].acceleration;}
+\DoxyCodeLine{515     \}}
+\DoxyCodeLine{516   \}}
+\DoxyCodeLine{517   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{518   \{}
+\DoxyCodeLine{519     \textcolor{comment}{// Set defaults}}
+\DoxyCodeLine{520     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{521     \{}
+\DoxyCodeLine{522       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}[j] = 0.02;  \textcolor{comment}{// tolerance is same as PR2}}
+\DoxyCodeLine{523       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_ae6471ff5bcaad7c3c8b116b4af12e0a0}{qd}}[j] = 0.02;}
+\DoxyCodeLine{524       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a4867a1ab07c8f575ce9cb5c42eb680c2}{qdd}}[j] = 0.02;}
+\DoxyCodeLine{525     \}}
+\DoxyCodeLine{526   \}}
+\DoxyCodeLine{527   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a625c0202ee4e5db3ee045aff9d67cd77}{goal\_time\_tolerance\_}} = \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}-\/>goal\_time\_tolerance.toSec();}
+\DoxyCodeLine{528 }
+\DoxyCodeLine{529   ROS\_DEBUG(\textcolor{stringliteral}{"Executing new trajectory"});}
+\DoxyCodeLine{530 }
+\DoxyCodeLine{531   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}{manager\_}}-\/>\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager_a280fcfa78c20a84a0b902d74e7d40560}{requestStart}}(\mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{getName}}()) != 0)}
+\DoxyCodeLine{532   \{}
+\DoxyCodeLine{533     \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.error\_code = control\_msgs::FollowJointTrajectoryResult::GOAL\_TOLERANCE\_VIOLATED;}
+\DoxyCodeLine{534     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Cannot execute trajectory, unable to start controller."});}
+\DoxyCodeLine{535     ROS\_ERROR(\textcolor{stringliteral}{"Cannot execute trajectory, unable to start controller."});}
+\DoxyCodeLine{536     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{537   \}}
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ab589fa8064daa6cae9fd7d5918860d5b}{preempted\_}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{540   \textcolor{keywordflow}{while} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>isActive())}
+\DoxyCodeLine{541   \{}
+\DoxyCodeLine{542     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>isPreemptRequested())}
+\DoxyCodeLine{543     \{}
+\DoxyCodeLine{544       control\_msgs::FollowJointTrajectoryResult \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}};}
+\DoxyCodeLine{545       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setPreempted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Trajectory preempted"});}
+\DoxyCodeLine{546       ROS\_DEBUG(\textcolor{stringliteral}{"Trajectory preempted"});}
+\DoxyCodeLine{547       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ab589fa8064daa6cae9fd7d5918860d5b}{preempted\_}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{548       \textcolor{keywordflow}{break};}
+\DoxyCodeLine{549     \}}
+\DoxyCodeLine{550 }
+\DoxyCodeLine{551     \textcolor{comment}{// Publish feedback}}
+\DoxyCodeLine{552     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.header.stamp = ros::Time::now();}
+\DoxyCodeLine{553     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.desired.time\_from\_start = \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.header.stamp -\/ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5a7c2185bfcc9f50737e1a25f1de6db8}{goal\_time}};}
+\DoxyCodeLine{554     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.actual.time\_from\_start = \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.header.stamp -\/ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5a7c2185bfcc9f50737e1a25f1de6db8}{goal\_time}};}
+\DoxyCodeLine{555     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.error.time\_from\_start = \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.header.stamp -\/ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5a7c2185bfcc9f50737e1a25f1de6db8}{goal\_time}};}
+\DoxyCodeLine{556     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>publishFeedback(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}});}
+\DoxyCodeLine{557     ros::Duration(1/50.0).sleep();}
+\DoxyCodeLine{558   \}}
+\DoxyCodeLine{559 }
+\DoxyCodeLine{560   \{}
+\DoxyCodeLine{561     boost::mutex::scoped\_lock lock(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aed66999a621086d0b97e9c01bd764ec1}{sampler\_mutex\_}});}
+\DoxyCodeLine{562     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}{sampler\_}}.reset();}
+\DoxyCodeLine{563   \}}
+\DoxyCodeLine{564 }
+\DoxyCodeLine{565   \textcolor{comment}{// Stop this controller if desired (and not preempted)}}
+\DoxyCodeLine{566   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a014f02099977e6c724ab06a9de249af0}{stop\_with\_action\_}} \&\& !\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ab589fa8064daa6cae9fd7d5918860d5b}{preempted\_}})}
+\DoxyCodeLine{567     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}{manager\_}}-\/>\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager_a0bc70bc7e49bc48322e569186e25791f}{requestStop}}(\mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{getName}}());}
+\DoxyCodeLine{568 }
+\DoxyCodeLine{569   ROS\_DEBUG(\textcolor{stringliteral}{"Done executing trajectory"});}
+\DoxyCodeLine{570 \}}
+
+\end{DoxyCode}
+
+
+References continuous\+\_\+, feedback\+\_\+, robot\+\_\+controllers\+::\+Controller\+::get\+Name(), get\+Point\+From\+Current(), get\+\_\+controller\+\_\+state\+::goal, goal\+\_\+time, goal\+\_\+time\+\_\+tolerance\+\_\+, goal\+\_\+tolerance\+\_\+, has\+\_\+path\+\_\+tolerance\+\_\+, initialized\+\_\+, joint\+\_\+names\+\_\+, joints\+\_\+, last\+\_\+sample\+\_\+, manager\+\_\+, path\+\_\+tolerance\+\_\+, robot\+\_\+controllers\+::\+Trajectory\+::points, preempted\+\_\+, robot\+\_\+controllers\+::\+Trajectory\+Point\+::q, robot\+\_\+controllers\+::\+Trajectory\+Point\+::qd, robot\+\_\+controllers\+::\+Trajectory\+Point\+::qdd, robot\+\_\+controllers\+::\+Controller\+Manager\+::request\+Start(), robot\+\_\+controllers\+::\+Controller\+Manager\+::request\+Stop(), sick\+\_\+camera\+\_\+client\+::result, sampler\+\_\+, sampler\+\_\+mutex\+\_\+, server\+\_\+, robot\+\_\+controllers\+::\+Trajectory\+::size(), robot\+\_\+controllers\+::splice\+Trajectories(), stop\+\_\+with\+\_\+action\+\_\+, battery\+\_\+monitor\+\_\+node\+::t, robot\+\_\+controllers\+::trajectory\+From\+Msg(), and robot\+\_\+controllers\+::windup\+Trajectory().
+
+
+
+Referenced by init().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1FollowJointTrajectoryController_ae22514964d54e9392cb6160a68589b57_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1FollowJointTrajectoryController_ae22514964d54e9392cb6160a68589b57_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a57876c932ba03d8b6e8e42bf7560124a}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a57876c932ba03d8b6e8e42bf7560124a}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!getClaimedNames@{getClaimedNames}}
+\index{getClaimedNames@{getClaimedNames}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{getClaimedNames()}{getClaimedNames()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::get\+Claimed\+Names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the names of joints/controllers which this controller exclusively claims. 
+
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_acb21ed7e8c391eb7151a7072416b4987}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 612 of file follow\+\_\+joint\+\_\+trajectory.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{613 \{}
+\DoxyCodeLine{614   \textcolor{keywordflow}{return} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae9a86d9ed87c4f61a6fb29c8040a54fb}{joint\_names\_}};}
+\DoxyCodeLine{615 \}}
+
+\end{DoxyCode}
+
+
+References joint\+\_\+names\+\_\+.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_ace7193138d924c565b4aac42a3b0f40e}\label{classrobot__controllers_1_1FollowJointTrajectoryController_ace7193138d924c565b4aac42a3b0f40e}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!getCommandedNames@{getCommandedNames}}
+\index{getCommandedNames@{getCommandedNames}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{getCommandedNames()}{getCommandedNames()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::get\+Commanded\+Names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the names of joints/controllers which this controller commands. 
+
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_a9b55bc2d5f95ef80dbf05878b7163fc0}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 607 of file follow\+\_\+joint\+\_\+trajectory.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{608 \{}
+\DoxyCodeLine{609   \textcolor{keywordflow}{return} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae9a86d9ed87c4f61a6fb29c8040a54fb}{joint\_names\_}};}
+\DoxyCodeLine{610 \}}
+
+\end{DoxyCode}
+
+
+References joint\+\_\+names\+\_\+.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_add7d1a58d09d0e9de1ce7e65caff2c3d}\label{classrobot__controllers_1_1FollowJointTrajectoryController_add7d1a58d09d0e9de1ce7e65caff2c3d}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!getPointFromCurrent@{getPointFromCurrent}}
+\index{getPointFromCurrent@{getPointFromCurrent}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{getPointFromCurrent()}{getPointFromCurrent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint}{Trajectory\+Point}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::get\+Point\+From\+Current (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbool}{bool}}}]{incl\+\_\+vel,  }\item[{\mbox{\hyperlink{classbool}{bool}}}]{incl\+\_\+acc,  }\item[{\mbox{\hyperlink{classbool}{bool}}}]{zero\+\_\+vel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Get a trajectory point from the current position/velocity/acceleration. 
+
+
+
+Definition at line 572 of file follow\+\_\+joint\+\_\+trajectory.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{574 \{}
+\DoxyCodeLine{575   TrajectoryPoint point;}
+\DoxyCodeLine{576 }
+\DoxyCodeLine{577   point.q.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{578   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{579     point.q[j] = \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}[j]-\/>getPosition();}
+\DoxyCodeLine{580 }
+\DoxyCodeLine{581   \textcolor{keywordflow}{if} (incl\_vel \&\& zero\_vel)}
+\DoxyCodeLine{582   \{}
+\DoxyCodeLine{583     point.qd.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{584     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{585       point.qd[j] = 0.0;}
+\DoxyCodeLine{586   \}}
+\DoxyCodeLine{587   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (incl\_vel)}
+\DoxyCodeLine{588   \{}
+\DoxyCodeLine{589     point.qd.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{590     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{591       point.qd[j] = \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}[j]-\/>getVelocity();}
+\DoxyCodeLine{592   \}}
+\DoxyCodeLine{593 }
+\DoxyCodeLine{594   \textcolor{keywordflow}{if} (incl\_acc)}
+\DoxyCodeLine{595   \{}
+\DoxyCodeLine{596     point.qdd.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{597     \textcolor{comment}{// Currently no good measure of acceleration, assume none}}
+\DoxyCodeLine{598     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{599       point.qdd[j] = 0.0;}
+\DoxyCodeLine{600   \}}
+\DoxyCodeLine{601 }
+\DoxyCodeLine{602   point.time = ros::Time::now().toSec();}
+\DoxyCodeLine{603 }
+\DoxyCodeLine{604   \textcolor{keywordflow}{return} point;}
+\DoxyCodeLine{605 \}}
+
+\end{DoxyCode}
+
+
+References joints\+\_\+, robot\+\_\+controllers\+::\+Trajectory\+Point\+::q, robot\+\_\+controllers\+::\+Trajectory\+Point\+::qd, robot\+\_\+controllers\+::\+Trajectory\+Point\+::qdd, and robot\+\_\+controllers\+::\+Trajectory\+Point\+::time.
+
+
+
+Referenced by execute\+Cb().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1FollowJointTrajectoryController_add7d1a58d09d0e9de1ce7e65caff2c3d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a5da0fca950cfedfd5c5f24eb64a1e006}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a5da0fca950cfedfd5c5f24eb64a1e006}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!getType@{getType}}
+\index{getType@{getType}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily virtual std\+::string robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Get the type of this controller. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classrobot__controllers_1_1Controller_ac527e1ae39519d5da149b78d79a37763}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 147 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a22075b75a8c9994333c9ed9108818e7b}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a22075b75a8c9994333c9ed9108818e7b}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!init@{init}}
+\index{init@{init}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily int robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::init (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{nh,  }\item[{\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} $\ast$}]{manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Initialize the controller and any required data structures. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nh} & Node handle for this controller. \\
+\hline
+{\em manager} & The controller manager instance, this is needed for the controller to get information about joints, etc. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if succesfully configured, negative values are error codes. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classrobot__controllers_1_1Controller_ac1b7a94badc6c8c4f22770fb027845a0}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 53 of file follow\+\_\+joint\+\_\+trajectory.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{54 \{}
+\DoxyCodeLine{55   \textcolor{comment}{// We absolutely need access to the controller manager}}
+\DoxyCodeLine{56   \textcolor{keywordflow}{if} (!manager)}
+\DoxyCodeLine{57   \{}
+\DoxyCodeLine{58     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5bd6e5733dc845d69fd6671378fa7d8f}{initialized\_}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{59     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{60   \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62   \mbox{\hyperlink{classrobot__controllers_1_1Controller_ac1b7a94badc6c8c4f22770fb027845a0}{Controller::init}}(nh, manager);}
+\DoxyCodeLine{63   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}{manager\_}} = manager;}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65   \textcolor{comment}{// No initial sampler}}
+\DoxyCodeLine{66   boost::mutex::scoped\_lock lock(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aed66999a621086d0b97e9c01bd764ec1}{sampler\_mutex\_}});}
+\DoxyCodeLine{67   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}{sampler\_}}.reset();}
+\DoxyCodeLine{68   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ab589fa8064daa6cae9fd7d5918860d5b}{preempted\_}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70   \textcolor{comment}{// Get Joint Names}}
+\DoxyCodeLine{71   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae9a86d9ed87c4f61a6fb29c8040a54fb}{joint\_names\_}}.clear();}
+\DoxyCodeLine{72   XmlRpc::XmlRpcValue names;}
+\DoxyCodeLine{73   \textcolor{keywordflow}{if} (!nh.getParam(\textcolor{stringliteral}{"joints"}, names))}
+\DoxyCodeLine{74   \{}
+\DoxyCodeLine{75     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"No joints given for "} << nh.getNamespace());}
+\DoxyCodeLine{76     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{77   \}}
+\DoxyCodeLine{78   \textcolor{keywordflow}{if} (names.getType() != XmlRpc::XmlRpcValue::TypeArray)}
+\DoxyCodeLine{79   \{}
+\DoxyCodeLine{80     ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Joints not in a list for "} << nh.getNamespace());}
+\DoxyCodeLine{81     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{82   \}}
+\DoxyCodeLine{83   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < names.size(); ++i)}
+\DoxyCodeLine{84   \{}
+\DoxyCodeLine{85     XmlRpc::XmlRpcValue \&name\_value = names[i];}
+\DoxyCodeLine{86     \textcolor{keywordflow}{if} (name\_value.getType() != XmlRpc::XmlRpcValue::TypeString)}
+\DoxyCodeLine{87     \{}
+\DoxyCodeLine{88       ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"Not all joint names are strings for "} << nh.getNamespace());}
+\DoxyCodeLine{89       \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{90     \}}
+\DoxyCodeLine{91     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae9a86d9ed87c4f61a6fb29c8040a54fb}{joint\_names\_}}.push\_back(\textcolor{keyword}{static\_cast<}std::string\textcolor{keyword}{>}(name\_value));}
+\DoxyCodeLine{92   \}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94   \textcolor{comment}{// Get parameters}}
+\DoxyCodeLine{95   nh.param<\textcolor{keywordtype}{bool}>(\textcolor{stringliteral}{"stop\_with\_action"}, \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a014f02099977e6c724ab06a9de249af0}{stop\_with\_action\_}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{96   nh.param<\textcolor{keywordtype}{bool}>(\textcolor{stringliteral}{"stop\_on\_path\_violation"}, \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a31a675e3bd98ecc7583ed37f538aba0a}{stop\_on\_path\_violation\_}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98   \textcolor{comment}{// Get Joint Handles, setup feedback}}
+\DoxyCodeLine{99   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.clear();}
+\DoxyCodeLine{100   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae9a86d9ed87c4f61a6fb29c8040a54fb}{joint\_names\_}}.size(); ++i)}
+\DoxyCodeLine{101   \{}
+\DoxyCodeLine{102     \mbox{\hyperlink{namespacerobot__controllers_a9c7cc37a8e0d295ea24c75cbb656ecfa}{JointHandlePtr}} j = \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}{manager\_}}-\/>\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager_a754efa5a95fb7a4668c14693401d4d7e}{getJointHandle}}(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae9a86d9ed87c4f61a6fb29c8040a54fb}{joint\_names\_}}[i]);}
+\DoxyCodeLine{103     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.joint\_names.push\_back(j-\/>getName());}
+\DoxyCodeLine{104     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.push\_back(j);}
+\DoxyCodeLine{105     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aadba351ef2cb4ea10de39dc756a82060}{continuous\_}}.push\_back(j-\/>isContinuous());}
+\DoxyCodeLine{106   \}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108   \textcolor{comment}{// Update feedback}}
+\DoxyCodeLine{109   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.desired.positions.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{110   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.desired.velocities.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{111   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.desired.accelerations.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{112   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.actual.positions.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{113   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.actual.velocities.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{114   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.actual.effort.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{115   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.error.positions.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{116   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.error.velocities.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118   \textcolor{comment}{// Update tolerances}}
+\DoxyCodeLine{119   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{120   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_ae6471ff5bcaad7c3c8b116b4af12e0a0}{qd}}.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{121   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a4867a1ab07c8f575ce9cb5c42eb680c2}{qdd}}.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{122   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{123   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_ae6471ff5bcaad7c3c8b116b4af12e0a0}{qd}}.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{124   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a4867a1ab07c8f575ce9cb5c42eb680c2}{qdd}}.resize(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size());}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126   \textcolor{comment}{// Setup ROS interfaces}}
+\DoxyCodeLine{127   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}.reset(\textcolor{keyword}{new} \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a6c33b2ed3f28d7a48eeedd0f15451883}{server\_t}}(nh, \textcolor{stringliteral}{""},}
+\DoxyCodeLine{128                              boost::bind(\&\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae22514964d54e9392cb6160a68589b57}{FollowJointTrajectoryController::executeCb}}, \textcolor{keyword}{this}, \_1),}
+\DoxyCodeLine{129                              \textcolor{keyword}{false}));}
+\DoxyCodeLine{130   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>start();}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5bd6e5733dc845d69fd6671378fa7d8f}{initialized\_}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{133   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{134 \}}
+
+\end{DoxyCode}
+
+
+References continuous\+\_\+, execute\+Cb(), feedback\+\_\+, robot\+\_\+controllers\+::\+Controller\+Manager\+::get\+Joint\+Handle(), goal\+\_\+tolerance\+\_\+, robot\+\_\+controllers\+::\+Controller\+::init(), initialized\+\_\+, joint\+\_\+names\+\_\+, joints\+\_\+, manager\+\_\+, path\+\_\+tolerance\+\_\+, preempted\+\_\+, robot\+\_\+controllers\+::\+Trajectory\+Point\+::q, robot\+\_\+controllers\+::\+Trajectory\+Point\+::qd, robot\+\_\+controllers\+::\+Trajectory\+Point\+::qdd, sampler\+\_\+, sampler\+\_\+mutex\+\_\+, server\+\_\+, stop\+\_\+on\+\_\+path\+\_\+violation\+\_\+, and stop\+\_\+with\+\_\+action\+\_\+.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1FollowJointTrajectoryController_a22075b75a8c9994333c9ed9108818e7b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_af5840ca1c92381be32cadca2764c7769}\label{classrobot__controllers_1_1FollowJointTrajectoryController_af5840ca1c92381be32cadca2764c7769}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!reset@{reset}}
+\index{reset@{reset}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Cleanly reset the controller to it\textquotesingle{}s initial state. Some controllers may choose to stop themselves. This is mainly used in the case of the the robot exiting some fault condition. 
+
+\begin{DoxyReturn}{Returns}
+True if successfully reset, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_af5170a159c210de2bcb20b89531d5e49}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 177 of file follow\+\_\+joint\+\_\+trajectory.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{178 \{}
+\DoxyCodeLine{179   \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a6f9fcc135a1e4513ffd4c5419869ad5f}{stop}}(\textcolor{keyword}{true});  \textcolor{comment}{// force stop ourselves}}
+\DoxyCodeLine{180   \textcolor{keywordflow}{return} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}{manager\_}}-\/>\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager_a0bc70bc7e49bc48322e569186e25791f}{requestStop}}(\mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{getName}}()) == 0);}
+\DoxyCodeLine{181 \}}
+
+\end{DoxyCode}
+
+
+References robot\+\_\+controllers\+::\+Controller\+::get\+Name(), manager\+\_\+, robot\+\_\+controllers\+::\+Controller\+Manager\+::request\+Stop(), and stop().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1FollowJointTrajectoryController_af5840ca1c92381be32cadca2764c7769_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_ac6bf93a3a4c56fe2deba84e909e34466}\label{classrobot__controllers_1_1FollowJointTrajectoryController_ac6bf93a3a4c56fe2deba84e909e34466}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!start@{start}}
+\index{start@{start}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Attempt to start the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. 
+
+\begin{DoxyReturn}{Returns}
+True if successfully started, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_a781e023ddefd3a60fd2c47d68838016b}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 136 of file follow\+\_\+joint\+\_\+trajectory.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{137 \{}
+\DoxyCodeLine{138   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5bd6e5733dc845d69fd6671378fa7d8f}{initialized\_}})}
+\DoxyCodeLine{139   \{}
+\DoxyCodeLine{140     ROS\_ERROR\_NAMED(\textcolor{stringliteral}{"FollowJointTrajectoryController"},}
+\DoxyCodeLine{141                     \textcolor{stringliteral}{"Unable to start, not initialized."});}
+\DoxyCodeLine{142     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{143   \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>isActive())}
+\DoxyCodeLine{146   \{}
+\DoxyCodeLine{147     ROS\_ERROR\_NAMED(\textcolor{stringliteral}{"FollowJointTrajectoryController"},}
+\DoxyCodeLine{148                     \textcolor{stringliteral}{"Unable to start, action server is not active."});}
+\DoxyCodeLine{149     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{150   \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152   \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{153 \}}
+
+\end{DoxyCode}
+
+
+References initialized\+\_\+, and server\+\_\+.
+
+
+
+Referenced by tuck\+\_\+arm.\+Move\+It\+Thread\+::\+\_\+\+\_\+init\+\_\+\+\_\+().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1FollowJointTrajectoryController_ac6bf93a3a4c56fe2deba84e909e34466_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a6f9fcc135a1e4513ffd4c5419869ad5f}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a6f9fcc135a1e4513ffd4c5419869ad5f}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!stop@{stop}}
+\index{stop@{stop}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::stop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classbool}{bool}}}]{force }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Attempt to stop the controller. This should be called only by the \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}} instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em force} & Should we force the controller to stop? Some controllers may wish to continue running until they absolutely have to stop. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successfully stopped, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_a64d4f0032496c26c0fa788a91bc0b466}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 155 of file follow\+\_\+joint\+\_\+trajectory.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{156 \{}
+\DoxyCodeLine{157   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5bd6e5733dc845d69fd6671378fa7d8f}{initialized\_}})}
+\DoxyCodeLine{158     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>isActive())}
+\DoxyCodeLine{161   \{}
+\DoxyCodeLine{162     \textcolor{keywordflow}{if} (force)}
+\DoxyCodeLine{163     \{}
+\DoxyCodeLine{164       \textcolor{comment}{// Shut down the action}}
+\DoxyCodeLine{165       control\_msgs::FollowJointTrajectoryResult \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}};}
+\DoxyCodeLine{166       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Controller manager forced preemption."});}
+\DoxyCodeLine{167       \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{168     \}}
+\DoxyCodeLine{169     \textcolor{comment}{// Do not abort unless forced}}
+\DoxyCodeLine{170     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{171   \}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173   \textcolor{comment}{// Just holding position, go ahead and stop us}}
+\DoxyCodeLine{174   \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{175 \}}
+
+\end{DoxyCode}
+
+
+References initialized\+\_\+, sick\+\_\+camera\+\_\+client\+::result, and server\+\_\+.
+
+
+
+Referenced by reset().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1FollowJointTrajectoryController_a6f9fcc135a1e4513ffd4c5419869ad5f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_acd845a6ace37822ce84c979c74c51403}\label{classrobot__controllers_1_1FollowJointTrajectoryController_acd845a6ace37822ce84c979c74c51403}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!update@{update}}
+\index{update@{update}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::update (\begin{DoxyParamCaption}\item[{const ros\+::\+Time \&}]{now,  }\item[{const ros\+::\+Duration \&}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+This is the update loop for the controller. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & The system time. \\
+\hline
+{\em dt} & The timestep since last call to update. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classrobot__controllers_1_1Controller_ab079e1d49a8afc4872049680dd950858}{robot\+\_\+controllers\+::\+Controller}}.
+
+
+
+Definition at line 183 of file follow\+\_\+joint\+\_\+trajectory.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{184 \{}
+\DoxyCodeLine{185   \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a5bd6e5733dc845d69fd6671378fa7d8f}{initialized\_}})}
+\DoxyCodeLine{186     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188   \textcolor{comment}{// Is trajectory active?}}
+\DoxyCodeLine{189   \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>isActive() \&\& \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}{sampler\_}})}
+\DoxyCodeLine{190   \{}
+\DoxyCodeLine{191     boost::mutex::scoped\_lock lock(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aed66999a621086d0b97e9c01bd764ec1}{sampler\_mutex\_}});}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193     \textcolor{comment}{// Interpolate trajectory}}
+\DoxyCodeLine{194     TrajectoryPoint p = \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}{sampler\_}}-\/>sample(now.toSec());}
+\DoxyCodeLine{195     \mbox{\hyperlink{namespacerobot__controllers_ac1a37a4d579dd3f1ea35c9babf598c5d}{unwindTrajectoryPoint}}(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aadba351ef2cb4ea10de39dc756a82060}{continuous\_}}, p);}
+\DoxyCodeLine{196     \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ac7949dd64878b63195d71831369e66b0}{last\_sample\_}} = p;}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198     \textcolor{comment}{// Update joints}}
+\DoxyCodeLine{199     \textcolor{keywordflow}{if} (p.q.size() == \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size())}
+\DoxyCodeLine{200     \{}
+\DoxyCodeLine{201       \textcolor{comment}{// Position is good}}
+\DoxyCodeLine{202       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++i)}
+\DoxyCodeLine{203       \{}
+\DoxyCodeLine{204         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.desired.positions[i] = p.q[i];}
+\DoxyCodeLine{205       \}}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207       \textcolor{keywordflow}{if} (p.qd.size() == \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size())}
+\DoxyCodeLine{208       \{}
+\DoxyCodeLine{209         \textcolor{comment}{// Velocity is good}}
+\DoxyCodeLine{210         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++i)}
+\DoxyCodeLine{211         \{}
+\DoxyCodeLine{212           \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.desired.velocities[i] = p.qd[i];}
+\DoxyCodeLine{213         \}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215         \textcolor{keywordflow}{if} (p.qdd.size() == \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size())}
+\DoxyCodeLine{216         \{}
+\DoxyCodeLine{217           \textcolor{comment}{// Acceleration is good}}
+\DoxyCodeLine{218           \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++i)}
+\DoxyCodeLine{219           \{}
+\DoxyCodeLine{220             \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.desired.accelerations[i] = p.qdd[i];}
+\DoxyCodeLine{221           \}}
+\DoxyCodeLine{222         \}}
+\DoxyCodeLine{223       \}}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225       \textcolor{comment}{// Fill in actual}}
+\DoxyCodeLine{226       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{227       \{}
+\DoxyCodeLine{228         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.actual.positions[j] = \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}[j]-\/>getPosition();}
+\DoxyCodeLine{229         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.actual.velocities[j] = \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}[j]-\/>getVelocity();}
+\DoxyCodeLine{230         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.actual.effort[j] = \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}[j]-\/>getEffort();}
+\DoxyCodeLine{231       \}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233       \textcolor{comment}{// Fill in error}}
+\DoxyCodeLine{234       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{235       \{}
+\DoxyCodeLine{236         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.error.positions[j] = shortest\_angular\_distance(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.desired.positions[j],}
+\DoxyCodeLine{237                                                                  \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.actual.positions[j]);}
+\DoxyCodeLine{238         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.error.velocities[j] = \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.actual.velocities[j] -\/}
+\DoxyCodeLine{239                                         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.desired.velocities[j];}
+\DoxyCodeLine{240       \}}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242       \textcolor{comment}{// Check that we are within path tolerance}}
+\DoxyCodeLine{243       \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae60bd78568416e3b03e4b8a28f742167}{has\_path\_tolerance\_}})}
+\DoxyCodeLine{244       \{}
+\DoxyCodeLine{245         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{246         \{}
+\DoxyCodeLine{247           \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}[j] > 0) \&\&}
+\DoxyCodeLine{248               (fabs(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.error.positions[j]) > \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}[j]))}
+\DoxyCodeLine{249           \{}
+\DoxyCodeLine{250             control\_msgs::FollowJointTrajectoryResult \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}};}
+\DoxyCodeLine{251             \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.error\_code = control\_msgs::FollowJointTrajectoryResult::PATH\_TOLERANCE\_VIOLATED;}
+\DoxyCodeLine{252             \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Trajectory path tolerances violated (position)."});}
+\DoxyCodeLine{253             ROS\_ERROR(\textcolor{stringliteral}{"Trajectory path tolerances violated (position)."});}
+\DoxyCodeLine{254             \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a31a675e3bd98ecc7583ed37f538aba0a}{stop\_on\_path\_violation\_}})}
+\DoxyCodeLine{255             \{}
+\DoxyCodeLine{256               \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}{manager\_}}-\/>\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager_a0bc70bc7e49bc48322e569186e25791f}{requestStop}}(\mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{getName}}());}
+\DoxyCodeLine{257             \}}
+\DoxyCodeLine{258             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{259           \}}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261           \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_ae6471ff5bcaad7c3c8b116b4af12e0a0}{qd}}[j] > 0) \&\&}
+\DoxyCodeLine{262               (fabs(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.error.velocities[j]) > \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_ae6471ff5bcaad7c3c8b116b4af12e0a0}{qd}}[j]))}
+\DoxyCodeLine{263           \{}
+\DoxyCodeLine{264             control\_msgs::FollowJointTrajectoryResult \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}};}
+\DoxyCodeLine{265             \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.error\_code = control\_msgs::FollowJointTrajectoryResult::PATH\_TOLERANCE\_VIOLATED;}
+\DoxyCodeLine{266             \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Trajectory path tolerances violated (velocity)."});}
+\DoxyCodeLine{267             ROS\_ERROR(\textcolor{stringliteral}{"Trajectory path tolerances violated (velocity)."});}
+\DoxyCodeLine{268             \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a31a675e3bd98ecc7583ed37f538aba0a}{stop\_on\_path\_violation\_}})}
+\DoxyCodeLine{269             \{}
+\DoxyCodeLine{270               \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}{manager\_}}-\/>\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager_a0bc70bc7e49bc48322e569186e25791f}{requestStop}}(\mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{getName}}());}
+\DoxyCodeLine{271             \}}
+\DoxyCodeLine{272             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{273           \}}
+\DoxyCodeLine{274         \}}
+\DoxyCodeLine{275       \}}
+\DoxyCodeLine{276 }
+\DoxyCodeLine{277       \textcolor{comment}{// Check that we are within goal tolerance}}
+\DoxyCodeLine{278       \textcolor{keywordflow}{if} (now.toSec() >= \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}{sampler\_}}-\/>end\_time())}
+\DoxyCodeLine{279       \{}
+\DoxyCodeLine{280         \textcolor{keywordtype}{bool} inside\_tolerances = \textcolor{keyword}{true};}
+\DoxyCodeLine{281         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{282         \{}
+\DoxyCodeLine{283           \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}[j] > 0) \&\&}
+\DoxyCodeLine{284               (fabs(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.error.positions[j]) > \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}{goal\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}[j]))}
+\DoxyCodeLine{285           \{}
+\DoxyCodeLine{286             inside\_tolerances = \textcolor{keyword}{false};}
+\DoxyCodeLine{287           \}}
+\DoxyCodeLine{288         \}}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290         \textcolor{keywordflow}{if} (inside\_tolerances)}
+\DoxyCodeLine{291         \{}
+\DoxyCodeLine{292           control\_msgs::FollowJointTrajectoryResult \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}};}
+\DoxyCodeLine{293           \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.error\_code = control\_msgs::FollowJointTrajectoryResult::SUCCESSFUL;}
+\DoxyCodeLine{294           \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setSucceeded(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Trajectory succeeded."});}
+\DoxyCodeLine{295           ROS\_DEBUG(\textcolor{stringliteral}{"Trajectory succeeded"});}
+\DoxyCodeLine{296         \}}
+\DoxyCodeLine{297         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (now.toSec() > (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}{sampler\_}}-\/>end\_time() + \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a625c0202ee4e5db3ee045aff9d67cd77}{goal\_time\_tolerance\_}} + 0.6))  \textcolor{comment}{// 0.6s matches PR2}}
+\DoxyCodeLine{298         \{}
+\DoxyCodeLine{299           control\_msgs::FollowJointTrajectoryResult \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}};}
+\DoxyCodeLine{300           \mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}.error\_code = control\_msgs::FollowJointTrajectoryResult::GOAL\_TOLERANCE\_VIOLATED;}
+\DoxyCodeLine{301           \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}{server\_}}-\/>setAborted(\mbox{\hyperlink{namespacesick__camera__client_a9d947cde3882f536db9c9474a53a3677}{result}}, \textcolor{stringliteral}{"Trajectory not executed within time limits."});}
+\DoxyCodeLine{302           ROS\_ERROR(\textcolor{stringliteral}{"Trajectory not executed within time limits"});}
+\DoxyCodeLine{303         \}}
+\DoxyCodeLine{304       \}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306       \textcolor{comment}{// Update joints}}
+\DoxyCodeLine{307       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{308       \{}
+\DoxyCodeLine{309         \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}[j]-\/>setPosition(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.desired.positions[j],}
+\DoxyCodeLine{310                                 \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}{feedback\_}}.desired.velocities[j],}
+\DoxyCodeLine{311                                 0.0);}
+\DoxyCodeLine{312       \}}
+\DoxyCodeLine{313     \}}
+\DoxyCodeLine{314   \}}
+\DoxyCodeLine{315   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ac7949dd64878b63195d71831369e66b0}{last\_sample\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}.size() == \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size())}
+\DoxyCodeLine{316   \{}
+\DoxyCodeLine{317     \textcolor{comment}{// Hold Position Unless Path Tolerance Violated}}
+\DoxyCodeLine{318     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ae60bd78568416e3b03e4b8a28f742167}{has\_path\_tolerance\_}} \&\& \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a31a675e3bd98ecc7583ed37f538aba0a}{stop\_on\_path\_violation\_}})}
+\DoxyCodeLine{319     \{}
+\DoxyCodeLine{320       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{321       \{}
+\DoxyCodeLine{322         \textcolor{keywordflow}{if} ((\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}[j] > 0) \&\&}
+\DoxyCodeLine{323             (fabs(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}[j]-\/>getPosition() -\/ \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ac7949dd64878b63195d71831369e66b0}{last\_sample\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}[j]) > \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}{path\_tolerance\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}[j]))}
+\DoxyCodeLine{324         \{}
+\DoxyCodeLine{325           \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}{manager\_}}-\/>\mbox{\hyperlink{classrobot__controllers_1_1ControllerManager_a0bc70bc7e49bc48322e569186e25791f}{requestStop}}(\mbox{\hyperlink{classrobot__controllers_1_1Controller_a75431f535a7abc4ed4154a3d1ed8908b}{getName}}());}
+\DoxyCodeLine{326           \textcolor{keywordflow}{break};}
+\DoxyCodeLine{327         \}}
+\DoxyCodeLine{328       \}}
+\DoxyCodeLine{329     \}}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}.size(); ++j)}
+\DoxyCodeLine{332     \{}
+\DoxyCodeLine{333       \mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}{joints\_}}[j]-\/>setPosition(\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_ac7949dd64878b63195d71831369e66b0}{last\_sample\_}}.\mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint_a7e8b273f85bd89e40b1195811c52d5d6}{q}}[j],}
+\DoxyCodeLine{334                               0.0,}
+\DoxyCodeLine{335                               0.0);}
+\DoxyCodeLine{336     \}}
+\DoxyCodeLine{337   \}}
+\DoxyCodeLine{338 \}}
+
+\end{DoxyCode}
+
+
+References continuous\+\_\+, feedback\+\_\+, robot\+\_\+controllers\+::\+Controller\+::get\+Name(), goal\+\_\+time\+\_\+tolerance\+\_\+, goal\+\_\+tolerance\+\_\+, has\+\_\+path\+\_\+tolerance\+\_\+, initialized\+\_\+, joints\+\_\+, last\+\_\+sample\+\_\+, manager\+\_\+, path\+\_\+tolerance\+\_\+, robot\+\_\+controllers\+::\+Trajectory\+Point\+::q, robot\+\_\+controllers\+::\+Trajectory\+Point\+::qd, robot\+\_\+controllers\+::\+Trajectory\+Point\+::qdd, robot\+\_\+controllers\+::\+Controller\+Manager\+::request\+Stop(), sick\+\_\+camera\+\_\+client\+::result, sampler\+\_\+, sampler\+\_\+mutex\+\_\+, server\+\_\+, stop\+\_\+on\+\_\+path\+\_\+violation\+\_\+, and robot\+\_\+controllers\+::unwind\+Trajectory\+Point().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classrobot__controllers_1_1FollowJointTrajectoryController_acd845a6ace37822ce84c979c74c51403_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_aadba351ef2cb4ea10de39dc756a82060}\label{classrobot__controllers_1_1FollowJointTrajectoryController_aadba351ef2cb4ea10de39dc756a82060}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!continuous\_@{continuous\_}}
+\index{continuous\_@{continuous\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{continuous\_}{continuous\_}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classbool}{bool}}$>$ robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::continuous\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 170 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), init(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a3659907758576ebc8257e21789f4cdae}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!feedback\_@{feedback\_}}
+\index{feedback\_@{feedback\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{feedback\_}{feedback\_}}
+{\footnotesize\ttfamily control\+\_\+msgs\+::\+Follow\+Joint\+Trajectory\+Feedback robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::feedback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 198 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), init(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a5a7c2185bfcc9f50737e1a25f1de6db8}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a5a7c2185bfcc9f50737e1a25f1de6db8}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!goal\_time@{goal\_time}}
+\index{goal\_time@{goal\_time}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{goal\_time}{goal\_time}}
+{\footnotesize\ttfamily ros\+::\+Time robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::goal\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 199 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a625c0202ee4e5db3ee045aff9d67cd77}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a625c0202ee4e5db3ee045aff9d67cd77}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!goal\_time\_tolerance\_@{goal\_time\_tolerance\_}}
+\index{goal\_time\_tolerance\_@{goal\_time\_tolerance\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{goal\_time\_tolerance\_}{goal\_time\_tolerance\_}}
+{\footnotesize\ttfamily double robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::goal\+\_\+time\+\_\+tolerance\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 196 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a4c6c31562fd4e9893958c0938082cd66}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!goal\_tolerance\_@{goal\_tolerance\_}}
+\index{goal\_tolerance\_@{goal\_tolerance\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{goal\_tolerance\_}{goal\_tolerance\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint}{Trajectory\+Point}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::goal\+\_\+tolerance\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 195 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), init(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a820b65a94d28d1b49f7e912daad2c9af}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a820b65a94d28d1b49f7e912daad2c9af}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!has\_goal\_tolerance\_@{has\_goal\_tolerance\_}}
+\index{has\_goal\_tolerance\_@{has\_goal\_tolerance\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{has\_goal\_tolerance\_}{has\_goal\_tolerance\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::has\+\_\+goal\+\_\+tolerance\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 194 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_ae60bd78568416e3b03e4b8a28f742167}\label{classrobot__controllers_1_1FollowJointTrajectoryController_ae60bd78568416e3b03e4b8a28f742167}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!has\_path\_tolerance\_@{has\_path\_tolerance\_}}
+\index{has\_path\_tolerance\_@{has\_path\_tolerance\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{has\_path\_tolerance\_}{has\_path\_tolerance\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::has\+\_\+path\+\_\+tolerance\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+action was preempted (has nothing to do with preempt() above). 
+
+Definition at line 191 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a5bd6e5733dc845d69fd6671378fa7d8f}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a5bd6e5733dc845d69fd6671378fa7d8f}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!initialized\_@{initialized\_}}
+\index{initialized\_@{initialized\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{initialized\_}{initialized\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::initialized\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 165 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), init(), start(), stop(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_ae9a86d9ed87c4f61a6fb29c8040a54fb}\label{classrobot__controllers_1_1FollowJointTrajectoryController_ae9a86d9ed87c4f61a6fb29c8040a54fb}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!joint\_names\_@{joint\_names\_}}
+\index{joint\_names\_@{joint\_names\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{joint\_names\_}{joint\_names\_}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::joint\+\_\+names\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 169 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), get\+Claimed\+Names(), get\+Commanded\+Names(), and init().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a0905ac07b14076b2adf1a9c2972549a5}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!joints\_@{joints\_}}
+\index{joints\_@{joints\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{joints\_}{joints\_}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{namespacerobot__controllers_a9c7cc37a8e0d295ea24c75cbb656ecfa}{Joint\+Handle\+Ptr}}$>$ robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::joints\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 168 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), get\+Point\+From\+Current(), init(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_ac7949dd64878b63195d71831369e66b0}\label{classrobot__controllers_1_1FollowJointTrajectoryController_ac7949dd64878b63195d71831369e66b0}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!last\_sample\_@{last\_sample\_}}
+\index{last\_sample\_@{last\_sample\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{last\_sample\_}{last\_sample\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint}{Trajectory\+Point}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::last\+\_\+sample\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+should we stop this controller when a path tolerance has been violated? 
+
+Definition at line 188 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a03f7689faf46c259faed922fc038c4ac}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!manager\_@{manager\_}}
+\index{manager\_@{manager\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{manager\_}{manager\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classrobot__controllers_1_1ControllerManager}{Controller\+Manager}}$\ast$ robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::manager\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 166 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), init(), reset(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a46ddaa84d6ff074b79072fb0bd4ab646}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!path\_tolerance\_@{path\_tolerance\_}}
+\index{path\_tolerance\_@{path\_tolerance\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{path\_tolerance\_}{path\_tolerance\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structrobot__controllers_1_1TrajectoryPoint}{Trajectory\+Point}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::path\+\_\+tolerance\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 192 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), init(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_ab589fa8064daa6cae9fd7d5918860d5b}\label{classrobot__controllers_1_1FollowJointTrajectoryController_ab589fa8064daa6cae9fd7d5918860d5b}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!preempted\_@{preempted\_}}
+\index{preempted\_@{preempted\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{preempted\_}{preempted\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::preempted\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 189 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), and init().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}\label{classrobot__controllers_1_1FollowJointTrajectoryController_aac01070ae4c4f9cbe484712a5fa0947c}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!sampler\_@{sampler\_}}
+\index{sampler\_@{sampler\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{sampler\_}{sampler\_}}
+{\footnotesize\ttfamily boost\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classrobot__controllers_1_1TrajectorySampler}{Trajectory\+Sampler}}$>$ robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::sampler\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 173 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), init(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_aed66999a621086d0b97e9c01bd764ec1}\label{classrobot__controllers_1_1FollowJointTrajectoryController_aed66999a621086d0b97e9c01bd764ec1}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!sampler\_mutex\_@{sampler\_mutex\_}}
+\index{sampler\_mutex\_@{sampler\_mutex\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{sampler\_mutex\_}{sampler\_mutex\_}}
+{\footnotesize\ttfamily boost\+::mutex robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::sampler\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 174 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), init(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a64cebac21216fe0d03ff76afa03a69c8}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!server\_@{server\_}}
+\index{server\_@{server\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{server\_}{server\_}}
+{\footnotesize\ttfamily boost\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classrobot__controllers_1_1FollowJointTrajectoryController_a6c33b2ed3f28d7a48eeedd0f15451883}{server\+\_\+t}}$>$ robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::server\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 171 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), init(), start(), stop(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a31a675e3bd98ecc7583ed37f538aba0a}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a31a675e3bd98ecc7583ed37f538aba0a}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!stop\_on\_path\_violation\_@{stop\_on\_path\_violation\_}}
+\index{stop\_on\_path\_violation\_@{stop\_on\_path\_violation\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{stop\_on\_path\_violation\_}{stop\_on\_path\_violation\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::stop\+\_\+on\+\_\+path\+\_\+violation\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+should we stop this controller when the action has terminated (or hold position)? 
+
+Definition at line 179 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by init(), and update().
+
+\mbox{\Hypertarget{classrobot__controllers_1_1FollowJointTrajectoryController_a014f02099977e6c724ab06a9de249af0}\label{classrobot__controllers_1_1FollowJointTrajectoryController_a014f02099977e6c724ab06a9de249af0}} 
+\index{robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}!stop\_with\_action\_@{stop\_with\_action\_}}
+\index{stop\_with\_action\_@{stop\_with\_action\_}!robot\_controllers::FollowJointTrajectoryController@{robot\_controllers::FollowJointTrajectoryController}}
+\doxysubsubsection{\texorpdfstring{stop\_with\_action\_}{stop\_with\_action\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbool}{bool}} robot\+\_\+controllers\+::\+Follow\+Joint\+Trajectory\+Controller\+::stop\+\_\+with\+\_\+action\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 176 of file follow\+\_\+joint\+\_\+trajectory.\+h.
+
+
+
+Referenced by execute\+Cb(), and init().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+submodules/robot\+\_\+controllers/robot\+\_\+controllers/include/robot\+\_\+controllers/\mbox{\hyperlink{follow__joint__trajectory_8h}{follow\+\_\+joint\+\_\+trajectory.\+h}}\item 
+submodules/robot\+\_\+controllers/robot\+\_\+controllers/src/\mbox{\hyperlink{follow__joint__trajectory_8cpp}{follow\+\_\+joint\+\_\+trajectory.\+cpp}}\end{DoxyCompactItemize}

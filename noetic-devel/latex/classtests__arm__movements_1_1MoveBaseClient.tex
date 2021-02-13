@@ -1,0 +1,120 @@
+\hypertarget{classtests__arm__movements_1_1MoveBaseClient}{}\doxysection{tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client Class Reference}
+\label{classtests__arm__movements_1_1MoveBaseClient}\index{tests\_arm\_movements.MoveBaseClient@{tests\_arm\_movements.MoveBaseClient}}
+
+
+Inheritance diagram for tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classtests__arm__movements_1_1MoveBaseClient__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classtests__arm__movements_1_1MoveBaseClient__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classtests__arm__movements_1_1MoveBaseClient_a63116ef3d500690ca5b9fc7df6eea912}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classtests__arm__movements_1_1MoveBaseClient_a286a4dad0f05fc1631ccbf443a496e95}{goto}} (self, x, y, theta, frame=\char`\"{}map\char`\"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtests__arm__movements_1_1MoveBaseClient_a72b27f8bab30920bc2f1bf4da1e46725}{client}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 53 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1MoveBaseClient_a63116ef3d500690ca5b9fc7df6eea912}\label{classtests__arm__movements_1_1MoveBaseClient_a63116ef3d500690ca5b9fc7df6eea912}} 
+\index{tests\_arm\_movements.MoveBaseClient@{tests\_arm\_movements.MoveBaseClient}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!tests\_arm\_movements.MoveBaseClient@{tests\_arm\_movements.MoveBaseClient}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 55 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{55     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{56         self.client = actionlib.SimpleActionClient(\textcolor{stringliteral}{"move\_base"}, MoveBaseAction)}
+\DoxyCodeLine{57         rospy.loginfo(\textcolor{stringliteral}{"Waiting for move\_base..."})}
+\DoxyCodeLine{58         self.client.wait\_for\_server()}
+\DoxyCodeLine{59 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1MoveBaseClient_a286a4dad0f05fc1631ccbf443a496e95}\label{classtests__arm__movements_1_1MoveBaseClient_a286a4dad0f05fc1631ccbf443a496e95}} 
+\index{tests\_arm\_movements.MoveBaseClient@{tests\_arm\_movements.MoveBaseClient}!goto@{goto}}
+\index{goto@{goto}!tests\_arm\_movements.MoveBaseClient@{tests\_arm\_movements.MoveBaseClient}}
+\doxysubsubsection{\texorpdfstring{goto()}{goto()}}
+{\footnotesize\ttfamily def tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+goto (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{theta,  }\item[{}]{frame = {\ttfamily \char`\"{}map\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 60 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{60     \textcolor{keyword}{def }goto(self, x, y, theta, frame="map"):}
+\DoxyCodeLine{61         move\_goal = MoveBaseGoal()}
+\DoxyCodeLine{62         move\_goal.target\_pose.pose.position.x = x}
+\DoxyCodeLine{63         move\_goal.target\_pose.pose.position.y = y}
+\DoxyCodeLine{64         move\_goal.target\_pose.pose.orientation.z = sin(theta/2.0)}
+\DoxyCodeLine{65         move\_goal.target\_pose.pose.orientation.w = cos(theta/2.0)}
+\DoxyCodeLine{66         move\_goal.target\_pose.header.frame\_id = frame}
+\DoxyCodeLine{67         move\_goal.target\_pose.header.stamp = rospy.Time.now()}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         \textcolor{comment}{\# TODO wait for things to work}}
+\DoxyCodeLine{70         self.client.send\_goal(move\_goal)}
+\DoxyCodeLine{71         self.client.wait\_for\_result()}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 }
+
+\end{DoxyCode}
+
+
+References smacc\+::default\+\_\+events\+::\+Ev\+Action\+Feedback$<$ Action\+Feedback, T\+Orthogonal $>$.\+client, tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+client, demo.\+Move\+Base\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+client, tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+client, demo.\+Follow\+Trajectory\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Follow\+Trajectory\+Client.\+client, demo.\+Point\+Head\+Client.\+client, and pick\+\_\+place\+\_\+demo.\+Point\+Head\+Client.\+client.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtests__arm__movements_1_1MoveBaseClient_a72b27f8bab30920bc2f1bf4da1e46725}\label{classtests__arm__movements_1_1MoveBaseClient_a72b27f8bab30920bc2f1bf4da1e46725}} 
+\index{tests\_arm\_movements.MoveBaseClient@{tests\_arm\_movements.MoveBaseClient}!client@{client}}
+\index{client@{client}!tests\_arm\_movements.MoveBaseClient@{tests\_arm\_movements.MoveBaseClient}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+client}
+
+
+
+Definition at line 56 of file tests\+\_\+arm\+\_\+movements.\+py.
+
+
+
+Referenced by camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+disable\+\_\+auto(), camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+enable\+\_\+auto(), tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+goto(), tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop(), tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+move\+\_\+to(), tuck\+\_\+arm.\+Tuck\+Thread.\+run(), gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position(), and tuck\+\_\+arm.\+Tuck\+Thread.\+stop().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+gazebo/fetch\+\_\+gazebo\+\_\+demo/scripts/\mbox{\hyperlink{tests__arm__movements_8py}{tests\+\_\+arm\+\_\+movements.\+py}}\end{DoxyCompactItemize}

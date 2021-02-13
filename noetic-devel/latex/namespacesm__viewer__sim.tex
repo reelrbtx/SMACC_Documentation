@@ -1,64 +1,65 @@
-\hypertarget{namespacesm__viewer__sim}{}\section{sm\+\_\+viewer\+\_\+sim Namespace Reference}
-\label{namespacesm__viewer__sim}\index{sm\+\_\+viewer\+\_\+sim@{sm\+\_\+viewer\+\_\+sim}}
-\subsection*{Classes}
+\hypertarget{namespacesm__viewer__sim}{}\doxysection{sm\+\_\+viewer\+\_\+sim Namespace Reference}
+\label{namespacesm__viewer__sim}\index{sm\_viewer\_sim@{sm\_viewer\_sim}}
+\doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structsm__viewer__sim_1_1Ev1}{Ev1}
+struct \mbox{\hyperlink{structsm__viewer__sim_1_1Ev1}{Ev1}}
 \item 
-struct \hyperlink{structsm__viewer__sim_1_1Ev2}{Ev2}
+struct \mbox{\hyperlink{structsm__viewer__sim_1_1Ev2}{Ev2}}
 \item 
-struct \hyperlink{structsm__viewer__sim_1_1Ev3}{Ev3}
+struct \mbox{\hyperlink{structsm__viewer__sim_1_1Ev3}{Ev3}}
 \item 
-struct \hyperlink{structsm__viewer__sim_1_1EvFail}{Ev\+Fail}
+struct \mbox{\hyperlink{structsm__viewer__sim_1_1EvFail}{Ev\+Fail}}
 \item 
-struct \hyperlink{structsm__viewer__sim_1_1EvToDeep}{Ev\+To\+Deep}
+struct \mbox{\hyperlink{structsm__viewer__sim_1_1EvToDeep}{Ev\+To\+Deep}}
 \item 
-struct \hyperlink{structsm__viewer__sim_1_1MsRecoveryMode}{Ms\+Recovery\+Mode}
+struct \mbox{\hyperlink{structsm__viewer__sim_1_1MsRecoveryMode}{Ms\+Recovery\+Mode}}
 \item 
-struct \hyperlink{structsm__viewer__sim_1_1MsRunMode}{Ms\+Run\+Mode}
+struct \mbox{\hyperlink{structsm__viewer__sim_1_1MsRunMode}{Ms\+Run\+Mode}}
 \item 
-class \hyperlink{classsm__viewer__sim_1_1OrNavigation}{Or\+Navigation}
+class \mbox{\hyperlink{classsm__viewer__sim_1_1OrNavigation}{Or\+Navigation}}
 \item 
-struct \hyperlink{structsm__viewer__sim_1_1SmViewerSim}{Sm\+Viewer\+Sim}
+struct \mbox{\hyperlink{structsm__viewer__sim_1_1SmViewerSim}{Sm\+Viewer\+Sim}}
 \item 
-struct \hyperlink{structsm__viewer__sim_1_1St1}{St1}
+struct \mbox{\hyperlink{structsm__viewer__sim_1_1St1}{St1}}
 \item 
-struct \hyperlink{structsm__viewer__sim_1_1St2}{St2}
+struct \mbox{\hyperlink{structsm__viewer__sim_1_1St2}{St2}}
 \item 
-struct \hyperlink{structsm__viewer__sim_1_1St3}{St3}
+struct \mbox{\hyperlink{structsm__viewer__sim_1_1St3}{St3}}
 \end{DoxyCompactItemize}
-\subsection*{Functions}
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename T\+Ev $>$ }\\void \hyperlink{namespacesm__viewer__sim_a19b5db17983d5b9bbf21e96ecf9ab5c8}{delayed\+Post\+Event} (\hyperlink{classsmacc_1_1ISmaccState}{smacc\+::\+I\+Smacc\+State} $\ast$sm, int delayseconds)
+{\footnotesize template$<$typename T\+Ev $>$ }\\void \mbox{\hyperlink{namespacesm__viewer__sim_a19b5db17983d5b9bbf21e96ecf9ab5c8}{delayed\+Post\+Event}} (\mbox{\hyperlink{classsmacc_1_1ISmaccState}{smacc\+::\+I\+Smacc\+State}} $\ast$sm, int delayseconds)
 \end{DoxyCompactItemize}
 
 
-\subsection{Function Documentation}
+\doxysubsection{Function Documentation}
 \mbox{\Hypertarget{namespacesm__viewer__sim_a19b5db17983d5b9bbf21e96ecf9ab5c8}\label{namespacesm__viewer__sim_a19b5db17983d5b9bbf21e96ecf9ab5c8}} 
-\index{sm\+\_\+viewer\+\_\+sim@{sm\+\_\+viewer\+\_\+sim}!delayed\+Post\+Event@{delayed\+Post\+Event}}
-\index{delayed\+Post\+Event@{delayed\+Post\+Event}!sm\+\_\+viewer\+\_\+sim@{sm\+\_\+viewer\+\_\+sim}}
-\subsubsection{\texorpdfstring{delayed\+Post\+Event()}{delayedPostEvent()}}
+\index{sm\_viewer\_sim@{sm\_viewer\_sim}!delayedPostEvent@{delayedPostEvent}}
+\index{delayedPostEvent@{delayedPostEvent}!sm\_viewer\_sim@{sm\_viewer\_sim}}
+\doxysubsubsection{\texorpdfstring{delayedPostEvent()}{delayedPostEvent()}}
 {\footnotesize\ttfamily template$<$typename T\+Ev $>$ \\
-void sm\+\_\+viewer\+\_\+sim\+::delayed\+Post\+Event (\begin{DoxyParamCaption}\item[{\hyperlink{classsmacc_1_1ISmaccState}{smacc\+::\+I\+Smacc\+State} $\ast$}]{sm,  }\item[{int}]{delayseconds }\end{DoxyParamCaption})}
+void sm\+\_\+viewer\+\_\+sim\+::delayed\+Post\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classsmacc_1_1ISmaccState}{smacc\+::\+I\+Smacc\+State}} $\ast$}]{sm,  }\item[{int}]{delayseconds }\end{DoxyParamCaption})}
 
 
 
 Definition at line 43 of file sm\+\_\+viewer\+\_\+sim.\+h.
 
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{44 \{}
+\DoxyCodeLine{45     std::async(std::launch::async, [=]() \{}
+\DoxyCodeLine{46         std::this\_thread::sleep\_for(std::chrono::seconds(delayseconds));}
+\DoxyCodeLine{47         sm-\/>\mbox{\hyperlink{classsmacc_1_1ISmaccState_acef404ab3766ddf2892e8dad14a4a7cf}{postEvent}}(\textcolor{keyword}{new} TEv());}
+\DoxyCodeLine{48     \});}
+\DoxyCodeLine{49 \}}
+
+\end{DoxyCode}
+
 
 References smacc\+::\+I\+Smacc\+State\+::post\+Event().
 
-
-\begin{DoxyCode}
-44 \{
-45     std::async(std::launch::async, [=]() \{
-46         std::this\_thread::sleep\_for(std::chrono::seconds(delayseconds));
-47         sm->\hyperlink{classsmacc_1_1ISmaccState_acef404ab3766ddf2892e8dad14a4a7cf}{postEvent}(\textcolor{keyword}{new} TEv());
-48     \});
-49 \}
-\end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]

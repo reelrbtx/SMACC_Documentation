@@ -1,0 +1,273 @@
+\hypertarget{classsick__camera__server_1_1SickCameraServer}{}\doxysection{sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server Class Reference}
+\label{classsick__camera__server_1_1SickCameraServer}\index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}}
+
+
+Inheritance diagram for sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{classsick__camera__server_1_1SickCameraServer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{classsick__camera__server_1_1SickCameraServer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsick__camera__server_1_1SickCameraServer_ac9dd249cdf510ad563b41fb22cdf747c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classsick__camera__server_1_1SickCameraServer_aac75ac90cb5838abb65cbaff70cc9c6a}{callback}} (self, goal)
+\item 
+def \mbox{\hyperlink{classsick__camera__server_1_1SickCameraServer_ae58d1f128a23bad2fde532858744e73a}{click}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsick__camera__server_1_1SickCameraServer_a0d0be1531df3cedbb4ef5963de1b1623}{server}}
+\item 
+\mbox{\hyperlink{classsick__camera__server_1_1SickCameraServer_a336473895649bc3a87c3329569467162}{wait\+\_\+duration}}
+\item 
+\mbox{\hyperlink{classsick__camera__server_1_1SickCameraServer_a921861fa6c43066d266de3b80678546d}{wait\+\_\+until}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsick__camera__server_1_1SickCameraServer_ab779789a2748cef35423535ef9725072}{\+\_\+sick\+\_\+camera}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsick__camera__server_1_1SickCameraServer_a860b09d99a486e21a3ecb9eccabb791d}{\+\_\+result}} = Sick\+Camera\+Result()
+\item 
+int \mbox{\hyperlink{classsick__camera__server_1_1SickCameraServer_a2752a40574cb6906ced24d80b2c17a89}{\+\_\+wait\+\_\+duration}} = 120
+\item 
+\mbox{\hyperlink{classsick__camera__server_1_1SickCameraServer_ad118c8fa7021f2e71a18cdb622030a5c}{\+\_\+wait\+\_\+until}} = datetime.\+now()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 62 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_ac9dd249cdf510ad563b41fb22cdf747c}\label{classsick__camera__server_1_1SickCameraServer_ac9dd249cdf510ad563b41fb22cdf747c}} 
+\index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 67 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{67     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{68         self.\_sick\_camera = PIM60(\textcolor{stringliteral}{"192.168.100.103"}, 2116)}
+\DoxyCodeLine{69         self.server = actionlib.SimpleActionServer(\textcolor{stringliteral}{'sick\_camera'}, SickCameraAction, self.callback, \textcolor{keyword}{False})}
+\DoxyCodeLine{70         self.server.start()}
+\DoxyCodeLine{71         self.wait\_duration = 5}
+\DoxyCodeLine{72         self.wait\_until = datetime.now() -\/ timedelta(seconds= self.wait\_duration)}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_aac75ac90cb5838abb65cbaff70cc9c6a}\label{classsick__camera__server_1_1SickCameraServer_aac75ac90cb5838abb65cbaff70cc9c6a}} 
+\index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!callback@{callback}}
+\index{callback@{callback}!sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}}
+\doxysubsubsection{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily def sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{goal }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Action server callback.\end{DoxyVerb}
+ 
+
+Definition at line 75 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{75     \textcolor{keyword}{def }\mbox{\hyperlink{sm__ridgeback__barrel__search__1_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}}(self, goal):}
+\DoxyCodeLine{76         \textcolor{stringliteral}{"""Action server callback."""}}
+\DoxyCodeLine{77         print(\textcolor{stringliteral}{"Received goal: "} + str(goal))}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79         \textcolor{keywordflow}{if} goal.trigger == SickCameraGoal.TRIG:}
+\DoxyCodeLine{80             time\_left = self.wait\_until -\/ datetime.now()}
+\DoxyCodeLine{81             \textcolor{keywordflow}{if} time\_left.total\_seconds() > 0.0:}
+\DoxyCodeLine{82                 print(\textcolor{stringliteral}{"Sick Camera can click only every 5 seconds"})}
+\DoxyCodeLine{83                 self.\_result.success = \textcolor{keyword}{False}}
+\DoxyCodeLine{84                 self.\_result.message = \textcolor{stringliteral}{"Sick Camera can click only every 5 seconds "} + str(self.wait\_duration) +\(\backslash\)}
+\DoxyCodeLine{85                         \textcolor{stringliteral}{"s. Please wait "} + str(time\_left.total\_seconds()) + \textcolor{stringliteral}{"s."}}
+\DoxyCodeLine{86                 self.server.set\_aborted(self.\_result)}
+\DoxyCodeLine{87             \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{88                 self.click()}
+\DoxyCodeLine{89                 self.wait\_until = datetime.now() + timedelta(seconds=self.wait\_duration)}
+\DoxyCodeLine{90                 self.\_result.success = \textcolor{keyword}{True}}
+\DoxyCodeLine{91                 self.\_result.message = \textcolor{stringliteral}{"Sick Camera took picture!."}}
+\DoxyCodeLine{92                 self.server.set\_succeeded(self.\_result)}
+\DoxyCodeLine{93         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{94             self.\_result.success = \textcolor{keyword}{False}}
+\DoxyCodeLine{95             self.\_result.message = \textcolor{stringliteral}{"Unknown goal type"}}
+\DoxyCodeLine{96             self.server.set\_aborted(self.\_result)}
+\DoxyCodeLine{97 }
+
+\end{DoxyCode}
+
+
+References schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+result, sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+\_\+result, sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+click(), schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+server, sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+server, sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+wait\+\_\+duration, and sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+wait\+\_\+until.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsick__camera__server_1_1SickCameraServer_aac75ac90cb5838abb65cbaff70cc9c6a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_ae58d1f128a23bad2fde532858744e73a}\label{classsick__camera__server_1_1SickCameraServer_ae58d1f128a23bad2fde532858744e73a}} 
+\index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!click@{click}}
+\index{click@{click}!sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}}
+\doxysubsubsection{\texorpdfstring{click()}{click()}}
+{\footnotesize\ttfamily def sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+click (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Clicks the pitures!\end{DoxyVerb}
+ 
+
+Definition at line 98 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{98     \textcolor{keyword}{def }click(self):}
+\DoxyCodeLine{99         \textcolor{stringliteral}{"""Clicks the pitures!"""}}
+\DoxyCodeLine{100         self.\_sick\_camera.trigger()}
+\DoxyCodeLine{101             }
+\DoxyCodeLine{102 }
+
+\end{DoxyCode}
+
+
+References sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+\_\+sick\+\_\+camera.
+
+
+
+Referenced by sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+callback().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classsick__camera__server_1_1SickCameraServer_ae58d1f128a23bad2fde532858744e73a_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_a860b09d99a486e21a3ecb9eccabb791d}\label{classsick__camera__server_1_1SickCameraServer_a860b09d99a486e21a3ecb9eccabb791d}} 
+\index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!\_result@{\_result}}
+\index{\_result@{\_result}!sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}}
+\doxysubsubsection{\texorpdfstring{\_result}{\_result}}
+{\footnotesize\ttfamily sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+\_\+result = Sick\+Camera\+Result()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 63 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+
+Referenced by sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+callback().
+
+\mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_ab779789a2748cef35423535ef9725072}\label{classsick__camera__server_1_1SickCameraServer_ab779789a2748cef35423535ef9725072}} 
+\index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!\_sick\_camera@{\_sick\_camera}}
+\index{\_sick\_camera@{\_sick\_camera}!sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}}
+\doxysubsubsection{\texorpdfstring{\_sick\_camera}{\_sick\_camera}}
+{\footnotesize\ttfamily sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+\_\+sick\+\_\+camera\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 68 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+
+Referenced by sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+click().
+
+\mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_a2752a40574cb6906ced24d80b2c17a89}\label{classsick__camera__server_1_1SickCameraServer_a2752a40574cb6906ced24d80b2c17a89}} 
+\index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!\_wait\_duration@{\_wait\_duration}}
+\index{\_wait\_duration@{\_wait\_duration}!sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}}
+\doxysubsubsection{\texorpdfstring{\_wait\_duration}{\_wait\_duration}}
+{\footnotesize\ttfamily int sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+\_\+wait\+\_\+duration = 120\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 64 of file sick\+\_\+camera\+\_\+server.\+py.
+
+\mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_ad118c8fa7021f2e71a18cdb622030a5c}\label{classsick__camera__server_1_1SickCameraServer_ad118c8fa7021f2e71a18cdb622030a5c}} 
+\index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!\_wait\_until@{\_wait\_until}}
+\index{\_wait\_until@{\_wait\_until}!sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}}
+\doxysubsubsection{\texorpdfstring{\_wait\_until}{\_wait\_until}}
+{\footnotesize\ttfamily sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+\_\+wait\+\_\+until = datetime.\+now()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 65 of file sick\+\_\+camera\+\_\+server.\+py.
+
+\mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_a0d0be1531df3cedbb4ef5963de1b1623}\label{classsick__camera__server_1_1SickCameraServer_a0d0be1531df3cedbb4ef5963de1b1623}} 
+\index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!server@{server}}
+\index{server@{server}!sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}}
+\doxysubsubsection{\texorpdfstring{server}{server}}
+{\footnotesize\ttfamily sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+server}
+
+
+
+Definition at line 69 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+
+Referenced by sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+callback().
+
+\mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_a336473895649bc3a87c3329569467162}\label{classsick__camera__server_1_1SickCameraServer_a336473895649bc3a87c3329569467162}} 
+\index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!wait\_duration@{wait\_duration}}
+\index{wait\_duration@{wait\_duration}!sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}}
+\doxysubsubsection{\texorpdfstring{wait\_duration}{wait\_duration}}
+{\footnotesize\ttfamily sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+wait\+\_\+duration}
+
+
+
+Definition at line 71 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+
+Referenced by sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+callback().
+
+\mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_a921861fa6c43066d266de3b80678546d}\label{classsick__camera__server_1_1SickCameraServer_a921861fa6c43066d266de3b80678546d}} 
+\index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!wait\_until@{wait\_until}}
+\index{wait\_until@{wait\_until}!sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}}
+\doxysubsubsection{\texorpdfstring{wait\_until}{wait\_until}}
+{\footnotesize\ttfamily sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+wait\+\_\+until}
+
+
+
+Definition at line 72 of file sick\+\_\+camera\+\_\+server.\+py.
+
+
+
+Referenced by sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+callback().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+gazebo/fetchit\+\_\+challenge/nodes/\mbox{\hyperlink{sick__camera__server_8py}{sick\+\_\+camera\+\_\+server.\+py}}\end{DoxyCompactItemize}

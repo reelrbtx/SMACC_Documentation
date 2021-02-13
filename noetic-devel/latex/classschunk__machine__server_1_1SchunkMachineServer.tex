@@ -1,0 +1,260 @@
+\hypertarget{classschunk__machine__server_1_1SchunkMachineServer}{}\doxysection{schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server Class Reference}
+\label{classschunk__machine__server_1_1SchunkMachineServer}\index{schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}}
+
+
+Inheritance diagram for schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{classschunk__machine__server_1_1SchunkMachineServer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{classschunk__machine__server_1_1SchunkMachineServer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classschunk__machine__server_1_1SchunkMachineServer_aeec63c5e0eb26d7b75cb1e70296816e8}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, is\+\_\+simulated=True)
+\item 
+def \mbox{\hyperlink{classschunk__machine__server_1_1SchunkMachineServer_aa1d8fc17f9801f8ed935a35802cb2a9d}{callback}} (self, goal)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classschunk__machine__server_1_1SchunkMachineServer_ae54d57ddb4939f948d5d46e3d6f98c1c}{server}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classschunk__machine__server_1_1SchunkMachineServer_ace61c6a91806e1e8475fad21b491a4dc}{\+\_\+shunk\+\_\+controlers\+\_\+object}}
+\item 
+\mbox{\hyperlink{classschunk__machine__server_1_1SchunkMachineServer_ab523131951500abbaac83bd018a390bd}{\+\_\+current\+\_\+state}}
+\item 
+\mbox{\hyperlink{classschunk__machine__server_1_1SchunkMachineServer_ae360918ed66e91b71773161cccd7f305}{\+\_\+lock\+\_\+time}}
+\item 
+\mbox{\hyperlink{classschunk__machine__server_1_1SchunkMachineServer_acc2c9f89e7655b1252230cbdfa9b4871}{\+\_\+lock\+\_\+until}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classschunk__machine__server_1_1SchunkMachineServer_ab1dbcae48d01a73b6f1e8b5cbed3bc8d}{\+\_\+result}} = Schunk\+Machine\+Result()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Class for using Schunk Machine chuck.\end{DoxyVerb}
+ 
+
+Definition at line 20 of file schunk\+\_\+machine\+\_\+server.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classschunk__machine__server_1_1SchunkMachineServer_aeec63c5e0eb26d7b75cb1e70296816e8}\label{classschunk__machine__server_1_1SchunkMachineServer_aeec63c5e0eb26d7b75cb1e70296816e8}} 
+\index{schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{is\+\_\+simulated = {\ttfamily True} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 24 of file schunk\+\_\+machine\+\_\+server.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{24     \textcolor{keyword}{def }\_\_init\_\_(self, is\_simulated = True):}
+\DoxyCodeLine{25         rospy.loginfo(\textcolor{stringliteral}{"Starting SchunkMachineServer..."})}
+\DoxyCodeLine{26         \textcolor{comment}{\# We Initialise the Real or Simulated Control object}}
+\DoxyCodeLine{27         \textcolor{keywordflow}{if} is\_simulated:}
+\DoxyCodeLine{28             self.\_shunk\_controlers\_object = ShunkMachineControlersSim()}
+\DoxyCodeLine{29         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{30             self.\_shunk\_controlers\_object = ShunkMachineControlersReal()}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         self.\_current\_state = SchunkMachineGoal.OPEN}
+\DoxyCodeLine{33         \textcolor{comment}{\# Minimum time for chuck to be closed}}
+\DoxyCodeLine{34         self.\_lock\_time = 120.0}
+\DoxyCodeLine{35         self.\_lock\_until = datetime.now()}
+\DoxyCodeLine{36         self.server = actionlib.SimpleActionServer(\textcolor{stringliteral}{'schunk\_machine'}, SchunkMachineAction, self.callback, \textcolor{keyword}{False})}
+\DoxyCodeLine{37         self.server.start()}
+\DoxyCodeLine{38         rospy.loginfo(\textcolor{stringliteral}{"SchunkMachineServer...READY"})}
+\DoxyCodeLine{39 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classschunk__machine__server_1_1SchunkMachineServer_aa1d8fc17f9801f8ed935a35802cb2a9d}\label{classschunk__machine__server_1_1SchunkMachineServer_aa1d8fc17f9801f8ed935a35802cb2a9d}} 
+\index{schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}!callback@{callback}}
+\index{callback@{callback}!schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}}
+\doxysubsubsection{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily def schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{goal }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Action server callback.\end{DoxyVerb}
+ 
+
+Definition at line 40 of file schunk\+\_\+machine\+\_\+server.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{40     \textcolor{keyword}{def }\mbox{\hyperlink{sm__ridgeback__barrel__search__1_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}}(self, goal):}
+\DoxyCodeLine{41         \textcolor{stringliteral}{"""Action server callback."""}}
+\DoxyCodeLine{42         rospy.loginfo(\textcolor{stringliteral}{"Received goal: "} + str(goal))}
+\DoxyCodeLine{43         \textcolor{keywordflow}{if} goal.state == self.\_current\_state:}
+\DoxyCodeLine{44             self.\_result.success = \textcolor{keyword}{True}}
+\DoxyCodeLine{45             self.\_result.message = \textcolor{stringliteral}{"Schunk Machine Chuck already in desired state."}}
+\DoxyCodeLine{46             self.server.set\_succeeded(self.\_result)}
+\DoxyCodeLine{47         \textcolor{keywordflow}{elif} goal.state == SchunkMachineGoal.CLOSE:}
+\DoxyCodeLine{48             self.\_shunk\_controlers\_object.close\_chuck()}
+\DoxyCodeLine{49             self.\_result.success = \textcolor{keyword}{True}}
+\DoxyCodeLine{50             self.\_result.message = \textcolor{stringliteral}{"Schunk Machine Chuck closed."}}
+\DoxyCodeLine{51             self.server.set\_succeeded(self.\_result)}
+\DoxyCodeLine{52             self.\_current\_state = SchunkMachineGoal.CLOSE}
+\DoxyCodeLine{53         \textcolor{keywordflow}{elif} goal.state == SchunkMachineGoal.OPEN:}
+\DoxyCodeLine{54             time\_left = self.\_lock\_until -\/ datetime.now()}
+\DoxyCodeLine{55             \textcolor{keywordflow}{if} time\_left.total\_seconds() > 0.0:}
+\DoxyCodeLine{56                 self.\_result.success = \textcolor{keyword}{False}}
+\DoxyCodeLine{57                 self.\_result.message = \textcolor{stringliteral}{"Schunk Machine Chuck must be closed for at least "} + str(self.\_lock\_time) +\(\backslash\)}
+\DoxyCodeLine{58                         \textcolor{stringliteral}{"s. Please wait "} + str(time\_left.total\_seconds()) + \textcolor{stringliteral}{"s."}}
+\DoxyCodeLine{59                 self.server.set\_aborted(self.\_result)}
+\DoxyCodeLine{60             \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{61                 self.\_shunk\_controlers\_object.open\_chuck()}
+\DoxyCodeLine{62                 self.\_result.success = \textcolor{keyword}{True}}
+\DoxyCodeLine{63                 self.\_result.message = \textcolor{stringliteral}{"Schunk Machine Chuck open."}}
+\DoxyCodeLine{64                 self.server.set\_succeeded(self.\_result)}
+\DoxyCodeLine{65                 self.\_current\_state = SchunkMachineGoal.OPEN}
+\DoxyCodeLine{66         \textcolor{keywordflow}{elif} goal.state == SchunkMachineGoal.START\_OPERATION:}
+\DoxyCodeLine{67             self.\_lock\_until = datetime.now() + timedelta(seconds=self.\_lock\_time)}
+\DoxyCodeLine{68             self.\_shunk\_controlers\_object.start\_operation()}
+\DoxyCodeLine{69             self.\_result.success = \textcolor{keyword}{True}}
+\DoxyCodeLine{70             self.\_result.message = \textcolor{stringliteral}{"Schunk Machine Started Operation, please wait =="}+str(self.\_lock\_time)+\textcolor{stringliteral}{" seconds"}}
+\DoxyCodeLine{71             self.server.set\_succeeded(self.\_result)}
+\DoxyCodeLine{72             self.\_current\_state = SchunkMachineGoal.START\_OPERATION}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         \textcolor{keywordflow}{elif} goal.state == SchunkMachineGoal.END\_OPERATION:}
+\DoxyCodeLine{75             time\_left = self.\_lock\_until -\/ datetime.now()}
+\DoxyCodeLine{76             \textcolor{keywordflow}{if} time\_left.total\_seconds() > 0.0:}
+\DoxyCodeLine{77                 self.\_result.success = \textcolor{keyword}{False}}
+\DoxyCodeLine{78                 self.\_result.message = \textcolor{stringliteral}{"Schunk Machine Chuck must be operating for at least "} + str(self.\_lock\_time) +\(\backslash\)}
+\DoxyCodeLine{79                         \textcolor{stringliteral}{"s. Please wait "} + str(time\_left.total\_seconds()) + \textcolor{stringliteral}{"s."}}
+\DoxyCodeLine{80                 self.server.set\_aborted(self.\_result)}
+\DoxyCodeLine{81             \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{82                 self.\_shunk\_controlers\_object.end\_operation()}
+\DoxyCodeLine{83                 self.\_result.success = \textcolor{keyword}{True}}
+\DoxyCodeLine{84                 self.\_result.message = \textcolor{stringliteral}{"Schunk Machine operation ended open."}}
+\DoxyCodeLine{85                 self.server.set\_succeeded(self.\_result)}
+\DoxyCodeLine{86                 self.\_current\_state = SchunkMachineGoal.END\_OPERATION}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{89             self.\_result.success = \textcolor{keyword}{False}}
+\DoxyCodeLine{90             self.\_result.message = \textcolor{stringliteral}{"Unknown goal type"}}
+\DoxyCodeLine{91             self.server.set\_aborted(self.\_result)}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93         rospy.loginfo(\textcolor{stringliteral}{"Message: "} + str(self.\_result.message))}
+\DoxyCodeLine{94 }
+
+\end{DoxyCode}
+
+
+References schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+current\+\_\+state, schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+lock\+\_\+time, schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+lock\+\_\+until, schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+result, schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+shunk\+\_\+controlers\+\_\+object, and schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+server.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classschunk__machine__server_1_1SchunkMachineServer_ab523131951500abbaac83bd018a390bd}\label{classschunk__machine__server_1_1SchunkMachineServer_ab523131951500abbaac83bd018a390bd}} 
+\index{schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}!\_current\_state@{\_current\_state}}
+\index{\_current\_state@{\_current\_state}!schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}}
+\doxysubsubsection{\texorpdfstring{\_current\_state}{\_current\_state}}
+{\footnotesize\ttfamily schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+current\+\_\+state\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 32 of file schunk\+\_\+machine\+\_\+server.\+py.
+
+
+
+Referenced by schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+callback().
+
+\mbox{\Hypertarget{classschunk__machine__server_1_1SchunkMachineServer_ae360918ed66e91b71773161cccd7f305}\label{classschunk__machine__server_1_1SchunkMachineServer_ae360918ed66e91b71773161cccd7f305}} 
+\index{schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}!\_lock\_time@{\_lock\_time}}
+\index{\_lock\_time@{\_lock\_time}!schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}}
+\doxysubsubsection{\texorpdfstring{\_lock\_time}{\_lock\_time}}
+{\footnotesize\ttfamily schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+lock\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 34 of file schunk\+\_\+machine\+\_\+server.\+py.
+
+
+
+Referenced by schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+callback().
+
+\mbox{\Hypertarget{classschunk__machine__server_1_1SchunkMachineServer_acc2c9f89e7655b1252230cbdfa9b4871}\label{classschunk__machine__server_1_1SchunkMachineServer_acc2c9f89e7655b1252230cbdfa9b4871}} 
+\index{schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}!\_lock\_until@{\_lock\_until}}
+\index{\_lock\_until@{\_lock\_until}!schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}}
+\doxysubsubsection{\texorpdfstring{\_lock\_until}{\_lock\_until}}
+{\footnotesize\ttfamily schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+lock\+\_\+until\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 35 of file schunk\+\_\+machine\+\_\+server.\+py.
+
+
+
+Referenced by schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+callback().
+
+\mbox{\Hypertarget{classschunk__machine__server_1_1SchunkMachineServer_ab1dbcae48d01a73b6f1e8b5cbed3bc8d}\label{classschunk__machine__server_1_1SchunkMachineServer_ab1dbcae48d01a73b6f1e8b5cbed3bc8d}} 
+\index{schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}!\_result@{\_result}}
+\index{\_result@{\_result}!schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}}
+\doxysubsubsection{\texorpdfstring{\_result}{\_result}}
+{\footnotesize\ttfamily schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+result = Schunk\+Machine\+Result()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 22 of file schunk\+\_\+machine\+\_\+server.\+py.
+
+
+
+Referenced by schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+callback(), and sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+callback().
+
+\mbox{\Hypertarget{classschunk__machine__server_1_1SchunkMachineServer_ace61c6a91806e1e8475fad21b491a4dc}\label{classschunk__machine__server_1_1SchunkMachineServer_ace61c6a91806e1e8475fad21b491a4dc}} 
+\index{schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}!\_shunk\_controlers\_object@{\_shunk\_controlers\_object}}
+\index{\_shunk\_controlers\_object@{\_shunk\_controlers\_object}!schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}}
+\doxysubsubsection{\texorpdfstring{\_shunk\_controlers\_object}{\_shunk\_controlers\_object}}
+{\footnotesize\ttfamily schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+\_\+shunk\+\_\+controlers\+\_\+object\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 28 of file schunk\+\_\+machine\+\_\+server.\+py.
+
+
+
+Referenced by schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+callback().
+
+\mbox{\Hypertarget{classschunk__machine__server_1_1SchunkMachineServer_ae54d57ddb4939f948d5d46e3d6f98c1c}\label{classschunk__machine__server_1_1SchunkMachineServer_ae54d57ddb4939f948d5d46e3d6f98c1c}} 
+\index{schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}!server@{server}}
+\index{server@{server}!schunk\_machine\_server.SchunkMachineServer@{schunk\_machine\_server.SchunkMachineServer}}
+\doxysubsubsection{\texorpdfstring{server}{server}}
+{\footnotesize\ttfamily schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+server}
+
+
+
+Definition at line 36 of file schunk\+\_\+machine\+\_\+server.\+py.
+
+
+
+Referenced by schunk\+\_\+machine\+\_\+server.\+Schunk\+Machine\+Server.\+callback(), and sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+callback().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+gazebo/fetchit\+\_\+challenge/nodes/\mbox{\hyperlink{schunk__machine__server_8py}{schunk\+\_\+machine\+\_\+server.\+py}}\end{DoxyCompactItemize}

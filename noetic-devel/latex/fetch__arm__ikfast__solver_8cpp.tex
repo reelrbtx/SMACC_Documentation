@@ -1,0 +1,1513 @@
+\hypertarget{fetch__arm__ikfast__solver_8cpp}{}\doxysection{submodules/fetch\+\_\+ros/fetch\+\_\+ikfast\+\_\+plugin/src/fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.cpp File Reference}
+\label{fetch__arm__ikfast__solver_8cpp}\index{submodules/fetch\_ros/fetch\_ikfast\_plugin/src/fetch\_arm\_ikfast\_solver.cpp@{submodules/fetch\_ros/fetch\_ikfast\_plugin/src/fetch\_arm\_ikfast\_solver.cpp}}
+{\ttfamily \#include \char`\"{}ikfast.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$complex$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+Include dependency graph for fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{fetch__arm__ikfast__solver_8cpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structCheckValue}{Check\+Value$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{classIKSolver}{I\+K\+Solver}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_aa9b5df21ca9479bf3deaa7da9845cd6c}{I\+K\+F\+A\+S\+T\+\_\+\+H\+A\+S\+\_\+\+L\+I\+B\+R\+A\+RY}}
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a14ff3dec1d7bf1b6f8bc3a7dcc0ed883}{I\+K\+F\+A\+S\+T\+\_\+\+C\+O\+M\+P\+I\+L\+E\+\_\+\+A\+S\+S\+E\+RT}}(x)~extern int \+\_\+\+\_\+dummy\mbox{[}(int)x\mbox{]}
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a9c15fe1e91b07ea3280f5239f9841b67}{\+\_\+\+\_\+\+P\+R\+E\+T\+T\+Y\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N\+\_\+\+\_\+}}~\+\_\+\+\_\+func\+\_\+\+\_\+
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af4e88f631e5a9381055a48fc90f3a633}{I\+K\+F\+A\+S\+T\+\_\+\+A\+S\+S\+E\+RT}}(b)~\{ if( !(b) ) \{ std\+::stringstream ss; ss $<$$<$ \char`\"{}ikfast exception\+: \char`\"{} $<$$<$ \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+ $<$$<$ \char`\"{}\+:\char`\"{} $<$$<$ \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+ $<$$<$ \char`\"{}\+: \char`\"{} $<$$<$\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a9c15fe1e91b07ea3280f5239f9841b67}{\+\_\+\+\_\+\+P\+R\+E\+T\+T\+Y\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N\+\_\+\+\_\+}} $<$$<$ \char`\"{}\+: Assertion \textquotesingle{}\char`\"{} $<$$<$ \#b $<$$<$ \char`\"{}\textquotesingle{} failed\char`\"{}; throw std\+::runtime\+\_\+error(ss.\+str()); \} \}
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a3940302e120211bb7af8a8a8290bb9e8}{I\+K\+F\+A\+S\+T\+\_\+\+A\+L\+I\+G\+N\+E\+D16}}(x)~x \+\_\+\+\_\+attribute((aligned(16)))
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_ad6a7e3ecef3983ec46a211ee00f30364}{I\+K2\+PI}}~((Ik\+Real)6.\+28318530717959)
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a0975daf07554eaa98742b83ae89344e6}{I\+K\+PI}}~((Ik\+Real)3.\+14159265358979)
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a45ed2f0e7e8e411264ebad95010986a7}{I\+K\+P\+I\+\_\+2}}~((Ik\+Real)1.\+57079632679490)
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a66d4d0ad56673a9555ebafe898d1e2c6}{I\+K\+F\+A\+S\+T\+\_\+\+S\+I\+N\+C\+O\+S\+\_\+\+T\+H\+R\+E\+SH}}~((Ik\+Real)1e-\/7)
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a0b03d83cf16b77e025d2100621f1f321}{I\+K\+F\+A\+S\+T\+\_\+\+A\+T\+A\+N2\+\_\+\+M\+A\+G\+T\+H\+R\+E\+SH}}~((Ik\+Real)1e-\/7)
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_adac93ad3ac22e016e6d690887e8688ba}{I\+K\+F\+A\+S\+T\+\_\+\+S\+O\+L\+U\+T\+I\+O\+N\+\_\+\+T\+H\+R\+E\+SH}}~((Ik\+Real)1e-\/6)
+\item 
+\#define \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a6e9c1fe901fde05201a0260782c920be}{I\+K\+F\+A\+S\+T\+\_\+\+E\+V\+A\+L\+C\+O\+N\+D\+\_\+\+T\+H\+R\+E\+SH}}~((Ik\+Real)0.\+00001)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_afc297e95128c8791d8660944bbc877eb}{I\+K\+F\+A\+S\+T\+\_\+\+C\+O\+M\+P\+I\+L\+E\+\_\+\+A\+S\+S\+E\+RT}} (\mbox{\hyperlink{ikfast_8h_afb507c47cee8d15d0241aa894bef5a67}{I\+K\+F\+A\+S\+T\+\_\+\+V\+E\+R\+S\+I\+ON}}==0x10000049)
+\item 
+void \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a1173528e396c678a5482bae5e7f6e43e}{dgetrf\+\_\+}} (const int $\ast$m, const int $\ast$n, double $\ast$a, const int $\ast$lda, int $\ast$ipiv, int $\ast$info)
+\item 
+void \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a6993bc2ff3751954630153bfd08bdd0b}{zgetrf\+\_\+}} (const int $\ast$m, const int $\ast$n, std\+::complex$<$ double $>$ $\ast$a, const int $\ast$lda, int $\ast$ipiv, int $\ast$info)
+\item 
+void \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8a0a23abeb2b5f4d136f544560421d68}{dgetri\+\_\+}} (const int $\ast$n, const double $\ast$a, const int $\ast$lda, int $\ast$ipiv, double $\ast$work, const int $\ast$lwork, int $\ast$info)
+\item 
+void \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8a0c34faf9ee31a4d83412a2b5d58125}{dgesv\+\_\+}} (const int $\ast$n, const int $\ast$nrhs, double $\ast$a, const int $\ast$lda, int $\ast$ipiv, double $\ast$b, const int $\ast$ldb, int $\ast$info)
+\item 
+void \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a1a2d74eb3410ef5bee213fce4b1f6443}{dgetrs\+\_\+}} (const char $\ast$trans, const int $\ast$n, const int $\ast$nrhs, double $\ast$a, const int $\ast$lda, int $\ast$ipiv, double $\ast$b, const int $\ast$ldb, int $\ast$info)
+\item 
+void \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_ae833a06f7ce2542df24b072e9c61d4e6}{dgeev\+\_\+}} (const char $\ast$jobvl, const char $\ast$jobvr, const int $\ast$n, double $\ast$a, const int $\ast$lda, double $\ast$wr, double $\ast$wi, double $\ast$vl, const int $\ast$ldvl, double $\ast$vr, const int $\ast$ldvr, double $\ast$work, const int $\ast$lwork, int $\ast$info)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af50774e991c9af3d423e2f15a1864fcd}{I\+Kabs}} (float f)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a95e1896df0cdeedf37f08dcb341b3918}{I\+Kabs}} (double f)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_ab527b2a76479c7f6ef9545b3c41a3b37}{I\+Ksqr}} (float f)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a95d600e8b1f9ee1b1f0d8919b31f1ce0}{I\+Ksqr}} (double f)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_ae5812d083cf95d2945bbd8b75c38d7cd}{I\+Klog}} (float f)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a429184284f7e6da54369a2290d8da22d}{I\+Klog}} (double f)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a159f6680a5e7eb9da0d76bfce5461050}{I\+Kasin}} (float f)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_abb5416a593fd7617f75130836a9f5491}{I\+Kasin}} (double f)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8af0ce9307f58d1e64bb413077478244}{I\+Kfmod}} (float x, float y)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a1ec8174f881fb22cf1a7cdf19b9a84ad}{I\+Kfmod}} (double x, double y)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a6985b623469662633075c50b708b5a97}{I\+Kacos}} (float f)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a10d86f8d485d2f30ce2638cb94b1e20e}{I\+Kacos}} (double f)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a7b5e881d13d85a4bc1020963f9e605b5}{I\+Ksin}} (float f)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8a11e6f22a19bd8f4ac73c3645c93c81}{I\+Ksin}} (double f)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8d241417f26868995cfb5a5648816e63}{I\+Kcos}} (float f)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_ac925942daf5e1b7df0c38f2a7a501ac0}{I\+Kcos}} (double f)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_ad2361d774d694b5935519a1b3c1075f9}{I\+Ktan}} (float f)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_acd8f1e5b83501cc42ffef27bd6458f9a}{I\+Ktan}} (double f)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a6f476874d10b265f6b0e6409104126b7}{I\+Ksqrt}} (float f)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_abb830ca15935c1c9b95a2ede5b2d43cc}{I\+Ksqrt}} (double f)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a1bbba04cc5114eb36e98181457e9f535}{I\+Katan2\+Simple}} (float fy, float fx)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a5e00463327d5e1acfd4e8eb788bbd6ac}{I\+Katan2}} (float fy, float fx)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a3ef91ca6735fc89a591ce04038c85ccf}{I\+Katan2\+Simple}} (double fy, double fx)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a82c3e90527cb705afd35438841994aa2}{I\+Katan2}} (double fy, double fx)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{structCheckValue}{Check\+Value}}$<$ T $>$ \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a2ee5f6ce877a26fda36feee121d53853}{I\+Katan2\+With\+Check}} (T fy, T fx, T epsilon)
+\item 
+float \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a845afc8ffdb8c068f0e75abac0d78b15}{I\+Ksign}} (float f)
+\item 
+double \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a903ab9632f6846449bbb3a8bba65ad8e}{I\+Ksign}} (double f)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{structCheckValue}{Check\+Value}}$<$ T $>$ \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_aa90320376a56efda3a751c3f5d86fc26}{I\+K\+Pow\+With\+Integer\+Check}} (T f, int n)
+\item 
+I\+K\+F\+A\+S\+T\+\_\+\+A\+PI void \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_ac5b257dc48deeb1c904d40b5dbf4a5a4}{Compute\+Fk}} (const Ik\+Real $\ast$j, Ik\+Real $\ast$eetrans, Ik\+Real $\ast$eerot)
+\item 
+I\+K\+F\+A\+S\+T\+\_\+\+A\+PI int \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af0cf03d3ad69d099a9a2eb6db5e5b352}{Get\+Num\+Free\+Parameters}} ()
+\item 
+I\+K\+F\+A\+S\+T\+\_\+\+A\+PI int $\ast$ \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a17f253d85cd4ac00e8840c417eef2487}{Get\+Free\+Parameters}} ()
+\item 
+I\+K\+F\+A\+S\+T\+\_\+\+A\+PI int \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a3e9541dde410904e043fe18701061b62}{Get\+Num\+Joints}} ()
+\item 
+I\+K\+F\+A\+S\+T\+\_\+\+A\+PI int \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a6709f20b26f0903f0aa58a26934c853c}{Get\+Ik\+Real\+Size}} ()
+\item 
+I\+K\+F\+A\+S\+T\+\_\+\+A\+PI int \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_abc401850b948d5a0402e9dbb77d3846f}{Get\+Ik\+Type}} ()
+\item 
+I\+K\+F\+A\+S\+T\+\_\+\+A\+PI \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_ad6e97fc303efda1a956b9a044f8424fc}{Compute\+Ik}} (const Ik\+Real $\ast$eetrans, const Ik\+Real $\ast$eerot, const Ik\+Real $\ast$pfree, \mbox{\hyperlink{classikfast_1_1IkSolutionListBase}{Ik\+Solution\+List\+Base}}$<$ Ik\+Real $>$ \&solutions)
+\item 
+I\+K\+F\+A\+S\+T\+\_\+\+A\+PI \mbox{\hyperlink{classbool}{bool}} \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a0657832109f0b05edc3d2b70d8ecc5ac}{Compute\+Ik2}} (const Ik\+Real $\ast$eetrans, const Ik\+Real $\ast$eerot, const Ik\+Real $\ast$pfree, \mbox{\hyperlink{classikfast_1_1IkSolutionListBase}{Ik\+Solution\+List\+Base}}$<$ Ik\+Real $>$ \&solutions, void $\ast$p\+Open\+R\+A\+V\+E\+Manip)
+\item 
+const I\+K\+F\+A\+S\+T\+\_\+\+A\+PI char $\ast$ \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a60bfc91584dcf60d86a5bede8189d2fd}{Get\+Kinematics\+Hash}} ()
+\item 
+const I\+K\+F\+A\+S\+T\+\_\+\+A\+PI char $\ast$ \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a6affa3876127bec46c92ac30669c3fcf}{Get\+Ik\+Fast\+Version}} ()
+\item 
+int \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a9c15fe1e91b07ea3280f5239f9841b67}\label{fetch__arm__ikfast__solver_8cpp_a9c15fe1e91b07ea3280f5239f9841b67}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!\_\_PRETTY\_FUNCTION\_\_@{\_\_PRETTY\_FUNCTION\_\_}}
+\index{\_\_PRETTY\_FUNCTION\_\_@{\_\_PRETTY\_FUNCTION\_\_}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{\_\_PRETTY\_FUNCTION\_\_}{\_\_PRETTY\_FUNCTION\_\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+P\+R\+E\+T\+T\+Y\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N\+\_\+\+\_\+~\+\_\+\+\_\+func\+\_\+\+\_\+}
+
+
+
+Definition at line 46 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_ad6a7e3ecef3983ec46a211ee00f30364}\label{fetch__arm__ikfast__solver_8cpp_ad6a7e3ecef3983ec46a211ee00f30364}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IK2PI@{IK2PI}}
+\index{IK2PI@{IK2PI}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IK2PI}{IK2PI}}
+{\footnotesize\ttfamily \#define I\+K2\+PI~((Ik\+Real)6.\+28318530717959)}
+
+
+
+Definition at line 59 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a3940302e120211bb7af8a8a8290bb9e8}\label{fetch__arm__ikfast__solver_8cpp_a3940302e120211bb7af8a8a8290bb9e8}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKFAST\_ALIGNED16@{IKFAST\_ALIGNED16}}
+\index{IKFAST\_ALIGNED16@{IKFAST\_ALIGNED16}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKFAST\_ALIGNED16}{IKFAST\_ALIGNED16}}
+{\footnotesize\ttfamily \#define I\+K\+F\+A\+S\+T\+\_\+\+A\+L\+I\+G\+N\+E\+D16(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~x \+\_\+\+\_\+attribute((aligned(16)))}
+
+
+
+Definition at line 56 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_af4e88f631e5a9381055a48fc90f3a633}\label{fetch__arm__ikfast__solver_8cpp_af4e88f631e5a9381055a48fc90f3a633}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKFAST\_ASSERT@{IKFAST\_ASSERT}}
+\index{IKFAST\_ASSERT@{IKFAST\_ASSERT}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKFAST\_ASSERT}{IKFAST\_ASSERT}}
+{\footnotesize\ttfamily \#define I\+K\+F\+A\+S\+T\+\_\+\+A\+S\+S\+E\+RT(\begin{DoxyParamCaption}\item[{}]{b }\end{DoxyParamCaption})~\{ if( !(b) ) \{ std\+::stringstream ss; ss $<$$<$ \char`\"{}ikfast exception\+: \char`\"{} $<$$<$ \+\_\+\+\_\+\+F\+I\+L\+E\+\_\+\+\_\+ $<$$<$ \char`\"{}\+:\char`\"{} $<$$<$ \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+ $<$$<$ \char`\"{}\+: \char`\"{} $<$$<$\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a9c15fe1e91b07ea3280f5239f9841b67}{\+\_\+\+\_\+\+P\+R\+E\+T\+T\+Y\+\_\+\+F\+U\+N\+C\+T\+I\+O\+N\+\_\+\+\_\+}} $<$$<$ \char`\"{}\+: Assertion \textquotesingle{}\char`\"{} $<$$<$ \#b $<$$<$ \char`\"{}\textquotesingle{} failed\char`\"{}; throw std\+::runtime\+\_\+error(ss.\+str()); \} \}}
+
+
+
+Definition at line 49 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a0b03d83cf16b77e025d2100621f1f321}\label{fetch__arm__ikfast__solver_8cpp_a0b03d83cf16b77e025d2100621f1f321}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKFAST\_ATAN2\_MAGTHRESH@{IKFAST\_ATAN2\_MAGTHRESH}}
+\index{IKFAST\_ATAN2\_MAGTHRESH@{IKFAST\_ATAN2\_MAGTHRESH}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKFAST\_ATAN2\_MAGTHRESH}{IKFAST\_ATAN2\_MAGTHRESH}}
+{\footnotesize\ttfamily \#define I\+K\+F\+A\+S\+T\+\_\+\+A\+T\+A\+N2\+\_\+\+M\+A\+G\+T\+H\+R\+E\+SH~((Ik\+Real)1e-\/7)}
+
+
+
+Definition at line 107 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a14ff3dec1d7bf1b6f8bc3a7dcc0ed883}\label{fetch__arm__ikfast__solver_8cpp_a14ff3dec1d7bf1b6f8bc3a7dcc0ed883}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKFAST\_COMPILE\_ASSERT@{IKFAST\_COMPILE\_ASSERT}}
+\index{IKFAST\_COMPILE\_ASSERT@{IKFAST\_COMPILE\_ASSERT}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKFAST\_COMPILE\_ASSERT}{IKFAST\_COMPILE\_ASSERT}}
+{\footnotesize\ttfamily \#define I\+K\+F\+A\+S\+T\+\_\+\+C\+O\+M\+P\+I\+L\+E\+\_\+\+A\+S\+S\+E\+RT(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~extern int \+\_\+\+\_\+dummy\mbox{[}(int)x\mbox{]}}
+
+
+
+Definition at line 25 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a6e9c1fe901fde05201a0260782c920be}\label{fetch__arm__ikfast__solver_8cpp_a6e9c1fe901fde05201a0260782c920be}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKFAST\_EVALCOND\_THRESH@{IKFAST\_EVALCOND\_THRESH}}
+\index{IKFAST\_EVALCOND\_THRESH@{IKFAST\_EVALCOND\_THRESH}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKFAST\_EVALCOND\_THRESH}{IKFAST\_EVALCOND\_THRESH}}
+{\footnotesize\ttfamily \#define I\+K\+F\+A\+S\+T\+\_\+\+E\+V\+A\+L\+C\+O\+N\+D\+\_\+\+T\+H\+R\+E\+SH~((Ik\+Real)0.\+00001)}
+
+
+
+Definition at line 117 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_aa9b5df21ca9479bf3deaa7da9845cd6c}\label{fetch__arm__ikfast__solver_8cpp_aa9b5df21ca9479bf3deaa7da9845cd6c}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKFAST\_HAS\_LIBRARY@{IKFAST\_HAS\_LIBRARY}}
+\index{IKFAST\_HAS\_LIBRARY@{IKFAST\_HAS\_LIBRARY}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKFAST\_HAS\_LIBRARY}{IKFAST\_HAS\_LIBRARY}}
+{\footnotesize\ttfamily \#define I\+K\+F\+A\+S\+T\+\_\+\+H\+A\+S\+\_\+\+L\+I\+B\+R\+A\+RY}
+
+autogenerated analytical inverse kinematics code from ikfast program part of Open\+R\+A\+VE \begin{DoxyAuthor}{Author}
+Rosen Diankov
+\end{DoxyAuthor}
+Licensed under the Apache License, Version 2.\+0 (the \char`\"{}\+License\char`\"{}); you may not use this file except in compliance with the License. You may obtain a copy of the License at \href{http://www.apache.org/licenses/LICENSE-2.0}{\texttt{ http\+://www.\+apache.\+org/licenses/\+L\+I\+C\+E\+N\+S\+E-\/2.\+0}}
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \char`\"{}\+A\+S I\+S\char`\"{} B\+A\+S\+IS, W\+I\+T\+H\+O\+UT W\+A\+R\+R\+A\+N\+T\+I\+ES OR C\+O\+N\+D\+I\+T\+I\+O\+NS OF A\+NY K\+I\+ND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+ikfast version 0x10000049 generated on 2016-\/08-\/23 13\+:37\+:00.\+154880 To compile with gcc\+: gcc -\/lstdc++ ik.\+cpp To compile without any main function as a shared object (might need -\/llapack)\+: gcc -\/f\+P\+IC -\/lstdc++ -\/D\+I\+K\+F\+A\+S\+T\+\_\+\+N\+O\+\_\+\+M\+A\+IN -\/D\+I\+K\+F\+A\+S\+T\+\_\+\+C\+L\+I\+B\+R\+A\+RY -\/shared -\/Wl,-\/soname,libik.\+so -\/o libik.\+so ik.\+cpp 
+
+Definition at line 20 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a66d4d0ad56673a9555ebafe898d1e2c6}\label{fetch__arm__ikfast__solver_8cpp_a66d4d0ad56673a9555ebafe898d1e2c6}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKFAST\_SINCOS\_THRESH@{IKFAST\_SINCOS\_THRESH}}
+\index{IKFAST\_SINCOS\_THRESH@{IKFAST\_SINCOS\_THRESH}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKFAST\_SINCOS\_THRESH}{IKFAST\_SINCOS\_THRESH}}
+{\footnotesize\ttfamily \#define I\+K\+F\+A\+S\+T\+\_\+\+S\+I\+N\+C\+O\+S\+\_\+\+T\+H\+R\+E\+SH~((Ik\+Real)1e-\/7)}
+
+
+
+Definition at line 102 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_adac93ad3ac22e016e6d690887e8688ba}\label{fetch__arm__ikfast__solver_8cpp_adac93ad3ac22e016e6d690887e8688ba}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKFAST\_SOLUTION\_THRESH@{IKFAST\_SOLUTION\_THRESH}}
+\index{IKFAST\_SOLUTION\_THRESH@{IKFAST\_SOLUTION\_THRESH}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKFAST\_SOLUTION\_THRESH}{IKFAST\_SOLUTION\_THRESH}}
+{\footnotesize\ttfamily \#define I\+K\+F\+A\+S\+T\+\_\+\+S\+O\+L\+U\+T\+I\+O\+N\+\_\+\+T\+H\+R\+E\+SH~((Ik\+Real)1e-\/6)}
+
+
+
+Definition at line 112 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a0975daf07554eaa98742b83ae89344e6}\label{fetch__arm__ikfast__solver_8cpp_a0975daf07554eaa98742b83ae89344e6}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKPI@{IKPI}}
+\index{IKPI@{IKPI}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKPI}{IKPI}}
+{\footnotesize\ttfamily \#define I\+K\+PI~((Ik\+Real)3.\+14159265358979)}
+
+
+
+Definition at line 60 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a45ed2f0e7e8e411264ebad95010986a7}\label{fetch__arm__ikfast__solver_8cpp_a45ed2f0e7e8e411264ebad95010986a7}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKPI\_2@{IKPI\_2}}
+\index{IKPI\_2@{IKPI\_2}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKPI\_2}{IKPI\_2}}
+{\footnotesize\ttfamily \#define I\+K\+P\+I\+\_\+2~((Ik\+Real)1.\+57079632679490)}
+
+
+
+Definition at line 61 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_ac5b257dc48deeb1c904d40b5dbf4a5a4}\label{fetch__arm__ikfast__solver_8cpp_ac5b257dc48deeb1c904d40b5dbf4a5a4}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!ComputeFk@{ComputeFk}}
+\index{ComputeFk@{ComputeFk}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{ComputeFk()}{ComputeFk()}}
+{\footnotesize\ttfamily I\+K\+F\+A\+S\+T\+\_\+\+A\+PI void Compute\+Fk (\begin{DoxyParamCaption}\item[{const Ik\+Real $\ast$}]{j,  }\item[{Ik\+Real $\ast$}]{eetrans,  }\item[{Ik\+Real $\ast$}]{eerot }\end{DoxyParamCaption})}
+
+solves the forward kinematics equations. 
+\begin{DoxyParams}{Parameters}
+{\em pfree} & is an array specifying the free joints of the chain. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 299 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{299                                                                            \{}
+\DoxyCodeLine{300 IkReal x0,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21,x22,x23,x24,x25,x26,x27,x28,x29,x30,x31,x32,x33,x34,x35,x36,x37,x38,x39,x40,x41,x42,x43,x44,x45,x46,x47,x48,x49,x50,x51,x52,x53,x54,x55,x56,x57,x58,x59;}
+\DoxyCodeLine{301 x0=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a7b5e881d13d85a4bc1020963f9e605b5}{IKsin}}(j[2]);}
+\DoxyCodeLine{302 x1=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a7b5e881d13d85a4bc1020963f9e605b5}{IKsin}}(j[5]);}
+\DoxyCodeLine{303 x2=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a7b5e881d13d85a4bc1020963f9e605b5}{IKsin}}(j[4]);}
+\DoxyCodeLine{304 x3=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8d241417f26868995cfb5a5648816e63}{IKcos}}(j[4]);}
+\DoxyCodeLine{305 x4=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8d241417f26868995cfb5a5648816e63}{IKcos}}(j[2]);}
+\DoxyCodeLine{306 x5=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8d241417f26868995cfb5a5648816e63}{IKcos}}(j[3]);}
+\DoxyCodeLine{307 x6=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a7b5e881d13d85a4bc1020963f9e605b5}{IKsin}}(j[1]);}
+\DoxyCodeLine{308 x7=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a7b5e881d13d85a4bc1020963f9e605b5}{IKsin}}(j[3]);}
+\DoxyCodeLine{309 x8=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8d241417f26868995cfb5a5648816e63}{IKcos}}(j[5]);}
+\DoxyCodeLine{310 x9=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8d241417f26868995cfb5a5648816e63}{IKcos}}(j[1]);}
+\DoxyCodeLine{311 x10=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a7b5e881d13d85a4bc1020963f9e605b5}{IKsin}}(j[0]);}
+\DoxyCodeLine{312 x11=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8d241417f26868995cfb5a5648816e63}{IKcos}}(j[0]);}
+\DoxyCodeLine{313 x12=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a8d241417f26868995cfb5a5648816e63}{IKcos}}(j[6]);}
+\DoxyCodeLine{314 x13=\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a7b5e881d13d85a4bc1020963f9e605b5}{IKsin}}(j[6]);}
+\DoxyCodeLine{315 x14=((1.0)*x1);}
+\DoxyCodeLine{316 x15=((1.0)*x13);}
+\DoxyCodeLine{317 x16=((1.0)*x9);}
+\DoxyCodeLine{318 x17=((1.0)*x12);}
+\DoxyCodeLine{319 x18=((0.1385)*x3);}
+\DoxyCodeLine{320 x19=((1.0)*x6);}
+\DoxyCodeLine{321 x20=((1.0)*x3);}
+\DoxyCodeLine{322 x21=((1.0)*x4);}
+\DoxyCodeLine{323 x22=((1.0)*x8);}
+\DoxyCodeLine{324 x23=(x0*x3);}
+\DoxyCodeLine{325 x24=(x5*x9);}
+\DoxyCodeLine{326 x25=(x0*x7);}
+\DoxyCodeLine{327 x26=(x2*x4);}
+\DoxyCodeLine{328 x27=(x0*x2);}
+\DoxyCodeLine{329 x28=(x5*x6);}
+\DoxyCodeLine{330 x29=(x4*x7);}
+\DoxyCodeLine{331 x30=((0.3215)*x25);}
+\DoxyCodeLine{332 x31=(x19*x7);}
+\DoxyCodeLine{333 x32=((0.1385)*x29);}
+\DoxyCodeLine{334 x33=(x19*x29);}
+\DoxyCodeLine{335 x34=((1.0)*x27*x5);}
+\DoxyCodeLine{336 x35=((0.1385)*x25*x8);}
+\DoxyCodeLine{337 x36=(x16*x27);}
+\DoxyCodeLine{338 x37=(x16*x23);}
+\DoxyCodeLine{339 x38=(((x23*x5))+x26);}
+\DoxyCodeLine{340 x39=((((-\/1.0)*x34))+((x3*x4)));}
+\DoxyCodeLine{341 x40=((((-\/1.0)*x31))+((x24*x4)));}
+\DoxyCodeLine{342 x41=(x34+(((-\/1.0)*x20*x4)));}
+\DoxyCodeLine{343 x42=((((-\/1.0)*x16*x4*x5))+x31);}
+\DoxyCodeLine{344 x43=(((x16*x7))+((x19*x4*x5)));}
+\DoxyCodeLine{345 x44=((-\/1.0)*x43);}
+\DoxyCodeLine{346 x45=(((x0*x18*x5))+(((0.1385)*x26)));}
+\DoxyCodeLine{347 x46=((((-\/1.0)*x19*x5))+(((-\/1.0)*x16*x29)));}
+\DoxyCodeLine{348 x47=(x30+x35);}
+\DoxyCodeLine{349 x48=(x2*x42);}
+\DoxyCodeLine{350 x49=(x2*x43);}
+\DoxyCodeLine{351 x50=(((x14*x25))+(((-\/1.0)*x22*x38)));}
+\DoxyCodeLine{352 x51=(((x27*x6))+((x3*x44)));}
+\DoxyCodeLine{353 x52=((1.0)*x50);}
+\DoxyCodeLine{354 x53=(x13*x50);}
+\DoxyCodeLine{355 x54=(((x8*(((((-\/1.0)*x33))+x24))))+((x1*x51)));}
+\DoxyCodeLine{356 x55=(((x8*(((((-\/1.0)*x36))+((x3*x40))))))+((x1*x46)));}
+\DoxyCodeLine{357 x56=(((x14*(((((-\/1.0)*x33))+((x16*x5))))))+(((-\/1.0)*x22*x51)));}
+\DoxyCodeLine{358 x57=((((0.352)*x9))+(((0.3215)*x24))+(((-\/0.3215)*x29*x6))+((x1*(((((0.1385)*x27*x6))+((x18*x44))))))+((x8*(((((-\/1.0)*x32*x6))+(((0.1385)*x24)))))));}
+\DoxyCodeLine{359 x58=(((x13*x56))+((x12*((((x23*x6))+x49)))));}
+\DoxyCodeLine{360 x59=(((x12*x56))+((x13*(((((-\/1.0)*x49))+(((-\/1.0)*x19*x23)))))));}
+\DoxyCodeLine{361 eerot[0]=(((x11*x54))+((x10*(((((-\/1.0)*x14*x38))+(((-\/1.0)*x22*x25)))))));}
+\DoxyCodeLine{362 eerot[1]=(((x10*(((((-\/1.0)*x17*x39))+(((-\/1.0)*x15*x50))))))+((x11*x58)));}
+\DoxyCodeLine{363 eerot[2]=(((x11*x59))+((x10*(((((-\/1.0)*x15*x41))+(((-\/1.0)*x17*x50)))))));}
+\DoxyCodeLine{364 eetrans[0]=((0.119525)+((x10*(((((-\/1.0)*x47))+(((-\/1.0)*x14*x45))))))+((x11*x57))+(((0.117)*x11)));}
+\DoxyCodeLine{365 eerot[3]=(((x11*((((x1*x38))+((x25*x8))))))+((x10*x54)));}
+\DoxyCodeLine{366 eerot[4]=(((x11*((x53+((x12*x39))))))+((x10*x58)));}
+\DoxyCodeLine{367 eerot[5]=(((x11*((((x12*x50))+((x13*x41))))))+((x10*x59)));}
+\DoxyCodeLine{368 eetrans[1]=(((x10*x57))+((x11*((x47+((x1*x45))))))+(((0.117)*x10)));}
+\DoxyCodeLine{369 eerot[6]=(((x1*(((((-\/1.0)*x20*x40))+x36))))+((x46*x8)));}
+\DoxyCodeLine{370 eerot[7]=(((x13*x55))+((x12*(((((-\/1.0)*x48))+x37)))));}
+\DoxyCodeLine{371 eerot[8]=(((x12*x55))+((x13*(((((-\/1.0)*x37))+x48)))));}
+\DoxyCodeLine{372 eetrans[2]=((0.40858)+(((-\/0.3215)*x29*x9))+(((-\/0.3215)*x28))+((x1*(((((0.1385)*x27*x9))+(((-\/1.0)*x18*x40))))))+(((-\/0.352)*x6))+((x8*(((((-\/1.0)*x32*x9))+(((-\/0.1385)*x28)))))));}
+\DoxyCodeLine{373 \}}
+
+\end{DoxyCode}
+
+
+References I\+Kcos(), and I\+Ksin().
+
+
+
+Referenced by fetch\+\_\+arm\+::\+I\+K\+Fast\+Kinematics\+Plugin\+::get\+Position\+F\+K().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{fetch__arm__ikfast__solver_8cpp_ac5b257dc48deeb1c904d40b5dbf4a5a4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=345pt]{fetch__arm__ikfast__solver_8cpp_ac5b257dc48deeb1c904d40b5dbf4a5a4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_ad6e97fc303efda1a956b9a044f8424fc}\label{fetch__arm__ikfast__solver_8cpp_ad6e97fc303efda1a956b9a044f8424fc}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!ComputeIk@{ComputeIk}}
+\index{ComputeIk@{ComputeIk}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{ComputeIk()}{ComputeIk()}}
+{\footnotesize\ttfamily I\+K\+F\+A\+S\+T\+\_\+\+A\+PI \mbox{\hyperlink{classbool}{bool}} Compute\+Ik (\begin{DoxyParamCaption}\item[{const Ik\+Real $\ast$}]{eetrans,  }\item[{const Ik\+Real $\ast$}]{eerot,  }\item[{const Ik\+Real $\ast$}]{pfree,  }\item[{\mbox{\hyperlink{classikfast_1_1IkSolutionListBase}{Ik\+Solution\+List\+Base}}$<$ Ik\+Real $>$ \&}]{solutions }\end{DoxyParamCaption})}
+
+solves the inverse kinematics equations. 
+\begin{DoxyParams}{Parameters}
+{\em pfree} & is an array specifying the free joints of the chain. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 17437 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{17437                                                                                                                                   \{}
+\DoxyCodeLine{17438 \mbox{\hyperlink{classIKSolver}{IKSolver}} solver;}
+\DoxyCodeLine{17439 \textcolor{keywordflow}{return} solver.\mbox{\hyperlink{classIKSolver_ac0195e291bed491b4cb6a68db8199b55}{ComputeIk}}(eetrans,eerot,pfree,solutions);}
+\DoxyCodeLine{17440 \}}
+
+\end{DoxyCode}
+
+
+References I\+K\+Solver\+::\+Compute\+Ik().
+
+
+
+Referenced by main(), and fetch\+\_\+arm\+::\+I\+K\+Fast\+Kinematics\+Plugin\+::solve().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_ad6e97fc303efda1a956b9a044f8424fc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{fetch__arm__ikfast__solver_8cpp_ad6e97fc303efda1a956b9a044f8424fc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a0657832109f0b05edc3d2b70d8ecc5ac}\label{fetch__arm__ikfast__solver_8cpp_a0657832109f0b05edc3d2b70d8ecc5ac}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!ComputeIk2@{ComputeIk2}}
+\index{ComputeIk2@{ComputeIk2}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{ComputeIk2()}{ComputeIk2()}}
+{\footnotesize\ttfamily I\+K\+F\+A\+S\+T\+\_\+\+A\+PI \mbox{\hyperlink{classbool}{bool}} Compute\+Ik2 (\begin{DoxyParamCaption}\item[{const Ik\+Real $\ast$}]{eetrans,  }\item[{const Ik\+Real $\ast$}]{eerot,  }\item[{const Ik\+Real $\ast$}]{pfree,  }\item[{\mbox{\hyperlink{classikfast_1_1IkSolutionListBase}{Ik\+Solution\+List\+Base}}$<$ Ik\+Real $>$ \&}]{solutions,  }\item[{void $\ast$}]{p\+Open\+R\+A\+V\+E\+Manip }\end{DoxyParamCaption})}
+
+
+
+Definition at line 17442 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{17442                                                                                                                                                          \{}
+\DoxyCodeLine{17443 \mbox{\hyperlink{classIKSolver}{IKSolver}} solver;}
+\DoxyCodeLine{17444 \textcolor{keywordflow}{return} solver.\mbox{\hyperlink{classIKSolver_ac0195e291bed491b4cb6a68db8199b55}{ComputeIk}}(eetrans,eerot,pfree,solutions);}
+\DoxyCodeLine{17445 \}}
+
+\end{DoxyCode}
+
+
+References I\+K\+Solver\+::\+Compute\+Ik().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a0657832109f0b05edc3d2b70d8ecc5ac_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_ae833a06f7ce2542df24b072e9c61d4e6}\label{fetch__arm__ikfast__solver_8cpp_ae833a06f7ce2542df24b072e9c61d4e6}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!dgeev\_@{dgeev\_}}
+\index{dgeev\_@{dgeev\_}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{dgeev\_()}{dgeev\_()}}
+{\footnotesize\ttfamily void dgeev\+\_\+ (\begin{DoxyParamCaption}\item[{const char $\ast$}]{jobvl,  }\item[{const char $\ast$}]{jobvr,  }\item[{const int $\ast$}]{n,  }\item[{double $\ast$}]{a,  }\item[{const int $\ast$}]{lda,  }\item[{double $\ast$}]{wr,  }\item[{double $\ast$}]{wi,  }\item[{double $\ast$}]{vl,  }\item[{const int $\ast$}]{ldvl,  }\item[{double $\ast$}]{vr,  }\item[{const int $\ast$}]{ldvr,  }\item[{double $\ast$}]{work,  }\item[{const int $\ast$}]{lwork,  }\item[{int $\ast$}]{info }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a8a0c34faf9ee31a4d83412a2b5d58125}\label{fetch__arm__ikfast__solver_8cpp_a8a0c34faf9ee31a4d83412a2b5d58125}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!dgesv\_@{dgesv\_}}
+\index{dgesv\_@{dgesv\_}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{dgesv\_()}{dgesv\_()}}
+{\footnotesize\ttfamily void dgesv\+\_\+ (\begin{DoxyParamCaption}\item[{const int $\ast$}]{n,  }\item[{const int $\ast$}]{nrhs,  }\item[{double $\ast$}]{a,  }\item[{const int $\ast$}]{lda,  }\item[{int $\ast$}]{ipiv,  }\item[{double $\ast$}]{b,  }\item[{const int $\ast$}]{ldb,  }\item[{int $\ast$}]{info }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a1173528e396c678a5482bae5e7f6e43e}\label{fetch__arm__ikfast__solver_8cpp_a1173528e396c678a5482bae5e7f6e43e}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!dgetrf\_@{dgetrf\_}}
+\index{dgetrf\_@{dgetrf\_}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{dgetrf\_()}{dgetrf\_()}}
+{\footnotesize\ttfamily void dgetrf\+\_\+ (\begin{DoxyParamCaption}\item[{const int $\ast$}]{m,  }\item[{const int $\ast$}]{n,  }\item[{double $\ast$}]{a,  }\item[{const int $\ast$}]{lda,  }\item[{int $\ast$}]{ipiv,  }\item[{int $\ast$}]{info }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a8a0a23abeb2b5f4d136f544560421d68}\label{fetch__arm__ikfast__solver_8cpp_a8a0a23abeb2b5f4d136f544560421d68}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!dgetri\_@{dgetri\_}}
+\index{dgetri\_@{dgetri\_}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{dgetri\_()}{dgetri\_()}}
+{\footnotesize\ttfamily void dgetri\+\_\+ (\begin{DoxyParamCaption}\item[{const int $\ast$}]{n,  }\item[{const double $\ast$}]{a,  }\item[{const int $\ast$}]{lda,  }\item[{int $\ast$}]{ipiv,  }\item[{double $\ast$}]{work,  }\item[{const int $\ast$}]{lwork,  }\item[{int $\ast$}]{info }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a1a2d74eb3410ef5bee213fce4b1f6443}\label{fetch__arm__ikfast__solver_8cpp_a1a2d74eb3410ef5bee213fce4b1f6443}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!dgetrs\_@{dgetrs\_}}
+\index{dgetrs\_@{dgetrs\_}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{dgetrs\_()}{dgetrs\_()}}
+{\footnotesize\ttfamily void dgetrs\+\_\+ (\begin{DoxyParamCaption}\item[{const char $\ast$}]{trans,  }\item[{const int $\ast$}]{n,  }\item[{const int $\ast$}]{nrhs,  }\item[{double $\ast$}]{a,  }\item[{const int $\ast$}]{lda,  }\item[{int $\ast$}]{ipiv,  }\item[{double $\ast$}]{b,  }\item[{const int $\ast$}]{ldb,  }\item[{int $\ast$}]{info }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a17f253d85cd4ac00e8840c417eef2487}\label{fetch__arm__ikfast__solver_8cpp_a17f253d85cd4ac00e8840c417eef2487}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!GetFreeParameters@{GetFreeParameters}}
+\index{GetFreeParameters@{GetFreeParameters}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{GetFreeParameters()}{GetFreeParameters()}}
+{\footnotesize\ttfamily I\+K\+F\+A\+S\+T\+\_\+\+A\+PI int$\ast$ Get\+Free\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 376 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{376 \{ \textcolor{keyword}{static} \textcolor{keywordtype}{int} freeparams[] = \{0\}; \textcolor{keywordflow}{return} freeparams; \}}
+
+\end{DoxyCode}
+
+
+Referenced by fetch\+\_\+arm\+::\+I\+K\+Fast\+Kinematics\+Plugin\+::initialize().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a17f253d85cd4ac00e8840c417eef2487_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a6affa3876127bec46c92ac30669c3fcf}\label{fetch__arm__ikfast__solver_8cpp_a6affa3876127bec46c92ac30669c3fcf}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!GetIkFastVersion@{GetIkFastVersion}}
+\index{GetIkFastVersion@{GetIkFastVersion}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{GetIkFastVersion()}{GetIkFastVersion()}}
+{\footnotesize\ttfamily const I\+K\+F\+A\+S\+T\+\_\+\+A\+PI char$\ast$ Get\+Ik\+Fast\+Version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 17449 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{17449 \{ \textcolor{keywordflow}{return} \textcolor{stringliteral}{"0x10000049"}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a6709f20b26f0903f0aa58a26934c853c}\label{fetch__arm__ikfast__solver_8cpp_a6709f20b26f0903f0aa58a26934c853c}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!GetIkRealSize@{GetIkRealSize}}
+\index{GetIkRealSize@{GetIkRealSize}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{GetIkRealSize()}{GetIkRealSize()}}
+{\footnotesize\ttfamily I\+K\+F\+A\+S\+T\+\_\+\+A\+PI int Get\+Ik\+Real\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 379 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{379 \{ \textcolor{keywordflow}{return} \textcolor{keyword}{sizeof}(IkReal); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_abc401850b948d5a0402e9dbb77d3846f}\label{fetch__arm__ikfast__solver_8cpp_abc401850b948d5a0402e9dbb77d3846f}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!GetIkType@{GetIkType}}
+\index{GetIkType@{GetIkType}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{GetIkType()}{GetIkType()}}
+{\footnotesize\ttfamily I\+K\+F\+A\+S\+T\+\_\+\+A\+PI int Get\+Ik\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 381 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{381 \{ \textcolor{keywordflow}{return} 0x67000001; \}}
+
+\end{DoxyCode}
+
+
+Referenced by fetch\+\_\+arm\+::\+I\+K\+Fast\+Kinematics\+Plugin\+::get\+Position\+F\+K(), and fetch\+\_\+arm\+::\+I\+K\+Fast\+Kinematics\+Plugin\+::solve().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{fetch__arm__ikfast__solver_8cpp_abc401850b948d5a0402e9dbb77d3846f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a60bfc91584dcf60d86a5bede8189d2fd}\label{fetch__arm__ikfast__solver_8cpp_a60bfc91584dcf60d86a5bede8189d2fd}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!GetKinematicsHash@{GetKinematicsHash}}
+\index{GetKinematicsHash@{GetKinematicsHash}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{GetKinematicsHash()}{GetKinematicsHash()}}
+{\footnotesize\ttfamily const I\+K\+F\+A\+S\+T\+\_\+\+A\+PI char$\ast$ Get\+Kinematics\+Hash (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 17447 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{17447 \{ \textcolor{keywordflow}{return} \textcolor{stringliteral}{"<robot:GenericRobot -\/ fetch (a5ffee371c921db78a56e98f69ac61f1)>"}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_af0cf03d3ad69d099a9a2eb6db5e5b352}\label{fetch__arm__ikfast__solver_8cpp_af0cf03d3ad69d099a9a2eb6db5e5b352}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!GetNumFreeParameters@{GetNumFreeParameters}}
+\index{GetNumFreeParameters@{GetNumFreeParameters}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{GetNumFreeParameters()}{GetNumFreeParameters()}}
+{\footnotesize\ttfamily I\+K\+F\+A\+S\+T\+\_\+\+A\+PI int Get\+Num\+Free\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 375 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{375 \{ \textcolor{keywordflow}{return} 1; \}}
+
+\end{DoxyCode}
+
+
+Referenced by fetch\+\_\+arm\+::\+I\+K\+Fast\+Kinematics\+Plugin\+::initialize(), and main().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_af0cf03d3ad69d099a9a2eb6db5e5b352_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a3e9541dde410904e043fe18701061b62}\label{fetch__arm__ikfast__solver_8cpp_a3e9541dde410904e043fe18701061b62}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!GetNumJoints@{GetNumJoints}}
+\index{GetNumJoints@{GetNumJoints}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{GetNumJoints()}{GetNumJoints()}}
+{\footnotesize\ttfamily I\+K\+F\+A\+S\+T\+\_\+\+A\+PI int Get\+Num\+Joints (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 377 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{377 \{ \textcolor{keywordflow}{return} 7; \}}
+
+\end{DoxyCode}
+
+
+Referenced by main().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{fetch__arm__ikfast__solver_8cpp_a3e9541dde410904e043fe18701061b62_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a95e1896df0cdeedf37f08dcb341b3918}\label{fetch__arm__ikfast__solver_8cpp_a95e1896df0cdeedf37f08dcb341b3918}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKabs@{IKabs}}
+\index{IKabs@{IKabs}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKabs()}{IKabs()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Kabs (\begin{DoxyParamCaption}\item[{double}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 92 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{92 \{ \textcolor{keywordflow}{return} fabs(f); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_af50774e991c9af3d423e2f15a1864fcd}\label{fetch__arm__ikfast__solver_8cpp_af50774e991c9af3d423e2f15a1864fcd}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKabs@{IKabs}}
+\index{IKabs@{IKabs}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKabs()}{IKabs()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Kabs (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 91 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{91 \{ \textcolor{keywordflow}{return} fabsf(f); \}}
+
+\end{DoxyCode}
+
+
+Referenced by I\+K\+Solver\+::\+Compute\+Ik(), I\+Katan2\+With\+Check(), I\+K\+Solver\+::polyroots4(), I\+K\+Solver\+::polyroots5(), I\+K\+Solver\+::polyroots6(), I\+K\+Solver\+::polyroots7(), I\+K\+Solver\+::polyroots8(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_af50774e991c9af3d423e2f15a1864fcd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a10d86f8d485d2f30ce2638cb94b1e20e}\label{fetch__arm__ikfast__solver_8cpp_a10d86f8d485d2f30ce2638cb94b1e20e}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKacos@{IKacos}}
+\index{IKacos@{IKacos}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKacos()}{IKacos()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Kacos (\begin{DoxyParamCaption}\item[{double}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 161 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{162 \{}
+\DoxyCodeLine{163 \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af4e88f631e5a9381055a48fc90f3a633}{IKFAST\_ASSERT}}( f > -\/1-\/\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a66d4d0ad56673a9555ebafe898d1e2c6}{IKFAST\_SINCOS\_THRESH}} \&\& f < 1+\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a66d4d0ad56673a9555ebafe898d1e2c6}{IKFAST\_SINCOS\_THRESH}} ); \textcolor{comment}{// any more error implies something is wrong with the solver}}
+\DoxyCodeLine{164 \textcolor{keywordflow}{if}( f <= -\/1 ) \textcolor{keywordflow}{return} \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a0975daf07554eaa98742b83ae89344e6}{IKPI}};}
+\DoxyCodeLine{165 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( f >= 1 ) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{166 \textcolor{keywordflow}{return} acos(f);}
+\DoxyCodeLine{167 \}}
+
+\end{DoxyCode}
+
+
+References I\+K\+F\+A\+S\+T\+\_\+\+A\+S\+S\+E\+RT, I\+K\+F\+A\+S\+T\+\_\+\+S\+I\+N\+C\+O\+S\+\_\+\+T\+H\+R\+E\+SH, and I\+K\+PI.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a6985b623469662633075c50b708b5a97}\label{fetch__arm__ikfast__solver_8cpp_a6985b623469662633075c50b708b5a97}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKacos@{IKacos}}
+\index{IKacos@{IKacos}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKacos()}{IKacos()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Kacos (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 154 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{155 \{}
+\DoxyCodeLine{156 \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af4e88f631e5a9381055a48fc90f3a633}{IKFAST\_ASSERT}}( f > -\/1-\/\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a66d4d0ad56673a9555ebafe898d1e2c6}{IKFAST\_SINCOS\_THRESH}} \&\& f < 1+\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a66d4d0ad56673a9555ebafe898d1e2c6}{IKFAST\_SINCOS\_THRESH}} ); \textcolor{comment}{// any more error implies something is wrong with the solver}}
+\DoxyCodeLine{157 \textcolor{keywordflow}{if}( f <= -\/1 ) \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacepick__and__place_a475ebaa92d8cfc598af843352825b105}{float}}(\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a0975daf07554eaa98742b83ae89344e6}{IKPI}});}
+\DoxyCodeLine{158 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( f >= 1 ) \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacepick__and__place_a475ebaa92d8cfc598af843352825b105}{float}}(0);}
+\DoxyCodeLine{159 \textcolor{keywordflow}{return} acosf(f);}
+\DoxyCodeLine{160 \}}
+
+\end{DoxyCode}
+
+
+References pick\+\_\+and\+\_\+place\+::float, I\+K\+F\+A\+S\+T\+\_\+\+A\+S\+S\+E\+RT, I\+K\+F\+A\+S\+T\+\_\+\+S\+I\+N\+C\+O\+S\+\_\+\+T\+H\+R\+E\+SH, and I\+K\+PI.
+
+
+
+Referenced by I\+K\+Solver\+::\+Compute\+Ik(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a6985b623469662633075c50b708b5a97_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_abb5416a593fd7617f75130836a9f5491}\label{fetch__arm__ikfast__solver_8cpp_abb5416a593fd7617f75130836a9f5491}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKasin@{IKasin}}
+\index{IKasin@{IKasin}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKasin()}{IKasin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Kasin (\begin{DoxyParamCaption}\item[{double}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 128 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{129 \{}
+\DoxyCodeLine{130 \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af4e88f631e5a9381055a48fc90f3a633}{IKFAST\_ASSERT}}( f > -\/1-\/\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a66d4d0ad56673a9555ebafe898d1e2c6}{IKFAST\_SINCOS\_THRESH}} \&\& f < 1+\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a66d4d0ad56673a9555ebafe898d1e2c6}{IKFAST\_SINCOS\_THRESH}} ); \textcolor{comment}{// any more error implies something is wrong with the solver}}
+\DoxyCodeLine{131 \textcolor{keywordflow}{if}( f <= -\/1 ) \textcolor{keywordflow}{return} -\/\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a45ed2f0e7e8e411264ebad95010986a7}{IKPI\_2}};}
+\DoxyCodeLine{132 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( f >= 1 ) \textcolor{keywordflow}{return} \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a45ed2f0e7e8e411264ebad95010986a7}{IKPI\_2}};}
+\DoxyCodeLine{133 \textcolor{keywordflow}{return} asin(f);}
+\DoxyCodeLine{134 \}}
+
+\end{DoxyCode}
+
+
+References I\+K\+F\+A\+S\+T\+\_\+\+A\+S\+S\+E\+RT, I\+K\+F\+A\+S\+T\+\_\+\+S\+I\+N\+C\+O\+S\+\_\+\+T\+H\+R\+E\+SH, and I\+K\+P\+I\+\_\+2.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a159f6680a5e7eb9da0d76bfce5461050}\label{fetch__arm__ikfast__solver_8cpp_a159f6680a5e7eb9da0d76bfce5461050}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKasin@{IKasin}}
+\index{IKasin@{IKasin}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKasin()}{IKasin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Kasin (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 121 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{122 \{}
+\DoxyCodeLine{123 \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af4e88f631e5a9381055a48fc90f3a633}{IKFAST\_ASSERT}}( f > -\/1-\/\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a66d4d0ad56673a9555ebafe898d1e2c6}{IKFAST\_SINCOS\_THRESH}} \&\& f < 1+\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a66d4d0ad56673a9555ebafe898d1e2c6}{IKFAST\_SINCOS\_THRESH}} ); \textcolor{comment}{// any more error implies something is wrong with the solver}}
+\DoxyCodeLine{124 \textcolor{keywordflow}{if}( f <= -\/1 ) \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacepick__and__place_a475ebaa92d8cfc598af843352825b105}{float}}(-\/\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a45ed2f0e7e8e411264ebad95010986a7}{IKPI\_2}});}
+\DoxyCodeLine{125 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( f >= 1 ) \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacepick__and__place_a475ebaa92d8cfc598af843352825b105}{float}}(\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a45ed2f0e7e8e411264ebad95010986a7}{IKPI\_2}});}
+\DoxyCodeLine{126 \textcolor{keywordflow}{return} asinf(f);}
+\DoxyCodeLine{127 \}}
+
+\end{DoxyCode}
+
+
+References pick\+\_\+and\+\_\+place\+::float, I\+K\+F\+A\+S\+T\+\_\+\+A\+S\+S\+E\+RT, I\+K\+F\+A\+S\+T\+\_\+\+S\+I\+N\+C\+O\+S\+\_\+\+T\+H\+R\+E\+SH, and I\+K\+P\+I\+\_\+2.
+
+
+
+Referenced by I\+K\+Solver\+::\+Compute\+Ik().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a159f6680a5e7eb9da0d76bfce5461050_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a82c3e90527cb705afd35438841994aa2}\label{fetch__arm__ikfast__solver_8cpp_a82c3e90527cb705afd35438841994aa2}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKatan2@{IKatan2}}
+\index{IKatan2@{IKatan2}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKatan2()}{IKatan2()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Katan2 (\begin{DoxyParamCaption}\item[{double}]{fy,  }\item[{double}]{fx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 192 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{192                                             \{}
+\DoxyCodeLine{193     \textcolor{keywordflow}{if}( std::isnan(fy) ) \{}
+\DoxyCodeLine{194         \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af4e88f631e5a9381055a48fc90f3a633}{IKFAST\_ASSERT}}(!std::isnan(fx)); \textcolor{comment}{// if both are nan, probably wrong value will be returned}}
+\DoxyCodeLine{195         \textcolor{keywordflow}{return} \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a45ed2f0e7e8e411264ebad95010986a7}{IKPI\_2}};}
+\DoxyCodeLine{196     \}}
+\DoxyCodeLine{197     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( std::isnan(fx) ) \{}
+\DoxyCodeLine{198         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{199     \}}
+\DoxyCodeLine{200     \textcolor{keywordflow}{return} atan2(fy,fx);}
+\DoxyCodeLine{201 \}}
+
+\end{DoxyCode}
+
+
+References I\+K\+F\+A\+S\+T\+\_\+\+A\+S\+S\+E\+RT, and I\+K\+P\+I\+\_\+2.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a5e00463327d5e1acfd4e8eb788bbd6ac}\label{fetch__arm__ikfast__solver_8cpp_a5e00463327d5e1acfd4e8eb788bbd6ac}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKatan2@{IKatan2}}
+\index{IKatan2@{IKatan2}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKatan2()}{IKatan2()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Katan2 (\begin{DoxyParamCaption}\item[{float}]{fy,  }\item[{float}]{fx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 179 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{179                                          \{}
+\DoxyCodeLine{180     \textcolor{keywordflow}{if}( std::isnan(fy) ) \{}
+\DoxyCodeLine{181         \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af4e88f631e5a9381055a48fc90f3a633}{IKFAST\_ASSERT}}(!std::isnan(fx)); \textcolor{comment}{// if both are nan, probably wrong value will be returned}}
+\DoxyCodeLine{182         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacepick__and__place_a475ebaa92d8cfc598af843352825b105}{float}}(\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a45ed2f0e7e8e411264ebad95010986a7}{IKPI\_2}});}
+\DoxyCodeLine{183     \}}
+\DoxyCodeLine{184     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( std::isnan(fx) ) \{}
+\DoxyCodeLine{185         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{186     \}}
+\DoxyCodeLine{187     \textcolor{keywordflow}{return} atan2f(fy,fx);}
+\DoxyCodeLine{188 \}}
+
+\end{DoxyCode}
+
+
+References pick\+\_\+and\+\_\+place\+::float, I\+K\+F\+A\+S\+T\+\_\+\+A\+S\+S\+E\+RT, and I\+K\+P\+I\+\_\+2.
+
+
+
+Referenced by I\+K\+Solver\+::\+Compute\+Ik(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a5e00463327d5e1acfd4e8eb788bbd6ac_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a3ef91ca6735fc89a591ce04038c85ccf}\label{fetch__arm__ikfast__solver_8cpp_a3ef91ca6735fc89a591ce04038c85ccf}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKatan2Simple@{IKatan2Simple}}
+\index{IKatan2Simple@{IKatan2Simple}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKatan2Simple()}{IKatan2Simple()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Katan2\+Simple (\begin{DoxyParamCaption}\item[{double}]{fy,  }\item[{double}]{fx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 189 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{189                                                   \{}
+\DoxyCodeLine{190     \textcolor{keywordflow}{return} atan2(fy,fx);}
+\DoxyCodeLine{191 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a1bbba04cc5114eb36e98181457e9f535}\label{fetch__arm__ikfast__solver_8cpp_a1bbba04cc5114eb36e98181457e9f535}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKatan2Simple@{IKatan2Simple}}
+\index{IKatan2Simple@{IKatan2Simple}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKatan2Simple()}{IKatan2Simple()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Katan2\+Simple (\begin{DoxyParamCaption}\item[{float}]{fy,  }\item[{float}]{fx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 176 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{176                                                \{}
+\DoxyCodeLine{177     \textcolor{keywordflow}{return} atan2f(fy,fx);}
+\DoxyCodeLine{178 \}}
+
+\end{DoxyCode}
+
+
+Referenced by I\+Katan2\+With\+Check().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a1bbba04cc5114eb36e98181457e9f535_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a2ee5f6ce877a26fda36feee121d53853}\label{fetch__arm__ikfast__solver_8cpp_a2ee5f6ce877a26fda36feee121d53853}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKatan2WithCheck@{IKatan2WithCheck}}
+\index{IKatan2WithCheck@{IKatan2WithCheck}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKatan2WithCheck()}{IKatan2WithCheck()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{structCheckValue}{Check\+Value}}$<$T$>$ I\+Katan2\+With\+Check (\begin{DoxyParamCaption}\item[{T}]{fy,  }\item[{T}]{fx,  }\item[{T}]{epsilon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 211 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{212 \{}
+\DoxyCodeLine{213     \mbox{\hyperlink{structCheckValue}{CheckValue<T>}} ret;}
+\DoxyCodeLine{214     ret.\mbox{\hyperlink{structCheckValue_a3be5a3feb4357bf37b01eef7fd5cc767}{valid}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{215     ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}} = 0;}
+\DoxyCodeLine{216     \textcolor{keywordflow}{if}( !std::isnan(fy) \&\& !std::isnan(fx) ) \{}
+\DoxyCodeLine{217         \textcolor{keywordflow}{if}( \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af50774e991c9af3d423e2f15a1864fcd}{IKabs}}(fy) >= \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a0b03d83cf16b77e025d2100621f1f321}{IKFAST\_ATAN2\_MAGTHRESH}} || \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af50774e991c9af3d423e2f15a1864fcd}{IKabs}}(fx) > \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a0b03d83cf16b77e025d2100621f1f321}{IKFAST\_ATAN2\_MAGTHRESH}} ) \{}
+\DoxyCodeLine{218             ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}} = \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a1bbba04cc5114eb36e98181457e9f535}{IKatan2Simple}}(fy,fx);}
+\DoxyCodeLine{219             ret.\mbox{\hyperlink{structCheckValue_a3be5a3feb4357bf37b01eef7fd5cc767}{valid}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{220         \}}
+\DoxyCodeLine{221     \}}
+\DoxyCodeLine{222     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{223 \}}
+
+\end{DoxyCode}
+
+
+References I\+Kabs(), I\+Katan2\+Simple(), I\+K\+F\+A\+S\+T\+\_\+\+A\+T\+A\+N2\+\_\+\+M\+A\+G\+T\+H\+R\+E\+SH, Check\+Value$<$ T $>$\+::valid, and Check\+Value$<$ T $>$\+::value.
+
+
+
+Referenced by I\+K\+Solver\+::\+Compute\+Ik(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=311pt]{fetch__arm__ikfast__solver_8cpp_a2ee5f6ce877a26fda36feee121d53853_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a2ee5f6ce877a26fda36feee121d53853_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_ac925942daf5e1b7df0c38f2a7a501ac0}\label{fetch__arm__ikfast__solver_8cpp_ac925942daf5e1b7df0c38f2a7a501ac0}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKcos@{IKcos}}
+\index{IKcos@{IKcos}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKcos()}{IKcos()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Kcos (\begin{DoxyParamCaption}\item[{double}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 171 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{171 \{ \textcolor{keywordflow}{return} cos(f); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a8d241417f26868995cfb5a5648816e63}\label{fetch__arm__ikfast__solver_8cpp_a8d241417f26868995cfb5a5648816e63}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKcos@{IKcos}}
+\index{IKcos@{IKcos}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKcos()}{IKcos()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Kcos (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 170 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{170 \{ \textcolor{keywordflow}{return} cosf(f); \}}
+
+\end{DoxyCode}
+
+
+Referenced by Compute\+Fk(), I\+K\+Solver\+::\+Compute\+Ik(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a8d241417f26868995cfb5a5648816e63_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_afc297e95128c8791d8660944bbc877eb}\label{fetch__arm__ikfast__solver_8cpp_afc297e95128c8791d8660944bbc877eb}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKFAST\_COMPILE\_ASSERT@{IKFAST\_COMPILE\_ASSERT}}
+\index{IKFAST\_COMPILE\_ASSERT@{IKFAST\_COMPILE\_ASSERT}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKFAST\_COMPILE\_ASSERT()}{IKFAST\_COMPILE\_ASSERT()}}
+{\footnotesize\ttfamily I\+K\+F\+A\+S\+T\+\_\+\+C\+O\+M\+P\+I\+L\+E\+\_\+\+A\+S\+S\+E\+RT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ikfast_8h_afb507c47cee8d15d0241aa894bef5a67}{I\+K\+F\+A\+S\+T\+\_\+\+V\+E\+R\+S\+I\+ON}}}]{ = {\ttfamily =0x10000049} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a1ec8174f881fb22cf1a7cdf19b9a84ad}\label{fetch__arm__ikfast__solver_8cpp_a1ec8174f881fb22cf1a7cdf19b9a84ad}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKfmod@{IKfmod}}
+\index{IKfmod@{IKfmod}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKfmod()}{IKfmod()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Kfmod (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 146 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{147 \{}
+\DoxyCodeLine{148     \textcolor{keywordflow}{while}(x < 0) \{}
+\DoxyCodeLine{149         x += \mbox{\hyperlink{namespacepick__and__place_a9dc3a6efa6a9a0786df1b6a1b1d60ffc}{y}};}
+\DoxyCodeLine{150     \}}
+\DoxyCodeLine{151     \textcolor{keywordflow}{return} fmod(x,\mbox{\hyperlink{namespacepick__and__place_a9dc3a6efa6a9a0786df1b6a1b1d60ffc}{y}});}
+\DoxyCodeLine{152 \}}
+
+\end{DoxyCode}
+
+
+References pick\+\_\+and\+\_\+place\+::y.
+
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a8af0ce9307f58d1e64bb413077478244}\label{fetch__arm__ikfast__solver_8cpp_a8af0ce9307f58d1e64bb413077478244}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKfmod@{IKfmod}}
+\index{IKfmod@{IKfmod}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKfmod()}{IKfmod()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Kfmod (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 137 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{138 \{}
+\DoxyCodeLine{139     \textcolor{keywordflow}{while}(x < 0) \{}
+\DoxyCodeLine{140         x += \mbox{\hyperlink{namespacepick__and__place_a9dc3a6efa6a9a0786df1b6a1b1d60ffc}{y}};}
+\DoxyCodeLine{141     \}}
+\DoxyCodeLine{142     \textcolor{keywordflow}{return} fmodf(x,\mbox{\hyperlink{namespacepick__and__place_a9dc3a6efa6a9a0786df1b6a1b1d60ffc}{y}});}
+\DoxyCodeLine{143 \}}
+
+\end{DoxyCode}
+
+
+References pick\+\_\+and\+\_\+place\+::y.
+
+
+
+Referenced by I\+K\+Solver\+::\+Compute\+Ik(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a8af0ce9307f58d1e64bb413077478244_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a429184284f7e6da54369a2290d8da22d}\label{fetch__arm__ikfast__solver_8cpp_a429184284f7e6da54369a2290d8da22d}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKlog@{IKlog}}
+\index{IKlog@{IKlog}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKlog()}{IKlog()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Klog (\begin{DoxyParamCaption}\item[{double}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 98 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{98 \{ \textcolor{keywordflow}{return} log(f); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_ae5812d083cf95d2945bbd8b75c38d7cd}\label{fetch__arm__ikfast__solver_8cpp_ae5812d083cf95d2945bbd8b75c38d7cd}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKlog@{IKlog}}
+\index{IKlog@{IKlog}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKlog()}{IKlog()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Klog (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 97 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{97 \{ \textcolor{keywordflow}{return} logf(f); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_aa90320376a56efda3a751c3f5d86fc26}\label{fetch__arm__ikfast__solver_8cpp_aa90320376a56efda3a751c3f5d86fc26}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKPowWithIntegerCheck@{IKPowWithIntegerCheck}}
+\index{IKPowWithIntegerCheck@{IKPowWithIntegerCheck}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKPowWithIntegerCheck()}{IKPowWithIntegerCheck()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{structCheckValue}{Check\+Value}}$<$T$>$ I\+K\+Pow\+With\+Integer\+Check (\begin{DoxyParamCaption}\item[{T}]{f,  }\item[{int}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 246 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{247 \{}
+\DoxyCodeLine{248     \mbox{\hyperlink{structCheckValue}{CheckValue<T>}} ret;}
+\DoxyCodeLine{249     ret.\mbox{\hyperlink{structCheckValue_a3be5a3feb4357bf37b01eef7fd5cc767}{valid}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{250     \textcolor{keywordflow}{if}( n == 0 ) \{}
+\DoxyCodeLine{251         ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}} = 1.0;}
+\DoxyCodeLine{252         \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{253     \}}
+\DoxyCodeLine{254     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( n == 1 )}
+\DoxyCodeLine{255     \{}
+\DoxyCodeLine{256         ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}} = f;}
+\DoxyCodeLine{257         \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{258     \}}
+\DoxyCodeLine{259     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( n < 0 )}
+\DoxyCodeLine{260     \{}
+\DoxyCodeLine{261         \textcolor{keywordflow}{if}( f == 0 )}
+\DoxyCodeLine{262         \{}
+\DoxyCodeLine{263             ret.\mbox{\hyperlink{structCheckValue_a3be5a3feb4357bf37b01eef7fd5cc767}{valid}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{264             ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}} = (T)1.0e30;}
+\DoxyCodeLine{265             \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{266         \}}
+\DoxyCodeLine{267         \textcolor{keywordflow}{if}( n == -\/1 ) \{}
+\DoxyCodeLine{268             ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}} = T(1.0)/f;}
+\DoxyCodeLine{269             \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{270         \}}
+\DoxyCodeLine{271     \}}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273     \textcolor{keywordtype}{int} num = n > 0 ? n : -\/n;}
+\DoxyCodeLine{274     \textcolor{keywordflow}{if}( num == 2 ) \{}
+\DoxyCodeLine{275         ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}} = f*f;}
+\DoxyCodeLine{276     \}}
+\DoxyCodeLine{277     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( num == 3 ) \{}
+\DoxyCodeLine{278         ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}} = f*f*f;}
+\DoxyCodeLine{279     \}}
+\DoxyCodeLine{280     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{281         ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}} = 1.0;}
+\DoxyCodeLine{282         \textcolor{keywordflow}{while}(num>0) \{}
+\DoxyCodeLine{283             \textcolor{keywordflow}{if}( num \& 1 ) \{}
+\DoxyCodeLine{284                 ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}} *= f;}
+\DoxyCodeLine{285             \}}
+\DoxyCodeLine{286             num >>= 1;}
+\DoxyCodeLine{287             f *= f;}
+\DoxyCodeLine{288         \}}
+\DoxyCodeLine{289     \}}
+\DoxyCodeLine{290     }
+\DoxyCodeLine{291     \textcolor{keywordflow}{if}( n < 0 ) \{}
+\DoxyCodeLine{292         ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}} = T(1.0)/ret.\mbox{\hyperlink{structCheckValue_a96d0c95abbb5c848c92f09df55d253a1}{value}};}
+\DoxyCodeLine{293     \}}
+\DoxyCodeLine{294     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{295 \}}
+
+\end{DoxyCode}
+
+
+References Check\+Value$<$ T $>$\+::valid, and Check\+Value$<$ T $>$\+::value.
+
+
+
+Referenced by I\+K\+Solver\+::\+Compute\+Ik(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_aa90320376a56efda3a751c3f5d86fc26_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a903ab9632f6846449bbb3a8bba65ad8e}\label{fetch__arm__ikfast__solver_8cpp_a903ab9632f6846449bbb3a8bba65ad8e}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKsign@{IKsign}}
+\index{IKsign@{IKsign}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKsign()}{IKsign()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Ksign (\begin{DoxyParamCaption}\item[{double}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 235 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{235                                \{}
+\DoxyCodeLine{236     \textcolor{keywordflow}{if}( f > 0 ) \{}
+\DoxyCodeLine{237         \textcolor{keywordflow}{return} 1.0;}
+\DoxyCodeLine{238     \}}
+\DoxyCodeLine{239     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( f < 0 ) \{}
+\DoxyCodeLine{240         \textcolor{keywordflow}{return} -\/1.0;}
+\DoxyCodeLine{241     \}}
+\DoxyCodeLine{242     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{243 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a845afc8ffdb8c068f0e75abac0d78b15}\label{fetch__arm__ikfast__solver_8cpp_a845afc8ffdb8c068f0e75abac0d78b15}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKsign@{IKsign}}
+\index{IKsign@{IKsign}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKsign()}{IKsign()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Ksign (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 225 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{225                              \{}
+\DoxyCodeLine{226     \textcolor{keywordflow}{if}( f > 0 ) \{}
+\DoxyCodeLine{227         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacepick__and__place_a475ebaa92d8cfc598af843352825b105}{float}}(1);}
+\DoxyCodeLine{228     \}}
+\DoxyCodeLine{229     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}( f < 0 ) \{}
+\DoxyCodeLine{230         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacepick__and__place_a475ebaa92d8cfc598af843352825b105}{float}}(-\/1);}
+\DoxyCodeLine{231     \}}
+\DoxyCodeLine{232     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{233 \}}
+
+\end{DoxyCode}
+
+
+References pick\+\_\+and\+\_\+place\+::float.
+
+
+
+Referenced by I\+K\+Solver\+::\+Compute\+Ik(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a845afc8ffdb8c068f0e75abac0d78b15_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a8a11e6f22a19bd8f4ac73c3645c93c81}\label{fetch__arm__ikfast__solver_8cpp_a8a11e6f22a19bd8f4ac73c3645c93c81}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKsin@{IKsin}}
+\index{IKsin@{IKsin}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKsin()}{IKsin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Ksin (\begin{DoxyParamCaption}\item[{double}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 169 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{169 \{ \textcolor{keywordflow}{return} sin(f); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a7b5e881d13d85a4bc1020963f9e605b5}\label{fetch__arm__ikfast__solver_8cpp_a7b5e881d13d85a4bc1020963f9e605b5}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKsin@{IKsin}}
+\index{IKsin@{IKsin}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKsin()}{IKsin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Ksin (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 168 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{168 \{ \textcolor{keywordflow}{return} sinf(f); \}}
+
+\end{DoxyCode}
+
+
+Referenced by Compute\+Fk(), I\+K\+Solver\+::\+Compute\+Ik(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a7b5e881d13d85a4bc1020963f9e605b5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a95d600e8b1f9ee1b1f0d8919b31f1ce0}\label{fetch__arm__ikfast__solver_8cpp_a95d600e8b1f9ee1b1f0d8919b31f1ce0}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKsqr@{IKsqr}}
+\index{IKsqr@{IKsqr}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKsqr()}{IKsqr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Ksqr (\begin{DoxyParamCaption}\item[{double}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 95 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{95 \{ \textcolor{keywordflow}{return} f*f; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_ab527b2a76479c7f6ef9545b3c41a3b37}\label{fetch__arm__ikfast__solver_8cpp_ab527b2a76479c7f6ef9545b3c41a3b37}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKsqr@{IKsqr}}
+\index{IKsqr@{IKsqr}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKsqr()}{IKsqr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Ksqr (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 94 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{94 \{ \textcolor{keywordflow}{return} f*f; \}}
+
+\end{DoxyCode}
+
+
+Referenced by I\+K\+Solver\+::\+Compute\+Ik(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_ab527b2a76479c7f6ef9545b3c41a3b37_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_abb830ca15935c1c9b95a2ede5b2d43cc}\label{fetch__arm__ikfast__solver_8cpp_abb830ca15935c1c9b95a2ede5b2d43cc}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKsqrt@{IKsqrt}}
+\index{IKsqrt@{IKsqrt}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKsqrt()}{IKsqrt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Ksqrt (\begin{DoxyParamCaption}\item[{double}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 175 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{175 \{ \textcolor{keywordflow}{if}( f <= 0.0 ) \textcolor{keywordflow}{return} 0.0; \textcolor{keywordflow}{return} sqrt(f); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a6f476874d10b265f6b0e6409104126b7}\label{fetch__arm__ikfast__solver_8cpp_a6f476874d10b265f6b0e6409104126b7}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKsqrt@{IKsqrt}}
+\index{IKsqrt@{IKsqrt}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKsqrt()}{IKsqrt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Ksqrt (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 174 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{174 \{ \textcolor{keywordflow}{if}( f <= 0.0f ) \textcolor{keywordflow}{return} 0.0f; \textcolor{keywordflow}{return} sqrtf(f); \}}
+
+\end{DoxyCode}
+
+
+Referenced by I\+K\+Solver\+::\+Compute\+Ik(), I\+K\+Solver\+::polyroots2(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a6f476874d10b265f6b0e6409104126b7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_acd8f1e5b83501cc42ffef27bd6458f9a}\label{fetch__arm__ikfast__solver_8cpp_acd8f1e5b83501cc42ffef27bd6458f9a}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKtan@{IKtan}}
+\index{IKtan@{IKtan}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKtan()}{IKtan()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double I\+Ktan (\begin{DoxyParamCaption}\item[{double}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 173 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{173 \{ \textcolor{keywordflow}{return} tan(f); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_ad2361d774d694b5935519a1b3c1075f9}\label{fetch__arm__ikfast__solver_8cpp_ad2361d774d694b5935519a1b3c1075f9}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!IKtan@{IKtan}}
+\index{IKtan@{IKtan}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{IKtan()}{IKtan()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float I\+Ktan (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 172 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{172 \{ \textcolor{keywordflow}{return} tanf(f); \}}
+
+\end{DoxyCode}
+
+
+Referenced by I\+K\+Solver\+::\+Compute\+Ik(), and I\+K\+Solver\+::rotationfunction0().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_ad2361d774d694b5935519a1b3c1075f9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{fetch__arm__ikfast__solver_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!main@{main}}
+\index{main@{main}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 17461 of file fetch\+\_\+arm\+\_\+ikfast\+\_\+solver.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{17462 \{}
+\DoxyCodeLine{17463     \textcolor{keywordflow}{if}( argc != 12+\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af0cf03d3ad69d099a9a2eb6db5e5b352}{GetNumFreeParameters}}()+1 ) \{}
+\DoxyCodeLine{17464         printf(\textcolor{stringliteral}{"\(\backslash\)nUsage: ./ik r00 r01 r02 t0 r10 r11 r12 t1 r20 r21 r22 t2 free0 ...\(\backslash\)n\(\backslash\)n"}}
+\DoxyCodeLine{17465                \textcolor{stringliteral}{"Returns the ik solutions given the transformation of the end effector specified by\(\backslash\)n"}}
+\DoxyCodeLine{17466                \textcolor{stringliteral}{"a 3x3 rotation R (rXX), and a 3x1 translation (tX).\(\backslash\)n"}}
+\DoxyCodeLine{17467                \textcolor{stringliteral}{"There are \%d free parameters that have to be specified.\(\backslash\)n\(\backslash\)n"},\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af0cf03d3ad69d099a9a2eb6db5e5b352}{GetNumFreeParameters}}());}
+\DoxyCodeLine{17468         \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{17469     \}}
+\DoxyCodeLine{17470 }
+\DoxyCodeLine{17471     \mbox{\hyperlink{classikfast_1_1IkSolutionList}{IkSolutionList<IkReal>}} solutions;}
+\DoxyCodeLine{17472     std::vector<IkReal> vfree(\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_af0cf03d3ad69d099a9a2eb6db5e5b352}{GetNumFreeParameters}}());}
+\DoxyCodeLine{17473     IkReal eerot[9],eetrans[3];}
+\DoxyCodeLine{17474     eerot[0] = atof(argv[1]); eerot[1] = atof(argv[2]); eerot[2] = atof(argv[3]); eetrans[0] = atof(argv[4]);}
+\DoxyCodeLine{17475     eerot[3] = atof(argv[5]); eerot[4] = atof(argv[6]); eerot[5] = atof(argv[7]); eetrans[1] = atof(argv[8]);}
+\DoxyCodeLine{17476     eerot[6] = atof(argv[9]); eerot[7] = atof(argv[10]); eerot[8] = atof(argv[11]); eetrans[2] = atof(argv[12]);}
+\DoxyCodeLine{17477     \textcolor{keywordflow}{for}(std::size\_t i = 0; i < vfree.size(); ++i)}
+\DoxyCodeLine{17478         vfree[i] = atof(argv[13+i]);}
+\DoxyCodeLine{17479     \textcolor{keywordtype}{bool} bSuccess = \mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_ad6e97fc303efda1a956b9a044f8424fc}{ComputeIk}}(eetrans, eerot, vfree.size() > 0 ? \&vfree[0] : NULL, solutions);}
+\DoxyCodeLine{17480 }
+\DoxyCodeLine{17481     \textcolor{keywordflow}{if}( !bSuccess ) \{}
+\DoxyCodeLine{17482         fprintf(stderr,\textcolor{stringliteral}{"Failed to get ik solution\(\backslash\)n"});}
+\DoxyCodeLine{17483         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{17484     \}}
+\DoxyCodeLine{17485 }
+\DoxyCodeLine{17486     printf(\textcolor{stringliteral}{"Found \%d ik solutions:\(\backslash\)n"}, (\textcolor{keywordtype}{int})solutions.\mbox{\hyperlink{classikfast_1_1IkSolutionList_ac9679184adc4a704c4c6497eef3cb597}{GetNumSolutions}}());}
+\DoxyCodeLine{17487     std::vector<IkReal> solvalues(\mbox{\hyperlink{fetch__arm__ikfast__solver_8cpp_a3e9541dde410904e043fe18701061b62}{GetNumJoints}}());}
+\DoxyCodeLine{17488     \textcolor{keywordflow}{for}(std::size\_t i = 0; i < solutions.\mbox{\hyperlink{classikfast_1_1IkSolutionList_ac9679184adc4a704c4c6497eef3cb597}{GetNumSolutions}}(); ++i) \{}
+\DoxyCodeLine{17489         \textcolor{keyword}{const} \mbox{\hyperlink{classikfast_1_1IkSolutionBase}{IkSolutionBase<IkReal>}}\& sol = solutions.\mbox{\hyperlink{classikfast_1_1IkSolutionList_a0320618db6b5432cd609e1e2c8c73614}{GetSolution}}(i);}
+\DoxyCodeLine{17490         printf(\textcolor{stringliteral}{"sol\%d (free=\%d): "}, (\textcolor{keywordtype}{int})i, (\textcolor{keywordtype}{int})sol.\mbox{\hyperlink{classikfast_1_1IkSolutionBase_a2693ede66be937b7c4c1c949284282ca}{GetFree}}().size());}
+\DoxyCodeLine{17491         std::vector<IkReal> vsolfree(sol.\mbox{\hyperlink{classikfast_1_1IkSolutionBase_a2693ede66be937b7c4c1c949284282ca}{GetFree}}().size());}
+\DoxyCodeLine{17492         sol.\mbox{\hyperlink{classikfast_1_1IkSolutionBase_a9405530feb49f12f56c3175e7150c66f}{GetSolution}}(\&solvalues[0],vsolfree.size()>0?\&vsolfree[0]:NULL);}
+\DoxyCodeLine{17493         \textcolor{keywordflow}{for}( std::size\_t j = 0; j < solvalues.size(); ++j)}
+\DoxyCodeLine{17494             printf(\textcolor{stringliteral}{"\%.15f, "}, solvalues[j]);}
+\DoxyCodeLine{17495         printf(\textcolor{stringliteral}{"\(\backslash\)n"});}
+\DoxyCodeLine{17496     \}}
+\DoxyCodeLine{17497     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{17498 \}}
+
+\end{DoxyCode}
+
+
+References Compute\+Ik(), ikfast\+::\+Ik\+Solution\+Base$<$ T $>$\+::\+Get\+Free(), Get\+Num\+Free\+Parameters(), Get\+Num\+Joints(), ikfast\+::\+Ik\+Solution\+List$<$ T $>$\+::\+Get\+Num\+Solutions(), ikfast\+::\+Ik\+Solution\+Base$<$ T $>$\+::\+Get\+Solution(), and ikfast\+::\+Ik\+Solution\+List$<$ T $>$\+::\+Get\+Solution().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fetch__arm__ikfast__solver_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fetch__arm__ikfast__solver_8cpp_a6993bc2ff3751954630153bfd08bdd0b}\label{fetch__arm__ikfast__solver_8cpp_a6993bc2ff3751954630153bfd08bdd0b}} 
+\index{fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}!zgetrf\_@{zgetrf\_}}
+\index{zgetrf\_@{zgetrf\_}!fetch\_arm\_ikfast\_solver.cpp@{fetch\_arm\_ikfast\_solver.cpp}}
+\doxysubsubsection{\texorpdfstring{zgetrf\_()}{zgetrf\_()}}
+{\footnotesize\ttfamily void zgetrf\+\_\+ (\begin{DoxyParamCaption}\item[{const int $\ast$}]{m,  }\item[{const int $\ast$}]{n,  }\item[{std\+::complex$<$ double $>$ $\ast$}]{a,  }\item[{const int $\ast$}]{lda,  }\item[{int $\ast$}]{ipiv,  }\item[{int $\ast$}]{info }\end{DoxyParamCaption})}
+

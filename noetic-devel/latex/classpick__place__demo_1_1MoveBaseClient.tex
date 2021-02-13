@@ -1,0 +1,120 @@
+\hypertarget{classpick__place__demo_1_1MoveBaseClient}{}\doxysection{pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client Class Reference}
+\label{classpick__place__demo_1_1MoveBaseClient}\index{pick\_place\_demo.MoveBaseClient@{pick\_place\_demo.MoveBaseClient}}
+
+
+Inheritance diagram for pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classpick__place__demo_1_1MoveBaseClient__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classpick__place__demo_1_1MoveBaseClient__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classpick__place__demo_1_1MoveBaseClient_a9756a2417232ff621c7f26c1db6a7a93}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classpick__place__demo_1_1MoveBaseClient_acba0ec782dffdc4338f8748a7aa111e8}{goto}} (self, x, y, theta, frame=\char`\"{}map\char`\"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpick__place__demo_1_1MoveBaseClient_ae66d2c39a115cff1abe7a515c9ed333d}{client}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 51 of file pick\+\_\+place\+\_\+demo.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classpick__place__demo_1_1MoveBaseClient_a9756a2417232ff621c7f26c1db6a7a93}\label{classpick__place__demo_1_1MoveBaseClient_a9756a2417232ff621c7f26c1db6a7a93}} 
+\index{pick\_place\_demo.MoveBaseClient@{pick\_place\_demo.MoveBaseClient}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!pick\_place\_demo.MoveBaseClient@{pick\_place\_demo.MoveBaseClient}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 53 of file pick\+\_\+place\+\_\+demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{53     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{54         self.client = actionlib.SimpleActionClient(\textcolor{stringliteral}{"move\_base"}, MoveBaseAction)}
+\DoxyCodeLine{55         rospy.loginfo(\textcolor{stringliteral}{"Waiting for move\_base..."})}
+\DoxyCodeLine{56         self.client.wait\_for\_server()}
+\DoxyCodeLine{57 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classpick__place__demo_1_1MoveBaseClient_acba0ec782dffdc4338f8748a7aa111e8}\label{classpick__place__demo_1_1MoveBaseClient_acba0ec782dffdc4338f8748a7aa111e8}} 
+\index{pick\_place\_demo.MoveBaseClient@{pick\_place\_demo.MoveBaseClient}!goto@{goto}}
+\index{goto@{goto}!pick\_place\_demo.MoveBaseClient@{pick\_place\_demo.MoveBaseClient}}
+\doxysubsubsection{\texorpdfstring{goto()}{goto()}}
+{\footnotesize\ttfamily def pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+goto (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{theta,  }\item[{}]{frame = {\ttfamily \char`\"{}map\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 58 of file pick\+\_\+place\+\_\+demo.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{58     \textcolor{keyword}{def }goto(self, x, y, theta, frame="map"):}
+\DoxyCodeLine{59         move\_goal = MoveBaseGoal()}
+\DoxyCodeLine{60         move\_goal.target\_pose.pose.position.x = x}
+\DoxyCodeLine{61         move\_goal.target\_pose.pose.position.y = y}
+\DoxyCodeLine{62         move\_goal.target\_pose.pose.orientation.z = sin(theta/2.0)}
+\DoxyCodeLine{63         move\_goal.target\_pose.pose.orientation.w = cos(theta/2.0)}
+\DoxyCodeLine{64         move\_goal.target\_pose.header.frame\_id = frame}
+\DoxyCodeLine{65         move\_goal.target\_pose.header.stamp = rospy.Time.now()}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67         \textcolor{comment}{\# TODO wait for things to work}}
+\DoxyCodeLine{68         self.client.send\_goal(move\_goal)}
+\DoxyCodeLine{69         self.client.wait\_for\_result()}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 \textcolor{comment}{\# Send a trajectory to controller}}
+
+\end{DoxyCode}
+
+
+References smacc\+::default\+\_\+events\+::\+Ev\+Action\+Feedback$<$ Action\+Feedback, T\+Orthogonal $>$.\+client, demo.\+Move\+Base\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+client, demo.\+Follow\+Trajectory\+Client.\+client, and demo.\+Point\+Head\+Client.\+client.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classpick__place__demo_1_1MoveBaseClient_ae66d2c39a115cff1abe7a515c9ed333d}\label{classpick__place__demo_1_1MoveBaseClient_ae66d2c39a115cff1abe7a515c9ed333d}} 
+\index{pick\_place\_demo.MoveBaseClient@{pick\_place\_demo.MoveBaseClient}!client@{client}}
+\index{client@{client}!pick\_place\_demo.MoveBaseClient@{pick\_place\_demo.MoveBaseClient}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+client}
+
+
+
+Definition at line 54 of file pick\+\_\+place\+\_\+demo.\+py.
+
+
+
+Referenced by camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+disable\+\_\+auto(), camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+enable\+\_\+auto(), pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+goto(), tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+goto(), tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+look\+\_\+at(), pick\+\_\+place\+\_\+demo.\+Point\+Head\+Client.\+look\+\_\+at(), tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop(), pick\+\_\+place\+\_\+demo.\+Follow\+Trajectory\+Client.\+move\+\_\+to(), tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+move\+\_\+to(), tuck\+\_\+arm.\+Tuck\+Thread.\+run(), gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position(), and tuck\+\_\+arm.\+Tuck\+Thread.\+stop().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+gazebo/fetch\+\_\+gazebo\+\_\+demo/scripts/\mbox{\hyperlink{pick__place__demo_8py}{pick\+\_\+place\+\_\+demo.\+py}}\end{DoxyCompactItemize}

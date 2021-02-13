@@ -1,5 +1,19 @@
 var searchData=
 [
-  ['temperature_5fsensor_5fnode_2ecpp',['temperature_sensor_node.cpp',['../sm__dance__bot_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp.html',1,'(Global Namespace)'],['../sm__dance__bot__2_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp.html',1,'(Global Namespace)'],['../sm__dance__bot__strikes__back_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp.html',1,'(Global Namespace)'],['../sm__ferrari_2servers_2temperature__sensor__node_2src_2temperature__sensor__node_8cpp.html',1,'(Global Namespace)']]],
-  ['timer_5fclient_2ecpp',['timer_client.cpp',['../timer__client_8cpp.html',1,'']]]
+  ['parallel_5fgripper_2ecpp_4999',['parallel_gripper.cpp',['../parallel__gripper_8cpp.html',1,'']]],
+  ['parallel_5fgripper_2eh_5000',['parallel_gripper.h',['../parallel__gripper_8h.html',1,'']]],
+  ['path_5ftools_2ecpp_5001',['path_tools.cpp',['../path__tools_8cpp.html',1,'']]],
+  ['pick_5fand_5fplace_2epy_5002',['pick_and_place.py',['../pick__and__place_8py.html',1,'']]],
+  ['pick_5fplace_5fdemo_2epy_5003',['pick_place_demo.py',['../pick__place__demo_8py.html',1,'']]],
+  ['pid_2ecpp_5004',['pid.cpp',['../pid_8cpp.html',1,'']]],
+  ['pid_2eh_5005',['pid.h',['../pid_8h.html',1,'']]],
+  ['planner_5fswitcher_2ecpp_5006',['planner_switcher.cpp',['../planner__switcher_8cpp.html',1,'']]],
+  ['planner_5fswitcher_2eh_5007',['planner_switcher.h',['../planner__switcher_8h.html',1,'']]],
+  ['plugin_2ecpp_5008',['plugin.cpp',['../plugin_8cpp.html',1,'']]],
+  ['point_5fhead_2ecpp_5009',['point_head.cpp',['../point__head_8cpp.html',1,'']]],
+  ['point_5fhead_2eh_5010',['point_head.h',['../point__head_8h.html',1,'']]],
+  ['prepare_5fsimulated_5frobot_2epy_5011',['prepare_simulated_robot.py',['../prepare__simulated__robot_8py.html',1,'']]],
+  ['prepare_5fsimulated_5frobot_5fpick_5fplace_2epy_5012',['prepare_simulated_robot_pick_place.py',['../prepare__simulated__robot__pick__place_8py.html',1,'']]],
+  ['pure_5fspinning_5flocal_5fplanner_2ecpp_5013',['pure_spinning_local_planner.cpp',['../pure__spinning__local__planner_8cpp.html',1,'']]],
+  ['pure_5fspinning_5flocal_5fplanner_2eh_5014',['pure_spinning_local_planner.h',['../pure__spinning__local__planner_8h.html',1,'']]]
 ];

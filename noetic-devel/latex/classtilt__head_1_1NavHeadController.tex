@@ -1,0 +1,321 @@
+\hypertarget{classtilt__head_1_1NavHeadController}{}\doxysection{tilt\+\_\+head.\+Nav\+Head\+Controller Class Reference}
+\label{classtilt__head_1_1NavHeadController}\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+
+
+Collaboration diagram for tilt\+\_\+head.\+Nav\+Head\+Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classtilt__head_1_1NavHeadController__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classtilt__head_1_1NavHeadController_a37864d07b472455da93291d221dfb7f0}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+def \mbox{\hyperlink{classtilt__head_1_1NavHeadController_a8280adf67fa1ddfaaf12cdef2d1f91ca}{stat\+Callback}} (self, msg)
+\item 
+def \mbox{\hyperlink{classtilt__head_1_1NavHeadController_a5fed20c142eaaf3f1d60ed71969b2d32}{plan\+Callback}} (self, msg)
+\item 
+def \mbox{\hyperlink{classtilt__head_1_1NavHeadController_a400576d950f371ffab98a0afbbb99d87}{loop}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtilt__head_1_1NavHeadController_a99dab789d8e1627a736503539e23b300}{has\+\_\+goal}}
+\item 
+\mbox{\hyperlink{classtilt__head_1_1NavHeadController_a0c654c4e7c47c4d2e29149c31a520dee}{x}}
+\item 
+\mbox{\hyperlink{classtilt__head_1_1NavHeadController_a9ba05500db3e0167feacf3ccf9382874}{y}}
+\item 
+\mbox{\hyperlink{classtilt__head_1_1NavHeadController_af4130fcf061d0c4846377a622ec64233}{mutex}}
+\item 
+\mbox{\hyperlink{classtilt__head_1_1NavHeadController_ac4c69d3d5510c9d0da23b1dce98a3f3b}{listener}}
+\item 
+\mbox{\hyperlink{classtilt__head_1_1NavHeadController_abddca7cf5138c9fc653440dfef26dc18}{client}}
+\item 
+\mbox{\hyperlink{classtilt__head_1_1NavHeadController_a44afe0776e960b0e8e6c64a5c999cef6}{plan\+\_\+sub}}
+\item 
+\mbox{\hyperlink{classtilt__head_1_1NavHeadController_a755638cffefe55080299ab6f6b01ef61}{stat\+\_\+sub}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 47 of file tilt\+\_\+head.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_a37864d07b472455da93291d221dfb7f0}\label{classtilt__head_1_1NavHeadController_a37864d07b472455da93291d221dfb7f0}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def tilt\+\_\+head.\+Nav\+Head\+Controller.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 49 of file tilt\+\_\+head.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{49     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{50         self.has\_goal = \textcolor{keyword}{False}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52         \textcolor{comment}{\# pose and lock}}
+\DoxyCodeLine{53         self.x = 1.0}
+\DoxyCodeLine{54         self.y = 0.0}
+\DoxyCodeLine{55         self.mutex = Lock()}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57         self.listener = TransformListener()}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         self.client = actionlib.SimpleActionClient(\textcolor{stringliteral}{"head\_controller/point\_head"}, PointHeadAction)}
+\DoxyCodeLine{60         self.client.wait\_for\_server()}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         self.plan\_sub = rospy.Subscriber(\textcolor{stringliteral}{"move\_base/TrajectoryPlannerROS/local\_plan"}, Path, self.planCallback)}
+\DoxyCodeLine{63         self.stat\_sub = rospy.Subscriber(\textcolor{stringliteral}{"move\_base/status"}, GoalStatusArray, self.statCallback)}
+\DoxyCodeLine{64 }
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_a400576d950f371ffab98a0afbbb99d87}\label{classtilt__head_1_1NavHeadController_a400576d950f371ffab98a0afbbb99d87}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!loop@{loop}}
+\index{loop@{loop}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily def tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line 106 of file tilt\+\_\+head.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{106     \textcolor{keyword}{def }loop(self):}
+\DoxyCodeLine{107         \textcolor{keywordflow}{while} \textcolor{keywordflow}{not} rospy.is\_shutdown():}
+\DoxyCodeLine{108             \textcolor{keywordflow}{if} self.has\_goal:}
+\DoxyCodeLine{109                 goal = PointHeadGoal()}
+\DoxyCodeLine{110                 goal.target.header.stamp = rospy.Time.now()}
+\DoxyCodeLine{111                 goal.target.header.frame\_id = \textcolor{stringliteral}{"base\_link"}}
+\DoxyCodeLine{112                 \textcolor{keyword}{with} self.mutex:}
+\DoxyCodeLine{113                     goal.target.point.x = self.x}
+\DoxyCodeLine{114                     goal.target.point.y = self.y}
+\DoxyCodeLine{115                     self.x = 1}
+\DoxyCodeLine{116                     self.y = 0}
+\DoxyCodeLine{117                 goal.target.point.z = 0.0}
+\DoxyCodeLine{118                 goal.min\_duration = rospy.Duration(1.0)}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120                 self.client.send\_goal(goal)}
+\DoxyCodeLine{121                 self.client.wait\_for\_result()}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123                 \textcolor{keyword}{with} self.mutex:}
+\DoxyCodeLine{124                     goal.target.point.x = self.x}
+\DoxyCodeLine{125                     goal.target.point.y = self.y}
+\DoxyCodeLine{126                     self.x = 1}
+\DoxyCodeLine{127                     self.y = 0}
+\DoxyCodeLine{128                 goal.target.point.z = 0.75}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130                 self.client.send\_goal(goal)}
+\DoxyCodeLine{131                 self.client.wait\_for\_result()}
+\DoxyCodeLine{132             \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{133                 rospy.sleep(1.0)}
+\DoxyCodeLine{134 }
+
+\end{DoxyCode}
+
+
+References smacc\+::default\+\_\+events\+::\+Ev\+Action\+Feedback$<$ Action\+Feedback, T\+Orthogonal $>$.\+client, camera\+\_\+reconfigure.\+Camera\+Reconfigure.\+client, tests\+\_\+arm\+\_\+movements.\+Point\+Head\+Client.\+client, demo.\+Move\+Base\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Move\+Base\+Client.\+client, tests\+\_\+arm\+\_\+movements.\+Move\+Base\+Client.\+client, tilt\+\_\+head.\+Nav\+Head\+Controller.\+client, demo.\+Follow\+Trajectory\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Follow\+Trajectory\+Client.\+client, tests\+\_\+arm\+\_\+movements.\+Follow\+Trajectory\+Client.\+client, demo.\+Point\+Head\+Client.\+client, pick\+\_\+place\+\_\+demo.\+Point\+Head\+Client.\+client, tilt\+\_\+head.\+Nav\+Head\+Controller.\+has\+\_\+goal, tilt\+\_\+head.\+Nav\+Head\+Controller.\+mutex, tilt\+\_\+head.\+Nav\+Head\+Controller.\+x, and tilt\+\_\+head.\+Nav\+Head\+Controller.\+y.
+
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_a5fed20c142eaaf3f1d60ed71969b2d32}\label{classtilt__head_1_1NavHeadController_a5fed20c142eaaf3f1d60ed71969b2d32}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!planCallback@{planCallback}}
+\index{planCallback@{planCallback}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{planCallback()}{planCallback()}}
+{\footnotesize\ttfamily def tilt\+\_\+head.\+Nav\+Head\+Controller.\+plan\+Callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+Definition at line 73 of file tilt\+\_\+head.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{73     \textcolor{keyword}{def }planCallback(self, msg):}
+\DoxyCodeLine{74         \textcolor{comment}{\# get the goal}}
+\DoxyCodeLine{75         pose\_stamped = msg.poses[-\/1]}
+\DoxyCodeLine{76         pose = pose\_stamped.pose}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         \textcolor{comment}{\# look ahead one meter}}
+\DoxyCodeLine{79         R = quaternion\_matrix([pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w])}
+\DoxyCodeLine{80         point = [1, 0, 0, 1]}
+\DoxyCodeLine{81         M = R*point}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83         p = PointStamped()}
+\DoxyCodeLine{84         p.header.frame\_id = pose\_stamped.header.frame\_id}
+\DoxyCodeLine{85         p.header.stamp = rospy.Time(0)}
+\DoxyCodeLine{86         p.point.x += pose\_stamped.pose.position.x + M[0,0]}
+\DoxyCodeLine{87         p.point.y += pose\_stamped.pose.position.y + M[1,0]}
+\DoxyCodeLine{88         p.point.z += pose\_stamped.pose.position.z + M[2,0]}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90         \textcolor{comment}{\# transform to base\_link}}
+\DoxyCodeLine{91         p = self.listener.transformPoint(\textcolor{stringliteral}{"base\_link"}, p)}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93         \textcolor{comment}{\# update}}
+\DoxyCodeLine{94         \textcolor{keyword}{with} self.mutex:}
+\DoxyCodeLine{95             \textcolor{keywordflow}{if} p.point.x < 0.65:}
+\DoxyCodeLine{96                 self.x = 0.65}
+\DoxyCodeLine{97             \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{98                 self.x = p.point.x}
+\DoxyCodeLine{99             \textcolor{keywordflow}{if} p.point.y > 0.5:}
+\DoxyCodeLine{100                 self.y = 0.5}
+\DoxyCodeLine{101             \textcolor{keywordflow}{elif} p.point.y < -\/0.5:}
+\DoxyCodeLine{102                 self.y = -\/0.5}
+\DoxyCodeLine{103             \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{104                 self.y = p.point.y}
+\DoxyCodeLine{105 }
+
+\end{DoxyCode}
+
+
+References cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Rotate.\+listener, cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Absolute\+Rotate.\+listener, cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Backwards.\+listener, cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards.\+listener, cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Navigate\+Forward.\+listener, cl\+\_\+move\+\_\+base\+\_\+z\+::\+Cb\+Undo\+Path\+Backwards2.\+listener, tilt\+\_\+head.\+Nav\+Head\+Controller.\+listener, tilt\+\_\+head.\+Nav\+Head\+Controller.\+mutex, tilt\+\_\+head.\+Nav\+Head\+Controller.\+x, and tilt\+\_\+head.\+Nav\+Head\+Controller.\+y.
+
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_a8280adf67fa1ddfaaf12cdef2d1f91ca}\label{classtilt__head_1_1NavHeadController_a8280adf67fa1ddfaaf12cdef2d1f91ca}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!statCallback@{statCallback}}
+\index{statCallback@{statCallback}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{statCallback()}{statCallback()}}
+{\footnotesize\ttfamily def tilt\+\_\+head.\+Nav\+Head\+Controller.\+stat\+Callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+Definition at line 65 of file tilt\+\_\+head.\+py.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{65     \textcolor{keyword}{def }statCallback(self, msg):}
+\DoxyCodeLine{66         goal = \textcolor{keyword}{False}}
+\DoxyCodeLine{67         \textcolor{keywordflow}{for} status \textcolor{keywordflow}{in} msg.status\_list:}
+\DoxyCodeLine{68             \textcolor{keywordflow}{if} status.status == GoalStatus.ACTIVE:}
+\DoxyCodeLine{69                 goal = \textcolor{keyword}{True}}
+\DoxyCodeLine{70                 \textcolor{keywordflow}{break}}
+\DoxyCodeLine{71         self.has\_goal = goal}
+\DoxyCodeLine{72 }
+
+\end{DoxyCode}
+
+
+References tilt\+\_\+head.\+Nav\+Head\+Controller.\+has\+\_\+goal.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_abddca7cf5138c9fc653440dfef26dc18}\label{classtilt__head_1_1NavHeadController_abddca7cf5138c9fc653440dfef26dc18}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!client@{client}}
+\index{client@{client}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily tilt\+\_\+head.\+Nav\+Head\+Controller.\+client}
+
+
+
+Definition at line 59 of file tilt\+\_\+head.\+py.
+
+
+
+Referenced by tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop(), tuck\+\_\+arm.\+Tuck\+Thread.\+run(), gripper\+\_\+keyboard.\+Gripper\+Keyboard.\+set\+\_\+position(), and tuck\+\_\+arm.\+Tuck\+Thread.\+stop().
+
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_a99dab789d8e1627a736503539e23b300}\label{classtilt__head_1_1NavHeadController_a99dab789d8e1627a736503539e23b300}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!has\_goal@{has\_goal}}
+\index{has\_goal@{has\_goal}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{has\_goal}{has\_goal}}
+{\footnotesize\ttfamily tilt\+\_\+head.\+Nav\+Head\+Controller.\+has\+\_\+goal}
+
+
+
+Definition at line 50 of file tilt\+\_\+head.\+py.
+
+
+
+Referenced by tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop(), and tilt\+\_\+head.\+Nav\+Head\+Controller.\+stat\+Callback().
+
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_ac4c69d3d5510c9d0da23b1dce98a3f3b}\label{classtilt__head_1_1NavHeadController_ac4c69d3d5510c9d0da23b1dce98a3f3b}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!listener@{listener}}
+\index{listener@{listener}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{listener}{listener}}
+{\footnotesize\ttfamily tilt\+\_\+head.\+Nav\+Head\+Controller.\+listener}
+
+
+
+Definition at line 57 of file tilt\+\_\+head.\+py.
+
+
+
+Referenced by tilt\+\_\+head.\+Nav\+Head\+Controller.\+plan\+Callback().
+
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_af4130fcf061d0c4846377a622ec64233}\label{classtilt__head_1_1NavHeadController_af4130fcf061d0c4846377a622ec64233}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!mutex@{mutex}}
+\index{mutex@{mutex}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{mutex}{mutex}}
+{\footnotesize\ttfamily tilt\+\_\+head.\+Nav\+Head\+Controller.\+mutex}
+
+
+
+Definition at line 55 of file tilt\+\_\+head.\+py.
+
+
+
+Referenced by tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop(), and tilt\+\_\+head.\+Nav\+Head\+Controller.\+plan\+Callback().
+
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_a44afe0776e960b0e8e6c64a5c999cef6}\label{classtilt__head_1_1NavHeadController_a44afe0776e960b0e8e6c64a5c999cef6}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!plan\_sub@{plan\_sub}}
+\index{plan\_sub@{plan\_sub}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{plan\_sub}{plan\_sub}}
+{\footnotesize\ttfamily tilt\+\_\+head.\+Nav\+Head\+Controller.\+plan\+\_\+sub}
+
+
+
+Definition at line 62 of file tilt\+\_\+head.\+py.
+
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_a755638cffefe55080299ab6f6b01ef61}\label{classtilt__head_1_1NavHeadController_a755638cffefe55080299ab6f6b01ef61}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!stat\_sub@{stat\_sub}}
+\index{stat\_sub@{stat\_sub}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{stat\_sub}{stat\_sub}}
+{\footnotesize\ttfamily tilt\+\_\+head.\+Nav\+Head\+Controller.\+stat\+\_\+sub}
+
+
+
+Definition at line 63 of file tilt\+\_\+head.\+py.
+
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_a0c654c4e7c47c4d2e29149c31a520dee}\label{classtilt__head_1_1NavHeadController_a0c654c4e7c47c4d2e29149c31a520dee}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!x@{x}}
+\index{x@{x}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily tilt\+\_\+head.\+Nav\+Head\+Controller.\+x}
+
+
+
+Definition at line 53 of file tilt\+\_\+head.\+py.
+
+
+
+Referenced by tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop(), and tilt\+\_\+head.\+Nav\+Head\+Controller.\+plan\+Callback().
+
+\mbox{\Hypertarget{classtilt__head_1_1NavHeadController_a9ba05500db3e0167feacf3ccf9382874}\label{classtilt__head_1_1NavHeadController_a9ba05500db3e0167feacf3ccf9382874}} 
+\index{tilt\_head.NavHeadController@{tilt\_head.NavHeadController}!y@{y}}
+\index{y@{y}!tilt\_head.NavHeadController@{tilt\_head.NavHeadController}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily tilt\+\_\+head.\+Nav\+Head\+Controller.\+y}
+
+
+
+Definition at line 54 of file tilt\+\_\+head.\+py.
+
+
+
+Referenced by tilt\+\_\+head.\+Nav\+Head\+Controller.\+loop(), and tilt\+\_\+head.\+Nav\+Head\+Controller.\+plan\+Callback().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+submodules/fetch\+\_\+ros/fetch\+\_\+navigation/scripts/\mbox{\hyperlink{tilt__head_8py}{tilt\+\_\+head.\+py}}\end{DoxyCompactItemize}

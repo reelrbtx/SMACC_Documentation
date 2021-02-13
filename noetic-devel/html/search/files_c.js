@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['path_5ftools_2ecpp',['path_tools.cpp',['../path__tools_8cpp.html',1,'']]],
-  ['planner_5fswitcher_2ecpp',['planner_switcher.cpp',['../planner__switcher_8cpp.html',1,'']]],
-  ['planner_5fswitcher_2eh',['planner_switcher.h',['../planner__switcher_8h.html',1,'']]],
-  ['pure_5fspinning_5flocal_5fplanner_2ecpp',['pure_spinning_local_planner.cpp',['../pure__spinning__local__planner_8cpp.html',1,'']]],
-  ['pure_5fspinning_5flocal_5fplanner_2eh',['pure_spinning_local_planner.h',['../pure__spinning__local__planner_8h.html',1,'']]]
+  ['led_5faction_5fserver_5fnode_2ecpp_4955',['led_action_server_node.cpp',['../servers_2led__action__server_2src_2led__action__server__node_8cpp.html',1,'(Global Namespace)'],['../2_2servers_2led__action__server_2src_2led__action__server__node_8cpp.html',1,'(Global Namespace)'],['../strikes__back_2servers_2led__action__server_2src_2led__action__server__node_8cpp.html',1,'(Global Namespace)']]],
+  ['license_2etxt_4956',['LICENSE.txt',['../LICENSE_8txt.html',1,'']]],
+  ['lidar_5fnode_2ecpp_4957',['lidar_node.cpp',['../servers_2lidar__node_2src_2lidar__node_8cpp.html',1,'(Global Namespace)'],['../2_2servers_2lidar__node_2src_2lidar__node_8cpp.html',1,'(Global Namespace)'],['../strikes__back_2servers_2lidar__node_2src_2lidar__node_8cpp.html',1,'(Global Namespace)']]]
 ];

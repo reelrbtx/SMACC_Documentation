@@ -1,0 +1,123 @@
+\hypertarget{joystick__teleop_8cpp}{}\doxysection{submodules/fetch\+\_\+ros/fetch\+\_\+teleop/src/joystick\+\_\+teleop.cpp File Reference}
+\label{joystick__teleop_8cpp}\index{submodules/fetch\_ros/fetch\_teleop/src/joystick\_teleop.cpp@{submodules/fetch\_ros/fetch\_teleop/src/joystick\_teleop.cpp}}
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$boost/thread/mutex.\+hpp$>$}\newline
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$control\+\_\+msgs/\+Follow\+Joint\+Trajectory\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$control\+\_\+msgs/\+Gripper\+Command\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$geometry\+\_\+msgs/\+Twist\+Stamped.\+h$>$}\newline
+{\ttfamily \#include $<$nav\+\_\+msgs/\+Odometry.\+h$>$}\newline
+{\ttfamily \#include $<$sensor\+\_\+msgs/\+Joint\+State.\+h$>$}\newline
+{\ttfamily \#include $<$sensor\+\_\+msgs/\+Joy.\+h$>$}\newline
+{\ttfamily \#include $<$topic\+\_\+tools/\+Mux\+Select.\+h$>$}\newline
+Include dependency graph for joystick\+\_\+teleop.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{joystick__teleop_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classTeleopComponent}{Teleop\+Component}}
+\item 
+class \mbox{\hyperlink{classBaseTeleop}{Base\+Teleop}}
+\item 
+class \mbox{\hyperlink{classFollowTeleop}{Follow\+Teleop}}
+\item 
+class \mbox{\hyperlink{classGripperTeleop}{Gripper\+Teleop}}
+\item 
+class \mbox{\hyperlink{classHeadTeleop}{Head\+Teleop}}
+\item 
+class \mbox{\hyperlink{classArmTeleop}{Arm\+Teleop}}
+\item 
+class \mbox{\hyperlink{classTeleop}{Teleop}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{joystick__teleop_8cpp_abc93e7e5e2e433ab3ad7b8c15243035e}{integrate}} (double desired, double present, double max\+\_\+rate, double dt)
+\item 
+int \mbox{\hyperlink{joystick__teleop_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{joystick__teleop_8cpp_abc93e7e5e2e433ab3ad7b8c15243035e}\label{joystick__teleop_8cpp_abc93e7e5e2e433ab3ad7b8c15243035e}} 
+\index{joystick\_teleop.cpp@{joystick\_teleop.cpp}!integrate@{integrate}}
+\index{integrate@{integrate}!joystick\_teleop.cpp@{joystick\_teleop.cpp}}
+\doxysubsubsection{\texorpdfstring{integrate()}{integrate()}}
+{\footnotesize\ttfamily double integrate (\begin{DoxyParamCaption}\item[{double}]{desired,  }\item[{double}]{present,  }\item[{double}]{max\+\_\+rate,  }\item[{double}]{dt }\end{DoxyParamCaption})}
+
+
+
+Definition at line 50 of file joystick\+\_\+teleop.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{51 \{}
+\DoxyCodeLine{52   \textcolor{keywordflow}{if} (desired > present)}
+\DoxyCodeLine{53     \textcolor{keywordflow}{return} std::min(desired, present + max\_rate * dt);}
+\DoxyCodeLine{54   \textcolor{keywordflow}{else}}
+\DoxyCodeLine{55     \textcolor{keywordflow}{return} std::max(desired, present -\/ max\_rate * dt);}
+\DoxyCodeLine{56 \}}
+
+\end{DoxyCode}
+
+
+Referenced by Base\+Teleop\+::publish(), Follow\+Teleop\+::publish(), Head\+Teleop\+::publish(), and Arm\+Teleop\+::publish().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{joystick__teleop_8cpp_abc93e7e5e2e433ab3ad7b8c15243035e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{joystick__teleop_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{joystick__teleop_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{joystick\_teleop.cpp@{joystick\_teleop.cpp}!main@{main}}
+\index{main@{main}!joystick\_teleop.cpp@{joystick\_teleop.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 856 of file joystick\+\_\+teleop.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{857 \{}
+\DoxyCodeLine{858   ros::init(argc, argv, \textcolor{stringliteral}{"teleop"});}
+\DoxyCodeLine{859   ros::NodeHandle n(\textcolor{stringliteral}{"\string~"});}
+\DoxyCodeLine{860 }
+\DoxyCodeLine{861   \mbox{\hyperlink{classTeleop}{Teleop}} teleop;}
+\DoxyCodeLine{862   teleop.\mbox{\hyperlink{classTeleop_a3eecea5298a9868336ccac940929e837}{init}}(n);}
+\DoxyCodeLine{863 }
+\DoxyCodeLine{864   ros::Rate \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}}(30.0);}
+\DoxyCodeLine{865   \textcolor{keywordflow}{while} (ros::ok())}
+\DoxyCodeLine{866   \{}
+\DoxyCodeLine{867     ros::spinOnce();}
+\DoxyCodeLine{868     teleop.\mbox{\hyperlink{classTeleop_a3c9109240335ab4949b64c550b1f2e12}{publish}}(ros::Duration(1/30.0));}
+\DoxyCodeLine{869     \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}}.sleep();}
+\DoxyCodeLine{870   \}}
+\DoxyCodeLine{871 }
+\DoxyCodeLine{872   \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{873 \}}
+
+\end{DoxyCode}
+
+
+References Teleop\+::init(), Teleop\+::publish(), and fake\+\_\+cube\+\_\+perception\+\_\+node\+::r.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{joystick__teleop_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
