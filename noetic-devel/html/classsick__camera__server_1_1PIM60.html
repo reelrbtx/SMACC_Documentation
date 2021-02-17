@@ -102,7 +102,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Interface for the PIm60 camera</pre> 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00018">18</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00017">17</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad7a1f345ffcdbfb264e5abbcbd7b3abc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad7a1f345ffcdbfb264e5abbcbd7b3abc">&#9670;&nbsp;</a></span>__init__()</h2>
@@ -136,13 +136,13 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00020">20</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">def </span>__init__(self, ip, port=2116):</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        self.buf = <span class="stringliteral">&#39;&#39;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        self.sock.connect( (ip, port) )</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        self.sock.settimeout(1.0)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00019">19</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">def </span>__init__(self, ip, port=2116):</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        self.buf = <span class="stringliteral">&#39;&#39;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        self.sock.connect( (ip, port) )</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        self.sock.settimeout(1.0)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -173,36 +173,36 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Received respose, will strip &lt;STX&gt; and &lt;ETX&gt; from response message </pre> 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00037">37</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">def </span>recv(self, timeout = 0.5):</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="stringliteral">&quot;&quot;&quot; Received respose, will strip &lt;STX&gt; and &lt;ETX&gt; from response message &quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        buf = self.buf</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">while</span> buf.find(chr(3)) &lt; 0:</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            buf += self.sock.recv(1000)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        start_idx = buf.find(chr(2))</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">if</span> start_idx &lt; 0:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            print(<span class="stringliteral">&quot; Could not find STX in buffer :&quot;</span>, self.prettyMsg(buf))</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">elif</span> start_idx != 0:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            print(<span class="stringliteral">&quot; Garbage data before STX :&quot;</span>, self.prettyMsg(buf[:start_idx+1]))</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        stop_idx = buf.find(chr(3))</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="comment"># Store any following messages in buffer</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        self.buf = buf[stop_idx+1:]</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="comment"># Make sure remaining message has a STX at begining</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">if</span> len(self.buf) <span class="keywordflow">and</span> (self.buf[0] != chr(2)):</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            print(<span class="stringliteral">&quot; Extra garbage after ETX :&quot;</span>, self.prettyMsg(buf[stop_idx+1:]))</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">if</span> start_idx &gt; stop_idx:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            print(<span class="stringliteral">&quot; Found stop before start&quot;</span>, start_idx, stop_idx)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">return</span> buf[start_idx+1:stop_idx]</div>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00036">36</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">def </span>recv(self, timeout = 0.5):</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="stringliteral">&quot;&quot;&quot; Received respose, will strip &lt;STX&gt; and &lt;ETX&gt; from response message &quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        buf = self.buf</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">while</span> buf.find(chr(3)) &lt; 0:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            buf += self.sock.recv(1000)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        start_idx = buf.find(chr(2))</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">if</span> start_idx &lt; 0:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            print(<span class="stringliteral">&quot; Could not find STX in buffer :&quot;</span>, self.prettyMsg(buf))</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">elif</span> start_idx != 0:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            print(<span class="stringliteral">&quot; Garbage data before STX :&quot;</span>, self.prettyMsg(buf[:start_idx+1]))</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        stop_idx = buf.find(chr(3))</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="comment"># Store any following messages in buffer</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        self.buf = buf[stop_idx+1:]</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="comment"># Make sure remaining message has a STX at begining</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">if</span> len(self.buf) <span class="keywordflow">and</span> (self.buf[0] != chr(2)):</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            print(<span class="stringliteral">&quot; Extra garbage after ETX :&quot;</span>, self.prettyMsg(buf[stop_idx+1:]))</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">if</span> start_idx &gt; stop_idx:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            print(<span class="stringliteral">&quot; Found stop before start&quot;</span>, start_idx, stop_idx)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">return</span> buf[start_idx+1:stop_idx]</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="sick__camera__server_8py_source.html#l00021">sick_camera_server.PIM60.buf</a>, and <a class="el" href="sick__camera__server_8py_source.html#l00022">sick_camera_server.PIM60.sock</a>.</p>
+<p class="reference">References <a class="el" href="sick__camera__server_8py_source.html#l00020">sick_camera_server.PIM60.buf</a>, and <a class="el" href="sick__camera__server_8py_source.html#l00021">sick_camera_server.PIM60.sock</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00026">sick_camera_server.PIM60.trigger()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00025">sick_camera_server.PIM60.trigger()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -241,16 +241,16 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Sends messages to device </pre> 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00032">32</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">def </span>send(self, msg):</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="stringliteral">&quot;&quot;&quot; Sends messages to device &quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        print(<span class="stringliteral">&#39;SENT&#39;</span>)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        self.sock.sendall(msg)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00031">31</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">def </span>send(self, msg):</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="stringliteral">&quot;&quot;&quot; Sends messages to device &quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        print(<span class="stringliteral">&#39;SENT&#39;</span>)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        self.sock.sendall(msg)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="sick__camera__server_8py_source.html#l00022">sick_camera_server.PIM60.sock</a>.</p>
+<p class="reference">References <a class="el" href="sick__camera__server_8py_source.html#l00021">sick_camera_server.PIM60.sock</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00026">sick_camera_server.PIM60.trigger()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00025">sick_camera_server.PIM60.trigger()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -279,15 +279,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Triggers the camera click</pre> 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00026">26</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">def </span>trigger(self):</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;Triggers the camera click&quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        self.send(<span class="stringliteral">&quot;TRIG&quot;</span>)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        resp = self.recv()</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        print(resp)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00025">25</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">def </span>trigger(self):</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;Triggers the camera click&quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        self.send(<span class="stringliteral">&quot;TRIG&quot;</span>)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        resp = self.recv()</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        print(resp)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="sick__camera__server_8py_source.html#l00037">sick_camera_server.PIM60.recv()</a>, and <a class="el" href="sick__camera__server_8py_source.html#l00032">sick_camera_server.PIM60.send()</a>.</p>
+<p class="reference">References <a class="el" href="sick__camera__server_8py_source.html#l00036">sick_camera_server.PIM60.recv()</a>, and <a class="el" href="sick__camera__server_8py_source.html#l00031">sick_camera_server.PIM60.send()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -314,9 +314,9 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00021">21</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00020">20</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00037">sick_camera_server.PIM60.recv()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00036">sick_camera_server.PIM60.recv()</a>.</p>
 
 </div>
 </div>
@@ -332,9 +332,9 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00022">22</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00021">21</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00037">sick_camera_server.PIM60.recv()</a>, and <a class="el" href="sick__camera__server_8py_source.html#l00032">sick_camera_server.PIM60.send()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00036">sick_camera_server.PIM60.recv()</a>, and <a class="el" href="sick__camera__server_8py_source.html#l00031">sick_camera_server.PIM60.send()</a>.</p>
 
 </div>
 </div>

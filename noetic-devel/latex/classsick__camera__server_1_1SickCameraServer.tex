@@ -57,7 +57,7 @@ int \mbox{\hyperlink{classsick__camera__server_1_1SickCameraServer_a2752a40574cb
 \doxysubsection{Detailed Description}
 
 
-Definition at line 62 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 61 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 
@@ -70,18 +70,18 @@ Definition at line 62 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 
-Definition at line 67 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 66 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{67     \textcolor{keyword}{def }\_\_init\_\_(self):}
-\DoxyCodeLine{68         self.\_sick\_camera = PIM60(\textcolor{stringliteral}{"192.168.100.103"}, 2116)}
-\DoxyCodeLine{69         self.server = actionlib.SimpleActionServer(\textcolor{stringliteral}{'sick\_camera'}, SickCameraAction, self.callback, \textcolor{keyword}{False})}
-\DoxyCodeLine{70         self.server.start()}
-\DoxyCodeLine{71         self.wait\_duration = 5}
-\DoxyCodeLine{72         self.wait\_until = datetime.now() -\/ timedelta(seconds= self.wait\_duration)}
+\DoxyCodeLine{66     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{67         self.\_sick\_camera = PIM60(\textcolor{stringliteral}{"192.168.100.103"}, 2116)}
+\DoxyCodeLine{68         self.server = actionlib.SimpleActionServer(\textcolor{stringliteral}{'sick\_camera'}, SickCameraAction, self.callback, \textcolor{keyword}{False})}
+\DoxyCodeLine{69         self.server.start()}
+\DoxyCodeLine{70         self.wait\_duration = 5}
+\DoxyCodeLine{71         self.wait\_until = datetime.now() -\/ timedelta(seconds= self.wait\_duration)}
+\DoxyCodeLine{72 }
 \DoxyCodeLine{73 }
-\DoxyCodeLine{74 }
 
 \end{DoxyCode}
 
@@ -96,33 +96,33 @@ Definition at line 67 of file sick\+\_\+camera\+\_\+server.\+py.
 \begin{DoxyVerb}Action server callback.\end{DoxyVerb}
  
 
-Definition at line 75 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 74 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{75     \textcolor{keyword}{def }\mbox{\hyperlink{sm__ridgeback__barrel__search__1_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}}(self, goal):}
-\DoxyCodeLine{76         \textcolor{stringliteral}{"""Action server callback."""}}
-\DoxyCodeLine{77         print(\textcolor{stringliteral}{"Received goal: "} + str(goal))}
-\DoxyCodeLine{78 }
-\DoxyCodeLine{79         \textcolor{keywordflow}{if} goal.trigger == SickCameraGoal.TRIG:}
-\DoxyCodeLine{80             time\_left = self.wait\_until -\/ datetime.now()}
-\DoxyCodeLine{81             \textcolor{keywordflow}{if} time\_left.total\_seconds() > 0.0:}
-\DoxyCodeLine{82                 print(\textcolor{stringliteral}{"Sick Camera can click only every 5 seconds"})}
-\DoxyCodeLine{83                 self.\_result.success = \textcolor{keyword}{False}}
-\DoxyCodeLine{84                 self.\_result.message = \textcolor{stringliteral}{"Sick Camera can click only every 5 seconds "} + str(self.wait\_duration) +\(\backslash\)}
-\DoxyCodeLine{85                         \textcolor{stringliteral}{"s. Please wait "} + str(time\_left.total\_seconds()) + \textcolor{stringliteral}{"s."}}
-\DoxyCodeLine{86                 self.server.set\_aborted(self.\_result)}
-\DoxyCodeLine{87             \textcolor{keywordflow}{else}:}
-\DoxyCodeLine{88                 self.click()}
-\DoxyCodeLine{89                 self.wait\_until = datetime.now() + timedelta(seconds=self.wait\_duration)}
-\DoxyCodeLine{90                 self.\_result.success = \textcolor{keyword}{True}}
-\DoxyCodeLine{91                 self.\_result.message = \textcolor{stringliteral}{"Sick Camera took picture!."}}
-\DoxyCodeLine{92                 self.server.set\_succeeded(self.\_result)}
-\DoxyCodeLine{93         \textcolor{keywordflow}{else}:}
-\DoxyCodeLine{94             self.\_result.success = \textcolor{keyword}{False}}
-\DoxyCodeLine{95             self.\_result.message = \textcolor{stringliteral}{"Unknown goal type"}}
-\DoxyCodeLine{96             self.server.set\_aborted(self.\_result)}
-\DoxyCodeLine{97 }
+\DoxyCodeLine{74     \textcolor{keyword}{def }\mbox{\hyperlink{sm__ridgeback__barrel__search__1_2servers_2opencv__perception__node_2opencv__perception__node_8cpp_a050e697bd654facce10ea3f6549669b3}{callback}}(self, goal):}
+\DoxyCodeLine{75         \textcolor{stringliteral}{"""Action server callback."""}}
+\DoxyCodeLine{76         print(\textcolor{stringliteral}{"Received goal: "} + str(goal))}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78         \textcolor{keywordflow}{if} goal.trigger == SickCameraGoal.TRIG:}
+\DoxyCodeLine{79             time\_left = self.wait\_until -\/ datetime.now()}
+\DoxyCodeLine{80             \textcolor{keywordflow}{if} time\_left.total\_seconds() > 0.0:}
+\DoxyCodeLine{81                 print(\textcolor{stringliteral}{"Sick Camera can click only every 5 seconds"})}
+\DoxyCodeLine{82                 self.\_result.success = \textcolor{keyword}{False}}
+\DoxyCodeLine{83                 self.\_result.message = \textcolor{stringliteral}{"Sick Camera can click only every 5 seconds "} + str(self.wait\_duration) +\(\backslash\)}
+\DoxyCodeLine{84                         \textcolor{stringliteral}{"s. Please wait "} + str(time\_left.total\_seconds()) + \textcolor{stringliteral}{"s."}}
+\DoxyCodeLine{85                 self.server.set\_aborted(self.\_result)}
+\DoxyCodeLine{86             \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{87                 self.click()}
+\DoxyCodeLine{88                 self.wait\_until = datetime.now() + timedelta(seconds=self.wait\_duration)}
+\DoxyCodeLine{89                 self.\_result.success = \textcolor{keyword}{True}}
+\DoxyCodeLine{90                 self.\_result.message = \textcolor{stringliteral}{"Sick Camera took picture!."}}
+\DoxyCodeLine{91                 self.server.set\_succeeded(self.\_result)}
+\DoxyCodeLine{92         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{93             self.\_result.success = \textcolor{keyword}{False}}
+\DoxyCodeLine{94             self.\_result.message = \textcolor{stringliteral}{"Unknown goal type"}}
+\DoxyCodeLine{95             self.server.set\_aborted(self.\_result)}
+\DoxyCodeLine{96 }
 
 \end{DoxyCode}
 
@@ -146,15 +146,15 @@ Here is the call graph for this function\+:
 \begin{DoxyVerb}Clicks the pitures!\end{DoxyVerb}
  
 
-Definition at line 98 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 97 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{98     \textcolor{keyword}{def }click(self):}
-\DoxyCodeLine{99         \textcolor{stringliteral}{"""Clicks the pitures!"""}}
-\DoxyCodeLine{100         self.\_sick\_camera.trigger()}
-\DoxyCodeLine{101             }
-\DoxyCodeLine{102 }
+\DoxyCodeLine{97     \textcolor{keyword}{def }click(self):}
+\DoxyCodeLine{98         \textcolor{stringliteral}{"""Clicks the pitures!"""}}
+\DoxyCodeLine{99         self.\_sick\_camera.trigger()}
+\DoxyCodeLine{100             }
+\DoxyCodeLine{101 }
 
 \end{DoxyCode}
 
@@ -184,7 +184,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 63 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 62 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 
@@ -198,7 +198,7 @@ Referenced by sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+callback().
 
 
 
-Definition at line 68 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 67 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 
@@ -212,7 +212,7 @@ Referenced by sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+click().
 
 
 
-Definition at line 64 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 63 of file sick\+\_\+camera\+\_\+server.\+py.
 
 \mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_ad118c8fa7021f2e71a18cdb622030a5c}\label{classsick__camera__server_1_1SickCameraServer_ad118c8fa7021f2e71a18cdb622030a5c}} 
 \index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!\_wait\_until@{\_wait\_until}}
@@ -222,7 +222,7 @@ Definition at line 64 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 
-Definition at line 65 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 64 of file sick\+\_\+camera\+\_\+server.\+py.
 
 \mbox{\Hypertarget{classsick__camera__server_1_1SickCameraServer_a0d0be1531df3cedbb4ef5963de1b1623}\label{classsick__camera__server_1_1SickCameraServer_a0d0be1531df3cedbb4ef5963de1b1623}} 
 \index{sick\_camera\_server.SickCameraServer@{sick\_camera\_server.SickCameraServer}!server@{server}}
@@ -232,7 +232,7 @@ Definition at line 65 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 
-Definition at line 69 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 68 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 
@@ -246,7 +246,7 @@ Referenced by sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+callback().
 
 
 
-Definition at line 71 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 70 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 
@@ -260,7 +260,7 @@ Referenced by sick\+\_\+camera\+\_\+server.\+Sick\+Camera\+Server.\+callback().
 
 
 
-Definition at line 72 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 71 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 

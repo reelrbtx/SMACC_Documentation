@@ -34,7 +34,7 @@ def \mbox{\hyperlink{classsick__camera__server_1_1PIM60_a6dd71af31bddb36b4a192ef
 \begin{DoxyVerb}Interface for the PIm60 camera\end{DoxyVerb}
  
 
-Definition at line 18 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 17 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 
@@ -47,16 +47,16 @@ Definition at line 18 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 
-Definition at line 20 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 19 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{20     \textcolor{keyword}{def }\_\_init\_\_(self, ip, port=2116):}
-\DoxyCodeLine{21         self.buf = \textcolor{stringliteral}{''}}
-\DoxyCodeLine{22         self.sock = socket.socket(socket.AF\_INET, socket.SOCK\_STREAM)}
-\DoxyCodeLine{23         self.sock.connect( (ip, port) )}
-\DoxyCodeLine{24         self.sock.settimeout(1.0)}
-\DoxyCodeLine{25 }
+\DoxyCodeLine{19     \textcolor{keyword}{def }\_\_init\_\_(self, ip, port=2116):}
+\DoxyCodeLine{20         self.buf = \textcolor{stringliteral}{''}}
+\DoxyCodeLine{21         self.sock = socket.socket(socket.AF\_INET, socket.SOCK\_STREAM)}
+\DoxyCodeLine{22         self.sock.connect( (ip, port) )}
+\DoxyCodeLine{23         self.sock.settimeout(1.0)}
+\DoxyCodeLine{24 }
 
 \end{DoxyCode}
 
@@ -71,35 +71,35 @@ Definition at line 20 of file sick\+\_\+camera\+\_\+server.\+py.
 \begin{DoxyVerb}Received respose, will strip <STX> and <ETX> from response message \end{DoxyVerb}
  
 
-Definition at line 37 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 36 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{37     \textcolor{keyword}{def }recv(self, timeout = 0.5):}
-\DoxyCodeLine{38         \textcolor{stringliteral}{""" Received respose, will strip <STX> and <ETX> from response message """}}
-\DoxyCodeLine{39         buf = self.buf}
-\DoxyCodeLine{40         \textcolor{keywordflow}{while} buf.find(chr(3)) < 0:}
-\DoxyCodeLine{41             buf += self.sock.recv(1000)}
-\DoxyCodeLine{42 }
-\DoxyCodeLine{43         start\_idx = buf.find(chr(2))}
-\DoxyCodeLine{44         \textcolor{keywordflow}{if} start\_idx < 0:}
-\DoxyCodeLine{45             print(\textcolor{stringliteral}{" Could not find STX in buffer :"}, self.prettyMsg(buf))}
-\DoxyCodeLine{46         \textcolor{keywordflow}{elif} start\_idx != 0:}
-\DoxyCodeLine{47             print(\textcolor{stringliteral}{" Garbage data before STX :"}, self.prettyMsg(buf[:start\_idx+1]))}
-\DoxyCodeLine{48 }
-\DoxyCodeLine{49         stop\_idx = buf.find(chr(3))}
-\DoxyCodeLine{50 }
-\DoxyCodeLine{51         \textcolor{comment}{\# Store any following messages in buffer}}
-\DoxyCodeLine{52         self.buf = buf[stop\_idx+1:]}
-\DoxyCodeLine{53 }
-\DoxyCodeLine{54         \textcolor{comment}{\# Make sure remaining message has a STX at begining}}
-\DoxyCodeLine{55         \textcolor{keywordflow}{if} len(self.buf) \textcolor{keywordflow}{and} (self.buf[0] != chr(2)):}
-\DoxyCodeLine{56             print(\textcolor{stringliteral}{" Extra garbage after ETX :"}, self.prettyMsg(buf[stop\_idx+1:]))}
-\DoxyCodeLine{57         \textcolor{keywordflow}{if} start\_idx > stop\_idx:}
-\DoxyCodeLine{58             print(\textcolor{stringliteral}{" Found stop before start"}, start\_idx, stop\_idx)}
-\DoxyCodeLine{59         \textcolor{keywordflow}{return} buf[start\_idx+1:stop\_idx]}
+\DoxyCodeLine{36     \textcolor{keyword}{def }recv(self, timeout = 0.5):}
+\DoxyCodeLine{37         \textcolor{stringliteral}{""" Received respose, will strip <STX> and <ETX> from response message """}}
+\DoxyCodeLine{38         buf = self.buf}
+\DoxyCodeLine{39         \textcolor{keywordflow}{while} buf.find(chr(3)) < 0:}
+\DoxyCodeLine{40             buf += self.sock.recv(1000)}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         start\_idx = buf.find(chr(2))}
+\DoxyCodeLine{43         \textcolor{keywordflow}{if} start\_idx < 0:}
+\DoxyCodeLine{44             print(\textcolor{stringliteral}{" Could not find STX in buffer :"}, self.prettyMsg(buf))}
+\DoxyCodeLine{45         \textcolor{keywordflow}{elif} start\_idx != 0:}
+\DoxyCodeLine{46             print(\textcolor{stringliteral}{" Garbage data before STX :"}, self.prettyMsg(buf[:start\_idx+1]))}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48         stop\_idx = buf.find(chr(3))}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50         \textcolor{comment}{\# Store any following messages in buffer}}
+\DoxyCodeLine{51         self.buf = buf[stop\_idx+1:]}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53         \textcolor{comment}{\# Make sure remaining message has a STX at begining}}
+\DoxyCodeLine{54         \textcolor{keywordflow}{if} len(self.buf) \textcolor{keywordflow}{and} (self.buf[0] != chr(2)):}
+\DoxyCodeLine{55             print(\textcolor{stringliteral}{" Extra garbage after ETX :"}, self.prettyMsg(buf[stop\_idx+1:]))}
+\DoxyCodeLine{56         \textcolor{keywordflow}{if} start\_idx > stop\_idx:}
+\DoxyCodeLine{57             print(\textcolor{stringliteral}{" Found stop before start"}, start\_idx, stop\_idx)}
+\DoxyCodeLine{58         \textcolor{keywordflow}{return} buf[start\_idx+1:stop\_idx]}
+\DoxyCodeLine{59 }
 \DoxyCodeLine{60 }
-\DoxyCodeLine{61 }
 
 \end{DoxyCode}
 
@@ -127,15 +127,15 @@ Here is the caller graph for this function\+:
 \begin{DoxyVerb}Sends messages to device \end{DoxyVerb}
  
 
-Definition at line 32 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 31 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{32     \textcolor{keyword}{def }send(self, msg):}
-\DoxyCodeLine{33         \textcolor{stringliteral}{""" Sends messages to device """}}
-\DoxyCodeLine{34         print(\textcolor{stringliteral}{'SENT'})}
-\DoxyCodeLine{35         self.sock.sendall(msg)}
-\DoxyCodeLine{36 }
+\DoxyCodeLine{31     \textcolor{keyword}{def }send(self, msg):}
+\DoxyCodeLine{32         \textcolor{stringliteral}{""" Sends messages to device """}}
+\DoxyCodeLine{33         print(\textcolor{stringliteral}{'SENT'})}
+\DoxyCodeLine{34         self.sock.sendall(msg)}
+\DoxyCodeLine{35 }
 
 \end{DoxyCode}
 
@@ -163,16 +163,16 @@ Here is the caller graph for this function\+:
 \begin{DoxyVerb}Triggers the camera click\end{DoxyVerb}
  
 
-Definition at line 26 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 25 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{26     \textcolor{keyword}{def }trigger(self):}
-\DoxyCodeLine{27         \textcolor{stringliteral}{"""Triggers the camera click"""}}
-\DoxyCodeLine{28         self.send(\textcolor{stringliteral}{"TRIG"})}
-\DoxyCodeLine{29         resp = self.recv()}
-\DoxyCodeLine{30         print(resp)}
-\DoxyCodeLine{31 }
+\DoxyCodeLine{25     \textcolor{keyword}{def }trigger(self):}
+\DoxyCodeLine{26         \textcolor{stringliteral}{"""Triggers the camera click"""}}
+\DoxyCodeLine{27         self.send(\textcolor{stringliteral}{"TRIG"})}
+\DoxyCodeLine{28         resp = self.recv()}
+\DoxyCodeLine{29         print(resp)}
+\DoxyCodeLine{30 }
 
 \end{DoxyCode}
 
@@ -198,7 +198,7 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 21 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 20 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 
@@ -212,7 +212,7 @@ Referenced by sick\+\_\+camera\+\_\+server.\+P\+I\+M60.\+recv().
 
 
 
-Definition at line 22 of file sick\+\_\+camera\+\_\+server.\+py.
+Definition at line 21 of file sick\+\_\+camera\+\_\+server.\+py.
 
 
 

@@ -129,7 +129,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00062">62</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00061">61</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac9dd249cdf510ad563b41fb22cdf747c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac9dd249cdf510ad563b41fb22cdf747c">&#9670;&nbsp;</a></span>__init__()</h2>
@@ -147,15 +147,15 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00067">67</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">def </span>__init__(self):</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        self._sick_camera = PIM60(<span class="stringliteral">&quot;192.168.100.103&quot;</span>, 2116)</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        self.server = actionlib.SimpleActionServer(<span class="stringliteral">&#39;sick_camera&#39;</span>, SickCameraAction, self.callback, <span class="keyword">False</span>)</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        self.server.start()</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        self.wait_duration = 5</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        self.wait_until = datetime.now() - timedelta(seconds= self.wait_duration)</div>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00066">66</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">def </span>__init__(self):</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        self._sick_camera = PIM60(<span class="stringliteral">&quot;192.168.100.103&quot;</span>, 2116)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        self.server = actionlib.SimpleActionServer(<span class="stringliteral">&#39;sick_camera&#39;</span>, SickCameraAction, self.callback, <span class="keyword">False</span>)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        self.server.start()</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        self.wait_duration = 5</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        self.wait_until = datetime.now() - timedelta(seconds= self.wait_duration)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -186,32 +186,32 @@ Static Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Action server callback.</pre> 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00075">75</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">def </span><a class="code" href="sm__ridgeback__barrel__search__1_2servers_2opencv__perception__node_2opencv__perception__node_8cpp.html#a050e697bd654facce10ea3f6549669b3">callback</a>(self, goal):</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;Action server callback.&quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        print(<span class="stringliteral">&quot;Received goal: &quot;</span> + str(goal))</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">if</span> goal.trigger == SickCameraGoal.TRIG:</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            time_left = self.wait_until - datetime.now()</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordflow">if</span> time_left.total_seconds() &gt; 0.0:</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                print(<span class="stringliteral">&quot;Sick Camera can click only every 5 seconds&quot;</span>)</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                self._result.success = <span class="keyword">False</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                self._result.message = <span class="stringliteral">&quot;Sick Camera can click only every 5 seconds &quot;</span> + str(self.wait_duration) +\</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                        <span class="stringliteral">&quot;s. Please wait &quot;</span> + str(time_left.total_seconds()) + <span class="stringliteral">&quot;s.&quot;</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                self.server.set_aborted(self._result)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">else</span>:</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                self.click()</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                self.wait_until = datetime.now() + timedelta(seconds=self.wait_duration)</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                self._result.success = <span class="keyword">True</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                self._result.message = <span class="stringliteral">&quot;Sick Camera took picture!.&quot;</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                self.server.set_succeeded(self._result)</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">else</span>:</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            self._result.success = <span class="keyword">False</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            self._result.message = <span class="stringliteral">&quot;Unknown goal type&quot;</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            self.server.set_aborted(self._result)</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00074">74</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">def </span><a class="code" href="sm__ridgeback__barrel__search__1_2servers_2opencv__perception__node_2opencv__perception__node_8cpp.html#a050e697bd654facce10ea3f6549669b3">callback</a>(self, goal):</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;Action server callback.&quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        print(<span class="stringliteral">&quot;Received goal: &quot;</span> + str(goal))</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">if</span> goal.trigger == SickCameraGoal.TRIG:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            time_left = self.wait_until - datetime.now()</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">if</span> time_left.total_seconds() &gt; 0.0:</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                print(<span class="stringliteral">&quot;Sick Camera can click only every 5 seconds&quot;</span>)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                self._result.success = <span class="keyword">False</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                self._result.message = <span class="stringliteral">&quot;Sick Camera can click only every 5 seconds &quot;</span> + str(self.wait_duration) +\</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                        <span class="stringliteral">&quot;s. Please wait &quot;</span> + str(time_left.total_seconds()) + <span class="stringliteral">&quot;s.&quot;</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                self.server.set_aborted(self._result)</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                self.click()</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                self.wait_until = datetime.now() + timedelta(seconds=self.wait_duration)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                self._result.success = <span class="keyword">True</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                self._result.message = <span class="stringliteral">&quot;Sick Camera took picture!.&quot;</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                self.server.set_succeeded(self._result)</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            self._result.success = <span class="keyword">False</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            self._result.message = <span class="stringliteral">&quot;Unknown goal type&quot;</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            self.server.set_aborted(self._result)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="schunk__machine__server_8py_source.html#l00022">schunk_machine_server.SchunkMachineServer._result</a>, <a class="el" href="sick__camera__server_8py_source.html#l00063">sick_camera_server.SickCameraServer._result</a>, <a class="el" href="sick__camera__server_8py_source.html#l00098">sick_camera_server.SickCameraServer.click()</a>, <a class="el" href="schunk__machine__server_8py_source.html#l00036">schunk_machine_server.SchunkMachineServer.server</a>, <a class="el" href="sick__camera__server_8py_source.html#l00069">sick_camera_server.SickCameraServer.server</a>, <a class="el" href="sick__camera__server_8py_source.html#l00071">sick_camera_server.SickCameraServer.wait_duration</a>, and <a class="el" href="sick__camera__server_8py_source.html#l00072">sick_camera_server.SickCameraServer.wait_until</a>.</p>
+<p class="reference">References <a class="el" href="schunk__machine__server_8py_source.html#l00021">schunk_machine_server.SchunkMachineServer._result</a>, <a class="el" href="sick__camera__server_8py_source.html#l00062">sick_camera_server.SickCameraServer._result</a>, <a class="el" href="sick__camera__server_8py_source.html#l00097">sick_camera_server.SickCameraServer.click()</a>, <a class="el" href="schunk__machine__server_8py_source.html#l00035">schunk_machine_server.SchunkMachineServer.server</a>, <a class="el" href="sick__camera__server_8py_source.html#l00068">sick_camera_server.SickCameraServer.server</a>, <a class="el" href="sick__camera__server_8py_source.html#l00070">sick_camera_server.SickCameraServer.wait_duration</a>, and <a class="el" href="sick__camera__server_8py_source.html#l00071">sick_camera_server.SickCameraServer.wait_until</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -240,16 +240,16 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Clicks the pitures!</pre> 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00098">98</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
-<div class="fragment"><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">def </span>click(self):</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;Clicks the pitures!&quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        self._sick_camera.trigger()</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00097">97</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<div class="fragment"><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">def </span>click(self):</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;Clicks the pitures!&quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        self._sick_camera.trigger()</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="sick__camera__server_8py_source.html#l00068">sick_camera_server.SickCameraServer._sick_camera</a>.</p>
+<p class="reference">References <a class="el" href="sick__camera__server_8py_source.html#l00067">sick_camera_server.SickCameraServer._sick_camera</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00075">sick_camera_server.SickCameraServer.callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00074">sick_camera_server.SickCameraServer.callback()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -283,9 +283,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00063">63</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00062">62</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00075">sick_camera_server.SickCameraServer.callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00074">sick_camera_server.SickCameraServer.callback()</a>.</p>
 
 </div>
 </div>
@@ -309,9 +309,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00068">68</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00067">67</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00098">sick_camera_server.SickCameraServer.click()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00097">sick_camera_server.SickCameraServer.click()</a>.</p>
 
 </div>
 </div>
@@ -335,7 +335,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00064">64</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00063">63</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
 
 </div>
 </div>
@@ -359,7 +359,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00065">65</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00064">64</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
 
 </div>
 </div>
@@ -375,9 +375,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00069">69</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00068">68</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00075">sick_camera_server.SickCameraServer.callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00074">sick_camera_server.SickCameraServer.callback()</a>.</p>
 
 </div>
 </div>
@@ -393,9 +393,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00071">71</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00070">70</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00075">sick_camera_server.SickCameraServer.callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00074">sick_camera_server.SickCameraServer.callback()</a>.</p>
 
 </div>
 </div>
@@ -411,9 +411,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00072">72</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sick__camera__server_8py_source.html#l00071">71</a> of file <a class="el" href="sick__camera__server_8py_source.html">sick_camera_server.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00075">sick_camera_server.SickCameraServer.callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="sick__camera__server_8py_source.html#l00074">sick_camera_server.SickCameraServer.callback()</a>.</p>
 
 </div>
 </div>
