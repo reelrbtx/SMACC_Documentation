@@ -39,7 +39,7 @@ def \mbox{\hyperlink{classtuck__arm_1_1TuckArmTeleop_afb54c36eca570315889d20a5e2
 \doxysubsection{Detailed Description}
 
 
-Definition at line 122 of file tuck\+\_\+arm.\+py.
+Definition at line 125 of file tuck\+\_\+arm.\+py.
 
 
 
@@ -52,20 +52,20 @@ Definition at line 122 of file tuck\+\_\+arm.\+py.
 
 
 
-Definition at line 124 of file tuck\+\_\+arm.\+py.
+Definition at line 127 of file tuck\+\_\+arm.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{124     \textcolor{keyword}{def }\_\_init\_\_(self):}
-\DoxyCodeLine{125         self.tuck\_button = rospy.get\_param(\textcolor{stringliteral}{"\string~tuck\_button"}, 6)  \textcolor{comment}{\# default button is the down button}}
-\DoxyCodeLine{126         self.deadman = rospy.get\_param(\textcolor{stringliteral}{"\string~deadman\_button"}, 10)}
-\DoxyCodeLine{127         self.tucking = \textcolor{keyword}{False}}
-\DoxyCodeLine{128 }
-\DoxyCodeLine{129         self.pressed = \textcolor{keyword}{False}}
-\DoxyCodeLine{130         self.pressed\_last = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{127     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{128         self.tuck\_button = rospy.get\_param(\textcolor{stringliteral}{"\string~tuck\_button"}, 6)  \textcolor{comment}{\# default button is the down button}}
+\DoxyCodeLine{129         self.deadman = rospy.get\_param(\textcolor{stringliteral}{"\string~deadman\_button"}, 10)}
+\DoxyCodeLine{130         self.tucking = \textcolor{keyword}{False}}
 \DoxyCodeLine{131 }
-\DoxyCodeLine{132         self.joy\_sub = rospy.Subscriber(\textcolor{stringliteral}{"joy"}, Joy, self.joy\_callback)}
-\DoxyCodeLine{133 }
+\DoxyCodeLine{132         self.pressed = \textcolor{keyword}{False}}
+\DoxyCodeLine{133         self.pressed\_last = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         self.joy\_sub = rospy.Subscriber(\textcolor{stringliteral}{"joy"}, Joy, self.joy\_callback)}
+\DoxyCodeLine{136 }
 
 \end{DoxyCode}
 
@@ -79,33 +79,33 @@ Definition at line 124 of file tuck\+\_\+arm.\+py.
 
 
 
-Definition at line 134 of file tuck\+\_\+arm.\+py.
+Definition at line 137 of file tuck\+\_\+arm.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{134     \textcolor{keyword}{def }joy\_callback(self, msg):}
-\DoxyCodeLine{135         \textcolor{keywordflow}{if} self.tucking:}
-\DoxyCodeLine{136             \textcolor{comment}{\# Only run once}}
-\DoxyCodeLine{137             \textcolor{keywordflow}{if} msg.buttons[self.deadman] <= 0:}
-\DoxyCodeLine{138                 \textcolor{comment}{\# Deadman has been released, don't tuck}}
-\DoxyCodeLine{139                 rospy.loginfo(\textcolor{stringliteral}{"Stopping tuck thread"})}
-\DoxyCodeLine{140                 self.tuck\_thread.stop()}
-\DoxyCodeLine{141             \textcolor{keywordflow}{return}}
-\DoxyCodeLine{142         \textcolor{keywordflow}{try}:}
-\DoxyCodeLine{143             \textcolor{keywordflow}{if} msg.buttons[self.tuck\_button] > 0 \textcolor{keywordflow}{and} msg.buttons[self.deadman] > 0:}
-\DoxyCodeLine{144                 \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} self.pressed:}
-\DoxyCodeLine{145                     self.pressed\_last = rospy.Time.now()}
-\DoxyCodeLine{146                     self.pressed = \textcolor{keyword}{True}}
-\DoxyCodeLine{147                 \textcolor{keywordflow}{elif} self.pressed\_last \textcolor{keywordflow}{and} rospy.Time.now() > self.pressed\_last + rospy.Duration(1.0):}
-\DoxyCodeLine{148                     \textcolor{comment}{\# Tuck the arm}}
-\DoxyCodeLine{149                     self.tucking = \textcolor{keyword}{True}}
-\DoxyCodeLine{150                     rospy.loginfo(\textcolor{stringliteral}{"Starting tuck thread"})}
-\DoxyCodeLine{151                     self.tuck\_thread = TuckThread()}
-\DoxyCodeLine{152             \textcolor{keywordflow}{else}:}
-\DoxyCodeLine{153                 self.pressed = \textcolor{keyword}{False}}
-\DoxyCodeLine{154         \textcolor{keywordflow}{except} KeyError:}
-\DoxyCodeLine{155             rospy.logwarn(\textcolor{stringliteral}{"tuck\_button is out of range"})}
-\DoxyCodeLine{156 }
+\DoxyCodeLine{137     \textcolor{keyword}{def }joy\_callback(self, msg):}
+\DoxyCodeLine{138         \textcolor{keywordflow}{if} self.tucking:}
+\DoxyCodeLine{139             \textcolor{comment}{\# Only run once}}
+\DoxyCodeLine{140             \textcolor{keywordflow}{if} msg.buttons[self.deadman] <= 0:}
+\DoxyCodeLine{141                 \textcolor{comment}{\# Deadman has been released, don't tuck}}
+\DoxyCodeLine{142                 rospy.loginfo(\textcolor{stringliteral}{"Stopping tuck thread"})}
+\DoxyCodeLine{143                 self.tuck\_thread.stop()}
+\DoxyCodeLine{144             \textcolor{keywordflow}{return}}
+\DoxyCodeLine{145         \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{146             \textcolor{keywordflow}{if} msg.buttons[self.tuck\_button] > 0 \textcolor{keywordflow}{and} msg.buttons[self.deadman] > 0:}
+\DoxyCodeLine{147                 \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} self.pressed:}
+\DoxyCodeLine{148                     self.pressed\_last = rospy.Time.now()}
+\DoxyCodeLine{149                     self.pressed = \textcolor{keyword}{True}}
+\DoxyCodeLine{150                 \textcolor{keywordflow}{elif} self.pressed\_last \textcolor{keywordflow}{and} rospy.Time.now() > self.pressed\_last + rospy.Duration(1.0):}
+\DoxyCodeLine{151                     \textcolor{comment}{\# Tuck the arm}}
+\DoxyCodeLine{152                     self.tucking = \textcolor{keyword}{True}}
+\DoxyCodeLine{153                     rospy.loginfo(\textcolor{stringliteral}{"Starting tuck thread"})}
+\DoxyCodeLine{154                     self.tuck\_thread = TuckThread()}
+\DoxyCodeLine{155             \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{156                 self.pressed = \textcolor{keyword}{False}}
+\DoxyCodeLine{157         \textcolor{keywordflow}{except} KeyError:}
+\DoxyCodeLine{158             rospy.logwarn(\textcolor{stringliteral}{"tuck\_button is out of range"})}
+\DoxyCodeLine{159 }
 
 \end{DoxyCode}
 
@@ -123,7 +123,7 @@ References tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+deadman, tuck\+\_\+arm.\+Tuck\+Ar
 
 
 
-Definition at line 126 of file tuck\+\_\+arm.\+py.
+Definition at line 129 of file tuck\+\_\+arm.\+py.
 
 
 
@@ -137,7 +137,7 @@ Referenced by tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback().
 
 
 
-Definition at line 132 of file tuck\+\_\+arm.\+py.
+Definition at line 135 of file tuck\+\_\+arm.\+py.
 
 \mbox{\Hypertarget{classtuck__arm_1_1TuckArmTeleop_a5896a0121053e2911bb19633fca146c6}\label{classtuck__arm_1_1TuckArmTeleop_a5896a0121053e2911bb19633fca146c6}} 
 \index{tuck\_arm.TuckArmTeleop@{tuck\_arm.TuckArmTeleop}!pressed@{pressed}}
@@ -147,7 +147,7 @@ Definition at line 132 of file tuck\+\_\+arm.\+py.
 
 
 
-Definition at line 129 of file tuck\+\_\+arm.\+py.
+Definition at line 132 of file tuck\+\_\+arm.\+py.
 
 
 
@@ -161,7 +161,7 @@ Referenced by tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback().
 
 
 
-Definition at line 130 of file tuck\+\_\+arm.\+py.
+Definition at line 133 of file tuck\+\_\+arm.\+py.
 
 
 
@@ -175,7 +175,7 @@ Referenced by tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback().
 
 
 
-Definition at line 125 of file tuck\+\_\+arm.\+py.
+Definition at line 128 of file tuck\+\_\+arm.\+py.
 
 
 
@@ -189,7 +189,7 @@ Referenced by tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback().
 
 
 
-Definition at line 151 of file tuck\+\_\+arm.\+py.
+Definition at line 154 of file tuck\+\_\+arm.\+py.
 
 
 
@@ -203,7 +203,7 @@ Referenced by tuck\+\_\+arm.\+Tuck\+Arm\+Teleop.\+joy\+\_\+callback().
 
 
 
-Definition at line 127 of file tuck\+\_\+arm.\+py.
+Definition at line 130 of file tuck\+\_\+arm.\+py.
 
 
 

@@ -39,7 +39,7 @@ def \mbox{\hyperlink{classtuck__arm_1_1TuckThread_a0fc61608d02a66717f536275d1dad
 \doxysubsection{Detailed Description}
 
 
-Definition at line 66 of file tuck\+\_\+arm.\+py.
+Definition at line 69 of file tuck\+\_\+arm.\+py.
 
 
 
@@ -52,15 +52,15 @@ Definition at line 66 of file tuck\+\_\+arm.\+py.
 
 
 
-Definition at line 68 of file tuck\+\_\+arm.\+py.
+Definition at line 71 of file tuck\+\_\+arm.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{68     \textcolor{keyword}{def }\_\_init\_\_(self):}
-\DoxyCodeLine{69         Thread.\_\_init\_\_(self)}
-\DoxyCodeLine{70         self.client = \textcolor{keywordtype}{None}}
-\DoxyCodeLine{71         self.start()}
-\DoxyCodeLine{72 }
+\DoxyCodeLine{71     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{72         Thread.\_\_init\_\_(self)}
+\DoxyCodeLine{73         self.client = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{74         self.start()}
+\DoxyCodeLine{75 }
 
 \end{DoxyCode}
 
@@ -74,50 +74,50 @@ Definition at line 68 of file tuck\+\_\+arm.\+py.
 
 
 
-Definition at line 73 of file tuck\+\_\+arm.\+py.
+Definition at line 76 of file tuck\+\_\+arm.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{73     \textcolor{keyword}{def }\mbox{\hyperlink{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}{run}}(self):}
-\DoxyCodeLine{74         move\_thread = \textcolor{keywordtype}{None}}
-\DoxyCodeLine{75         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} \mbox{\hyperlink{namespacetuck__arm_a3cef60e1f84a756fb4d90b2bdc0dc4e9}{is\_moveit\_running}}():}
-\DoxyCodeLine{76             rospy.loginfo(\textcolor{stringliteral}{"starting moveit"})}
-\DoxyCodeLine{77             move\_thread = MoveItThread()}
-\DoxyCodeLine{78         \textcolor{keywordflow}{else}:}
-\DoxyCodeLine{79             rospy.loginfo(\textcolor{stringliteral}{"moveit already started"})}
-\DoxyCodeLine{80 }
-\DoxyCodeLine{81         rospy.loginfo(\textcolor{stringliteral}{"Waiting for MoveIt..."})}
-\DoxyCodeLine{82         self.client = MoveGroupInterface(\textcolor{stringliteral}{"arm\_with\_torso"}, \textcolor{stringliteral}{"base\_link"})}
-\DoxyCodeLine{83         rospy.loginfo(\textcolor{stringliteral}{"...connected"})}
-\DoxyCodeLine{84 }
-\DoxyCodeLine{85         \textcolor{comment}{\# Padding does not work (especially for self collisions)}}
-\DoxyCodeLine{86         \textcolor{comment}{\# So we are adding a box above the base of the robot}}
-\DoxyCodeLine{87         scene = PlanningSceneInterface(\textcolor{stringliteral}{"base\_link"})}
-\DoxyCodeLine{88         scene.addBox(\textcolor{stringliteral}{"keepout"}, 0.3, 0.5, 0.05, 0.12, 0.0, 0.375)}
-\DoxyCodeLine{89         scene.addBox(\textcolor{stringliteral}{"ground"}, 1.5, 1.5, 0.05, 0.5, 0.0, 0.0)}
-\DoxyCodeLine{90 }
-\DoxyCodeLine{91         joints = [\textcolor{stringliteral}{"torso\_lift\_joint"}, \textcolor{stringliteral}{"shoulder\_pan\_joint"}, \textcolor{stringliteral}{"shoulder\_lift\_joint"}, \textcolor{stringliteral}{"upperarm\_roll\_joint"},}
-\DoxyCodeLine{92                   \textcolor{stringliteral}{"elbow\_flex\_joint"}, \textcolor{stringliteral}{"forearm\_roll\_joint"}, \textcolor{stringliteral}{"wrist\_flex\_joint"}, \textcolor{stringliteral}{"wrist\_roll\_joint"}]}
-\DoxyCodeLine{93         pose = [0.05, 1.32, 1.40, -\/0.2, 1.72, 0.0, 1.66, 0.0]}
-\DoxyCodeLine{94         \textcolor{keywordflow}{while} \textcolor{keywordflow}{not} rospy.is\_shutdown():}
-\DoxyCodeLine{95             result = self.client.moveToJointPosition(joints,}
-\DoxyCodeLine{96                                                      pose,}
-\DoxyCodeLine{97                                                      0.0,}
-\DoxyCodeLine{98                                                      max\_velocity\_scaling\_factor=0.5)}
-\DoxyCodeLine{99             \textcolor{keywordflow}{if} result \textcolor{keywordflow}{and} result.error\_code.val == MoveItErrorCodes.SUCCESS:}
-\DoxyCodeLine{100                 scene.removeCollisionObject(\textcolor{stringliteral}{"keepout"})}
-\DoxyCodeLine{101                 scene.removeCollisionObject(\textcolor{stringliteral}{"ground"})}
-\DoxyCodeLine{102                 \textcolor{keywordflow}{if} move\_thread:}
-\DoxyCodeLine{103                     move\_thread.stop()}
-\DoxyCodeLine{104 }
-\DoxyCodeLine{105                 \textcolor{comment}{\# On success quit}}
-\DoxyCodeLine{106                 \textcolor{comment}{\# Stopping the MoveIt thread works, however, the action client}}
-\DoxyCodeLine{107                 \textcolor{comment}{\# does not get shut down, and future tucks will not work.}}
-\DoxyCodeLine{108                 \textcolor{comment}{\# As a work-\/around, we die and roslaunch will respawn us.}}
-\DoxyCodeLine{109                 rospy.signal\_shutdown(\textcolor{stringliteral}{"done"})}
-\DoxyCodeLine{110                 sys.exit(0)}
-\DoxyCodeLine{111                 \textcolor{keywordflow}{return}}
-\DoxyCodeLine{112 }
+\DoxyCodeLine{76     \textcolor{keyword}{def }\mbox{\hyperlink{namespacesmacc_a47ac3b8d2968b1ba4152afd64ab66bd0}{run}}(self):}
+\DoxyCodeLine{77         move\_thread = \textcolor{keywordtype}{None}}
+\DoxyCodeLine{78         \textcolor{keywordflow}{if} \textcolor{keywordflow}{not} \mbox{\hyperlink{namespacetuck__arm_a3cef60e1f84a756fb4d90b2bdc0dc4e9}{is\_moveit\_running}}():}
+\DoxyCodeLine{79             rospy.loginfo(\textcolor{stringliteral}{"Starting MoveIt..."})}
+\DoxyCodeLine{80             move\_thread = MoveItThread()}
+\DoxyCodeLine{81         \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{82             rospy.loginfo(\textcolor{stringliteral}{"MoveIt already started..."})}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84         rospy.loginfo(\textcolor{stringliteral}{"Waiting for MoveIt..."})}
+\DoxyCodeLine{85         self.client = MoveGroupInterface(\textcolor{stringliteral}{"arm\_with\_torso"}, \textcolor{stringliteral}{"base\_link"})}
+\DoxyCodeLine{86         rospy.loginfo(\textcolor{stringliteral}{"...connected"})}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         \textcolor{comment}{\# Padding does not work (especially for self collisions)}}
+\DoxyCodeLine{89         \textcolor{comment}{\# So we are adding a box above the base of the robot}}
+\DoxyCodeLine{90         scene = PlanningSceneInterface(\textcolor{stringliteral}{"base\_link"})}
+\DoxyCodeLine{91         scene.addBox(\textcolor{stringliteral}{"keepout"}, 0.3, 0.5, 0.05, 0.12, 0.0, 0.375)}
+\DoxyCodeLine{92         scene.addBox(\textcolor{stringliteral}{"ground"}, 1.5, 1.5, 0.05, 0.5, 0.0, 0.0)}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94         joints = [\textcolor{stringliteral}{"torso\_lift\_joint"}, \textcolor{stringliteral}{"shoulder\_pan\_joint"}, \textcolor{stringliteral}{"shoulder\_lift\_joint"}, \textcolor{stringliteral}{"upperarm\_roll\_joint"},}
+\DoxyCodeLine{95                   \textcolor{stringliteral}{"elbow\_flex\_joint"}, \textcolor{stringliteral}{"forearm\_roll\_joint"}, \textcolor{stringliteral}{"wrist\_flex\_joint"}, \textcolor{stringliteral}{"wrist\_roll\_joint"}]}
+\DoxyCodeLine{96         pose = [0.05, 1.32, 1.40, -\/0.2, 1.72, 0.0, 1.66, 0.0]}
+\DoxyCodeLine{97         \textcolor{keywordflow}{while} \textcolor{keywordflow}{not} rospy.is\_shutdown():}
+\DoxyCodeLine{98             result = self.client.moveToJointPosition(joints,}
+\DoxyCodeLine{99                                                      pose,}
+\DoxyCodeLine{100                                                      0.0,}
+\DoxyCodeLine{101                                                      max\_velocity\_scaling\_factor=0.5)}
+\DoxyCodeLine{102             \textcolor{keywordflow}{if} result \textcolor{keywordflow}{and} result.error\_code.val == MoveItErrorCodes.SUCCESS:}
+\DoxyCodeLine{103                 scene.removeCollisionObject(\textcolor{stringliteral}{"keepout"})}
+\DoxyCodeLine{104                 scene.removeCollisionObject(\textcolor{stringliteral}{"ground"})}
+\DoxyCodeLine{105                 \textcolor{keywordflow}{if} move\_thread:}
+\DoxyCodeLine{106                     move\_thread.stop()}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108                 \textcolor{comment}{\# On success quit}}
+\DoxyCodeLine{109                 \textcolor{comment}{\# Stopping the MoveIt thread works, however, the action client}}
+\DoxyCodeLine{110                 \textcolor{comment}{\# does not get shut down, and future tucks will not work.}}
+\DoxyCodeLine{111                 \textcolor{comment}{\# As a work-\/around, we die and roslaunch will respawn us.}}
+\DoxyCodeLine{112                 rospy.signal\_shutdown(\textcolor{stringliteral}{"done"})}
+\DoxyCodeLine{113                 sys.exit(0)}
+\DoxyCodeLine{114                 \textcolor{keywordflow}{return}}
+\DoxyCodeLine{115 }
 
 \end{DoxyCode}
 
@@ -140,19 +140,19 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 113 of file tuck\+\_\+arm.\+py.
+Definition at line 116 of file tuck\+\_\+arm.\+py.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{113     \textcolor{keyword}{def }stop(self):}
-\DoxyCodeLine{114         \textcolor{keywordflow}{if} self.client:}
-\DoxyCodeLine{115             self.client.get\_move\_action().cancel\_goal()}
-\DoxyCodeLine{116         \textcolor{comment}{\# Stopping the MoveIt thread works, however, the action client}}
-\DoxyCodeLine{117         \textcolor{comment}{\# does not get shut down, and future tucks will not work.}}
-\DoxyCodeLine{118         \textcolor{comment}{\# As a work-\/around, we die and roslaunch will respawn us.}}
-\DoxyCodeLine{119         rospy.signal\_shutdown(\textcolor{stringliteral}{"failed"})}
-\DoxyCodeLine{120         sys.exit(0)}
-\DoxyCodeLine{121 }
+\DoxyCodeLine{116     \textcolor{keyword}{def }stop(self):}
+\DoxyCodeLine{117         \textcolor{keywordflow}{if} self.client:}
+\DoxyCodeLine{118             self.client.get\_move\_action().cancel\_goal()}
+\DoxyCodeLine{119         \textcolor{comment}{\# Stopping the MoveIt thread works, however, the action client}}
+\DoxyCodeLine{120         \textcolor{comment}{\# does not get shut down, and future tucks will not work.}}
+\DoxyCodeLine{121         \textcolor{comment}{\# As a work-\/around, we die and roslaunch will respawn us.}}
+\DoxyCodeLine{122         rospy.signal\_shutdown(\textcolor{stringliteral}{"failed"})}
+\DoxyCodeLine{123         sys.exit(0)}
+\DoxyCodeLine{124 }
 
 \end{DoxyCode}
 
@@ -170,7 +170,7 @@ References smacc\+::default\+\_\+events\+::\+Ev\+Action\+Feedback$<$ Action\+Fee
 
 
 
-Definition at line 70 of file tuck\+\_\+arm.\+py.
+Definition at line 73 of file tuck\+\_\+arm.\+py.
 
 
 
