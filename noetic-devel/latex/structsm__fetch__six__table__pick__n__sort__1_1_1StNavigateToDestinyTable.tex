@@ -76,41 +76,37 @@ Definition at line 26 of file st\+\_\+navigate\+\_\+to\+\_\+destiny\+\_\+table.\
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{27         \{}
-\DoxyCodeLine{28             \textcolor{keyword}{auto} navigateGlobalPosition = this-\/>getOrthogonal<OrNavigation>()-\/>getClientBehavior<CbNavigateGlobalPosition>();}
-\DoxyCodeLine{29             ClPerceptionSystem *perceptionSystem;}
-\DoxyCodeLine{30             navigateGlobalPosition-\/>requiresClient(perceptionSystem);}
+\DoxyCodeLine{28             ROS\_INFO(\textcolor{stringliteral}{"getting navigate global position behavior"});}
+\DoxyCodeLine{29             \textcolor{keyword}{auto} navigateGlobalPosition = this-\/>getOrthogonal<OrNavigation>()-\/>getClientBehavior<CbNavigateGlobalPosition>();}
+\DoxyCodeLine{30             ClPerceptionSystem *perceptionSystem;}
 \DoxyCodeLine{31 }
-\DoxyCodeLine{32             geometry\_msgs::PoseStamped nextCubePose;}
-\DoxyCodeLine{33             perceptionSystem-\/>decidePickCubePose(nextCubePose);}
-\DoxyCodeLine{34             \textcolor{keyword}{auto} targetTablePose = perceptionSystem-\/>getTargetTablePose().pose;}
-\DoxyCodeLine{35 }
-\DoxyCodeLine{36             \textcolor{keywordflow}{if} (targetTablePose.position.x > 0)}
-\DoxyCodeLine{37             \{}
-\DoxyCodeLine{38                 targetTablePose.position.x -\/= 0.85;   }
-\DoxyCodeLine{39             \}}
-\DoxyCodeLine{40             \textcolor{keywordflow}{else}}
-\DoxyCodeLine{41             \{}
-\DoxyCodeLine{42                 targetTablePose.position.x += 0.85;}
-\DoxyCodeLine{43                 \textcolor{keyword}{auto} quat = tf::createQuaternionFromYaw(M\_PI);}
-\DoxyCodeLine{44                 tf::quaternionTFToMsg(quat, targetTablePose.orientation);}
-\DoxyCodeLine{45             \}}
-\DoxyCodeLine{46 }
-\DoxyCodeLine{47             navigateGlobalPosition-\/>setGoal(targetTablePose);}
-\DoxyCodeLine{48         \}}
+\DoxyCodeLine{32             ROS\_INFO(\textcolor{stringliteral}{"getting perception system client"});}
+\DoxyCodeLine{33             navigateGlobalPosition-\/>requiresClient(perceptionSystem);}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35             geometry\_msgs::PoseStamped nextCubePose;}
+\DoxyCodeLine{36             ROS\_INFO(\textcolor{stringliteral}{"deciding pick cube pose"});}
+\DoxyCodeLine{37             perceptionSystem-\/>decidePickCubePose(nextCubePose);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39             ROS\_INFO(\textcolor{stringliteral}{"getting table pose"});}
+\DoxyCodeLine{40             \textcolor{keyword}{auto} targetTablePose = perceptionSystem-\/>getTargetTablePose().pose;}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42             perceptionSystem-\/>printCubesState();}
+\DoxyCodeLine{43             ROS\_INFO(\textcolor{stringliteral}{"filtering side"});}
+\DoxyCodeLine{44             \textcolor{keywordflow}{if} (targetTablePose.position.x > 0)}
+\DoxyCodeLine{45             \{}
+\DoxyCodeLine{46                 targetTablePose.position.x -\/= 0.85;   }
+\DoxyCodeLine{47             \}}
+\DoxyCodeLine{48             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{49             \{}
+\DoxyCodeLine{50                 targetTablePose.position.x += 0.85;}
+\DoxyCodeLine{51                 \textcolor{keyword}{auto} quat = tf::createQuaternionFromYaw(M\_PI);}
+\DoxyCodeLine{52                 tf::quaternionTFToMsg(quat, targetTablePose.orientation);}
+\DoxyCodeLine{53             \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55             navigateGlobalPosition-\/>setGoal(targetTablePose);}
+\DoxyCodeLine{56         \}}
 
 \end{DoxyCode}
-
-
-References smacc\+::\+I\+Smacc\+Client\+::requires\+Client().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{structsm__fetch__six__table__pick__n__sort__1_1_1StNavigateToDestinyTable_a9243186869228196101ca60180b9b1b1_cgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{structsm__fetch__six__table__pick__n__sort__1_1_1StNavigateToDestinyTable_ae38532760f97b528f03df3f4b540da1a}\label{structsm__fetch__six__table__pick__n__sort__1_1_1StNavigateToDestinyTable_ae38532760f97b528f03df3f4b540da1a}} 
 \index{sm\_fetch\_six\_table\_pick\_n\_sort\_1::StNavigateToDestinyTable@{sm\_fetch\_six\_table\_pick\_n\_sort\_1::StNavigateToDestinyTable}!staticConfigure@{staticConfigure}}
 \index{staticConfigure@{staticConfigure}!sm\_fetch\_six\_table\_pick\_n\_sort\_1::StNavigateToDestinyTable@{sm\_fetch\_six\_table\_pick\_n\_sort\_1::StNavigateToDestinyTable}}

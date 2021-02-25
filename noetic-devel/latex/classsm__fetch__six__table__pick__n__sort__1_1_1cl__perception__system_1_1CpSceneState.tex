@@ -62,9 +62,10 @@ Definition at line 41 of file cp\+\_\+scene\+\_\+state.\+h.
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{42             \{}
-\DoxyCodeLine{43                 \mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a9e412e0e18779e1fe371b0160919bd9b}{cubeInfos\_}}.resize(cubeCount);}
-\DoxyCodeLine{44                 \mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a2de6a25cdfe869099984fbf8225874cd}{tablesInfo\_}}.resize(tableCount);}
-\DoxyCodeLine{45             \}}
+\DoxyCodeLine{43                 ROS\_INFO(\textcolor{stringliteral}{"[CpSceneState] Creating scene, cube count: \%d"}, cubeCount);}
+\DoxyCodeLine{44                 \mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a9e412e0e18779e1fe371b0160919bd9b}{cubeInfos\_}}.resize(cubeCount);}
+\DoxyCodeLine{45                 \mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a2de6a25cdfe869099984fbf8225874cd}{tablesInfo\_}}.resize(tableCount);}
+\DoxyCodeLine{46             \}}
 
 \end{DoxyCode}
 
@@ -83,27 +84,29 @@ void sm\+\_\+fetch\+\_\+six\+\_\+table\+\_\+pick\+\_\+n\+\_\+sort\+\_\+1\+::cl\+
 
 
 
-Definition at line 48 of file cp\+\_\+scene\+\_\+state.\+h.
+Definition at line 49 of file cp\+\_\+scene\+\_\+state.\+h.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{49             \{}
-\DoxyCodeLine{50                 \textcolor{comment}{// create table "poses track components"}}
-\DoxyCodeLine{51                 std::vector<std::string> availableColors = \{\textcolor{stringliteral}{"none"}, \textcolor{stringliteral}{"yellow"}, \textcolor{stringliteral}{"white"}, \textcolor{stringliteral}{"purple"}, \textcolor{stringliteral}{"red"}, \textcolor{stringliteral}{"green"}\};}
-\DoxyCodeLine{52                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a2de6a25cdfe869099984fbf8225874cd}{tablesInfo\_}}.size(); i++)}
-\DoxyCodeLine{53                 \{}
-\DoxyCodeLine{54                     \textcolor{keyword}{auto} tablename = \textcolor{stringliteral}{"table\_"} + std::to\_string(i + 1);}
-\DoxyCodeLine{55                     this-\/>\mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a2de6a25cdfe869099984fbf8225874cd}{tablesInfo\_}}[i].pose\_ = this-\/>createSiblingNamedComponent<cl\_move\_base\_z::Pose, TSourceObject, TOrthogonal>(tablename, tablename, \textcolor{stringliteral}{"map"});}
-\DoxyCodeLine{56                     this-\/>\mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a2de6a25cdfe869099984fbf8225874cd}{tablesInfo\_}}[i].associatedCubeColor\_ = availableColors[i];}
-\DoxyCodeLine{57                 \}}
-\DoxyCodeLine{58 }
-\DoxyCodeLine{59                 \textcolor{comment}{// create cube "poses track components"}}
-\DoxyCodeLine{60                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a9e412e0e18779e1fe371b0160919bd9b}{cubeInfos\_}}.size(); i++)}
-\DoxyCodeLine{61                 \{}
-\DoxyCodeLine{62                     \textcolor{keyword}{auto} cubename = \textcolor{stringliteral}{"cube\_"} + std::to\_string(i + 1);}
-\DoxyCodeLine{63                     this-\/>\mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a9e412e0e18779e1fe371b0160919bd9b}{cubeInfos\_}}[i].pose\_ = this-\/>createSiblingNamedComponent<cl\_move\_base\_z::Pose, TSourceObject, TOrthogonal>(cubename, cubename, \textcolor{stringliteral}{"map"});}
-\DoxyCodeLine{64                 \}}
-\DoxyCodeLine{65             \}}
+\DoxyCodeLine{50             \{}
+\DoxyCodeLine{51                 \textcolor{comment}{// create table "poses track components"}}
+\DoxyCodeLine{52                 std::vector<std::string> availableColors = \{\textcolor{stringliteral}{"none"}, \textcolor{stringliteral}{"yellow"}, \textcolor{stringliteral}{"white"}, \textcolor{stringliteral}{"purple"}, \textcolor{stringliteral}{"red"}, \textcolor{stringliteral}{"green"}\};}
+\DoxyCodeLine{53                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a2de6a25cdfe869099984fbf8225874cd}{tablesInfo\_}}.size(); i++)}
+\DoxyCodeLine{54                 \{}
+\DoxyCodeLine{55                     ROS\_INFO(\textcolor{stringliteral}{"[CpSceneState]  creatng table: \%d"} , i);}
+\DoxyCodeLine{56                     \textcolor{keyword}{auto} tablename = \textcolor{stringliteral}{"table\_"} + std::to\_string(i + 1);}
+\DoxyCodeLine{57                     this-\/>\mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a2de6a25cdfe869099984fbf8225874cd}{tablesInfo\_}}[i].pose\_ = this-\/>createSiblingNamedComponent<cl\_move\_base\_z::Pose, TSourceObject, TOrthogonal>(tablename, tablename, \textcolor{stringliteral}{"map"});}
+\DoxyCodeLine{58                     this-\/>\mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a2de6a25cdfe869099984fbf8225874cd}{tablesInfo\_}}[i].associatedCubeColor\_ = availableColors[i];}
+\DoxyCodeLine{59                 \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61                 \textcolor{comment}{// create cube "poses track components"}}
+\DoxyCodeLine{62                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a9e412e0e18779e1fe371b0160919bd9b}{cubeInfos\_}}.size(); i++)}
+\DoxyCodeLine{63                 \{}
+\DoxyCodeLine{64                     ROS\_INFO(\textcolor{stringliteral}{"[CpSceneState]  Creating cube: \%d"} , i);}
+\DoxyCodeLine{65                     \textcolor{keyword}{auto} cubename = \textcolor{stringliteral}{"cube\_"} + std::to\_string(i + 1);}
+\DoxyCodeLine{66                     this-\/>\mbox{\hyperlink{classsm__fetch__six__table__pick__n__sort__1_1_1cl__perception__system_1_1CpSceneState_a9e412e0e18779e1fe371b0160919bd9b}{cubeInfos\_}}[i].pose\_ = this-\/>createSiblingNamedComponent<cl\_move\_base\_z::Pose, TSourceObject, TOrthogonal>(cubename, cubename, \textcolor{stringliteral}{"map"});}
+\DoxyCodeLine{67                 \}}
+\DoxyCodeLine{68             \}}
 
 \end{DoxyCode}
 
