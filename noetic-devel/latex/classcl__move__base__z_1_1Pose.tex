@@ -55,14 +55,14 @@ std\+::string \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618
 \item 
 std\+::string \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{reference\+Frame\+\_\+}}
 \item 
-boost\+::mutex \mbox{\hyperlink{classcl__move__base__z_1_1Pose_aeed25227df22e04ebeff2732e860f499}{m\+\_\+mutex\+\_\+}}
+std\+::mutex \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\+\_\+mutex\+\_\+}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static std\+::shared\+\_\+ptr$<$ tf\+::\+Transform\+Listener $>$ \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a188a5ac62d5424c1eacd667868049962}{tf\+Listener\+\_\+}}
+static std\+::shared\+\_\+ptr$<$ tf\+::\+Transform\+Listener $>$ \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a188a5ac62d5424c1eacd667868049962}{tf\+Listener\+\_\+}} = nullptr
 \item 
-static boost\+::mutex \mbox{\hyperlink{classcl__move__base__z_1_1Pose_ab850594e402fe3c4943f063100fb8728}{listener\+Mutex\+\_\+}}
+static std\+::mutex \mbox{\hyperlink{classcl__move__base__z_1_1Pose_ae1b5ee53f49d74926e04a477d792f1d0}{listener\+Mutex\+\_\+}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -70,7 +70,7 @@ static boost\+::mutex \mbox{\hyperlink{classcl__move__base__z_1_1Pose_ab850594e4
 \doxysubsection{Detailed Description}
 
 
-Definition at line 23 of file cp\+\_\+pose.\+h.
+Definition at line 22 of file cp\+\_\+pose.\+h.
 
 
 
@@ -93,14 +93,15 @@ Definition at line 19 of file cp\+\_\+pose.\+cpp.
 \DoxyCodeLine{23 }
 \DoxyCodeLine{24         \{}
 \DoxyCodeLine{25             \textcolor{comment}{//singleton}}
-\DoxyCodeLine{26             boost::lock\_guard<boost::mutex> guard(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_ab850594e402fe3c4943f063100fb8728}{listenerMutex\_}});}
-\DoxyCodeLine{27             \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a188a5ac62d5424c1eacd667868049962}{tfListener\_}} = std::make\_shared<tf::TransformListener>();}
-\DoxyCodeLine{28         \}}
-\DoxyCodeLine{29     \}}
-\DoxyCodeLine{30 }
-\DoxyCodeLine{31     \textcolor{keywordtype}{void} \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a5f8576c3dacfb2f2e7f9df5105c480ea}{Pose::waitTransformUpdate}}(ros::Rate \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}})}
-\DoxyCodeLine{32     \{}
-\DoxyCodeLine{33         \textcolor{keywordtype}{bool} found = \textcolor{keyword}{false};}
+\DoxyCodeLine{26             std::lock\_guard<std::mutex> guard(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_ae1b5ee53f49d74926e04a477d792f1d0}{listenerMutex\_}});}
+\DoxyCodeLine{27             \textcolor{keywordflow}{if} (\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a188a5ac62d5424c1eacd667868049962}{tfListener\_}} == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{28                 \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a188a5ac62d5424c1eacd667868049962}{tfListener\_}} = std::make\_shared<tf::TransformListener>();}
+\DoxyCodeLine{29         \}}
+\DoxyCodeLine{30     \}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keywordtype}{void} \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a5f8576c3dacfb2f2e7f9df5105c480ea}{Pose::waitTransformUpdate}}(ros::Rate \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}})}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34         \textcolor{keywordtype}{bool} found = \textcolor{keyword}{false};}
 
 \end{DoxyCode}
 
@@ -114,7 +115,7 @@ Definition at line 19 of file cp\+\_\+pose.\+cpp.
 
 
 
-Definition at line 45 of file cp\+\_\+pose.\+h.
+Definition at line 52 of file cp\+\_\+pose.\+h.
 
 
 
@@ -136,12 +137,12 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 40 of file cp\+\_\+pose.\+h.
+Definition at line 47 of file cp\+\_\+pose.\+h.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{44        :}
-\DoxyCodeLine{45     geometry\_msgs::PoseStamped \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}};}
+\DoxyCodeLine{51        :}
+\DoxyCodeLine{52     geometry\_msgs::PoseStamped \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}};}
 
 \end{DoxyCode}
 
@@ -160,16 +161,15 @@ Here is the caller graph for this function\+:
 \index{cl\_move\_base\_z::Pose@{cl\_move\_base\_z::Pose}!toPoseMsg@{toPoseMsg}}
 \index{toPoseMsg@{toPoseMsg}!cl\_move\_base\_z::Pose@{cl\_move\_base\_z::Pose}}
 \doxysubsubsection{\texorpdfstring{toPoseMsg()}{toPoseMsg()}}
-{\footnotesize\ttfamily geometry\+\_\+msgs\+::\+Pose cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::to\+Pose\+Msg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily geometry\+\_\+msgs\+::\+Pose cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::to\+Pose\+Msg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 67 of file cp\+\_\+pose.\+cpp.
+Definition at line 35 of file cp\+\_\+pose.\+h.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{70   \{}
-\DoxyCodeLine{71     boost::lock\_guard<boost::mutex> guard(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_aeed25227df22e04ebeff2732e860f499}{m\_mutex\_}});}
+\DoxyCodeLine{40     \{}
 
 \end{DoxyCode}
 
@@ -188,16 +188,15 @@ Here is the caller graph for this function\+:
 \index{cl\_move\_base\_z::Pose@{cl\_move\_base\_z::Pose}!toPoseStampedMsg@{toPoseStampedMsg}}
 \index{toPoseStampedMsg@{toPoseStampedMsg}!cl\_move\_base\_z::Pose@{cl\_move\_base\_z::Pose}}
 \doxysubsubsection{\texorpdfstring{toPoseStampedMsg()}{toPoseStampedMsg()}}
-{\footnotesize\ttfamily geometry\+\_\+msgs\+::\+Pose\+Stamped cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::to\+Pose\+Stamped\+Msg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily geometry\+\_\+msgs\+::\+Pose\+Stamped cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::to\+Pose\+Stamped\+Msg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line 73 of file cp\+\_\+pose.\+cpp.
+Definition at line 41 of file cp\+\_\+pose.\+h.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{76     \{}
-\DoxyCodeLine{77         tf::StampedTransform transform;}
+\DoxyCodeLine{45     \{}
 
 \end{DoxyCode}
 
@@ -224,30 +223,30 @@ Implements \mbox{\hyperlink{classsmacc_1_1ISmaccUpdatable_a84ee0520cbefdb1d412be
 
 
 
-Definition at line 79 of file cp\+\_\+pose.\+cpp.
+Definition at line 68 of file cp\+\_\+pose.\+cpp.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{79         \{}
-\DoxyCodeLine{80             \{}
-\DoxyCodeLine{81                 boost::lock\_guard<boost::mutex> lock(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_ab850594e402fe3c4943f063100fb8728}{listenerMutex\_}});}
-\DoxyCodeLine{82                 \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a188a5ac62d5424c1eacd667868049962}{tfListener\_}}-\/>lookupTransform(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}}, \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_}},}
-\DoxyCodeLine{83                                                   ros::Time(0), transform);}
-\DoxyCodeLine{84             \}}
-\DoxyCodeLine{85 }
-\DoxyCodeLine{86             \{}
-\DoxyCodeLine{87                 boost::lock\_guard<boost::mutex> guard(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_aeed25227df22e04ebeff2732e860f499}{m\_mutex\_}});}
-\DoxyCodeLine{88                 tf::poseTFToMsg(transform, this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}}.pose);}
-\DoxyCodeLine{89                 this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}}.header.stamp = transform.stamp\_;}
-\DoxyCodeLine{90                 this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized}} = \textcolor{keyword}{true};}
-\DoxyCodeLine{91             \}}
-\DoxyCodeLine{92         \}}
-\DoxyCodeLine{93         \textcolor{keywordflow}{catch} (tf::TransformException ex)}
-\DoxyCodeLine{94         \{}
-\DoxyCodeLine{95             ROS\_ERROR\_STREAM\_THROTTLE(1, \textcolor{stringliteral}{"[Component pose] ("} << \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_}} << \textcolor{stringliteral}{"/["} << \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}} << \textcolor{stringliteral}{"] ) is failing on pose update : "} << ex.what());}
-\DoxyCodeLine{96         \}}
-\DoxyCodeLine{97     \}}
-\DoxyCodeLine{98 \} \textcolor{comment}{// namespace cl\_move\_base\_z}}
+\DoxyCodeLine{68         \{}
+\DoxyCodeLine{69             \{}
+\DoxyCodeLine{70                 std::lock\_guard<std::mutex> lock(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_ae1b5ee53f49d74926e04a477d792f1d0}{listenerMutex\_}});}
+\DoxyCodeLine{71                 \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a188a5ac62d5424c1eacd667868049962}{tfListener\_}}-\/>lookupTransform(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}}, \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_}},}
+\DoxyCodeLine{72                                                   ros::Time(0), transform);}
+\DoxyCodeLine{73             \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75             \{}
+\DoxyCodeLine{76                 std::lock\_guard<std::mutex> guard(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\_mutex\_}});}
+\DoxyCodeLine{77                 tf::poseTFToMsg(transform, this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}}.pose);}
+\DoxyCodeLine{78                 this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}}.header.stamp = transform.stamp\_;}
+\DoxyCodeLine{79                 this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{80             \}}
+\DoxyCodeLine{81         \}}
+\DoxyCodeLine{82         \textcolor{keywordflow}{catch} (tf::TransformException ex)}
+\DoxyCodeLine{83         \{}
+\DoxyCodeLine{84             ROS\_ERROR\_STREAM\_THROTTLE(1, \textcolor{stringliteral}{"[Component pose] ("} << \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_}} << \textcolor{stringliteral}{"/["} << \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}} << \textcolor{stringliteral}{"] ) is failing on pose update : "} << ex.what());}
+\DoxyCodeLine{85         \}}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87 \} \textcolor{comment}{// namespace cl\_move\_base\_z}}
 
 \end{DoxyCode}
 
@@ -262,41 +261,41 @@ References is\+Initialized, listener\+Mutex\+\_\+, m\+\_\+mutex\+\_\+, pose\+\_\
 
 
 
-Definition at line 35 of file cp\+\_\+pose.\+cpp.
+Definition at line 36 of file cp\+\_\+pose.\+cpp.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{35         \{}
-\DoxyCodeLine{36             tf::StampedTransform transform;}
-\DoxyCodeLine{37             \textcolor{keywordflow}{try}}
-\DoxyCodeLine{38             \{}
-\DoxyCodeLine{39                 \{}
-\DoxyCodeLine{40                     boost::lock\_guard<boost::mutex> lock(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_ab850594e402fe3c4943f063100fb8728}{listenerMutex\_}});}
-\DoxyCodeLine{41                     \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a188a5ac62d5424c1eacd667868049962}{tfListener\_}}-\/>lookupTransform(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}}, \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_}},}
-\DoxyCodeLine{42                                                       ros::Time(0), transform);}
-\DoxyCodeLine{43                 \}}
-\DoxyCodeLine{44 }
-\DoxyCodeLine{45                 \{}
-\DoxyCodeLine{46                     boost::lock\_guard<boost::mutex> guard(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_aeed25227df22e04ebeff2732e860f499}{m\_mutex\_}});}
-\DoxyCodeLine{47                     tf::poseTFToMsg(transform, this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}}.pose);}
-\DoxyCodeLine{48                     this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}}.header.stamp = transform.stamp\_;}
-\DoxyCodeLine{49                     found = \textcolor{keyword}{true};}
-\DoxyCodeLine{50                     this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized}} = \textcolor{keyword}{true};}
-\DoxyCodeLine{51                 \}}
-\DoxyCodeLine{52             \}}
-\DoxyCodeLine{53             \textcolor{keywordflow}{catch} (tf::TransformException ex)}
-\DoxyCodeLine{54             \{}
-\DoxyCodeLine{55                 ROS\_ERROR\_STREAM\_THROTTLE(1, \textcolor{stringliteral}{"[Component pose] ("} << \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_}} << \textcolor{stringliteral}{"/["} << \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}} << \textcolor{stringliteral}{"] ) is failing on pose update : "} << ex.what());}
-\DoxyCodeLine{56             \}}
-\DoxyCodeLine{57 }
-\DoxyCodeLine{58             \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}}.sleep();}
-\DoxyCodeLine{59             ros::spinOnce();}
-\DoxyCodeLine{60         \}}
-\DoxyCodeLine{61     \}}
-\DoxyCodeLine{62 }
-\DoxyCodeLine{63 geometry\_msgs::Pose \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a9faf8c6b437ff6b19c8bddd692908dca}{Pose::toPoseMsg}}()}
-\DoxyCodeLine{64   \{}
-\DoxyCodeLine{65     boost::lock\_guard<boost::mutex> guard(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_aeed25227df22e04ebeff2732e860f499}{m\_mutex\_}});}
+\DoxyCodeLine{36         \{}
+\DoxyCodeLine{37             tf::StampedTransform transform;}
+\DoxyCodeLine{38             \textcolor{keywordflow}{try}}
+\DoxyCodeLine{39             \{}
+\DoxyCodeLine{40                 \{}
+\DoxyCodeLine{41                     std::lock\_guard<std::mutex> lock(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_ae1b5ee53f49d74926e04a477d792f1d0}{listenerMutex\_}});}
+\DoxyCodeLine{42                     \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a188a5ac62d5424c1eacd667868049962}{tfListener\_}}-\/>lookupTransform(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}}, \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_}},}
+\DoxyCodeLine{43                                                       ros::Time(0), transform);}
+\DoxyCodeLine{44                 \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46                 \{}
+\DoxyCodeLine{47                     std::lock\_guard<std::mutex> guard(\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}{m\_mutex\_}});}
+\DoxyCodeLine{48                     tf::poseTFToMsg(transform, this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}}.pose);}
+\DoxyCodeLine{49                     this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a9da7acf880968a3c220b8436fd0bb6ef}{pose\_}}.header.stamp = transform.stamp\_;}
+\DoxyCodeLine{50                     found = \textcolor{keyword}{true};}
+\DoxyCodeLine{51                     this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1Pose_a49df3a978021edb71a48ef5e6d8e75a8}{isInitialized}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{52                 \}}
+\DoxyCodeLine{53             \}}
+\DoxyCodeLine{54             \textcolor{keywordflow}{catch} (tf::TransformException ex)}
+\DoxyCodeLine{55             \{}
+\DoxyCodeLine{56                 ROS\_ERROR\_STREAM\_THROTTLE(1, \textcolor{stringliteral}{"[Component pose] ("} << \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a4f45be8e2fd73e618d815582a4ca8efe}{poseFrameName\_}} << \textcolor{stringliteral}{"/["} << \mbox{\hyperlink{classcl__move__base__z_1_1Pose_a6a7a593232b6edaf99103d48ad8da9d3}{referenceFrame\_}} << \textcolor{stringliteral}{"] ) is failing on pose update : "} << ex.what());}
+\DoxyCodeLine{57             \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59             \mbox{\hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}}.sleep();}
+\DoxyCodeLine{60             ros::spinOnce();}
+\DoxyCodeLine{61         \}}
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} \mbox{\hyperlink{classcl__move__base__z_1_1Pose_abf99d1127cf51a93f97ada2031196114}{Pose::update}}()}
+\DoxyCodeLine{65     \{}
+\DoxyCodeLine{66         tf::StampedTransform transform;}
 
 \end{DoxyCode}
 
@@ -326,35 +325,35 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 50 of file cp\+\_\+pose.\+h.
+Definition at line 57 of file cp\+\_\+pose.\+h.
 
 
 
 Referenced by update(), sm\+\_\+fetch\+\_\+two\+\_\+table\+\_\+pick\+\_\+n\+\_\+place\+\_\+1\+::cl\+\_\+perception\+\_\+system\+::\+Cl\+Perception\+System\+::update(), and wait\+Transform\+Update().
 
-\mbox{\Hypertarget{classcl__move__base__z_1_1Pose_ab850594e402fe3c4943f063100fb8728}\label{classcl__move__base__z_1_1Pose_ab850594e402fe3c4943f063100fb8728}} 
+\mbox{\Hypertarget{classcl__move__base__z_1_1Pose_ae1b5ee53f49d74926e04a477d792f1d0}\label{classcl__move__base__z_1_1Pose_ae1b5ee53f49d74926e04a477d792f1d0}} 
 \index{cl\_move\_base\_z::Pose@{cl\_move\_base\_z::Pose}!listenerMutex\_@{listenerMutex\_}}
 \index{listenerMutex\_@{listenerMutex\_}!cl\_move\_base\_z::Pose@{cl\_move\_base\_z::Pose}}
 \doxysubsubsection{\texorpdfstring{listenerMutex\_}{listenerMutex\_}}
-{\footnotesize\ttfamily boost\+::mutex cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::listener\+Mutex\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily std\+::mutex cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::listener\+Mutex\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
-Definition at line 56 of file cp\+\_\+pose.\+h.
+Definition at line 63 of file cp\+\_\+pose.\+h.
 
 
 
 Referenced by update(), and wait\+Transform\+Update().
 
-\mbox{\Hypertarget{classcl__move__base__z_1_1Pose_aeed25227df22e04ebeff2732e860f499}\label{classcl__move__base__z_1_1Pose_aeed25227df22e04ebeff2732e860f499}} 
+\mbox{\Hypertarget{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}\label{classcl__move__base__z_1_1Pose_a73ed2daba3e473e156cab751fb37b58f}} 
 \index{cl\_move\_base\_z::Pose@{cl\_move\_base\_z::Pose}!m\_mutex\_@{m\_mutex\_}}
 \index{m\_mutex\_@{m\_mutex\_}!cl\_move\_base\_z::Pose@{cl\_move\_base\_z::Pose}}
 \doxysubsubsection{\texorpdfstring{m\_mutex\_}{m\_mutex\_}}
-{\footnotesize\ttfamily boost\+::mutex cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::m\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily std\+::mutex cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::m\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 61 of file cp\+\_\+pose.\+h.
+Definition at line 68 of file cp\+\_\+pose.\+h.
 
 
 
@@ -368,7 +367,7 @@ Referenced by update(), and wait\+Transform\+Update().
 
 
 
-Definition at line 53 of file cp\+\_\+pose.\+h.
+Definition at line 60 of file cp\+\_\+pose.\+h.
 
 
 
@@ -382,7 +381,7 @@ Referenced by update(), and wait\+Transform\+Update().
 
 
 
-Definition at line 58 of file cp\+\_\+pose.\+h.
+Definition at line 65 of file cp\+\_\+pose.\+h.
 
 
 
@@ -396,7 +395,7 @@ Referenced by update(), and wait\+Transform\+Update().
 
 
 
-Definition at line 59 of file cp\+\_\+pose.\+h.
+Definition at line 66 of file cp\+\_\+pose.\+h.
 
 
 
@@ -406,11 +405,11 @@ Referenced by update(), and wait\+Transform\+Update().
 \index{cl\_move\_base\_z::Pose@{cl\_move\_base\_z::Pose}!tfListener\_@{tfListener\_}}
 \index{tfListener\_@{tfListener\_}!cl\_move\_base\_z::Pose@{cl\_move\_base\_z::Pose}}
 \doxysubsubsection{\texorpdfstring{tfListener\_}{tfListener\_}}
-{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ tf\+::\+Transform\+Listener $>$ cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::tf\+Listener\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ tf\+::\+Transform\+Listener $>$ cl\+\_\+move\+\_\+base\+\_\+z\+::\+Pose\+::tf\+Listener\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 
-Definition at line 55 of file cp\+\_\+pose.\+h.
+Definition at line 62 of file cp\+\_\+pose.\+h.
 
 
 

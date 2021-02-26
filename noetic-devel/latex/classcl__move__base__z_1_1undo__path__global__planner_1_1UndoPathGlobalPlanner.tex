@@ -254,7 +254,9 @@ Definition at line 118 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 \DoxyCodeLine{235             \{}
 \DoxyCodeLine{236                 ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner ] backward global plan size:  "} << plan.size());}
 \DoxyCodeLine{237             \}}
-\DoxyCodeLine{238         \}}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{240         \}}
 
 \end{DoxyCode}
 
@@ -318,66 +320,66 @@ Here is the call graph for this function\+:
 
 \mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{make\+Plan()}} 
 
-Definition at line 245 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 247 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{247         \{}
-\DoxyCodeLine{248             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Backwards global planner: Generating global plan ");}}
-\DoxyCodeLine{249             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Clearing...");}}
-\DoxyCodeLine{250 }
-\DoxyCodeLine{251             plan.clear();}
+\DoxyCodeLine{249         \{}
+\DoxyCodeLine{250             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Backwards global planner: Generating global plan ");}}
+\DoxyCodeLine{251             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Clearing...");}}
 \DoxyCodeLine{252 }
-\DoxyCodeLine{253             \textcolor{keywordflow}{if}(\mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}}.poses.size() == 0)}
-\DoxyCodeLine{254             \{}
-\DoxyCodeLine{255                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
-\DoxyCodeLine{256             \}}
-\DoxyCodeLine{257 }
-\DoxyCodeLine{258             \textcolor{keyword}{auto} forcedGoal = \mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}}.poses[\mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}}.poses.size() -\/ 1]; \textcolor{comment}{// FORCE LAST POSE}}
-\DoxyCodeLine{259             this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a659c16f439d33ac7026a54bb65c26ca8}{createDefaultUndoPathPlan}}(start, forcedGoal, plan);}
-\DoxyCodeLine{260             \textcolor{comment}{//this-\/>createPureSpiningAndStragihtLineBackwardPath(start, goal, plan);}}
-\DoxyCodeLine{261 }
-\DoxyCodeLine{262             \textcolor{comment}{//ROS\_INFO\_STREAM(" start -\/ " << start);}}
-\DoxyCodeLine{263             \textcolor{comment}{//ROS\_INFO\_STREAM(" end -\/ " << goal.pose.position);}}
-\DoxyCodeLine{264 }
-\DoxyCodeLine{265             \textcolor{comment}{//ROS\_INFO("3 -\/ heading to goal orientation");}}
-\DoxyCodeLine{266             \textcolor{comment}{//double goalOrientation = angles::normalize\_angle(tf::getYaw(goal.pose.orientation));}}
-\DoxyCodeLine{267             \textcolor{comment}{//cl\_move\_base\_z::makePureSpinningSubPlan(prevState,goalOrientation,plan);}}
-\DoxyCodeLine{268 }
-\DoxyCodeLine{269             \textcolor{comment}{//ROS\_WARN\_STREAM( "MAKE PLAN INVOKED, plan size:"<< plan.size());}}
-\DoxyCodeLine{270             \mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a37a85e1cd57173902d8302cb8cb9b933}{publishGoalMarker}}(forcedGoal.pose, 1.0, 0, 1.0);}
-\DoxyCodeLine{271 }
-\DoxyCodeLine{272             nav\_msgs::Path planMsg;}
-\DoxyCodeLine{273             planMsg.poses = plan;}
-\DoxyCodeLine{274             planMsg.header.frame\_id = this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}}-\/>getGlobalFrameID();}
-\DoxyCodeLine{275 }
-\DoxyCodeLine{276             \textcolor{comment}{// check plan rejection}}
-\DoxyCodeLine{277             \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};}
-\DoxyCodeLine{278 }
-\DoxyCodeLine{279             \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}}
-\DoxyCodeLine{280             \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}}
-\DoxyCodeLine{281             \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}}
-\DoxyCodeLine{282             \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}}
-\DoxyCodeLine{283 }
-\DoxyCodeLine{284             costmap\_2d::Costmap2D *costmap2d = this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}}-\/>getCostmap();}
-\DoxyCodeLine{285             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&p : plan)}
-\DoxyCodeLine{286             \{}
-\DoxyCodeLine{287                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;}
-\DoxyCodeLine{288                 costmap2d-\/>worldToMap(p.pose.position.x, p.pose.position.y, mx, my);}
-\DoxyCodeLine{289                 \textcolor{keyword}{auto} cost = costmap2d-\/>getCost(mx, my);}
-\DoxyCodeLine{290 }
-\DoxyCodeLine{291                 \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)}
-\DoxyCodeLine{292                 \{}
-\DoxyCodeLine{293                     acceptedGlobalPlan = \textcolor{keyword}{false};}
-\DoxyCodeLine{294                     \textcolor{keywordflow}{break};}
-\DoxyCodeLine{295                 \}}
-\DoxyCodeLine{296             \}}
-\DoxyCodeLine{297 }
-\DoxyCodeLine{298             \mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a65bf364a122d5950baf1bf8b42309d68}{planPub\_}}.publish(planMsg);}
+\DoxyCodeLine{253             plan.clear();}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255             \textcolor{keywordflow}{if}(\mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}}.poses.size() == 0)}
+\DoxyCodeLine{256             \{}
+\DoxyCodeLine{257                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{258             \}}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260             \textcolor{keyword}{auto} forcedGoal = \mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}}.poses[\mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}}.poses.size() -\/ 1]; \textcolor{comment}{// FORCE LAST POSE}}
+\DoxyCodeLine{261             this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a659c16f439d33ac7026a54bb65c26ca8}{createDefaultUndoPathPlan}}(start, forcedGoal, plan);}
+\DoxyCodeLine{262             \textcolor{comment}{//this-\/>createPureSpiningAndStragihtLineBackwardPath(start, goal, plan);}}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264             \textcolor{comment}{//ROS\_INFO\_STREAM(" start -\/ " << start);}}
+\DoxyCodeLine{265             \textcolor{comment}{//ROS\_INFO\_STREAM(" end -\/ " << goal.pose.position);}}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267             \textcolor{comment}{//ROS\_INFO("3 -\/ heading to goal orientation");}}
+\DoxyCodeLine{268             \textcolor{comment}{//double goalOrientation = angles::normalize\_angle(tf::getYaw(goal.pose.orientation));}}
+\DoxyCodeLine{269             \textcolor{comment}{//cl\_move\_base\_z::makePureSpinningSubPlan(prevState,goalOrientation,plan);}}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271             \textcolor{comment}{//ROS\_WARN\_STREAM( "MAKE PLAN INVOKED, plan size:"<< plan.size());}}
+\DoxyCodeLine{272             \mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a37a85e1cd57173902d8302cb8cb9b933}{publishGoalMarker}}(forcedGoal.pose, 1.0, 0, 1.0);}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{274             nav\_msgs::Path planMsg;}
+\DoxyCodeLine{275             planMsg.poses = plan;}
+\DoxyCodeLine{276             planMsg.header.frame\_id = this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}}-\/>getGlobalFrameID();}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278             \textcolor{comment}{// check plan rejection}}
+\DoxyCodeLine{279             \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281             \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}}
+\DoxyCodeLine{282             \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}}
+\DoxyCodeLine{283             \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}}
+\DoxyCodeLine{284             \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}}
+\DoxyCodeLine{285 }
+\DoxyCodeLine{286             costmap\_2d::Costmap2D *costmap2d = this-\/>\mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}}-\/>getCostmap();}
+\DoxyCodeLine{287             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&p : plan)}
+\DoxyCodeLine{288             \{}
+\DoxyCodeLine{289                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;}
+\DoxyCodeLine{290                 costmap2d-\/>worldToMap(p.pose.position.x, p.pose.position.y, mx, my);}
+\DoxyCodeLine{291                 \textcolor{keyword}{auto} cost = costmap2d-\/>getCost(mx, my);}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293                 \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)}
+\DoxyCodeLine{294                 \{}
+\DoxyCodeLine{295                     acceptedGlobalPlan = \textcolor{keyword}{false};}
+\DoxyCodeLine{296                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{297                 \}}
+\DoxyCodeLine{298             \}}
 \DoxyCodeLine{299 }
-\DoxyCodeLine{300             \textcolor{comment}{// this was previously set to size() <= 1, but a plan with a single point is also a valid plan (the goal)}}
-\DoxyCodeLine{301             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
-\DoxyCodeLine{302         \}}
+\DoxyCodeLine{300             \mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a65bf364a122d5950baf1bf8b42309d68}{planPub\_}}.publish(planMsg);}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{302             \textcolor{comment}{// this was previously set to size() <= 1, but a plan with a single point is also a valid plan (the goal)}}
+\DoxyCodeLine{303             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{304         \}}
 
 \end{DoxyCode}
 
@@ -412,15 +414,15 @@ Here is the caller graph for this function\+:
 
 \mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{make\+Plan()}} 
 
-Definition at line 309 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 311 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{312         \{}
-\DoxyCodeLine{313             cost = 0;}
-\DoxyCodeLine{314             \mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{makePlan}}(start, \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}, plan);}
-\DoxyCodeLine{315             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
-\DoxyCodeLine{316         \}}
+\DoxyCodeLine{314         \{}
+\DoxyCodeLine{315             cost = 0;}
+\DoxyCodeLine{316             \mbox{\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{makePlan}}(start, \mbox{\hyperlink{namespaceget__controller__state_a945e8678050edb331915cd734a90511e}{goal}}, plan);}
+\DoxyCodeLine{317             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{318         \}}
 
 \end{DoxyCode}
 
