@@ -279,7 +279,9 @@ Referenced by make\+Plan().
 235             \{
 236                 ROS\_ERROR\_STREAM(\textcolor{stringliteral}{"[UndoPathGlobalPlanner ] backward global plan size:  "} << plan.size());
 237             \}
-238         \}
+238 
+239             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+240         \}
 \end{DoxyCode}
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -336,7 +338,7 @@ Here is the call graph for this function\+:
 
 \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{make\+Plan()} 
 
-Definition at line 245 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 247 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -348,64 +350,64 @@ Referenced by make\+Plan().
 
 
 \begin{DoxyCode}
-247         \{
-248             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Backwards global planner: Generating global plan ");}
-249             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Clearing...");}
-250 
-251             plan.clear();
+249         \{
+250             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Backwards global planner: Generating global plan ");}
+251             \textcolor{comment}{//ROS\_WARN\_NAMED("Backwards", "Clearing...");}
 252 
-253             \textcolor{keywordflow}{if}(\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() == 0)
-254             \{
-255                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
-256             \}
-257 
-258             \textcolor{keyword}{auto} forcedGoal = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses[
+253             plan.clear();
+254 
+255             \textcolor{keywordflow}{if}(\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() == 0)
+256             \{
+257                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+258             \}
+259 
+260             \textcolor{keyword}{auto} forcedGoal = \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses[
       \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a9a4a6e40f5b6cb5f77dedbc5b6170871}{lastForwardPathMsg\_}.poses.size() - 1]; \textcolor{comment}{// FORCE LAST POSE}
-259             this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a659c16f439d33ac7026a54bb65c26ca8}{createDefaultUndoPathPlan}(start, forcedGoal, plan);
-260             \textcolor{comment}{//this->createPureSpiningAndStragihtLineBackwardPath(start, goal, plan);}
-261 
-262             \textcolor{comment}{//ROS\_INFO\_STREAM(" start - " << start);}
-263             \textcolor{comment}{//ROS\_INFO\_STREAM(" end - " << goal.pose.position);}
-264 
-265             \textcolor{comment}{//ROS\_INFO("3 - heading to goal orientation");}
-266             \textcolor{comment}{//double goalOrientation = angles::normalize\_angle(tf::getYaw(goal.pose.orientation));}
-267             \textcolor{comment}{//cl\_move\_base\_z::makePureSpinningSubPlan(prevState,goalOrientation,plan);}
-268 
-269             \textcolor{comment}{//ROS\_WARN\_STREAM( "MAKE PLAN INVOKED, plan size:"<< plan.size());}
-270             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a37a85e1cd57173902d8302cb8cb9b933}{publishGoalMarker}(forcedGoal.pose, 1.0, 0, 1.0);
-271 
-272             nav\_msgs::Path planMsg;
-273             planMsg.poses = plan;
-274             planMsg.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getGlobalFrameID();
-275 
-276             \textcolor{comment}{// check plan rejection}
-277             \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};
-278 
-279             \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
-280             \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
-281             \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
-282             \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
-283 
-284             costmap\_2d::Costmap2D *costmap2d = this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getCostmap();
-285             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : plan)
-286             \{
-287                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
-288                 costmap2d->worldToMap(p.pose.position.x, p.pose.position.y, mx, my);
-289                 \textcolor{keyword}{auto} cost = costmap2d->getCost(mx, my);
-290 
-291                 \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
-292                 \{
-293                     acceptedGlobalPlan = \textcolor{keyword}{false};
-294                     \textcolor{keywordflow}{break};
-295                 \}
-296             \}
-297 
-298             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a65bf364a122d5950baf1bf8b42309d68}{planPub\_}.publish(planMsg);
+261             this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a659c16f439d33ac7026a54bb65c26ca8}{createDefaultUndoPathPlan}(start, forcedGoal, plan);
+262             \textcolor{comment}{//this->createPureSpiningAndStragihtLineBackwardPath(start, goal, plan);}
+263 
+264             \textcolor{comment}{//ROS\_INFO\_STREAM(" start - " << start);}
+265             \textcolor{comment}{//ROS\_INFO\_STREAM(" end - " << goal.pose.position);}
+266 
+267             \textcolor{comment}{//ROS\_INFO("3 - heading to goal orientation");}
+268             \textcolor{comment}{//double goalOrientation = angles::normalize\_angle(tf::getYaw(goal.pose.orientation));}
+269             \textcolor{comment}{//cl\_move\_base\_z::makePureSpinningSubPlan(prevState,goalOrientation,plan);}
+270 
+271             \textcolor{comment}{//ROS\_WARN\_STREAM( "MAKE PLAN INVOKED, plan size:"<< plan.size());}
+272             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a37a85e1cd57173902d8302cb8cb9b933}{publishGoalMarker}(forcedGoal.pose, 1.0, 0, 1.0);
+273 
+274             nav\_msgs::Path planMsg;
+275             planMsg.poses = plan;
+276             planMsg.header.frame\_id = this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getGlobalFrameID();
+277 
+278             \textcolor{comment}{// check plan rejection}
+279             \textcolor{keywordtype}{bool} acceptedGlobalPlan = \textcolor{keyword}{true};
+280 
+281             \textcolor{comment}{// static const unsigned char NO\_INFORMATION = 255;}
+282             \textcolor{comment}{// static const unsigned char LETHAL\_OBSTACLE = 254;}
+283             \textcolor{comment}{// static const unsigned char INSCRIBED\_INFLATED\_OBSTACLE = 253;}
+284             \textcolor{comment}{// static const unsigned char FREE\_SPACE = 0;}
+285 
+286             costmap\_2d::Costmap2D *costmap2d = this->\hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_ab63eeb465e3ae989a6edcc4d059cf8f0}{costmap\_ros\_}->getCostmap();
+287             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} &p : plan)
+288             \{
+289                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} mx, my;
+290                 costmap2d->worldToMap(p.pose.position.x, p.pose.position.y, mx, my);
+291                 \textcolor{keyword}{auto} cost = costmap2d->getCost(mx, my);
+292 
+293                 \textcolor{keywordflow}{if} (cost >= costmap\_2d::INSCRIBED\_INFLATED\_OBSTACLE)
+294                 \{
+295                     acceptedGlobalPlan = \textcolor{keyword}{false};
+296                     \textcolor{keywordflow}{break};
+297                 \}
+298             \}
 299 
-300             \textcolor{comment}{// this was previously set to size() <= 1, but a plan with a single point is also a valid plan
+300             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a65bf364a122d5950baf1bf8b42309d68}{planPub\_}.publish(planMsg);
+301 
+302             \textcolor{comment}{// this was previously set to size() <= 1, but a plan with a single point is also a valid plan
        (the goal)}
-301             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-302         \}
+303             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+304         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
@@ -431,7 +433,7 @@ Here is the caller graph for this function\+:
 
 \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{make\+Plan()} 
 
-Definition at line 309 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
+Definition at line 311 of file undo\+\_\+path\+\_\+global\+\_\+planner.\+cpp.
 
 
 
@@ -439,11 +441,11 @@ References make\+Plan().
 
 
 \begin{DoxyCode}
-312         \{
-313             cost = 0;
-314             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{makePlan}(start, goal, plan);
-315             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-316         \}
+314         \{
+315             cost = 0;
+316             \hyperlink{classcl__move__base__z_1_1undo__path__global__planner_1_1UndoPathGlobalPlanner_a46034d27c0811abae440009457a7f8b0}{makePlan}(start, goal, plan);
+317             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+318         \}
 \end{DoxyCode}
 Here is the call graph for this function\+:
 \nopagebreak
