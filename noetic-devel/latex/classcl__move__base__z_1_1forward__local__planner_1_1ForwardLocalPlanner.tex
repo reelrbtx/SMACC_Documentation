@@ -194,71 +194,72 @@ Definition at line 269 of file forward\+\_\+local\+\_\+planner.\+cpp.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{276     \{}
-\DoxyCodeLine{277         \textcolor{comment}{// iterate the point from the current position and ahead until reaching a new goal point in the path}}
-\DoxyCodeLine{278         \textcolor{keywordflow}{while} (!ok \&\& \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}} < \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.size())}
-\DoxyCodeLine{279         \{}
-\DoxyCodeLine{280             \textcolor{keyword}{auto} \&\mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}} = \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}[\mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}}];}
-\DoxyCodeLine{281             \textcolor{keyword}{const} geometry\_msgs::Point \&p = \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.pose.position;}
-\DoxyCodeLine{282             tf::Quaternion q;}
-\DoxyCodeLine{283             tf::quaternionMsgToTF(\mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.pose.orientation, q);}
-\DoxyCodeLine{284 }
-\DoxyCodeLine{285             \textcolor{comment}{// take error from the current position to the path point}}
-\DoxyCodeLine{286             \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} = p.x -\/ tfpose.getOrigin().x();}
-\DoxyCodeLine{287             \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}} = p.y -\/ tfpose.getOrigin().y();}
-\DoxyCodeLine{288             \textcolor{keywordtype}{double} dist = sqrt(\mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} * \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} + \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}} * \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}});}
-\DoxyCodeLine{289 }
-\DoxyCodeLine{290             \textcolor{keywordtype}{double} pangle = tf::getYaw(q);}
-\DoxyCodeLine{291             \textcolor{keywordtype}{double} angle = tf::getYaw(tfpose.getRotation());}
-\DoxyCodeLine{292             \textcolor{keywordtype}{double} angular\_error = angles::shortest\_angular\_distance(pangle, angle);}
-\DoxyCodeLine{293 }
-\DoxyCodeLine{294             \textcolor{keywordflow}{if} (dist >= \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a4101afebb7e2a5eb0a2144a5fb553a92}{carrot\_distance\_}} || fabs(angular\_error) > 0.1)}
-\DoxyCodeLine{295             \{}
-\DoxyCodeLine{296                 \textcolor{comment}{// the target pose is enough different to be defined as a target}}
-\DoxyCodeLine{297                 ok = \textcolor{keyword}{true};}
-\DoxyCodeLine{298                 ROS\_DEBUG(\textcolor{stringliteral}{"current index: \%d, carrot goal percentaje: \%lf, dist: \%lf, maxdist: \%lf, angle\_error: \%lf"}, \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}}, 100.0 * \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}} / \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.size(), dist, \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a4101afebb7e2a5eb0a2144a5fb553a92}{carrot\_distance\_}}, angular\_error);}
-\DoxyCodeLine{299             \}}
-\DoxyCodeLine{300             \textcolor{keywordflow}{else}}
-\DoxyCodeLine{301             \{}
-\DoxyCodeLine{302                 \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}}++;}
-\DoxyCodeLine{303             \}}
-\DoxyCodeLine{304         \}}
-\DoxyCodeLine{305 }
-\DoxyCodeLine{306         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[ForwardLocalPlanner] selected carrot pose index "} << \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}} << \textcolor{stringliteral}{"/"} << \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.size());}
-\DoxyCodeLine{307 }
-\DoxyCodeLine{308         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}} >= \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.size())}
-\DoxyCodeLine{309         \{}
-\DoxyCodeLine{310             \textcolor{comment}{// even the latest point is quite similar, then take the last since it is the final goal}}
-\DoxyCodeLine{311             cmd\_vel.linear.x = 0;}
-\DoxyCodeLine{312             cmd\_vel.angular.z = 0;}
-\DoxyCodeLine{313             \textcolor{comment}{//ROS\_INFO("End Local planner");}}
-\DoxyCodeLine{314             ok = \textcolor{keyword}{true};}
-\DoxyCodeLine{315             \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}} = \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.size() -\/ 1;}
-\DoxyCodeLine{316             \textcolor{comment}{//return true;}}
-\DoxyCodeLine{317         \}}
-\DoxyCodeLine{318     \}}
-\DoxyCodeLine{319 }
-\DoxyCodeLine{320     \textcolor{comment}{//ROS\_INFO("pose control algorithm");}}
-\DoxyCodeLine{321 }
-\DoxyCodeLine{322     \textcolor{keyword}{const} geometry\_msgs::PoseStamped \&finalgoalpose = \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.back();}
-\DoxyCodeLine{323     \textcolor{keyword}{const} geometry\_msgs::PoseStamped \&goalpose = \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}[\mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}}];}
-\DoxyCodeLine{324     \textcolor{keyword}{const} geometry\_msgs::Point \&goalposition = goalpose.pose.position;}
-\DoxyCodeLine{325 }
-\DoxyCodeLine{326     tf::Quaternion goalQ;}
-\DoxyCodeLine{327     tf::quaternionMsgToTF(goalpose.pose.orientation, goalQ);}
-\DoxyCodeLine{328     \textcolor{comment}{//ROS\_INFO\_STREAM("Plan goal quaternion at "<< goalpose.pose.orientation);}}
-\DoxyCodeLine{329 }
-\DoxyCodeLine{330     \textcolor{comment}{//goal orientation (global frame)}}
-\DoxyCodeLine{331     \textcolor{keywordtype}{double} betta = tf::getYaw(goalpose.pose.orientation) + \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a935db3e785e3276d42b34d58011e793c}{betta\_offset\_}};}
-\DoxyCodeLine{332 }
-\DoxyCodeLine{333     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} = goalposition.x -\/ tfpose.getOrigin().x();}
-\DoxyCodeLine{334     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}} = goalposition.y -\/ tfpose.getOrigin().y();}
-\DoxyCodeLine{335 }
-\DoxyCodeLine{336     \textcolor{comment}{//distance error to the targetpoint}}
-\DoxyCodeLine{337     \textcolor{keywordtype}{double} rho\_error = sqrt(\mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} * \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} + \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}} * \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}});}
-\DoxyCodeLine{338 }
-\DoxyCodeLine{339     \textcolor{comment}{//current angle}}
-\DoxyCodeLine{340     \textcolor{keywordtype}{double} theta = tf::getYaw(q);}
+\DoxyCodeLine{275     \{}
+\DoxyCodeLine{276         \textcolor{comment}{// iterate the point from the current position and ahead until reaching a new goal point in the path}}
+\DoxyCodeLine{277         \textcolor{keywordflow}{while} (!ok \&\& \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}} < \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.size())}
+\DoxyCodeLine{278         \{}
+\DoxyCodeLine{279             \textcolor{keyword}{auto} \&\mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}} = \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}[\mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}}];}
+\DoxyCodeLine{280             \textcolor{keyword}{const} geometry\_msgs::Point \&p = \mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.pose.position;}
+\DoxyCodeLine{281             tf::Quaternion q;}
+\DoxyCodeLine{282             tf::quaternionMsgToTF(\mbox{\hyperlink{namespacedemo_af3b79916997ed33739583b8acea7cf7b}{pose}}.pose.orientation, q);}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{284             \textcolor{comment}{// take error from the current position to the path point}}
+\DoxyCodeLine{285             \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} = p.x -\/ tfpose.getOrigin().x();}
+\DoxyCodeLine{286             \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}} = p.y -\/ tfpose.getOrigin().y();}
+\DoxyCodeLine{287             \textcolor{keywordtype}{double} dist = sqrt(\mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} * \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} + \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}} * \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}});}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289             \textcolor{keywordtype}{double} pangle = tf::getYaw(q);}
+\DoxyCodeLine{290             \textcolor{keywordtype}{double} angle = tf::getYaw(tfpose.getRotation());}
+\DoxyCodeLine{291             \textcolor{keywordtype}{double} angular\_error = angles::shortest\_angular\_distance(pangle, angle);}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293             \textcolor{keywordflow}{if} (dist >= \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a4101afebb7e2a5eb0a2144a5fb553a92}{carrot\_distance\_}} || fabs(angular\_error) > 0.1)}
+\DoxyCodeLine{294             \{}
+\DoxyCodeLine{295                 \textcolor{comment}{// the target pose is enough different to be defined as a target}}
+\DoxyCodeLine{296                 ok = \textcolor{keyword}{true};}
+\DoxyCodeLine{297                 ROS\_DEBUG(\textcolor{stringliteral}{"current index: \%d, carrot goal percentaje: \%lf, dist: \%lf, maxdist: \%lf, angle\_error: \%lf"}, \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}}, 100.0 * \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}} / \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.size(), dist, \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a4101afebb7e2a5eb0a2144a5fb553a92}{carrot\_distance\_}}, angular\_error);}
+\DoxyCodeLine{298             \}}
+\DoxyCodeLine{299             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{300             \{}
+\DoxyCodeLine{301                 \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}}++;}
+\DoxyCodeLine{302             \}}
+\DoxyCodeLine{303         \}}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[ForwardLocalPlanner] selected carrot pose index "} << \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}} << \textcolor{stringliteral}{"/"} << \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.size());}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}} >= \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.size())}
+\DoxyCodeLine{308         \{}
+\DoxyCodeLine{309             \textcolor{comment}{// even the latest point is quite similar, then take the last since it is the final goal}}
+\DoxyCodeLine{310             cmd\_vel.linear.x = 0;}
+\DoxyCodeLine{311             cmd\_vel.angular.z = 0;}
+\DoxyCodeLine{312             \textcolor{comment}{//ROS\_INFO("End Local planner");}}
+\DoxyCodeLine{313             ok = \textcolor{keyword}{true};}
+\DoxyCodeLine{314             \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}} = \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.size() -\/ 1;}
+\DoxyCodeLine{315             \textcolor{comment}{//return true;}}
+\DoxyCodeLine{316         \}}
+\DoxyCodeLine{317     \}}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319     \textcolor{comment}{//ROS\_INFO("pose control algorithm");}}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321     \textcolor{keyword}{const} geometry\_msgs::PoseStamped \&finalgoalpose = \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}.back();}
+\DoxyCodeLine{322     \textcolor{keyword}{const} geometry\_msgs::PoseStamped \&carrot\_goalpose = \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}}[\mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}}];}
+\DoxyCodeLine{323     \textcolor{keyword}{const} geometry\_msgs::Point \&goalposition = carrot\_goalpose.pose.position;}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325     tf::Quaternion carrotGoalQ;}
+\DoxyCodeLine{326     tf::quaternionMsgToTF(carrot\_goalpose.pose.orientation, carrotGoalQ);}
+\DoxyCodeLine{327     \textcolor{comment}{//ROS\_INFO\_STREAM("Plan goal quaternion at "<< goalpose.pose.orientation);}}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{329     \textcolor{comment}{//goal orientation (global frame)}}
+\DoxyCodeLine{330     \textcolor{keywordtype}{double} betta = tf::getYaw(carrot\_goalpose.pose.orientation) + \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a935db3e785e3276d42b34d58011e793c}{betta\_offset\_}};}
+\DoxyCodeLine{331 }
+\DoxyCodeLine{332     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} = goalposition.x -\/ tfpose.getOrigin().x();}
+\DoxyCodeLine{333     \textcolor{keywordtype}{double} \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}} = goalposition.y -\/ tfpose.getOrigin().y();}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335     \textcolor{comment}{//distance error to the targetpoint}}
+\DoxyCodeLine{336     \textcolor{keywordtype}{double} rho\_error = sqrt(\mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} * \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}} + \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}} * \mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}});}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338     \textcolor{comment}{//current angle}}
+\DoxyCodeLine{339     tf::Quaternion currentOrientation = tfpose.getRotation();}
+\DoxyCodeLine{340     \textcolor{keywordtype}{double} theta = tf::getYaw(currentOrientation);}
 \DoxyCodeLine{341     \textcolor{keywordtype}{double} alpha = atan2(\mbox{\hyperlink{namespacepick__and__place_a61938a48c502f643a1c3f7a1e18ca0be}{dy}}, \mbox{\hyperlink{namespacepick__and__place_a9d56acae898189f28c9b80e8779f7842}{dx}});}
 \DoxyCodeLine{342     alpha = alpha + \mbox{\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a3d1b7e2ddf54efd67e4935875c7b6a67}{alpha\_offset\_}};}
 \DoxyCodeLine{343 }

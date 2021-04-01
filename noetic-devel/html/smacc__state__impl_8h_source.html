@@ -231,74 +231,75 @@ $(function() {
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> TOrthogonal&gt;</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    TOrthogonal *<a class="code" href="classsmacc_1_1ISmaccState.html#afc5c5683cbe39964a52fc3a2553196d2">ISmaccState::getOrthogonal</a>()</div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    {</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordflow">return</span> this-&gt;getStateMachine().getOrthogonal&lt;TOrthogonal&gt;();</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    }</div>
-<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#afc5c5683cbe39964a52fc3a2553196d2">  165</a></span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> TEventGenerator&gt;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    TEventGenerator* <a class="code" href="classsmacc_1_1ISmaccState.html#a0fc590cfcf030b09376ddb75a0c4362e">ISmaccState::getEventGenerator</a>()</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    {</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        TEventGenerator* ret = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; evg: this-&gt;eventGenerators_)</div>
-<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#a0fc590cfcf030b09376ddb75a0c4362e">  171</a></span>&#160;        {</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            ret = <span class="keyword">dynamic_cast&lt;</span>TEventGenerator *<span class="keyword">&gt;</span>(evg.get());</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <span class="keywordflow">if</span>(ret!=<span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        }</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keywordflow">return</span> ret;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> TStateReactor&gt;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    TStateReactor* <a class="code" href="classsmacc_1_1ISmaccState.html#a6dfd4a076d5f4e7521bea010a56ee49f">ISmaccState::getStateReactor</a>()</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    {</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        TStateReactor* ret = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; sr: this-&gt;eventGenerators_)</div>
-<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#a6dfd4a076d5f4e7521bea010a56ee49f">  184</a></span>&#160;        {</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            ret = <span class="keyword">dynamic_cast&lt;</span>TStateReactor *<span class="keyword">&gt;</span>(sr.get());</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <span class="keywordflow">if</span>(ret!=<span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        }</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordflow">return</span> ret;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    }</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="comment">// template &lt;typename TStateReactor, typename TTriggerEvent, typename... TEvArgs&gt;</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="comment">// std::shared_ptr&lt;TStateReactor&gt; ISmaccState::createStateReactor(TEvArgs... args)</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="comment">// {</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="comment">//     auto sb = std::make_shared&lt;TStateReactor&gt;(std::forward(args...));</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="comment">//     sb-&gt;initialize(this, typelist&lt;TEvArgs...&gt;());</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="comment">//     sb-&gt;setOutputEvent(typelist&lt;TTriggerEvent&gt;());</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="comment">//     stateReactors_.push_back(sb);</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="comment">//     return sb;</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="comment">// }</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="comment">//-------------------------------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> EventType&gt;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a1308e7a5348de1870c26b3b00a92cf55">ISmaccState::postEvent</a>(<span class="keyword">const</span> EventType &amp;ev)</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    {</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        getStateMachine().postEvent(ev);</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    }</div>
-<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#acef404ab3766ddf2892e8dad14a4a7cf">  209</a></span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> EventType&gt;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a1308e7a5348de1870c26b3b00a92cf55">ISmaccState::postEvent</a>()</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    {</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        getStateMachine().postEvent&lt;EventType&gt;();</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    }</div>
-<div class="line"><a name="l00215"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#a1308e7a5348de1870c26b3b00a92cf55">  215</a></span>&#160;    <span class="comment">//-------------------------------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> TransitionType&gt;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a98df316afd79180d3c27a15a7d5dd1cf">ISmaccState::notifyTransition</a>()</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    {</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <span class="keyword">auto</span> transitionType = TypeInfo::getTypeInfoFromType&lt;TransitionType&gt;();</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        this-&gt;notifyTransitionFromTransitionTypeInfo(transitionType);</div>
-<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#a98df316afd79180d3c27a15a7d5dd1cf">  222</a></span>&#160;    }</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="comment">//-------------------------------------------------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;} <span class="comment">// namespace smacc</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">// implementation depends on state definition</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="smacc__state__reactor__impl_8h.html">smacc/impl/smacc_state_reactor_impl.h</a>&gt;</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="smacc__event__generator__impl_8h.html">smacc/impl/smacc_event_generator_impl.h</a>&gt;</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="comment">//static_assert(boost::type_traits::is_base_of&lt;ISmaccOrthogonal,TOrthogonal&gt;::value);</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keywordflow">return</span> this-&gt;getStateMachine().getOrthogonal&lt;TOrthogonal&gt;();</div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#afc5c5683cbe39964a52fc3a2553196d2">  165</a></span>&#160;    }</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> TEventGenerator&gt;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    TEventGenerator* <a class="code" href="classsmacc_1_1ISmaccState.html#a0fc590cfcf030b09376ddb75a0c4362e">ISmaccState::getEventGenerator</a>()</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    {</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        TEventGenerator* ret = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; evg: this-&gt;eventGenerators_)</div>
+<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#a0fc590cfcf030b09376ddb75a0c4362e">  172</a></span>&#160;        {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            ret = <span class="keyword">dynamic_cast&lt;</span>TEventGenerator *<span class="keyword">&gt;</span>(evg.get());</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <span class="keywordflow">if</span>(ret!=<span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        }</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">return</span> ret;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    }</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> TStateReactor&gt;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    TStateReactor* <a class="code" href="classsmacc_1_1ISmaccState.html#a6dfd4a076d5f4e7521bea010a56ee49f">ISmaccState::getStateReactor</a>()</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        TStateReactor* ret = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; sr: this-&gt;eventGenerators_)</div>
+<div class="line"><a name="l00185"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#a6dfd4a076d5f4e7521bea010a56ee49f">  185</a></span>&#160;        {</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            ret = <span class="keyword">dynamic_cast&lt;</span>TStateReactor *<span class="keyword">&gt;</span>(sr.get());</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            <span class="keywordflow">if</span>(ret!=<span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        }</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="keywordflow">return</span> ret;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="comment">// template &lt;typename TStateReactor, typename TTriggerEvent, typename... TEvArgs&gt;</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="comment">// std::shared_ptr&lt;TStateReactor&gt; ISmaccState::createStateReactor(TEvArgs... args)</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="comment">// {</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="comment">//     auto sb = std::make_shared&lt;TStateReactor&gt;(std::forward(args...));</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="comment">//     sb-&gt;initialize(this, typelist&lt;TEvArgs...&gt;());</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="comment">//     sb-&gt;setOutputEvent(typelist&lt;TTriggerEvent&gt;());</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="comment">//     stateReactors_.push_back(sb);</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="comment">//     return sb;</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="comment">// }</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="comment">//-------------------------------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> EventType&gt;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a1308e7a5348de1870c26b3b00a92cf55">ISmaccState::postEvent</a>(<span class="keyword">const</span> EventType &amp;ev)</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    {</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        getStateMachine().postEvent(ev);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    }</div>
+<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#acef404ab3766ddf2892e8dad14a4a7cf">  210</a></span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> EventType&gt;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a1308e7a5348de1870c26b3b00a92cf55">ISmaccState::postEvent</a>()</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    {</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        getStateMachine().postEvent&lt;EventType&gt;();</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    }</div>
+<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#a1308e7a5348de1870c26b3b00a92cf55">  216</a></span>&#160;    <span class="comment">//-------------------------------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> TransitionType&gt;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classsmacc_1_1ISmaccState.html#a98df316afd79180d3c27a15a7d5dd1cf">ISmaccState::notifyTransition</a>()</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    {</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keyword">auto</span> transitionType = TypeInfo::getTypeInfoFromType&lt;TransitionType&gt;();</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        this-&gt;notifyTransitionFromTransitionTypeInfo(transitionType);</div>
+<div class="line"><a name="l00223"></a><span class="lineno"><a class="line" href="classsmacc_1_1ISmaccState.html#a98df316afd79180d3c27a15a7d5dd1cf">  223</a></span>&#160;    }</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="comment">//-------------------------------------------------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;} <span class="comment">// namespace smacc</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">// implementation depends on state definition</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="smacc__state__reactor__impl_8h.html">smacc/impl/smacc_state_reactor_impl.h</a>&gt;</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="smacc__event__generator__impl_8h.html">smacc/impl/smacc_event_generator_impl.h</a>&gt;</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="asmacc__state_8h_html"><div class="ttname"><a href="smacc__state_8h.html">smacc_state.h</a></div></div>
 <div class="ttc" id="aintrospection_8h_html"><div class="ttname"><a href="introspection_8h.html">introspection.h</a></div></div>
@@ -313,15 +314,15 @@ $(function() {
 <div class="ttc" id="aclasssmacc_1_1StateReactor_html_acd4b35b4c82241fc27bb858761f6e4de"><div class="ttname"><a href="classsmacc_1_1StateReactor.html#acd4b35b4c82241fc27bb858761f6e4de">smacc::StateReactor::addInputEvent</a></div><div class="ttdeci">void addInputEvent()</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__reactor__impl_8h_source.html#l00041">smacc_state_reactor_impl.h:41</a></div></div>
 <div class="ttc" id="aclasssmacc_1_1ISmaccState_html_afc5c5683cbe39964a52fc3a2553196d2"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#afc5c5683cbe39964a52fc3a2553196d2">smacc::ISmaccState::getOrthogonal</a></div><div class="ttdeci">TOrthogonal * getOrthogonal()</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00165">smacc_state_impl.h:165</a></div></div>
 <div class="ttc" id="anamespacesmacc_1_1introspection_html"><div class="ttname"><a href="namespacesmacc_1_1introspection.html">smacc::introspection</a></div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__reactor__impl_8h_source.html#l00066">smacc_state_reactor_impl.h:66</a></div></div>
-<div class="ttc" id="aclasssmacc_1_1ISmaccState_html_a6dfd4a076d5f4e7521bea010a56ee49f"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a6dfd4a076d5f4e7521bea010a56ee49f">smacc::ISmaccState::getStateReactor</a></div><div class="ttdeci">TStateReactor * getStateReactor()</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00184">smacc_state_impl.h:184</a></div></div>
-<div class="ttc" id="aclasssmacc_1_1ISmaccState_html_a0fc590cfcf030b09376ddb75a0c4362e"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a0fc590cfcf030b09376ddb75a0c4362e">smacc::ISmaccState::getEventGenerator</a></div><div class="ttdeci">TEventGenerator * getEventGenerator()</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00171">smacc_state_impl.h:171</a></div></div>
+<div class="ttc" id="aclasssmacc_1_1ISmaccState_html_a6dfd4a076d5f4e7521bea010a56ee49f"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a6dfd4a076d5f4e7521bea010a56ee49f">smacc::ISmaccState::getStateReactor</a></div><div class="ttdeci">TStateReactor * getStateReactor()</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00185">smacc_state_impl.h:185</a></div></div>
+<div class="ttc" id="aclasssmacc_1_1ISmaccState_html_a0fc590cfcf030b09376ddb75a0c4362e"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a0fc590cfcf030b09376ddb75a0c4362e">smacc::ISmaccState::getEventGenerator</a></div><div class="ttdeci">TEventGenerator * getEventGenerator()</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00172">smacc_state_impl.h:172</a></div></div>
 <div class="ttc" id="anamespacestart__controller_html_a7b97ae4906891a46251e92cce0503b41"><div class="ttname"><a href="namespacestart__controller.html#a7b97ae4906891a46251e92cce0503b41">start_controller.name</a></div><div class="ttdeci">name</div><div class="ttdef"><b>Definition:</b> <a href="start__controller_8py_source.html#l00055">start_controller.py:55</a></div></div>
 <div class="ttc" id="aclasssmacc_1_1StateReactor_html"><div class="ttname"><a href="classsmacc_1_1StateReactor.html">smacc::StateReactor</a></div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__reactor_8h_source.html#l00033">smacc_state_reactor.h:33</a></div></div>
 <div class="ttc" id="asmacc__state__reactor_8h_html"><div class="ttname"><a href="smacc__state__reactor_8h.html">smacc_state_reactor.h</a></div></div>
 <div class="ttc" id="aclasssmacc_1_1ISmaccState_html_a120fcda41b44a437ff2e3906ac9fa5ca"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a120fcda41b44a437ff2e3906ac9fa5ca">smacc::ISmaccState::setGlobalSMData</a></div><div class="ttdeci">void setGlobalSMData(std::string name, T value)</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00107">smacc_state_impl.h:107</a></div></div>
 <div class="ttc" id="anamespacegenerate__debs_html_a50bc9a7ecac9584553e089a448bcde58"><div class="ttname"><a href="namespacegenerate__debs.html#a50bc9a7ecac9584553e089a448bcde58">generate_debs.type</a></div><div class="ttdeci">type</div><div class="ttdef"><b>Definition:</b> <a href="generate__debs_8py_source.html#l00208">generate_debs.py:208</a></div></div>
 <div class="ttc" id="asmacc__state__machine_8h_html"><div class="ttname"><a href="smacc__state__machine_8h.html">smacc_state_machine.h</a></div></div>
-<div class="ttc" id="aclasssmacc_1_1ISmaccState_html_a1308e7a5348de1870c26b3b00a92cf55"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a1308e7a5348de1870c26b3b00a92cf55">smacc::ISmaccState::postEvent</a></div><div class="ttdeci">void postEvent()</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00215">smacc_state_impl.h:215</a></div></div>
+<div class="ttc" id="aclasssmacc_1_1ISmaccState_html_a1308e7a5348de1870c26b3b00a92cf55"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a1308e7a5348de1870c26b3b00a92cf55">smacc::ISmaccState::postEvent</a></div><div class="ttdeci">void postEvent()</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00216">smacc_state_impl.h:216</a></div></div>
 <div class="ttc" id="aclasssmacc_1_1ISmaccState_html_ad129c58b69a90e7056f2b3c3fa139a24"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#ad129c58b69a90e7056f2b3c3fa139a24">smacc::ISmaccState::configure</a></div><div class="ttdeci">std::shared_ptr&lt; TBehavior &gt; configure(Args &amp;&amp;... args)</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00052">smacc_state_impl.h:52</a></div></div>
 <div class="ttc" id="aclasssmacc_1_1ISmaccState_html_a7f95c9f0a6ea2d6f18d1aec0519de4ac"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a7f95c9f0a6ea2d6f18d1aec0519de4ac">smacc::ISmaccState::requiresClient</a></div><div class="ttdeci">void requiresClient(SmaccClientType *&amp;storage)</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00082">smacc_state_impl.h:82</a></div></div>
 <div class="ttc" id="astructsmacc_1_1AddTEventType_html"><div class="ttname"><a href="structsmacc_1_1AddTEventType.html">smacc::AddTEventType</a></div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00132">smacc_state_impl.h:132</a></div></div>
@@ -329,7 +330,7 @@ $(function() {
 <div class="ttc" id="astring__type__walker_8h_html"><div class="ttname"><a href="string__type__walker_8h.html">string_type_walker.h</a></div></div>
 <div class="ttc" id="aclasssmacc_1_1ISmaccState_html_a5b071f3034e2a0416d87ff26332f598f"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a5b071f3034e2a0416d87ff26332f598f">smacc::ISmaccState::createStateReactor</a></div><div class="ttdeci">std::shared_ptr&lt; TStateReactor &gt; createStateReactor(TEvArgs... args)</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00147">smacc_state_impl.h:147</a></div></div>
 <div class="ttc" id="aclasssmacc_1_1ISmaccState_html_ad6811b03329d9e694e78bc4b1220c2c0"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#ad6811b03329d9e694e78bc4b1220c2c0">smacc::ISmaccState::getGlobalSMData</a></div><div class="ttdeci">bool getGlobalSMData(std::string name, T &amp;ret)</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00099">smacc_state_impl.h:99</a></div></div>
-<div class="ttc" id="aclasssmacc_1_1ISmaccState_html_a98df316afd79180d3c27a15a7d5dd1cf"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a98df316afd79180d3c27a15a7d5dd1cf">smacc::ISmaccState::notifyTransition</a></div><div class="ttdeci">void notifyTransition()</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00222">smacc_state_impl.h:222</a></div></div>
+<div class="ttc" id="aclasssmacc_1_1ISmaccState_html_a98df316afd79180d3c27a15a7d5dd1cf"><div class="ttname"><a href="classsmacc_1_1ISmaccState.html#a98df316afd79180d3c27a15a7d5dd1cf">smacc::ISmaccState::notifyTransition</a></div><div class="ttdeci">void notifyTransition()</div><div class="ttdef"><b>Definition:</b> <a href="smacc__state__impl_8h_source.html#l00223">smacc_state_impl.h:223</a></div></div>
 <div class="ttc" id="anamespacesmacc_html"><div class="ttname"><a href="namespacesmacc.html">smacc</a></div><div class="ttdef"><b>Definition:</b> <a href="cp__ros__control__interface_8h_source.html#l00005">cp_ros_control_interface.h:5</a></div></div>
 <div class="ttc" id="asmacc__state__reactor__impl_8h_html"><div class="ttname"><a href="smacc__state__reactor__impl_8h.html">smacc_state_reactor_impl.h</a></div></div>
 <div class="ttc" id="anamespacesmacc_1_1introspection_html_a2f495108db3e57604d8d3ff5ef030302"><div class="ttname"><a href="namespacesmacc_1_1introspection.html#a2f495108db3e57604d8d3ff5ef030302">smacc::introspection::demangleSymbol</a></div><div class="ttdeci">std::string demangleSymbol(const std::string &amp;name)</div><div class="ttdef"><b>Definition:</b> <a href="introspection_8h_source.html#l00059">introspection.h:59</a></div></div>
