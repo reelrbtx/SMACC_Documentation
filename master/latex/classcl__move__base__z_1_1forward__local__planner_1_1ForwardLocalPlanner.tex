@@ -207,79 +207,80 @@ References alpha\+\_\+offset\+\_\+, betta\+\_\+offset\+\_\+, carrot\+\_\+distanc
 269     tf::poseStampedTFToMsg(tfpose,currentPose);
 270     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[ForwardLocalPlanner] current robot pose "} << currentPose);
 271 
-272     tf::Quaternion q = tfpose.getRotation();
-273 
-274     \textcolor{keywordtype}{bool} ok = \textcolor{keyword}{false};
-275     \textcolor{keywordflow}{while} (!ok)
-276     \{
-277         \textcolor{comment}{// iterate the point from the current position and ahead until reaching a new goal point in the
+272 
+273     \textcolor{keywordtype}{bool} ok = \textcolor{keyword}{false};
+274     \textcolor{keywordflow}{while} (!ok)
+275     \{
+276         \textcolor{comment}{// iterate the point from the current position and ahead until reaching a new goal point in the
        path}
-278         \textcolor{keywordflow}{while} (!ok && \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} < \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size())
-279         \{
-280             \textcolor{keyword}{auto} &pose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}[\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}];
-281             \textcolor{keyword}{const} geometry\_msgs::Point &p = pose.pose.position;
-282             tf::Quaternion q;
-283             tf::quaternionMsgToTF(pose.pose.orientation, q);
-284 
-285             \textcolor{comment}{// take error from the current position to the path point}
-286             \textcolor{keywordtype}{double} dx = p.x - tfpose.getOrigin().x();
-287             \textcolor{keywordtype}{double} dy = p.y - tfpose.getOrigin().y();
-288             \textcolor{keywordtype}{double} dist = sqrt(dx * dx + dy * dy);
-289 
-290             \textcolor{keywordtype}{double} pangle = tf::getYaw(q);
-291             \textcolor{keywordtype}{double} angle = tf::getYaw(tfpose.getRotation());
-292             \textcolor{keywordtype}{double} angular\_error = angles::shortest\_angular\_distance(pangle, angle);
-293 
-294             \textcolor{keywordflow}{if} (dist >= \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a4101afebb7e2a5eb0a2144a5fb553a92}{carrot\_distance\_} || fabs(angular\_error) > 0.1)
-295             \{
-296                 \textcolor{comment}{// the target pose is enough different to be defined as a target}
-297                 ok = \textcolor{keyword}{true};
-298                 ROS\_DEBUG(\textcolor{stringliteral}{"current index: %d, carrot goal percentaje: %lf, dist: %lf, maxdist: %lf,
+277         \textcolor{keywordflow}{while} (!ok && \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} < \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size())
+278         \{
+279             \textcolor{keyword}{auto} &pose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}[\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}];
+280             \textcolor{keyword}{const} geometry\_msgs::Point &p = pose.pose.position;
+281             tf::Quaternion q;
+282             tf::quaternionMsgToTF(pose.pose.orientation, q);
+283 
+284             \textcolor{comment}{// take error from the current position to the path point}
+285             \textcolor{keywordtype}{double} dx = p.x - tfpose.getOrigin().x();
+286             \textcolor{keywordtype}{double} dy = p.y - tfpose.getOrigin().y();
+287             \textcolor{keywordtype}{double} dist = sqrt(dx * dx + dy * dy);
+288 
+289             \textcolor{keywordtype}{double} pangle = tf::getYaw(q);
+290             \textcolor{keywordtype}{double} angle = tf::getYaw(tfpose.getRotation());
+291             \textcolor{keywordtype}{double} angular\_error = angles::shortest\_angular\_distance(pangle, angle);
+292 
+293             \textcolor{keywordflow}{if} (dist >= \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a4101afebb7e2a5eb0a2144a5fb553a92}{carrot\_distance\_} || fabs(angular\_error) > 0.1)
+294             \{
+295                 \textcolor{comment}{// the target pose is enough different to be defined as a target}
+296                 ok = \textcolor{keyword}{true};
+297                 ROS\_DEBUG(\textcolor{stringliteral}{"current index: %d, carrot goal percentaje: %lf, dist: %lf, maxdist: %lf,
        angle\_error: %lf"}, \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}, 100.0 * \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} / 
       \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size(), dist, \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a4101afebb7e2a5eb0a2144a5fb553a92}{carrot\_distance\_}, angular\_error);
-299             \}
-300             \textcolor{keywordflow}{else}
-301             \{
-302                 \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}++;
-303             \}
-304         \}
-305 
-306         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[ForwardLocalPlanner] selected carrot pose index "} << 
+298             \}
+299             \textcolor{keywordflow}{else}
+300             \{
+301                 \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}++;
+302             \}
+303         \}
+304 
+305         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"[ForwardLocalPlanner] selected carrot pose index "} << 
       \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} << \textcolor{stringliteral}{"/"} << \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size());
-307 
-308         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} >= \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size())
-309         \{
-310             \textcolor{comment}{// even the latest point is quite similar, then take the last since it is the final goal}
-311             cmd\_vel.linear.x = 0;
-312             cmd\_vel.angular.z = 0;
-313             \textcolor{comment}{//ROS\_INFO("End Local planner");}
-314             ok = \textcolor{keyword}{true};
-315             \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size() - 1;
-316             \textcolor{comment}{//return true;}
-317         \}
-318     \}
-319 
-320     \textcolor{comment}{//ROS\_INFO("pose control algorithm");}
-321 
-322     \textcolor{keyword}{const} geometry\_msgs::PoseStamped &finalgoalpose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.back();
-323     \textcolor{keyword}{const} geometry\_msgs::PoseStamped &goalpose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}[\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}];
-324     \textcolor{keyword}{const} geometry\_msgs::Point &goalposition = goalpose.pose.position;
-325 
-326     tf::Quaternion goalQ;
-327     tf::quaternionMsgToTF(goalpose.pose.orientation, goalQ);
-328     \textcolor{comment}{//ROS\_INFO\_STREAM("Plan goal quaternion at "<< goalpose.pose.orientation);}
-329 
-330     \textcolor{comment}{//goal orientation (global frame)}
-331     \textcolor{keywordtype}{double} betta = tf::getYaw(goalpose.pose.orientation) + \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a935db3e785e3276d42b34d58011e793c}{betta\_offset\_};
-332 
-333     \textcolor{keywordtype}{double} dx = goalposition.x - tfpose.getOrigin().x();
-334     \textcolor{keywordtype}{double} dy = goalposition.y - tfpose.getOrigin().y();
-335 
-336     \textcolor{comment}{//distance error to the targetpoint}
-337     \textcolor{keywordtype}{double} rho\_error = sqrt(dx * dx + dy * dy);
-338 
-339     \textcolor{comment}{//current angle}
-340     \textcolor{keywordtype}{double} theta = tf::getYaw(q);
+306 
+307         \textcolor{keywordflow}{if} (\hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} >= \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size())
+308         \{
+309             \textcolor{comment}{// even the latest point is quite similar, then take the last since it is the final goal}
+310             cmd\_vel.linear.x = 0;
+311             cmd\_vel.angular.z = 0;
+312             \textcolor{comment}{//ROS\_INFO("End Local planner");}
+313             ok = \textcolor{keyword}{true};
+314             \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_} = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.size() - 1;
+315             \textcolor{comment}{//return true;}
+316         \}
+317     \}
+318 
+319     \textcolor{comment}{//ROS\_INFO("pose control algorithm");}
+320 
+321     \textcolor{keyword}{const} geometry\_msgs::PoseStamped &finalgoalpose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}.back();
+322     \textcolor{keyword}{const} geometry\_msgs::PoseStamped &carrot\_goalpose = \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a929e5d0a9db3027810beb658a2343560}{plan\_}[
+      \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_af4019077a7661d10957cca16222547c2}{currentPoseIndex\_}];
+323     \textcolor{keyword}{const} geometry\_msgs::Point &goalposition = carrot\_goalpose.pose.position;
+324 
+325     tf::Quaternion carrotGoalQ;
+326     tf::quaternionMsgToTF(carrot\_goalpose.pose.orientation, carrotGoalQ);
+327     \textcolor{comment}{//ROS\_INFO\_STREAM("Plan goal quaternion at "<< goalpose.pose.orientation);}
+328 
+329     \textcolor{comment}{//goal orientation (global frame)}
+330     \textcolor{keywordtype}{double} betta = tf::getYaw(carrot\_goalpose.pose.orientation) + \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a935db3e785e3276d42b34d58011e793c}{betta\_offset\_};
+331 
+332     \textcolor{keywordtype}{double} dx = goalposition.x - tfpose.getOrigin().x();
+333     \textcolor{keywordtype}{double} dy = goalposition.y - tfpose.getOrigin().y();
+334 
+335     \textcolor{comment}{//distance error to the targetpoint}
+336     \textcolor{keywordtype}{double} rho\_error = sqrt(dx * dx + dy * dy);
+337 
+338     \textcolor{comment}{//current angle}
+339     tf::Quaternion currentOrientation = tfpose.getRotation();
+340     \textcolor{keywordtype}{double} theta = tf::getYaw(currentOrientation);
 341     \textcolor{keywordtype}{double} alpha = atan2(dy, dx);
 342     alpha = alpha + \hyperlink{classcl__move__base__z_1_1forward__local__planner_1_1ForwardLocalPlanner_a3d1b7e2ddf54efd67e4935875c7b6a67}{alpha\_offset\_};
 343 

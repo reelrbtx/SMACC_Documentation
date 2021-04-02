@@ -64,6 +64,7 @@ var searchData=
   ['evfinishdemo',['EvFinishDemo',['../structsm__fetch__six__table__pick__n__sort__1_1_1EvFinishDemo.html',1,'sm_fetch_six_table_pick_n_sort_1::EvFinishDemo'],['../structsm__fetch__two__table__whiskey__pour_1_1EvFinishDemo.html',1,'sm_fetch_two_table_whiskey_pour::EvFinishDemo']]],
   ['evglobalerror',['EvGlobalError',['../structsm__dance__bot__2_1_1EvGlobalError.html',1,'sm_dance_bot_2::EvGlobalError'],['../structsm__dance__bot__strikes__back_1_1EvGlobalError.html',1,'sm_dance_bot_strikes_back::EvGlobalError'],['../structsm__dance__bot_1_1EvGlobalError.html',1,'sm_dance_bot::EvGlobalError']]],
   ['evgoalvirtuallinepassed',['EvGoalVirtualLinePassed',['../structcl__move__base__z_1_1EvGoalVirtualLinePassed.html',1,'cl_move_base_z']]],
+  ['evimportantmessage',['EvImportantMessage',['../structsm__subscriber_1_1EvImportantMessage.html',1,'sm_subscriber']]],
   ['evincorrectinitialposition',['EvIncorrectInitialPosition',['../structcl__move__group__interface_1_1EvIncorrectInitialPosition.html',1,'cl_move_group_interface']]],
   ['evjointdiscontinuity',['EvJointDiscontinuity',['../structcl__move__group__interface_1_1EvJointDiscontinuity.html',1,'cl_move_group_interface']]],
   ['evkeypressa',['EvKeyPressA',['../structcl__keyboard_1_1EvKeyPressA.html',1,'cl_keyboard']]],
