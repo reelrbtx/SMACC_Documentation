@@ -47,6 +47,7 @@ var searchData=
   ['sm_5fridgeback_5fbarrel_5fsearch_5f1',['sm_ridgeback_barrel_search_1',['../namespacesm__ridgeback__barrel__search__1.html',1,'']]],
   ['sm_5fridgeback_5fbarrel_5fsearch_5f2',['sm_ridgeback_barrel_search_2',['../namespacesm__ridgeback__barrel__search__2.html',1,'']]],
   ['sm_5fstarcraft_5fai',['sm_starcraft_ai',['../namespacesm__starcraft__ai.html',1,'sm_starcraft_ai'],['../namespacesm__starcraft__ai_1_1SS1_1_1sm__starcraft__ai.html',1,'sm_starcraft_ai::SS1::sm_starcraft_ai'],['../namespacesm__starcraft__ai_1_1SS2_1_1sm__starcraft__ai.html',1,'sm_starcraft_ai::SS2::sm_starcraft_ai'],['../namespacesm__starcraft__ai_1_1SS3_1_1sm__starcraft__ai.html',1,'sm_starcraft_ai::SS3::sm_starcraft_ai']]],
+  ['sm_5fsubscriber',['sm_subscriber',['../namespacesm__subscriber.html',1,'']]],
   ['sm_5fthree_5fsome',['sm_three_some',['../namespacesm__three__some.html',1,'sm_three_some'],['../namespacesm__three__some_1_1SS1_1_1sm__three__some.html',1,'sm_three_some::SS1::sm_three_some'],['../namespacesm__three__some_1_1SS2_1_1sm__three__some.html',1,'sm_three_some::SS2::sm_three_some']]],
   ['sm_5fupdate_5floop',['sm_update_loop',['../namespacesm__update__loop.html',1,'']]],
   ['sm_5fviewer_5fsim',['sm_viewer_sim',['../namespacesm__viewer__sim.html',1,'']]],

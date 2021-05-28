@@ -1,0 +1,58 @@
+\hypertarget{numbers__publisher_8cpp}{}\section{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+subscriber/servers/numbers\+\_\+publisher/numbers\+\_\+publisher.cpp File Reference}
+\label{numbers__publisher_8cpp}\index{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+subscriber/servers/numbers\+\_\+publisher/numbers\+\_\+publisher.\+cpp@{smacc\+\_\+sm\+\_\+reference\+\_\+library/sm\+\_\+subscriber/servers/numbers\+\_\+publisher/numbers\+\_\+publisher.\+cpp}}
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$std\+\_\+msgs/\+U\+Int16.\+h$>$}\newline
+Include dependency graph for numbers\+\_\+publisher.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{numbers__publisher_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{numbers__publisher_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{numbers__publisher_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{numbers__publisher_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{numbers\+\_\+publisher.\+cpp@{numbers\+\_\+publisher.\+cpp}!main@{main}}
+\index{main@{main}!numbers\+\_\+publisher.\+cpp@{numbers\+\_\+publisher.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 4 of file numbers\+\_\+publisher.\+cpp.
+
+
+
+References battery\+\_\+monitor\+\_\+node\+::msg, battery\+\_\+monitor\+\_\+node\+::pub, and fake\+\_\+cube\+\_\+perception\+\_\+node\+::r.
+
+
+\begin{DoxyCode}
+5 \{
+6   ros::init(argc, argv, \textcolor{stringliteral}{"numbers\_publisher"});
+7 
+8   ros::NodeHandle nh\_;
+9   
+10   \textcolor{keyword}{auto} \hyperlink{namespacebattery__monitor__node_ab13957b56951b692f19d70ccac2e2511}{pub} = nh\_.advertise<std\_msgs::UInt16>(\textcolor{stringliteral}{"/numbers"}, 1);
+11 
+12   ros::Rate \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}(0.5);
+13 
+14   \textcolor{keywordtype}{int} i = 0;
+15   \textcolor{keywordflow}{while} (ros::ok())
+16   \{
+17     std\_msgs::UInt16 \hyperlink{namespacebattery__monitor__node_ab1920c64448816edd4064e494275fdff}{msg};
+18     msg.data = i++;
+19 
+20     \hyperlink{namespacebattery__monitor__node_ab13957b56951b692f19d70ccac2e2511}{pub}.publish(msg);
+21 
+22     \hyperlink{namespacefake__cube__perception__node_a36e88703ab69fd35065e8a8d9344903e}{r}.sleep();
+23     ros::spinOnce();
+24   \}
+25 \}
+\end{DoxyCode}
