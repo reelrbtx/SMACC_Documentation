@@ -207,238 +207,253 @@ Definition at line 61 of file string\+\_\+type\+\_\+walker.\+cpp.
 \DoxyCodeLine{79         \textcolor{keyword}{const} \textcolor{keywordtype}{char} *simpletypeRE = \textcolor{stringliteral}{"[\string^\(\backslash\)\(\backslash\)<\(\backslash\)\(\backslash\)>,\(\backslash\)\(\backslash\)s]+\(\backslash\)\(\backslash\)<[\string^\(\backslash\)\(\backslash\)<\(\backslash\)\(\backslash\)>]+\(\backslash\)\(\backslash\)>"};}
 \DoxyCodeLine{80         \textcolor{comment}{//std::cout << inputtext << std::endl;}}
 \DoxyCodeLine{81 }
-\DoxyCodeLine{82         std::smatch matches;}
-\DoxyCodeLine{83         std::regex regex(simpletypeRE); \textcolor{comment}{// matches words beginning by "sub"}}
-\DoxyCodeLine{84 }
-\DoxyCodeLine{85         \textcolor{comment}{//matches = [m for m in enumerate(re.finditer(simpletypeRE, inputtext))]}}
-\DoxyCodeLine{86         std::regex\_search(inputtext, matches, regex);}
-\DoxyCodeLine{87 }
-\DoxyCodeLine{88         \textcolor{comment}{//   if len(matches) == 0:}}
-\DoxyCodeLine{89         \textcolor{comment}{//     if len(typesdict) == 0:}}
-\DoxyCodeLine{90         \textcolor{comment}{//         tkey = "\$T" + str(typecount)}}
-\DoxyCodeLine{91         \textcolor{comment}{//         typesdict[tkey] = inputtext}}
-\DoxyCodeLine{92         \textcolor{comment}{//     break}}
-\DoxyCodeLine{93 }
-\DoxyCodeLine{94         \textcolor{keywordflow}{if} (matches.size() == 0)}
-\DoxyCodeLine{95         \{}
-\DoxyCodeLine{96             \textcolor{keywordflow}{if} (typesdict.size() == 0)}
-\DoxyCodeLine{97             \{}
-\DoxyCodeLine{98                 \textcolor{keyword}{auto} \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}} = \textcolor{stringliteral}{"\$T"} + std::to\_string(typecount);}
-\DoxyCodeLine{99                 typesdict[\mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}}] = inputtext;}
-\DoxyCodeLine{100             \}}
-\DoxyCodeLine{101             \textcolor{keywordflow}{break};}
-\DoxyCodeLine{102         \}}
-\DoxyCodeLine{103 }
-\DoxyCodeLine{104         \textcolor{comment}{// for i, m in matches:}}
-\DoxyCodeLine{105         \textcolor{comment}{//     tstr = m.group(0)}}
-\DoxyCodeLine{106         \textcolor{comment}{//     tkey = "\$T" + str(typecount)}}
-\DoxyCodeLine{107         \textcolor{comment}{//     inputtext = inputtext.replace(tstr, tkey)}}
-\DoxyCodeLine{108         \textcolor{comment}{//     print("updating input text: " + inputtext)}}
-\DoxyCodeLine{109         \textcolor{comment}{//     typecount += 1}}
-\DoxyCodeLine{110         \textcolor{comment}{//     typesdict[tkey] = tstr}}
-\DoxyCodeLine{111 }
-\DoxyCodeLine{112         \textcolor{keywordtype}{int} i = 0;}
-\DoxyCodeLine{113         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&m : matches)}
-\DoxyCodeLine{114         \{}
-\DoxyCodeLine{115             std::string tstr = m;}
-\DoxyCodeLine{116             \textcolor{keyword}{auto} \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}} = \textcolor{stringliteral}{"\$T"} + std::to\_string(typecount);}
-\DoxyCodeLine{117             \mbox{\hyperlink{namespacesmacc_1_1introspection_a48571b9bf3b115d2a83cc0147c96d0bd}{replace}}(inputtext, tstr, \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}});}
-\DoxyCodeLine{118 }
-\DoxyCodeLine{119             \textcolor{comment}{//std::cout << "updating input text:" << inputtext << std::endl;}}
+\DoxyCodeLine{82         \textcolor{comment}{// locate moste outter template}}
+\DoxyCodeLine{83         std::smatch matches;}
+\DoxyCodeLine{84         std::regex regex(simpletypeRE); \textcolor{comment}{// matches words beginning by "sub"}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \textcolor{comment}{//matches = [m for m in enumerate(re.finditer(simpletypeRE, inputtext))]}}
+\DoxyCodeLine{87         std::regex\_search(inputtext, matches, regex);}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89         \textcolor{comment}{//   if len(matches) == 0:}}
+\DoxyCodeLine{90         \textcolor{comment}{//     if len(typesdict) == 0:}}
+\DoxyCodeLine{91         \textcolor{comment}{//         tkey = "\$T" + str(typecount)}}
+\DoxyCodeLine{92         \textcolor{comment}{//         typesdict[tkey] = inputtext}}
+\DoxyCodeLine{93         \textcolor{comment}{//     break}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95         \textcolor{keywordflow}{if} (matches.size() == 0)}
+\DoxyCodeLine{96         \{}
+\DoxyCodeLine{97             \textcolor{keywordflow}{if} (typesdict.size() == 0)}
+\DoxyCodeLine{98             \{}
+\DoxyCodeLine{99                 \textcolor{keyword}{auto} \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}} = \textcolor{stringliteral}{"\$T"} + std::to\_string(typecount);}
+\DoxyCodeLine{100                 typesdict[\mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}}] = inputtext;}
+\DoxyCodeLine{101             \}}
+\DoxyCodeLine{102             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{103         \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \textcolor{comment}{// for i, m in matches:}}
+\DoxyCodeLine{106         \textcolor{comment}{//     tstr = m.group(0)}}
+\DoxyCodeLine{107         \textcolor{comment}{//     tkey = "\$T" + str(typecount)}}
+\DoxyCodeLine{108         \textcolor{comment}{//     inputtext = inputtext.replace(tstr, tkey)}}
+\DoxyCodeLine{109         \textcolor{comment}{//     print("updating input text: " + inputtext)}}
+\DoxyCodeLine{110         \textcolor{comment}{//     typecount += 1}}
+\DoxyCodeLine{111         \textcolor{comment}{//     typesdict[tkey] = tstr}}
+\DoxyCodeLine{112     }
+\DoxyCodeLine{113         \textcolor{comment}{// find and replace internal templates with tokens}}
+\DoxyCodeLine{114         \textcolor{keywordtype}{int} i = 0;}
+\DoxyCodeLine{115         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&m : matches)}
+\DoxyCodeLine{116         \{}
+\DoxyCodeLine{117             std::string tstr = m;}
+\DoxyCodeLine{118             \textcolor{keyword}{auto} \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}} = \textcolor{stringliteral}{"\$T"} + std::to\_string(typecount);}
+\DoxyCodeLine{119             \mbox{\hyperlink{namespacesmacc_1_1introspection_a48571b9bf3b115d2a83cc0147c96d0bd}{replace}}(inputtext, tstr, \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}});}
 \DoxyCodeLine{120 }
-\DoxyCodeLine{121             typecount++;}
-\DoxyCodeLine{122             typesdict[\mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}}] = tstr;}
-\DoxyCodeLine{123 }
-\DoxyCodeLine{124             i++;}
-\DoxyCodeLine{125         \}}
-\DoxyCodeLine{126     \}}
-\DoxyCodeLine{127 }
-\DoxyCodeLine{128     \textcolor{comment}{// allbasetypes = set()}}
-\DoxyCodeLine{129     \textcolor{comment}{// for tkey in typesdict.keys():}}
-\DoxyCodeLine{130     \textcolor{comment}{//     flat = typesdict[tkey]}}
-\DoxyCodeLine{131     \textcolor{comment}{//     print flat}}
-\DoxyCodeLine{132     \textcolor{comment}{//     startindex = flat.index("<")}}
-\DoxyCodeLine{133     \textcolor{comment}{//     flat = flat[startindex + 1:-\/1]}}
-\DoxyCodeLine{134     \textcolor{comment}{//     basetypes = [t.strip() for t in flat.split(",")]}}
-\DoxyCodeLine{135     \textcolor{comment}{//     for b in basetypes:}}
-\DoxyCodeLine{136     \textcolor{comment}{//         if not "\$" in b:}}
-\DoxyCodeLine{137     \textcolor{comment}{//             allbasetypes.add(b)}}
-\DoxyCodeLine{138 }
-\DoxyCodeLine{139     std::set<std::string> allbasetypes;}
-\DoxyCodeLine{140     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&typeentry : typesdict)}
-\DoxyCodeLine{141     \{}
-\DoxyCodeLine{142         \textcolor{keyword}{auto} flat = typeentry.second;}
-\DoxyCodeLine{143         \textcolor{comment}{//std::cout << flat << std::endl;}}
-\DoxyCodeLine{144 }
-\DoxyCodeLine{145         \textcolor{keywordtype}{size\_t} startindex = flat.find(\textcolor{stringliteral}{"<"});}
-\DoxyCodeLine{146         \textcolor{keywordtype}{size\_t} endindex = flat.find(\textcolor{stringliteral}{">"});}
-\DoxyCodeLine{147         \textcolor{keywordflow}{if} (startindex != std::string::npos)}
-\DoxyCodeLine{148         \{}
-\DoxyCodeLine{149             flat = flat.substr(startindex + 1, endindex -\/ startindex -\/ 1);}
-\DoxyCodeLine{150             \textcolor{comment}{//std::cout << typeentry.first <<":" << flat << std::endl;}}
-\DoxyCodeLine{151             typesdict\_content[typeentry.first] = flat;}
-\DoxyCodeLine{152             std::vector<std::string> localbasetypes;}
-\DoxyCodeLine{153 }
-\DoxyCodeLine{154             std::istringstream iss(flat);}
-\DoxyCodeLine{155             std::string token;}
-\DoxyCodeLine{156             \textcolor{keywordflow}{while} (std::getline(iss, token, \textcolor{charliteral}{','}))}
-\DoxyCodeLine{157             \{}
-\DoxyCodeLine{158                 boost::trim(token);}
-\DoxyCodeLine{159                 localbasetypes.push\_back(token);}
-\DoxyCodeLine{160                 \textcolor{comment}{//std::cout << "base type: " << token << std::endl;}}
-\DoxyCodeLine{161             \}}
-\DoxyCodeLine{162 }
-\DoxyCodeLine{163             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&b : localbasetypes)}
-\DoxyCodeLine{164             \{}
-\DoxyCodeLine{165                 \textcolor{keywordtype}{size\_t} found = b.find(\textcolor{stringliteral}{"\$"});}
-\DoxyCodeLine{166 }
-\DoxyCodeLine{167                 \textcolor{keywordflow}{if} (found == std::string::npos)}
-\DoxyCodeLine{168                 \{}
-\DoxyCodeLine{169                     allbasetypes.insert(b);}
-\DoxyCodeLine{170                 \}}
-\DoxyCodeLine{171             \}}
-\DoxyCodeLine{172         \}}
-\DoxyCodeLine{173 }
-\DoxyCodeLine{174         \textcolor{comment}{// for b in allbasetypes:}}
-\DoxyCodeLine{175         \textcolor{comment}{// typesdict[b] = b}}
+\DoxyCodeLine{121             \textcolor{comment}{//std::cout << "updating input text:" << inputtext << std::endl;}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123             typecount++;}
+\DoxyCodeLine{124             typesdict[\mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}}] = tstr;}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126             i++;}
+\DoxyCodeLine{127         \}}
+\DoxyCodeLine{128     \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     \textcolor{comment}{// allbasetypes = set()}}
+\DoxyCodeLine{131     \textcolor{comment}{// for tkey in typesdict.keys():}}
+\DoxyCodeLine{132     \textcolor{comment}{//     flat = typesdict[tkey]}}
+\DoxyCodeLine{133     \textcolor{comment}{//     print flat}}
+\DoxyCodeLine{134     \textcolor{comment}{//     startindex = flat.index("<")}}
+\DoxyCodeLine{135     \textcolor{comment}{//     flat = flat[startindex + 1:-\/1]}}
+\DoxyCodeLine{136     \textcolor{comment}{//     basetypes = [t.strip() for t in flat.split(",")]}}
+\DoxyCodeLine{137     \textcolor{comment}{//     for b in basetypes:}}
+\DoxyCodeLine{138     \textcolor{comment}{//         if not "\$" in b:}}
+\DoxyCodeLine{139     \textcolor{comment}{//             allbasetypes.add(b)}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141     \textcolor{comment}{// SORT by token key to replace back in a single pass}}
+\DoxyCodeLine{142     std::vector<std::pair<std::string, std::string> > orderedTypedict;}
+\DoxyCodeLine{143     \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \&item : typesdict) \{}
+\DoxyCodeLine{144         orderedTypedict.emplace\_back(item);}
+\DoxyCodeLine{145     \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147      std::sort(orderedTypedict.begin(),orderedTypedict.end(),}
+\DoxyCodeLine{148                                 [](\textcolor{keyword}{auto}\& a, \textcolor{keyword}{auto}\& b)    }
+\DoxyCodeLine{149                                 \{}
+\DoxyCodeLine{150                                     return std::stoi(a.first.substr(2)) > std::stoi(b.first.substr(2));}
+\DoxyCodeLine{151                                 \});}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153     std::set<std::string> allbasetypes;}
+\DoxyCodeLine{154     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&typeentry : orderedTypedict \textcolor{comment}{/*typesdict*/})}
+\DoxyCodeLine{155     \{}
+\DoxyCodeLine{156         \textcolor{keyword}{auto} flat = typeentry.second;}
+\DoxyCodeLine{157         \textcolor{comment}{//std::cout << flat << std::endl;}}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159         \textcolor{keywordtype}{size\_t} startindex = flat.find(\textcolor{stringliteral}{"<"});}
+\DoxyCodeLine{160         \textcolor{keywordtype}{size\_t} endindex = flat.find(\textcolor{stringliteral}{">"});}
+\DoxyCodeLine{161         \textcolor{keywordflow}{if} (startindex != std::string::npos)}
+\DoxyCodeLine{162         \{}
+\DoxyCodeLine{163             flat = flat.substr(startindex + 1, endindex -\/ startindex -\/ 1);}
+\DoxyCodeLine{164             \textcolor{comment}{//std::cout << typeentry.first <<":" << flat << std::endl;}}
+\DoxyCodeLine{165             typesdict\_content[typeentry.first] = flat;}
+\DoxyCodeLine{166             std::vector<std::string> localbasetypes;}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168             std::istringstream iss(flat);}
+\DoxyCodeLine{169             std::string token;}
+\DoxyCodeLine{170             \textcolor{keywordflow}{while} (std::getline(iss, token, \textcolor{charliteral}{','}))}
+\DoxyCodeLine{171             \{}
+\DoxyCodeLine{172                 boost::trim(token);}
+\DoxyCodeLine{173                 localbasetypes.push\_back(token);}
+\DoxyCodeLine{174                 \textcolor{comment}{//std::cout << "base type: " << token << std::endl;}}
+\DoxyCodeLine{175             \}}
 \DoxyCodeLine{176 }
-\DoxyCodeLine{177         \textcolor{comment}{//refresh}}
-\DoxyCodeLine{178         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&b : allbasetypes)}
-\DoxyCodeLine{179         \{}
-\DoxyCodeLine{180             typesdict[b] = b;}
-\DoxyCodeLine{181         \}}
-\DoxyCodeLine{182     \}}
-\DoxyCodeLine{183     \textcolor{comment}{// types = []}}
-\DoxyCodeLine{184     \textcolor{comment}{// for tkey in typesdict:}}
-\DoxyCodeLine{185     \textcolor{comment}{//     finaltype = replace\_back(typesdict[tkey], typesdict)}}
-\DoxyCodeLine{186     \textcolor{comment}{//     t = TypeInfo(tkey, typesdict[tkey], finaltype)}}
-\DoxyCodeLine{187     \textcolor{comment}{//     types.append(t)}}
-\DoxyCodeLine{188 }
-\DoxyCodeLine{189     \textcolor{comment}{//     print t}}
+\DoxyCodeLine{177             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&b : localbasetypes)}
+\DoxyCodeLine{178             \{}
+\DoxyCodeLine{179                 \textcolor{keywordtype}{size\_t} found = b.find(\textcolor{stringliteral}{"\$"});}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181                 \textcolor{keywordflow}{if} (found == std::string::npos)}
+\DoxyCodeLine{182                 \{}
+\DoxyCodeLine{183                     allbasetypes.insert(b);}
+\DoxyCodeLine{184                 \}}
+\DoxyCodeLine{185             \}}
+\DoxyCodeLine{186         \}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188         \textcolor{comment}{// for b in allbasetypes:}}
+\DoxyCodeLine{189         \textcolor{comment}{// typesdict[b] = b}}
 \DoxyCodeLine{190 }
-\DoxyCodeLine{191     \textcolor{comment}{//std::cout << "-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ TYPES -\/-\/-\/-\/-\/-\/-\/" << std::endl;}}
-\DoxyCodeLine{192     std::vector<TypeInfo::Ptr> types;}
-\DoxyCodeLine{193     std::vector<std::string> tokens;}
-\DoxyCodeLine{194 }
-\DoxyCodeLine{195     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}} : typesdict)}
-\DoxyCodeLine{196     \{}
-\DoxyCodeLine{197         \textcolor{comment}{//auto t = *it;}}
-\DoxyCodeLine{198         \textcolor{keyword}{auto} \&\mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}} = \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}.first;}
-\DoxyCodeLine{199         \textcolor{keyword}{auto} \&tval = \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}.second;}
-\DoxyCodeLine{200         \textcolor{keyword}{auto} \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_aa4010ed427e12db443e08ab16a3de243}{finaltype}} = \mbox{\hyperlink{namespacesmacc_1_1introspection_a19350163cda321a04645dcd6f6585f24}{replace\_back}}(tval, typesdict);}
-\DoxyCodeLine{201         \textcolor{keyword}{auto} tinfo = std::make\_shared<TypeInfo>(\mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}}, tval, \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_aa4010ed427e12db443e08ab16a3de243}{finaltype}});}
-\DoxyCodeLine{202         types.push\_back(tinfo);}
-\DoxyCodeLine{203         tokens.push\_back(\mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}});}
+\DoxyCodeLine{191         \textcolor{comment}{//refresh}}
+\DoxyCodeLine{192         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&b : allbasetypes)}
+\DoxyCodeLine{193         \{}
+\DoxyCodeLine{194             typesdict[b] = b;}
+\DoxyCodeLine{195         \}}
+\DoxyCodeLine{196     \}}
+\DoxyCodeLine{197     \textcolor{comment}{// types = []}}
+\DoxyCodeLine{198     \textcolor{comment}{// for tkey in typesdict:}}
+\DoxyCodeLine{199     \textcolor{comment}{//     finaltype = replace\_back(typesdict[tkey], typesdict)}}
+\DoxyCodeLine{200     \textcolor{comment}{//     t = TypeInfo(tkey, typesdict[tkey], finaltype)}}
+\DoxyCodeLine{201     \textcolor{comment}{//     types.append(t)}}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203     \textcolor{comment}{//     print t}}
 \DoxyCodeLine{204 }
-\DoxyCodeLine{205         \textcolor{comment}{//std::cout << "replacing back: " << finaltype << std::endl;}}
-\DoxyCodeLine{206     \}}
-\DoxyCodeLine{207 }
-\DoxyCodeLine{208     \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_aa6ffd9c39811d59f7c771941b7fad860}{TypeInfo::Ptr}} roottype = \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{209     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&\mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}} : types)}
+\DoxyCodeLine{205     \textcolor{comment}{//std::cout << "-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ TYPES -\/-\/-\/-\/-\/-\/-\/" << std::endl;}}
+\DoxyCodeLine{206     std::vector<TypeInfo::Ptr> types;}
+\DoxyCodeLine{207     std::vector<std::string> tokens;}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}} : orderedTypedict) \textcolor{comment}{// must be ordered. to avoid issue, ie: \$11 to be replaced in \$T14}}
 \DoxyCodeLine{210     \{}
-\DoxyCodeLine{211         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}-\/>finaltype == originalinputtext)}
-\DoxyCodeLine{212         \{}
-\DoxyCodeLine{213             roottype = \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}};}
-\DoxyCodeLine{214             \textcolor{keywordflow}{break};}
-\DoxyCodeLine{215         \}}
-\DoxyCodeLine{216     \}}
-\DoxyCodeLine{217 }
-\DoxyCodeLine{218     \textcolor{comment}{// std::sort(types.begin(), types.end(),[](auto\& a, auto\& b)}}
-\DoxyCodeLine{219     \textcolor{comment}{// \{}}
-\DoxyCodeLine{220     \textcolor{comment}{//     return a-\/>getFullName().size() > b-\/>getFullName().size();}}
-\DoxyCodeLine{221     \textcolor{comment}{// \});}}
-\DoxyCodeLine{222 }
-\DoxyCodeLine{223     \textcolor{comment}{/*}}
-\DoxyCodeLine{224 \textcolor{comment}{    std::cout<<"types order:" << std::endl;}}
-\DoxyCodeLine{225 \textcolor{comment}{    for(auto t: types)}}
-\DoxyCodeLine{226 \textcolor{comment}{    \{}}
-\DoxyCodeLine{227 \textcolor{comment}{        std::cout<< t-\/>codedtype << std::endl;}}
-\DoxyCodeLine{228 \textcolor{comment}{    \}}}
-\DoxyCodeLine{229 \textcolor{comment}{    std::cout<<"-\/-\/-\/-\/-\/-\/-\/-\/-\/" << std::endl;}}
-\DoxyCodeLine{230 \textcolor{comment}{}}
-\DoxyCodeLine{231 \textcolor{comment}{    std::cout<<"types order:" << std::endl;}}
-\DoxyCodeLine{232 \textcolor{comment}{    for(auto t: types)}}
-\DoxyCodeLine{233 \textcolor{comment}{    \{}}
-\DoxyCodeLine{234 \textcolor{comment}{        std::cout<< t-\/>finaltype << std::endl;}}
-\DoxyCodeLine{235 \textcolor{comment}{    \}}}
-\DoxyCodeLine{236 \textcolor{comment}{    std::cout<<"-\/-\/-\/-\/-\/-\/-\/-\/-\/" << std::endl;}}
-\DoxyCodeLine{237 \textcolor{comment}{    */}}
-\DoxyCodeLine{238 }
-\DoxyCodeLine{239     }
-\DoxyCodeLine{240     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i< types.size();i++)}
-\DoxyCodeLine{241     \{}
-\DoxyCodeLine{242         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}= types[i];}
-\DoxyCodeLine{243         \textcolor{keyword}{auto} ttoken = tokens[i];}
-\DoxyCodeLine{244 }
-\DoxyCodeLine{245         \textcolor{comment}{//auto t = types[it1];}}
-\DoxyCodeLine{246         std::vector<std::pair<int, TypeInfo::Ptr>> unorderedTemplateParameters;}
-\DoxyCodeLine{247 }
-\DoxyCodeLine{248         }
-\DoxyCodeLine{249         \textcolor{comment}{//std::cout << "original typestr: " << codedtypecopy << std::endl;}}
-\DoxyCodeLine{250 }
-\DoxyCodeLine{251         \textcolor{comment}{//auto codedtypecopy = t-\/>codedtype;}}
-\DoxyCodeLine{252         \textcolor{keyword}{auto} codedtypecopy = typesdict\_content[ttoken];}
+\DoxyCodeLine{211         \textcolor{comment}{//auto t = *it;}}
+\DoxyCodeLine{212         \textcolor{keyword}{auto} \&\mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}} = \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}.first;}
+\DoxyCodeLine{213         \textcolor{keyword}{auto} \&tval = \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}.second;}
+\DoxyCodeLine{214         \textcolor{keyword}{auto} \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_aa4010ed427e12db443e08ab16a3de243}{finaltype}} = \mbox{\hyperlink{namespacesmacc_1_1introspection_a1fdcabf57e4277cd66c46522531e35fa}{replace\_back}}(tval, orderedTypedict);}
+\DoxyCodeLine{215         \textcolor{keyword}{auto} tinfo = std::make\_shared<TypeInfo>(\mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}}, tval, \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_aa4010ed427e12db443e08ab16a3de243}{finaltype}});}
+\DoxyCodeLine{216         types.push\_back(tinfo);}
+\DoxyCodeLine{217         tokens.push\_back(\mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_a697dd505119258dba1224d10eea5b2bd}{tkey}});}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219         \textcolor{comment}{//std::cout << "replacing back: " << finaltype << std::endl;}}
+\DoxyCodeLine{220     \}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222     \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_aa6ffd9c39811d59f7c771941b7fad860}{TypeInfo::Ptr}} roottype = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{223     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&\mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}} : types)}
+\DoxyCodeLine{224     \{}
+\DoxyCodeLine{225         \textcolor{comment}{// std::cout << t-\/>finaltype << " vs " <<originalinputtext;}}
+\DoxyCodeLine{226         \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}-\/>finaltype == originalinputtext)}
+\DoxyCodeLine{227         \{}
+\DoxyCodeLine{228             roottype = \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}};}
+\DoxyCodeLine{229             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{230         \}}
+\DoxyCodeLine{231     \}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233     \textcolor{comment}{// std::sort(types.begin(), types.end(),[](auto\& a, auto\& b)}}
+\DoxyCodeLine{234     \textcolor{comment}{// \{}}
+\DoxyCodeLine{235     \textcolor{comment}{//     return a-\/>getFullName().size() > b-\/>getFullName().size();}}
+\DoxyCodeLine{236     \textcolor{comment}{// \});}}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238     \textcolor{comment}{/*}}
+\DoxyCodeLine{239 \textcolor{comment}{    std::cout<<"types order:" << std::endl;}}
+\DoxyCodeLine{240 \textcolor{comment}{    for(auto t: types)}}
+\DoxyCodeLine{241 \textcolor{comment}{    \{}}
+\DoxyCodeLine{242 \textcolor{comment}{        std::cout<< t-\/>codedtype << std::endl;}}
+\DoxyCodeLine{243 \textcolor{comment}{    \}}}
+\DoxyCodeLine{244 \textcolor{comment}{    std::cout<<"-\/-\/-\/-\/-\/-\/-\/-\/-\/" << std::endl;}}
+\DoxyCodeLine{245 \textcolor{comment}{}}
+\DoxyCodeLine{246 \textcolor{comment}{    std::cout<<"types order:" << std::endl;}}
+\DoxyCodeLine{247 \textcolor{comment}{    for(auto t: types)}}
+\DoxyCodeLine{248 \textcolor{comment}{    \{}}
+\DoxyCodeLine{249 \textcolor{comment}{        std::cout<< t-\/>finaltype << std::endl;}}
+\DoxyCodeLine{250 \textcolor{comment}{    \}}}
+\DoxyCodeLine{251 \textcolor{comment}{    std::cout<<"-\/-\/-\/-\/-\/-\/-\/-\/-\/" << std::endl;}}
+\DoxyCodeLine{252 \textcolor{comment}{    */}}
 \DoxyCodeLine{253 }
-\DoxyCodeLine{254         \textcolor{comment}{// std::cout << "original typestr: " << codedtypecopy << std::endl;}}
-\DoxyCodeLine{255         \textcolor{comment}{// std::cout << "original token: " << ttoken << std::endl;}}
-\DoxyCodeLine{256         \textcolor{comment}{// std::cout << "original typestr: " << typesdict\_content[ttoken] << std::endl;}}
-\DoxyCodeLine{257 }
-\DoxyCodeLine{258         \textcolor{comment}{// size\_t startindex = codedtypecopy.find("<");}}
-\DoxyCodeLine{259         \textcolor{comment}{// size\_t endindex = codedtypecopy.find(">");}}
-\DoxyCodeLine{260 }
-\DoxyCodeLine{261         \textcolor{comment}{// if (startindex != std::string::npos)}}
-\DoxyCodeLine{262         \textcolor{comment}{// \{}}
-\DoxyCodeLine{263         \textcolor{comment}{//     codedtypecopy = codedtypecopy.substr(startindex + 1, endindex -\/ startindex -\/ 1);}}
-\DoxyCodeLine{264         \textcolor{comment}{// \}}}
-\DoxyCodeLine{265         \textcolor{comment}{//std::cout << "original typestr: " << codedtypecopy << std::endl;}}
-\DoxyCodeLine{266 }
-\DoxyCodeLine{267         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&t2 : types)}
-\DoxyCodeLine{268         \textcolor{comment}{//for (auto it2= types.size() -\/1; it2 >=0; it2-\/-\/)}}
-\DoxyCodeLine{269         \{}
-\DoxyCodeLine{270             \textcolor{comment}{//std::cout << it2 << std::endl;}}
-\DoxyCodeLine{271             \textcolor{comment}{//auto t2 = types[it2];}}
-\DoxyCodeLine{272             \textcolor{comment}{//std::cout << t2-\/>getFullName() << std::endl;}}
-\DoxyCodeLine{273             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}} == t2)}
-\DoxyCodeLine{274                 \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{254     }
+\DoxyCodeLine{255     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i=0; i< types.size();i++)}
+\DoxyCodeLine{256     \{}
+\DoxyCodeLine{257         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}= types[i];}
+\DoxyCodeLine{258         \textcolor{keyword}{auto} ttoken = tokens[i];}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260         \textcolor{comment}{//auto t = types[it1];}}
+\DoxyCodeLine{261         std::vector<std::pair<int, TypeInfo::Ptr>> unorderedTemplateParameters;}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263         }
+\DoxyCodeLine{264         \textcolor{comment}{//std::cout << "original typestr: " << codedtypecopy << std::endl;}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266         \textcolor{comment}{//auto codedtypecopy = t-\/>codedtype;}}
+\DoxyCodeLine{267         \textcolor{keyword}{auto} codedtypecopy = typesdict\_content[ttoken];}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269         \textcolor{comment}{// std::cout << "original typestr: " << codedtypecopy << std::endl;}}
+\DoxyCodeLine{270         \textcolor{comment}{// std::cout << "original token: " << ttoken << std::endl;}}
+\DoxyCodeLine{271         \textcolor{comment}{// std::cout << "original typestr: " << typesdict\_content[ttoken] << std::endl;}}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273         \textcolor{comment}{// size\_t startindex = codedtypecopy.find("<");}}
+\DoxyCodeLine{274         \textcolor{comment}{// size\_t endindex = codedtypecopy.find(">");}}
 \DoxyCodeLine{275 }
-\DoxyCodeLine{276             \textcolor{keyword}{auto} index = codedtypecopy.find(t2-\/>tkey);}
-\DoxyCodeLine{277             \textcolor{keywordflow}{if} (index != std::string::npos)}
-\DoxyCodeLine{278             \{}
-\DoxyCodeLine{279                 \textcolor{keyword}{auto} pair = std::make\_pair(index, t2); \textcolor{comment}{// this line is important for the order of templates}}
-\DoxyCodeLine{280                 \textcolor{comment}{//auto pair = std::make\_pair(0, t2);}}
-\DoxyCodeLine{281                 \textcolor{comment}{//std::cout << "matches: " << t2-\/>tkey <<std::endl;}}
-\DoxyCodeLine{282                 unorderedTemplateParameters.push\_back(pair);}
-\DoxyCodeLine{283                 \mbox{\hyperlink{namespacesmacc_1_1introspection_a48571b9bf3b115d2a83cc0147c96d0bd}{replace}}(codedtypecopy,t2-\/>tkey,\textcolor{stringliteral}{""}); \textcolor{comment}{// consume token}}
-\DoxyCodeLine{284                 \textcolor{comment}{//std::cout << "codedtypecopy: " << codedtypecopy << std::endl;}}
-\DoxyCodeLine{285             \}}
-\DoxyCodeLine{286         \}}
-\DoxyCodeLine{287 }
-\DoxyCodeLine{288         std::sort(unorderedTemplateParameters.begin(), unorderedTemplateParameters.end(),}
-\DoxyCodeLine{289                   [](\textcolor{keyword}{auto} \&a, \textcolor{keyword}{auto} \&b) -\/> \textcolor{keywordtype}{bool} \{}
-\DoxyCodeLine{290                       return a.first <= b.first;}
-\DoxyCodeLine{291                   \});}
-\DoxyCodeLine{292 }
-\DoxyCodeLine{293         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"});}
-\DoxyCodeLine{294         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"CREATING TYPE:"} << \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}-\/>getFullName());}
-\DoxyCodeLine{295 }
-\DoxyCodeLine{296         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&item : unorderedTemplateParameters)}
-\DoxyCodeLine{297         \{}
-\DoxyCodeLine{298             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{" -\/ template paramter: "} << item.second-\/>getFullName());}
-\DoxyCodeLine{299             \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}-\/>templateParameters.push\_back(item.second);}
-\DoxyCodeLine{300         \}}
-\DoxyCodeLine{301         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"});}
-\DoxyCodeLine{302     \}}
-\DoxyCodeLine{303 }
-\DoxyCodeLine{304     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"ADDING TYPE TO DATABASE: "} << inputtext);}
-\DoxyCodeLine{305     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"Current Database"});}
-\DoxyCodeLine{306     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&en : \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_ab780c03206b824aaf338135d16b0eff4}{typeInfoDatabase}})}
-\DoxyCodeLine{307     \{}
-\DoxyCodeLine{308         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"-\/ "} << en.first);}
-\DoxyCodeLine{309     \}}
+\DoxyCodeLine{276         \textcolor{comment}{// if (startindex != std::string::npos)}}
+\DoxyCodeLine{277         \textcolor{comment}{// \{}}
+\DoxyCodeLine{278         \textcolor{comment}{//     codedtypecopy = codedtypecopy.substr(startindex + 1, endindex -\/ startindex -\/ 1);}}
+\DoxyCodeLine{279         \textcolor{comment}{// \}}}
+\DoxyCodeLine{280         \textcolor{comment}{//std::cout << "original typestr: " << codedtypecopy << std::endl;}}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&t2 : types)}
+\DoxyCodeLine{283         \textcolor{comment}{//for (auto it2= types.size() -\/1; it2 >=0; it2-\/-\/)}}
+\DoxyCodeLine{284         \{}
+\DoxyCodeLine{285             \textcolor{comment}{//std::cout << it2 << std::endl;}}
+\DoxyCodeLine{286             \textcolor{comment}{//auto t2 = types[it2];}}
+\DoxyCodeLine{287             \textcolor{comment}{//std::cout << t2-\/>getFullName() << std::endl;}}
+\DoxyCodeLine{288             \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}} == t2)}
+\DoxyCodeLine{289                 \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291             \textcolor{keyword}{auto} index = codedtypecopy.find(t2-\/>tkey);}
+\DoxyCodeLine{292             \textcolor{keywordflow}{if} (index != std::string::npos)}
+\DoxyCodeLine{293             \{}
+\DoxyCodeLine{294                 \textcolor{keyword}{auto} pair = std::make\_pair(index, t2); \textcolor{comment}{// this line is important for the order of templates}}
+\DoxyCodeLine{295                 \textcolor{comment}{//auto pair = std::make\_pair(0, t2);}}
+\DoxyCodeLine{296                 \textcolor{comment}{//std::cout << "matches: " << t2-\/>tkey <<std::endl;}}
+\DoxyCodeLine{297                 unorderedTemplateParameters.push\_back(pair);}
+\DoxyCodeLine{298                 \mbox{\hyperlink{namespacesmacc_1_1introspection_a48571b9bf3b115d2a83cc0147c96d0bd}{replace}}(codedtypecopy,t2-\/>tkey,\textcolor{stringliteral}{""}); \textcolor{comment}{// consume token}}
+\DoxyCodeLine{299                 \textcolor{comment}{//std::cout << "codedtypecopy: " << codedtypecopy << std::endl;}}
+\DoxyCodeLine{300             \}}
+\DoxyCodeLine{301         \}}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303         std::sort(unorderedTemplateParameters.begin(), unorderedTemplateParameters.end(),}
+\DoxyCodeLine{304                   [](\textcolor{keyword}{auto} \&a, \textcolor{keyword}{auto} \&b) -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{305                       return a.first <= b.first;}
+\DoxyCodeLine{306                   \});}
+\DoxyCodeLine{307 }
+\DoxyCodeLine{308         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"});}
+\DoxyCodeLine{309         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"CREATING TYPE:"} << \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}-\/>getFullName());}
 \DoxyCodeLine{310 }
-\DoxyCodeLine{311     \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_ab780c03206b824aaf338135d16b0eff4}{typeInfoDatabase}}[originalinputtext] = roottype;}
-\DoxyCodeLine{312     \textcolor{keywordflow}{return} roottype;}
-\DoxyCodeLine{313 \}}
+\DoxyCodeLine{311         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&item : unorderedTemplateParameters)}
+\DoxyCodeLine{312         \{}
+\DoxyCodeLine{313             ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{" -\/ template paramter: "} << item.second-\/>getFullName());}
+\DoxyCodeLine{314             \mbox{\hyperlink{namespacebattery__monitor__node_a7a63d20d1ea461e280f4eb5b47f925cd}{t}}-\/>templateParameters.push\_back(item.second);}
+\DoxyCodeLine{315         \}}
+\DoxyCodeLine{316         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"});}
+\DoxyCodeLine{317     \}}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"ADDING TYPE TO DATABASE: "} << inputtext);}
+\DoxyCodeLine{320     ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"Current Database"});}
+\DoxyCodeLine{321     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&en : \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_ab780c03206b824aaf338135d16b0eff4}{typeInfoDatabase}})}
+\DoxyCodeLine{322     \{}
+\DoxyCodeLine{323         ROS\_DEBUG\_STREAM(\textcolor{stringliteral}{"-\/ "} << en.first);}
+\DoxyCodeLine{324     \}}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326     \mbox{\hyperlink{classsmacc_1_1introspection_1_1TypeInfo_ab780c03206b824aaf338135d16b0eff4}{typeInfoDatabase}}[originalinputtext] = roottype;}
+\DoxyCodeLine{327     \textcolor{keywordflow}{return} roottype;}
+\DoxyCodeLine{328 \}}
 
 \end{DoxyCode}
 
